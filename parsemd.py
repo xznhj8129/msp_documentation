@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-import re
 import json
 from typing import List, Tuple, Optional, Dict, Any
 from msp_codes import MSPCodes
@@ -23,184 +22,86 @@ bin_type_map = {
 }
 
 msg_fmt = {
-    "hex": "",
     "id": 0,
+    "hex": "",
     "mspv": None,
-    "size": None,
-    "struct": None,
     "direction": None,
-    "variable_len": None,
-    "payload": None,
-    "deprecated": None
+    "request": None,
+    "reply": None,
+    #"deprecated": False
+}
+
+type_fmt = {
+    "size": [],
+    "payload": None
+}
+
+val_fmt = {
+    "name": None,
+    "ctype": None,
+    #"size": None,
+    "units": None,
+    "desc": None,
 }
 
 # Byte sizes for struct format chars
-_type_sizes = {"B":1,"H":2,"I":4,"Q":8,"b":1,"h":2,"i":4,"q":8,"f":4,"d":8,"c":1,"?":1}
-
-_array_re = re.compile(r'^\s*([A-Za-z_]\w*)\s*\[\s*(.*?)\s*\]\s*$')
+_type_sizes = {
+    "B":1,
+    "H":2,
+    "I":4,
+    "Q":8,
+    "b":1,
+    "h":2,
+    "i":4,
+    "q":8,
+    "f":4,
+    "d":8,
+    "c":1,
+    "?":1
+}
 
 def _parse_int(s: str) -> Optional[int]:
     s = (s or "").strip()
+    if not s:
+        return None
+    if s.startswith(("0x", "0X")):
+        try:
+            return int(s, 16)
+        except Exception:
+            return None
     return int(s) if s.isdigit() else None
 
 def _map_base_type(t: str) -> Optional[str]:
-    t = t.strip()
+    t = (t or "").strip()
     if t.lower() == "boolean":
         t = "bool"
     return bin_type_map.get(t)
 
 def _emit_fixed_array(fmt_char: str, count: int) -> str:
-    # Prefer compact "8H" over repeating
     return f"{count}{fmt_char}"
 
-def build_struct_or_none(payload_fields, repetition_factor_str=None):
+def _parse_array_type(t: str) -> Optional[Tuple[str, str]]:
     """
-    Build a concrete Python 'struct' format string from payload_fields or return None.
-    Accepts either:
-      - list of dicts: {"name":..., "ctype":..., "size":...[, "units":..., "desc":...]}
-      - list of tuples: (name, ctype, size, units, desc)
-    Strict rules:
-      - Scalars must map via bin_type_map.
-      - Arrays must have a numeric count in brackets, or a purely numeric total byte Size we can divide by the element size.
-      - Open arrays 'type[]' or symbolic counts/macros (e.g., type[MAX_FOO]) return None (unless count derivable from numeric Size).
-      - Unknown/opaque types return None.
-      - Any single unknown => None (fail fast).
-    Dependencies expected in outer scope:
-      - bin_type_map, _type_sizes, _array_re, _parse_int, _map_base_type, _emit_fixed_array
+    Parse "foo[bar]" without regex.
+    Returns (base, count_str) or None if not an array type.
     """
-    def _norm_item(item):
-        if isinstance(item, dict):
-            name = item.get("name", "")
-            ctype = item.get("ctype", "")
-            size = item.get("size", "")
-            # normalize size to string for downstream routines
-            if isinstance(size, int):
-                size = str(size)
-            return name, ctype, (size or ""), item.get("units", ""), item.get("desc", "")
-        # tuple: allow (name,ctype,size) or (name,ctype,size,units,desc)
-        if isinstance(item, (tuple, list)):
-            if len(item) >= 3:
-                name = item[0]
-                ctype = item[1]
-                size = item[2]
-                if isinstance(size, int):
-                    size = str(size)
-                units = item[3] if len(item) >= 4 else ""
-                desc  = item[4] if len(item) >= 5 else ""
-                return name, ctype, (size or ""), units, desc
-        # fallback
-        return "", "", "", "", ""
-
-    parts = []
-
-    for raw in payload_fields or []:
-        field_name, c_type, size_bytes_str, _units, _desc = _norm_item(raw)
-        t = (c_type or "").strip()
-        if not t:
-            return None
-
-        # Array?
-        m = _array_re.match(t)
-        if m:
-            base = m.group(1)
-            count_str = (m.group(2) or "").strip()
-
-            # char[N] -> Ns ; char[] -> None (unknown)
-            if base == "char":
-                if count_str.isdigit():
-                    parts.append(f"{count_str}s")
-                    continue
-                size_n = _parse_int(size_bytes_str)
-                if size_n is not None:
-                    parts.append(f"{size_n}s")
-                    continue
-                return None  # unknown char array length
-                
-                raise Exception("unknown char array length")
-
-            fmt = _map_base_type(base)
-            #if not fmt:
-            #    print('base:',base)
-            #    raise Exception("unknown base type")
-
-            # Numeric count in brackets
-            if count_str.isdigit():
-                parts.append(_emit_fixed_array(fmt, int(count_str)))
-                continue
-
-            # Empty [] => variable/open ended -> None
-            if count_str == "":
-                return None
-
-            # Symbolic like MAX_FOO -> try derive from purely numeric Size
-            size_n = _parse_int(size_bytes_str)
-            if size_n is None:
-                return None
-            bpt = _type_sizes.get(fmt)
-            if not bpt or size_n % bpt != 0:
-                return None
-            parts.append(_emit_fixed_array(fmt, size_n // bpt))
-            continue
-
-        # Scalar
-        fmt = _map_base_type(t)
-        if fmt:
-            parts.append(fmt)
-            continue
-
-        # Anything else (structs/opaque/custom) -> unknown
+    t = (t or "").strip()
+    if not t:
         return None
-
-    if not parts:
+    lb = t.find('[')
+    rb = t.rfind(']')
+    if lb == -1 or rb == -1 or rb < lb:
         return None
+    base = t[:lb].strip()
+    count_str = t[lb+1:rb].strip()
+    return base, count_str
 
-    # Optional compaction of consecutive identical single-letter tokens (e.g., III -> 3I)
-    compact = []
-    i = 0
-    while i < len(parts):
-        tok = parts[i]
-        # tokens like '8H' or '4s' already compact; leave as-is
-        if len(tok) > 1 and tok[0].isdigit():
-            compact.append(tok)
-            i += 1
-            continue
-        # count run of same single-letter tokens
-        j = i + 1
-        while j < len(parts) and parts[j] == tok and len(parts[j]) == 1:
-            j += 1
-        run_len = j - i
-        if run_len > 1:
-            compact.append(f"{run_len}{tok}")
-        else:
-            compact.append(tok)
-        i = j
-
-    struct_str = "".join(compact)
-
-    # Apply repetition strictly; symbolic repetition => unknown
-    if repetition_factor_str:
-        rep = str(repetition_factor_str).strip()
-        if rep.isdigit():
-            struct_str = struct_str * int(rep)
-        else:
-            return None
-
-    return struct_str
-
-
-
-# ===== Markdown parsing helpers (no regex soup) =====
-
-MSG_HEADER_RE = re.compile(r'^###\s+`(MSP[A-Za-z0-9_]+(?:_EX|_EXT2)?)`\s*\(([^)]+)\)\s*$', re.MULTILINE)
+# ===== Markdown parsing helpers (no regex) =====
 
 def _strip_ticks(s: str) -> str:
-    return s.strip().strip('`').strip()
+    return (s or "").strip().strip('`').strip()
 
 def _find_after_label(body: str, label: str) -> Optional[str]:
-    """
-    Returns the remainder of the line after a markdown label like '**Direction:**'.
-    Purely line oriented; not greedy into next sections.
-    """
     needle = f"**{label}:**"
     i = body.find(needle)
     if i == -1:
@@ -208,123 +109,245 @@ def _find_after_label(body: str, label: str) -> Optional[str]:
     line = body[i + len(needle):].splitlines()[0]
     return line.strip()
 
-def _slice_between(body: str, start_idx: int, end_markers: List[str]) -> str:
+def _slice_between_ci(body: str, start_idx: int, end_markers: List[str]) -> str:
     """
-    Slice body from start_idx to the earliest next end marker (or end of string).
+    Case-insensitive earliest cut among markers. Returns slice body[start_idx:j].
     """
+    if start_idx >= len(body):
+        return ""
+    low = body.casefold()
     j = len(body)
     for marker in end_markers:
-        k = body.find(marker, start_idx)
+        m = marker.casefold()
+        k = low.find(m, start_idx)
         if k != -1 and k < j:
             j = k
     return body[start_idx:j]
 
-def _find_payload_block(msg_content: str, direction: str) -> str:
-    """
-    Heuristic to return the payload subsection text (which may contain tables or 'Payload: None').
-    Prefers Reply for In/Out, Request for In, plain Payload for Out.
-    Falls back to first '**Payload' block if specific not found.
-    """
-    # Candidates in priority order
-    candidates: List[str] = []
+def _normalize_bullet_prefix(line: str) -> str:
+    s = line.lstrip()
+    while s.startswith("* ") or s.startswith("- ") or s.startswith("+ "):
+        s = s[2:].lstrip()
+    # also tolerate "*   " etc.
+    while s.startswith(("*", "-", "+")) and len(s) > 1 and s[1].isspace():
+        s = s[2:].lstrip()
+    return s
 
-    if direction == "In/Out":
-        candidates += [r'**Reply Payload', r'**Request Payload', r'**Payload']
-    elif direction == "In":
-        candidates += [r'**Request Payload', r'**Payload']
+def _is_section_start(norm_line: str) -> bool:
+    L = norm_line.strip()
+    if L.startswith("### `"):
+        return True
+    if not L.startswith("**"):
+        return False
+    Llow = L.casefold()
+    return (
+        Llow.startswith("**request payload")
+        or Llow.startswith("**reply payload")
+        or Llow.startswith("**payload")
+        or Llow.startswith("**notes:")
+    )
+
+
+def _find_named_payload_block(msg_content: str, label: str) -> str:
+    """
+    Find the block after '**Request Payload' or '**Reply Payload'.
+    Handles list bullets before the '**' and same-line trailers (e.g. 'Repeated ...').
+    """
+    lines = msg_content.splitlines()
+    target = f"**{label} payload".casefold()
+
+    i = 0
+    while i < len(lines):
+        norm = _normalize_bullet_prefix(lines[i])
+        nlow = norm.casefold()
+        if nlow.startswith(target):
+            # capture same-line trailer after the closing '**'
+            tail = ""
+            if "**" in norm[2:]:
+                close_bold = norm.find("**", 2)
+                if close_bold != -1:
+                    tail = norm[close_bold + 2:].strip().lstrip(":").strip()
+
+            # collect until next section start
+            buf = []
+            j = i + 1
+            while j < len(lines):
+                normj = _normalize_bullet_prefix(lines[j])
+                if _is_section_start(normj):
+                    break
+                buf.append(lines[j])
+                j += 1
+
+            if tail:
+                if tail.casefold() == "none":
+                    return "Payload: None"
+                return tail + "\n" + "\n".join(buf)
+            return "\n".join(buf)
+        i += 1
+    return ""
+
+
+def _find_generic_payload_block(msg_content: str) -> str:
+    """
+    Find a generic '**Payload**' header, optionally with '(Optional)', optionally with ':',
+    and return any same-line note plus the following block until the next section marker.
+    """
+    low = msg_content.casefold()
+    key = "**payload"
+    idx = low.find(key)
+    if idx == -1:
+        return ""
+
+    # Find the end of the bold header: the next '**' after idx
+    close_bold = msg_content.find("**", idx + 2)
+    if close_bold == -1:
+        # give up; treat the rest of the line after key as same-line text
+        line_end = msg_content.find("\n", idx)
+        same_line = "" if line_end == -1 else msg_content[idx:line_end]
+        return same_line
+
+    # Same-line text after the bold header
+    line_end = msg_content.find("\n", close_bold + 2)
+    if line_end == -1:
+        line_end = len(msg_content)
+    same_line = msg_content[close_bold + 2:line_end].strip()
+    if same_line:
+        if same_line.strip().casefold() == "none":
+            return "Payload: None"
+        block_prefix = same_line + "\n"
     else:
-        candidates += [r'**Payload', r'**Reply Payload', r'**Request Payload']
+        block_prefix = ""
 
-    for label in candidates:
-        pos = msg_content.find(label)
-        if pos != -1:
-            # Start after the closing '**' and optional colon
-            line_start = pos
-            # take from end of that line
-            start = msg_content.find('\n', line_start)
-            if start == -1:
-                start = len(msg_content)
-            else:
-                start += 1
-            block = _slice_between(
-                msg_content,
-                start,
-                end_markers=[
-                    "\n**Notes:**",
-                    "\n**Field Tables for other formats:**",
-                    "\n### `",
-                    "\n**Request Payload",
-                    "\n**Reply Payload",
-                    "\n**Payload"
-                ]
-            )
-            return block
-    return ""  # not found
-
-REPETITION_RE = re.compile(r'Repeated\s+(?:`([\w_]+)`|(\d+))\s+times:', re.IGNORECASE)
+    start = line_end + 1 if line_end < len(msg_content) else len(msg_content)
+    block_body = _slice_between_ci(
+        msg_content,
+        start,
+        end_markers=[
+            "\n**Notes:**",
+            "\n**Field Tables for other formats:**",
+            "\n### `",
+            "\n**Request Payload",
+            "\n**Reply Payload",
+            "\n**Payload",
+        ],
+    )
+    return block_prefix + block_body
 
 def _extract_repetition_factor(text: str) -> Tuple[Optional[str], str]:
     """
-    Finds 'Repeated X times:' and returns (X_as_string_or_symbol, remaining_text_after_that_line).
-    If not found, returns (None, original_text).
+    Look for lines like:
+      'Repeat 4 times:'
+      'Repeated N times:'
+      'Repeating `FOO_COUNT`:'
+      'Repeating (barCount):'
+      'Repeated for each thing:'
+    Returns (factor_str_or_None, remainder_after_colon)
     """
-    m = REPETITION_RE.search(text)
-    if not m:
+    low = text.casefold()
+    # find first 'repeat' variant
+    idx = low.find("repeat")
+    if idx == -1:
         return None, text
-    factor = m.group(1) if m.group(1) else m.group(2)
-    # Keep everything after the matched line for the actual table content
-    after = text[m.end():]
+    #print(low)
+    #input('stop')
+
+    # ensure we actually have a colon in the same line
+    nl = text.find("\n", idx)
+    colon = text.find(":", idx, nl if nl != -1 else len(text))
+    if colon == -1:
+        #print('no colon')
+        #input('stop')
+        return None, text
+
+    phrase = text[idx:colon]
+    # 1) numeric
+    digits = "".join(ch for ch in phrase if ch.isdigit())
+    if digits:
+        factor = digits
+    else:
+        # 2) backticked symbol
+        bt1 = phrase.find("`")
+        if bt1 != -1:
+            bt2 = phrase.find("`", bt1 + 1)
+            factor = phrase[bt1 + 1:bt2].strip() if bt2 != -1 else None
+        else:
+            # 3) parenthesized
+            p1 = phrase.find("(")
+            p2 = phrase.find(")", p1 + 1) if p1 != -1 else -1
+            if p1 != -1 and p2 != -1 and p2 > p1:
+                factor = phrase[p1 + 1:p2].strip()
+            else:
+                # 4) for each ...
+                fe_idx = phrase.casefold().find("for each")
+                if fe_idx != -1:
+                    factor = phrase[fe_idx:].strip()
+                else:
+                    factor = phrase.strip()
+
+    after = text[colon + 1:]
+    #print(factor, after)
+    #input('stop')
     return factor, after
 
-def _parse_table_from_block(block: str) -> List[Tuple[str,str,str,str,str]]:
-    """
-    Parses the first markdown table found in 'block'.
-    Returns rows as (field, ctype, size, units, desc).
-    Works with 4 or 5 column tables. If 'Units' column is absent, sets units="".
-    Ignores header and separator rows.
-    """
-    lines = [ln.rstrip().lstrip() for ln in block.splitlines()]
+def _first_backticked(s: str) -> Optional[str]:
+    a = s.find("`")
+    if a == -1:
+        return None
+    b = s.find("`", a + 1)
+    if b == -1:
+        return None
+    return s[a + 1:b]
 
-    # Find the header row (starts with '|' and contains 'Field' somewhere) and the separator row
+def _safe_index_name(header_norm: List[str], names: List[str]) -> Optional[int]:
+    for name in names:
+        for idx, hn in enumerate(header_norm):
+            if hn == name:
+                return idx
+    return None
+
+def _parse_table_from_block(block: str) -> List[Dict[str, Any]]:
+    lines = [ln.strip() for ln in (block or "").splitlines()]
+
+    # Find header row and separator
     header_idx = -1
     for i, ln in enumerate(lines):
         if ln.startswith('|') and 'Field' in ln:
-            # next non-empty should be the --- separator
-            if i + 1 < len(lines) and lines[i+1].startswith('|---'):
-                header_idx = i
-                break
+            if i + 1 < len(lines):
+                nxt = lines[i + 1].lstrip()
+                if nxt.startswith('|---'):
+                    header_idx = i
+                    break
     if header_idx == -1:
-        # No table found; maybe "Payload: None" styled prose
-        return False, []
+        return []
 
-    header_cells = [c.strip().strip('`') for c in lines[header_idx].split('|')[1:-1]]
+    def _split_cells(row: str) -> List[str]:
+        # remove leading and trailing pipe, then split
+        parts = row.split('|')[1:-1]
+        return [c.strip().strip('`') for c in parts]
+
+    header_cells = _split_cells(lines[header_idx])
     header_norm = [c.lower() for c in header_cells]
 
-    # Determine column positions
-    # Accept variants: "size (bytes)" or "size"
     col_field = _safe_index_name(header_norm, ["field"])
     col_ctype = _safe_index_name(header_norm, ["c type", "ctype", "type"])
     col_size  = _safe_index_name(header_norm, ["size (bytes)", "size"])
     col_units = _safe_index_name(header_norm, ["units"])
     col_desc  = _safe_index_name(header_norm, ["description", "desc"])
 
-    rows: List[Tuple[str,str,str,str,str]] = []
-
-    # Data rows start after the separator
+    rows: List[Dict[str, Any]] = []
     i = header_idx + 2
-    varlen = False
     while i < len(lines):
         ln = lines[i]
         if not ln.startswith('|'):
             break
-        if ln.startswith('|---'):
+        if ln.lstrip().startswith('|---'):
             i += 1
             continue
 
-        cells = [c.strip().strip('`') for c in ln.split('|')[1:-1]]
+        cells = _split_cells(ln)
         if len(cells) < 2:
             i += 1
-            raise Exception('2')
+            continue
 
         def get(col_idx: Optional[int]) -> str:
             if col_idx is None:
@@ -334,177 +357,311 @@ def _parse_table_from_block(block: str) -> List[Tuple[str,str,str,str,str]]:
         field_name = get(col_field)
         if not field_name or field_name.lower() == "field":
             i += 1
-            raise Exception('field name')
+            continue
 
-        # Skip subheaders some specs jam into tables
         fn_low = field_name.lower()
-        if (fn_low.startswith("payload (format") # THIS IS BAD. THIS IS VERY BAD.
+        if (fn_low.startswith("payload (format")
             or "**vehicle data (repeated" in fn_low
             or "**parts data (repeated" in fn_low):
             i += 1
-            varlen = True
             continue
 
         ctype = get(col_ctype)
-        size  = get(col_size)
+        size_raw = get(col_size)
         units = get(col_units)
         desc  = get(col_desc)
-        
-        if 'enum' in desc.lower():
-            match = re.search(r'`([^`]*)`', desc)
-            if match:
-                print('ENUM DETECTED')
-                print(match.group(1))
-                isenum = match.group(1)
-            else:
-                isenum = False
-        elif units=="Enum":
-            isenum = "?_e"
-        else:
-            isenum = False
 
-        # Normalize "Variable" forms (case differences)
-        size = size.replace("variable", "Variable")
-        try:
-            size = int(size)
-        except:
-            varlen = True
-            size = None
-        val = {
-            "name": field_name,
-            "ctype":ctype,
-            "size":size,
-            "units":units,
-            "desc":desc,
-        }
+        # enum detection: prefer backticked name in description; fallback to Units == Enum
+        isenum = False
+        if 'enum' in (desc or "").lower():
+            bt = _first_backticked(desc or "")
+            isenum = bt if bt else True
+        elif (units or "") == "Enum":
+            isenum = "?_e"
+
+        # optional detection:
+        isoptional = 'Optional' in desc
+
+
+        # normalize size to int where possible; anything else -> None
+        size: Optional[int] = None
+        if size_raw:
+            sr = size_raw.strip()
+            if sr.isdigit():
+                size = int(sr)
+            else:
+                # allow hex
+                if sr.startswith(("0x","0X")):
+                    try:
+                        size = int(sr, 16)
+                    except Exception:
+                        size = None
+                else:
+                    size = None
+        val = val_fmt.copy()
+        val['name'] = field_name
+        val['ctype'] = ctype
+        #val['size'] = size
+        val['units'] = units
+        val['desc'] = desc
+        if isoptional:
+            val["optional"] = True 
         if isenum:
-            val["enum"]=isenum
+            # if True without a specific name, annotate opaque enum
+            if isinstance(isenum, str):
+                val["enum"] = isenum
+            else:
+                val["enum"] = "?_e"
         rows.append(val)
         i += 1
 
-    return varlen, rows
+    return rows
+def _iter_generic_payload_blocks(msg_content: str) -> list[str]:
+    lines = msg_content.splitlines()
+    blocks = []
+    i = 0
+    while i < len(lines):
+        norm = _normalize_bullet_prefix(lines[i])
+        nlow = norm.casefold()
+        if nlow.startswith("**payload"):
+            # tail after the closing '**'
+            tail = ""
+            close_bold = norm.find("**", 2)
+            if close_bold != -1:
+                tail = norm[close_bold + 2:].strip().lstrip(":").strip()
+            # collect until next section
+            buf = []
+            j = i + 1
+            while j < len(lines):
+                normj = _normalize_bullet_prefix(lines[j])
+                if _is_section_start(normj):
+                    break
+                buf.append(lines[j])
+                j += 1
+            if tail.casefold() == "none":
+                blocks.append("Payload: None")
+            elif tail:
+                blocks.append((tail + "\n" + "\n".join(buf)).strip())
+            else:
+                blocks.append(("\n".join(buf)).strip())
+            i = j
+        else:
+            i += 1
+    return blocks
 
-def _safe_index_name(header_norm: List[str], names: List[str]) -> Optional[int]:
-    for name in names:
-        for idx, hn in enumerate(header_norm):
-            if hn == name:
-                return idx
+def _find_payload_blocks(msg_content: str, direction: int) -> tuple[str, str]:
+    req = _find_named_payload_block(msg_content, "Request")
+    rep = _find_named_payload_block(msg_content, "Reply")
+
+    if not req or not rep:
+        blocks = _iter_generic_payload_blocks(msg_content)
+        if len(blocks) > 1:
+            raise ValueError("Multiple generic '**Payload' sections found; unsupported multi-profile payload.")
+        if blocks:
+            g = blocks[0]  # string, not list
+            if not req and direction == 0:
+                req = g
+            elif not rep:
+                rep = g
+
+    return req or "", rep or ""
+
+
+# ===== Section scanner (no regex) =====
+
+def _scan_message_sections(markdown_content: str) -> List[Tuple[str, str, str]]:
+    """
+    Return a list of (msg_name, id_info_str, body) for each '### `NAME` (ID / 0xHEX)' section.
+    """
+    sections: List[Tuple[str, str, str]] = []
+    lines = markdown_content.splitlines(keepends=True)
+    offsets = []
+    total = 0
+    for ln in lines:
+        offsets.append(total)
+        total += len(ln)
+
+    header_indices: List[int] = []
+    for idx, ln in enumerate(lines):
+        s = ln.lstrip()
+        if s.startswith("### "):
+            # must contain a backticked name and parentheses
+            if "`" in s and "(" in s and ")" in s:
+                header_indices.append(idx)
+
+    for h_idx_i, line_idx in enumerate(header_indices):
+        header = lines[line_idx].lstrip()
+        # extract name between backticks
+        t1 = header.find("`")
+        t2 = header.find("`", t1 + 1) if t1 != -1 else -1
+        if t1 == -1 or t2 == -1:
+            continue
+        msg_name = header[t1 + 1:t2].strip()
+
+        # extract id info inside parentheses after the name
+        p1 = header.find("(", t2 + 1)
+        p2 = header.find(")", p1 + 1) if p1 != -1 else -1
+        if p1 == -1 or p2 == -1:
+            id_info_str = ""
+        else:
+            id_info_str = header[p1 + 1:p2].strip()
+
+        start_line = line_idx + 1
+        end_line = header_indices[h_idx_i + 1] if (h_idx_i + 1) < len(header_indices) else len(lines)
+        body = "".join(lines[start_line:end_line])
+        sections.append((msg_name, id_info_str, body))
+    return sections
+
+def _parse_msg_code(id_info_str: str) -> Optional[int]:
+    """
+    Accepts forms like:
+      '105 / 0x69'
+      '0x69 / 105'
+      '105/0x69'
+      '0x69/105'
+      '105'
+    """
+    s = (id_info_str or "").strip()
+    if not s:
+        return None
+    parts = [p.strip() for p in s.split('/')]
+    # try obvious digit first in order
+    for p in parts:
+        if p.isdigit():
+            try:
+                return int(p)
+            except Exception:
+                pass
+    # try last resort: if a single token is present and numeric-like
+    if len(parts) == 1 and parts[0]:
+        p = parts[0]
+        if p.isdigit():
+            return int(p)
+        if p.startswith(("0x","0X")):
+            # hex-only header is rare, ignore
+            return None
+    # nothing usable
     return None
-
 
 # ===== Main generator =====
 
 def generate_msp_dict(markdown_content: str) -> Dict[str, Any]:
     msp_references: Dict[str, Any] = {}
 
-    # Find all message headers and their body spans
-    sections = []
-    for m in MSG_HEADER_RE.finditer(markdown_content):
-        msg_name = m.group(1).strip()
-        id_info_str = m.group(2).strip()
-        start = m.end()
-        # body ends at next header or end of file
-        next_m = MSG_HEADER_RE.search(markdown_content, pos=start)
-        end = next_m.start() if next_m else len(markdown_content)
-        body = markdown_content[start:end]
-        sections.append((msg_name, id_info_str, body))
+    sections = _scan_message_sections(markdown_content)
 
     for (msg_name, id_info_str, msg_content) in sections:
-        # Parse message code from "(DEC / 0xHEX)" or "(0xHEX / DEC)"
-        msg_code: Optional[int] = None
-        match_dec_first = re.match(r"^\s*(\d+)\s*/\s*0x[\dA-Fa-f]+\s*$", id_info_str)
-        if match_dec_first:
-            msg_code = int(match_dec_first.group(1))
-        else:
-            match_hex_first = re.match(r"^\s*0x[\dA-Fa-f]+\s*/\s*(\d+)\s*$", id_info_str)
-            if match_hex_first:
-                msg_code = int(match_hex_first.group(1))
+        try:
+            msg_code = int(id_info_str.split(' / ')[0])
+        except:
+            msg_code = int(id_info_str.split(' / ')[1])
         if msg_code is None:
-            parts = [p.strip() for p in id_info_str.split('/')]
-            if parts and parts[0].isdigit():
-                msg_code = int(parts[0])
-            elif len(parts) > 1 and parts[1].isdigit():
-                msg_code = int(parts[1])
-        if msg_code is None:
-            # Skip if we cannot determine code
+            # If truly unknown, this is a spec error. Bail hard to catch it.
             raise Exception("Cant find code")
 
         direction_str = _find_after_label(msg_content, "Direction")
         if not direction_str:
-            # Skip messages without Direction
-            print(msg_content)
             if "Not implemented" in msg_content:
                 msp_references[msg_name] = {"implemented": False}
                 continue
             else:
                 raise Exception(f"Cant find direction for {msg_name}")
+
         direction_val = -1
-        if direction_str.strip().startswith("Out"):
+        d = direction_str.strip()
+        if d.startswith("Out"):
             direction_val = 1
-        elif direction_str.strip().startswith("In/Out"):
+        elif d.startswith("In/Out"):
             direction_val = 2
-        elif direction_str.strip().startswith("In"):
+        elif d.startswith("In"):
             direction_val = 0
-        elif direction_str.strip().startswith("N/A"):
+        elif d.startswith("N/A"):
             direction_val = -1
 
-        # Description (single line)
         description_line = _find_after_label(msg_content, "Description")
 
-        # Payload block
-        payload_block = _find_payload_block(msg_content, "In/Out" if direction_val == 2 else ("In" if direction_val == 0 else "Out"))
+        notes_str = _find_after_label(msg_content, "Notes")
+        if not notes_str:
+            notes_str = ""
+        try:
+            req_block, rep_block = _find_payload_blocks(msg_content, direction_val)
+        except: #MSP2_COMMON_MOTOR_MIXER
+            msg = msg_fmt.copy()
+            msg["hex"] = hex(msg_code)
+            msg["id"] = msg_code
+            msg["mspv"] = 1 if msg_code <= 255 else 2
+            msg["direction"] = direction_val
+            msg["request"] = None
+            msg["reply"] = None
+            msg["error"] = True
+            msg["notes"] = notes_str
+            if description_line:
+                msg["description"] = description_line
 
-        # "Payload: None" fast path
-        payload_fields: List[Tuple[str,str,str,str,str]] = []
-        repetition_factor_str: Optional[str] = None
+            msp_references[msg_name] = msg
+            continue
 
-        if "Payload: None" in payload_block:
-            # No fields
-            varlen = False
-        else:
-            # Extract repetition if present and trim block
-            repetition_factor_str, payload_core = _extract_repetition_factor(payload_block)
-            if repetition_factor_str is None:
-                payload_core = payload_block
+        def parse_block(block_text: str) -> tuple[list, Optional[int], Optional[str]]:
+            if not block_text:
+                return [], None, None
+            if "Payload: None" in block_text or "**Payload:** None" in block_text:
+                return [], None, None
 
-            # Parse first table found in payload_core
-            varlen, payload_fields = _parse_table_from_block(payload_core)
+            rep_factor, core = _extract_repetition_factor(block_text)
+            if rep_factor is None:
+                core = block_text
 
-        final_struct_str = build_struct_or_none(payload_fields, repetition_factor_str)
-        compsize = 0
-        for plf in payload_fields:
-            try:
-                compsize += plf['size']
-            except:
-                compsize = None
-                break
+            fields = _parse_table_from_block(core)
+
+            compsize: Optional[int] = 0
+            for plf in fields:
+                try:
+                    sz = plf.get("size", None)
+                    if sz is None:
+                        compsize = None
+                        break
+                    compsize += sz
+                except Exception:
+                    compsize = None
+                    break
+            return fields, compsize, rep_factor
+
+        req_fields, req_size, repeating_req = parse_block(req_block)
+        rep_fields, rep_size, repeating_rep = parse_block(rep_block)
+
+        req_data = None
+        if len(req_fields) > 0:
+            req_data = type_fmt.copy()
+            req_data["payload"] = req_fields
+            #req_data["size"] = req_size
+            if repeating_req: req_data["repeating"] = True
+
+        rep_data = None
+        if len(rep_fields) > 0:
+            rep_data = type_fmt.copy()
+            rep_data["payload"] = rep_fields
+            #rep_data["size"] = rep_size
+            if repeating_rep: rep_data["repeating"] = True
+
         msg = msg_fmt.copy()
-
         msg["hex"] = hex(msg_code)
         msg["id"] = msg_code
-        msg["mspv"] = 1 if msg_code<=255 else 2
-        msg["size"] = compsize
-        msg["struct"] = final_struct_str
+        msg["mspv"] = 1 if msg_code <= 255 else 2
+        #msg["size"] = rep_size if (rep_fields or rep_size is not None) else req_size
         msg["direction"] = direction_val
-        msg["payload"] = payload_fields
-        msg["variable_len"] = varlen
-        msp_references[msg_name] = msg
+        msg["request"] = req_data
+        msg["reply"] = rep_data
+        msg["notes"] = notes_str
         if description_line:
-            msp_references[msg_name]["description"] = description_line
-        print(msg_name)
-        for key, value in msp_references[msg_name].items():
-            if key == 'payload':
-                print('\t', key, ":")
-                for p in value:  # value is the list of payload fields
-                    #print("\t\t", p)   # each `p` is a tuple (field, ctype, size, units, desc)
-                    sizs = p['size'] if p['size'] else '?'
-                    print(f"\t\t{p['name']:20} {p['ctype']:12} {sizs:4} {p['units']:16} {p['desc']:16}")
-            else:
-                print('\t', key, ":", value)
-    #print(msp_references[msg_name])
+            msg["description"] = description_line
+
+        msp_references[msg_name] = msg
+        # Debug printout 
+        print(msg_name) 
+        for key, value in msp_references[msg_name].items(): 
+            print("\t", key, ":", value) 
 
     return msp_references
-
 
 # ===== CLI usage example =====
 
@@ -513,9 +670,9 @@ if __name__ == "__main__":
         markdown = f.read()
 
     data = generate_msp_dict(markdown)
-    for i,j in enumerate(MSPCodes):
+    for i, j in enumerate(MSPCodes):
         if j not in data:
-            print(i,j)
+            print(i, j)
             msg = msg_fmt.copy()
             msg['id'] = i
             msg['hex'] = hex(i)

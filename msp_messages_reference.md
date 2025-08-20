@@ -2056,10 +2056,10 @@ These commands are part of the MSPv2 specification and are intended for general 
 
 *   **Direction:** In/Out
 *   **Description:** Gets a list of Parameter Group Numbers (PGNs) used by settings, along with the start and end setting indexes for each group. Can request info for a single PGN.
-*   **Request Payload (Optional):**
+*   **Request Payload:**
     | Field | C Type | Size (Bytes) | Description |
     |---|---|---|---|
-    | `pgn` | `uint16_t` | 2 | PGN ID to query. If omitted, returns all used PGNs. |
+    | `pgn` | `uint16_t` | 2 | Optional. PGN ID to query. If omitted, returns all used PGNs. |
 *   **Reply Payload:** Repeated for each PGN found:
     | Field | C Type | Size (Bytes) | Description |
     |---|---|---|---|
@@ -2987,11 +2987,11 @@ These commands are specific extensions added by the INAV project.
 
 *   **Direction:** In/Out
 *   **Description:** Get or Set configuration for a specific Safe Home location.
-*   **Request Payload (Get):**
+*   **Request Payload:**
     | Field | C Type | Size (Bytes) | Description |
     |---|---|---|---|
     | `safehomeIndex` | `uint8_t` | 1 | Index of the safe home location (0 to `MAX_SAFE_HOMES - 1`). |
-*   **Reply Payload (Get):**
+*   **Reply Payload:**
     | Field | C Type | Size (Bytes) | Description |
     |---|---|---|---|
     | `safehomeIndex` | `uint8_t` | 1 | Index requested. |
@@ -3092,11 +3092,11 @@ These commands are specific extensions added by the INAV project.
 
 *   **Direction:** In/Out
 *   **Description:** Get or Set configuration for a specific Fixed Wing Autoland approach.
-*   **Request Payload (Get):**
+*   **Request Payload:**
     | Field | C Type | Size (Bytes) | Description |
     |---|---|---|---|
     | `approachIndex` | `uint8_t` | 1 | Index of the approach setting (0 to `MAX_FW_LAND_APPOACH_SETTINGS - 1`). |
-*   **Reply Payload (Get):**
+*   **Reply Payload:**
     | Field | C Type | Size (Bytes) | Units | Description |
     |---|---|---|---|---|
     | `approachIndex` | `uint8_t` | 1 | Index | Index requested. |
@@ -3316,11 +3316,11 @@ These commands are specific extensions added by the INAV project.
 
 *   **Direction:** In/Out
 *   **Description:** Get configuration for a specific Geozone.
-*   **Request Payload (Get):**
+*   **Request Payload:**
     | Field | C Type | Size (Bytes) | Description |
     |---|---|---|---|
     | `geozoneIndex` | `uint8_t` | 1 | Index of the geozone (0 to `MAX_GEOZONES_IN_CONFIG - 1`). |
-*   **Reply Payload (Get):**
+*   **Reply Payload:**
     | Field | C Type | Size (Bytes) | Description |
     |---|---|---|---|
     | `geozoneIndex` | `uint8_t` | 1 | Index requested. |
@@ -3354,7 +3354,7 @@ These commands are specific extensions added by the INAV project.
 
 *   **Direction:** In/Out
 *   **Description:** Get a specific vertex (or center+radius for circular zones) of a Geozone.
-*   **Request Payload (Get):**
+*   **Request Payload:**
     | Field | C Type | Size (Bytes) | Description |
     |---|---|---|---|
     | `geozoneIndex` | `uint8_t` | 1 | Index of the geozone. |
