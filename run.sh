@@ -1,4 +1,9 @@
 #!/bin/bash
+rm lib/all_defines.h
+rm lib/inav_defines.py
+rm lib/msp_enum.py
+rm lib/msp_messages.json
+
 echo "###########"
 echo get_msp_defs.py
 python get_msp_defs.py
@@ -23,6 +28,7 @@ python get_inav_enums.py
 echo "###########"
 echo bad_define_parse.py
 python bad_define_parse.py
+
 
 echo "###########"
 echo mspref.py

@@ -395,12 +395,6 @@ if __name__ == '__main__':
     search_dirs = ['blackbox','navigation','sensors','programming','rx','telemetry','io','flight','fc','config','msp','common']
     exclude_files = ['string_light.h','printf.h','settings.h']
 
-    # (Keep main execution block exactly as it was in the previous version)
-
-    if not os.path.isdir(arguments.src):
-        print(f"Error: Source directory not found: {arguments.src}")
-        sys.exit(1)
-
     all_extracted_data = {}
 
     print(f"Scanning directories: {', '.join(search_dirs)}")
@@ -433,16 +427,7 @@ if __name__ == '__main__':
 
     print(f"\nProcessed {files_processed} header files, found data in {files_with_data}.")
 
-    # --- Load Base Enums ---
     base_enums_output_dict = {}
-    try:
-        for name in dir(base_enums):
-            if not name.startswith("__"):
-                attr = getattr(base_enums, name)
-                if isinstance(attr, (dict, list, tuple, str, int, float, bool, type(None))):
-                     base_enums_output_dict[sanitize_name(name)] = attr
-    except Exception as e:
-         print(f"Warning: Error loading base enums: {e}")
 
     # --- Generate Code ---
     print("Generating Python code...")

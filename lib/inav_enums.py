@@ -2509,33 +2509,6 @@ class InavEnums:
         SERVO_SINGLECOPTER_4 = 6
 
 
-    # Source: fc/settings.h
-    class setting_mode_e(enum.IntEnum):
-        MODE_DIRECT = (0 << SETTING_MODE_OFFSET)
-        MODE_LOOKUP = (1 << SETTING_MODE_OFFSET)
-
-
-    # Source: fc/settings.h
-    class setting_section_e(enum.IntEnum):
-        MASTER_VALUE = (0 << SETTING_SECTION_OFFSET)
-        PROFILE_VALUE = (1 << SETTING_SECTION_OFFSET)
-        CONTROL_RATE_VALUE = (2 << SETTING_SECTION_OFFSET)
-        BATTERY_CONFIG_VALUE = (3 << SETTING_SECTION_OFFSET)
-        MIXER_CONFIG_VALUE = (4 << SETTING_SECTION_OFFSET)
-        EZ_TUNE_VALUE = (5 << SETTING_SECTION_OFFSET)
-
-
-    # Source: fc/settings.h
-    class setting_type_e(enum.IntEnum):
-        VAR_UINT8 = (0 << SETTING_TYPE_OFFSET)
-        VAR_INT8 = (1 << SETTING_TYPE_OFFSET)
-        VAR_UINT16 = (2 << SETTING_TYPE_OFFSET)
-        VAR_INT16 = (3 << SETTING_TYPE_OFFSET)
-        VAR_UINT32 = (4 << SETTING_TYPE_OFFSET)
-        VAR_FLOAT = (5 << SETTING_TYPE_OFFSET)
-        VAR_STRING = (6 << SETTING_TYPE_OFFSET)
-
-
     # Source: telemetry/sim.h
     class simTxFlags_e(enum.IntEnum):
         SIM_TX_FLAG = (1 << 0)
