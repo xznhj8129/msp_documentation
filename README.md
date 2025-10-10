@@ -25,6 +25,7 @@ mspref.py (updates msp_messages.json)
 # Not meant to be run every time/often, run it *ONCE* and *THEN* fix mistakes in the JSON file, not the error-prone Markdown
 
 ## Problems:
+* msg 100 (MSP_IDENT, deprec) and 255 (v2 frame indicator) missing
 * wrote old get_enums, ifdef problems, wrote new get_enums, forgot about it, forgot how it worked, worked on old one, it had problems, remembered old one, forgot how it works, but just works. yeah.
 * doubtful source-of-truth before burning the markdown file and going solely from json
 * How do we handle polymorphic messages? Dunno yet lol

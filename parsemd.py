@@ -27,9 +27,10 @@ msg_fmt = {
     "mspv": None,
     "direction": None,
     "request": None,
-    #"reply": None,
-    #"complex": False,
-    #"deprecated": False
+    "reply": None,
+    "variable_len": False,
+    "complex": False,
+    #"deprecated": False,
 }
 
 type_fmt = {
@@ -685,6 +686,9 @@ def generate_msp_dict(markdown_content: str) -> Dict[str, Any]:
         msg["request"] = req_data
         if rep_data:
             msg["reply"] = rep_data
+        else:
+            rep_data = None
+        msg["variable_len"] = (repeating_rep!=None) or (repeating_req!=None) or polymorph
         msg["notes"] = notes_str
         if description_line:
             msg["description"] = description_line

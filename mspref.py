@@ -29,7 +29,6 @@ bin_type_map = {
 }
 
 
-
 with open("lib/msp_messages.json","r") as file:
     f = file.read()
     msp = json.loads(f)
