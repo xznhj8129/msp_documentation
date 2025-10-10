@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import json
 from typing import List, Tuple, Optional, Dict, Any
-from msp_codes import MSPCodes
+from lib.msp_enum import MultiWii
 
 bin_type_map = {
     "enum": "B",
@@ -27,13 +27,16 @@ msg_fmt = {
     "mspv": None,
     "direction": None,
     "request": None,
-    "reply": None,
+    #"reply": None,
+    #"complex": False,
     #"deprecated": False
 }
 
 type_fmt = {
-    "size": [],
+    "size": 0,
+    "struct": "",
     "payload": None
+    #"variants": 
 }
 
 val_fmt = {
@@ -71,11 +74,18 @@ def _parse_int(s: str) -> Optional[int]:
             return None
     return int(s) if s.isdigit() else None
 
-def _map_base_type(t: str) -> Optional[str]:
+def _map_base_type(t: str):
     t = (t or "").strip()
     if t.lower() == "boolean":
         t = "bool"
-    return bin_type_map.get(t)
+    tt = bin_type_map.get(t)
+    if not tt:
+        if t.endswith(']'):
+            tt = 'array'
+        elif t.endswith('_t') and ' or ' not in t:
+            tt = 'struct'
+    
+    return tt
 
 def _emit_fixed_array(fmt_char: str, count: int) -> str:
     return f"{count}{fmt_char}"
@@ -367,6 +377,9 @@ def _parse_table_from_block(block: str) -> List[Dict[str, Any]]:
             continue
 
         ctype = get(col_ctype)
+        #print(ctype)
+        wtfisit = _map_base_type(ctype)
+        #print(wtfisit)
         size_raw = get(col_size)
         units = get(col_units)
         desc  = get(col_desc)
@@ -401,6 +414,8 @@ def _parse_table_from_block(block: str) -> List[Dict[str, Any]]:
         val = val_fmt.copy()
         val['name'] = field_name
         val['ctype'] = ctype
+        if not wtfisit:
+            val['polymorph'] = True
         #val['size'] = size
         val['units'] = units
         val['desc'] = desc
@@ -562,7 +577,12 @@ def generate_msp_dict(markdown_content: str) -> Dict[str, Any]:
         direction_str = _find_after_label(msg_content, "Direction")
         if not direction_str:
             if "Not implemented" in msg_content:
-                msp_references[msg_name] = {"implemented": False}
+                msp_references[msg_name] = {
+                    "hex": hex(msg_code),
+                    "id": msg_code,
+                    "mspv": 1 if msg_code <= 255 else 2,
+                    "implemented": False
+                    }
                 continue
             else:
                 raise Exception(f"Cant find direction for {msg_name}")
@@ -593,7 +613,7 @@ def generate_msp_dict(markdown_content: str) -> Dict[str, Any]:
             msg["direction"] = direction_val
             msg["request"] = None
             msg["reply"] = None
-            msg["error"] = True
+            msg["complex"] = True
             msg["notes"] = notes_str
             if description_line:
                 msg["description"] = description_line
@@ -625,23 +645,36 @@ def generate_msp_dict(markdown_content: str) -> Dict[str, Any]:
                     compsize = None
                     break
             return fields, compsize, rep_factor
-
+        
         req_fields, req_size, repeating_req = parse_block(req_block)
         rep_fields, rep_size, repeating_rep = parse_block(rep_block)
-
+        #if msg_name == "MSP_OSD_CHAR_WRITE": exit(0)
         req_data = None
         if len(req_fields) > 0:
             req_data = type_fmt.copy()
             req_data["payload"] = req_fields
             #req_data["size"] = req_size
-            if repeating_req: req_data["repeating"] = True
+            if repeating_req: 
+                if msg_name == "MSP2_INAV_SET_TEMP_SENSOR_CONFIG":
+                    req_data["repeating"] = "MAX_TEMP_SENSORS"
+                else:
+                    req_data["repeating"] = repeating_req
+
+        polymorph = False
+        for f in req_fields:
+            if 'polymorph' in f:
+                polymorph = True
+        for f in rep_fields:
+            if 'polymorph' in f:
+                polymorph = True
+            
 
         rep_data = None
         if len(rep_fields) > 0:
             rep_data = type_fmt.copy()
             rep_data["payload"] = rep_fields
             #rep_data["size"] = rep_size
-            if repeating_rep: rep_data["repeating"] = True
+            if repeating_rep: rep_data["repeating"] = repeating_rep
 
         msg = msg_fmt.copy()
         msg["hex"] = hex(msg_code)
@@ -650,10 +683,13 @@ def generate_msp_dict(markdown_content: str) -> Dict[str, Any]:
         #msg["size"] = rep_size if (rep_fields or rep_size is not None) else req_size
         msg["direction"] = direction_val
         msg["request"] = req_data
-        msg["reply"] = rep_data
+        if rep_data:
+            msg["reply"] = rep_data
         msg["notes"] = notes_str
         if description_line:
             msg["description"] = description_line
+        if polymorph:
+            msg["complex"] = True
 
         msp_references[msg_name] = msg
         # Debug printout 
@@ -670,14 +706,15 @@ if __name__ == "__main__":
         markdown = f.read()
 
     data = generate_msp_dict(markdown)
-    for i, j in enumerate(MSPCodes):
-        if j not in data:
-            print(i, j)
+    for c in MultiWii:
+        print(c.name, c.value)
+        if c.name not in data:
+            print(c.name, c.value)
             msg = msg_fmt.copy()
-            msg['id'] = i
-            msg['hex'] = hex(i)
-            msg['name'] = j
+            msg['id'] = c.value
+            msg['hex'] = hex(c.value)
+            msg['name'] = c.name
             msg['missing'] = True
     text = json.dumps(data, indent=4, ensure_ascii=False)
-    with open("msp_messages.json", "w", encoding="utf-8") as f:
+    with open("lib/msp_messages.json", "w", encoding="utf-8") as f:
         f.write(text)

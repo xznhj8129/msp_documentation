@@ -1,140 +1,7 @@
-// Consolidated defines - generated on 2025-08-18 12:01:44.291096
+// Consolidated defines - generated on 2025-10-10 16:32:00.411581
 
 
-// ../../../../other_software/inav/src/main/navigation/navigation_pos_estimator.c
-#define resetTimer(tim, currentTimeUs) { (tim)->deltaTime = 0; (tim)->lastTriggeredTime = currentTimeUs; }
-#define getTimerDeltaMicros(tim) ((tim)->deltaTime)
-#define ACC_VIB_FACTOR_S 1.0f
-#define ACC_VIB_FACTOR_E 3.0f
-
-
-// ../../../../other_software/inav/src/main/navigation/navigation_private.h
-#define DISTANCE_BETWEEN_TWO_LONGITUDE_POINTS_AT_EQUATOR    1.113195f
-#define MIN_POSITION_UPDATE_RATE_HZ         5
-#define NAV_THROTTLE_CUTOFF_FREQENCY_HZ     4
-#define NAV_FW_CONTROL_MONITORING_RATE      2
-#define NAV_DTERM_CUT_HZ                    10.0f
-#define NAV_VEL_Z_DERIVATIVE_CUT_HZ         5.0f
-#define NAV_VEL_Z_ERROR_CUT_HZ              5.0f
-#define NAV_ACCELERATION_XY_MAX             980.0f
-#define INAV_SURFACE_MAX_DISTANCE           40
-#define MC_POS_CONTROL_JERK_LIMIT_CMSSS     1700.0f
-#define MC_LAND_CHECK_VEL_XY_MOVING         100.0f
-#define MC_LAND_CHECK_VEL_Z_MOVING          100.0f
-#define MC_LAND_THR_STABILISE_DELAY         1
-#define MC_LAND_DESCEND_THROTTLE            40
-#define MC_LAND_SAFE_SURFACE                5.0f
-#define MAX_POSITION_UPDATE_INTERVAL_US     HZ2US(MIN_POSITION_UPDATE_RATE_HZ)
-
-
-// ../../../../other_software/inav/src/main/navigation/navigation_fixedwing.c
-#define NAV_FW_BASE_PITCH_CUTOFF_FREQUENCY_HZ     2.0f
-#define NAV_FW_BASE_ROLL_CUTOFF_FREQUENCY_HZ     10.0f
-#define NAV_FW_THROTTLE_SPEED_BOOST_GAIN        1.5f
-    #define TAN_15DEG    0.26795f
-
-
-// ../../../../other_software/inav/src/main/navigation/rth_trackback.h
-#define NAV_RTH_TRACKBACK_POINTS                50
-#define NAV_RTH_TRACKBACK_MIN_DIST_TO_START     50
-#define NAV_RTH_TRACKBACK_MIN_XY_DIST_TO_SAVE   20
-#define NAV_RTH_TRACKBACK_MIN_Z_DIST_TO_SAVE    10
-#define NAV_RTH_TRACKBACK_MIN_TRIP_DIST_TO_SAVE 10
-
-
-// ../../../../other_software/inav/src/main/navigation/navigation_pos_estimator_private.h
-#define INAV_GPS_DEFAULT_EPH                200.0f
-#define INAV_GPS_DEFAULT_EPV                500.0f
-#define INAV_GPS_ACCEPTANCE_EPE             500.0f
-#define INAV_ACC_BIAS_ACCEPTANCE_VALUE      (GRAVITY_CMSS * 0.25f)
-#define INAV_GPS_GLITCH_RADIUS              250.0f
-#define INAV_GPS_GLITCH_ACCEL               1000.0f
-#define INAV_POSITION_PUBLISH_RATE_HZ       50
-#define INAV_PITOT_UPDATE_RATE              10
-#define INAV_GPS_TIMEOUT_MS                 1500
-#define INAV_BARO_TIMEOUT_MS                200
-#define INAV_SURFACE_TIMEOUT_MS             400
-#define INAV_FLOW_TIMEOUT_MS                200
-#define CALIBRATING_GRAVITY_TIME_MS         2000
-#define INAV_BARO_AVERAGE_HZ                1.0f
-#define INAV_SURFACE_AVERAGE_HZ             1.0f
-#define INAV_ACC_CLIPPING_RC_CONSTANT           (0.010f)
-#define RANGEFINDER_RELIABILITY_RC_CONSTANT     (0.47802f)
-#define RANGEFINDER_RELIABILITY_LIGHT_THRESHOLD (0.15f)
-#define RANGEFINDER_RELIABILITY_LOW_THRESHOLD   (0.33f)
-#define RANGEFINDER_RELIABILITY_HIGH_THRESHOLD  (0.75f)
-
-
-// ../../../../other_software/inav/src/main/navigation/navigation.c
-#define MR_RTH_CLIMB_OVERSHOOT_CM   100
-#define MR_RTH_CLIMB_MARGIN_MIN_CM  100
-#define MR_RTH_CLIMB_MARGIN_PERCENT 15
-#define MR_RTH_LAND_MARGIN_CM       2000
-#define FW_RTH_CLIMB_OVERSHOOT_CM   100
-#define FW_RTH_CLIMB_MARGIN_MIN_CM  100
-#define FW_RTH_CLIMB_MARGIN_PERCENT 15
-#define FW_LAND_LOITER_MIN_TIME 30000000
-#define FW_LAND_LOITER_ALT_TOLERANCE 150
-
-
-// ../../../../other_software/inav/src/main/navigation/navigation_fw_launch.c
-#define SWING_LAUNCH_MIN_ROTATION_RATE      DEGREES_TO_RADIANS(100)
-#define LAUNCH_MOTOR_IDLE_SPINUP_TIME 1500
-#if !defined(UNUSED)
-#define UNUSED(x) ((void)(x))
-#endif
-#define FW_LAUNCH_MESSAGE_TEXT_WAIT_THROTTLE "RAISE THE THROTTLE"
-#define FW_LAUNCH_MESSAGE_TEXT_WAIT_IDLE "WAITING FOR IDLE"
-#define FW_LAUNCH_MESSAGE_TEXT_WAIT_DETECTION "READY TO LAUNCH"
-#define FW_LAUNCH_MESSAGE_TEXT_IN_PROGRESS "MOVE THE STICKS TO ABORT"
-#define FW_LAUNCH_MESSAGE_TEXT_FINISHING "FINISHING"
-
-
-// ../../../../other_software/inav/src/main/navigation/navigation.h
-#if defined(USE_SAFE_HOME)
-#define MAX_SAFE_HOMES 8
-#endif
-#ifdef USE_FW_AUTOLAND
-#ifndef MAX_SAFE_HOMES
-#define MAX_SAFE_HOMES 0
-#endif
-#define MAX_FW_LAND_APPOACH_SETTINGS (MAX_SAFE_HOMES + 9)
-#endif
-#if defined(USE_GEOZONE)
-#define GEOZONE_SHAPE_CIRCULAR 0
-#define GEOZONE_SHAPE_POLYGON  1
-#define GEOZONE_TYPE_EXCLUSIVE 0
-#define GEOZONE_TYPE_INCLUSIVE 1
-#endif
-#ifndef NAV_MAX_WAYPOINTS
-#define NAV_MAX_WAYPOINTS 15
-#endif
-#define NAV_ACCEL_CUTOFF_FREQUENCY_HZ 2
-#define RADAR_MAX_POIS 5
-
-
-// ../../../../other_software/inav/src/main/navigation/navigation_geozone.c
-#ifdef USE_GEOZONE
-#define MAX_VERTICES (MAX_VERTICES_IN_CONFIG + 1)
-#define MAX_GEOZONES (MAX_GEOZONES_IN_CONFIG + 1)
-#define MAX_DISTANCE_FLY_OVER_POINTS 50000
-#define MAX_PATH_PONITS (2 + 2 * MAX_VERTICES)
-#define POS_DETECTION_DISTANCE 7500
-#define STICK_LOCK_MIN_TIME 2500
-#define AVOID_TIMEOUT 30000
-#define MAX_LOCAL_VERTICES 128
-#define GEOZONE_INCLUSE_IGNORE_DISTANCE 2000 * 100
-#define STICK_MOVE_THRESHOULD 40
-#define MAX_RTH_WAYPOINTS (MAX_VERTICES / 2)
-#define GEOZONE_INACTIVE INT8_MAX
-#define RTH_OVERRIDE_TIMEOUT 1000
-#define K_EPSILON 1e-8f
-#define IS_IN_TOLERANCE_RANGE(a, b, t) (((a) > (b) - (t)) && ((a) < (b) + (t)))
-#define CIRCLE_POLY_SIDES 6
-#endif
-
-
-// ../../../../other_software/inav/src/main/sensors/pitotmeter.c
+// ../inav/src/main/sensors/pitotmeter.c
 #ifdef USE_PITOT
 #define PITOT_HARDWARE_TIMEOUT_MS   500
 #ifdef USE_PITOT
@@ -145,7 +12,7 @@
 #endif
 
 
-// ../../../../other_software/inav/src/main/sensors/irlock.c
+// ../inav/src/main/sensors/irlock.c
 #define IRLOCK_TIMEOUT 100
 #if defined(USE_IRLOCK)
 #define X_TO_DISTANCE_FACTOR -0.0029387573f
@@ -157,7 +24,7 @@
 #endif
 
 
-// ../../../../other_software/inav/src/main/sensors/boardalignment.c
+// ../inav/src/main/sensors/boardalignment.c
 #if defined(UNIT_TEST)
 #define SETTING_ALIGN_BOARD_ROLL_MIN -1800
 #define SETTING_ALIGN_BOARD_ROLL_MAX 3600
@@ -166,11 +33,11 @@
 #endif
 
 
-// ../../../../other_software/inav/src/main/sensors/gyro.c
+// ../inav/src/main/sensors/gyro.c
 #define MAX_GYRO_COUNT 1
 
 
-// ../../../../other_software/inav/src/main/sensors/opflow.c
+// ../inav/src/main/sensors/opflow.c
 #ifdef USE_OPFLOW
 #define OPFLOW_SQUAL_THRESHOLD_HIGH     35
 #define OPFLOW_SQUAL_THRESHOLD_LOW      10
@@ -179,7 +46,7 @@
 #endif
 
 
-// ../../../../other_software/inav/src/main/sensors/battery.c
+// ../inav/src/main/sensors/battery.c
 #define ADCVREF 3300
 #define VBATT_CELL_FULL_MAX_DIFF 10
 #define VBATT_PRESENT_THRESHOLD 220
@@ -190,7 +57,7 @@
 #define IMPEDANCE_STABLE_SAMPLE_COUNT_THRESH 10
 
 
-// ../../../../other_software/inav/src/main/sensors/battery.h
+// ../inav/src/main/sensors/battery.h
 #ifndef VBAT_SCALE_DEFAULT
 #define VBAT_SCALE_DEFAULT 1100
 #endif
@@ -206,7 +73,7 @@
 #define currentBatteryProfileMutable ((batteryProfile_t*)currentBatteryProfile)
 
 
-// ../../../../other_software/inav/src/main/sensors/rangefinder.c
+// ../inav/src/main/sensors/rangefinder.c
 #define RANGEFINDER_HARDWARE_TIMEOUT_MS         500
 #define RANGEFINDER_DYNAMIC_THRESHOLD           600
 #define RANGEFINDER_DYNAMIC_FACTOR              75
@@ -215,18 +82,18 @@
 #endif
 
 
-// ../../../../other_software/inav/src/main/sensors/temperature.h
+// ../inav/src/main/sensors/temperature.h
 #define TEMPERATURE_LABEL_LEN 4
 #define MAX_TEMP_SENSORS 8
 #define TEMPERATURE_INVALID_VALUE -1250
 
 
-// ../../../../other_software/inav/src/main/sensors/pitotmeter.h
+// ../inav/src/main/sensors/pitotmeter.h
 #define PITOT_MAX  PITOT_FAKE
 #define PITOT_SAMPLE_COUNT_MAX   48
 
 
-// ../../../../other_software/inav/src/main/sensors/esc_sensor.c
+// ../inav/src/main/sensors/esc_sensor.c
 #if defined(USE_ESC_SENSOR)
 #define ESC_BOOTTIME_MS         5000
 #define ESC_REQUEST_TIMEOUT_MS  50
@@ -235,7 +102,7 @@
 #endif
 
 
-// ../../../../other_software/inav/src/main/sensors/sensors.h
+// ../inav/src/main/sensors/sensors.h
 #define CALIBRATING_BARO_TIME_MS            2000
 #define CALIBRATING_PITOT_TIME_MS           4000
 #define CALIBRATING_GYRO_TIME_MS            2000
@@ -243,7 +110,7 @@
 #define CALIBRATING_GYRO_MORON_THRESHOLD    32
 
 
-// ../../../../other_software/inav/src/main/sensors/acceleration.h
+// ../inav/src/main/sensors/acceleration.h
 #define GRAVITY_CMSS    980.665f
 #define GRAVITY_MSS     9.80665f
 #define ACC_CLIPPING_THRESHOLD_G        15.9f
@@ -251,39 +118,39 @@
 #define ACC_VIBE_FILT_HZ                2.0f
 
 
-// ../../../../other_software/inav/src/main/sensors/diagnostics.h
+// ../inav/src/main/sensors/diagnostics.h
 #define HW_SENSOR_IS_HEALTHY(status)    (status == HW_SENSOR_NONE || status == HW_SENSOR_OK)
 
 
-// ../../../../other_software/inav/src/main/sensors/esc_sensor.h
+// ../inav/src/main/sensors/esc_sensor.h
 #define ESC_DATA_MAX_AGE    10
 #define ESC_DATA_INVALID    255
 #define ERPM_PER_LSB        100.0f
 
 
-// ../../../../other_software/inav/src/main/sensors/temperature.c
+// ../inav/src/main/sensors/temperature.c
 #define MPU_TEMP_VALID_BIT 0
 #define BARO_TEMP_VALID_BIT 1
 #define MPU_TEMP_VALID (mpuBaroTempValid & (1 << MPU_TEMP_VALID_BIT))
 #define BARO_TEMP_VALID (mpuBaroTempValid & (1 << BARO_TEMP_VALID_BIT))
 
 
-// ../../../../other_software/inav/src/main/programming/global_variables.h
+// ../inav/src/main/programming/global_variables.h
 #define MAX_GLOBAL_VARIABLES 8
 
 
-// ../../../../other_software/inav/src/main/programming/pid.h
+// ../inav/src/main/programming/pid.h
 #define MAX_PROGRAMMING_PID_COUNT 4
 
 
-// ../../../../other_software/inav/src/main/programming/logic_condition.h
+// ../inav/src/main/programming/logic_condition.h
 #define MAX_LOGIC_CONDITIONS 64
 #define LOGIC_CONDITION_GLOBAL_FLAG_DISABLE(mask) (logicConditionsGlobalFlags &= ~(mask))
 #define LOGIC_CONDITION_GLOBAL_FLAG_ENABLE(mask) (logicConditionsGlobalFlags |= (mask))
 #define LOGIC_CONDITION_GLOBAL_FLAG(mask) (logicConditionsGlobalFlags & (mask))
 
 
-// ../../../../other_software/inav/src/main/rx/rx.h
+// ../inav/src/main/rx/rx.h
 #define STICK_CHANNEL_COUNT 4
 #define PWM_RANGE_MIN 1000
 #define PWM_RANGE_MAX 2000
@@ -313,7 +180,7 @@
 #define REMAPPABLE_CHANNEL_COUNT ARRAYLEN(((rxConfig_t *)0)->rcmap)
 
 
-// ../../../../other_software/inav/src/main/rx/crsf.c
+// ../inav/src/main/rx/crsf.c
 #ifdef USE_SERIALRX_CRSF
 #define CRSF_TIME_NEEDED_PER_FRAME_US   1100
 #define CRSF_TIME_BETWEEN_FRAMES_US     6667
@@ -324,7 +191,7 @@
 #endif
 
 
-// ../../../../other_software/inav/src/main/rx/rx.c
+// ../inav/src/main/rx/rx.c
 #define MSP_RSSI_TIMEOUT_US     1500000
 #define RX_LQ_INTERVAL_MS       200
 #define RX_LQ_TIMEOUT_MS        1000
@@ -338,7 +205,7 @@
 #define RSSI_SAMPLE_COUNT 16
 
 
-// ../../../../other_software/inav/src/main/rx/sbus_channels.h
+// ../inav/src/main/rx/sbus_channels.h
 #define SBUS_MAX_CHANNEL 34
 #define SBUS_FLAG_CHANNEL_DG1       (1 << 0)
 #define SBUS_FLAG_CHANNEL_DG2       (1 << 1)
@@ -355,7 +222,7 @@
 #endif
 
 
-// ../../../../other_software/inav/src/main/rx/ibus.c
+// ../inav/src/main/rx/ibus.c
 #ifdef USE_SERIALRX_IBUS
 #define IBUS_MAX_CHANNEL 18
 #define IBUS_MAX_SLOTS 14
@@ -368,7 +235,7 @@
 #endif
 
 
-// ../../../../other_software/inav/src/main/rx/crsf.h
+// ../inav/src/main/rx/crsf.h
 #define CRSF_BAUDRATE           420000
 #define CRSF_PORT_OPTIONS       (SERIAL_STOPBITS_1 | SERIAL_PARITY_NO)
 #define CRSF_PORT_MODE          MODE_RXTX
@@ -376,7 +243,7 @@
 #define CRSF_TELEMETRY_SYNC_BYTE  0XC8
 
 
-// ../../../../other_software/inav/src/main/rx/ghst_protocol.h
+// ../inav/src/main/rx/ghst_protocol.h
 #define GHST_RX_BAUDRATE                420000
 #define GHST_TX_BAUDRATE_FAST           400000
 #define GHST_TX_BAUDRATE_SLOW           115200
@@ -395,7 +262,7 @@
 #define GPS_FLAGS_FIX_HOME          0x02
 
 
-// ../../../../other_software/inav/src/main/rx/srxl2.c
+// ../inav/src/main/rx/srxl2.c
 #ifdef USE_SERIALRX_SRXL2
 #ifndef SRXL2_DEBUG
 #define SRXL2_DEBUG 0
@@ -425,7 +292,7 @@
 #endif
 
 
-// ../../../../other_software/inav/src/main/rx/sumd.c
+// ../inav/src/main/rx/sumd.c
 #ifdef USE_SERIALRX_SUMD
 #define SUMD_SYNCBYTE 0xA8
 #define SUMD_MAX_CHANNEL 16
@@ -440,21 +307,21 @@
 #endif
 
 
-// ../../../../other_software/inav/src/main/rx/ghst.h
+// ../inav/src/main/rx/ghst.h
 #define GHST_MAX_NUM_CHANNELS           16
 
 
-// ../../../../other_software/inav/src/main/rx/mavlink.c
+// ../inav/src/main/rx/mavlink.c
 #ifdef USE_SERIALRX_MAVLINK
 #define MAVLINK_CHANNEL_COUNT 18
 #endif
 
 
-// ../../../../other_software/inav/src/main/rx/mavlink.h
+// ../inav/src/main/rx/mavlink.h
 #define MAVLINK_COMM_NUM_BUFFERS 1
 
 
-// ../../../../other_software/inav/src/main/rx/fport2.c
+// ../inav/src/main/rx/fport2.c
 #ifdef USE_SERIALRX_FPORT2
 #define FPORT2_MIN_TELEMETRY_RESPONSE_DELAY_US 500
 #define FPORT2_MAX_TELEMETRY_RESPONSE_DELAY_US 3000
@@ -477,7 +344,7 @@
 #endif
 
 
-// ../../../../other_software/inav/src/main/rx/jetiexbus.h
+// ../inav/src/main/rx/jetiexbus.h
 #define EXBUS_HEADER_LEN                6
 #define EXBUS_CRC_LEN                   2
 #define EXBUS_OVERHEAD                  (EXBUS_HEADER_LEN + EXBUS_CRC_LEN)
@@ -486,14 +353,14 @@
 #define EXBUS_EX_REQUEST                (0x3A)
 
 
-// ../../../../other_software/inav/src/main/rx/sbus_channels.c
+// ../inav/src/main/rx/sbus_channels.c
 #ifdef USE_SERIAL_RX
 #define SBUS_DIGITAL_CHANNEL_MIN 173
 #define SBUS_DIGITAL_CHANNEL_MAX 1812
 #endif
 
 
-// ../../../../other_software/inav/src/main/rx/spektrum.h
+// ../inav/src/main/rx/spektrum.h
 #define SPEKTRUM_MAX_SUPPORTED_CHANNEL_COUNT 12
 #define SPEKTRUM_2048_CHANNEL_COUNT          12
 #define SPEKTRUM_1024_CHANNEL_COUNT          7
@@ -506,7 +373,7 @@
 #define SPEKTRUM_BAUDRATE 115200
 
 
-// ../../../../other_software/inav/src/main/rx/spektrum.c
+// ../inav/src/main/rx/spektrum.c
 #ifdef USE_SERIALRX_SPEKTRUM
 #define SPEKTRUM_TELEMETRY_FRAME_DELAY_US 1000
 #define SPEKTRUM_MAX_FADE_PER_SEC 40
@@ -514,7 +381,7 @@
 #endif
 
 
-// ../../../../other_software/inav/src/main/rx/jetiexbus.c
+// ../inav/src/main/rx/jetiexbus.c
 #ifdef USE_SERIALRX_JETIEXBUS
 #define JETIEXBUS_BAUDRATE 125000
 #define JETIEXBUS_OPTIONS (SERIAL_STOPBITS_1 | SERIAL_PARITY_NO)
@@ -533,12 +400,12 @@
 #endif
 
 
-// ../../../../other_software/inav/src/main/rx/sbus.h
+// ../inav/src/main/rx/sbus.h
 #define SBUS_DEFAULT_INTERFRAME_DELAY_US    3000
 #define SBUS_BYTE_TIME_US(bytes)    MS2US(10 * 12 * bytes)
 
 
-// ../../../../other_software/inav/src/main/rx/fport.c
+// ../inav/src/main/rx/fport.c
 #if defined(USE_SERIAL_RX)
 #define FPORT_TIME_NEEDED_PER_FRAME_US 3000
 #define FPORT_MAX_TELEMETRY_RESPONSE_DELAY_US 2000
@@ -561,7 +428,7 @@
 #endif
 
 
-// ../../../../other_software/inav/src/main/rx/ghst.c
+// ../inav/src/main/rx/ghst.c
 #ifdef USE_SERIALRX_GHST
 #define GHST_PORT_OPTIONS               (SERIAL_STOPBITS_1 | SERIAL_PARITY_NO | SERIAL_BIDIR | SERIAL_BIDIR_PP)
 #define GHST_PORT_MODE                  MODE_RXTX
@@ -578,14 +445,14 @@
 #endif
 
 
-// ../../../../other_software/inav/src/main/rx/srxl2_types.h
+// ../inav/src/main/rx/srxl2_types.h
 #define PACKED __attribute__((packed))
 #define SRXL_BIND_OPT_NONE              (0x00)
 #define SRXL_BIND_OPT_TELEM_TX_ENABLE   (0x01)
 #define SRXL_BIND_OPT_BIND_TX_ENABLE    (0x02)
 
 
-// ../../../../other_software/inav/src/main/telemetry/crsf.c
+// ../inav/src/main/telemetry/crsf.c
 #if defined(USE_TELEMETRY) && defined(USE_SERIALRX_CRSF) && defined(USE_TELEMETRY_CRSF)
 #define CRSF_CYCLETIME_US                   100000
 #define CRSF_DEVICEINFO_VERSION             0x01
@@ -596,11 +463,11 @@
 #endif
 
 
-// ../../../../other_software/inav/src/main/telemetry/telemetry.h
+// ../inav/src/main/telemetry/telemetry.h
 #define TELEMETRY_SHAREABLE_PORT_FUNCTIONS_MASK (FUNCTION_TELEMETRY_LTM | FUNCTION_TELEMETRY_IBUS)
 
 
-// ../../../../other_software/inav/src/main/telemetry/smartport.c
+// ../inav/src/main/telemetry/smartport.c
 #if defined(USE_TELEMETRY) && defined(USE_TELEMETRY_SMARTPORT)
 #define __USE_C99_MATH
 #define SMARTPORT_BAUD 57600
@@ -610,7 +477,7 @@
 #endif
 
 
-// ../../../../other_software/inav/src/main/telemetry/hott.c
+// ../inav/src/main/telemetry/hott.c
 #if defined(USE_TELEMETRY) && defined(USE_TELEMETRY_HOTT)
 #if defined (USE_HOTT_TEXTMODE) && defined (USE_CMS)
 #define HOTT_TEXTMODE_TASK_PERIOD 1000
@@ -627,7 +494,7 @@
 #endif
 
 
-// ../../../../other_software/inav/src/main/telemetry/msp_shared.c
+// ../inav/src/main/telemetry/msp_shared.c
 #if defined(USE_MSP_OVER_TELEMETRY)
 #define TELEMETRY_MSP_VERSION    1
 #define TELEMETRY_MSP_VER_SHIFT  5
@@ -639,12 +506,12 @@
 #endif
 
 
-// ../../../../other_software/inav/src/main/telemetry/crsf.h
+// ../inav/src/main/telemetry/crsf.h
 #define CRSF_MSP_RX_BUF_SIZE 128
 #define CRSF_MSP_TX_BUF_SIZE 128
 
 
-// ../../../../other_software/inav/src/main/telemetry/hott.h
+// ../inav/src/main/telemetry/hott.h
 #define HOTTV4_RXTX 4
 #define HOTTV4_TEXT_MODE_REQUEST_ID       0x7f
 #define HOTTV4_BINARY_MODE_REQUEST_ID     0x80
@@ -677,7 +544,7 @@
 #define HOTT_VARIO_MSG_TEXT_LEN 21
 
 
-// ../../../../other_software/inav/src/main/telemetry/ltm.c
+// ../inav/src/main/telemetry/ltm.c
 #if defined(USE_TELEMETRY_LTM)
 #define TELEMETRY_LTM_INITIAL_PORT_MODE MODE_TX
 #define LTM_CYCLETIME   100
@@ -691,7 +558,7 @@
 #endif
 
 
-// ../../../../other_software/inav/src/main/telemetry/ltm.h
+// ../inav/src/main/telemetry/ltm.h
 #define LTM_GFRAME_PAYLOAD_SIZE 14
 #define LTM_AFRAME_PAYLOAD_SIZE  6
 #define LTM_SFRAME_PAYLOAD_SIZE  7
@@ -702,7 +569,7 @@
 #define LTM_MAX_MESSAGE_SIZE (LTM_MAX_PAYLOAD_SIZE+4)
 
 
-// ../../../../other_software/inav/src/main/telemetry/ibus_shared.h
+// ../inav/src/main/telemetry/ibus_shared.h
 #define IBUS_TASK_PERIOD_US (500)
 #define IBUS_BAUDRATE      (115200)
 #define IBUS_CYCLE_TIME_MS (8)
@@ -713,13 +580,13 @@
 #define IBUS_RX_BUF_LEN    (IBUS_MAX_RX_LEN)
 
 
-// ../../../../other_software/inav/src/main/telemetry/ibus_shared.c
+// ../inav/src/main/telemetry/ibus_shared.c
 #if defined(USE_TELEMETRY) && defined(USE_TELEMETRY_IBUS)
 #define IBUS_TEMPERATURE_OFFSET (0x0190)
 #endif
 
 
-// ../../../../other_software/inav/src/main/telemetry/sim.c
+// ../inav/src/main/telemetry/sim.c
 #if defined(USE_TELEMETRY) && defined(USE_TELEMETRY_SIM)
 #define SIM_AT_COMMAND_MAX_SIZE 255
 #define SIM_RESPONSE_BUFFER_SIZE 255
@@ -739,7 +606,7 @@
 #endif
 
 
-// ../../../../other_software/inav/src/main/telemetry/mavlink.c
+// ../inav/src/main/telemetry/mavlink.c
 #if defined(USE_TELEMETRY) && defined(USE_TELEMETRY_MAVLINK)
 #define MAVLINK_COMM_NUM_BUFFERS 1
 #define TELEMETRY_MAVLINK_PORT_MODE     MODE_RXTX
@@ -751,11 +618,11 @@
 #endif
 
 
-// ../../../../other_software/inav/src/main/telemetry/jetiexbus.h
+// ../inav/src/main/telemetry/jetiexbus.h
 #define JETI_EXBUS_TELEMETRY_FRAME_LEN  128
 
 
-// ../../../../other_software/inav/src/main/telemetry/sim.h
+// ../inav/src/main/telemetry/sim.h
 #define SIM_MIN_TRANSMIT_INTERVAL 10u
 #define SIM_DEFAULT_TRANSMIT_INTERVAL 60u
 #define SIM_N_TX_FLAGS 5
@@ -763,7 +630,7 @@
 #define SIM_PIN "0000"
 
 
-// ../../../../other_software/inav/src/main/telemetry/sbus2.h
+// ../inav/src/main/telemetry/sbus2.h
 #define SBUS2_TELEMETRY_PAYLOAD_SIZE 3
 #define SBUS2_TELEMETRY_ITEM_SIZE   3
 #define SBUS2_TELEMETRY_SLOTS       8
@@ -775,7 +642,7 @@
 #define SBUS2_SLOT_COUNT            (SBUS2_TELEMETRY_PAGES * SBUS2_TELEMETRY_SLOTS)
 
 
-// ../../../../other_software/inav/src/main/telemetry/jetiexbus.c
+// ../inav/src/main/telemetry/jetiexbus.c
 #if defined(USE_TELEMETRY_JETIEXBUS)
 #define EXTEL_DATA_MSG      (0x40)
 #define EXTEL_UNMASK_TYPE   (0x3F)
@@ -791,7 +658,7 @@
 #endif
 
 
-// ../../../../other_software/inav/src/main/telemetry/ghst.c
+// ../inav/src/main/telemetry/ghst.c
 #ifdef USE_TELEMETRY_GHST
 #define GHST_CYCLETIME_US                   100000
 #define GHST_FRAME_PACK_PAYLOAD_SIZE        10
@@ -801,18 +668,18 @@
 #endif
 
 
-// ../../../../other_software/inav/src/main/telemetry/srxl.h
+// ../inav/src/main/telemetry/srxl.h
 #define SPEKTRUM_SRXL_TEXTGEN_BUFFER_ROWS 9
 #define SPEKTRUM_SRXL_TEXTGEN_BUFFER_COLS 12
 #define SPEKTRUM_SRXL_TEXTGEN_CLEAR_SCREEN 255
 
 
-// ../../../../other_software/inav/src/main/telemetry/smartport.h
+// ../inav/src/main/telemetry/smartport.h
 #define SMARTPORT_MSP_TX_BUF_SIZE 256
 #define SMARTPORT_MSP_RX_BUF_SIZE 64
 
 
-// ../../../../other_software/inav/src/main/telemetry/srxl.c
+// ../inav/src/main/telemetry/srxl.c
 #if defined(USE_TELEMETRY_SRXL)
 #define SRXL_ADDRESS_FIRST          0xA5
 #define SRXL_ADDRESS_SECOND         0x80
@@ -884,7 +751,7 @@
 #endif
 
 
-// ../../../../other_software/inav/src/main/io/gps.h
+// ../inav/src/main/io/gps.h
 #define GPS_DBHZ_MIN 0
 #define GPS_DBHZ_MAX 55
 #define LAT 0
@@ -895,7 +762,7 @@
 #define HDOP_SCALE (100)
 
 
-// ../../../../other_software/inav/src/main/io/vtx_msp.h
+// ../inav/src/main/io/vtx_msp.h
 #ifndef _VTX_MSP_H
 #define _VTX_MSP_H
 #define VTX_MSP_TIMEOUT         250
@@ -905,7 +772,7 @@
 #endif
 
 
-// ../../../../other_software/inav/src/main/io/gimbal_serial.h
+// ../inav/src/main/io/gimbal_serial.h
 #ifdef USE_SERIAL_GIMBAL
 #define HTKATTITUDE_SYNC0  0xA5
 #define HTKATTITUDE_SYNC1  0x5A
@@ -913,7 +780,7 @@
 #endif
 
 
-// ../../../../other_software/inav/src/main/io/osd_dji_hd.c
+// ../inav/src/main/io/osd_dji_hd.c
 #if defined(USE_DJI_HD_OSD)
 #define RC_RX_LINK_LOST_MSG "!RC RX LINK LOST!"
 #define OSD_MESSAGE_LENGTH 28
@@ -927,13 +794,13 @@
 #endif
 
 
-// ../../../../other_software/inav/src/main/io/displayport_msp.c
+// ../inav/src/main/io/displayport_msp.c
 #ifdef USE_MSP_DISPLAYPORT
 #define MSP_OSD_MAX_STRING_LENGTH 30
 #endif
 
 
-// ../../../../other_software/inav/src/main/io/serial_4way.c
+// ../inav/src/main/io/serial_4way.c
 #ifdef  USE_SERIAL_4WAY_BLHELI_INTERFACE
 #if defined(USE_HAL_DRIVER)
 #define Bit_RESET GPIO_PIN_RESET
@@ -1003,7 +870,7 @@
 #endif
 
 
-// ../../../../other_software/inav/src/main/io/vtx_tramp.c
+// ../inav/src/main/io/vtx_tramp.c
 #if defined(USE_VTX_TRAMP) && defined(USE_VTX_CONTROL)
 #define VTX_PKT_SIZE                16
 #define VTX_PROTO_STATE_TIMEOUT_MS  1000
@@ -1015,7 +882,7 @@
 #endif
 
 
-// ../../../../other_software/inav/src/main/io/serial_4way_impl.h
+// ../inav/src/main/io/serial_4way_impl.h
 #define ESC_IS_HI  isEscHi(selected_esc)
 #define ESC_IS_LO  isEscLo(selected_esc)
 #define ESC_SET_HI setEscHi(selected_esc)
@@ -1024,11 +891,11 @@
 #define ESC_OUTPUT setEscOutput(selected_esc)
 
 
-// ../../../../other_software/inav/src/main/io/serial.h
+// ../inav/src/main/io/serial.h
 #define FUNCTION_VTX_MSP FUNCTION_MSP_OSD
 
 
-// ../../../../other_software/inav/src/main/io/rcdevice.h
+// ../inav/src/main/io/rcdevice.h
 #define RCDEVICE_PROTOCOL_HEADER                                    0xCC
 #define RCDEVICE_PROTOCOL_MAX_PACKET_SIZE                           64
 #define RCDEVICE_PROTOCOL_MAX_DATA_SIZE                             20
@@ -1043,21 +910,21 @@
 #define MAX_WAITING_RESPONSES 2
 
 
-// ../../../../other_software/inav/src/main/io/osd_common.c
+// ../inav/src/main/io/osd_common.c
 #if defined(USE_OSD)
 #define CANVAS_DEFAULT_GRID_ELEMENT_WIDTH OSD_CHAR_WIDTH
 #define CANVAS_DEFAULT_GRID_ELEMENT_HEIGHT OSD_CHAR_HEIGHT
 #endif
 
 
-// ../../../../other_software/inav/src/main/io/servo_sbus.c
+// ../inav/src/main/io/servo_sbus.c
 #if defined(USE_SERVO_SBUS)
 #define SERVO_SBUS_UART_BAUD            100000
 #define SERVO_SBUS_OPTIONS              (SBUS_PORT_OPTIONS | SERIAL_INVERTED | SERIAL_UNIDIR)
 #endif
 
 
-// ../../../../other_software/inav/src/main/io/vtx_msp.c
+// ../inav/src/main/io/vtx_msp.c
 #if defined(USE_VTX_MSP) && defined(USE_VTX_CONTROL) && defined(USE_VTX_COMMON)
 #define VTX_MSP_MIN_BAND           (1)
 #define VTX_MSP_MAX_BAND           (VTX_MSP_MIN_BAND + VTX_MSP_BAND_COUNT - 1)
@@ -1070,7 +937,7 @@
 #endif
 
 
-// ../../../../other_software/inav/src/main/io/frsky_osd.c
+// ../inav/src/main/io/frsky_osd.c
 #if defined(USE_OSD) && defined(USE_FRSKYOSD)
 #define FRSKY_OSD_DEFAULT_BAUDRATE_INDEX BAUD_115200
 #define FRSKY_OSD_SUPPORTED_API_VERSION 2
@@ -1096,7 +963,7 @@
 #endif
 
 
-// ../../../../other_software/inav/src/main/io/rangefinder_nanoradar.c
+// ../inav/src/main/io/rangefinder_nanoradar.c
 #if defined(USE_RANGEFINDER_NANORADAR)
 #define NANORADAR_HDR 0xAA
 #define NANORADAR_END 0x55
@@ -1106,11 +973,11 @@
 #endif
 
 
-// ../../../../other_software/inav/src/main/io/vtx_control.h
+// ../inav/src/main/io/vtx_control.h
 #define MAX_CHANNEL_ACTIVATION_CONDITION_COUNT  10
 
 
-// ../../../../other_software/inav/src/main/io/osd.c
+// ../inav/src/main/io/osd.c
 #ifdef USE_OSD
 #define VIDEO_BUFFER_CHARS_PAL    480
 #define VIDEO_BUFFER_CHARS_HDZERO 900
@@ -1148,7 +1015,7 @@
 #endif
 
 
-// ../../../../other_software/inav/src/main/io/osd_canvas.c
+// ../inav/src/main/io/osd_canvas.c
 #if defined(USE_CANVAS)
 #define AHI_MIN_DRAW_INTERVAL_MS 50
 #define AHI_MAX_DRAW_INTERVAL_MS 1000
@@ -1160,13 +1027,13 @@
 #endif
 
 
-// ../../../../other_software/inav/src/main/io/serial.c
+// ../inav/src/main/io/serial.c
 #define BAUD_RATE_COUNT ARRAYLEN(baudRates)
 #define ALL_TELEMETRY_FUNCTIONS_MASK (FUNCTION_TELEMETRY_HOTT | FUNCTION_TELEMETRY_SMARTPORT | FUNCTION_TELEMETRY_LTM | FUNCTION_TELEMETRY_MAVLINK | FUNCTION_TELEMETRY_IBUS)
 #define ALL_FUNCTIONS_SHARABLE_WITH_MSP (FUNCTION_BLACKBOX | ALL_TELEMETRY_FUNCTIONS_MASK | FUNCTION_LOG)
 
 
-// ../../../../other_software/inav/src/main/io/gps_ublox.h
+// ../inav/src/main/io/gps_ublox.h
 #define GPS_CFG_CMD_TIMEOUT_MS              500
 #define GPS_VERSION_RETRY_TIMES             3
 #ifndef UBLOX_MAX_SIGNALS
@@ -1289,13 +1156,13 @@
 #define UBX_MON_GNSS_GALILEO_MASK   (1 << 3)
 
 
-// ../../../../other_software/inav/src/main/io/opflow_cxof.c
+// ../inav/src/main/io/opflow_cxof.c
 #if defined(USE_OPFLOW_CXOF)
 #define CXOF_PACKET_SIZE    9
 #endif
 
 
-// ../../../../other_software/inav/src/main/io/dashboard.c
+// ../inav/src/main/io/dashboard.c
 #ifdef USE_DASHBOARD
 #define MICROSECONDS_IN_A_SECOND (1000 * 1000)
 #define DASHBOARD_UPDATE_FREQUENCY (MICROSECONDS_IN_A_SECOND / 5)
@@ -1307,7 +1174,7 @@
 #endif
 
 
-// ../../../../other_software/inav/src/main/io/osd_common.h
+// ../inav/src/main/io/osd_common.h
 #define OSD_VARIO_CM_S_PER_ARROW 50
 #define OSD_VARIO_HEIGHT_ROWS 5
 #define OSD_AHI_HEIGHT 9
@@ -1323,7 +1190,7 @@
 #define OSD_DRAW_POINT_PIXEL(_x, _y) (&(osdDrawPoint_t){ .type = OSD_DRAW_POINT_TYPE_PIXEL, .pixel = {.px = (_x), .py = (_y)}})
 
 
-// ../../../../other_software/inav/src/main/io/vtx_string.c
+// ../inav/src/main/io/vtx_string.c
 #define VTX_STRING_5G8_BAND_COUNT  5
 #define VTX_STRING_5G8_CHAN_COUNT  8
 #define VTX_STRING_5G8_POWER_COUNT 5
@@ -1332,7 +1199,7 @@
 #define VTX_STRING_1G3_POWER_COUNT 3
 
 
-// ../../../../other_software/inav/src/main/io/osd_dji_hd.h
+// ../inav/src/main/io/osd_dji_hd.h
 #if defined(USE_DJI_HD_OSD)
 #define DJI_API_VERSION_MAJOR           1
 #define DJI_API_VERSION_MINOR           42
@@ -1372,13 +1239,13 @@
 #endif
 
 
-// ../../../../other_software/inav/src/main/io/vtx_ffpv24g.h
+// ../inav/src/main/io/vtx_ffpv24g.h
 #define VTX_FFPV_BAND_COUNT         2
 #define VTX_FFPV_CHANNEL_COUNT      8
 #define VTX_FFPV_POWER_COUNT        4
 
 
-// ../../../../other_software/inav/src/main/io/ledstrip.h
+// ../inav/src/main/io/ledstrip.h
 #define LED_MAX_STRIP_LENGTH           128
 #define LED_CONFIGURABLE_COLOR_COUNT   16
 #define LED_MODE_COUNT                  6
@@ -1414,7 +1281,7 @@
   (ledConfigPtr)->led_params = (params); }
 
 
-// ../../../../other_software/inav/src/main/io/beeper.c
+// ../inav/src/main/io/beeper.c
 #define MAX_MULTI_BEEPS 20
 #define BEEPER_COMMAND_REPEAT 0xFE
 #define BEEPER_COMMAND_STOP   0xFF
@@ -1424,7 +1291,7 @@
 #define BEEPER_TABLE_ENTRY_COUNT (sizeof(beeperTable) / sizeof(beeperTableEntry_t))
 
 
-// ../../../../other_software/inav/src/main/io/vtx_tramp.h
+// ../inav/src/main/io/vtx_tramp.h
 #define VTX_TRAMP_5G8_BAND_COUNT        5
 #define VTX_TRAMP_5G8_CHANNEL_COUNT     8
 #define VTX_TRAMP_5G8_MAX_POWER_COUNT   5
@@ -1439,13 +1306,13 @@
 #define VTX_TRAMP_1G3_MAX_FREQUENCY_MHZ 1399
 
 
-// ../../../../other_software/inav/src/main/io/osd_hud.c
+// ../inav/src/main/io/osd_hud.c
 #ifdef USE_OSD
 #define HUD_DRAWN_MAXCHARS 54
 #endif
 
 
-// ../../../../other_software/inav/src/main/io/serial_4way.h
+// ../inav/src/main/io/serial_4way.h
 #define USE_SERIAL_4WAY_BLHELI_BOOTLOADER
 #define USE_SERIAL_4WAY_SK_BOOTLOADER
 #define imC2 0
@@ -1455,7 +1322,7 @@
 #define imARM_BLB 4
 
 
-// ../../../../other_software/inav/src/main/io/smartport_master.c
+// ../inav/src/main/io/smartport_master.c
 #if defined(USE_SMARTPORT_MASTER)
 #define SMARTPORT_BAUD 57600
 #define SMARTPORT_UART_MODE MODE_RXTX
@@ -1470,7 +1337,7 @@
 #endif
 
 
-// ../../../../other_software/inav/src/main/io/piniobox.h
+// ../inav/src/main/io/piniobox.h
 #define BOX_PERMANENT_ID_USER1      47
 #define BOX_PERMANENT_ID_USER2      48
 #define BOX_PERMANENT_ID_USER3      57
@@ -1478,14 +1345,14 @@
 #define BOX_PERMANENT_ID_NONE       255
 
 
-// ../../../../other_software/inav/src/main/io/rcdevice.c
+// ../inav/src/main/io/rcdevice.c
 #ifdef USE_RCDEVICE
 #define RCDEVICE_INIT_DEVICE_ATTEMPTS 6
 #define RCDEVICE_INIT_DEVICE_ATTEMPT_INTERVAL 1000
 #endif
 
 
-// ../../../../other_software/inav/src/main/io/vtx_smartaudio.c
+// ../inav/src/main/io/vtx_smartaudio.c
 #if defined(USE_VTX_SMARTAUDIO) && defined(USE_VTX_CONTROL)
 #define SMARTAUDIO_CMD_TIMEOUT       120
 #define SMARTAUDIO_POLLING_INTERVAL  150
@@ -1509,7 +1376,7 @@
 #endif
 
 
-// ../../../../other_software/inav/src/main/io/gps_ublox.c
+// ../inav/src/main/io/gps_ublox.c
 #if defined(USE_GPS) && defined(USE_GPS_PROTO_UBLOX)
 #define SBASMASK1_BASE 120
 #define SBASMASK1_BITS(prn) (1 << (prn-SBASMASK1_BASE))
@@ -1521,7 +1388,7 @@
 #endif
 
 
-// ../../../../other_software/inav/src/main/io/rangefinder_benewake.c
+// ../inav/src/main/io/rangefinder_benewake.c
 #if defined(USE_RANGEFINDER_BENEWAKE)
 #define BENEWAKE_PACKET_SIZE    sizeof(tfminiPacket_t)
 #define BENEWAKE_MIN_QUALITY    0
@@ -1529,12 +1396,12 @@
 #endif
 
 
-// ../../../../other_software/inav/src/main/io/adsb.h
+// ../inav/src/main/io/adsb.h
 #define ADSB_CALL_SIGN_MAX_LENGTH 9
 #define ADSB_MAX_SECONDS_KEEP_INACTIVE_PLANE_IN_LIST 10
 
 
-// ../../../../other_software/inav/src/main/io/vtx_ffpv24g.c
+// ../inav/src/main/io/vtx_ffpv24g.c
 #if defined(USE_VTX_FFPV) && defined(USE_VTX_CONTROL)
 #define VTX_FFPV_CMD_TIMEOUT_MS     250
 #define VTX_FFPV_HEARTBEAT_MS       1000
@@ -1548,18 +1415,18 @@
 #endif
 
 
-// ../../../../other_software/inav/src/main/io/rcdevice_cam.h
+// ../inav/src/main/io/rcdevice_cam.h
 #define FIVE_KEY_CABLE_JOYSTICK_MIN 1080
 #define FIVE_KEY_CABLE_JOYSTICK_MAX 1920
 #define FIVE_KEY_CABLE_JOYSTICK_MID_START 1350
 #define FIVE_KEY_CABLE_JOYSTICK_MID_END 1650
 
 
-// ../../../../other_software/inav/src/main/io/servo_sbus.h
+// ../inav/src/main/io/servo_sbus.h
 #define SERVO_SBUS_MAX_SERVOS   18
 
 
-// ../../../../other_software/inav/src/main/io/osd.h
+// ../inav/src/main/io/osd.h
 #ifndef OSD_ALTERNATE_LAYOUT_COUNT
 #define OSD_ALTERNATE_LAYOUT_COUNT 3
 #endif
@@ -1669,7 +1536,7 @@
 #define OSD_SWITCH_INDICATOR_NAME_LENGTH 4
 
 
-// ../../../../other_software/inav/src/main/io/ledstrip.c
+// ../inav/src/main/io/ledstrip.c
 #ifdef USE_LED_STRIP
 #define LED_STRIP_HZ(hz) ((int32_t)((1000 * 1000) / (hz)))
 #define LED_STRIP_MS(ms) ((int32_t)(1000 * (ms)))
@@ -1681,13 +1548,13 @@
 #endif
 
 
-// ../../../../other_software/inav/src/main/io/gimbal_serial.c
+// ../inav/src/main/io/gimbal_serial.c
 #ifdef USE_SERIAL_GIMBAL
 #define GIMBAL_SERIAL_BUFFER_SIZE 512
 #endif
 
 
-// ../../../../other_software/inav/src/main/io/rcdevice_cam.c
+// ../inav/src/main/io/rcdevice_cam.c
 #ifdef USE_RCDEVICE
 #define IS_HI(X) (rxGetChannelValue(X) > FIVE_KEY_CABLE_JOYSTICK_MAX)
 #define IS_LO(X) (rxGetChannelValue(X) < FIVE_KEY_CABLE_JOYSTICK_MIN)
@@ -1695,7 +1562,7 @@
 #endif
 
 
-// ../../../../other_software/inav/src/main/io/vtx_smartaudio.h
+// ../inav/src/main/io/vtx_smartaudio.h
 #define VTX_SMARTAUDIO_MIN_BAND 1
 #define VTX_SMARTAUDIO_MAX_BAND 5
 #define VTX_SMARTAUDIO_MIN_CHANNEL 1
@@ -1724,7 +1591,7 @@
 #define SA_FREQ_MASK                        (~(SA_FREQ_GETPIT|SA_FREQ_SETPIT))
 
 
-// ../../../../other_software/inav/src/main/io/gps_private.h
+// ../inav/src/main/io/gps_private.h
 #ifdef USE_GPS
 #define GPS_HDOP_TO_EPH_MULTIPLIER      2
 #define GPS_TIMEOUT             (1000)
@@ -1735,7 +1602,7 @@
 #endif
 
 
-// ../../../../other_software/inav/src/main/io/displayport_msp_osd.h
+// ../inav/src/main/io/displayport_msp_osd.h
 #define DISPLAYPORT_MSP_ATTR_FONTPAGE   0
 #define DISPLAYPORT_MSP_ATTR_BLINK      6
 #define DISPLAYPORT_MSP_ATTR_VERSION    7
@@ -1747,7 +1614,7 @@
 #define getAttrVersion(attr) ((attr & DISPLAYPORT_MSP_ATTR_VERSION_MASK) >> DISPLAYPORT_MSP_ATTR_VERSION)
 
 
-// ../../../../other_software/inav/src/main/io/serial_4way_avrootloader.c
+// ../inav/src/main/io/serial_4way_avrootloader.c
 #ifdef  USE_SERIAL_4WAY_BLHELI_INTERFACE
 #if defined(USE_SERIAL_4WAY_BLHELI_BOOTLOADER) && !defined(USE_FAKE_ESC)
 #define RestartBootloader   0
@@ -1783,7 +1650,7 @@
 #endif
 
 
-// ../../../../other_software/inav/src/main/io/rangefinder_usd1_v0.c
+// ../inav/src/main/io/rangefinder_usd1_v0.c
 #if defined(USE_RANGEFINDER_USD1_V0)
 #define USD1_HDR_V0 72
 #define USD1_PACKET_SIZE 3
@@ -1791,7 +1658,7 @@
 #endif
 
 
-// ../../../../other_software/inav/src/main/io/displayport_msp_osd.c
+// ../inav/src/main/io/displayport_msp_osd.c
 #if defined(USE_OSD) && defined(USE_MSP_OSD)
 #define FONT_VERSION 3
 #define DRAW_FREQ_DENOM 4
@@ -1817,13 +1684,13 @@
 #endif
 
 
-// ../../../../other_software/inav/src/main/io/flashfs.h
+// ../inav/src/main/io/flashfs.h
 #define FLASHFS_WRITE_BUFFER_SIZE 128
 #define FLASHFS_WRITE_BUFFER_USABLE (FLASHFS_WRITE_BUFFER_SIZE - 1)
 #define FLASHFS_WRITE_BUFFER_AUTO_FLUSH_LEN 64
 
 
-// ../../../../other_software/inav/src/main/io/serial_4way_stk500v2.c
+// ../inav/src/main/io/serial_4way_stk500v2.c
 #ifdef  USE_SERIAL_4WAY_BLHELI_INTERFACE
 #ifdef USE_SERIAL_4WAY_SK_BOOTLOADER
 #define BIT_LO_US (32)
@@ -1858,7 +1725,7 @@
 #endif
 
 
-// ../../../../other_software/inav/src/main/io/dji_osd_symbols.h
+// ../inav/src/main/io/dji_osd_symbols.h
 #define DJI_SYM_NONE                    0x00
 #define DJI_SYM_END_OF_FONT             0xFF
 #define DJI_SYM_BLANK                   0x20
@@ -1964,7 +1831,7 @@
 #define DJI_SYM_GPS_SECOND              0x22
 
 
-// ../../../../other_software/inav/src/main/io/displayport_msp_dji_compat.h
+// ../inav/src/main/io/displayport_msp_dji_compat.h
 #if defined(USE_OSD) && defined(USE_MSP_DISPLAYPORT) && !defined(DISABLE_MSP_DJI_COMPAT)
 #define isDJICompatibleVideoSystem(osdConfigPtr) (osdConfigPtr->video_system == VIDEO_SYSTEM_DJICOMPAT || osdConfigPtr->video_system == VIDEO_SYSTEM_DJICOMPAT_HD)
 #else
@@ -1977,7 +1844,7 @@
 #endif
 
 
-// ../../../../other_software/inav/src/main/io/serial_4way_avrootloader.h
+// ../inav/src/main/io/serial_4way_avrootloader.h
 #define brSUCCESS           0x30
 #define brERRORVERIFY       0xC0
 #define brERRORCOMMAND      0xC1
@@ -1985,13 +1852,13 @@
 #define brNONE              0xFF
 
 
-// ../../../../other_software/inav/src/main/io/osd/custom_elements.h
+// ../inav/src/main/io/osd/custom_elements.h
 #define OSD_CUSTOM_ELEMENT_TEXT_SIZE 16
 #define CUSTOM_ELEMENTS_PARTS 3
 #define MAX_CUSTOM_ELEMENTS 8
 
 
-// ../../../../other_software/inav/src/main/io/asyncfatfs/fat_standard.h
+// ../inav/src/main/io/asyncfatfs/fat_standard.h
 #define MBR_PARTITION_TYPE_FAT16     0x06
 #define MBR_PARTITION_TYPE_FAT32     0x0B
 #define MBR_PARTITION_TYPE_FAT32_LBA 0x0C
@@ -2015,7 +1882,7 @@
 #define FAT_MAKE_TIME(hour, minute, second) ((second / 2) | (minute << 5) | (hour << 11))
 
 
-// ../../../../other_software/inav/src/main/io/asyncfatfs/asyncfatfs.c
+// ../inav/src/main/io/asyncfatfs/asyncfatfs.c
 #ifdef AFATFS_DEBUG
     #define ONLY_EXPOSE_FOR_TESTING
 #else
@@ -2050,7 +1917,7 @@
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
 
 
-// ../../../../other_software/inav/src/main/flight/servos.h
+// ../inav/src/main/flight/servos.h
 #define MAX_SUPPORTED_SERVOS 18
 #define SERVO_PLANE_INDEX_MIN SERVO_ELEVATOR
 #define SERVO_PLANE_INDEX_MAX SERVO_RUDDER
@@ -2069,12 +1936,12 @@
 #define SERVO_OUTPUT_MIN 500
 
 
-// ../../../../other_software/inav/src/main/flight/dynamic_gyro_notch.h
+// ../inav/src/main/flight/dynamic_gyro_notch.h
 #define DYNAMIC_NOTCH_DEFAULT_CENTER_HZ 350
 #define DYN_NOTCH_PEAK_COUNT 3
 
 
-// ../../../../other_software/inav/src/main/flight/gyroanalyse.c
+// ../inav/src/main/flight/gyroanalyse.c
 #ifdef USE_DYNAMIC_FILTERS
 #define FFT_BIN_COUNT             (FFT_WINDOW_SIZE / 2)
 #define DYN_NOTCH_SMOOTH_FREQ_HZ  25
@@ -2082,14 +1949,14 @@
 #endif
 
 
-// ../../../../other_software/inav/src/main/flight/mixer.c
+// ../inav/src/main/flight/mixer.c
 #define MAX_THROTTLE 2000
 #define MAX_THROTTLE_ROVER 1850
 #define CRASH_OVER_AFTER_CRASH_FLIP_STICK_MIN 0.15f
     #define THROTTLE_CLIPPING_FACTOR    0.33f
 
 
-// ../../../../other_software/inav/src/main/flight/mixer_profile.h
+// ../inav/src/main/flight/mixer_profile.h
 #ifndef MAX_MIXER_PROFILE_COUNT
 #define MAX_MIXER_PROFILE_COUNT 2
 #endif
@@ -2106,7 +1973,7 @@
 #define mixerServoMixersByIndex(index) (mixerProfiles(index)->ServoMixers)
 
 
-// ../../../../other_software/inav/src/main/flight/rpm_filter.c
+// ../inav/src/main/flight/rpm_filter.c
 #ifdef USE_RPM_FILTER
 #define HZ_TO_RPM 1/60.0f
 #define RPM_FILTER_RPM_LPF_HZ 150
@@ -2114,7 +1981,7 @@
 #endif
 
 
-// ../../../../other_software/inav/src/main/flight/pid_autotune.c
+// ../inav/src/main/flight/pid_autotune.c
 #define AUTOTUNE_FIXED_WING_MIN_FF              10
 #define AUTOTUNE_FIXED_WING_MAX_FF              255
 #define AUTOTUNE_FIXED_WING_MIN_ROLL_PITCH_RATE 40
@@ -2127,18 +1994,18 @@
 #define AUTOTUNE_SAVE_PERIOD        5000
 
 
-// ../../../../other_software/inav/src/main/flight/rpm_filter.h
+// ../inav/src/main/flight/rpm_filter.h
 #define RPM_FILTER_UPDATE_RATE_HZ 500
 #define RPM_FILTER_UPDATE_RATE_US (1000000.0f / RPM_FILTER_UPDATE_RATE_HZ)
 
 
-// ../../../../other_software/inav/src/main/flight/secondary_dynamic_gyro_notch.c
+// ../inav/src/main/flight/secondary_dynamic_gyro_notch.c
 #ifdef USE_DYNAMIC_FILTERS
 #define SECONDARY_DYNAMIC_NOTCH_DEFAULT_CENTER_HZ 150
 #endif
 
 
-// ../../../../other_software/inav/src/main/flight/pid.c
+// ../inav/src/main/flight/pid.c
 #define D_BOOST_GYRO_LPF_HZ 80
 #define D_BOOST_LPF_HZ 7
 #define FIXED_WING_LEVEL_TRIM_MAX_ANGLE 10.0f
@@ -2147,24 +2014,24 @@
 #define FIXED_WING_LEVEL_TRIM_CONTROLLER_LIMIT FIXED_WING_LEVEL_TRIM_DIVIDER * FIXED_WING_LEVEL_TRIM_MAX_ANGLE
 
 
-// ../../../../other_software/inav/src/main/flight/kalman.h
+// ../inav/src/main/flight/kalman.h
 #define MAX_KALMAN_WINDOW_SIZE 64
 #define VARIANCE_SCALE 0.67f
 
 
-// ../../../../other_software/inav/src/main/flight/power_limits.c
+// ../inav/src/main/flight/power_limits.c
 #if defined(USE_POWER_LIMITS)
 #define LIMITING_THR_FILTER_TCONST 50
 #endif
 
 
-// ../../../../other_software/inav/src/main/flight/gyroanalyse.h
+// ../inav/src/main/flight/gyroanalyse.h
 #ifdef USE_DYNAMIC_FILTERS
 #define FFT_WINDOW_SIZE 64
 #endif
 
 
-// ../../../../other_software/inav/src/main/flight/servos.c
+// ../inav/src/main/flight/servos.c
 #define GET_RX_CHANNEL_INPUT(x) (rxGetChannelValue(x) - PWM_RANGE_MIDDLE)
 #define SERVO_AUTOTRIM_TIMER_MS     2000
 #define SERVO_AUTOTRIM_FILTER_CUTOFF    1
@@ -2174,11 +2041,11 @@
 #define SERVO_AUTOTRIM_ATTITUDE_LIMIT   50
 
 
-// ../../../../other_software/inav/src/main/flight/smith_predictor.h
+// ../inav/src/main/flight/smith_predictor.h
 #define MAX_SMITH_SAMPLES 64
 
 
-// ../../../../other_software/inav/src/main/flight/imu.c
+// ../inav/src/main/flight/imu.c
 #define SPIN_RATE_LIMIT             20
 #define MAX_ACC_NEARNESS            0.2
 #define MAX_MAG_NEARNESS            0.25
@@ -2187,7 +2054,7 @@
 #define IMU_ROTATION_LPF         3
 
 
-// ../../../../other_software/inav/src/main/flight/pid.h
+// ../inav/src/main/flight/pid.h
 #define GYRO_SATURATION_LIMIT       1800
 #define PID_SUM_LIMIT_MIN           100
 #define PID_SUM_LIMIT_MAX           1000
@@ -2212,7 +2079,7 @@
 #define TASK_AUX_RATE_HZ   100
 
 
-// ../../../../other_software/inav/src/main/flight/mixer.h
+// ../inav/src/main/flight/mixer.h
 #if defined(TARGET_MOTOR_COUNT)
 #define MAX_SUPPORTED_MOTORS TARGET_MOTOR_COUNT
 #else
@@ -2225,7 +2092,7 @@
 #define DSHOT_3D_DEADBAND_HIGH 1048
 
 
-// ../../../../other_software/inav/src/main/flight/failsafe.h
+// ../inav/src/main/flight/failsafe.h
 #define FAILSAFE_POWER_ON_DELAY_US (1000 * 1000 * 5)
 #define MILLIS_PER_TENTH_SECOND         100
 #define MILLIS_PER_SECOND              1000
@@ -2236,25 +2103,25 @@
 #define PERIOD_RXDATA_RECOVERY          200
 
 
-// ../../../../other_software/inav/src/main/flight/ez_tune.c
+// ../inav/src/main/flight/ez_tune.c
 #define EZ_TUNE_PID_RP_DEFAULT { 40, 75, 23, 100 }
 #define EZ_TUNE_PID_YAW_DEFAULT { 45, 80, 0, 100 }
 #define EZ_TUNE_YAW_SCALE 0.5f
 
 
-// ../../../../other_software/inav/src/main/flight/wind_estimator.c
+// ../inav/src/main/flight/wind_estimator.c
 #if defined(USE_WIND_ESTIMATOR)
 #define WINDESTIMATOR_TIMEOUT       60*15
 #define WINDESTIMATOR_ALTITUDE_SCALE WINDESTIMATOR_TIMEOUT/500.0f
 #endif
 
 
-// ../../../../other_software/inav/src/main/flight/adaptive_filter.h
+// ../inav/src/main/flight/adaptive_filter.h
 #define ADAPTIVE_FILTER_BUFFER_SIZE 64
 #define ADAPTIVE_FILTER_RATE_HZ 100
 
 
-// ../../../../other_software/inav/src/main/fc/stats.h
+// ../inav/src/main/fc/stats.h
 #ifdef USE_STATS
 #else
 #define statsOnArm()    do {} while (0)
@@ -2262,7 +2129,7 @@
 #endif
 
 
-// ../../../../other_software/inav/src/main/fc/rc_modes.h
+// ../inav/src/main/fc/rc_modes.h
 #define BOXID_NONE 255
 #define MAX_MODE_ACTIVATION_CONDITION_COUNT 40
 #define CHANNEL_RANGE_MIN 900
@@ -2275,7 +2142,7 @@
 #define IS_RANGE_USABLE(range) ((range)->startStep < (range)->endStep)
 
 
-// ../../../../other_software/inav/src/main/fc/fc_msp_box.c
+// ../inav/src/main/fc/fc_msp_box.c
 #define BOX_SUFFIX ';'
 #define BOX_SUFFIX_LEN 1
 #define RESET_BOX_ID_COUNT activeBoxIdCount = 0
@@ -2284,17 +2151,17 @@
 #define CHECK_ACTIVE_BOX(condition, index)    do { if (IS_ENABLED(condition)) { activeBoxes[index] = 1; } } while(0)
 
 
-// ../../../../other_software/inav/src/main/fc/controlrate_profile.h
+// ../inav/src/main/fc/controlrate_profile.h
 #define MAX_CONTROL_RATE_PROFILE_COUNT SETTING_CONSTANT_MAX_CONTROL_RATE_PROFILE_COUNT
 
 
-// ../../../../other_software/inav/src/main/fc/stats.c
+// ../inav/src/main/fc/stats.c
 #ifdef USE_STATS
 #define MIN_FLIGHT_TIME_TO_RECORD_STATS_S 10
 #endif
 
 
-// ../../../../other_software/inav/src/main/fc/firmware_update.c
+// ../inav/src/main/fc/firmware_update.c
 #ifdef MSP_FIRMWARE_UPDATE
 #if defined(USE_SDCARD)
 #define SD_BACKUP_FILE_BLOCK_READ_SIZE 512
@@ -2302,12 +2169,12 @@
 #endif
 
 
-// ../../../../other_software/inav/src/main/fc/rc_smoothing.c
+// ../inav/src/main/fc/rc_smoothing.c
 #define RC_INTERPOLATION_MIN_FREQUENCY 15
     #define RC_FILTER_SAMPLES_MEDIAN 9
 
 
-// ../../../../other_software/inav/src/main/fc/cli.c
+// ../inav/src/main/fc/cli.c
 #define SENSOR_NAMES_MASK (SENSOR_GYRO | SENSOR_ACC | SENSOR_BARO | SENSOR_MAG | SENSOR_RANGEFINDER | SENSOR_PITOT | SENSOR_OPFLOW)
 #ifdef CLI_MINIMAL_VERBOSITY
 #define cliPrintHashLine(str)
@@ -2329,7 +2196,7 @@
 #endif
 
 
-// ../../../../other_software/inav/src/main/fc/settings.h
+// ../inav/src/main/fc/settings.h
 #define SETTING_TYPE_OFFSET 0
 #define SETTING_SECTION_OFFSET 3
 #define SETTING_MODE_OFFSET 6
@@ -2338,7 +2205,7 @@
 #define SETTING_MODE_MASK (0xC0)
 
 
-// ../../../../other_software/inav/src/main/fc/rc_adjustments.c
+// ../inav/src/main/fc/rc_adjustments.c
 #define MARK_ADJUSTMENT_FUNCTION_AS_BUSY(adjustmentIndex) adjustmentStateMask |= (1 << adjustmentIndex)
 #define MARK_ADJUSTMENT_FUNCTION_AS_READY(adjustmentIndex) adjustmentStateMask &= ~(1 << adjustmentIndex)
 #define IS_ADJUSTMENT_FUNCTION_BUSY(adjustmentIndex) (adjustmentStateMask & (1 << adjustmentIndex))
@@ -2346,11 +2213,11 @@
 #define RESET_FREQUENCY_2HZ (1000 / 2)
 
 
-// ../../../../other_software/inav/src/main/fc/rc_controls.h
+// ../inav/src/main/fc/rc_controls.h
 #define CONTROL_DEADBAND           10
 
 
-// ../../../../other_software/inav/src/main/fc/multifunction.h
+// ../inav/src/main/fc/multifunction.h
 #ifdef USE_MULTI_FUNCTIONS
 #define MULTI_FUNC_FLAG_DISABLE(mask) (multiFunctionFlags &= ~(mask))
 #define MULTI_FUNC_FLAG_ENABLE(mask) (multiFunctionFlags |= (mask))
@@ -2358,14 +2225,14 @@
 #endif
 
 
-// ../../../../other_software/inav/src/main/fc/rc_controls.c
+// ../inav/src/main/fc/rc_controls.c
 #define AIRMODE_DEADBAND 25
 #define MIN_RC_TICK_INTERVAL_MS             20
 #define DEFAULT_RC_SWITCH_DISARM_DELAY_MS   250
 #define DEFAULT_PREARM_TIMEOUT              10000
 
 
-// ../../../../other_software/inav/src/main/fc/rc_adjustments.h
+// ../inav/src/main/fc/rc_adjustments.h
 #define ADJUSTMENT_INDEX_OFFSET 1
 #ifndef MAX_SIMULTANEOUS_ADJUSTMENT_COUNT
 #define MAX_SIMULTANEOUS_ADJUSTMENT_COUNT 4
@@ -2373,11 +2240,11 @@
 #define MAX_ADJUSTMENT_RANGE_COUNT 20
 
 
-// ../../../../other_software/inav/src/main/fc/rc_curves.c
+// ../inav/src/main/fc/rc_curves.c
 #define THROTTLE_LOOKUP_LENGTH 11
 
 
-// ../../../../other_software/inav/src/main/fc/firmware_update_common.h
+// ../inav/src/main/fc/firmware_update_common.h
 #define FIRMWARE_UPDATE_FIRMWARE_FILENAME "firmware.upt"
 #define FIRMWARE_UPDATE_BACKUP_FILENAME "firmware.bak"
 #define FIRMWARE_UPDATE_META_FILENAME "update.mta"
@@ -2390,7 +2257,7 @@
 #define AVAILABLE_FIRMWARE_SPACE (FLASH_END - FIRMWARE_START_ADDRESS)
 
 
-// ../../../../other_software/inav/src/main/fc/fc_core.c
+// ../inav/src/main/fc/fc_core.c
 #define EMERGENCY_ARMING_TIME_WINDOW_MS 10000
 #define EMERGENCY_ARMING_COUNTER_STEP_MS 1000
 #define EMERGENCY_ARMING_MIN_ARM_COUNT 10
@@ -2398,14 +2265,14 @@
 #define TELEMETRY_FUNCTION_MASK (FUNCTION_TELEMETRY_HOTT | FUNCTION_TELEMETRY_SMARTPORT | FUNCTION_TELEMETRY_LTM | FUNCTION_TELEMETRY_MAVLINK | FUNCTION_TELEMETRY_IBUS)
 
 
-// ../../../../other_software/inav/src/main/fc/config.h
+// ../inav/src/main/fc/config.h
 #define MAX_PROFILE_COUNT 3
 #define ONESHOT_FEATURE_CHANGED_DELAY_ON_BOOT_MS 1500
 #define MAX_NAME_LENGTH 16
 #define TASK_GYRO_LOOPTIME 250
 
 
-// ../../../../other_software/inav/src/main/fc/runtime_config.h
+// ../inav/src/main/fc/runtime_config.h
 #define ARMING_DISABLED_EMERGENCY_OVERRIDE  (ARMING_DISABLED_GEOZONE \
                                             | ARMING_DISABLED_NOT_LEVEL \
                                             | ARMING_DISABLED_NAVIGATION_UNSAFE \
@@ -2431,7 +2298,7 @@
 #endif
 
 
-// ../../../../other_software/inav/src/main/fc/config.c
+// ../inav/src/main/fc/config.c
 #ifndef DEFAULT_FEATURES
 #define DEFAULT_FEATURES 0
 #endif

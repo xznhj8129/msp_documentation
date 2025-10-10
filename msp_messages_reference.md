@@ -1,5 +1,4 @@
 
-
 # INAV MSP Messages reference
 
 **Warning: Work in progress**\
@@ -968,7 +967,7 @@ These commands originated in Baseflight or were added later in similar ranges.
     | `gyroSyncDenom` | `uint8_t` | 1 | Always 1 (BF compatibility). |
     | `pidProcessDenom` | `uint8_t` | 1 | Always 1 (BF compatibility). |
     | `useUnsyncedPwm` | `uint8_t` | 1 | Always 1 (BF compatibility, INAV uses async PWM based on protocol). |
-    | `motorPwmProtocol` | `uint8_t` | 1 | Enum: Motor PWM protocol type (`motorConfig()->motorPwmProtocol`). |
+    | `motorPwmProtocol` | `uint8_t` | 1 | Motor PWM protocol type (`motorConfig()->motorPwmProtocol`). |
     | `motorPwmRate` | `uint16_t` | 2 | Hz: Motor PWM rate (if applicable) (`motorConfig()->motorPwmRate`). |
     | `servoPwmRate` | `uint16_t` | 2 | Hz: Servo PWM rate (`servoConfig()->servoPwmRate`). |
     | `legacyGyroSync` | `uint8_t` | 1 | Always 0 (BF compatibility). |
@@ -1125,7 +1124,7 @@ These are commands originating from the MultiWii project.
     | Field | C Type | Size (Bytes) | Units | Description |
     |---|---|---|---|---|
 	| MultiWii version | uint8_t | 1 | n/a | Scaled version major*100+minor |
-	| Mixer Mode |  uint8_t | 1 | Enumeration | Mixer type |
+	| Mixer Mode |  uint8_t | 1 | Enum | Mixer type |
 	| MSP Version | uint8_t | 1 | n/a | Scaled version major*100+minor |
 	| Platform Capability | uint32_t | | Bitmask of MW capabilities |
 * **Notes:** Obsolete. Listed for legacy compatibility only.
@@ -1200,7 +1199,7 @@ These are commands originating from the MultiWii project.
     | `numSat` | `uint8_t` | 1 | Count | Number of satellites used in solution (`gpsSol.numSat`). |
     | `latitude` | `int32_t` | 4 | deg * 1e7 | Latitude (`gpsSol.llh.lat`). |
     | `longitude` | `int32_t` | 4 | deg * 1e7 | Longitude (`gpsSol.llh.lon`). |
-    | `altitude` | `uint16_t` | 2 | meters | Altitude above MSL (`gpsSol.llh.alt / 100`). |
+    | `altitude` | `int16_t` | 2 | meters | Altitude above MSL (`gpsSol.llh.alt / 100`). |
     | `speed` | `uint16_t` | 2 | cm/s | Ground speed (`gpsSol.groundSpeed`). |
     | `groundCourse` | `uint16_t` | 2 | deci-degrees | Ground course (`gpsSol.groundCourse`). |
     | `hdop` | `uint16_t` | 2 | HDOP * 100 | Horizontal Dilution of Precision (`gpsSol.hdop`). |
@@ -1566,9 +1565,9 @@ These commands are sent *to* the FC.
     | `legacyMaxThrottle` | `uint16_t` | 2 | - | Ignored. |
     | `minCommand` | `uint16_t` | 2 | PWM | Sets `motorConfigMutable()->mincommand` (constrained 0-PWM_RANGE_MAX). |
     | `failsafeThrottle` | `uint16_t` | 2 | PWM | Sets `currentBatteryProfileMutable->failsafe_throttle` (constrained PWM_RANGE_MIN/MAX). |
-    | `gpsType` | `uint8_t` | 1 | Enum | Sets `gpsConfigMutable()->provider` (if `USE_GPS`). |
+    | `gpsType` | `uint8_t` | 1 | Enum | `gpsProvider_e` (Sets `gpsConfigMutable()->provider`)|
     | `legacyGpsBaud` | `uint8_t` | 1 | - | Ignored. |
-    | `gpsSbasMode` | `uint8_t` | 1 | Enum | Sets `gpsConfigMutable()->sbasMode` (if `USE_GPS`). |
+    | `gpsSbasMode` | `uint8_t` | 1 | Enum | `sbasMode_e` (Sets `gpsConfigMutable()->sbasMode`) |
     | `legacyMwCurrentOut` | `uint8_t` | 1 | - | Ignored. |
     | `rssiChannel` | `uint8_t` | 1 | Index | Sets `rxConfigMutable()->rssi_channel` (constrained 0-MAX_SUPPORTED_RC_CHANNEL_COUNT). Updates source. |
     | `reserved1` | `uint8_t` | 1 | - | Ignored. |
@@ -2056,10 +2055,10 @@ These commands are part of the MSPv2 specification and are intended for general 
 
 *   **Direction:** In/Out
 *   **Description:** Gets a list of Parameter Group Numbers (PGNs) used by settings, along with the start and end setting indexes for each group. Can request info for a single PGN.
-*   **Request Payload:**
+*   **Request Payload (Optional):**
     | Field | C Type | Size (Bytes) | Description |
     |---|---|---|---|
-    | `pgn` | `uint16_t` | 2 | Optional. PGN ID to query. If omitted, returns all used PGNs. |
+    | `pgn` | `uint16_t` | 2 | PGN ID to query. If omitted, returns all used PGNs. |
 *   **Reply Payload:** Repeated for each PGN found:
     | Field | C Type | Size (Bytes) | Description |
     |---|---|---|---|
@@ -2987,11 +2986,11 @@ These commands are specific extensions added by the INAV project.
 
 *   **Direction:** In/Out
 *   **Description:** Get or Set configuration for a specific Safe Home location.
-*   **Request Payload:**
+*   **Request Payload (Get):**
     | Field | C Type | Size (Bytes) | Description |
     |---|---|---|---|
     | `safehomeIndex` | `uint8_t` | 1 | Index of the safe home location (0 to `MAX_SAFE_HOMES - 1`). |
-*   **Reply Payload:**
+*   **Reply Payload (Get):**
     | Field | C Type | Size (Bytes) | Description |
     |---|---|---|---|
     | `safehomeIndex` | `uint8_t` | 1 | Index requested. |
@@ -3092,11 +3091,11 @@ These commands are specific extensions added by the INAV project.
 
 *   **Direction:** In/Out
 *   **Description:** Get or Set configuration for a specific Fixed Wing Autoland approach.
-*   **Request Payload:**
+*   **Request Payload (Get):**
     | Field | C Type | Size (Bytes) | Description |
     |---|---|---|---|
     | `approachIndex` | `uint8_t` | 1 | Index of the approach setting (0 to `MAX_FW_LAND_APPOACH_SETTINGS - 1`). |
-*   **Reply Payload:**
+*   **Reply Payload (Get):**
     | Field | C Type | Size (Bytes) | Units | Description |
     |---|---|---|---|---|
     | `approachIndex` | `uint8_t` | 1 | Index | Index requested. |
@@ -3316,11 +3315,11 @@ These commands are specific extensions added by the INAV project.
 
 *   **Direction:** In/Out
 *   **Description:** Get configuration for a specific Geozone.
-*   **Request Payload:**
+*   **Request Payload (Get):**
     | Field | C Type | Size (Bytes) | Description |
     |---|---|---|---|
     | `geozoneIndex` | `uint8_t` | 1 | Index of the geozone (0 to `MAX_GEOZONES_IN_CONFIG - 1`). |
-*   **Reply Payload:**
+*   **Reply Payload (Get):**
     | Field | C Type | Size (Bytes) | Description |
     |---|---|---|---|
     | `geozoneIndex` | `uint8_t` | 1 | Index requested. |
@@ -3354,7 +3353,7 @@ These commands are specific extensions added by the INAV project.
 
 *   **Direction:** In/Out
 *   **Description:** Get a specific vertex (or center+radius for circular zones) of a Geozone.
-*   **Request Payload:**
+*   **Request Payload (Get):**
     | Field | C Type | Size (Bytes) | Description |
     |---|---|---|---|
     | `geozoneIndex` | `uint8_t` | 1 | Index of the geozone. |
@@ -3518,18 +3517,3 @@ These commands are typically sent *to* the FC from external sensor modules conne
     |---|---|---|---|---|
     | `...` | Varies | Variable | Head tracker angles (e.g., int16 Roll, Pitch, Yaw in deci-degrees). |
 *   **Notes:** Requires `USE_HEADTRACKER` and `USE_HEADTRACKER_MSP`. Calls `mspHeadTrackerReceiverNewData()`. Payload structure needs verification from `mspHeadTrackerReceiverNewData` implementation.
-
-
----
-
-## Core Enums
-
-### boxId_e
-*   **Location:** /src/main/fc/rc_modes.h
-    | Field | Value | Comment |
-    |-------|-------|---------|
-    | `BOXARM` | 0  |         |
-    | `BOXANGLE` | 1  |         |
-    | `BOXHORIZON` | 2  |         |
-    | `BOXNAVALTHOLD` | 3  |         |
-

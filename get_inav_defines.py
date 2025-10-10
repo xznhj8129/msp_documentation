@@ -5,6 +5,7 @@ from pathlib import Path
 
 BASE = Path('../inav/src/main')
 SUBDIRS = [
+    'common'
     'navigation',
     'sensors',
     'programming',
@@ -158,7 +159,7 @@ for sd in SUBDIRS:
                     all_out_lines.append('\n')
                 total_defines += count
 
-with open('all_defines.h', 'w') as out:
+with open('gen/all_defines.h', 'w') as out:
     out.write(f"// Consolidated defines - generated on {datetime.datetime.now()}\n\n")
     out.writelines(all_out_lines)
 

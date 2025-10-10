@@ -5,6 +5,7 @@ from pathlib import Path
 
 BASE = Path('../inav/src/main')
 SUBDIRS = [
+    'common'
     'navigation',
     'sensors',
     'programming',
@@ -69,7 +70,7 @@ for sd in SUBDIRS:
                 continue
             all_enums.extend(extract_enums(txt))
 
-with open('all_enums.h', 'w') as out:
+with open('lib/all_enums.h', 'w') as out:
     out.write(f"// Consolidated enums — generated on {datetime.datetime.now()}\n\n")
     out.writelines(all_enums)
 

@@ -1,520 +1,4 @@
-#pragma once
-
-typedef enum {
-    NAV_POS_UPDATE_NONE                 = 0,
-    NAV_POS_UPDATE_Z                    = 1 << 1,
-    NAV_POS_UPDATE_XY                   = 1 << 0,
-    NAV_POS_UPDATE_HEADING              = 1 << 2,
-    NAV_POS_UPDATE_BEARING              = 1 << 3,
-    NAV_POS_UPDATE_BEARING_TAIL_FIRST   = 1 << 4,
-} navSetWaypointFlags_t;
-
-typedef enum {
-    ROC_TO_ALT_CURRENT,
-    ROC_TO_ALT_CONSTANT,
-    ROC_TO_ALT_TARGET
-} climbRateToAltitudeControllerMode_e;
-
-typedef enum {
-    EST_NONE = 0,       
-    EST_USABLE = 1,     
-    EST_TRUSTED = 2     
-} navigationEstimateStatus_e;
-
-typedef enum {
-    NAV_HOME_INVALID = 0,
-    NAV_HOME_VALID_XY = 1 << 0,
-    NAV_HOME_VALID_Z = 1 << 1,
-    NAV_HOME_VALID_HEADING = 1 << 2,
-    NAV_HOME_VALID_ALL = NAV_HOME_VALID_XY | NAV_HOME_VALID_Z | NAV_HOME_VALID_HEADING,
-} navigationHomeFlags_t;
-
-typedef enum {
-    NAV_FSM_EVENT_NONE = 0,
-    NAV_FSM_EVENT_TIMEOUT,
-
-    NAV_FSM_EVENT_SUCCESS,
-    NAV_FSM_EVENT_ERROR,
-
-    NAV_FSM_EVENT_SWITCH_TO_IDLE,
-    NAV_FSM_EVENT_SWITCH_TO_ALTHOLD,
-    NAV_FSM_EVENT_SWITCH_TO_POSHOLD_3D,
-    NAV_FSM_EVENT_SWITCH_TO_RTH,
-    NAV_FSM_EVENT_SWITCH_TO_WAYPOINT,
-    NAV_FSM_EVENT_SWITCH_TO_EMERGENCY_LANDING,
-    NAV_FSM_EVENT_SWITCH_TO_LAUNCH,
-    NAV_FSM_EVENT_SWITCH_TO_COURSE_HOLD,
-    NAV_FSM_EVENT_SWITCH_TO_CRUISE,
-    NAV_FSM_EVENT_SWITCH_TO_COURSE_ADJ,
-    NAV_FSM_EVENT_SWITCH_TO_MIXERAT,
-    NAV_FSM_EVENT_SWITCH_TO_NAV_STATE_FW_LANDING,
-    NAV_FSM_EVENT_SWITCH_TO_SEND_TO,
-
-    NAV_FSM_EVENT_STATE_SPECIFIC_1,             
-    NAV_FSM_EVENT_STATE_SPECIFIC_2,             
-    NAV_FSM_EVENT_STATE_SPECIFIC_3,             
-    NAV_FSM_EVENT_STATE_SPECIFIC_4,             
-    NAV_FSM_EVENT_STATE_SPECIFIC_5,             
-
-    NAV_FSM_EVENT_SWITCH_TO_NAV_STATE_FW_LANDING_ABORT = NAV_FSM_EVENT_STATE_SPECIFIC_1,
-    NAV_FSM_EVENT_SWITCH_TO_NAV_STATE_FW_LANDING_FINISHED = NAV_FSM_EVENT_STATE_SPECIFIC_2,
-    NAV_FSM_EVENT_SWITCH_TO_WAYPOINT_HOLD_TIME = NAV_FSM_EVENT_STATE_SPECIFIC_1,
-    NAV_FSM_EVENT_SWITCH_TO_WAYPOINT_RTH_LAND = NAV_FSM_EVENT_STATE_SPECIFIC_2,
-    NAV_FSM_EVENT_SWITCH_TO_WAYPOINT_FINISHED = NAV_FSM_EVENT_STATE_SPECIFIC_3,
-    NAV_FSM_EVENT_SWITCH_TO_NAV_STATE_RTH_INITIALIZE = NAV_FSM_EVENT_STATE_SPECIFIC_1,
-    NAV_FSM_EVENT_SWITCH_TO_NAV_STATE_RTH_TRACKBACK = NAV_FSM_EVENT_STATE_SPECIFIC_2,
-    NAV_FSM_EVENT_SWITCH_TO_RTH_HEAD_HOME = NAV_FSM_EVENT_STATE_SPECIFIC_3,
-    NAV_FSM_EVENT_SWITCH_TO_RTH_LOITER_ABOVE_HOME = NAV_FSM_EVENT_STATE_SPECIFIC_4,
-    NAV_FSM_EVENT_SWITCH_TO_RTH_LANDING = NAV_FSM_EVENT_STATE_SPECIFIC_5,
-
-    NAV_FSM_EVENT_COUNT,
-} navigationFSMEvent_t;
-
-typedef enum {
-    NAV_PERSISTENT_ID_UNDEFINED                                 = 0,
-
-    NAV_PERSISTENT_ID_IDLE                                      = 1,
-
-    NAV_PERSISTENT_ID_ALTHOLD_INITIALIZE                        = 2,
-    NAV_PERSISTENT_ID_ALTHOLD_IN_PROGRESS                       = 3,
-
-    NAV_PERSISTENT_ID_UNUSED_1                                  = 4,  
-    NAV_PERSISTENT_ID_UNUSED_2                                  = 5,  
-
-    NAV_PERSISTENT_ID_POSHOLD_3D_INITIALIZE                     = 6,
-    NAV_PERSISTENT_ID_POSHOLD_3D_IN_PROGRESS                    = 7,
-
-    NAV_PERSISTENT_ID_RTH_INITIALIZE                            = 8,
-    NAV_PERSISTENT_ID_RTH_CLIMB_TO_SAFE_ALT                     = 9,
-    NAV_PERSISTENT_ID_RTH_HEAD_HOME                             = 10,
-    NAV_PERSISTENT_ID_RTH_LOITER_PRIOR_TO_LANDING               = 11,
-    NAV_PERSISTENT_ID_RTH_LANDING                               = 12,
-    NAV_PERSISTENT_ID_RTH_FINISHING                             = 13,
-    NAV_PERSISTENT_ID_RTH_FINISHED                              = 14,
-
-    NAV_PERSISTENT_ID_WAYPOINT_INITIALIZE                       = 15,
-    NAV_PERSISTENT_ID_WAYPOINT_PRE_ACTION                       = 16,
-    NAV_PERSISTENT_ID_WAYPOINT_IN_PROGRESS                      = 17,
-    NAV_PERSISTENT_ID_WAYPOINT_REACHED                          = 18,
-    NAV_PERSISTENT_ID_WAYPOINT_NEXT                             = 19,
-    NAV_PERSISTENT_ID_WAYPOINT_FINISHED                         = 20,
-    NAV_PERSISTENT_ID_WAYPOINT_RTH_LAND                         = 21,
-
-    NAV_PERSISTENT_ID_EMERGENCY_LANDING_INITIALIZE              = 22,
-    NAV_PERSISTENT_ID_EMERGENCY_LANDING_IN_PROGRESS             = 23,
-    NAV_PERSISTENT_ID_EMERGENCY_LANDING_FINISHED                = 24,
-
-    NAV_PERSISTENT_ID_LAUNCH_INITIALIZE                         = 25,
-    NAV_PERSISTENT_ID_LAUNCH_WAIT                               = 26,
-    NAV_PERSISTENT_ID_UNUSED_3                                  = 27, 
-    NAV_PERSISTENT_ID_LAUNCH_IN_PROGRESS                        = 28,
-
-    NAV_PERSISTENT_ID_COURSE_HOLD_INITIALIZE                    = 29,
-    NAV_PERSISTENT_ID_COURSE_HOLD_IN_PROGRESS                   = 30,
-    NAV_PERSISTENT_ID_COURSE_HOLD_ADJUSTING                     = 31,
-
-    NAV_PERSISTENT_ID_CRUISE_INITIALIZE                         = 32,
-    NAV_PERSISTENT_ID_CRUISE_IN_PROGRESS                        = 33,
-    NAV_PERSISTENT_ID_CRUISE_ADJUSTING                          = 34,
-
-    NAV_PERSISTENT_ID_WAYPOINT_HOLD_TIME                        = 35,
-    NAV_PERSISTENT_ID_RTH_LOITER_ABOVE_HOME                     = 36,
-    NAV_PERSISTENT_ID_UNUSED_4                                  = 37, 
-    NAV_PERSISTENT_ID_RTH_TRACKBACK                             = 38,
-
-    NAV_PERSISTENT_ID_MIXERAT_INITIALIZE                        = 39,
-    NAV_PERSISTENT_ID_MIXERAT_IN_PROGRESS                       = 40,
-    NAV_PERSISTENT_ID_MIXERAT_ABORT                             = 41,
-    NAV_PERSISTENT_ID_FW_LANDING_CLIMB_TO_LOITER                = 42,
-    NAV_PERSISTENT_ID_FW_LANDING_LOITER                         = 43,
-    NAV_PERSISTENT_ID_FW_LANDING_APPROACH                       = 44,
-    NAV_PERSISTENT_ID_FW_LANDING_GLIDE                          = 45,
-    NAV_PERSISTENT_ID_FW_LANDING_FLARE                          = 46,
-    NAV_PERSISTENT_ID_FW_LANDING_ABORT                          = 47,
-    NAV_PERSISTENT_ID_FW_LANDING_FINISHED                       = 48,
-
-    NAV_PERSISTENT_ID_SEND_TO_INITALIZE                         = 49,
-    NAV_PERSISTENT_ID_SEND_TO_IN_PROGRES                        = 50,
-    NAV_PERSISTENT_ID_SEND_TO_FINISHED                          = 51
-} navigationPersistentId_e;
-
-typedef enum {
-    NAV_STATE_UNDEFINED = 0,
-
-    NAV_STATE_IDLE,
-
-    NAV_STATE_ALTHOLD_INITIALIZE,
-    NAV_STATE_ALTHOLD_IN_PROGRESS,
-
-    NAV_STATE_POSHOLD_3D_INITIALIZE,
-    NAV_STATE_POSHOLD_3D_IN_PROGRESS,
-
-    NAV_STATE_RTH_INITIALIZE,
-    NAV_STATE_RTH_CLIMB_TO_SAFE_ALT,
-    NAV_STATE_RTH_TRACKBACK,
-    NAV_STATE_RTH_HEAD_HOME,
-    NAV_STATE_RTH_LOITER_PRIOR_TO_LANDING,
-    NAV_STATE_RTH_LOITER_ABOVE_HOME,
-    NAV_STATE_RTH_LANDING,
-    NAV_STATE_RTH_FINISHING,
-    NAV_STATE_RTH_FINISHED,
-
-    NAV_STATE_WAYPOINT_INITIALIZE,
-    NAV_STATE_WAYPOINT_PRE_ACTION,
-    NAV_STATE_WAYPOINT_IN_PROGRESS,
-    NAV_STATE_WAYPOINT_REACHED,
-    NAV_STATE_WAYPOINT_HOLD_TIME,
-    NAV_STATE_WAYPOINT_NEXT,
-    NAV_STATE_WAYPOINT_FINISHED,
-    NAV_STATE_WAYPOINT_RTH_LAND,
-
-    NAV_STATE_EMERGENCY_LANDING_INITIALIZE,
-    NAV_STATE_EMERGENCY_LANDING_IN_PROGRESS,
-    NAV_STATE_EMERGENCY_LANDING_FINISHED,
-
-    NAV_STATE_LAUNCH_INITIALIZE,
-    NAV_STATE_LAUNCH_WAIT,
-    NAV_STATE_LAUNCH_IN_PROGRESS,
-
-    NAV_STATE_COURSE_HOLD_INITIALIZE,
-    NAV_STATE_COURSE_HOLD_IN_PROGRESS,
-    NAV_STATE_COURSE_HOLD_ADJUSTING,
-    NAV_STATE_CRUISE_INITIALIZE,
-    NAV_STATE_CRUISE_IN_PROGRESS,
-    NAV_STATE_CRUISE_ADJUSTING,
-
-    NAV_STATE_FW_LANDING_CLIMB_TO_LOITER,
-    NAV_STATE_FW_LANDING_LOITER,
-    NAV_STATE_FW_LANDING_APPROACH,
-    NAV_STATE_FW_LANDING_GLIDE,
-    NAV_STATE_FW_LANDING_FLARE,
-    NAV_STATE_FW_LANDING_FINISHED,
-    NAV_STATE_FW_LANDING_ABORT,
-
-    NAV_STATE_MIXERAT_INITIALIZE,
-    NAV_STATE_MIXERAT_IN_PROGRESS,
-    NAV_STATE_MIXERAT_ABORT,
-
-    NAV_STATE_SEND_TO_INITALIZE,
-    NAV_STATE_SEND_TO_IN_PROGESS,
-    NAV_STATE_SEND_TO_FINISHED,
-
-    NAV_STATE_COUNT,
-} navigationFSMState_t;
-
-typedef enum {
-    
-    NAV_CTL_ALT             = (1 << 0),     
-    NAV_CTL_POS             = (1 << 1),     
-    NAV_CTL_YAW             = (1 << 2),
-    NAV_CTL_EMERG           = (1 << 3),
-    NAV_CTL_LAUNCH          = (1 << 4),
-
-    
-    NAV_REQUIRE_ANGLE       = (1 << 5),
-    NAV_REQUIRE_ANGLE_FW    = (1 << 6),
-    NAV_REQUIRE_MAGHOLD     = (1 << 7),
-    NAV_REQUIRE_THRTILT     = (1 << 8),
-
-    
-    NAV_AUTO_RTH            = (1 << 9),
-    NAV_AUTO_WP             = (1 << 10),
-
-    
-    NAV_RC_ALT              = (1 << 11),
-    NAV_RC_POS              = (1 << 12),
-    NAV_RC_YAW              = (1 << 13),
-
-    
-    NAV_CTL_LAND            = (1 << 14),
-    NAV_AUTO_WP_DONE        = (1 << 15),    
-
-    NAV_MIXERAT             = (1 << 16),    
-    NAV_CTL_HOLD            = (1 << 17),    
-} navigationFSMStateFlags_t;
-
-typedef enum {
-    FW_AUTOLAND_WP_TURN,
-    FW_AUTOLAND_WP_FINAL_APPROACH,
-    FW_AUTOLAND_WP_LAND,
-    FW_AUTOLAND_WP_COUNT,
-} fwAutolandWaypoint_t;
-
-typedef enum {
-    RTH_HOME_ENROUTE_INITIAL,       
-    RTH_HOME_ENROUTE_PROPORTIONAL,  
-    RTH_HOME_ENROUTE_FINAL,         
-    RTH_HOME_FINAL_LOITER,          
-    RTH_HOME_FINAL_LAND,            
-} rthTargetMode_e;
-
-typedef enum {
-    SURFACE_QUAL_LOW,   
-    SURFACE_QUAL_MID,   
-    SURFACE_QUAL_HIGH   
-} navAGLEstimateQuality_e;
-
-typedef enum {
-    EST_GPS_XY_VALID            = (1 << 0),
-    EST_GPS_Z_VALID             = (1 << 1),
-    EST_BARO_VALID              = (1 << 2),
-    EST_SURFACE_VALID           = (1 << 3),
-    EST_FLOW_VALID              = (1 << 4),
-    EST_XY_VALID                = (1 << 5),
-    EST_Z_VALID                 = (1 << 6),
-} navPositionEstimationFlags_e;
-
-typedef enum {
-    ALTITUDE_SOURCE_GPS,
-    ALTITUDE_SOURCE_BARO,
-    ALTITUDE_SOURCE_GPS_ONLY,
-    ALTITUDE_SOURCE_BARO_ONLY,
-} navDefaultAltitudeSensor_e;
-
-typedef enum {
-    FW_LAUNCH_MESSAGE_TYPE_NONE = 0,
-    FW_LAUNCH_MESSAGE_TYPE_WAIT_THROTTLE,
-    FW_LAUNCH_MESSAGE_TYPE_WAIT_IDLE,
-    FW_LAUNCH_MESSAGE_TYPE_WAIT_DETECTION,
-    FW_LAUNCH_MESSAGE_TYPE_IN_PROGRESS,
-    FW_LAUNCH_MESSAGE_TYPE_FINISHING
-} fixedWingLaunchMessage_t;
-
-typedef enum {
-    FW_LAUNCH_EVENT_NONE = 0,
-    FW_LAUNCH_EVENT_SUCCESS,
-    FW_LAUNCH_EVENT_GOTO_DETECTION,
-    FW_LAUNCH_EVENT_ABORT,
-    FW_LAUNCH_EVENT_THROTTLE_LOW,
-    FW_LAUNCH_EVENT_COUNT
-} fixedWingLaunchEvent_t;
-
-typedef enum {  
-    FW_LAUNCH_STATE_WAIT_THROTTLE = 0,
-    FW_LAUNCH_STATE_IDLE_WIGGLE_WAIT,
-    FW_LAUNCH_STATE_IDLE_MOTOR_DELAY,
-    FW_LAUNCH_STATE_MOTOR_IDLE,
-    FW_LAUNCH_STATE_WAIT_DETECTION,
-    FW_LAUNCH_STATE_DETECTED,           
-    FW_LAUNCH_STATE_MOTOR_DELAY,
-    FW_LAUNCH_STATE_MOTOR_SPINUP,
-    FW_LAUNCH_STATE_IN_PROGRESS,
-    FW_LAUNCH_STATE_FINISH,
-    FW_LAUNCH_STATE_ABORTED,            
-    FW_LAUNCH_STATE_FLYING,             
-    FW_LAUNCH_STATE_COUNT
-} fixedWingLaunchState_t;
-
-typedef enum {
-    SAFEHOME_USAGE_OFF = 0,    
-    SAFEHOME_USAGE_RTH = 1,    
-    SAFEHOME_USAGE_RTH_FS = 2, 
-} safehomeUsageMode_e;
-
-typedef enum  {
-    FW_AUTOLAND_APPROACH_DIRECTION_LEFT,
-    FW_AUTOLAND_APPROACH_DIRECTION_RIGHT
-} fwAutolandApproachDirection_e;
-
-typedef enum {
-    FW_AUTOLAND_STATE_IDLE,
-    FW_AUTOLAND_STATE_LOITER,
-    FW_AUTOLAND_STATE_DOWNWIND,
-    FW_AUTOLAND_STATE_BASE_LEG,
-    FW_AUTOLAND_STATE_FINAL_APPROACH,
-    FW_AUTOLAND_STATE_GLIDE,
-    FW_AUTOLAND_STATE_FLARE
-} fwAutolandState_t;
-
-typedef enum {
-    GEOZONE_MESSAGE_STATE_NONE,
-    GEOZONE_MESSAGE_STATE_NFZ,
-    GEOZONE_MESSAGE_STATE_LEAVING_FZ,
-    GEOZONE_MESSAGE_STATE_OUTSIDE_FZ,
-    GEOZONE_MESSAGE_STATE_ENTERING_NFZ,
-    GEOZONE_MESSAGE_STATE_AVOIDING_FB,
-    GEOZONE_MESSAGE_STATE_RETURN_TO_ZONE,
-    GEOZONE_MESSAGE_STATE_FLYOUT_NFZ,
-    GEOZONE_MESSAGE_STATE_AVOIDING_ALTITUDE_BREACH,
-    GEOZONE_MESSAGE_STATE_POS_HOLD
-} geozoneMessageState_e;
-
-typedef enum {
-    NAV_RESET_NEVER = 0,
-    NAV_RESET_ON_FIRST_ARM,
-    NAV_RESET_ON_EACH_ARM,
-} nav_reset_type_e;
-
-typedef enum {
-    NAV_RTH_ALLOW_LANDING_NEVER = 0,
-    NAV_RTH_ALLOW_LANDING_ALWAYS = 1,
-    NAV_RTH_ALLOW_LANDING_FS_ONLY = 2, 
-} navRTHAllowLanding_e;
-
-typedef enum {
-    NAV_EXTRA_ARMING_SAFETY_ON = 0,
-    NAV_EXTRA_ARMING_SAFETY_ALLOW_BYPASS = 1, 
-} navExtraArmingSafety_e;
-
-typedef enum {
-    NAV_ARMING_BLOCKER_NONE = 0,
-    NAV_ARMING_BLOCKER_MISSING_GPS_FIX = 1,
-    NAV_ARMING_BLOCKER_NAV_IS_ALREADY_ACTIVE = 2,
-    NAV_ARMING_BLOCKER_FIRST_WAYPOINT_TOO_FAR = 3,
-    NAV_ARMING_BLOCKER_JUMP_WAYPOINT_ERROR = 4,
-} navArmingBlocker_e;
-
-typedef enum {
-    NOMS_OFF_ALWAYS,
-    NOMS_OFF,
-    NOMS_AUTO_ONLY,
-    NOMS_ALL_NAV
-} navOverridesMotorStop_e;
-
-typedef enum {
-    RTH_CLIMB_OFF,
-    RTH_CLIMB_ON,
-    RTH_CLIMB_ON_FW_SPIRAL,
-} navRTHClimbFirst_e;
-
-typedef enum {  
-    FW_LAUNCH_DETECTED = 5,
-    FW_LAUNCH_ABORTED = 10,
-    FW_LAUNCH_FLYING = 11,
-} navFwLaunchStatus_e;
-
-typedef enum {
-    WP_PLAN_WAIT,
-    WP_PLAN_SAVE,
-    WP_PLAN_OK,
-    WP_PLAN_FULL,
-} wpMissionPlannerStatus_e;
-
-typedef enum {
-    WP_MISSION_START,
-    WP_MISSION_RESUME,
-    WP_MISSION_SWITCH,
-} navMissionRestart_e;
-
-typedef enum {
-    RTH_TRACKBACK_OFF,
-    RTH_TRACKBACK_ON,
-    RTH_TRACKBACK_FS,
-} rthTrackbackMode_e;
-
-typedef enum {
-    WP_TURN_SMOOTHING_OFF,
-    WP_TURN_SMOOTHING_ON,
-    WP_TURN_SMOOTHING_CUT,
-} wpFwTurnSmoothing_e;
-
-typedef enum {
-    MC_ALT_HOLD_STICK,
-    MC_ALT_HOLD_MID,
-    MC_ALT_HOLD_HOVER,
-} navMcAltHoldThrottle_e;
-
-typedef enum {
-    NAV_WP_ACTION_WAYPOINT  = 0x01,
-    NAV_WP_ACTION_HOLD_TIME = 0x03,
-    NAV_WP_ACTION_RTH       = 0x04,
-    NAV_WP_ACTION_SET_POI   = 0x05,
-    NAV_WP_ACTION_JUMP      = 0x06,
-    NAV_WP_ACTION_SET_HEAD  = 0x07,
-    NAV_WP_ACTION_LAND      = 0x08
-} navWaypointActions_e;
-
-typedef enum {
-    NAV_WP_HEAD_MODE_NONE  = 0,
-    NAV_WP_HEAD_MODE_POI   = 1,
-    NAV_WP_HEAD_MODE_FIXED = 2
-} navWaypointHeadings_e;
-
-typedef enum {
-    NAV_WP_FLAG_HOME = 0x48,
-    NAV_WP_FLAG_LAST = 0xA5
-} navWaypointFlags_e;
-
-typedef enum {
-    NAV_WP_ALTMODE = (1<<0),
-    NAV_WP_USER1 = (1<<1),
-    NAV_WP_USER2 = (1<<2),
-    NAV_WP_USER3 = (1<<3),
-    NAV_WP_USER4 = (1<<4)
-} navWaypointP3Flags_e;
-
-typedef enum {
-    MW_GPS_MODE_NONE = 0,
-    MW_GPS_MODE_HOLD,
-    MW_GPS_MODE_RTH,
-    MW_GPS_MODE_NAV,
-    MW_GPS_MODE_EMERG = 15
-} navSystemStatus_Mode_e;
-
-typedef enum {
-    MW_NAV_STATE_NONE = 0,                
-    MW_NAV_STATE_RTH_START,               
-    MW_NAV_STATE_RTH_ENROUTE,             
-    MW_NAV_STATE_HOLD_INFINIT,            
-    MW_NAV_STATE_HOLD_TIMED,              
-    MW_NAV_STATE_WP_ENROUTE,              
-    MW_NAV_STATE_PROCESS_NEXT,            
-    MW_NAV_STATE_DO_JUMP,                 
-    MW_NAV_STATE_LAND_START,              
-    MW_NAV_STATE_LAND_IN_PROGRESS,        
-    MW_NAV_STATE_LANDED,                  
-    MW_NAV_STATE_LAND_SETTLE,             
-    MW_NAV_STATE_LAND_START_DESCENT,      
-    MW_NAV_STATE_HOVER_ABOVE_HOME,        
-    MW_NAV_STATE_EMERGENCY_LANDING,       
-    MW_NAV_STATE_RTH_CLIMB,               
-} navSystemStatus_State_e;
-
-typedef enum {
-    MW_NAV_ERROR_NONE = 0,            
-    MW_NAV_ERROR_TOOFAR,              
-    MW_NAV_ERROR_SPOILED_GPS,         
-    MW_NAV_ERROR_WP_CRC,              
-    MW_NAV_ERROR_FINISH,              
-    MW_NAV_ERROR_TIMEWAIT,            
-    MW_NAV_ERROR_INVALID_JUMP,        
-    MW_NAV_ERROR_INVALID_DATA,        
-    MW_NAV_ERROR_WAIT_FOR_RTH_ALT,    
-    MW_NAV_ERROR_GPS_FIX_LOST,        
-    MW_NAV_ERROR_DISARMED,            
-    MW_NAV_ERROR_LANDING              
-} navSystemStatus_Error_e;
-
-typedef enum {
-    MW_NAV_FLAG_ADJUSTING_POSITION  = 1 << 0,
-    MW_NAV_FLAG_ADJUSTING_ALTITUDE  = 1 << 1,
-} navSystemStatus_Flags_e;
-
-typedef enum {
-    GEO_ALT_ABSOLUTE,
-    GEO_ALT_RELATIVE
-} geoAltitudeConversionMode_e;
-
-typedef enum {
-    GEO_ORIGIN_SET,
-    GEO_ORIGIN_RESET_ALTITUDE
-} geoOriginResetMode_e;
-
-typedef enum {
-    NAV_WP_TAKEOFF_DATUM,
-    NAV_WP_MSL_DATUM
-} geoAltitudeDatumFlag_e;
-
-typedef enum {
-    GEOZONE_ACTION_STATE_NONE,
-    GEOZONE_ACTION_STATE_AVOIDING,
-    GEOZONE_ACTION_STATE_AVOIDING_UPWARD,
-    GEOZONE_ACTION_STATE_AVOIDING_ALTITUDE,
-    GEOZONE_ACTION_STATE_RETURN_TO_FZ,
-    GEOZONE_ACTION_STATE_FLYOUT_NFZ,
-    GEOZONE_ACTION_STATE_POSHOLD,
-    GEOZONE_ACTION_STATE_RTH
-} geozoneActionState_e;
+// Consolidated enums — generated on 2025-10-10 16:32:00.495342
 
 typedef enum {
     CURRENT_SENSOR_NONE = 0,
@@ -620,6 +104,18 @@ typedef enum {
     PITOT_MSP = 6,
     PITOT_DLVR = 7,
 } pitotSensor_e;
+
+typedef enum {
+    ESC_SENSOR_WAIT_STARTUP = 0,
+    ESC_SENSOR_READY = 1,
+    ESC_SENSOR_WAITING = 2
+} escSensorState_t;
+
+typedef enum {
+    ESC_SENSOR_FRAME_PENDING,
+    ESC_SENSOR_FRAME_COMPLETE,
+    ESC_SENSOR_FRAME_FAILED
+} escSensorFrameStatus_t;
 
 typedef enum {
     SENSOR_INDEX_GYRO = 0,
@@ -890,6 +386,500 @@ typedef enum {
 } logicConditionFlags_e;
 
 typedef enum {
+    RX_FRAME_PENDING             = 0,         
+    RX_FRAME_COMPLETE            = (1 << 0),  
+    RX_FRAME_FAILSAFE            = (1 << 1),  
+    RX_FRAME_PROCESSING_REQUIRED = (1 << 2),
+    RX_FRAME_DROPPED             = (1 << 3),  
+} rxFrameState_e;
+
+typedef enum {
+    RX_TYPE_NONE = 0,
+    RX_TYPE_SERIAL,
+    RX_TYPE_MSP,
+    RX_TYPE_SIM
+} rxReceiverType_e;
+
+typedef enum {
+    SERIALRX_SPEKTRUM1024 = 0,
+    SERIALRX_SPEKTRUM2048,
+    SERIALRX_SBUS,
+    SERIALRX_SUMD,
+    SERIALRX_IBUS,
+    SERIALRX_JETIEXBUS,
+    SERIALRX_CRSF,
+    SERIALRX_FPORT,
+    SERIALRX_SBUS_FAST,
+    SERIALRX_FPORT2,
+    SERIALRX_SRXL2,
+    SERIALRX_GHST,
+    SERIALRX_MAVLINK,
+    SERIALRX_FBUS,
+    SERIALRX_SBUS2,
+} rxSerialReceiverType_e;
+
+typedef enum {
+    RSSI_SOURCE_NONE = 0,
+    RSSI_SOURCE_AUTO,
+    RSSI_SOURCE_ADC,
+    RSSI_SOURCE_RX_CHANNEL,
+    RSSI_SOURCE_RX_PROTOCOL,
+    RSSI_SOURCE_MSP,
+} rssiSource_e;
+
+typedef enum {
+    CRSF_ADDRESS_BROADCAST = 0x00,
+    CRSF_ADDRESS_USB = 0x10,
+    CRSF_ADDRESS_TBS_CORE_PNP_PRO = 0x80,
+    CRSF_ADDRESS_RESERVED1 = 0x8A,
+    CRSF_ADDRESS_CURRENT_SENSOR = 0xC0,
+    CRSF_ADDRESS_GPS = 0xC2,
+    CRSF_ADDRESS_TBS_BLACKBOX = 0xC4,
+    CRSF_ADDRESS_FLIGHT_CONTROLLER = 0xC8,
+    CRSF_ADDRESS_RESERVED2 = 0xCA,
+    CRSF_ADDRESS_RACE_TAG = 0xCC,
+    CRSF_ADDRESS_RADIO_TRANSMITTER = 0xEA,
+    CRSF_ADDRESS_CRSF_RECEIVER = 0xEC,
+    CRSF_ADDRESS_CRSF_TRANSMITTER = 0xEE
+} crsfAddress_e;
+
+typedef enum {
+    CRSF_FRAMETYPE_GPS = 0x02,
+    CRSF_FRAMETYPE_VARIO_SENSOR = 0x07,
+    CRSF_FRAMETYPE_BATTERY_SENSOR = 0x08,
+    CRSF_FRAMETYPE_LINK_STATISTICS = 0x14,
+    CRSF_FRAMETYPE_RC_CHANNELS_PACKED = 0x16,
+    CRSF_FRAMETYPE_ATTITUDE = 0x1E,
+    CRSF_FRAMETYPE_FLIGHT_MODE = 0x21,
+    
+    CRSF_FRAMETYPE_DEVICE_PING = 0x28,
+    CRSF_FRAMETYPE_DEVICE_INFO = 0x29,
+    CRSF_FRAMETYPE_PARAMETER_SETTINGS_ENTRY = 0x2B,
+    CRSF_FRAMETYPE_PARAMETER_READ = 0x2C,
+    CRSF_FRAMETYPE_PARAMETER_WRITE = 0x2D,
+    CRSF_FRAMETYPE_COMMAND = 0x32,
+    
+    CRSF_FRAMETYPE_MSP_REQ = 0x7A,   
+    CRSF_FRAMETYPE_MSP_RESP = 0x7B,  
+    CRSF_FRAMETYPE_MSP_WRITE = 0x7C,  
+    CRSF_FRAMETYPE_DISPLAYPORT_CMD = 0x7D, 
+} crsfFrameType_e;
+
+typedef enum {
+    STATE_SBUS_SYNC = 0,
+    STATE_SBUS_PAYLOAD,
+    STATE_SBUS26_PAYLOAD,
+    STATE_SBUS_WAIT_SYNC
+} sbusDecoderState_e;
+
+typedef enum {
+    GHST_ADDR_RADIO             = 0x80,
+    GHST_ADDR_TX_MODULE_SYM     = 0x81,     
+    GHST_ADDR_TX_MODULE_ASYM    = 0x88,     
+    GHST_ADDR_FC                = 0x82,
+    GHST_ADDR_GOGGLES           = 0x83,
+    GHST_ADDR_QUANTUM_TEE1      = 0x84,     
+    GHST_ADDR_QUANTUM_TEE2      = 0x85,
+    GHST_ADDR_QUANTUM_GW1       = 0x86,
+    GHST_ADDR_5G_CLK            = 0x87,     
+    GHST_ADDR_RX                = 0x89
+} ghstAddr_e;
+
+typedef enum {
+    
+    
+    
+    GHST_UL_RC_CHANS_HS4_FIRST  = 0x10,     
+    GHST_UL_RC_CHANS_HS4_5TO8   = 0x10,     
+    GHST_UL_RC_CHANS_HS4_9TO12  = 0x11,     
+    GHST_UL_RC_CHANS_HS4_13TO16 = 0x12,     
+    GHST_UL_RC_CHANS_HS4_RSSI   = 0x13,     
+    GHST_UL_RC_CHANS_HS4_LAST   = 0x1f      
+} ghstUl_e;
+
+typedef enum {
+    GHST_DL_OPENTX_SYNC         = 0x20,
+    GHST_DL_LINK_STAT           = 0x21,
+    GHST_DL_VTX_STAT            = 0x22,
+    GHST_DL_PACK_STAT           = 0x23,     
+    GHST_DL_GPS_PRIMARY         = 0x25,     
+    GHST_DL_GPS_SECONDARY       = 0x26      
+} ghstDl_e;
+
+typedef enum {
+    CFT_RC = 0xFF,
+    CFT_OTA_START = 0xF0,
+    CFT_OTA_DATA = 0xF1,
+    CFT_OTA_STOP = 0xF2
+} fport2_control_frame_type_e;
+
+typedef enum {
+    FT_CONTROL,
+    FT_DOWNLINK
+} frame_type_e;
+
+typedef enum {
+    FS_CONTROL_FRAME_START,
+    FS_CONTROL_FRAME_TYPE,
+    FS_CONTROL_FRAME_DATA,
+    FS_DOWNLINK_FRAME_START,
+    FS_DOWNLINK_FRAME_DATA
+} frame_state_e;
+
+typedef enum {
+    Disabled,
+    ListenForActivity,
+    SendHandshake,
+    ListenForHandshake,
+    Running
+} Srxl2State;
+
+typedef enum {
+    Handshake = 0x21,
+    BindInfo = 0x41,
+    ParameterConfiguration = 0x50,
+    SignalQuality = 0x55,
+    TelemetrySensorData = 0x80,
+    ControlData = 0xCD,
+} Srxl2PacketType;
+
+typedef enum {
+    ChannelData = 0x00,
+    FailsafeChannelData = 0x01,
+    VTXData = 0x02,
+} Srxl2ControlDataCommand;
+
+typedef enum {
+    NoDevice = 0,
+    RemoteReceiver = 1,
+    Receiver = 2,
+    FlightController = 3,
+    ESC = 4,
+    Reserved = 5,
+    SRXLServo = 6,
+    SRXLServo_2 = 7,
+    VTX = 8,
+} Srxl2DeviceType;
+
+typedef enum {
+    FlightControllerDefault = 0x30,
+    FlightControllerMax = 0x3F,
+    Broadcast = 0xFF,
+} Srxl2DeviceId;
+
+typedef enum {
+    EnterBindMode = 0xEB,
+    RequestBindStatus = 0xB5,
+    BoundDataReport = 0xDB,
+    SetBindInfo = 0x5B,
+} Srxl2BindRequest;
+
+typedef enum {
+    NotBound = 0x0,
+    DSM2_1024_22ms = 0x01,
+    DSM2_1024_MC24 = 0x02,
+    DMS2_2048_11ms = 0x12,
+    DMSX_22ms = 0xA2,
+    DMSX_11ms = 0xB2,
+    Surface_DSM2_16_5ms = 0x63,
+    DSMR_11ms_22ms = 0xE2,
+    DSMR_5_5ms = 0xE4,
+} Srxl2BindType;
+
+typedef enum {
+    CRSF_ACTIVE_ANTENNA1 = 0,
+    CRSF_ACTIVE_ANTENNA2 = 1
+} crsfActiveAntenna_e;
+
+typedef enum {
+    CRSF_RF_MODE_4_HZ = 0,
+    CRSF_RF_MODE_50_HZ = 1,
+    CRSF_RF_MODE_150_HZ = 2
+} crsrRfMode_e;
+
+typedef enum {
+    CRSF_RF_POWER_0_mW = 0,
+    CRSF_RF_POWER_10_mW = 1,
+    CRSF_RF_POWER_25_mW = 2,
+    CRSF_RF_POWER_100_mW = 3,
+    CRSF_RF_POWER_500_mW = 4,
+    CRSF_RF_POWER_1000_mW = 5,
+    CRSF_RF_POWER_2000_mW = 6,
+    CRSF_RF_POWER_250_mW = 7
+} crsrRfPower_e;
+
+typedef enum {
+    CRSF_FRAME_START_INDEX = 0,
+    CRSF_FRAME_ATTITUDE_INDEX = CRSF_FRAME_START_INDEX,
+    CRSF_FRAME_BATTERY_SENSOR_INDEX,
+    CRSF_FRAME_FLIGHT_MODE_INDEX,
+    CRSF_FRAME_GPS_INDEX,
+    CRSF_FRAME_VARIO_SENSOR_INDEX,
+    CRSF_SCHEDULE_COUNT_MAX
+} crsfFrameTypeIndex_e;
+
+typedef enum {
+    LTM_RATE_NORMAL,
+    LTM_RATE_MEDIUM,
+    LTM_RATE_SLOW
+} ltmUpdateRate_e;
+
+typedef enum {
+    MAVLINK_RADIO_GENERIC,
+    MAVLINK_RADIO_ELRS,
+    MAVLINK_RADIO_SIK,
+} mavlinkRadio_e;
+
+typedef enum {
+    SMARTPORT_FUEL_UNIT_PERCENT,
+    SMARTPORT_FUEL_UNIT_MAH,
+    SMARTPORT_FUEL_UNIT_MWH
+} smartportFuelUnit_e;
+
+typedef enum {
+    HOTT_WAITING_FOR_REQUEST,
+    HOTT_RECEIVING_REQUEST,
+    HOTT_WAITING_FOR_TX_WINDOW,
+    HOTT_TRANSMITTING,
+    HOTT_ENDING_TRANSMISSION
+} hottState_e;
+
+typedef enum {
+    GPS_FIX_CHAR_NONE = '-',
+    GPS_FIX_CHAR_2D = '2',
+    GPS_FIX_CHAR_3D = '3',
+    GPS_FIX_CHAR_DGPS = 'D',
+} gpsFixChar_e;
+
+typedef enum {
+    HOTT_EAM_ALARM1_FLAG_NONE = 0,
+    HOTT_EAM_ALARM1_FLAG_MAH = (1 << 0),
+    HOTT_EAM_ALARM1_FLAG_BATTERY_1 = (1 << 1),
+    HOTT_EAM_ALARM1_FLAG_BATTERY_2 = (1 << 2),
+    HOTT_EAM_ALARM1_FLAG_TEMPERATURE_1 = (1 << 3),
+    HOTT_EAM_ALARM1_FLAG_TEMPERATURE_2 = (1 << 4),
+    HOTT_EAM_ALARM1_FLAG_ALTITUDE = (1 << 5),
+    HOTT_EAM_ALARM1_FLAG_CURRENT = (1 << 6),
+    HOTT_EAM_ALARM1_FLAG_MAIN_VOLTAGE = (1 << 7),
+} hottEamAlarm1Flag_e;
+
+typedef enum {
+    HOTT_EAM_ALARM2_FLAG_NONE = 0,
+    HOTT_EAM_ALARM2_FLAG_MS = (1 << 0),
+    HOTT_EAM_ALARM2_FLAG_M3S = (1 << 1),
+    HOTT_EAM_ALARM2_FLAG_ALTITUDE_DUPLICATE = (1 << 2),
+    HOTT_EAM_ALARM2_FLAG_MS_DUPLICATE = (1 << 3),
+    HOTT_EAM_ALARM2_FLAG_M3S_DUPLICATE = (1 << 4),
+    HOTT_EAM_ALARM2_FLAG_UNKNOWN_1 = (1 << 5),
+    HOTT_EAM_ALARM2_FLAG_UNKNOWN_2 = (1 << 6),
+    HOTT_EAM_ALARM2_FLAG_ON_SIGN_OR_TEXT_ACTIVE = (1 << 7),
+} hottEamAlarm2Flag_e;
+
+typedef enum {
+    LTM_FRAME_START = 0,
+    LTM_AFRAME = LTM_FRAME_START, 
+    LTM_SFRAME, 
+#if defined(USE_GPS)
+    LTM_GFRAME, 
+    LTM_OFRAME, 
+    LTM_XFRAME, 
+#endif
+    LTM_NFRAME, 
+    LTM_FRAME_COUNT
+} ltm_frame_e;
+
+typedef enum {
+    LTM_MODE_MANUAL = 0,
+    LTM_MODE_RATE,
+    LTM_MODE_ANGLE,
+    LTM_MODE_HORIZON,
+    LTM_MODE_ACRO,
+    LTM_MODE_STABALIZED1,
+    LTM_MODE_STABALIZED2,
+    LTM_MODE_STABILIZED3,
+    LTM_MODE_ALTHOLD,
+    LTM_MODE_GPSHOLD,
+    LTM_MODE_WAYPOINTS,
+    LTM_MODE_HEADHOLD,
+    LTM_MODE_CIRCLE,
+    LTM_MODE_RTH,
+    LTM_MODE_FOLLOWWME,
+    LTM_MODE_LAND,
+    LTM_MODE_FLYBYWIRE1,
+    LTM_MODE_FLYBYWIRE2,
+    LTM_MODE_CRUISE,
+    LTM_MODE_UNKNOWN,
+        
+    LTM_MODE_LAUNCH,
+    LTM_MODE_AUTOTUNE
+} ltm_modes_e;
+
+typedef enum {
+    IBUS_MEAS_TYPE_INTERNAL_VOLTAGE = 0x00, 
+    IBUS_MEAS_TYPE_TEMPERATURE      = 0x01, 
+    IBUS_MEAS_TYPE_RPM              = 0x02, 
+    IBUS_MEAS_TYPE_EXTERNAL_VOLTAGE = 0x03, 
+    IBUS_MEAS_TYPE_HEADING          = 0x04, 
+    IBUS_MEAS_TYPE_CURRENT          = 0x05, 
+    IBUS_MEAS_TYPE_CLIMB            = 0x06, 
+    IBUS_MEAS_TYPE_ACC_Z            = 0x07, 
+    IBUS_MEAS_TYPE_ACC_Y            = 0x08, 
+    IBUS_MEAS_TYPE_ACC_X            = 0x09, 
+    IBUS_MEAS_TYPE_VSPEED           = 0x0a, 
+    IBUS_MEAS_TYPE_SPEED            = 0x0b, 
+    IBUS_MEAS_TYPE_DIST             = 0x0c, 
+    IBUS_MEAS_TYPE_ARMED            = 0x0d,	
+    IBUS_MEAS_TYPE_MODE             = 0x0e, 
+    
+    IBUS_MEAS_TYPE_PRES             = 0x41, 
+    
+    
+    IBUS_MEAS_TYPE_SPE              = 0x7e, 
+    IBUS_MEAS_TYPE_COG              = 0x80, 
+    IBUS_MEAS_TYPE_GPS_STATUS       = 0x81, 
+    IBUS_MEAS_TYPE_GPS_LON          = 0x82, 
+    IBUS_MEAS_TYPE_GPS_LAT          = 0x83, 
+    IBUS_MEAS_TYPE_ALT              = 0x84, 
+    IBUS_MEAS_TYPE_S85              = 0x85, 
+    IBUS_MEAS_TYPE_S86              = 0x86, 
+    IBUS_MEAS_TYPE_S87              = 0x87, 
+    IBUS_MEAS_TYPE_S88              = 0x88, 
+    IBUS_MEAS_TYPE_S89              = 0x89, 
+    IBUS_MEAS_TYPE_S8A              = 0x8A, 
+    IBUS_MEAS_TYPE_GALT             = 0xf9, 
+    
+    
+    
+    IBUS_MEAS_TYPE_GPS              = 0xfd 
+    
+} ibusSensorType_e;
+
+typedef enum {
+    IBUS_MEAS_TYPE1_INTV             = 0x00,
+    IBUS_MEAS_TYPE1_TEM              = 0x01,
+    IBUS_MEAS_TYPE1_MOT              = 0x02,
+    IBUS_MEAS_TYPE1_EXTV             = 0x03,
+    IBUS_MEAS_TYPE1_CELL             = 0x04,
+    IBUS_MEAS_TYPE1_BAT_CURR         = 0x05,
+    IBUS_MEAS_TYPE1_FUEL             = 0x06,
+    IBUS_MEAS_TYPE1_RPM              = 0x07,
+    IBUS_MEAS_TYPE1_CMP_HEAD         = 0x08,
+    IBUS_MEAS_TYPE1_CLIMB_RATE       = 0x09,
+    IBUS_MEAS_TYPE1_COG              = 0x0a,
+    IBUS_MEAS_TYPE1_GPS_STATUS       = 0x0b,
+    IBUS_MEAS_TYPE1_ACC_X            = 0x0c,
+    IBUS_MEAS_TYPE1_ACC_Y            = 0x0d,
+    IBUS_MEAS_TYPE1_ACC_Z            = 0x0e,
+    IBUS_MEAS_TYPE1_ROLL             = 0x0f,
+    IBUS_MEAS_TYPE1_PITCH            = 0x10,
+    IBUS_MEAS_TYPE1_YAW              = 0x11,
+    IBUS_MEAS_TYPE1_VERTICAL_SPEED   = 0x12,
+    IBUS_MEAS_TYPE1_GROUND_SPEED     = 0x13,
+    IBUS_MEAS_TYPE1_GPS_DIST         = 0x14,
+    IBUS_MEAS_TYPE1_ARMED            = 0x15,
+    IBUS_MEAS_TYPE1_FLIGHT_MODE      = 0x16,
+    IBUS_MEAS_TYPE1_PRES             = 0x41,
+    
+    
+    IBUS_MEAS_TYPE1_SPE              = 0x7e,
+    
+    IBUS_MEAS_TYPE1_GPS_LAT          = 0x80,
+    IBUS_MEAS_TYPE1_GPS_LON          = 0x81,
+    IBUS_MEAS_TYPE1_GPS_ALT          = 0x82,
+    IBUS_MEAS_TYPE1_ALT              = 0x83,
+    IBUS_MEAS_TYPE1_S84              = 0x84,
+    IBUS_MEAS_TYPE1_S85              = 0x85,
+    IBUS_MEAS_TYPE1_S86              = 0x86,
+    IBUS_MEAS_TYPE1_S87              = 0x87,
+    IBUS_MEAS_TYPE1_S88              = 0x88,
+    IBUS_MEAS_TYPE1_S89              = 0x89,
+    IBUS_MEAS_TYPE1_S8a              = 0x8a
+    
+    
+    
+    
+} ibusSensorType1_e;
+
+typedef enum {
+    IBUS_MEAS_VALUE_NONE             = 0x00, 
+    IBUS_MEAS_VALUE_TEMPERATURE      = 0x01, 
+    IBUS_MEAS_VALUE_MOT              = 0x02, 
+    IBUS_MEAS_VALUE_EXTERNAL_VOLTAGE = 0x03, 
+    IBUS_MEAS_VALUE_CELL             = 0x04, 
+    IBUS_MEAS_VALUE_CURRENT          = 0x05, 
+    IBUS_MEAS_VALUE_FUEL             = 0x06, 
+    IBUS_MEAS_VALUE_RPM              = 0x07, 
+    IBUS_MEAS_VALUE_HEADING          = 0x08, 
+    IBUS_MEAS_VALUE_CLIMB            = 0x09, 
+    IBUS_MEAS_VALUE_COG              = 0x0a, 
+    IBUS_MEAS_VALUE_GPS_STATUS       = 0x0b, 
+    IBUS_MEAS_VALUE_ACC_X            = 0x0c, 
+    IBUS_MEAS_VALUE_ACC_Y            = 0x0d, 
+    IBUS_MEAS_VALUE_ACC_Z            = 0x0e, 
+    IBUS_MEAS_VALUE_ROLL             = 0x0f, 
+    IBUS_MEAS_VALUE_PITCH            = 0x10, 
+    IBUS_MEAS_VALUE_YAW              = 0x11, 
+    IBUS_MEAS_VALUE_VSPEED           = 0x12, 
+    IBUS_MEAS_VALUE_SPEED            = 0x13, 
+    IBUS_MEAS_VALUE_DIST             = 0x14, 
+    IBUS_MEAS_VALUE_ARMED            = 0x15, 
+    IBUS_MEAS_VALUE_MODE             = 0x16, 
+    IBUS_MEAS_VALUE_PRES             = 0x41, 
+    IBUS_MEAS_VALUE_SPE              = 0x7e, 
+    IBUS_MEAS_VALUE_GPS_LAT          = 0x80, 
+    IBUS_MEAS_VALUE_GPS_LON          = 0x81, 
+    IBUS_MEAS_VALUE_GALT4            = 0x82, 
+    IBUS_MEAS_VALUE_ALT4             = 0x83, 
+    IBUS_MEAS_VALUE_GALT             = 0x84, 
+    IBUS_MEAS_VALUE_ALT              = 0x85, 
+    IBUS_MEAS_VALUE_STATUS           = 0x87, 
+    IBUS_MEAS_VALUE_GPS_LAT1         = 0x88, 
+    IBUS_MEAS_VALUE_GPS_LON1         = 0x89, 
+    IBUS_MEAS_VALUE_GPS_LAT2         = 0x90, 
+    IBUS_MEAS_VALUE_GPS_LON2         = 0x91, 
+    IBUS_MEAS_VALUE_GPS              = 0xfd 
+} ibusSensorValue_e;
+
+typedef enum {
+    IBUS_COMMAND_DISCOVER_SENSOR      = 0x80,
+    IBUS_COMMAND_SENSOR_TYPE          = 0x90,
+    IBUS_COMMAND_MEASUREMENT          = 0xA0
+} ibusCommand_e;
+
+typedef enum  {
+    SIM_MODULE_NOT_DETECTED = 0,
+    SIM_MODULE_NOT_REGISTERED,
+    SIM_MODULE_REGISTERED,
+} simModuleState_e;
+
+typedef enum  {
+    SIM_STATE_INIT = 0,
+    SIM_STATE_INIT2,
+    SIM_STATE_INIT_ENTER_PIN,
+    SIM_STATE_SET_MODES,
+    SIM_STATE_SEND_SMS,
+    SIM_STATE_SEND_SMS_ENTER_MESSAGE
+} simTelemetryState_e;
+
+typedef enum  {
+    SIM_AT_OK = 0,
+    SIM_AT_ERROR,
+    SIM_AT_WAITING_FOR_RESPONSE
+} simATCommandState_e;
+
+typedef enum  {
+    SIM_READSTATE_RESPONSE = 0,
+    SIM_READSTATE_SMS,
+    SIM_READSTATE_SKIP
+} simReadState_e;
+
+typedef enum  {
+    SIM_TX_NO = 0,
+    SIM_TX_FS,
+    SIM_TX
+} simTransmissionState_e;
+
+typedef enum {
     ACC_EVENT_NONE = 0,
     ACC_EVENT_HIGH,
     ACC_EVENT_LOW,
@@ -947,12 +937,39 @@ typedef enum APM_COPTER_MODE
    COPTER_MODE_ENUM_END=22,
 } APM_COPTER_MODE;
 
+typedef enum  {
+    SIM_TX_FLAG                 = (1 << 0),
+    SIM_TX_FLAG_FAILSAFE        = (1 << 1),
+    SIM_TX_FLAG_GPS             = (1 << 2),
+    SIM_TX_FLAG_ACC             = (1 << 3),
+    SIM_TX_FLAG_LOW_ALT         = (1 << 4),
+    SIM_TX_FLAG_RESPONSE        = (1 << 5)
+} simTxFlags_e;
+
+typedef enum {
+    GHST_FRAME_START_INDEX = 0,
+    GHST_FRAME_PACK_INDEX = GHST_FRAME_START_INDEX, 
+    GHST_FRAME_GPS_PRIMARY_INDEX,                   
+    GHST_FRAME_GPS_SECONDARY_INDEX,                 
+   GHST_SCHEDULE_COUNT_MAX
+} ghstFrameTypeIndex_e;
+
 typedef enum {
     GPS_UBLOX = 0,
     GPS_MSP,
     GPS_FAKE,
     GPS_PROVIDER_COUNT
 } gpsProvider_e;
+
+typedef enum {
+    SBAS_AUTO = 0,
+    SBAS_EGNOS,
+    SBAS_WAAS,
+    SBAS_MSAS,
+    SBAS_GAGAN,
+    SBAS_SPAN,
+    SBAS_NONE
+} sbasMode_e;
 
 typedef enum {
     GPS_BAUDRATE_115200 = 0,
@@ -991,6 +1008,64 @@ typedef enum {
     GPS_FIX_2D,
     GPS_FIX_3D
 } gpsFixType_e;
+
+typedef enum {
+    MSP_DP_HEARTBEAT = 0,       
+    MSP_DP_RELEASE = 1,         
+    MSP_DP_CLEAR_SCREEN = 2,    
+    MSP_DP_WRITE_STRING = 3,    
+    MSP_DP_DRAW_SCREEN = 4,     
+    MSP_DP_OPTIONS = 5,         
+    MSP_DP_SYS = 6,             
+    MSP_DP_COUNT,
+} displayportMspCommand_e;
+
+typedef enum {
+    WAITING_HDR1,
+    WAITING_HDR2,
+    WAITING_PAYLOAD,
+    WAITING_CRCH,
+    WAITING_CRCL,
+} gimbalHeadtrackerState_e;
+
+typedef enum {
+    DJI_OSD_CN_MESSAGES,
+    DJI_OSD_CN_THROTTLE,
+    DJI_OSD_CN_THROTTLE_AUTO_THR,
+    DJI_OSD_CN_AIR_SPEED,
+    DJI_OSD_CN_EFFICIENCY,
+    DJI_OSD_CN_DISTANCE,
+    DJI_OSD_CN_ADJUSTEMNTS,
+    DJI_OSD_CN_MAX_ELEMENTS
+} DjiCraftNameElements_t;
+
+typedef enum {
+    VTX_LOW_POWER_DISARM_OFF = 0,
+    VTX_LOW_POWER_DISARM_ALWAYS = 1,
+    VTX_LOW_POWER_DISARM_UNTIL_FIRST_ARM = 2, 
+} vtxLowerPowerDisarm_e;
+
+typedef enum {
+    VTX_STATE_RESET         = 0,
+    VTX_STATE_OFFILE        = 1,    
+    VTX_STATE_DETECTING     = 2,    
+    VTX_STATE_IDLE          = 3,    
+    VTX_STATE_QUERY_DELAY   = 4,
+    VTX_STATE_QUERY_STATUS  = 5,
+    VTX_STATE_WAIT_STATUS   = 6,    
+} vtxProtoState_e;
+
+typedef enum {
+    VTX_RESPONSE_TYPE_NONE,
+    VTX_RESPONSE_TYPE_CAPABILITIES,
+    VTX_RESPONSE_TYPE_STATUS,
+} vtxProtoResponseType_e;
+
+typedef enum {
+    PORTSHARING_UNUSED = 0,
+    PORTSHARING_NOT_SHARED,
+    PORTSHARING_SHARED
+} portSharing_e;
 
 typedef enum {
     FUNCTION_NONE                       = 0,
@@ -1062,6 +1137,65 @@ typedef enum {
     SERIAL_PORT_SOFTSERIAL2,
     SERIAL_PORT_IDENTIFIER_MAX = SERIAL_PORT_SOFTSERIAL2
 } serialPortIdentifier_e;
+
+typedef enum {
+    RCDEVICE_PROTOCOL_FEATURE_SIMULATE_POWER_BUTTON    = (1 << 0),
+    RCDEVICE_PROTOCOL_FEATURE_SIMULATE_WIFI_BUTTON     = (1 << 1),
+    RCDEVICE_PROTOCOL_FEATURE_CHANGE_MODE              = (1 << 2),
+    RCDEVICE_PROTOCOL_FEATURE_SIMULATE_5_KEY_OSD_CABLE = (1 << 3),
+    RCDEVICE_PROTOCOL_FEATURE_START_RECORDING          = (1 << 6),
+    RCDEVICE_PROTOCOL_FEATURE_STOP_RECORDING           = (1 << 7),
+    RCDEVICE_PROTOCOL_FEATURE_CMS_MENU                 = (1 << 8),
+} rcdevice_features_e;
+
+typedef enum {
+    RCDEVICE_PROTOCOL_CAM_CTRL_SIMULATE_WIFI_BTN        = 0x00,
+    RCDEVICE_PROTOCOL_CAM_CTRL_SIMULATE_POWER_BTN       = 0x01,
+    RCDEVICE_PROTOCOL_CAM_CTRL_CHANGE_MODE              = 0x02,
+    RCDEVICE_PROTOCOL_CAM_CTRL_START_RECORDING          = 0x03,
+    RCDEVICE_PROTOCOL_CAM_CTRL_STOP_RECORDING           = 0x04,
+    RCDEVICE_PROTOCOL_CAM_CTRL_UNKNOWN_CAMERA_OPERATION = 0xFF
+} rcdevice_camera_control_opeation_e;
+
+typedef enum {
+    RCDEVICE_PROTOCOL_5KEY_SIMULATION_NONE  = 0x00,
+    RCDEVICE_PROTOCOL_5KEY_SIMULATION_SET   = 0x01,
+    RCDEVICE_PROTOCOL_5KEY_SIMULATION_LEFT  = 0x02,
+    RCDEVICE_PROTOCOL_5KEY_SIMULATION_RIGHT = 0x03,
+    RCDEVICE_PROTOCOL_5KEY_SIMULATION_UP    = 0x04,
+    RCDEVICE_PROTOCOL_5KEY_SIMULATION_DOWN  = 0x05
+} rcdevice_5key_simulation_operation_e;
+
+typedef enum {
+    RCDEVICE_PROTOCOL_5KEY_CONNECTION_OPEN = 0x01,
+    RCDEVICE_PROTOCOL_5KEY_CONNECTION_CLOSE = 0x02
+} RCDEVICE_5key_connection_event_e;
+
+typedef enum {
+    RCDEVICE_CAM_KEY_NONE,
+    RCDEVICE_CAM_KEY_ENTER,
+    RCDEVICE_CAM_KEY_LEFT,
+    RCDEVICE_CAM_KEY_UP,
+    RCDEVICE_CAM_KEY_RIGHT,
+    RCDEVICE_CAM_KEY_DOWN,
+    RCDEVICE_CAM_KEY_CONNECTION_CLOSE,
+    RCDEVICE_CAM_KEY_CONNECTION_OPEN,
+    RCDEVICE_CAM_KEY_RELEASE,
+} rcdeviceCamSimulationKeyEvent_e;
+
+typedef enum {
+    RCDEVICE_PROTOCOL_RCSPLIT_VERSION = 0x00, 
+                                              
+                                              
+    RCDEVICE_PROTOCOL_VERSION_1_0 = 0x01,
+    RCDEVICE_PROTOCOL_UNKNOWN
+} rcdevice_protocol_version_e;
+
+typedef enum {
+    RCDEVICE_RESP_SUCCESS = 0,
+    RCDEVICE_RESP_INCORRECT_CRC = 1,
+    RCDEVICE_RESP_TIMEOUT = 2
+} rcdeviceResponseStatus_e;
 
 typedef enum {
     VTX_PARAM_POWER = 0,
@@ -1182,6 +1316,74 @@ typedef enum
 } osdCommand_e;
 
 typedef enum {
+    RECV_STATE_NONE,
+    RECV_STATE_SYNC,
+    RECV_STATE_LENGTH,
+    RECV_STATE_DATA,
+    RECV_STATE_CHECKSUM,
+    RECV_STATE_DONE,
+} frskyOSDRecvState_e;
+
+typedef enum {
+    UBLOX_SIG_HEALTH_UNKNOWN = 0,
+    UBLOX_SIG_HEALTH_HEALTHY = 1,
+    UBLOX_SIG_HEALTH_UNHEALTHY = 2
+} ublox_nav_sig_health_e;
+
+typedef enum {
+    UBLOX_SIG_QUALITY_NOSIGNAL = 0,
+    UBLOX_SIG_QUALITY_SEARCHING = 1,
+    UBLOX_SIG_QUALITY_ACQUIRED = 2,
+    UBLOX_SIG_QUALITY_UNUSABLE = 3,
+    UBLOX_SIG_QUALITY_CODE_LOCK_TIME_SYNC = 4,
+    UBLOX_SIG_QUALITY_CODE_CARRIER_LOCK_TIME_SYNC = 5,
+    UBLOX_SIG_QUALITY_CODE_CARRIER_LOCK_TIME_SYNC2 = 6,
+    UBLOX_SIG_QUALITY_CODE_CARRIER_LOCK_TIME_SYNC3 = 7,
+} ublox_nav_sig_quality;
+
+typedef enum {
+    UBX_ACK_WAITING = 0,
+    UBX_ACK_GOT_ACK = 1,
+    UBX_ACK_GOT_NAK = 2
+} ubx_ack_state_t;
+
+typedef enum {
+    PREAMBLE1 = 0xB5,
+    PREAMBLE2 = 0x62,
+    CLASS_NAV = 0x01,
+    CLASS_ACK = 0x05,
+    CLASS_CFG = 0x06,
+    CLASS_MON = 0x0A,
+    MSG_CLASS_UBX = 0x01,
+    MSG_CLASS_NMEA = 0xF0,
+    MSG_VER = 0x04,
+    MSG_ACK_NACK = 0x00,
+    MSG_ACK_ACK = 0x01,
+    MSG_NMEA_GGA = 0x0,
+    MSG_NMEA_GLL = 0x1,
+    MSG_NMEA_GSA = 0x2,
+    MSG_NMEA_GSV = 0x3,
+    MSG_NMEA_RMC = 0x4,
+    MSG_NMEA_VGS = 0x5,
+    MSG_POSLLH = 0x2,
+    MSG_STATUS = 0x3,
+    MSG_SOL = 0x6,
+    MSG_PVT = 0x7,
+    MSG_VELNED = 0x12,
+    MSG_TIMEUTC = 0x21,
+    MSG_SVINFO = 0x30,
+    MSG_NAV_SAT = 0x35,
+    MSG_CFG_PRT = 0x00,
+    MSG_CFG_RATE = 0x08,
+    MSG_CFG_SET_RATE = 0x01,
+    MSG_CFG_NAV_SETTINGS = 0x24,
+    MSG_CFG_SBAS = 0x16,
+    MSG_CFG_GNSS = 0x3e,
+    MSG_MON_GNSS = 0x28,
+    MSG_NAV_SIG = 0x43
+} ubx_protocol_bytes_t;
+
+typedef enum {
     FIX_NONE = 0,
     FIX_DEAD_RECKONING = 1,
     FIX_2D = 2,
@@ -1195,6 +1397,12 @@ typedef enum {
 } ubx_nav_status_bits_t;
 
 typedef enum {
+    PAGE_WELCOME,
+    PAGE_ARMED,
+    PAGE_STATUS
+} pageId_e;
+
+typedef enum {
     OSD_SPEED_SOURCE_GROUND    = 0,
     OSD_SPEED_SOURCE_3D        = 1,
     OSD_SPEED_SOURCE_AIR       = 2
@@ -1206,10 +1414,131 @@ typedef enum {
 } osdDrawPointType_e;
 
 typedef enum {
+    COLOR_BLACK = 0,
+    COLOR_WHITE,
+    COLOR_RED,
+    COLOR_ORANGE,
+    COLOR_YELLOW,
+    COLOR_LIME_GREEN,
+    COLOR_GREEN,
+    COLOR_MINT_GREEN,
+    COLOR_CYAN,
+    COLOR_LIGHT_BLUE,
+    COLOR_BLUE,
+    COLOR_DARK_VIOLET,
+    COLOR_MAGENTA,
+    COLOR_DEEP_PINK,
+} colorId_e;
+
+typedef enum {
+    LED_MODE_ORIENTATION = 0,
+    LED_MODE_HEADFREE,
+    LED_MODE_HORIZON,
+    LED_MODE_ANGLE,
+    LED_MODE_MAG,
+    LED_MODE_BARO,
+    LED_SPECIAL
+} ledModeIndex_e;
+
+typedef enum {
+    LED_SCOLOR_DISARMED = 0,
+    LED_SCOLOR_ARMED,
+    LED_SCOLOR_ANIMATION,
+    LED_SCOLOR_BACKGROUND,
+    LED_SCOLOR_BLINKBACKGROUND,
+    LED_SCOLOR_GPSNOSATS,
+    LED_SCOLOR_GPSNOLOCK,
+    LED_SCOLOR_GPSLOCKED,
+    LED_SCOLOR_STROBE
+} ledSpecialColorIds_e;
+
+typedef enum {
+    LED_DIRECTION_NORTH = 0,
+    LED_DIRECTION_EAST,
+    LED_DIRECTION_SOUTH,
+    LED_DIRECTION_WEST,
+    LED_DIRECTION_UP,
+    LED_DIRECTION_DOWN
+} ledDirectionId_e;
+
+typedef enum {
+    LED_FUNCTION_COLOR,
+    LED_FUNCTION_FLIGHT_MODE,
+    LED_FUNCTION_ARM_STATE,
+    LED_FUNCTION_BATTERY,
+    LED_FUNCTION_RSSI,
+    LED_FUNCTION_GPS,
+    LED_FUNCTION_THRUST_RING,
+    LED_FUNCTION_CHANNEL,
+} ledBaseFunctionId_e;
+
+typedef enum {
+    LED_OVERLAY_THROTTLE,
+    LED_OVERLAY_LARSON_SCANNER,
+    LED_OVERLAY_BLINK,
+    LED_OVERLAY_LANDING_FLASH,
+    LED_OVERLAY_INDICATOR,
+    LED_OVERLAY_WARNING,
+    LED_OVERLAY_STROBE
+} ledOverlayId_e;
+
+typedef enum {
+    PT_ACTIVE_ID,
+    PT_INACTIVE_ID
+} pollType_e;
+
+typedef enum {
     WARNING_LED_OFF = 0,
     WARNING_LED_ON,
     WARNING_LED_FLASH
 } warningLedState_e;
+
+typedef enum {
+    FRSKY_OSD_TRANSACTION_OPT_PROFILED = 1 << 0,
+    FRSKY_OSD_TRANSACTION_OPT_RESET_DRAWING = 1 << 1,
+} frskyOSDTransactionOptions_e;
+
+typedef enum {
+    FRSKY_OSD_COLOR_BLACK = 0,
+    FRSKY_OSD_COLOR_TRANSPARENT = 1,
+    FRSKY_OSD_COLOR_WHITE = 2,
+    FRSKY_OSD_COLOR_GRAY = 3,
+} frskyOSDColor_e;
+
+typedef enum {
+    FRSKY_OSD_OUTLINE_TYPE_NONE = 0,
+    FRSKY_OSD_OUTLINE_TYPE_TOP = 1 << 0,
+    FRSKY_OSD_OUTLINE_TYPE_RIGHT = 1 << 1,
+    FRSKY_OSD_OUTLINE_TYPE_BOTTOM = 1 << 2,
+    FRSKY_OSD_OUTLINE_TYPE_LEFT = 1 << 3,
+} frskyOSDLineOutlineType_e;
+
+typedef enum
+{
+    FRSKY_OSD_WIDGET_ID_AHI = 0,
+
+    FRSKY_OSD_WIDGET_ID_SIDEBAR_0 = 1,
+    FRSKY_OSD_WIDGET_ID_SIDEBAR_1 = 2,
+
+    FRSKY_OSD_WIDGET_ID_GRAPH_0 = 3,
+    FRSKY_OSD_WIDGET_ID_GRAPH_1 = 4,
+    FRSKY_OSD_WIDGET_ID_GRAPH_2 = 5,
+    FRSKY_OSD_WIDGET_ID_GRAPH_3 = 6,
+
+    FRSKY_OSD_WIDGET_ID_CHARGAUGE_0 = 7,
+    FRSKY_OSD_WIDGET_ID_CHARGAUGE_1 = 8,
+    FRSKY_OSD_WIDGET_ID_CHARGAUGE_2 = 9,
+    FRSKY_OSD_WIDGET_ID_CHARGAUGE_3 = 10,
+
+    FRSKY_OSD_WIDGET_ID_SIDEBAR_FIRST = FRSKY_OSD_WIDGET_ID_SIDEBAR_0,
+    FRSKY_OSD_WIDGET_ID_SIDEBAR_LAST = FRSKY_OSD_WIDGET_ID_SIDEBAR_1,
+
+    FRSKY_OSD_WIDGET_ID_GRAPH_FIRST = FRSKY_OSD_WIDGET_ID_GRAPH_0,
+    FRSKY_OSD_WIDGET_ID_GRAPH_LAST = FRSKY_OSD_WIDGET_ID_GRAPH_3,
+
+    FRSKY_OSD_WIDGET_ID_CHARGAUGE_FIRST = FRSKY_OSD_WIDGET_ID_CHARGAUGE_0,
+    FRSKY_OSD_WIDGET_ID_CHARGAUGE_LAST = FRSKY_OSD_WIDGET_ID_CHARGAUGE_3,
+} frskyOSDWidgetID_e;
 
 typedef enum {
     OSD_RSSI_VALUE,
@@ -1383,6 +1712,21 @@ typedef enum {
 } osd_items_e;
 
 typedef enum {
+    OSD_UNIT_IMPERIAL,
+    OSD_UNIT_METRIC,
+    OSD_UNIT_METRIC_MPH,    
+    OSD_UNIT_UK,            
+    OSD_UNIT_GA,            
+
+    OSD_UNIT_MAX = OSD_UNIT_GA,
+} osd_unit_e;
+
+typedef enum {
+    OSD_STATS_ENERGY_UNIT_MAH,
+    OSD_STATS_ENERGY_UNIT_WH,
+} osd_stats_energy_unit_e;
+
+typedef enum {
     OSD_CROSSHAIRS_STYLE_DEFAULT,
     OSD_CROSSHAIRS_STYLE_AIRCRAFT,
     OSD_CROSSHAIRS_STYLE_TYPE3,
@@ -1391,6 +1735,31 @@ typedef enum {
     OSD_CROSSHAIRS_STYLE_TYPE6,
     OSD_CROSSHAIRS_STYLE_TYPE7,
 } osd_crosshairs_style_e;
+
+typedef enum {
+    OSD_SIDEBAR_SCROLL_NONE,
+    OSD_SIDEBAR_SCROLL_ALTITUDE,
+    OSD_SIDEBAR_SCROLL_SPEED,
+    OSD_SIDEBAR_SCROLL_HOME_DISTANCE,
+
+    OSD_SIDEBAR_SCROLL_MAX = OSD_SIDEBAR_SCROLL_HOME_DISTANCE,
+} osd_sidebar_scroll_e;
+
+typedef enum {
+    OSD_ALIGN_LEFT,
+    OSD_ALIGN_RIGHT
+} osd_alignment_e;
+
+typedef enum {
+    OSD_AHI_STYLE_DEFAULT,
+    OSD_AHI_STYLE_LINE,
+} osd_ahi_style_e;
+
+typedef enum {
+    OSD_CRSF_LQ_TYPE1,
+    OSD_CRSF_LQ_TYPE2,
+    OSD_CRSF_LQ_TYPE3
+} osd_crsf_lq_format_e;
 
 typedef enum {
     
@@ -1416,11 +1785,59 @@ typedef enum {
 } warningFlags_e;
 
 typedef enum {
+    timBlink = 0,
+    timLarson,
+    timBattery,
+    timRssi,
+#ifdef USE_GPS
+    timGps,
+#endif
+    timWarning,
+    timIndicator,
+#ifdef USE_LED_ANIMATION
+    timAnimation,
+#endif
+    timRing,
+    timTimerCount
+} timId_e;
+
+typedef enum {
+    SA_UNKNOWN, 
+    SA_1_0,
+    SA_2_0,
+    SA_2_1
+} smartAudioVersion_e;
+
+typedef enum {
     GPS_UNKNOWN,                
     GPS_INITIALIZING,           
     GPS_RUNNING,                
     GPS_LOST_COMMUNICATION,     
 } gpsState_e;
+
+typedef enum {
+    VS600_BAND_A,
+    VS600_BAND_B,
+    VS600_BAND_C,
+    VS600_BAND_D,
+    VS600_BAND_E,
+    VS600_BAND_F,
+} vs600Band_e;
+
+typedef enum {
+    VS600_POWER_PIT,
+    VS600_POWER_25MW,
+    VS600_POWER_200MW,
+    VS600_POWER_600MW,
+} vs600Power_e;
+
+typedef enum {          
+    SD_3016,
+    HD_5018,
+    HD_3016,           
+    HD_6022,           
+    HD_5320            
+} resolutionType_e;
 
 typedef enum {
     OSD_SIDEBAR_ARROW_NONE,
@@ -1466,6 +1883,156 @@ typedef enum {
     CUSTOM_ELEMENT_VISIBILITY_GV        = 1,
     CUSTOM_ELEMENT_VISIBILITY_LOGIC_CON = 2,
 } osdCustomElementTypeVisibility_e;
+
+typedef enum {
+    AFATFS_FILESYSTEM_STATE_UNKNOWN,
+    AFATFS_FILESYSTEM_STATE_FATAL,
+    AFATFS_FILESYSTEM_STATE_INITIALIZATION,
+    AFATFS_FILESYSTEM_STATE_READY,
+} afatfsFilesystemState_e;
+
+typedef enum {
+    AFATFS_OPERATION_IN_PROGRESS,
+    AFATFS_OPERATION_SUCCESS,
+    AFATFS_OPERATION_FAILURE,
+} afatfsOperationStatus_e;
+
+typedef enum {
+    AFATFS_ERROR_NONE = 0,
+    AFATFS_ERROR_GENERIC = 1,
+    AFATFS_ERROR_BAD_MBR = 2,
+    AFATFS_ERROR_BAD_FILESYSTEM_HEADER = 3
+} afatfsError_e;
+
+typedef enum {
+    AFATFS_SEEK_SET,
+    AFATFS_SEEK_CUR,
+    AFATFS_SEEK_END,
+} afatfsSeek_e;
+
+typedef enum {
+    FAT_FILESYSTEM_TYPE_INVALID,
+    FAT_FILESYSTEM_TYPE_FAT12,
+    FAT_FILESYSTEM_TYPE_FAT16,
+    FAT_FILESYSTEM_TYPE_FAT32,
+} fatFilesystemType_e;
+
+typedef enum {
+    AFATFS_SAVE_DIRECTORY_NORMAL,
+    AFATFS_SAVE_DIRECTORY_FOR_CLOSE,
+    AFATFS_SAVE_DIRECTORY_DELETED,
+} afatfsSaveDirectoryEntryMode_e;
+
+typedef enum {
+    AFATFS_CACHE_STATE_EMPTY,
+    AFATFS_CACHE_STATE_IN_SYNC,
+    AFATFS_CACHE_STATE_READING,
+    AFATFS_CACHE_STATE_WRITING,
+    AFATFS_CACHE_STATE_DIRTY
+} afatfsCacheBlockState_e;
+
+typedef enum {
+    AFATFS_FILE_TYPE_NONE,
+    AFATFS_FILE_TYPE_NORMAL,
+    AFATFS_FILE_TYPE_FAT16_ROOT_DIRECTORY,
+    AFATFS_FILE_TYPE_DIRECTORY
+} afatfsFileType_e;
+
+typedef enum {
+    CLUSTER_SEARCH_FREE_AT_BEGINNING_OF_FAT_SECTOR,
+    CLUSTER_SEARCH_FREE,
+    CLUSTER_SEARCH_OCCUPIED,
+} afatfsClusterSearchCondition_e;
+
+typedef enum {
+    AFATFS_FIND_CLUSTER_IN_PROGRESS,
+    AFATFS_FIND_CLUSTER_FOUND,
+    AFATFS_FIND_CLUSTER_FATAL,
+    AFATFS_FIND_CLUSTER_NOT_FOUND,
+} afatfsFindClusterStatus_e;
+
+typedef enum {
+    AFATFS_FAT_PATTERN_UNTERMINATED_CHAIN,
+    AFATFS_FAT_PATTERN_TERMINATED_CHAIN,
+    AFATFS_FAT_PATTERN_FREE
+} afatfsFATPattern_e;
+
+typedef enum {
+    AFATFS_FREE_SPACE_SEARCH_PHASE_FIND_HOLE,
+    AFATFS_FREE_SPACE_SEARCH_PHASE_GROW_HOLE
+} afatfsFreeSpaceSearchPhase_e;
+
+typedef enum {
+    AFATFS_APPEND_SUPERCLUSTER_PHASE_INIT = 0,
+    AFATFS_APPEND_SUPERCLUSTER_PHASE_UPDATE_FREEFILE_DIRECTORY,
+    AFATFS_APPEND_SUPERCLUSTER_PHASE_UPDATE_FAT,
+    AFATFS_APPEND_SUPERCLUSTER_PHASE_UPDATE_FILE_DIRECTORY,
+} afatfsAppendSuperclusterPhase_e;
+
+typedef enum {
+    AFATFS_APPEND_FREE_CLUSTER_PHASE_INITIAL = 0,
+    AFATFS_APPEND_FREE_CLUSTER_PHASE_FIND_FREESPACE = 0,
+    AFATFS_APPEND_FREE_CLUSTER_PHASE_UPDATE_FAT1,
+    AFATFS_APPEND_FREE_CLUSTER_PHASE_UPDATE_FAT2,
+    AFATFS_APPEND_FREE_CLUSTER_PHASE_UPDATE_FILE_DIRECTORY,
+    AFATFS_APPEND_FREE_CLUSTER_PHASE_COMPLETE,
+    AFATFS_APPEND_FREE_CLUSTER_PHASE_FAILURE,
+} afatfsAppendFreeClusterPhase_e;
+
+typedef enum {
+    AFATFS_EXTEND_SUBDIRECTORY_PHASE_INITIAL = 0,
+    AFATFS_EXTEND_SUBDIRECTORY_PHASE_ADD_FREE_CLUSTER = 0,
+    AFATFS_EXTEND_SUBDIRECTORY_PHASE_WRITE_SECTORS,
+    AFATFS_EXTEND_SUBDIRECTORY_PHASE_SUCCESS,
+    AFATFS_EXTEND_SUBDIRECTORY_PHASE_FAILURE
+} afatfsExtendSubdirectoryPhase_e;
+
+typedef enum {
+    AFATFS_TRUNCATE_FILE_INITIAL = 0,
+    AFATFS_TRUNCATE_FILE_UPDATE_DIRECTORY = 0,
+    AFATFS_TRUNCATE_FILE_ERASE_FAT_CHAIN_NORMAL,
+#ifdef AFATFS_USE_FREEFILE
+    AFATFS_TRUNCATE_FILE_ERASE_FAT_CHAIN_CONTIGUOUS,
+    AFATFS_TRUNCATE_FILE_PREPEND_TO_FREEFILE,
+#endif
+    AFATFS_TRUNCATE_FILE_SUCCESS,
+} afatfsTruncateFilePhase_e;
+
+typedef enum {
+    AFATFS_DELETE_FILE_DELETE_DIRECTORY_ENTRY,
+    AFATFS_DELETE_FILE_DEALLOCATE_CLUSTERS,
+} afatfsDeleteFilePhase_e;
+
+typedef enum {
+    AFATFS_FILE_OPERATION_NONE,
+    AFATFS_FILE_OPERATION_CREATE_FILE,
+    AFATFS_FILE_OPERATION_SEEK, 
+    AFATFS_FILE_OPERATION_CLOSE,
+    AFATFS_FILE_OPERATION_TRUNCATE,
+    AFATFS_FILE_OPERATION_UNLINK,
+#ifdef AFATFS_USE_FREEFILE
+    AFATFS_FILE_OPERATION_APPEND_SUPERCLUSTER,
+    AFATFS_FILE_OPERATION_LOCKED,
+#endif
+    AFATFS_FILE_OPERATION_APPEND_FREE_CLUSTER,
+    AFATFS_FILE_OPERATION_EXTEND_SUBDIRECTORY,
+} afatfsFileOperation_e;
+
+typedef enum {
+    AFATFS_INITIALIZATION_READ_MBR,
+    AFATFS_INITIALIZATION_READ_VOLUME_ID,
+
+#ifdef AFATFS_USE_FREEFILE
+    AFATFS_INITIALIZATION_FREEFILE_CREATE,
+    AFATFS_INITIALIZATION_FREEFILE_CREATING,
+    AFATFS_INITIALIZATION_FREEFILE_FAT_SEARCH,
+    AFATFS_INITIALIZATION_FREEFILE_UPDATE_FAT,
+    AFATFS_INITIALIZATION_FREEFILE_SAVE_DIR_ENTRY,
+    AFATFS_INITIALIZATION_FREEFILE_LAST = AFATFS_INITIALIZATION_FREEFILE_SAVE_DIR_ENTRY,
+#endif
+
+    AFATFS_INITIALIZATION_DONE
+} afatfsInitializationPhase_e;
 
 typedef enum {
     INPUT_STABILIZED_ROLL           = 0,
@@ -1782,6 +2349,54 @@ typedef enum {
     CHECKBOX_ITEM_COUNT
 } boxId_e;
 
+typedef enum {
+    MODE_OPERATOR_OR, 
+    MODE_OPERATOR_AND
+} modeActivationOperator_e;
+
+typedef enum {
+    DUMP_MASTER = (1 << 0),
+    DUMP_CONTROL_PROFILE = (1 << 1),
+    DUMP_BATTERY_PROFILE = (1 << 2),
+    DUMP_MIXER_PROFILE = (1 << 3),
+    DUMP_ALL = (1 << 4),
+    DO_DIFF = (1 << 5),
+    SHOW_DEFAULTS = (1 << 6),
+    HIDE_UNUSED = (1 << 7)
+} dumpFlags_e;
+
+typedef enum {
+    SYSTEM_STATE_INITIALISING   = 0,
+    SYSTEM_STATE_CONFIG_LOADED  = (1 << 0),
+    SYSTEM_STATE_SENSORS_READY  = (1 << 1),
+    SYSTEM_STATE_MOTORS_READY   = (1 << 2),
+    SYSTEM_STATE_TRANSPONDER_ENABLED = (1 << 3),
+    SYSTEM_STATE_READY          = (1 << 7)
+} systemState_e;
+
+typedef enum {
+    MSP_SDCARD_STATE_NOT_PRESENT = 0,
+    MSP_SDCARD_STATE_FATAL       = 1,
+    MSP_SDCARD_STATE_CARD_INIT   = 2,
+    MSP_SDCARD_STATE_FS_INIT     = 3,
+    MSP_SDCARD_STATE_READY       = 4
+} mspSDCardState_e;
+
+typedef enum {
+    MSP_SDCARD_FLAG_SUPPORTTED   = 1
+} mspSDCardFlags_e;
+
+typedef enum {
+    MSP_FLASHFS_BIT_READY        = 1,
+    MSP_FLASHFS_BIT_SUPPORTED    = 2
+} mspFlashfsFlags_e;
+
+typedef enum {
+    MSP_PASSTHROUGH_SERIAL_ID          = 0xFD,
+    MSP_PASSTHROUGH_SERIAL_FUNCTION_ID = 0xFE,
+    MSP_PASSTHROUGH_ESC_4WAY           = 0xFF,
+ } mspPassthroughType_e;
+
 typedef enum rc_alias {
     ROLL = 0,
     PITCH,
@@ -1983,60 +2598,45 @@ typedef enum {
 } features_e;
 
 typedef enum {
-    ARMFLAGS_ARMED                                           = (1 << 2),
-    ARMFLAGS_WAS_EVER_ARMED                                  = (1 << 3),
-    ARMFLAGS_SIMULATOR_MODE_HITL                             = (1 << 4),
-    ARMFLAGS_SIMULATOR_MODE_SITL                             = (1 << 5),
-    ARMFLAGS_ARMING_DISABLED_GEOZONE                         = (1 << 6),
-    ARMFLAGS_ARMING_DISABLED_FAILSAFE_SYSTEM                 = (1 << 7),
-    ARMFLAGS_ARMING_DISABLED_NOT_LEVEL                       = (1 << 8),
-    ARMFLAGS_ARMING_DISABLED_SENSORS_CALIBRATING             = (1 << 9),
-    ARMFLAGS_ARMING_DISABLED_SYSTEM_OVERLOADED               = (1 << 10),
-    ARMFLAGS_ARMING_DISABLED_NAVIGATION_UNSAFE               = (1 << 11),
-    ARMFLAGS_ARMING_DISABLED_COMPASS_NOT_CALIBRATED          = (1 << 12),
-    ARMFLAGS_ARMING_DISABLED_ACCELEROMETER_NOT_CALIBRATED    = (1 << 13),
-    ARMFLAGS_ARMING_DISABLED_ARM_SWITCH                      = (1 << 14),
-    ARMFLAGS_ARMING_DISABLED_HARDWARE_FAILURE                = (1 << 15),
-    ARMFLAGS_ARMING_DISABLED_BOXFAILSAFE                     = (1 << 16),
+    ARMED                                           = (1 << 2),
+    WAS_EVER_ARMED                                  = (1 << 3),
+    SIMULATOR_MODE_HITL                             = (1 << 4),
+    SIMULATOR_MODE_SITL                             = (1 << 5),
+    ARMING_DISABLED_GEOZONE                         = (1 << 6),
+    ARMING_DISABLED_FAILSAFE_SYSTEM                 = (1 << 7),
+    ARMING_DISABLED_NOT_LEVEL                       = (1 << 8),
+    ARMING_DISABLED_SENSORS_CALIBRATING             = (1 << 9),
+    ARMING_DISABLED_SYSTEM_OVERLOADED               = (1 << 10),
+    ARMING_DISABLED_NAVIGATION_UNSAFE               = (1 << 11),
+    ARMING_DISABLED_COMPASS_NOT_CALIBRATED          = (1 << 12),
+    ARMING_DISABLED_ACCELEROMETER_NOT_CALIBRATED    = (1 << 13),
+    ARMING_DISABLED_ARM_SWITCH                      = (1 << 14),
+    ARMING_DISABLED_HARDWARE_FAILURE                = (1 << 15),
+    ARMING_DISABLED_BOXFAILSAFE                     = (1 << 16),
 
-    ARMFLAGS_ARMING_DISABLED_RC_LINK                         = (1 << 18),
-    ARMFLAGS_ARMING_DISABLED_THROTTLE                        = (1 << 19),
-    ARMFLAGS_ARMING_DISABLED_CLI                             = (1 << 20),
-    ARMFLAGS_ARMING_DISABLED_CMS_MENU                        = (1 << 21),
-    ARMFLAGS_ARMING_DISABLED_OSD_MENU                        = (1 << 22),
-    ARMFLAGS_ARMING_DISABLED_ROLLPITCH_NOT_CENTERED          = (1 << 23),
-    ARMFLAGS_ARMING_DISABLED_SERVO_AUTOTRIM                  = (1 << 24),
-    ARMFLAGS_ARMING_DISABLED_OOM                             = (1 << 25),
-    ARMFLAGS_ARMING_DISABLED_INVALID_SETTING                 = (1 << 26),
-    ARMFLAGS_ARMING_DISABLED_PWM_OUTPUT_ERROR                = (1 << 27),
-    ARMFLAGS_ARMING_DISABLED_NO_PREARM                       = (1 << 28),
-    ARMFLAGS_ARMING_DISABLED_DSHOT_BEEPER                    = (1 << 29),
-    ARMFLAGS_ARMING_DISABLED_LANDING_DETECTED                = (1 << 30),
+    ARMING_DISABLED_RC_LINK                         = (1 << 18),
+    ARMING_DISABLED_THROTTLE                        = (1 << 19),
+    ARMING_DISABLED_CLI                             = (1 << 20),
+    ARMING_DISABLED_CMS_MENU                        = (1 << 21),
+    ARMING_DISABLED_OSD_MENU                        = (1 << 22),
+    ARMING_DISABLED_ROLLPITCH_NOT_CENTERED          = (1 << 23),
+    ARMING_DISABLED_SERVO_AUTOTRIM                  = (1 << 24),
+    ARMING_DISABLED_OOM                             = (1 << 25),
+    ARMING_DISABLED_INVALID_SETTING                 = (1 << 26),
+    ARMING_DISABLED_PWM_OUTPUT_ERROR                = (1 << 27),
+    ARMING_DISABLED_NO_PREARM                       = (1 << 28),
+    ARMING_DISABLED_DSHOT_BEEPER                    = (1 << 29),
+    ARMING_DISABLED_LANDING_DETECTED                = (1 << 30),
 
-    ARMFLAGS_ARMING_DISABLED_ALL_FLAGS                       = (ARMFLAGS_ARMING_DISABLED_GEOZONE |
-        ARMFLAGS_ARMING_DISABLED_FAILSAFE_SYSTEM | 
-        ARMFLAGS_ARMING_DISABLED_NOT_LEVEL | 
-        ARMFLAGS_ARMING_DISABLED_SENSORS_CALIBRATING | 
-        ARMFLAGS_ARMING_DISABLED_SYSTEM_OVERLOADED | 
-        ARMFLAGS_ARMING_DISABLED_NAVIGATION_UNSAFE |
-        ARMFLAGS_ARMING_DISABLED_COMPASS_NOT_CALIBRATED | 
-        ARMFLAGS_ARMING_DISABLED_ACCELEROMETER_NOT_CALIBRATED |
-        ARMFLAGS_ARMING_DISABLED_ARM_SWITCH | 
-        ARMFLAGS_ARMING_DISABLED_HARDWARE_FAILURE | 
-        ARMFLAGS_ARMING_DISABLED_BOXFAILSAFE |
-        ARMFLAGS_ARMING_DISABLED_RC_LINK | 
-        ARMFLAGS_ARMING_DISABLED_THROTTLE | 
-        ARMFLAGS_ARMING_DISABLED_CLI |
-        ARMFLAGS_ARMING_DISABLED_CMS_MENU | 
-        ARMFLAGS_ARMING_DISABLED_OSD_MENU | 
-        ARMFLAGS_ARMING_DISABLED_ROLLPITCH_NOT_CENTERED |
-        ARMFLAGS_ARMING_DISABLED_SERVO_AUTOTRIM | 
-        ARMFLAGS_ARMING_DISABLED_OOM | 
-        ARMFLAGS_ARMING_DISABLED_INVALID_SETTING |
-        ARMFLAGS_ARMING_DISABLED_PWM_OUTPUT_ERROR | 
-        ARMFLAGS_ARMING_DISABLED_NO_PREARM | 
-        ARMFLAGS_ARMING_DISABLED_DSHOT_BEEPER |
-        ARMFLAGS_ARMING_DISABLED_LANDING_DETECTED),
+    ARMING_DISABLED_ALL_FLAGS                       = (ARMING_DISABLED_GEOZONE | ARMING_DISABLED_FAILSAFE_SYSTEM | ARMING_DISABLED_NOT_LEVEL | 
+                                                       ARMING_DISABLED_SENSORS_CALIBRATING | ARMING_DISABLED_SYSTEM_OVERLOADED | ARMING_DISABLED_NAVIGATION_UNSAFE |
+                                                       ARMING_DISABLED_COMPASS_NOT_CALIBRATED | ARMING_DISABLED_ACCELEROMETER_NOT_CALIBRATED |
+                                                       ARMING_DISABLED_ARM_SWITCH | ARMING_DISABLED_HARDWARE_FAILURE | ARMING_DISABLED_BOXFAILSAFE |
+                                                       ARMING_DISABLED_RC_LINK | ARMING_DISABLED_THROTTLE | ARMING_DISABLED_CLI |
+                                                       ARMING_DISABLED_CMS_MENU | ARMING_DISABLED_OSD_MENU | ARMING_DISABLED_ROLLPITCH_NOT_CENTERED |
+                                                       ARMING_DISABLED_SERVO_AUTOTRIM | ARMING_DISABLED_OOM | ARMING_DISABLED_INVALID_SETTING |
+                                                       ARMING_DISABLED_PWM_OUTPUT_ERROR | ARMING_DISABLED_NO_PREARM | ARMING_DISABLED_DSHOT_BEEPER |
+                                                       ARMING_DISABLED_LANDING_DETECTED),
 } armingFlag_e;
 
 typedef enum {
@@ -2113,3 +2713,18 @@ typedef enum {
     FLM_ANGLEHOLD,
     FLM_COUNT
 } flightModeForTelemetry_e;
+
+typedef enum {
+    HITL_RESET_FLAGS            = (0 << 0),
+    HITL_ENABLE					= (1 << 0),
+    HITL_SIMULATE_BATTERY		= (1 << 1),
+    HITL_MUTE_BEEPER			= (1 << 2),
+    HITL_USE_IMU			    = (1 << 3), 
+    HITL_HAS_NEW_GPS_DATA		= (1 << 4),
+    HITL_EXT_BATTERY_VOLTAGE	= (1 << 5), 
+    HITL_AIRSPEED               = (1 << 6),
+    HITL_EXTENDED_FLAGS         = (1 << 7), 
+    HITL_GPS_TIMEOUT            = (1 << 8),
+    HITL_PITOT_FAILURE          = (1 << 9)
+} simulatorFlags_t;
+

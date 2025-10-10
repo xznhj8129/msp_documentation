@@ -8,6 +8,12 @@ SUBDIRS = [
     'msp',
 ]
 
+enumfile = """
+import enum
+
+class MultiWii(enum.IntEnum):
+"""
+
 def strip_comments(text: str) -> str:
     # Remove /* ... */ block comments and // line comments
     text = re.sub(r'/\*.*?\*/', '', text, flags=re.DOTALL)
@@ -72,12 +78,14 @@ for l in all_out_lines:
     directive, name, value = parts[0], parts[1], parts[2]
     num = int(value, 0)
     asddsa[name] = num
+
 inav_msp_msgs = dict(sorted(asddsa.items(), key=lambda x:x[1]))
 for key in inav_msp_msgs:
+    enumfile += f"    {key} = {inav_msp_msgs[key]}\n"
     print(key,":", inav_msp_msgs[key])
 
 import json
-with open('msp_codes.py', 'w') as out:
-    out.write("MSPCodes = "+json.dumps(inav_msp_msgs,indent=4))
+with open('lib/msp_enum.py', 'w') as out:
+    out.write(enumfile)
 
 #print(f"Found {total_defines} #define entries across {file_hits} files")
