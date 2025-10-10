@@ -40,10 +40,10 @@ for msg_code in msp:
     print()
     print(msg_code, msp[msg_code]['id'])
     total_bytes = 0
-    structstr = "<"
     
     abort = False
     for direction in ["request", "reply"]:
+        structstr = "<"
         if abort:
             break
         print('\t',direction)

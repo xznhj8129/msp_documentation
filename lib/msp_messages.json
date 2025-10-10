@@ -2229,7 +2229,7 @@
         },
         "reply": {
             "size": 14,
-            "struct": "<IHII",
+            "struct": "<II",
             "payload": [
                 {
                     "name": "address",
@@ -4081,7 +4081,7 @@
         },
         "reply": {
             "size": 22,
-            "struct": "<BBBiiiHHHB",
+            "struct": "<BBiiiHHHB",
             "payload": [
                 {
                     "name": "waypointIndex",
@@ -4522,7 +4522,7 @@
         },
         "reply": {
             "size": 6,
-            "struct": "<BBHBs",
+            "struct": "<BHBs",
             "payload": [
                 {
                     "name": "powerLevelIndex",
@@ -5847,7 +5847,7 @@
         },
         "reply": {
             "size": 2,
-            "struct": "<ss",
+            "struct": "<s",
             "payload": [
                 {
                     "name": "settingValue",
@@ -6049,7 +6049,7 @@
         },
         "reply": {
             "size": 8,
-            "struct": "<HHHH",
+            "struct": "<HHH",
             "payload": [
                 {
                     "name": "pgn",
@@ -8449,7 +8449,7 @@
         },
         "reply": {
             "size": 83,
-            "struct": "<BBBBIIIHHhhhhhhhhhhhhIhhhBHBHHHHBIhhhBBBBBB",
+            "struct": "<HHHHBIhhhBBBBBB",
             "payload": [
                 {
                     "name": "stabilizedRoll",
@@ -9154,7 +9154,7 @@
         },
         "reply": {
             "size": 11,
-            "struct": "<BBBii",
+            "struct": "<BBii",
             "payload": [
                 {
                     "name": "safehomeIndex",
@@ -9281,7 +9281,7 @@
         },
         "reply": {
             "size": 15,
-            "struct": "<BBBBBIBIB",
+            "struct": "<BBBBIBIB",
             "payload": [
                 {
                     "name": "enabled",
@@ -9458,7 +9458,7 @@
         },
         "reply": {
             "size": 16,
-            "struct": "<BBIIBhhB",
+            "struct": "<BIIBhhB",
             "payload": [
                 {
                     "name": "approachIndex",
@@ -10030,7 +10030,7 @@
         },
         "reply": {
             "size": 15,
-            "struct": "<BBBBIIBBB",
+            "struct": "<BBBIIBBB",
             "payload": [
                 {
                     "name": "geozoneIndex",
@@ -10178,7 +10178,7 @@
         },
         "reply": {
             "size": 12,
-            "struct": "<BBBBii",
+            "struct": "<BBii",
             "payload": [
                 {
                     "name": "geozoneIndex",

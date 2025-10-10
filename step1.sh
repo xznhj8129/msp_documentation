@@ -15,8 +15,8 @@ echo "###########"
 echo get_inav_enums.py
 python get_inav_enums.py
 
-echo "###########"
-echo h_to_enum.py
-python h_to_enum.py
+#echo "###########"
+#echo h_to_enum.py
+#python h_to_enum.py
 
 echo "Go fix what's messed up in the headers"
