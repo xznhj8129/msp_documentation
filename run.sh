@@ -18,5 +18,12 @@ python get_inav_enums.py
 #echo "###########"
 #echo h_to_enum.py
 #python h_to_enum.py
+#echo "Go fix what's messed up in the headers"
 
-echo "Go fix what's messed up in the headers"
+echo "###########"
+echo bad_define_parse.py
+python bad_define_parse.py
+
+echo "###########"
+echo mspref.py
+python mspref.py

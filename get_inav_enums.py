@@ -334,16 +334,17 @@ def generate_python_code(all_data, base_enums_dict):
     member_count = 0
     skipped_member_count = 0
     output_lines.append("\n# --- Enums ---")
+    output_lines.append("\nclass InavEnums:")
     for name, (members, rel_path) in sorted(consolidated_enums.items()):
         # Add source comment ONLY if it changes
         # if rel_path != last_rel_path_enum:
         #     output_lines.append(f"\n# Source: {rel_path}")
         #     last_rel_path_enum = rel_path
         # OR add source comment for EVERY enum
-        output_lines.append(f"\n# Source: {rel_path}")
+        output_lines.append(f"\n    # Source: {rel_path}")
 
 
-        output_lines.append(f"class {name}(enum.IntEnum):")
+        output_lines.append(f"    class {name}(enum.IntEnum):")
         enum_count += 1
         member_lines = []
         processed_member_names_in_enum = set()
@@ -365,10 +366,10 @@ def generate_python_code(all_data, base_enums_dict):
                  else:
                      # Ensure value isn't empty after formatting (can happen with only casts/suffixes)
                      if fmt_val.strip():
-                          member_lines.append(f"    {safe_m_name} = {fmt_val}")
+                          member_lines.append(f"        {safe_m_name} = {fmt_val}")
                           member_count += 1
                      else:
-                          member_lines.append(f"    # Skipped Member: {safe_m_name} = {m_val_str} # (Empty after formatting)")
+                          member_lines.append(f"        # Skipped Member: {safe_m_name} = {m_val_str} # (Empty after formatting)")
                           skipped_member_count += 1
                  processed_member_names_in_enum.add(safe_m_name)
             else:
@@ -377,7 +378,7 @@ def generate_python_code(all_data, base_enums_dict):
                 processed_member_names_in_enum.add(safe_m_name)
 
         if not member_lines or all('# Skipped' in line or not line.strip() for line in member_lines):
-            output_lines.append("    pass # No valid members generated or all skipped")
+            output_lines.append("        pass # No valid members generated or all skipped")
         else:
             # Filter out empty lines that might result from skipped members
             output_lines.extend([line for line in member_lines if line.strip()])
@@ -389,26 +390,21 @@ def generate_python_code(all_data, base_enums_dict):
 
 # --- Main Execution Logic ---
 if __name__ == '__main__':
-    # (Keep main execution block exactly as it was in the previous version)
-    parser = argparse.ArgumentParser(description='Generate Python Enums/Defines from C Headers (No Eval, Structure Aware)')
-    parser.add_argument('--src', action='store', default="../inav/src/main/", help='Source code directory (e.g., path/to/inav/src/main)')
-    parser.add_argument('--output', action='store', default=None, help='Output Python file path.')
-    parser.add_argument('--dirs', action='store', default='blackbox,navigation,sensors,programming,rx,telemetry,io,flight,fc,config,msp,common', help='Comma-separated list of subdirectories to scan within src')
-    parser.add_argument('--exclude-files', action='store', default='string_light.h,printf.h', help='Comma-separated list of header filenames to exclude')
 
-    arguments = parser.parse_args()
+    src_base_path = "../inav/src/main/"
+    search_dirs = ['blackbox','navigation','sensors','programming','rx','telemetry','io','flight','fc','config','msp','common']
+    exclude_files = ['string_light.h','printf.h','settings.h']
+
+    # (Keep main execution block exactly as it was in the previous version)
 
     if not os.path.isdir(arguments.src):
         print(f"Error: Source directory not found: {arguments.src}")
         sys.exit(1)
 
     all_extracted_data = {}
-    search_dirs = [d.strip() for d in arguments.dirs.split(',') if d.strip()]
-    exclude_files = {f.strip() for f in arguments.exclude_files.split(',') if f.strip()}
 
     print(f"Scanning directories: {', '.join(search_dirs)}")
     print(f"Excluding files: {', '.join(exclude_files)}")
-    src_base_path = os.path.abspath(arguments.src)
     files_processed = 0
     files_with_data = 0
 

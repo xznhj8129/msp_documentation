@@ -19,16 +19,13 @@ get_msp_defs.py \
 parsemd.py -> msp_messages.json\
 get_inav_defines.py\
 get_inav_enums.py\
-h_to_enum.py\
-manually fix all_defines.h -> inav_defines.h\
 bad_define_parse.py (this, as named, is bad; as it skips any define that isn't simple arithmetic and ignores #ifdefs; complex cases shouldn't be handled here anyway but in the flight controller)\
 mspref.py (updates msp_messages.json)
 
 # Not meant to be run every time/often, run it *ONCE* and *THEN* fix mistakes in the JSON file, not the error-prone Markdown
 
 ## Problems:
-* need to (manually for now) remove all ifdefs from defines!!!
-* some acquired enums and defines are unusable and have to be manually removed
+* wrote old get_enums, ifdef problems, wrote new get_enums, forgot about it, forgot how it worked, worked on old one, it had problems, remembered old one, forgot how it works, but just works. yeah.
 * doubtful source-of-truth before burning the markdown file and going solely from json
 * How do we handle polymorphic messages? Dunno yet lol
 * consolidate everything
