@@ -35,7 +35,7 @@ mspref.py (updates msp_messages.json)
 ## JSON format example:
 ```
     "MSP_API_VERSION": {
-        "id": 1,
+        "code": 1,
         "hex": "0x1",
         "mspv": 1,
         "direction": 1,

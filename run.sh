@@ -1,12 +1,13 @@
 #!/bin/bash
 rm lib/all_defines.h
+rm lib/inav_enums.py
 rm lib/inav_defines.py
 rm lib/msp_enum.py
 rm lib/msp_messages.json
 
 echo "###########"
-echo get_msp_defs.py
-python get_msp_defs.py
+echo get_msp_enums.py
+python get_msp_enums.py
 
 echo "###########"
 echo parsemd.py

@@ -1,6 +1,6 @@
 {
     "MSP_API_VERSION": {
-        "id": 1,
+        "code": 1,
         "hex": "0x1",
         "mspv": 1,
         "direction": 1,
@@ -35,7 +35,7 @@
         "description": "Provides the MSP protocol version and the INAV API version."
     },
     "MSP_FC_VARIANT": {
-        "id": 2,
+        "code": 2,
         "hex": "0x2",
         "mspv": 1,
         "direction": 1,
@@ -58,7 +58,7 @@
         "description": "Identifies the flight controller firmware variant (e.g., INAV, Betaflight)."
     },
     "MSP_FC_VERSION": {
-        "id": 3,
+        "code": 3,
         "hex": "0x3",
         "mspv": 1,
         "direction": 1,
@@ -93,7 +93,7 @@
         "description": "Provides the specific version number of the flight controller firmware."
     },
     "MSP_BOARD_INFO": {
-        "id": 4,
+        "code": 4,
         "hex": "0x4",
         "mspv": 1,
         "direction": 1,
@@ -146,7 +146,7 @@
         "description": "Provides information about the specific hardware board and its capabilities."
     },
     "MSP_BUILD_INFO": {
-        "id": 5,
+        "code": 5,
         "hex": "0x5",
         "mspv": 1,
         "direction": 1,
@@ -181,7 +181,7 @@
         "description": "Provides build date, time, and Git revision of the firmware."
     },
     "MSP_INAV_PID": {
-        "id": 6,
+        "code": 6,
         "hex": "0x6",
         "mspv": 1,
         "direction": 1,
@@ -271,7 +271,7 @@
         "description": "Retrieves legacy INAV-specific PID controller related settings. Many fields are now obsolete or placeholders."
     },
     "MSP_SET_INAV_PID": {
-        "id": 7,
+        "code": 7,
         "hex": "0x7",
         "mspv": 1,
         "direction": 0,
@@ -361,7 +361,7 @@
         "description": "Sets legacy INAV-specific PID controller related settings."
     },
     "MSP_NAME": {
-        "id": 10,
+        "code": 10,
         "hex": "0xa",
         "mspv": 1,
         "direction": 1,
@@ -384,7 +384,7 @@
         "description": "Returns the user-defined craft name."
     },
     "MSP_SET_NAME": {
-        "id": 11,
+        "code": 11,
         "hex": "0xb",
         "mspv": 1,
         "direction": 0,
@@ -407,7 +407,7 @@
         "description": "Sets the user-defined craft name."
     },
     "MSP_NAV_POSHOLD": {
-        "id": 12,
+        "code": 12,
         "hex": "0xc",
         "mspv": 1,
         "direction": 1,
@@ -474,7 +474,7 @@
         "description": "Retrieves navigation position hold and general manual/auto flight parameters. Some parameters depend on the platform type (Multirotor vs Fixed Wing)."
     },
     "MSP_SET_NAV_POSHOLD": {
-        "id": 13,
+        "code": 13,
         "hex": "0xd",
         "mspv": 1,
         "direction": 0,
@@ -541,7 +541,7 @@
         "description": "Sets navigation position hold and general manual/auto flight parameters."
     },
     "MSP_CALIBRATION_DATA": {
-        "id": 14,
+        "code": 14,
         "hex": "0xe",
         "mspv": 1,
         "direction": 1,
@@ -642,7 +642,7 @@
         "description": "Retrieves sensor calibration data (Accelerometer zero/gain, Magnetometer zero/gain, Optical Flow scale)."
     },
     "MSP_SET_CALIBRATION_DATA": {
-        "id": 15,
+        "code": 15,
         "hex": "0xf",
         "mspv": 1,
         "direction": 0,
@@ -737,7 +737,7 @@
         "description": "Sets sensor calibration data."
     },
     "MSP_POSITION_ESTIMATION_CONFIG": {
-        "id": 16,
+        "code": 16,
         "hex": "0x10",
         "mspv": 1,
         "direction": 1,
@@ -796,7 +796,7 @@
         "description": "Retrieves parameters related to the INAV position estimation fusion weights and GPS minimum satellite count."
     },
     "MSP_SET_POSITION_ESTIMATION_CONFIG": {
-        "id": 17,
+        "code": 17,
         "hex": "0x11",
         "mspv": 1,
         "direction": 0,
@@ -855,7 +855,7 @@
         "description": "Sets parameters related to the INAV position estimation fusion weights and GPS minimum satellite count."
     },
     "MSP_WP_MISSION_LOAD": {
-        "id": 18,
+        "code": 18,
         "hex": "0x12",
         "mspv": 1,
         "direction": 0,
@@ -878,7 +878,7 @@
         "description": "Commands the FC to load the waypoint mission stored in non-volatile memory (e.g., EEPROM or FlashFS) into the active mission buffer."
     },
     "MSP_WP_MISSION_SAVE": {
-        "id": 19,
+        "code": 19,
         "hex": "0x13",
         "mspv": 1,
         "direction": 0,
@@ -901,7 +901,7 @@
         "description": "Commands the FC to save the currently active waypoint mission from RAM to non-volatile memory (e.g., EEPROM or FlashFS)."
     },
     "MSP_WP_GETINFO": {
-        "id": 20,
+        "code": 20,
         "hex": "0x14",
         "mspv": 1,
         "direction": 1,
@@ -942,7 +942,7 @@
         "description": "Retrieves information about the waypoint mission capabilities and the status of the currently loaded mission."
     },
     "MSP_RTH_AND_LAND_CONFIG": {
-        "id": 21,
+        "code": 21,
         "hex": "0x15",
         "mspv": 1,
         "direction": 1,
@@ -1038,7 +1038,7 @@
         "description": "Retrieves configuration parameters related to Return-to-Home (RTH) and automatic landing behaviors."
     },
     "MSP_SET_RTH_AND_LAND_CONFIG": {
-        "id": 22,
+        "code": 22,
         "hex": "0x16",
         "mspv": 1,
         "direction": 0,
@@ -1134,7 +1134,7 @@
         "description": "Sets configuration parameters related to Return-to-Home (RTH) and automatic landing behaviors."
     },
     "MSP_FW_CONFIG": {
-        "id": 23,
+        "code": 23,
         "hex": "0x17",
         "mspv": 1,
         "direction": 1,
@@ -1199,7 +1199,7 @@
         "description": "Retrieves configuration parameters specific to Fixed Wing navigation."
     },
     "MSP_SET_FW_CONFIG": {
-        "id": 24,
+        "code": 24,
         "hex": "0x18",
         "mspv": 1,
         "direction": 0,
@@ -1264,7 +1264,7 @@
         "description": "Sets configuration parameters specific to Fixed Wing navigation."
     },
     "MSP_MODE_RANGES": {
-        "id": 34,
+        "code": 34,
         "hex": "0x22",
         "mspv": 1,
         "direction": 1,
@@ -1276,7 +1276,7 @@
                 {
                     "name": "modePermanentId",
                     "ctype": "uint8_t",
-                    "units": "ID",
+                    "units": "code",
                     "desc": "Permanent ID of the flight mode (maps to `boxId` via `findBoxByActiveBoxId`). 0 if entry unused."
                 },
                 {
@@ -1306,7 +1306,7 @@
         "description": "Returns all defined mode activation ranges (aux channel assignments for flight modes)."
     },
     "MSP_SET_MODE_RANGE": {
-        "id": 35,
+        "code": 35,
         "hex": "0x23",
         "mspv": 1,
         "direction": 0,
@@ -1323,7 +1323,7 @@
                 {
                     "name": "modePermanentId",
                     "ctype": "uint8_t",
-                    "units": "ID",
+                    "units": "code",
                     "desc": "Permanent ID of the flight mode to assign."
                 },
                 {
@@ -1353,7 +1353,7 @@
         "description": "Sets a single mode activation range by its index."
     },
     "MSP_FEATURE": {
-        "id": 36,
+        "code": 36,
         "hex": "0x24",
         "mspv": 1,
         "direction": 1,
@@ -1376,7 +1376,7 @@
         "description": "Returns a bitmask of enabled features."
     },
     "MSP_SET_FEATURE": {
-        "id": 37,
+        "code": 37,
         "hex": "0x25",
         "mspv": 1,
         "direction": 0,
@@ -1399,7 +1399,7 @@
         "description": "Sets the enabled features using a bitmask. Clears all previous features first."
     },
     "MSP_BOARD_ALIGNMENT": {
-        "id": 38,
+        "code": 38,
         "hex": "0x26",
         "mspv": 1,
         "direction": 1,
@@ -1434,7 +1434,7 @@
         "description": "Returns the sensor board alignment angles relative to the craft frame."
     },
     "MSP_SET_BOARD_ALIGNMENT": {
-        "id": 39,
+        "code": 39,
         "hex": "0x27",
         "mspv": 1,
         "direction": 0,
@@ -1469,7 +1469,7 @@
         "description": "Sets the sensor board alignment angles."
     },
     "MSP_CURRENT_METER_CONFIG": {
-        "id": 40,
+        "code": 40,
         "hex": "0x28",
         "mspv": 1,
         "direction": 1,
@@ -1511,7 +1511,7 @@
         "description": "Retrieves the configuration for the current sensor."
     },
     "MSP_SET_CURRENT_METER_CONFIG": {
-        "id": 41,
+        "code": 41,
         "hex": "0x29",
         "mspv": 1,
         "direction": 0,
@@ -1553,7 +1553,7 @@
         "description": "Sets the configuration for the current sensor."
     },
     "MSP_MIXER": {
-        "id": 42,
+        "code": 42,
         "hex": "0x2a",
         "mspv": 1,
         "direction": 1,
@@ -1576,7 +1576,7 @@
         "description": "Retrieves the mixer type (Legacy, INAV always returns QuadX)."
     },
     "MSP_SET_MIXER": {
-        "id": 43,
+        "code": 43,
         "hex": "0x2b",
         "mspv": 1,
         "direction": 0,
@@ -1599,7 +1599,7 @@
         "description": "Sets the mixer type (Legacy, ignored by INAV)."
     },
     "MSP_RX_CONFIG": {
-        "id": 44,
+        "code": 44,
         "hex": "0x2c",
         "mspv": 1,
         "direction": 1,
@@ -1708,7 +1708,7 @@
         "description": "Retrieves receiver configuration settings. Some fields are Betaflight compatibility placeholders."
     },
     "MSP_SET_RX_CONFIG": {
-        "id": 45,
+        "code": 45,
         "hex": "0x2d",
         "mspv": 1,
         "direction": 0,
@@ -1817,7 +1817,7 @@
         "description": "Sets receiver configuration settings."
     },
     "MSP_LED_COLORS": {
-        "id": 46,
+        "code": 46,
         "hex": "0x2e",
         "mspv": 1,
         "direction": 1,
@@ -1853,7 +1853,7 @@
         "description": "Retrieves the HSV color definitions for configurable LED colors."
     },
     "MSP_SET_LED_COLORS": {
-        "id": 47,
+        "code": 47,
         "hex": "0x2f",
         "mspv": 1,
         "direction": 0,
@@ -1889,7 +1889,7 @@
         "description": "Sets the HSV color definitions for configurable LED colors."
     },
     "MSP_LED_STRIP_CONFIG": {
-        "id": 48,
+        "code": 48,
         "hex": "0x30",
         "mspv": 1,
         "direction": 1,
@@ -1913,7 +1913,7 @@
         "description": "Retrieves the configuration for each LED on the strip (legacy packed format)."
     },
     "MSP_SET_LED_STRIP_CONFIG": {
-        "id": 49,
+        "code": 49,
         "hex": "0x31",
         "mspv": 1,
         "direction": 0,
@@ -1942,7 +1942,7 @@
         "description": "Sets the configuration for a single LED on the strip using the legacy packed format."
     },
     "MSP_RSSI_CONFIG": {
-        "id": 50,
+        "code": 50,
         "hex": "0x32",
         "mspv": 1,
         "direction": 1,
@@ -1965,7 +1965,7 @@
         "description": "Retrieves the channel used for analog RSSI input."
     },
     "MSP_SET_RSSI_CONFIG": {
-        "id": 51,
+        "code": 51,
         "hex": "0x33",
         "mspv": 1,
         "direction": 0,
@@ -1988,7 +1988,7 @@
         "description": "Sets the channel used for analog RSSI input."
     },
     "MSP_ADJUSTMENT_RANGES": {
-        "id": 52,
+        "code": 52,
         "hex": "0x34",
         "mspv": 1,
         "direction": 1,
@@ -2043,7 +2043,7 @@
         "description": "Returns all defined RC adjustment ranges (tuning via aux channels)."
     },
     "MSP_SET_ADJUSTMENT_RANGE": {
-        "id": 53,
+        "code": 53,
         "hex": "0x35",
         "mspv": 1,
         "direction": 0,
@@ -2102,7 +2102,7 @@
         "description": "Sets a single RC adjustment range configuration by its index."
     },
     "MSP_CF_SERIAL_CONFIG": {
-        "id": 54,
+        "code": 54,
         "hex": "0x36",
         "mspv": 1,
         "direction": 1,
@@ -2114,7 +2114,7 @@
         "description": "Deprecated command to get serial port configuration."
     },
     "MSP_SET_CF_SERIAL_CONFIG": {
-        "id": 55,
+        "code": 55,
         "hex": "0x37",
         "mspv": 1,
         "direction": 0,
@@ -2126,7 +2126,7 @@
         "description": "Deprecated command to set serial port configuration."
     },
     "MSP_VOLTAGE_METER_CONFIG": {
-        "id": 56,
+        "code": 56,
         "hex": "0x38",
         "mspv": 1,
         "direction": 1,
@@ -2167,7 +2167,7 @@
         "description": "Retrieves legacy voltage meter configuration (scaled values)."
     },
     "MSP_SET_VOLTAGE_METER_CONFIG": {
-        "id": 57,
+        "code": 57,
         "hex": "0x39",
         "mspv": 1,
         "direction": 0,
@@ -2208,7 +2208,7 @@
         "description": "Sets legacy voltage meter configuration (scaled values)."
     },
     "MSP_SONAR_ALTITUDE": {
-        "id": 58,
+        "code": 58,
         "hex": "0x3a",
         "mspv": 1,
         "direction": 1,
@@ -2231,7 +2231,7 @@
         "description": "Retrieves the altitude measured by the primary rangefinder (sonar or lidar)."
     },
     "MSP_RX_MAP": {
-        "id": 64,
+        "code": 64,
         "hex": "0x40",
         "mspv": 1,
         "direction": 1,
@@ -2254,7 +2254,7 @@
         "description": "Retrieves the RC channel mapping array (AETR, etc.)."
     },
     "MSP_SET_RX_MAP": {
-        "id": 65,
+        "code": 65,
         "hex": "0x41",
         "mspv": 1,
         "direction": 0,
@@ -2277,7 +2277,7 @@
         "description": "Sets the RC channel mapping array."
     },
     "MSP_REBOOT": {
-        "id": 68,
+        "code": 68,
         "hex": "0x44",
         "mspv": 1,
         "direction": 1,
@@ -2289,7 +2289,7 @@
         "description": "Commands the flight controller to reboot."
     },
     "MSP_DATAFLASH_SUMMARY": {
-        "id": 70,
+        "code": 70,
         "hex": "0x46",
         "mspv": 1,
         "direction": 1,
@@ -2330,7 +2330,7 @@
         "description": "Retrieves summary information about the onboard dataflash chip (if present and used for Blackbox via FlashFS)."
     },
     "MSP_DATAFLASH_READ": {
-        "id": 71,
+        "code": 71,
         "hex": "0x47",
         "mspv": 1,
         "direction": 2,
@@ -2377,7 +2377,7 @@
         "description": "Reads a block of data from the onboard dataflash (FlashFS)."
     },
     "MSP_DATAFLASH_ERASE": {
-        "id": 72,
+        "code": 72,
         "hex": "0x48",
         "mspv": 1,
         "direction": 0,
@@ -2389,7 +2389,7 @@
         "description": "Erases the entire onboard dataflash chip (FlashFS volume)."
     },
     "MSP_LOOP_TIME": {
-        "id": 73,
+        "code": 73,
         "hex": "0x49",
         "mspv": 1,
         "direction": 1,
@@ -2412,7 +2412,7 @@
         "description": "Retrieves the configured loop time (PID loop frequency denominator)."
     },
     "MSP_SET_LOOP_TIME": {
-        "id": 74,
+        "code": 74,
         "hex": "0x4a",
         "mspv": 1,
         "direction": 0,
@@ -2435,7 +2435,7 @@
         "description": "Sets the configured loop time."
     },
     "MSP_FAILSAFE_CONFIG": {
-        "id": 75,
+        "code": 75,
         "hex": "0x4b",
         "mspv": 1,
         "direction": 1,
@@ -2532,7 +2532,7 @@
         "description": "Retrieves the failsafe configuration settings."
     },
     "MSP_SET_FAILSAFE_CONFIG": {
-        "id": 76,
+        "code": 76,
         "hex": "0x4c",
         "mspv": 1,
         "direction": 0,
@@ -2629,7 +2629,7 @@
         "description": "Sets the failsafe configuration settings."
     },
     "MSP_SDCARD_SUMMARY": {
-        "id": 79,
+        "code": 79,
         "hex": "0x4f",
         "mspv": 1,
         "direction": 1,
@@ -2677,7 +2677,7 @@
         "description": "Retrieves summary information about the SD card status and filesystem."
     },
     "MSP_BLACKBOX_CONFIG": {
-        "id": 80,
+        "code": 80,
         "hex": "0x50",
         "mspv": 1,
         "direction": 1,
@@ -2718,7 +2718,7 @@
         "description": "Legacy command to retrieve Blackbox configuration. Superseded by `MSP2_BLACKBOX_CONFIG`."
     },
     "MSP_SET_BLACKBOX_CONFIG": {
-        "id": 81,
+        "code": 81,
         "hex": "0x51",
         "mspv": 1,
         "direction": 0,
@@ -2730,7 +2730,7 @@
         "description": "Legacy command to set Blackbox configuration. Superseded by `MSP2_SET_BLACKBOX_CONFIG`."
     },
     "MSP_TRANSPONDER_CONFIG": {
-        "id": 82,
+        "code": 82,
         "hex": "0x52",
         "mspv": 1,
         "direction": 1,
@@ -2742,7 +2742,7 @@
         "description": "Get VTX Transponder settings (likely specific to RaceFlight/Betaflight, not standard INAV VTX)."
     },
     "MSP_SET_TRANSPONDER_CONFIG": {
-        "id": 83,
+        "code": 83,
         "hex": "0x53",
         "mspv": 1,
         "direction": 0,
@@ -2754,7 +2754,7 @@
         "description": "Set VTX Transponder settings."
     },
     "MSP_OSD_CONFIG": {
-        "id": 84,
+        "code": 84,
         "hex": "0x54",
         "mspv": 1,
         "direction": 1,
@@ -2834,7 +2834,7 @@
         "description": "Retrieves OSD configuration settings and layout for screen 0."
     },
     "MSP_SET_OSD_CONFIG": {
-        "id": 85,
+        "code": 85,
         "hex": "0x55",
         "mspv": 1,
         "direction": 0,
@@ -2846,7 +2846,7 @@
         "description": "Sets OSD configuration or a single item's position on screen 0."
     },
     "MSP_OSD_CHAR_READ": {
-        "id": 86,
+        "code": 86,
         "hex": "0x56",
         "mspv": 1,
         "direction": 1,
@@ -2858,7 +2858,7 @@
         "description": "Reads character data from the OSD font memory."
     },
     "MSP_OSD_CHAR_WRITE": {
-        "id": 87,
+        "code": 87,
         "hex": "0x57",
         "mspv": 1,
         "direction": 0,
@@ -2888,7 +2888,7 @@
         "description": "Writes character data to the OSD font memory."
     },
     "MSP_VTX_CONFIG": {
-        "id": 88,
+        "code": 88,
         "hex": "0x58",
         "mspv": 1,
         "direction": 1,
@@ -2972,7 +2972,7 @@
         "description": "Retrieves the current VTX (Video Transmitter) configuration and capabilities."
     },
     "MSP_SET_VTX_CONFIG": {
-        "id": 89,
+        "code": 89,
         "hex": "0x59",
         "mspv": 1,
         "direction": 0,
@@ -2984,7 +2984,7 @@
         "description": "Sets the VTX configuration (band, channel, power, pit mode). Supports multiple protocol versions/extensions based on payload size."
     },
     "MSP_ADVANCED_CONFIG": {
-        "id": 90,
+        "code": 90,
         "hex": "0x5a",
         "mspv": 1,
         "direction": 1,
@@ -3043,7 +3043,7 @@
         "description": "Retrieves advanced hardware-related configuration (PWM protocols, rates). Some fields are BF compatibility placeholders."
     },
     "MSP_SET_ADVANCED_CONFIG": {
-        "id": 91,
+        "code": 91,
         "hex": "0x5b",
         "mspv": 1,
         "direction": 0,
@@ -3102,7 +3102,7 @@
         "description": "Sets advanced hardware-related configuration (PWM protocols, rates)."
     },
     "MSP_FILTER_CONFIG": {
-        "id": 92,
+        "code": 92,
         "hex": "0x5c",
         "mspv": 1,
         "direction": 1,
@@ -3191,7 +3191,7 @@
         "description": "Retrieves filter configuration settings (Gyro, D-term, Yaw, Accel). Some fields are BF compatibility placeholders or legacy."
     },
     "MSP_SET_FILTER_CONFIG": {
-        "id": 93,
+        "code": 93,
         "hex": "0x5d",
         "mspv": 1,
         "direction": 0,
@@ -3280,7 +3280,7 @@
         "description": "Sets filter configuration settings. Handles different payload lengths for backward compatibility."
     },
     "MSP_PID_ADVANCED": {
-        "id": 94,
+        "code": 94,
         "hex": "0x5e",
         "mspv": 1,
         "direction": 1,
@@ -3363,7 +3363,7 @@
         "description": "Retrieves advanced PID tuning parameters. Many fields are BF compatibility placeholders."
     },
     "MSP_SET_PID_ADVANCED": {
-        "id": 95,
+        "code": 95,
         "hex": "0x5f",
         "mspv": 1,
         "direction": 0,
@@ -3446,7 +3446,7 @@
         "description": "Sets advanced PID tuning parameters."
     },
     "MSP_SENSOR_CONFIG": {
-        "id": 96,
+        "code": 96,
         "hex": "0x60",
         "mspv": 1,
         "direction": 1,
@@ -3505,7 +3505,7 @@
         "description": "Retrieves the configured hardware type for various sensors."
     },
     "MSP_SET_SENSOR_CONFIG": {
-        "id": 97,
+        "code": 97,
         "hex": "0x61",
         "mspv": 1,
         "direction": 0,
@@ -3558,7 +3558,7 @@
         "description": "Sets the configured hardware type for various sensors."
     },
     "MSP_SPECIAL_PARAMETERS": {
-        "id": 98,
+        "code": 98,
         "hex": "0x62",
         "mspv": 1,
         "direction": 1,
@@ -3570,7 +3570,7 @@
         "description": "Betaflight specific, likely unused/unimplemented in INAV."
     },
     "MSP_SET_SPECIAL_PARAMETERS": {
-        "id": 99,
+        "code": 99,
         "hex": "0x63",
         "mspv": 1,
         "direction": 0,
@@ -3582,7 +3582,7 @@
         "description": "Betaflight specific, likely unused/unimplemented in INAV."
     },
     "MSP_IDENT": {
-        "id": 100,
+        "code": 100,
         "hex": "0x64",
         "mspv": 1,
         "direction": 1,
@@ -3624,7 +3624,7 @@
         "description": "Provides basic flight controller identity information. Not implemented in modern INAV, but used by legacy versions and MultiWii."
     },
     "MSP_STATUS": {
-        "id": 101,
+        "code": 101,
         "hex": "0x65",
         "mspv": 1,
         "direction": 1,
@@ -3671,7 +3671,7 @@
         "description": "Provides basic flight controller status including cycle time, errors, sensor status, active modes (first 32), and the current configuration profile."
     },
     "MSP_RAW_IMU": {
-        "id": 102,
+        "code": 102,
         "hex": "0x66",
         "mspv": 1,
         "direction": 1,
@@ -3742,7 +3742,7 @@
         "description": "Provides raw sensor readings from the IMU (Accelerometer, Gyroscope, Magnetometer)."
     },
     "MSP_SERVO": {
-        "id": 103,
+        "code": 103,
         "hex": "0x67",
         "mspv": 1,
         "direction": 1,
@@ -3765,7 +3765,7 @@
         "description": "Provides the current output values for all supported servos."
     },
     "MSP_MOTOR": {
-        "id": 104,
+        "code": 104,
         "hex": "0x68",
         "mspv": 1,
         "direction": 1,
@@ -3788,7 +3788,7 @@
         "description": "Provides the current output values for the first 8 motors."
     },
     "MSP_RC": {
-        "id": 105,
+        "code": 105,
         "hex": "0x69",
         "mspv": 1,
         "direction": 1,
@@ -3811,7 +3811,7 @@
         "description": "Provides the current values of the received RC channels."
     },
     "MSP_RAW_GPS": {
-        "id": 106,
+        "code": 106,
         "hex": "0x6a",
         "mspv": 1,
         "direction": 1,
@@ -3877,7 +3877,7 @@
         "description": "Provides raw GPS data (fix status, coordinates, altitude, speed, course)."
     },
     "MSP_COMP_GPS": {
-        "id": 107,
+        "code": 107,
         "hex": "0x6b",
         "mspv": 1,
         "direction": 1,
@@ -3912,7 +3912,7 @@
         "description": "Provides computed GPS values: distance and direction to home."
     },
     "MSP_ATTITUDE": {
-        "id": 108,
+        "code": 108,
         "hex": "0x6c",
         "mspv": 1,
         "direction": 1,
@@ -3947,7 +3947,7 @@
         "description": "Provides the current attitude estimate (roll, pitch, yaw)."
     },
     "MSP_ALTITUDE": {
-        "id": 109,
+        "code": 109,
         "hex": "0x6d",
         "mspv": 1,
         "direction": 1,
@@ -3982,7 +3982,7 @@
         "description": "Provides estimated altitude, vertical speed (variometer), and raw barometric altitude."
     },
     "MSP_ANALOG": {
-        "id": 110,
+        "code": 110,
         "hex": "0x6e",
         "mspv": 1,
         "direction": 1,
@@ -4023,7 +4023,7 @@
         "description": "Provides analog sensor readings: battery voltage, current consumption (mAh), RSSI, and current draw (Amps)."
     },
     "MSP_RC_TUNING": {
-        "id": 111,
+        "code": 111,
         "hex": "0x6f",
         "mspv": 1,
         "direction": 1,
@@ -4100,7 +4100,7 @@
         "description": "Retrieves RC tuning parameters (rates, expos, TPA) for the current control rate profile."
     },
     "MSP_ACTIVEBOXES": {
-        "id": 113,
+        "code": 113,
         "hex": "0x71",
         "mspv": 1,
         "direction": 1,
@@ -4123,7 +4123,7 @@
         "description": "Provides the full bitmask of currently active flight modes (boxes)."
     },
     "MSP_MISC": {
-        "id": 114,
+        "code": 114,
         "hex": "0x72",
         "mspv": 1,
         "direction": 1,
@@ -4238,7 +4238,7 @@
         "description": "Retrieves miscellaneous configuration settings, mostly related to RC, GPS, Mag, and Battery voltage (legacy formats)."
     },
     "MSP_BOXNAMES": {
-        "id": 116,
+        "code": 116,
         "hex": "0x74",
         "mspv": 1,
         "direction": 1,
@@ -4261,7 +4261,7 @@
         "description": "Provides a semicolon-separated string containing the names of all available flight modes (boxes)."
     },
     "MSP_PIDNAMES": {
-        "id": 117,
+        "code": 117,
         "hex": "0x75",
         "mspv": 1,
         "direction": 1,
@@ -4284,7 +4284,7 @@
         "description": "Provides a semicolon-separated string containing the names of the PID controllers."
     },
     "MSP_WP": {
-        "id": 118,
+        "code": 118,
         "hex": "0x76",
         "mspv": 1,
         "direction": 2,
@@ -4367,7 +4367,7 @@
         "description": "Get/Set a single waypoint from the mission plan."
     },
     "MSP_BOXIDS": {
-        "id": 119,
+        "code": 119,
         "hex": "0x77",
         "mspv": 1,
         "direction": 1,
@@ -4390,7 +4390,7 @@
         "description": "Provides a list of permanent IDs associated with the available flight modes (boxes)."
     },
     "MSP_SERVO_CONFIGURATIONS": {
-        "id": 120,
+        "code": 120,
         "hex": "0x78",
         "mspv": 1,
         "direction": 1,
@@ -4456,7 +4456,7 @@
         "description": "Retrieves the configuration parameters for all supported servos (min, max, middle, rate). Legacy format with unused fields."
     },
     "MSP_NAV_STATUS": {
-        "id": 121,
+        "code": 121,
         "hex": "0x79",
         "mspv": 1,
         "direction": 1,
@@ -4514,12 +4514,12 @@
     },
     "MSP_NAV_CONFIG": {
         "hex": "0x7a",
-        "id": 122,
+        "code": 122,
         "mspv": 1,
         "implemented": false
     },
     "MSP_3D": {
-        "id": 124,
+        "code": 124,
         "hex": "0x7c",
         "mspv": 1,
         "direction": 1,
@@ -4554,7 +4554,7 @@
         "description": "Retrieves settings related to 3D/reversible motor operation."
     },
     "MSP_RC_DEADBAND": {
-        "id": 125,
+        "code": 125,
         "hex": "0x7d",
         "mspv": 1,
         "direction": 1,
@@ -4595,7 +4595,7 @@
         "description": "Retrieves RC input deadband settings."
     },
     "MSP_SENSOR_ALIGNMENT": {
-        "id": 126,
+        "code": 126,
         "hex": "0x7e",
         "mspv": 1,
         "direction": 1,
@@ -4638,7 +4638,7 @@
         "description": "Retrieves sensor alignment settings (legacy format)."
     },
     "MSP_LED_STRIP_MODECOLOR": {
-        "id": 127,
+        "code": 127,
         "hex": "0x7f",
         "mspv": 1,
         "direction": 1,
@@ -4674,7 +4674,7 @@
         "description": "Retrieves the color index assigned to each LED mode and function/direction combination, including special colors."
     },
     "MSP_BATTERY_STATE": {
-        "id": 130,
+        "code": 130,
         "hex": "0x82",
         "mspv": 1,
         "direction": 1,
@@ -4734,7 +4734,7 @@
         "description": "Provides battery state information, formatted primarily for DJI FPV Goggles compatibility."
     },
     "MSP_VTXTABLE_BAND": {
-        "id": 137,
+        "code": 137,
         "hex": "0x89",
         "mspv": 1,
         "direction": 2,
@@ -4746,7 +4746,7 @@
         "description": "Retrieves information about a specific VTX band from the VTX table. (Implementation missing in provided `fc_msp.c`)"
     },
     "MSP_VTXTABLE_POWERLEVEL": {
-        "id": 138,
+        "code": 138,
         "hex": "0x8a",
         "mspv": 1,
         "direction": 2,
@@ -4798,7 +4798,7 @@
         "description": "Retrieves information about a specific VTX power level from the VTX table."
     },
     "MSP_SET_RAW_RC": {
-        "id": 200,
+        "code": 200,
         "hex": "0xc8",
         "mspv": 1,
         "direction": 0,
@@ -4821,7 +4821,7 @@
         "description": "Provides raw RC channel data to the flight controller, typically used when the receiver is connected via MSP (e.g., MSP RX feature)."
     },
     "MSP_SET_RAW_GPS": {
-        "id": 201,
+        "code": 201,
         "hex": "0xc9",
         "mspv": 1,
         "direction": 0,
@@ -4881,7 +4881,7 @@
         "description": "Provides raw GPS data to the flight controller, typically for simulation or external GPS injection."
     },
     "MSP_SET_BOX": {
-        "id": 203,
+        "code": 203,
         "hex": "0xcb",
         "mspv": 1,
         "direction": 0,
@@ -4893,7 +4893,7 @@
         "description": "Sets the state of flight modes (boxes). (Likely unused/obsolete in INAV)."
     },
     "MSP_SET_RC_TUNING": {
-        "id": 204,
+        "code": 204,
         "hex": "0xcc",
         "mspv": 1,
         "direction": 0,
@@ -4971,7 +4971,7 @@
         "description": "Sets RC tuning parameters (rates, expos, TPA) for the current control rate profile."
     },
     "MSP_ACC_CALIBRATION": {
-        "id": 205,
+        "code": 205,
         "hex": "0xcd",
         "mspv": 1,
         "direction": 0,
@@ -4983,7 +4983,7 @@
         "description": "Starts the accelerometer calibration procedure."
     },
     "MSP_MAG_CALIBRATION": {
-        "id": 206,
+        "code": 206,
         "hex": "0xce",
         "mspv": 1,
         "direction": 0,
@@ -4995,7 +4995,7 @@
         "description": "Starts the magnetometer calibration procedure."
     },
     "MSP_SET_MISC": {
-        "id": 207,
+        "code": 207,
         "hex": "0xcf",
         "mspv": 1,
         "direction": 0,
@@ -5110,7 +5110,7 @@
         "description": "Sets miscellaneous configuration settings (legacy formats/scaling)."
     },
     "MSP_RESET_CONF": {
-        "id": 208,
+        "code": 208,
         "hex": "0xd0",
         "mspv": 1,
         "direction": 0,
@@ -5122,7 +5122,7 @@
         "description": "Resets all configuration settings to their default values and saves to EEPROM."
     },
     "MSP_SET_WP": {
-        "id": 209,
+        "code": 209,
         "hex": "0xd1",
         "mspv": 1,
         "direction": 0,
@@ -5194,7 +5194,7 @@
         "description": "Sets a single waypoint in the mission plan."
     },
     "MSP_SELECT_SETTING": {
-        "id": 210,
+        "code": 210,
         "hex": "0xd2",
         "mspv": 1,
         "direction": 0,
@@ -5217,7 +5217,7 @@
         "description": "Selects the active configuration profile and saves it."
     },
     "MSP_SET_HEAD": {
-        "id": 211,
+        "code": 211,
         "hex": "0xd3",
         "mspv": 1,
         "direction": 0,
@@ -5240,7 +5240,7 @@
         "description": "Sets the target heading for the heading hold controller (e.g., during MAG mode)."
     },
     "MSP_SET_SERVO_CONFIGURATION": {
-        "id": 212,
+        "code": 212,
         "hex": "0xd4",
         "mspv": 1,
         "direction": 0,
@@ -5311,7 +5311,7 @@
         "description": "Sets the configuration for a single servo (legacy format)."
     },
     "MSP_SET_MOTOR": {
-        "id": 214,
+        "code": 214,
         "hex": "0xd6",
         "mspv": 1,
         "direction": 0,
@@ -5335,12 +5335,12 @@
     },
     "MSP_SET_NAV_CONFIG": {
         "hex": "0xd7",
-        "id": 215,
+        "code": 215,
         "mspv": 1,
         "implemented": false
     },
     "MSP_SET_3D": {
-        "id": 217,
+        "code": 217,
         "hex": "0xd9",
         "mspv": 1,
         "direction": 0,
@@ -5375,7 +5375,7 @@
         "description": "Sets parameters related to 3D/reversible motor operation."
     },
     "MSP_SET_RC_DEADBAND": {
-        "id": 218,
+        "code": 218,
         "hex": "0xda",
         "mspv": 1,
         "direction": 0,
@@ -5416,7 +5416,7 @@
         "description": "Sets RC input deadband values."
     },
     "MSP_SET_RESET_CURR_PID": {
-        "id": 219,
+        "code": 219,
         "hex": "0xdb",
         "mspv": 1,
         "direction": 0,
@@ -5428,7 +5428,7 @@
         "description": "Resets the PIDs of the *current* profile to their default values. Does not save."
     },
     "MSP_SET_SENSOR_ALIGNMENT": {
-        "id": 220,
+        "code": 220,
         "hex": "0xdc",
         "mspv": 1,
         "direction": 0,
@@ -5469,7 +5469,7 @@
         "description": "Sets sensor alignment (legacy format)."
     },
     "MSP_SET_LED_STRIP_MODECOLOR": {
-        "id": 221,
+        "code": 221,
         "hex": "0xdd",
         "mspv": 1,
         "direction": 0,
@@ -5504,7 +5504,7 @@
         "description": "Sets the color index for a specific LED mode/function combination."
     },
     "MSP_SET_ACC_TRIM": {
-        "id": 239,
+        "code": 239,
         "hex": "0xef",
         "mspv": 1,
         "direction": 0,
@@ -5516,7 +5516,7 @@
         "description": "Sets the accelerometer trim values (leveling calibration)."
     },
     "MSP_ACC_TRIM": {
-        "id": 240,
+        "code": 240,
         "hex": "0xf0",
         "mspv": 1,
         "direction": 1,
@@ -5528,7 +5528,7 @@
         "description": "Gets the accelerometer trim values."
     },
     "MSP_SERVO_MIX_RULES": {
-        "id": 241,
+        "code": 241,
         "hex": "0xf1",
         "mspv": 1,
         "direction": 1,
@@ -5589,7 +5589,7 @@
         "description": "Retrieves the custom servo mixer rules (legacy format)."
     },
     "MSP_SET_SERVO_MIX_RULE": {
-        "id": 242,
+        "code": 242,
         "hex": "0xf2",
         "mspv": 1,
         "direction": 0,
@@ -5649,7 +5649,7 @@
         "description": "Sets a single custom servo mixer rule (legacy format)."
     },
     "MSP_SET_PASSTHROUGH": {
-        "id": 245,
+        "code": 245,
         "hex": "0xf5",
         "mspv": 1,
         "direction": 2,
@@ -5672,7 +5672,7 @@
         "description": "Enables serial passthrough mode to peripherals like ESCs (BLHeli 4-way) or other serial devices."
     },
     "MSP_RTC": {
-        "id": 246,
+        "code": 246,
         "hex": "0xf6",
         "mspv": 1,
         "direction": 1,
@@ -5701,7 +5701,7 @@
         "description": "Retrieves the current Real-Time Clock time."
     },
     "MSP_SET_RTC": {
-        "id": 247,
+        "code": 247,
         "hex": "0xf7",
         "mspv": 1,
         "direction": 0,
@@ -5730,7 +5730,7 @@
         "description": "Sets the Real-Time Clock time."
     },
     "MSP_EEPROM_WRITE": {
-        "id": 250,
+        "code": 250,
         "hex": "0xfa",
         "mspv": 1,
         "direction": 0,
@@ -5742,7 +5742,7 @@
         "description": "Saves the current configuration from RAM to non-volatile memory (EEPROM/Flash)."
     },
     "MSP_DEBUGMSG": {
-        "id": 253,
+        "code": 253,
         "hex": "0xfd",
         "mspv": 1,
         "direction": 1,
@@ -5765,7 +5765,7 @@
         "description": "Retrieves debug (\"serial printf\") messages from the firmware."
     },
     "MSP_DEBUG": {
-        "id": 254,
+        "code": 254,
         "hex": "0xfe",
         "mspv": 1,
         "direction": 1,
@@ -5788,7 +5788,7 @@
         "description": "Retrieves values from the firmware's `debug[]` array (legacy 16-bit version)."
     },
     "MSP_V2_FRAME": {
-        "id": 255,
+        "code": 255,
         "hex": "0xff",
         "mspv": 1,
         "direction": -1,
@@ -5800,7 +5800,7 @@
         "description": "This ID is used as a *payload indicator* within an MSPv1 message structure (`$M>`) to signify that the following payload conforms to the MSPv2 format. It's not a command itself."
     },
     "MSP_STATUS_EX": {
-        "id": 150,
+        "code": 150,
         "hex": "0x96",
         "mspv": 1,
         "direction": 1,
@@ -5865,7 +5865,7 @@
         "description": "Provides extended flight controller status, including CPU load, arming flags, and calibration status, in addition to `MSP_STATUS` fields."
     },
     "MSP_SENSOR_STATUS": {
-        "id": 151,
+        "code": 151,
         "hex": "0x97",
         "mspv": 1,
         "direction": 1,
@@ -5944,7 +5944,7 @@
         "description": "Provides the hardware status for each individual sensor system."
     },
     "MSP_UID": {
-        "id": 160,
+        "code": 160,
         "hex": "0xa0",
         "mspv": 1,
         "direction": 1,
@@ -5979,7 +5979,7 @@
         "description": "Provides the unique identifier of the microcontroller."
     },
     "MSP_GPSSVINFO": {
-        "id": 164,
+        "code": 164,
         "hex": "0xa4",
         "mspv": 1,
         "direction": 1,
@@ -6020,7 +6020,7 @@
         "description": "Provides satellite signal strength information (legacy U-Blox compatibility stub)."
     },
     "MSP_GPSSTATISTICS": {
-        "id": 166,
+        "code": 166,
         "hex": "0xa6",
         "mspv": 1,
         "direction": 1,
@@ -6079,7 +6079,7 @@
         "description": "Provides debugging statistics for the GPS communication link."
     },
     "MSP_TX_INFO": {
-        "id": 187,
+        "code": 187,
         "hex": "0xbb",
         "mspv": 1,
         "direction": 1,
@@ -6109,7 +6109,7 @@
         "description": "Provides information potentially useful for transmitter LUA scripts."
     },
     "MSP_SET_TX_INFO": {
-        "id": 186,
+        "code": 186,
         "hex": "0xba",
         "mspv": 1,
         "direction": 0,
@@ -6132,7 +6132,7 @@
         "description": "Allows a transmitter LUA script (or similar) to send runtime information (currently only RSSI) to the firmware."
     },
     "MSP2_COMMON_TZ": {
-        "id": 4097,
+        "code": 4097,
         "hex": "0x1001",
         "mspv": 2,
         "direction": 1,
@@ -6161,7 +6161,7 @@
         "description": "Gets the time zone offset configuration."
     },
     "MSP2_COMMON_SET_TZ": {
-        "id": 4098,
+        "code": 4098,
         "hex": "0x1002",
         "mspv": 2,
         "direction": 0,
@@ -6173,7 +6173,7 @@
         "description": "Sets the time zone offset configuration."
     },
     "MSP2_COMMON_SETTING": {
-        "id": 4099,
+        "code": 4099,
         "hex": "0x1003",
         "mspv": 2,
         "direction": 2,
@@ -6207,7 +6207,7 @@
         "description": "Gets the value of a specific configuration setting, identified by name or index."
     },
     "MSP2_COMMON_SET_SETTING": {
-        "id": 4100,
+        "code": 4100,
         "hex": "0x1004",
         "mspv": 2,
         "direction": 0,
@@ -6237,7 +6237,7 @@
         "description": "Sets the value of a specific configuration setting, identified by name or index."
     },
     "MSP2_COMMON_MOTOR_MIXER": {
-        "id": 4101,
+        "code": 4101,
         "hex": "0x1005",
         "mspv": 2,
         "direction": 1,
@@ -6249,7 +6249,7 @@
         "description": "Retrieves the current motor mixer configuration (throttle, roll, pitch, yaw weights for each motor) for the primary and secondary mixer profiles."
     },
     "MSP2_COMMON_SET_MOTOR_MIXER": {
-        "id": 4102,
+        "code": 4102,
         "hex": "0x1006",
         "mspv": 2,
         "direction": 0,
@@ -6296,7 +6296,7 @@
         "description": "Sets the motor mixer weights for a single motor in the primary mixer profile."
     },
     "MSP2_COMMON_SETTING_INFO": {
-        "id": 4103,
+        "code": 4103,
         "hex": "0x1007",
         "mspv": 2,
         "direction": 2,
@@ -6385,7 +6385,7 @@
         "description": "Gets detailed information about a specific configuration setting (name, type, range, flags, current value, etc.)."
     },
     "MSP2_COMMON_PG_LIST": {
-        "id": 4104,
+        "code": 4104,
         "hex": "0x1008",
         "mspv": 2,
         "direction": 2,
@@ -6432,7 +6432,7 @@
         "description": "Gets a list of Parameter Group Numbers (PGNs) used by settings, along with the start and end setting indexes for each group. Can request info for a single PGN."
     },
     "MSP2_COMMON_SERIAL_CONFIG": {
-        "id": 4105,
+        "code": 4105,
         "hex": "0x1009",
         "mspv": 2,
         "direction": 1,
@@ -6486,7 +6486,7 @@
         "description": "Retrieves the configuration for all available serial ports."
     },
     "MSP2_COMMON_SET_SERIAL_CONFIG": {
-        "id": 4106,
+        "code": 4106,
         "hex": "0x100a",
         "mspv": 2,
         "direction": 0,
@@ -6540,7 +6540,7 @@
         "description": "Sets the configuration for one or more serial ports."
     },
     "MSP2_COMMON_SET_RADAR_POS": {
-        "id": 4107,
+        "code": 4107,
         "hex": "0x100b",
         "mspv": 2,
         "direction": 0,
@@ -6606,7 +6606,7 @@
         "description": "Sets the position and status information for a \"radar\" Point of Interest (POI). Used for displaying other craft/objects on the OSD map."
     },
     "MSP2_COMMON_SET_RADAR_ITD": {
-        "id": 4108,
+        "code": 4108,
         "hex": "0x100c",
         "mspv": 2,
         "direction": 0,
@@ -6618,7 +6618,7 @@
         "description": "Sets radar information to display (likely internal/unused)."
     },
     "MSP2_COMMON_SET_MSP_RC_LINK_STATS": {
-        "id": 4109,
+        "code": 4109,
         "hex": "0x100d",
         "mspv": 2,
         "direction": 0,
@@ -6677,7 +6677,7 @@
         "description": "Provides RC link statistics (RSSI, LQ) to the FC, typically from an MSP-based RC link (like ExpressLRS). Sent periodically by the RC link."
     },
     "MSP2_COMMON_SET_MSP_RC_INFO": {
-        "id": 4110,
+        "code": 4110,
         "hex": "0x100e",
         "mspv": 2,
         "direction": 0,
@@ -6724,7 +6724,7 @@
         "description": "Provides additional RC link information (power levels, band, mode) to the FC from an MSP-based RC link. Sent less frequently than link stats."
     },
     "MSP2_INAV_STATUS": {
-        "id": 8192,
+        "code": 8192,
         "hex": "0x2000",
         "mspv": 2,
         "direction": 1,
@@ -6789,7 +6789,7 @@
         "description": "Provides comprehensive flight controller status, extending `MSP_STATUS_EX` with full arming flags, battery profile, and mixer profile."
     },
     "MSP2_INAV_OPTICAL_FLOW": {
-        "id": 8193,
+        "code": 8193,
         "hex": "0x2001",
         "mspv": 2,
         "direction": 1,
@@ -6836,7 +6836,7 @@
         "description": "Provides data from the optical flow sensor."
     },
     "MSP2_INAV_ANALOG": {
-        "id": 8194,
+        "code": 8194,
         "hex": "0x2002",
         "mspv": 2,
         "direction": 1,
@@ -6908,7 +6908,7 @@
         "description": "Provides detailed analog sensor readings, superseding `MSP_ANALOG` with higher precision and additional fields."
     },
     "MSP2_INAV_MISC": {
-        "id": 8195,
+        "code": 8195,
         "hex": "0x2003",
         "mspv": 2,
         "direction": 1,
@@ -7055,7 +7055,7 @@
         "description": "Retrieves miscellaneous configuration settings, superseding `MSP_MISC` with higher precision and capacity fields."
     },
     "MSP2_INAV_SET_MISC": {
-        "id": 8196,
+        "code": 8196,
         "hex": "0x2004",
         "mspv": 2,
         "direction": 0,
@@ -7202,7 +7202,7 @@
         "description": "Sets miscellaneous configuration settings, superseding `MSP_SET_MISC`."
     },
     "MSP2_INAV_BATTERY_CONFIG": {
-        "id": 8197,
+        "code": 8197,
         "hex": "0x2005",
         "mspv": 2,
         "direction": 1,
@@ -7299,7 +7299,7 @@
         "description": "Retrieves the configuration specific to the battery voltage and current sensors and capacity settings for the current battery profile."
     },
     "MSP2_INAV_SET_BATTERY_CONFIG": {
-        "id": 8198,
+        "code": 8198,
         "hex": "0x2006",
         "mspv": 2,
         "direction": 0,
@@ -7396,7 +7396,7 @@
         "description": "Sets the battery voltage/current sensor configuration and capacity settings for the current battery profile."
     },
     "MSP2_INAV_RATE_PROFILE": {
-        "id": 8199,
+        "code": 8199,
         "hex": "0x2007",
         "mspv": 2,
         "direction": 1,
@@ -7497,7 +7497,7 @@
         "description": "Retrieves the rates and expos for the current control rate profile, including both stabilized and manual flight modes. Supersedes `MSP_RC_TUNING`."
     },
     "MSP2_INAV_SET_RATE_PROFILE": {
-        "id": 8200,
+        "code": 8200,
         "hex": "0x2008",
         "mspv": 2,
         "direction": 0,
@@ -7598,7 +7598,7 @@
         "description": "Sets the rates and expos for the current control rate profile (stabilized and manual). Supersedes `MSP_SET_RC_TUNING`."
     },
     "MSP2_INAV_AIR_SPEED": {
-        "id": 8201,
+        "code": 8201,
         "hex": "0x2009",
         "mspv": 2,
         "direction": 1,
@@ -7621,7 +7621,7 @@
         "description": "Retrieves the estimated or measured airspeed."
     },
     "MSP2_INAV_OUTPUT_MAPPING": {
-        "id": 8202,
+        "code": 8202,
         "hex": "0x200a",
         "mspv": 2,
         "direction": 1,
@@ -7645,7 +7645,7 @@
         "description": "Retrieves the output mapping configuration (identifies which timer outputs are used for Motors/Servos). Legacy version sending only 8-bit usage flags."
     },
     "MSP2_INAV_MC_BRAKING": {
-        "id": 8203,
+        "code": 8203,
         "hex": "0x200b",
         "mspv": 2,
         "direction": 1,
@@ -7710,7 +7710,7 @@
         "description": "Retrieves configuration parameters for the multirotor braking mode feature."
     },
     "MSP2_INAV_SET_MC_BRAKING": {
-        "id": 8204,
+        "code": 8204,
         "hex": "0x200c",
         "mspv": 2,
         "direction": 0,
@@ -7775,7 +7775,7 @@
         "description": "Sets configuration parameters for the multirotor braking mode feature."
     },
     "MSP2_INAV_OUTPUT_MAPPING_EXT": {
-        "id": 8205,
+        "code": 8205,
         "hex": "0x200d",
         "mspv": 2,
         "direction": 1,
@@ -7805,7 +7805,7 @@
         "description": "Retrieves extended output mapping configuration (timer ID and usage flags). Obsolete, use `MSP2_INAV_OUTPUT_MAPPING_EXT2`."
     },
     "MSP2_INAV_TIMER_OUTPUT_MODE": {
-        "id": 8206,
+        "code": 8206,
         "hex": "0x200e",
         "mspv": 2,
         "direction": 2,
@@ -7836,7 +7836,7 @@
         "description": "Get or list the output mode override for hardware timers (e.g., force ONESHOT, DSHOT)."
     },
     "MSP2_INAV_SET_TIMER_OUTPUT_MODE": {
-        "id": 8207,
+        "code": 8207,
         "hex": "0x200f",
         "mspv": 2,
         "direction": 0,
@@ -7866,7 +7866,7 @@
         "description": "Set the output mode override for a specific hardware timer."
     },
     "MSP2_INAV_OUTPUT_MAPPING_EXT2": {
-        "id": 8461,
+        "code": 8461,
         "hex": "0x210d",
         "mspv": 2,
         "direction": 1,
@@ -7903,7 +7903,7 @@
         "description": "Retrieves the full extended output mapping configuration (timer ID, full 32-bit usage flags, and pin label). Supersedes `MSP2_INAV_OUTPUT_MAPPING_EXT`."
     },
     "MSP2_INAV_MIXER": {
-        "id": 8208,
+        "code": 8208,
         "hex": "0x2010",
         "mspv": 2,
         "direction": 1,
@@ -7970,7 +7970,7 @@
         "description": "Retrieves INAV-specific mixer configuration details."
     },
     "MSP2_INAV_SET_MIXER": {
-        "id": 8209,
+        "code": 8209,
         "hex": "0x2011",
         "mspv": 2,
         "direction": 0,
@@ -8035,7 +8035,7 @@
         "description": "Sets INAV-specific mixer configuration details."
     },
     "MSP2_INAV_OSD_LAYOUTS": {
-        "id": 8210,
+        "code": 8210,
         "hex": "0x2012",
         "mspv": 2,
         "direction": 2,
@@ -8064,7 +8064,7 @@
         "description": "Gets OSD layout information (counts, positions for a specific layout, or position for a specific item)."
     },
     "MSP2_INAV_OSD_SET_LAYOUT_ITEM": {
-        "id": 8211,
+        "code": 8211,
         "hex": "0x2013",
         "mspv": 2,
         "direction": 0,
@@ -8100,7 +8100,7 @@
         "description": "Sets the position of a single OSD item within a specific layout."
     },
     "MSP2_INAV_OSD_ALARMS": {
-        "id": 8212,
+        "code": 8212,
         "hex": "0x2014",
         "mspv": 2,
         "direction": 1,
@@ -8207,7 +8207,7 @@
         "description": "Retrieves OSD alarm threshold settings."
     },
     "MSP2_INAV_OSD_SET_ALARMS": {
-        "id": 8213,
+        "code": 8213,
         "hex": "0x2015",
         "mspv": 2,
         "direction": 0,
@@ -8302,7 +8302,7 @@
         "description": "Sets OSD alarm threshold settings."
     },
     "MSP2_INAV_OSD_PREFERENCES": {
-        "id": 8214,
+        "code": 8214,
         "hex": "0x2016",
         "mspv": 2,
         "direction": 1,
@@ -8377,7 +8377,7 @@
         "description": "Retrieves OSD display preferences (video system, units, styles, etc.)."
     },
     "MSP2_INAV_OSD_SET_PREFERENCES": {
-        "id": 8215,
+        "code": 8215,
         "hex": "0x2017",
         "mspv": 2,
         "direction": 0,
@@ -8448,7 +8448,7 @@
         "description": "Sets OSD display preferences."
     },
     "MSP2_INAV_SELECT_BATTERY_PROFILE": {
-        "id": 8216,
+        "code": 8216,
         "hex": "0x2018",
         "mspv": 2,
         "direction": 0,
@@ -8471,7 +8471,7 @@
         "description": "Selects the active battery profile and saves configuration."
     },
     "MSP2_INAV_DEBUG": {
-        "id": 8217,
+        "code": 8217,
         "hex": "0x2019",
         "mspv": 2,
         "direction": 1,
@@ -8494,7 +8494,7 @@
         "description": "Retrieves values from the firmware's 32-bit `debug[]` array. Supersedes `MSP_DEBUG`."
     },
     "MSP2_BLACKBOX_CONFIG": {
-        "id": 8218,
+        "code": 8218,
         "hex": "0x201a",
         "mspv": 2,
         "direction": 1,
@@ -8542,7 +8542,7 @@
         "description": "Retrieves the Blackbox configuration. Supersedes `MSP_BLACKBOX_CONFIG`."
     },
     "MSP2_SET_BLACKBOX_CONFIG": {
-        "id": 8219,
+        "code": 8219,
         "hex": "0x201b",
         "mspv": 2,
         "direction": 0,
@@ -8583,7 +8583,7 @@
         "description": "Sets the Blackbox configuration. Supersedes `MSP_SET_BLACKBOX_CONFIG`."
     },
     "MSP2_INAV_TEMP_SENSOR_CONFIG": {
-        "id": 8220,
+        "code": 8220,
         "hex": "0x201c",
         "mspv": 2,
         "direction": 1,
@@ -8638,7 +8638,7 @@
         "description": "Retrieves the configuration for all onboard temperature sensors."
     },
     "MSP2_INAV_SET_TEMP_SENSOR_CONFIG": {
-        "id": 8221,
+        "code": 8221,
         "hex": "0x201d",
         "mspv": 2,
         "direction": 0,
@@ -8692,7 +8692,7 @@
         "description": "Sets the configuration for all onboard temperature sensors."
     },
     "MSP2_INAV_TEMPERATURES": {
-        "id": 8222,
+        "code": 8222,
         "hex": "0x201e",
         "mspv": 2,
         "direction": 1,
@@ -8716,7 +8716,7 @@
         "description": "Retrieves the current readings from all configured temperature sensors."
     },
     "MSP_SIMULATOR": {
-        "id": 8223,
+        "code": 8223,
         "hex": "0x201f",
         "mspv": 2,
         "direction": 2,
@@ -8996,7 +8996,7 @@
         "description": "Handles Hardware-in-the-Loop (HITL) simulation data exchange. Receives simulated sensor data and options, sends back control outputs and debug info."
     },
     "MSP2_INAV_SERVO_MIXER": {
-        "id": 8224,
+        "code": 8224,
         "hex": "0x2020",
         "mspv": 2,
         "direction": 1,
@@ -9008,7 +9008,7 @@
         "description": "Retrieves the custom servo mixer rules, including programming framework condition IDs, for primary and secondary mixer profiles. Supersedes `MSP_SERVO_MIX_RULES`."
     },
     "MSP2_INAV_SET_SERVO_MIXER": {
-        "id": 8225,
+        "code": 8225,
         "hex": "0x2021",
         "mspv": 2,
         "direction": 0,
@@ -9062,7 +9062,7 @@
         "description": "Sets a single custom servo mixer rule, including programming framework condition ID. Supersedes `MSP_SET_SERVO_MIX_RULE`."
     },
     "MSP2_INAV_LOGIC_CONDITIONS": {
-        "id": 8226,
+        "code": 8226,
         "hex": "0x2022",
         "mspv": 2,
         "direction": 1,
@@ -9131,7 +9131,7 @@
         "description": "Retrieves the configuration of all defined Logic Conditions."
     },
     "MSP2_INAV_SET_LOGIC_CONDITIONS": {
-        "id": 8227,
+        "code": 8227,
         "hex": "0x2023",
         "mspv": 2,
         "direction": 0,
@@ -9206,18 +9206,18 @@
     },
     "MSP2_INAV_GLOBAL_FUNCTIONS": {
         "hex": "0x2024",
-        "id": 8228,
+        "code": 8228,
         "mspv": 2,
         "implemented": false
     },
     "MSP2_INAV_SET_GLOBAL_FUNCTIONS": {
         "hex": "0x2025",
-        "id": 8229,
+        "code": 8229,
         "mspv": 2,
         "implemented": false
     },
     "MSP2_INAV_LOGIC_CONDITIONS_STATUS": {
-        "id": 8230,
+        "code": 8230,
         "hex": "0x2026",
         "mspv": 2,
         "direction": 1,
@@ -9240,7 +9240,7 @@
         "description": "Retrieves the current evaluated status (true/false or numerical value) of all logic conditions."
     },
     "MSP2_INAV_GVAR_STATUS": {
-        "id": 8231,
+        "code": 8231,
         "hex": "0x2027",
         "mspv": 2,
         "direction": 1,
@@ -9263,7 +9263,7 @@
         "description": "Retrieves the current values of all Global Variables (GVARS)."
     },
     "MSP2_INAV_PROGRAMMING_PID": {
-        "id": 8232,
+        "code": 8232,
         "hex": "0x2028",
         "mspv": 2,
         "direction": 1,
@@ -9337,7 +9337,7 @@
         "description": "Retrieves the configuration of all Programming PIDs."
     },
     "MSP2_INAV_SET_PROGRAMMING_PID": {
-        "id": 8233,
+        "code": 8233,
         "hex": "0x2029",
         "mspv": 2,
         "direction": 0,
@@ -9416,7 +9416,7 @@
         "description": "Sets the configuration for a single Programming PID by its index."
     },
     "MSP2_INAV_PROGRAMMING_PID_STATUS": {
-        "id": 8234,
+        "code": 8234,
         "hex": "0x202a",
         "mspv": 2,
         "direction": 1,
@@ -9439,7 +9439,7 @@
         "description": "Retrieves the current output value of all Programming PIDs."
     },
     "MSP2_PID": {
-        "id": 8240,
+        "code": 8240,
         "hex": "0x2030",
         "mspv": 2,
         "direction": 1,
@@ -9481,7 +9481,7 @@
         "description": "Retrieves the standard PID controller gains (P, I, D, FF) for the current PID profile."
     },
     "MSP2_SET_PID": {
-        "id": 8241,
+        "code": 8241,
         "hex": "0x2031",
         "mspv": 2,
         "direction": 0,
@@ -9523,7 +9523,7 @@
         "description": "Sets the standard PID controller gains (P, I, D, FF) for the current PID profile."
     },
     "MSP2_INAV_OPFLOW_CALIBRATION": {
-        "id": 8242,
+        "code": 8242,
         "hex": "0x2032",
         "mspv": 2,
         "direction": 0,
@@ -9535,7 +9535,7 @@
         "description": "Starts the optical flow sensor calibration procedure."
     },
     "MSP2_INAV_FWUPDT_PREPARE": {
-        "id": 8243,
+        "code": 8243,
         "hex": "0x2033",
         "mspv": 2,
         "direction": 0,
@@ -9558,7 +9558,7 @@
         "description": "Prepares the flight controller to receive a firmware update via MSP."
     },
     "MSP2_INAV_FWUPDT_STORE": {
-        "id": 8244,
+        "code": 8244,
         "hex": "0x2034",
         "mspv": 2,
         "direction": 0,
@@ -9581,7 +9581,7 @@
         "description": "Stores a chunk of firmware data received via MSP."
     },
     "MSP2_INAV_FWUPDT_EXEC": {
-        "id": 8245,
+        "code": 8245,
         "hex": "0x2035",
         "mspv": 2,
         "direction": 0,
@@ -9604,7 +9604,7 @@
         "description": "Executes the firmware update process (flashes the stored firmware and reboots)."
     },
     "MSP2_INAV_FWUPDT_ROLLBACK_PREPARE": {
-        "id": 8246,
+        "code": 8246,
         "hex": "0x2036",
         "mspv": 2,
         "direction": 0,
@@ -9616,7 +9616,7 @@
         "description": "Prepares the flight controller to perform a firmware rollback to the previously stored version."
     },
     "MSP2_INAV_FWUPDT_ROLLBACK_EXEC": {
-        "id": 8247,
+        "code": 8247,
         "hex": "0x2037",
         "mspv": 2,
         "direction": 0,
@@ -9628,7 +9628,7 @@
         "description": "Executes the firmware rollback process (flashes the stored backup firmware and reboots)."
     },
     "MSP2_INAV_SAFEHOME": {
-        "id": 8248,
+        "code": 8248,
         "hex": "0x2038",
         "mspv": 2,
         "direction": 2,
@@ -9680,7 +9680,7 @@
         "description": "Get or Set configuration for a specific Safe Home location."
     },
     "MSP2_INAV_SET_SAFEHOME": {
-        "id": 8249,
+        "code": 8249,
         "hex": "0x2039",
         "mspv": 2,
         "direction": 0,
@@ -9721,7 +9721,7 @@
         "description": "Sets the configuration for a specific Safe Home location."
     },
     "MSP2_INAV_MISC2": {
-        "id": 8250,
+        "code": 8250,
         "hex": "0x203a",
         "mspv": 2,
         "direction": 1,
@@ -9762,7 +9762,7 @@
         "description": "Retrieves miscellaneous runtime information including timers and throttle status."
     },
     "MSP2_INAV_LOGIC_CONDITIONS_SINGLE": {
-        "id": 8251,
+        "code": 8251,
         "hex": "0x203b",
         "mspv": 2,
         "direction": 2,
@@ -9841,7 +9841,7 @@
         "description": "Gets the configuration for a single Logic Condition by its index."
     },
     "MSP2_INAV_ESC_RPM": {
-        "id": 8256,
+        "code": 8256,
         "hex": "0x2040",
         "mspv": 2,
         "direction": 1,
@@ -9865,7 +9865,7 @@
         "description": "Retrieves the RPM reported by each ESC via telemetry."
     },
     "MSP2_INAV_ESC_TELEM": {
-        "id": 8257,
+        "code": 8257,
         "hex": "0x2041",
         "mspv": 2,
         "direction": 1,
@@ -9894,7 +9894,7 @@
         "description": "Retrieves the full telemetry data structure reported by each ESC."
     },
     "MSP2_INAV_LED_STRIP_CONFIG_EX": {
-        "id": 8264,
+        "code": 8264,
         "hex": "0x2048",
         "mspv": 2,
         "direction": 1,
@@ -9918,7 +9918,7 @@
         "description": "Retrieves the full configuration for each LED on the strip using the `ledConfig_t` structure. Supersedes `MSP_LED_STRIP_CONFIG`."
     },
     "MSP2_INAV_SET_LED_STRIP_CONFIG_EX": {
-        "id": 8265,
+        "code": 8265,
         "hex": "0x2049",
         "mspv": 2,
         "direction": 0,
@@ -9947,7 +9947,7 @@
         "description": "Sets the configuration for a single LED on the strip using the `ledConfig_t` structure. Supersedes `MSP_SET_LED_STRIP_CONFIG`."
     },
     "MSP2_INAV_FW_APPROACH": {
-        "id": 8266,
+        "code": 8266,
         "hex": "0x204a",
         "mspv": 2,
         "direction": 2,
@@ -10018,7 +10018,7 @@
         "description": "Get or Set configuration for a specific Fixed Wing Autoland approach."
     },
     "MSP2_INAV_SET_FW_APPROACH": {
-        "id": 8267,
+        "code": 8267,
         "hex": "0x204b",
         "mspv": 2,
         "direction": 0,
@@ -10078,7 +10078,7 @@
         "description": "Sets the configuration for a specific Fixed Wing Autoland approach."
     },
     "MSP2_INAV_GPS_UBLOX_COMMAND": {
-        "id": 8272,
+        "code": 8272,
         "hex": "0x2050",
         "mspv": 2,
         "direction": 0,
@@ -10101,7 +10101,7 @@
         "description": "Sends a raw command directly to a U-Blox GPS module connected to the FC."
     },
     "MSP2_INAV_RATE_DYNAMICS": {
-        "id": 8288,
+        "code": 8288,
         "hex": "0x2060",
         "mspv": 2,
         "direction": 1,
@@ -10154,7 +10154,7 @@
         "description": "Retrieves Rate Dynamics configuration parameters for the current control rate profile."
     },
     "MSP2_INAV_SET_RATE_DYNAMICS": {
-        "id": 8289,
+        "code": 8289,
         "hex": "0x2061",
         "mspv": 2,
         "direction": 0,
@@ -10207,7 +10207,7 @@
         "description": "Sets Rate Dynamics configuration parameters for the current control rate profile."
     },
     "MSP2_INAV_EZ_TUNE": {
-        "id": 8304,
+        "code": 8304,
         "hex": "0x2070",
         "mspv": 2,
         "direction": 1,
@@ -10284,7 +10284,7 @@
         "description": "Retrieves the current EZ-Tune parameters."
     },
     "MSP2_INAV_EZ_TUNE_SET": {
-        "id": 8305,
+        "code": 8305,
         "hex": "0x2071",
         "mspv": 2,
         "direction": 0,
@@ -10362,7 +10362,7 @@
         "description": "Sets the EZ-Tune parameters and triggers an update."
     },
     "MSP2_INAV_SELECT_MIXER_PROFILE": {
-        "id": 8320,
+        "code": 8320,
         "hex": "0x2080",
         "mspv": 2,
         "direction": 0,
@@ -10385,7 +10385,7 @@
         "description": "Selects the active mixer profile and saves configuration."
     },
     "MSP2_ADSB_VEHICLE_LIST": {
-        "id": 8336,
+        "code": 8336,
         "hex": "0x2090",
         "mspv": 2,
         "direction": 1,
@@ -10397,7 +10397,7 @@
         "description": "Retrieves the list of currently tracked ADSB (Automatic Dependent Surveillance\u2013Broadcast) vehicles."
     },
     "MSP2_INAV_CUSTOM_OSD_ELEMENTS": {
-        "id": 8448,
+        "code": 8448,
         "hex": "0x2100",
         "mspv": 2,
         "direction": 1,
@@ -10432,7 +10432,7 @@
         "description": "Retrieves counts related to custom OSD elements defined by the programming framework."
     },
     "MSP2_INAV_CUSTOM_OSD_ELEMENT": {
-        "id": 8449,
+        "code": 8449,
         "hex": "0x2101",
         "mspv": 2,
         "direction": 2,
@@ -10455,7 +10455,7 @@
         "description": "Gets the configuration of a single custom OSD element defined by the programming framework."
     },
     "MSP2_INAV_SET_CUSTOM_OSD_ELEMENTS": {
-        "id": 8450,
+        "code": 8450,
         "hex": "0x2102",
         "mspv": 2,
         "direction": 0,
@@ -10467,7 +10467,7 @@
         "description": "Sets the configuration of a single custom OSD element defined by the programming framework."
     },
     "MSP2_INAV_SERVO_CONFIG": {
-        "id": 8704,
+        "code": 8704,
         "hex": "0x2200",
         "mspv": 2,
         "direction": 1,
@@ -10509,7 +10509,7 @@
         "description": "Retrieves the configuration parameters for all supported servos (min, max, middle, rate). Supersedes `MSP_SERVO_CONFIGURATIONS`."
     },
     "MSP2_INAV_SET_SERVO_CONFIG": {
-        "id": 8705,
+        "code": 8705,
         "hex": "0x2201",
         "mspv": 2,
         "direction": 0,
@@ -10556,7 +10556,7 @@
         "description": "Sets the configuration parameters for a single servo. Supersedes `MSP_SET_SERVO_CONFIGURATION`."
     },
     "MSP2_INAV_GEOZONE": {
-        "id": 8720,
+        "code": 8720,
         "hex": "0x2210",
         "mspv": 2,
         "direction": 2,
@@ -10635,7 +10635,7 @@
         "description": "Get configuration for a specific Geozone."
     },
     "MSP2_INAV_SET_GEOZONE": {
-        "id": 8721,
+        "code": 8721,
         "hex": "0x2211",
         "mspv": 2,
         "direction": 0,
@@ -10703,7 +10703,7 @@
         "description": "Sets the main configuration for a specific Geozone (type, shape, altitude, action). **This command resets (clears) all vertices associated with the zone.**"
     },
     "MSP2_INAV_GEOZONE_VERTEX": {
-        "id": 8722,
+        "code": 8722,
         "hex": "0x2212",
         "mspv": 2,
         "direction": 2,
@@ -10761,7 +10761,7 @@
         "description": "Get a specific vertex (or center+radius for circular zones) of a Geozone."
     },
     "MSP2_INAV_SET_GEOZONE_VERTEX": {
-        "id": 8723,
+        "code": 8723,
         "hex": "0x2213",
         "mspv": 2,
         "direction": 0,
@@ -10773,7 +10773,7 @@
         "description": "Sets a specific vertex (or center+radius for circular zones) for a Geozone."
     },
     "MSP2_BETAFLIGHT_BIND": {
-        "id": 12288,
+        "code": 12288,
         "hex": "0x3000",
         "mspv": 2,
         "direction": 0,
@@ -10785,7 +10785,7 @@
         "description": "Initiates the receiver binding procedure for supported serial protocols (CRSF, SRXL2)."
     },
     "MSP2_SENSOR_RANGEFINDER": {
-        "id": 7937,
+        "code": 7937,
         "hex": "0x1f01",
         "mspv": 2,
         "direction": 0,
@@ -10814,7 +10814,7 @@
         "description": "Provides rangefinder data (distance, quality) from an external MSP-based sensor."
     },
     "MSP2_SENSOR_OPTIC_FLOW": {
-        "id": 7938,
+        "code": 7938,
         "hex": "0x1f02",
         "mspv": 2,
         "direction": 0,
@@ -10849,7 +10849,7 @@
         "description": "Provides optical flow data (motion, quality) from an external MSP-based sensor."
     },
     "MSP2_SENSOR_GPS": {
-        "id": 7939,
+        "code": 7939,
         "hex": "0x1f03",
         "mspv": 2,
         "direction": 0,
@@ -11005,7 +11005,7 @@
         "description": "Provides detailed GPS data from an external MSP-based GPS module."
     },
     "MSP2_SENSOR_COMPASS": {
-        "id": 7940,
+        "code": 7940,
         "hex": "0x1f04",
         "mspv": 2,
         "direction": 0,
@@ -11052,7 +11052,7 @@
         "description": "Provides magnetometer data from an external MSP-based compass module."
     },
     "MSP2_SENSOR_BAROMETER": {
-        "id": 7941,
+        "code": 7941,
         "hex": "0x1f05",
         "mspv": 2,
         "direction": 0,
@@ -11093,7 +11093,7 @@
         "description": "Provides barometer data from an external MSP-based barometer module."
     },
     "MSP2_SENSOR_AIRSPEED": {
-        "id": 7942,
+        "code": 7942,
         "hex": "0x1f06",
         "mspv": 2,
         "direction": 0,
@@ -11134,7 +11134,7 @@
         "description": "Provides airspeed data from an external MSP-based pitot sensor module."
     },
     "MSP2_SENSOR_HEADTRACKER": {
-        "id": 7943,
+        "code": 7943,
         "hex": "0x1f07",
         "mspv": 2,
         "direction": 0,

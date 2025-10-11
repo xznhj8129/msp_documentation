@@ -37,7 +37,7 @@ print(len(msp))
 
 for msg_code in msp:
     print()
-    print(msg_code, msp[msg_code]['id'])
+    print(msg_code, msp[msg_code]['code'])
     total_bytes = 0
     
     abort = False

@@ -22,7 +22,7 @@ bin_type_map = {
 }
 
 msg_fmt = {
-    "id": 0,
+    "code": 0,
     "hex": "",
     "mspv": None,
     "direction": None,
@@ -580,7 +580,7 @@ def generate_msp_dict(markdown_content: str) -> Dict[str, Any]:
             if "Not implemented" in msg_content:
                 msp_references[msg_name] = {
                     "hex": hex(msg_code),
-                    "id": msg_code,
+                    "code": msg_code,
                     "mspv": 1 if msg_code <= 255 else 2,
                     "implemented": False
                     }
@@ -609,7 +609,7 @@ def generate_msp_dict(markdown_content: str) -> Dict[str, Any]:
         except: #MSP2_COMMON_MOTOR_MIXER
             msg = msg_fmt.copy()
             msg["hex"] = hex(msg_code)
-            msg["id"] = msg_code
+            msg["code"] = msg_code
             msg["mspv"] = 1 if msg_code <= 255 else 2
             msg["direction"] = direction_val
             msg["request"] = None
@@ -679,7 +679,7 @@ def generate_msp_dict(markdown_content: str) -> Dict[str, Any]:
 
         msg = msg_fmt.copy()
         msg["hex"] = hex(msg_code)
-        msg["id"] = msg_code
+        msg["code"] = msg_code
         msg["mspv"] = 1 if msg_code <= 255 else 2
         #msg["size"] = rep_size if (rep_fields or rep_size is not None) else req_size
         msg["direction"] = direction_val
@@ -715,7 +715,7 @@ if __name__ == "__main__":
         if c.name not in data:
             print(c.name, c.value)
             msg = msg_fmt.copy()
-            msg['id'] = c.value
+            msg['code'] = c.value
             msg['hex'] = hex(c.value)
             msg['name'] = c.name
             msg['missing'] = True

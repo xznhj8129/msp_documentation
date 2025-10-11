@@ -157,7 +157,7 @@ def emit_size_macro(msg_name: str, kind: str, size: Optional[int]) -> str:
     return f"#define {U}_{kind.upper()}_PAYLOAD_SIZE {size}"
 
 def sort_by_id(items: List[Tuple[str, Dict[str, Any]]]) -> List[Tuple[str, Dict[str, Any]]]:
-    return sorted(items, key=lambda kv: int(kv[1].get("id", 0)))
+    return sorted(items, key=lambda kv: int(kv[1].get("code", 0)))
 
 # -------------------- header generation --------------------
 
@@ -217,7 +217,7 @@ def gen_header(spec: Dict[str, Any]) -> str:
 
     for name, msg in items:
         U = to_c_ident(name)
-        mid = int(msg.get("id"))
+        mid = int(msg.get("code"))
         out.append(f"    {U} = {mid},")
     out.append("} msp_command_id;")
     out.append("")
@@ -226,7 +226,7 @@ def gen_header(spec: Dict[str, Any]) -> str:
     out.append("// ------- MSP command metadata -------")
     for name, msg in items:
         U = to_c_ident(name)
-        mid = int(msg.get("id"))
+        mid = int(msg.get("code"))
         hexv = msg.get("hex", None)
         mspv = msg.get("mspv", None)
         direction = msg.get("direction", None)
