@@ -1,7 +1,26 @@
 #!/usr/bin/env python3
 import json
-from typing import List, Tuple, Optional, Dict, Any
+from typing import List, Tuple, Optional, Dict, Any, Union, Literal, TypedDict
 from lib.msp_enum import MultiWii
+import re
+
+
+
+def parse_array(ctype: str):
+    _bracket_re = re.compile(r"\[\s*([^\]]*)\s*\]")  # first [] only
+    _int_re = re.compile(r"^\d+$")
+    _var_re = re.compile(r"^[A-Za-z_]\w*$")
+    m = _bracket_re.search(ctype)
+    if not m:
+        return False, None, None, None
+    dtype = ctype.split('[')[0]
+    inside = m.group(1).strip()
+    if inside == "":
+        return True, dtype, None, None
+    if _int_re.match(inside):
+        return True, dtype, int, int(inside)
+    return True, dtype, str, inside
+
 
 bin_type_map = {
     "enum": "B",
@@ -415,8 +434,20 @@ def _parse_table_from_block(block: str) -> List[Dict[str, Any]]:
         val = val_fmt.copy()
         val['name'] = field_name
         val['ctype'] = ctype
+        is_array, dtype, keytype, keysize = parse_array(ctype)
+
         if not wtfisit:
             val['polymorph'] = True
+
+        if is_array:
+            val['array'] = True
+            val['array_ctype'] = dtype
+            if keytype:
+                val['array_size'] = keysize
+            else:
+                val['array_size'] = 0
+
+
         #val['size'] = size
         val['units'] = units
         val['desc'] = desc
@@ -432,6 +463,7 @@ def _parse_table_from_block(block: str) -> List[Dict[str, Any]]:
         i += 1
 
     return rows
+
 def _iter_generic_payload_blocks(msg_content: str) -> list[str]:
     lines = msg_content.splitlines()
     blocks = []
@@ -624,9 +656,9 @@ def generate_msp_dict(markdown_content: str) -> Dict[str, Any]:
 
         def parse_block(block_text: str) -> tuple[list, Optional[int], Optional[str]]:
             if not block_text:
-                return [], None, None
+                return [], None, None, None
             if "Payload: None" in block_text or "**Payload:** None" in block_text:
-                return [], None, None
+                return [], None, None, None
 
             rep_factor, core = _extract_repetition_factor(block_text)
             if rep_factor is None:
@@ -635,20 +667,23 @@ def generate_msp_dict(markdown_content: str) -> Dict[str, Any]:
             fields = _parse_table_from_block(core)
 
             compsize: Optional[int] = 0
+            vararray = False
             for plf in fields:
-                try:
-                    sz = plf.get("size", None)
-                    if sz is None:
-                        compsize = None
-                        break
+                if "array" in plf:
+                    if type(plf['array_size']) is str:
+                        vararray = True
+                    else:
+                        if plf["array_size"] == 0:
+                            vararray = True
+                sz = plf.get("size", None)
+                if sz:
                     compsize += sz
-                except Exception:
-                    compsize = None
-                    break
-            return fields, compsize, rep_factor
+            return fields, compsize, rep_factor, vararray
         
-        req_fields, req_size, repeating_req = parse_block(req_block)
-        rep_fields, rep_size, repeating_rep = parse_block(rep_block)
+        req_fields, req_size, repeating_req, varr_req = parse_block(req_block)
+        rep_fields, rep_size, repeating_rep, varr_rep = parse_block(rep_block)
+        #print('req',req_fields, req_size, repeating_req, varr_req)
+        #print('reply',rep_fields, rep_size, repeating_rep, varr_rep)
         #if msg_name == "MSP_OSD_CHAR_WRITE": exit(0)
         req_data = None
         if len(req_fields) > 0:
@@ -688,7 +723,7 @@ def generate_msp_dict(markdown_content: str) -> Dict[str, Any]:
             msg["reply"] = rep_data
         else:
             rep_data = None
-        msg["variable_len"] = (repeating_rep!=None) or (repeating_req!=None) or polymorph
+        msg["variable_len"] = (repeating_rep!=None) or (repeating_req!=None) or varr_req or varr_rep
         msg["notes"] = notes_str
         if description_line:
             msg["description"] = description_line

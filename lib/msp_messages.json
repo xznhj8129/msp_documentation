@@ -48,7 +48,10 @@
                     "name": "fcVariantIdentifier",
                     "ctype": "char[4]",
                     "units": "",
-                    "desc": "4-character identifier string (e.g., \"INAV\"). Defined by `flightControllerIdentifier`."
+                    "desc": "4-character identifier string (e.g., \"INAV\"). Defined by `flightControllerIdentifier`.",
+                    "array": true,
+                    "array_ctype": "char",
+                    "array_size": 4
                 }
             ]
         },
@@ -106,7 +109,10 @@
                     "name": "boardIdentifier",
                     "ctype": "char[4]",
                     "units": "",
-                    "desc": "4-character UPPER CASE board identifier (`TARGET_BOARD_IDENTIFIER`)."
+                    "desc": "4-character UPPER CASE board identifier (`TARGET_BOARD_IDENTIFIER`).",
+                    "array": true,
+                    "array_ctype": "char",
+                    "array_size": 4
                 },
                 {
                     "name": "hardwareRevision",
@@ -136,11 +142,14 @@
                     "name": "targetName",
                     "ctype": "char[]",
                     "units": "",
-                    "desc": "Target name string (e.g., \"MATEKF405\"). Length given by previous field."
+                    "desc": "Target name string (e.g., \"MATEKF405\"). Length given by previous field.",
+                    "array": true,
+                    "array_ctype": "char",
+                    "array_size": 0
                 }
             ]
         },
-        "variable_len": false,
+        "variable_len": true,
         "complex": false,
         "notes": "`BOARD_IDENTIFIER_LENGTH` is 4.",
         "description": "Provides information about the specific hardware board and its capabilities."
@@ -159,19 +168,28 @@
                     "name": "buildDate",
                     "ctype": "char[11]",
                     "units": "",
-                    "desc": "Build date string (e.g., \"Dec 31 2023\"). `BUILD_DATE_LENGTH`."
+                    "desc": "Build date string (e.g., \"Dec 31 2023\"). `BUILD_DATE_LENGTH`.",
+                    "array": true,
+                    "array_ctype": "char",
+                    "array_size": 11
                 },
                 {
                     "name": "buildTime",
                     "ctype": "char[8]",
                     "units": "",
-                    "desc": "Build time string (e.g., \"23:59:59\"). `BUILD_TIME_LENGTH`."
+                    "desc": "Build time string (e.g., \"23:59:59\"). `BUILD_TIME_LENGTH`.",
+                    "array": true,
+                    "array_ctype": "char",
+                    "array_size": 8
                 },
                 {
                     "name": "gitRevision",
                     "ctype": "char[7]",
                     "units": "",
-                    "desc": "Short Git revision string. `GIT_SHORT_REVISION_LENGTH`."
+                    "desc": "Short Git revision string. `GIT_SHORT_REVISION_LENGTH`.",
+                    "array": true,
+                    "array_ctype": "char",
+                    "array_size": 7
                 }
             ]
         },
@@ -355,7 +373,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Expects 15 bytes.",
         "description": "Sets legacy INAV-specific PID controller related settings."
@@ -374,11 +392,14 @@
                     "name": "craftName",
                     "ctype": "char[]",
                     "units": "",
-                    "desc": "The craft name string (`systemConfig()->craftName`). Null termination is *not* explicitly sent, the length is determined by the payload size."
+                    "desc": "The craft name string (`systemConfig()->craftName`). Null termination is *not* explicitly sent, the length is determined by the payload size.",
+                    "array": true,
+                    "array_ctype": "char",
+                    "array_size": 0
                 }
             ]
         },
-        "variable_len": false,
+        "variable_len": true,
         "complex": false,
         "notes": "",
         "description": "Returns the user-defined craft name."
@@ -396,12 +417,15 @@
                     "name": "craftName",
                     "ctype": "char[]",
                     "units": "",
-                    "desc": "The new craft name string. Automatically null-terminated by the FC."
+                    "desc": "The new craft name string. Automatically null-terminated by the FC.",
+                    "array": true,
+                    "array_ctype": "char",
+                    "array_size": 0
                 }
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": true,
         "complex": false,
         "notes": "Maximum length is `MAX_NAME_LENGTH`.",
         "description": "Sets the user-defined craft name."
@@ -535,7 +559,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Expects 13 bytes.",
         "description": "Sets navigation position hold and general manual/auto flight parameters."
@@ -731,7 +755,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Expects 26 bytes. Ignores values for sensors not enabled by `USE_*` defines.",
         "description": "Sets sensor calibration data."
@@ -849,7 +873,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Expects 12 bytes.",
         "description": "Sets parameters related to the INAV position estimation fusion weights and GPS minimum satellite count."
@@ -872,7 +896,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Only functional if `NAV_NON_VOLATILE_WAYPOINT_STORAGE` is defined. Requires 1 byte payload. Returns error if loading fails.",
         "description": "Commands the FC to load the waypoint mission stored in non-volatile memory (e.g., EEPROM or FlashFS) into the active mission buffer."
@@ -895,7 +919,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Only functional if `NAV_NON_VOLATILE_WAYPOINT_STORAGE` is defined. Requires 1 byte payload. Returns error if saving fails.",
         "description": "Commands the FC to save the currently active waypoint mission from RAM to non-volatile memory (e.g., EEPROM or FlashFS)."
@@ -1128,7 +1152,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Expects 21 bytes.",
         "description": "Sets configuration parameters related to Return-to-Home (RTH) and automatic landing behaviors."
@@ -1258,7 +1282,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Expects 12 bytes.",
         "description": "Sets configuration parameters specific to Fixed Wing navigation."
@@ -1276,7 +1300,7 @@
                 {
                     "name": "modePermanentId",
                     "ctype": "uint8_t",
-                    "units": "code",
+                    "units": "ID",
                     "desc": "Permanent ID of the flight mode (maps to `boxId` via `findBoxByActiveBoxId`). 0 if entry unused."
                 },
                 {
@@ -1323,7 +1347,7 @@
                 {
                     "name": "modePermanentId",
                     "ctype": "uint8_t",
-                    "units": "code",
+                    "units": "ID",
                     "desc": "Permanent ID of the flight mode to assign."
                 },
                 {
@@ -1347,7 +1371,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Expects 5 bytes. Updates the mode configuration and recalculates used mode flags. Returns error if `rangeIndex` or `modePermanentId` is invalid.",
         "description": "Sets a single mode activation range by its index."
@@ -1393,7 +1417,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Expects 4 bytes. Updates feature configuration and related settings (e.g., RSSI source).",
         "description": "Sets the enabled features using a bitmask. Clears all previous features first."
@@ -1463,7 +1487,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Expects 6 bytes.",
         "description": "Sets the sensor board alignment angles."
@@ -1547,7 +1571,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Expects 7 bytes.",
         "description": "Sets the configuration for the current sensor."
@@ -1593,7 +1617,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Expects 1 byte. Calls `mixerUpdateStateFlags()` for potential side effects related to presets.",
         "description": "Sets the mixer type (Legacy, ignored by INAV)."
@@ -1811,7 +1835,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Expects 24 bytes.",
         "description": "Sets receiver configuration settings."
@@ -1936,7 +1960,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Only available if `USE_LED_STRIP` is defined. Expects 5 bytes. Calls `reevaluateLedConfig()`. Superseded by `MSP2_INAV_SET_LED_STRIP_CONFIG_EX`.",
         "description": "Sets the configuration for a single LED on the strip using the legacy packed format."
@@ -1982,7 +2006,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Expects 1 byte. Input value is constrained 0 to `MAX_SUPPORTED_RC_CHANNEL_COUNT`. Updates the effective RSSI source.",
         "description": "Sets the channel used for analog RSSI input."
@@ -2096,7 +2120,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Expects 7 bytes. Returns error if `rangeIndex` or `adjustmentIndex` is invalid.",
         "description": "Sets a single RC adjustment range configuration by its index."
@@ -2108,7 +2132,7 @@
         "direction": 1,
         "request": null,
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Not implemented in INAV `fc_msp.c`. Use `MSP2_COMMON_SERIAL_CONFIG`.",
         "description": "Deprecated command to get serial port configuration."
@@ -2120,7 +2144,7 @@
         "direction": 0,
         "request": null,
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Not implemented in INAV `fc_msp.c`. Use `MSP2_COMMON_SET_SERIAL_CONFIG`.",
         "description": "Deprecated command to set serial port configuration."
@@ -2202,7 +2226,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Expects 4 bytes. Superseded by `MSP2_INAV_SET_BATTERY_CONFIG`.",
         "description": "Sets legacy voltage meter configuration (scaled values)."
@@ -2244,11 +2268,14 @@
                     "name": "rcMap",
                     "ctype": "uint8_t[MAX_MAPPABLE_RX_INPUTS]",
                     "units": "",
-                    "desc": "Array defining the mapping from input channel index to logical function (Roll, Pitch, Yaw, Throttle, Aux1...)."
+                    "desc": "Array defining the mapping from input channel index to logical function (Roll, Pitch, Yaw, Throttle, Aux1...).",
+                    "array": true,
+                    "array_ctype": "uint8_t",
+                    "array_size": "MAX_MAPPABLE_RX_INPUTS"
                 }
             ]
         },
-        "variable_len": false,
+        "variable_len": true,
         "complex": false,
         "notes": "`MAX_MAPPABLE_RX_INPUTS` is typically 8 or more.",
         "description": "Retrieves the RC channel mapping array (AETR, etc.)."
@@ -2266,12 +2293,15 @@
                     "name": "rcMap",
                     "ctype": "uint8_t[MAX_MAPPABLE_RX_INPUTS]",
                     "units": "",
-                    "desc": "Array defining the new channel mapping."
+                    "desc": "Array defining the new channel mapping.",
+                    "array": true,
+                    "array_ctype": "uint8_t",
+                    "array_size": "MAX_MAPPABLE_RX_INPUTS"
                 }
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": true,
         "complex": false,
         "notes": "Expects `MAX_MAPPABLE_RX_INPUTS` bytes.",
         "description": "Sets the RC channel mapping array."
@@ -2283,7 +2313,7 @@
         "direction": 1,
         "request": null,
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "The FC sends an ACK *before* rebooting. The `mspPostProcessFn` is set to `mspRebootFn` to perform the reboot after the reply is sent. Will fail if the craft is armed.",
         "description": "Commands the flight controller to reboot."
@@ -2367,11 +2397,14 @@
                     "name": "data",
                     "ctype": "uint8_t[]",
                     "units": "",
-                    "desc": "The data read from flash. Length is MIN(requested size, remaining buffer space, remaining flashfs data)."
+                    "desc": "The data read from flash. Length is MIN(requested size, remaining buffer space, remaining flashfs data).",
+                    "array": true,
+                    "array_ctype": "uint8_t",
+                    "array_size": 0
                 }
             ]
         },
-        "variable_len": false,
+        "variable_len": true,
         "complex": false,
         "notes": "Requires `USE_FLASHFS`. Read length may be truncated by buffer size or end of flashfs volume.",
         "description": "Reads a block of data from the onboard dataflash (FlashFS)."
@@ -2383,7 +2416,7 @@
         "direction": 0,
         "request": null,
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Requires `USE_FLASHFS`. This is a potentially long operation. Use with caution.",
         "description": "Erases the entire onboard dataflash chip (FlashFS volume)."
@@ -2429,7 +2462,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Expects 2 bytes.",
         "description": "Sets the configured loop time."
@@ -2623,7 +2656,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Expects 20 bytes.",
         "description": "Sets the failsafe configuration settings."
@@ -2724,7 +2757,7 @@
         "direction": 0,
         "request": null,
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Not implemented in `fc_msp.c`. Use `MSP2_SET_BLACKBOX_CONFIG`.",
         "description": "Legacy command to set Blackbox configuration. Superseded by `MSP2_SET_BLACKBOX_CONFIG`."
@@ -2736,7 +2769,7 @@
         "direction": 1,
         "request": null,
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Not implemented in INAV `fc_msp.c`.",
         "description": "Get VTX Transponder settings (likely specific to RaceFlight/Betaflight, not standard INAV VTX)."
@@ -2748,7 +2781,7 @@
         "direction": 0,
         "request": null,
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Not implemented in INAV `fc_msp.c`.",
         "description": "Set VTX Transponder settings."
@@ -2824,11 +2857,14 @@
                     "name": "itemPositions",
                     "ctype": "uint16_t[OSD_ITEM_COUNT]",
                     "units": "Coordinates",
-                    "desc": "Packed X/Y position for each OSD item on screen 0 (`osdLayoutsConfig()->item_pos[0][i]`). Sent even if OSD disabled."
+                    "desc": "Packed X/Y position for each OSD item on screen 0 (`osdLayoutsConfig()->item_pos[0][i]`). Sent even if OSD disabled.",
+                    "array": true,
+                    "array_ctype": "uint16_t",
+                    "array_size": "OSD_ITEM_COUNT"
                 }
             ]
         },
-        "variable_len": false,
+        "variable_len": true,
         "complex": true,
         "notes": "Requires `USE_OSD` for meaningful data, but payload is always sent. Coordinates are packed: `(Y << 8) | X`. See `MSP2_INAV_OSD_*` commands for more detail and multi-layout support.",
         "description": "Retrieves OSD configuration settings and layout for screen 0."
@@ -2852,7 +2888,7 @@
         "direction": 1,
         "request": null,
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Not implemented in INAV `fc_msp.c`. Requires direct hardware access, typically done via DisplayPort.",
         "description": "Reads character data from the OSD font memory."
@@ -2877,7 +2913,10 @@
                     "name": "charData",
                     "ctype": "uint8_t[]",
                     "units": "",
-                    "desc": "Character bitmap data (54 or 64 bytes per char, depending on format)."
+                    "desc": "Character bitmap data (54 or 64 bytes per char, depending on format).",
+                    "array": true,
+                    "array_ctype": "uint8_t",
+                    "array_size": 0
                 }
             ]
         },
@@ -3096,7 +3135,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Expects 9 bytes.",
         "description": "Sets advanced hardware-related configuration (PWM protocols, rates)."
@@ -3274,7 +3313,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Requires specific payload sizes (5, 9, 13, 17, 21, or 22 bytes) to be accepted. Calls `pidInitFilters()` if size >= 13.",
         "description": "Sets filter configuration settings. Handles different payload lengths for backward compatibility."
@@ -3440,7 +3479,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Expects 17 bytes.",
         "description": "Sets advanced PID tuning parameters."
@@ -3552,7 +3591,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Expects 6 bytes.",
         "description": "Sets the configured hardware type for various sensors."
@@ -3564,7 +3603,7 @@
         "direction": 1,
         "request": null,
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Not implemented in INAV `fc_msp.c`.",
         "description": "Betaflight specific, likely unused/unimplemented in INAV."
@@ -3576,7 +3615,7 @@
         "direction": 0,
         "request": null,
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Not implemented in INAV `fc_msp.c`.",
         "description": "Betaflight specific, likely unused/unimplemented in INAV."
@@ -3755,11 +3794,14 @@
                     "name": "servoOutputs",
                     "ctype": "int16_t[MAX_SUPPORTED_SERVOS]",
                     "units": "PWM",
-                    "desc": "Array of current servo output values (typically 1000-2000)."
+                    "desc": "Array of current servo output values (typically 1000-2000).",
+                    "array": true,
+                    "array_ctype": "int16_t",
+                    "array_size": "MAX_SUPPORTED_SERVOS"
                 }
             ]
         },
-        "variable_len": false,
+        "variable_len": true,
         "complex": false,
         "notes": "",
         "description": "Provides the current output values for all supported servos."
@@ -3778,7 +3820,10 @@
                     "name": "motorOutputs",
                     "ctype": "uint16_t[8]",
                     "units": "PWM",
-                    "desc": "Array of current motor output values (typically 1000-2000). Values beyond `MAX_SUPPORTED_MOTORS` are 0."
+                    "desc": "Array of current motor output values (typically 1000-2000). Values beyond `MAX_SUPPORTED_MOTORS` are 0.",
+                    "array": true,
+                    "array_ctype": "uint16_t",
+                    "array_size": 8
                 }
             ]
         },
@@ -3801,11 +3846,14 @@
                     "name": "rcChannels",
                     "ctype": "uint16_t[]",
                     "units": "PWM",
-                    "desc": "Array of current RC channel values (typically 1000-2000). Length depends on detected channels."
+                    "desc": "Array of current RC channel values (typically 1000-2000). Length depends on detected channels.",
+                    "array": true,
+                    "array_ctype": "uint16_t",
+                    "array_size": 0
                 }
             ]
         },
-        "variable_len": false,
+        "variable_len": true,
         "complex": false,
         "notes": "",
         "description": "Provides the current values of the received RC channels."
@@ -4251,11 +4299,14 @@
                     "name": "boxNamesString",
                     "ctype": "char[]",
                     "units": "",
-                    "desc": "String containing mode names separated by ';'. Null termination not guaranteed by MSP, relies on payload size. (`serializeBoxNamesReply()`)."
+                    "desc": "String containing mode names separated by ';'. Null termination not guaranteed by MSP, relies on payload size. (`serializeBoxNamesReply()`).",
+                    "array": true,
+                    "array_ctype": "char",
+                    "array_size": 0
                 }
             ]
         },
-        "variable_len": false,
+        "variable_len": true,
         "complex": false,
         "notes": "The exact set of names depends on compiled features and configuration. Due to the size of the payload, it is recommended that [`MSP_BOXIDS`](#msp_boxids-119--0x77) is used instead.",
         "description": "Provides a semicolon-separated string containing the names of all available flight modes (boxes)."
@@ -4274,11 +4325,14 @@
                     "name": "pidNamesString",
                     "ctype": "char[]",
                     "units": "",
-                    "desc": "String \"ROLL;PITCH;YAW;ALT;Pos;PosR;NavR;LEVEL;MAG;VEL;\". Null termination not guaranteed by MSP."
+                    "desc": "String \"ROLL;PITCH;YAW;ALT;Pos;PosR;NavR;LEVEL;MAG;VEL;\". Null termination not guaranteed by MSP.",
+                    "array": true,
+                    "array_ctype": "char",
+                    "array_size": 0
                 }
             ]
         },
-        "variable_len": false,
+        "variable_len": true,
         "complex": false,
         "notes": "",
         "description": "Provides a semicolon-separated string containing the names of the PID controllers."
@@ -4380,11 +4434,14 @@
                     "name": "boxIds",
                     "ctype": "uint8_t[]",
                     "units": "",
-                    "desc": "Array of permanent IDs for each configured box (`serializeBoxReply()`). Length depends on number of boxes."
+                    "desc": "Array of permanent IDs for each configured box (`serializeBoxReply()`). Length depends on number of boxes.",
+                    "array": true,
+                    "array_ctype": "uint8_t",
+                    "array_size": 0
                 }
             ]
         },
-        "variable_len": false,
+        "variable_len": true,
         "complex": false,
         "notes": "Useful for mapping mode range configurations (`MSP_MODE_RANGES`) back to user-understandable modes via `MSP_BOXNAMES`.",
         "description": "Provides a list of permanent IDs associated with the available flight modes (boxes)."
@@ -4740,7 +4797,7 @@
         "direction": 2,
         "request": null,
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "The ID is defined, but no handler exists in the provided C code. Likely intended to query band names and frequencies.",
         "description": "Retrieves information about a specific VTX band from the VTX table. (Implementation missing in provided `fc_msp.c`)"
@@ -4788,11 +4845,14 @@
                     "name": "label",
                     "ctype": "char[]",
                     "units": "",
-                    "desc": "Power level label string (e.g., \"25\", \"200\"). Length given by previous field."
+                    "desc": "Power level label string (e.g., \"25\", \"200\"). Length given by previous field.",
+                    "array": true,
+                    "array_ctype": "char",
+                    "array_size": 0
                 }
             ]
         },
-        "variable_len": false,
+        "variable_len": true,
         "complex": false,
         "notes": "Requires `USE_VTX_CONTROL`. Returns error if index is out of bounds. The `powerValue` field is unused.",
         "description": "Retrieves information about a specific VTX power level from the VTX table."
@@ -4810,12 +4870,15 @@
                     "name": "rcChannels",
                     "ctype": "uint16_t[]",
                     "units": "PWM",
-                    "desc": "Array of RC channel values (typically 1000-2000). Number of channels determined by payload size."
+                    "desc": "Array of RC channel values (typically 1000-2000). Number of channels determined by payload size.",
+                    "array": true,
+                    "array_ctype": "uint16_t",
+                    "array_size": 0
                 }
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": true,
         "complex": false,
         "notes": "Requires `USE_RX_MSP`. Maximum channels `MAX_SUPPORTED_RC_CHANNEL_COUNT`. Calls `rxMspFrameReceive()`.",
         "description": "Provides raw RC channel data to the flight controller, typically used when the receiver is connected via MSP (e.g., MSP RX feature)."
@@ -4875,7 +4938,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Requires `USE_GPS`. Expects 14 bytes. Updates `gpsSol` structure and calls `onNewGPSData()`. Note the altitude unit mismatch (meters in MSP, cm internal). Does not provide velocity components.",
         "description": "Provides raw GPS data to the flight controller, typically for simulation or external GPS injection."
@@ -4887,7 +4950,7 @@
         "direction": 0,
         "request": null,
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Not implemented in INAV `fc_msp.c`. Mode changes are typically handled via RC channels (`MSP_MODE_RANGES`).",
         "description": "Sets the state of flight modes (boxes). (Likely unused/obsolete in INAV)."
@@ -4965,7 +5028,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Expects 10 or 11 bytes. Calls `schedulePidGainsUpdate()`. Superseded by `MSP2_INAV_SET_RATE_PROFILE`.",
         "description": "Sets RC tuning parameters (rates, expos, TPA) for the current control rate profile."
@@ -4977,7 +5040,7 @@
         "direction": 0,
         "request": null,
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Will fail if armed. Calls `accStartCalibration()`.",
         "description": "Starts the accelerometer calibration procedure."
@@ -4989,7 +5052,7 @@
         "direction": 0,
         "request": null,
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Will fail if armed. Enables the `CALIBRATE_MAG` state flag.",
         "description": "Starts the magnetometer calibration procedure."
@@ -5104,7 +5167,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Expects 22 bytes. Superseded by `MSP2_INAV_SET_MISC`.",
         "description": "Sets miscellaneous configuration settings (legacy formats/scaling)."
@@ -5116,7 +5179,7 @@
         "direction": 0,
         "request": null,
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Will fail if armed. Suspends RX, calls `resetEEPROM()`, `writeEEPROM()`, `readEEPROM()`, resumes RX. Use with caution!",
         "description": "Resets all configuration settings to their default values and saves to EEPROM."
@@ -5188,7 +5251,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Expects 21 bytes. Calls `setWaypoint()`. If `USE_FW_AUTOLAND` is enabled, this also interacts with autoland approach settings based on waypoint index and flags.",
         "description": "Sets a single waypoint in the mission plan."
@@ -5211,7 +5274,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Will fail if armed. Calls `setConfigProfileAndWriteEEPROM()`.",
         "description": "Selects the active configuration profile and saves it."
@@ -5234,7 +5297,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Expects 2 bytes. Calls `updateHeadingHoldTarget()`.",
         "description": "Sets the target heading for the heading hold controller (e.g., during MAG mode)."
@@ -5305,7 +5368,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Expects 15 bytes. Returns error if index is invalid. Calls `servoComputeScalingFactors()`. Superseded by `MSP2_INAV_SET_SERVO_CONFIG`.",
         "description": "Sets the configuration for a single servo (legacy format)."
@@ -5323,12 +5386,15 @@
                     "name": "motorValues",
                     "ctype": "uint16_t[8]",
                     "units": "PWM",
-                    "desc": "Array of motor values to set when disarmed. Only affects first `MAX_SUPPORTED_MOTORS`."
+                    "desc": "Array of motor values to set when disarmed. Only affects first `MAX_SUPPORTED_MOTORS`.",
+                    "array": true,
+                    "array_ctype": "uint16_t",
+                    "array_size": 8
                 }
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Expects 16 bytes. Modifies the `motor_disarmed` array. These values are *not* saved persistently.",
         "description": "Sets the disarmed motor values, typically used for motor testing or propeller balancing functions in a configurator."
@@ -5369,7 +5435,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Expects 6 bytes. Requires reversible motor support.",
         "description": "Sets parameters related to 3D/reversible motor operation."
@@ -5410,7 +5476,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Expects 5 bytes.",
         "description": "Sets RC input deadband values."
@@ -5422,7 +5488,7 @@
         "direction": 0,
         "request": null,
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Calls `PG_RESET_CURRENT(pidProfile)`. To save, follow with `MSP_EEPROM_WRITE`.",
         "description": "Resets the PIDs of the *current* profile to their default values. Does not save."
@@ -5463,7 +5529,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Expects 4 bytes. Use `MSP_SET_BOARD_ALIGNMENT` for primary board orientation.",
         "description": "Sets sensor alignment (legacy format)."
@@ -5498,7 +5564,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Only available if `USE_LED_STRIP` is defined. Expects 3 bytes. Returns error if setting fails (invalid index).",
         "description": "Sets the color index for a specific LED mode/function combination."
@@ -5510,7 +5576,7 @@
         "direction": 0,
         "request": null,
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Not implemented in INAV `fc_msp.c`. Use `MSP_ACC_CALIBRATION`.",
         "description": "Sets the accelerometer trim values (leveling calibration)."
@@ -5522,7 +5588,7 @@
         "direction": 1,
         "request": null,
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Not implemented in INAV `fc_msp.c`. Calibration data via `MSP_CALIBRATION_DATA`.",
         "description": "Gets the accelerometer trim values."
@@ -5643,7 +5709,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Expects 9 bytes. Returns error if index invalid. Calls `loadCustomServoMixer()`. Superseded by `MSP2_INAV_SET_SERVO_MIXER`.",
         "description": "Sets a single custom servo mixer rule (legacy format)."
@@ -5724,7 +5790,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Requires RTC hardware/support. Expects 6 bytes. Uses `rtcSet()`.",
         "description": "Sets the Real-Time Clock time."
@@ -5736,7 +5802,7 @@
         "direction": 0,
         "request": null,
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Will fail if armed. Suspends RX, calls `writeEEPROM()`, `readEEPROM()`, resumes RX.",
         "description": "Saves the current configuration from RAM to non-volatile memory (EEPROM/Flash)."
@@ -5755,11 +5821,14 @@
                     "name": "Message Text",
                     "ctype": "char[]",
                     "units": "",
-                    "desc": "NUL` terminated [debug message](https://github.com/iNavFlight/inav/blob/master/docs/development/serial_printf_debugging.md) text."
+                    "desc": "NUL` terminated [debug message](https://github.com/iNavFlight/inav/blob/master/docs/development/serial_printf_debugging.md) text.",
+                    "array": true,
+                    "array_ctype": "char",
+                    "array_size": 0
                 }
             ]
         },
-        "variable_len": false,
+        "variable_len": true,
         "complex": false,
         "notes": "",
         "description": "Retrieves debug (\"serial printf\") messages from the firmware."
@@ -5778,7 +5847,10 @@
                     "name": "debugValues",
                     "ctype": "uint16_t[4]",
                     "units": "",
-                    "desc": "First 4 values from the `debug` array."
+                    "desc": "First 4 values from the `debug` array.",
+                    "array": true,
+                    "array_ctype": "uint16_t",
+                    "array_size": 4
                 }
             ]
         },
@@ -5794,7 +5866,7 @@
         "direction": -1,
         "request": null,
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "See MSPv2 documentation for the actual frame structure that follows this indicator.",
         "description": "This ID is used as a *payload indicator* within an MSPv1 message structure (`$M>`) to signify that the following payload conforms to the MSPv2 format. It's not a command itself."
@@ -6126,7 +6198,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Calls `setRSSIFromMSP()`. Expects 1 byte.",
         "description": "Allows a transmitter LUA script (or similar) to send runtime information (currently only RSSI) to the firmware."
@@ -6185,7 +6257,10 @@
                     "name": "settingName",
                     "ctype": "char[]",
                     "units": "",
-                    "desc": "Null-terminated string containing the setting name (e.g., \"gyro_main_lpf_hz\")."
+                    "desc": "Null-terminated string containing the setting name (e.g., \"gyro_main_lpf_hz\").",
+                    "array": true,
+                    "array_ctype": "char",
+                    "array_size": 0
                 }
             ]
         },
@@ -6197,11 +6272,14 @@
                     "name": "settingValue",
                     "ctype": "uint8_t[]",
                     "units": "",
-                    "desc": "Raw byte value of the setting. Size depends on the setting's type (`settingGetValueSize()`)."
+                    "desc": "Raw byte value of the setting. Size depends on the setting's type (`settingGetValueSize()`).",
+                    "array": true,
+                    "array_ctype": "uint8_t",
+                    "array_size": 0
                 }
             ]
         },
-        "variable_len": false,
+        "variable_len": true,
         "complex": false,
         "notes": "Returns error if setting not found. Use `MSP2_COMMON_SETTING_INFO` to discover settings, types, and sizes.",
         "description": "Gets the value of a specific configuration setting, identified by name or index."
@@ -6226,7 +6304,10 @@
                     "name": "settingValue",
                     "ctype": "uint8_t[]",
                     "units": "",
-                    "desc": "Raw byte value to set for the setting. Size must match the setting's type."
+                    "desc": "Raw byte value to set for the setting. Size must match the setting's type.",
+                    "array": true,
+                    "array_ctype": "uint8_t",
+                    "array_size": 0
                 }
             ]
         },
@@ -6290,7 +6371,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Expects 9 bytes. Modifies `primaryMotorMixerMutable()`. Returns error if index is invalid.",
         "description": "Sets the motor mixer weights for a single motor in the primary mixer profile."
@@ -6309,7 +6390,10 @@
                     "name": "settingName",
                     "ctype": "char[]",
                     "units": "",
-                    "desc": "Null-terminated setting name."
+                    "desc": "Null-terminated setting name.",
+                    "array": true,
+                    "array_ctype": "char",
+                    "array_size": 0
                 },
                 {
                     "name": "pgn",
@@ -6369,17 +6453,23 @@
                     "name": "lookupNames",
                     "ctype": "char[]",
                     "units": "",
-                    "desc": "(If `mode == MODE_LOOKUP`) Series of null-terminated strings for each possible value from min to max."
+                    "desc": "(If `mode == MODE_LOOKUP`) Series of null-terminated strings for each possible value from min to max.",
+                    "array": true,
+                    "array_ctype": "char",
+                    "array_size": 0
                 },
                 {
                     "name": "settingValue",
                     "ctype": "uint8_t[]",
                     "units": "",
-                    "desc": "Current raw byte value of the setting."
+                    "desc": "Current raw byte value of the setting.",
+                    "array": true,
+                    "array_ctype": "uint8_t",
+                    "array_size": 0
                 }
             ]
         },
-        "variable_len": false,
+        "variable_len": true,
         "complex": false,
         "notes": "",
         "description": "Gets detailed information about a specific configuration setting (name, type, range, flags, current value, etc.)."
@@ -6600,7 +6690,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Expects 19 bytes. Updates the `radar_pois` array.",
         "description": "Sets the position and status information for a \"radar\" Point of Interest (POI). Used for displaying other craft/objects on the OSD map."
@@ -6612,7 +6702,7 @@
         "direction": 0,
         "request": null,
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Not implemented in INAV `fc_msp.c`.",
         "description": "Sets radar information to display (likely internal/unused)."
@@ -6671,7 +6761,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Requires `USE_RX_MSP`. Expects at least 7 bytes. Updates `rxLinkStatistics` and sets RSSI via `setRSSIFromMSP_RC()` only if `sublinkID` is 0. This message expects **no reply** (`MSP_RESULT_NO_REPLY`).",
         "description": "Provides RC link statistics (RSSI, LQ) to the FC, typically from an MSP-based RC link (like ExpressLRS). Sent periodically by the RC link."
@@ -6707,18 +6797,24 @@
                     "name": "band",
                     "ctype": "char[4]",
                     "units": "-",
-                    "desc": "Operating band string (e.g., \"2G4\", \"900\")."
+                    "desc": "Operating band string (e.g., \"2G4\", \"900\").",
+                    "array": true,
+                    "array_ctype": "char",
+                    "array_size": 4
                 },
                 {
                     "name": "mode",
                     "ctype": "char[6]",
                     "units": "-",
-                    "desc": "Operating mode/rate string (e.g., \"100HZ\", \"F1000\")."
+                    "desc": "Operating mode/rate string (e.g., \"100HZ\", \"F1000\").",
+                    "array": true,
+                    "array_ctype": "char",
+                    "array_size": 6
                 }
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Requires `USE_RX_MSP`. Expects at least 15 bytes. Updates `rxLinkStatistics` only if `sublinkID` is 0. Converts band/mode strings to uppercase. This message expects **no reply** (`MSP_RESULT_NO_REPLY`).",
         "description": "Provides additional RC link information (power levels, band, mode) to the FC from an MSP-based RC link. Sent less frequently than link stats."
@@ -7196,7 +7292,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Expects 41 bytes. Performs validation on `vbatSource` and `capacityUnit`.",
         "description": "Sets miscellaneous configuration settings, superseding `MSP_SET_MISC`."
@@ -7390,7 +7486,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Expects 29 bytes. Performs validation on `vbatSource` and `capacityUnit`.",
         "description": "Sets the battery voltage/current sensor configuration and capacity settings for the current battery profile."
@@ -7592,7 +7688,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Expects 15 bytes. Constraints applied to rates based on axis.",
         "description": "Sets the rates and expos for the current control rate profile (stabilized and manual). Supersedes `MSP_SET_RC_TUNING`."
@@ -7769,7 +7865,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Expects 14 bytes. Returns error if `USE_MR_BRAKING_MODE` is not defined.",
         "description": "Sets configuration parameters for the multirotor braking mode feature."
@@ -7860,7 +7956,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Only available on non-SITL builds. Expects 2 bytes. Returns error if `timerIndex` is invalid.",
         "description": "Set the output mode override for a specific hardware timer."
@@ -8029,7 +8125,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Expects 9 bytes. Calls `mixerUpdateStateFlags()`.",
         "description": "Sets INAV-specific mixer configuration details."
@@ -8094,7 +8190,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Requires `USE_OSD`. Expects 4 bytes. Returns error if indexes are invalid. If the modified layout is not the currently active one, it temporarily overrides the active layout for 10 seconds to show the change. Otherwise, triggers a full OSD redraw.",
         "description": "Sets the position of a single OSD item within a specific layout."
@@ -8296,7 +8392,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Requires `USE_OSD`. Expects 24 bytes. ADSB alarms are not settable via this message.",
         "description": "Sets OSD alarm threshold settings."
@@ -8442,7 +8538,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Requires `USE_OSD`. Expects 9 bytes. Triggers a full OSD redraw.",
         "description": "Sets OSD display preferences."
@@ -8465,7 +8561,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Expects 1 byte. Will fail if armed. Calls `setConfigBatteryProfileAndWriteEEPROM()`.",
         "description": "Selects the active battery profile and saves configuration."
@@ -8484,11 +8580,14 @@
                     "name": "debugValues",
                     "ctype": "uint32_t[DEBUG32_VALUE_COUNT]",
                     "units": "",
-                    "desc": "Values from the `debug` array (typically 8 values)."
+                    "desc": "Values from the `debug` array (typically 8 values).",
+                    "array": true,
+                    "array_ctype": "uint32_t",
+                    "array_size": "DEBUG32_VALUE_COUNT"
                 }
             ]
         },
-        "variable_len": false,
+        "variable_len": true,
         "complex": true,
         "notes": "`DEBUG32_VALUE_COUNT` is usually 8.",
         "description": "Retrieves values from the firmware's 32-bit `debug[]` array. Supersedes `MSP_DEBUG`."
@@ -8577,7 +8676,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Requires `USE_BLACKBOX`. Expects 9 bytes. Returns error if Blackbox is currently logging (`!blackboxMayEditConfig()`).",
         "description": "Sets the Blackbox configuration. Supersedes `MSP_SET_BLACKBOX_CONFIG`."
@@ -8627,7 +8726,10 @@
                     "name": "label",
                     "ctype": "char[TEMPERATURE_LABEL_LEN]",
                     "units": "",
-                    "desc": "User-defined label for the sensor."
+                    "desc": "User-defined label for the sensor.",
+                    "array": true,
+                    "array_ctype": "char",
+                    "array_size": "TEMPERATURE_LABEL_LEN"
                 }
             ],
             "repeating": "MAX_TEMP_SENSORS"
@@ -8680,7 +8782,10 @@
                     "name": "label",
                     "ctype": "char[TEMPERATURE_LABEL_LEN]",
                     "units": "",
-                    "desc": "Sets sensor label (converted to uppercase)."
+                    "desc": "Sets sensor label (converted to uppercase).",
+                    "array": true,
+                    "array_ctype": "char",
+                    "array_size": "TEMPERATURE_LABEL_LEN"
                 }
             ],
             "repeating": "MAX_TEMP_SENSORS"
@@ -8986,11 +9091,14 @@
                     "name": "osdRleData",
                     "ctype": "uint8_t[]",
                     "units": "",
-                    "desc": "(If OSD supported) Run-length encoded OSD character data. Terminated by `[0, 0]`."
+                    "desc": "(If OSD supported) Run-length encoded OSD character data. Terminated by `[0, 0]`.",
+                    "array": true,
+                    "array_ctype": "uint8_t",
+                    "array_size": 0
                 }
             ]
         },
-        "variable_len": false,
+        "variable_len": true,
         "complex": false,
         "notes": "Requires `USE_SIMULATOR`. Complex message handling state changes for enabling/disabling HITL. Sensor data is injected directly. OSD data is sent using a custom RLE scheme. See `simulatorData` struct and associated code for details.",
         "description": "Handles Hardware-in-the-Loop (HITL) simulation data exchange. Receives simulated sensor data and options, sends back control outputs and debug info."
@@ -9056,7 +9164,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Expects 7 bytes. Returns error if index invalid. Calls `loadCustomServoMixer()`.",
         "description": "Sets a single custom servo mixer rule, including programming framework condition ID. Supersedes `MSP_SET_SERVO_MIX_RULE`."
@@ -9199,7 +9307,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Requires `USE_PROGRAMMING_FRAMEWORK`. Expects 15 bytes. Returns error if index is invalid.",
         "description": "Sets the configuration for a single Logic Condition by its index."
@@ -9230,11 +9338,14 @@
                     "name": "conditionValues",
                     "ctype": "uint32_t[MAX_LOGIC_CONDITIONS]",
                     "units": "",
-                    "desc": "Array of current values for each logic condition (`logicConditionGetValue(i)`). 1 for true, 0 for false, or numerical value depending on operation."
+                    "desc": "Array of current values for each logic condition (`logicConditionGetValue(i)`). 1 for true, 0 for false, or numerical value depending on operation.",
+                    "array": true,
+                    "array_ctype": "uint32_t",
+                    "array_size": "MAX_LOGIC_CONDITIONS"
                 }
             ]
         },
-        "variable_len": false,
+        "variable_len": true,
         "complex": false,
         "notes": "Requires `USE_PROGRAMMING_FRAMEWORK`.",
         "description": "Retrieves the current evaluated status (true/false or numerical value) of all logic conditions."
@@ -9253,11 +9364,14 @@
                     "name": "gvarValues",
                     "ctype": "uint32_t[MAX_GLOBAL_VARIABLES]",
                     "units": "",
-                    "desc": "Array of current values for each global variable (`gvGet(i)`)."
+                    "desc": "Array of current values for each global variable (`gvGet(i)`).",
+                    "array": true,
+                    "array_ctype": "uint32_t",
+                    "array_size": "MAX_GLOBAL_VARIABLES"
                 }
             ]
         },
-        "variable_len": false,
+        "variable_len": true,
         "complex": false,
         "notes": "Requires `USE_PROGRAMMING_FRAMEWORK`.",
         "description": "Retrieves the current values of all Global Variables (GVARS)."
@@ -9410,7 +9524,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Requires `USE_PROGRAMMING_FRAMEWORK`. Expects 20 bytes. Returns error if index is invalid.",
         "description": "Sets the configuration for a single Programming PID by its index."
@@ -9429,11 +9543,14 @@
                     "name": "pidOutputs",
                     "ctype": "uint32_t[MAX_PROGRAMMING_PID_COUNT]",
                     "units": "",
-                    "desc": "Array of current output values for each Programming PID (`programmingPidGetOutput(i)`)."
+                    "desc": "Array of current output values for each Programming PID (`programmingPidGetOutput(i)`).",
+                    "array": true,
+                    "array_ctype": "uint32_t",
+                    "array_size": "MAX_PROGRAMMING_PID_COUNT"
                 }
             ]
         },
-        "variable_len": false,
+        "variable_len": true,
         "complex": false,
         "notes": "Requires `USE_PROGRAMMING_FRAMEWORK`.",
         "description": "Retrieves the current output value of all Programming PIDs."
@@ -9529,7 +9646,7 @@
         "direction": 0,
         "request": null,
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Requires `USE_OPFLOW`. Will fail if armed. Calls `opflowStartCalibration()`.",
         "description": "Starts the optical flow sensor calibration procedure."
@@ -9552,7 +9669,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Requires `MSP_FIRMWARE_UPDATE`. Expects 4 bytes. Returns error if preparation fails (e.g., no storage, invalid size). Calls `firmwareUpdatePrepare()`.",
         "description": "Prepares the flight controller to receive a firmware update via MSP."
@@ -9570,12 +9687,15 @@
                     "name": "firmwareChunk",
                     "ctype": "uint8_t[]",
                     "units": "",
-                    "desc": "Chunk of firmware data."
+                    "desc": "Chunk of firmware data.",
+                    "array": true,
+                    "array_ctype": "uint8_t",
+                    "array_size": 0
                 }
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": true,
         "complex": false,
         "notes": "Requires `MSP_FIRMWARE_UPDATE`. Returns error if storage fails (e.g., out of space, checksum error). Called repeatedly until the entire firmware is transferred. Calls `firmwareUpdateStore()`.",
         "description": "Stores a chunk of firmware data received via MSP."
@@ -9598,7 +9718,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Requires `MSP_FIRMWARE_UPDATE`. Expects 1 byte. Returns error if update cannot start (e.g., not fully received). Calls `firmwareUpdateExec()`. If successful, the device will reboot into the new firmware.",
         "description": "Executes the firmware update process (flashes the stored firmware and reboots)."
@@ -9610,7 +9730,7 @@
         "direction": 0,
         "request": null,
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Requires `MSP_FIRMWARE_UPDATE`. Returns error if rollback preparation fails (e.g., no rollback image available). Calls `firmwareUpdateRollbackPrepare()`.",
         "description": "Prepares the flight controller to perform a firmware rollback to the previously stored version."
@@ -9622,7 +9742,7 @@
         "direction": 0,
         "request": null,
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Requires `MSP_FIRMWARE_UPDATE`. Returns error if rollback cannot start. Calls `firmwareUpdateRollbackExec()`. If successful, the device will reboot into the backup firmware.",
         "description": "Executes the firmware rollback process (flashes the stored backup firmware and reboots)."
@@ -9715,7 +9835,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Requires `USE_SAFE_HOME`. Expects 10 bytes. Returns error if index invalid. Resets corresponding FW autoland approach if `USE_FW_AUTOLAND` is enabled.",
         "description": "Sets the configuration for a specific Safe Home location."
@@ -9884,11 +10004,14 @@
                     "name": "escData",
                     "ctype": "escSensorData_t[]",
                     "units": "",
-                    "desc": "Array of `escSensorData_t` structures containing voltage, current, temp, RPM, errors etc. for each ESC."
+                    "desc": "Array of `escSensorData_t` structures containing voltage, current, temp, RPM, errors etc. for each ESC.",
+                    "array": true,
+                    "array_ctype": "escSensorData_t",
+                    "array_size": 0
                 }
             ]
         },
-        "variable_len": false,
+        "variable_len": true,
         "complex": true,
         "notes": "Requires `USE_ESC_SENSOR`. See `escSensorData_t` in `sensors/esc_sensor.h` for the exact structure fields.",
         "description": "Retrieves the full telemetry data structure reported by each ESC."
@@ -9941,7 +10064,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": true,
         "notes": "Requires `USE_LED_STRIP`. Expects `1 + sizeof(ledConfig_t)` bytes. Returns error if index invalid. Calls `reevaluateLedConfig()`.",
         "description": "Sets the configuration for a single LED on the strip using the `ledConfig_t` structure. Supersedes `MSP_SET_LED_STRIP_CONFIG`."
@@ -10072,7 +10195,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Requires `USE_FW_AUTOLAND`. Expects 15 bytes. Returns error if index invalid.",
         "description": "Sets the configuration for a specific Fixed Wing Autoland approach."
@@ -10090,12 +10213,15 @@
                     "name": "ubxCommand",
                     "ctype": "uint8_t[]",
                     "units": "",
-                    "desc": "Raw U-Blox UBX protocol command frame (including header, class, ID, length, payload, checksum)."
+                    "desc": "Raw U-Blox UBX protocol command frame (including header, class, ID, length, payload, checksum).",
+                    "array": true,
+                    "array_ctype": "uint8_t",
+                    "array_size": 0
                 }
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": true,
         "complex": false,
         "notes": "Requires GPS feature enabled (`FEATURE_GPS`) and the GPS driver to be U-Blox (`isGpsUblox()`). Payload must be at least 8 bytes (minimum UBX frame size). Use with extreme caution, incorrect commands can misconfigure the GPS module. Calls `gpsUbloxSendCommand()`.",
         "description": "Sends a raw command directly to a U-Blox GPS module connected to the FC."
@@ -10201,7 +10327,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Requires `USE_RATE_DYNAMICS`. Expects 6 bytes.",
         "description": "Sets Rate Dynamics configuration parameters for the current control rate profile."
@@ -10356,7 +10482,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Requires `USE_EZ_TUNE`. Expects 10 or 11 bytes. Calls `ezTuneUpdate()` after setting parameters.",
         "description": "Sets the EZ-Tune parameters and triggers an update."
@@ -10379,7 +10505,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Expects 1 byte. Will fail if armed. Calls `setConfigMixerProfileAndWriteEEPROM()`. Only applicable if `MAX_MIXER_PROFILE_COUNT` > 1.",
         "description": "Selects the active mixer profile and saves configuration."
@@ -10550,7 +10676,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Expects 8 bytes. Returns error if index invalid. Calls `servoComputeScalingFactors()`.",
         "description": "Sets the configuration parameters for a single servo. Supersedes `MSP_SET_SERVO_CONFIGURATION`."
@@ -10697,7 +10823,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Requires `USE_GEOZONE`. Expects 14 bytes. Returns error if index invalid. Calls `geozoneResetVertices()`. Vertices must be set subsequently using `MSP2_INAV_SET_GEOZONE_VERTEX`.",
         "description": "Sets the main configuration for a specific Geozone (type, shape, altitude, action). **This command resets (clears) all vertices associated with the zone.**"
@@ -10779,7 +10905,7 @@
         "direction": 0,
         "request": null,
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Requires `rxConfig()->receiverType == RX_TYPE_SERIAL`. Requires `USE_SERIALRX_CRSF` or `USE_SERIALRX_SRXL2`. Calls `crsfBind()` or `srxl2Bind()` respectively. Returns error if receiver type or provider is not supported for binding.",
         "description": "Initiates the receiver binding procedure for supported serial protocols (CRSF, SRXL2)."
@@ -10808,7 +10934,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Requires `USE_RANGEFINDER_MSP`. Calls `mspRangefinderReceiveNewData()`.",
         "description": "Provides rangefinder data (distance, quality) from an external MSP-based sensor."
@@ -10843,7 +10969,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Requires `USE_OPFLOW_MSP`. Calls `mspOpflowReceiveNewData()`.",
         "description": "Provides optical flow data (motion, quality) from an external MSP-based sensor."
@@ -10999,7 +11125,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Requires `USE_GPS_PROTO_MSP`. Calls `mspGPSReceiveNewData()`.",
         "description": "Provides detailed GPS data from an external MSP-based GPS module."
@@ -11046,7 +11172,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Requires `USE_MAG_MSP`. Calls `mspMagReceiveNewData()`.",
         "description": "Provides magnetometer data from an external MSP-based compass module."
@@ -11087,7 +11213,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Requires `USE_BARO_MSP`. Calls `mspBaroReceiveNewData()`.",
         "description": "Provides barometer data from an external MSP-based barometer module."
@@ -11128,7 +11254,7 @@
             ]
         },
         "reply": null,
-        "variable_len": false,
+        "variable_len": null,
         "complex": false,
         "notes": "Requires `USE_PITOT_MSP`. Calls `mspPitotmeterReceiveNewData()`.",
         "description": "Provides airspeed data from an external MSP-based pitot sensor module."
@@ -11152,7 +11278,7 @@
             ]
         },
         "reply": null,
-        "variable_len": true,
+        "variable_len": null,
         "complex": true,
         "notes": "Requires `USE_HEADTRACKER` and `USE_HEADTRACKER_MSP`. Calls `mspHeadTrackerReceiverNewData()`. Payload structure needs verification from `mspHeadTrackerReceiverNewData` implementation.",
         "description": "Provides head tracker orientation data."
