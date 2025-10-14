@@ -255,7 +255,7 @@ def generate_markdown(defs: Dict[str, Any]) -> str:
 
 def main():
     in_path = Path(sys.argv[1]) if len(sys.argv) >= 2 else Path("lib/msp_messages.json")
-    out_path = Path(sys.argv[2]) if len(sys.argv) >= 3 else Path("msp_ref_2.md")
+    out_path = Path(sys.argv[2]) if len(sys.argv) >= 3 else Path("docs/msp_ref_2.md")
 
     with in_path.open("r", encoding="utf-8") as f:
         defs = json.load(f)

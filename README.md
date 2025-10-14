@@ -1,31 +1,32 @@
 # msp_documentation
-mapping/documentation of INAV multiwii serial protocol
+mapping/documentation/reverse engineering of INAV multiwii serial protocol
+Creates one master JSON file from AI-gathered markdown, plugs holes, correct errors\
+Also auto-generates markdown files\
 
 ## Heavily WIP
 
-This is super bad and convoluted and has real problems with variable length/format messages (which isn't a surprise) but is intended as a basis to start defining the protocol PROGRAMMATICALLY
+## Not meant to be run every time/often, run it *ONCE* and *THEN* fix mistakes in the JSON file, not the error-prone Markdown
+
+This has real problems with variable length/format messages (which isn't a surprise) but is intended as a basis to start defining the protocol PROGRAMMATICALLY
 
 What we do:
 * Get all possible enums, structs and defines we can from the inav source
 * Read the generated markdown file
 * Generate a json dictionnary of MSP messages from the markdown file
 * Go look in the source files for structure details
+* Go look for the enums and structs
 
-This fails on complex undefined and variable length messages, which were a TERRIBLE idea to begin with AAAH!!!
+This fails on complex undefined and variable length messages, which were a TERRIBLE idea to begin with. Since there's only a dozen or so of them, they will just be added manually.\
 
 ** just run.sh **\
 
-get_msp_defs.py \
-parsemd.py -> msp_messages.json\
-get_inav_defines.py\
-get_inav_enums.py\
-bad_define_parse.py (this, as named, is bad; as it skips any define that isn't simple arithmetic and ignores #ifdefs; complex cases shouldn't be handled here anyway but in the flight controller)\
-mspref.py (updates msp_messages.json)
+Once we're happy with the JSON, we use it as master for everything else going forward.
 
-# Not meant to be run every time/often, run it *ONCE* and *THEN* fix mistakes in the JSON file, not the error-prone Markdown
+
+
+
 
 ## Problems:
-* msg 100 (MSP_IDENT, deprec) and 255 (v2 frame indicator) missing
 * wrote old get_enums, ifdef problems, wrote new get_enums, forgot about it, forgot how it worked, worked on old one, it had problems, remembered old one, forgot how it works, but just works. yeah.
 * doubtful source-of-truth before burning the markdown file and going solely from json
 * How do we handle polymorphic messages? Dunno yet lol
