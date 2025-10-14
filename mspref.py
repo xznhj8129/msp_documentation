@@ -2,32 +2,7 @@ import json
 import re
 import os
 from lib.inav_defines import InavDefines  # the auto-generated module
-
-def get_define(name: str):
-    # optional sanity checks
-    if not name.isidentifier() or not name.isupper():
-        raise ValueError(f"Bad define name: {name!r}")
-    # returns the value, or None if missing or explicitly set to None
-    return getattr(InavDefines, name, None)
-
-
-bin_type_map = {
-    "enum": "B",
-    "uint8_t": "B",
-    "uint16_t": "H",
-    "uint32_t": "I",
-    "uint64_t": "Q",
-    "int8_t": "b",
-    "int16_t": "h",
-    "int32_t": "i",
-    "int64_t": "q",
-    "float": "f",
-    "double": "d",
-    "char": "c",
-    "bool": "?",
-    "boolean": "?"
-}
-
+from mspcommonlib import *
 
 with open("lib/msp_messages.json","r") as file:
     f = file.read()
@@ -117,6 +92,14 @@ for msg_code in msp:
             print('\t\tBytes:',total_bytes)
             msp[msg_code][direction]["struct"] = structstr
             msp[msg_code][direction]["size"] = total_bytes
+
+# MANUAL CORRECTONS
+def correct_enum(msgcode, direction, field, e_type):
+    idx = next(i for i, f in enumerate(msp[msgcode][direction]["payload"]) if f.get("name","") == field)
+    msp[msgcode][direction]["payload"][idx]["enum"] = e_type
+
+correct_enum("MSP_RX_CONFIG", "reply", "serialRxProvider", "rxSerialReceiverType_e")
+
 
 with open("lib/msp_messages.json","w+") as file:
     file.write(json.dumps(msp,indent=4))

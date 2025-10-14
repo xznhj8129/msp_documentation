@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
 import json
 from typing import List, Tuple, Optional, Dict, Any, Union, Literal, TypedDict
-from lib.msp_enum import MultiWii
 import re
-
+from mspcommonlib import bin_type_map, msg_fmt, type_fmt, val_fmt, _type_sizes
 
 
 def parse_array(ctype: str):
@@ -21,67 +20,6 @@ def parse_array(ctype: str):
         return True, dtype, int, int(inside)
     return True, dtype, str, inside
 
-
-bin_type_map = {
-    "enum": "B",
-    "uint8_t": "B",
-    "uint16_t": "H",
-    "uint32_t": "I",
-    "uint64_t": "Q",
-    "int8_t": "b",
-    "int16_t": "h",
-    "int32_t": "i",
-    "int64_t": "q",
-    "float": "f",
-    "double": "d",
-    "char": "c",
-    "bool": "?",
-    "boolean": "?",  # normalize to bool
-    "boxBitmask_t": "Q",
-}
-
-msg_fmt = {
-    "code": 0,
-    "hex": "",
-    "mspv": None,
-    "direction": None,
-    "request": None,
-    "reply": None,
-    "variable_len": False,
-    "complex": False,
-    #"deprecated": False,
-}
-
-type_fmt = {
-    "size": 0,
-    "struct": "",
-    "payload": None
-    #"variants": 
-}
-
-val_fmt = {
-    "name": None,
-    "ctype": None,
-    #"size": None,
-    "units": None,
-    "desc": None,
-}
-
-# Byte sizes for struct format chars
-_type_sizes = {
-    "B":1,
-    "H":2,
-    "I":4,
-    "Q":8,
-    "b":1,
-    "h":2,
-    "i":4,
-    "q":8,
-    "f":4,
-    "d":8,
-    "c":1,
-    "?":1
-}
 
 def _parse_int(s: str) -> Optional[int]:
     s = (s or "").strip()
@@ -449,7 +387,8 @@ def _parse_table_from_block(block: str) -> List[Dict[str, Any]]:
 
 
         #val['size'] = size
-        val['units'] = units
+        if units!="-":
+            val['units'] = units
         val['desc'] = desc
         if isoptional:
             val["optional"] = True 
@@ -661,7 +600,7 @@ def generate_msp_dict(markdown_content: str) -> Dict[str, Any]:
                 return [], None, None, None
 
             rep_factor, core = _extract_repetition_factor(block_text)
-            if rep_factor is None:
+            if rep_factor is None or rep_factor is False:
                 core = block_text
 
             fields = _parse_table_from_block(core)
@@ -723,7 +662,9 @@ def generate_msp_dict(markdown_content: str) -> Dict[str, Any]:
             msg["reply"] = rep_data
         else:
             rep_data = None
-        msg["variable_len"] = (repeating_rep!=None) or (repeating_req!=None) or varr_req or varr_rep
+        varlen = repeating_rep or repeating_req or varr_req or varr_rep
+        if varlen == None: varlen = False
+        msg["variable_len"] = varlen
         msg["notes"] = notes_str
         if description_line:
             msg["description"] = description_line
@@ -745,15 +686,27 @@ if __name__ == "__main__":
         markdown = f.read()
 
     data = generate_msp_dict(markdown)
-    for c in MultiWii:
-        print(c.name, c.value)
+    from lib.msp_enum import MSPCodes
+    for c in MSPCodes:
+        #print(c.name, c.value)
         if c.name not in data:
-            print(c.name, c.value)
+            print("Missing:",c.name, c.value)
             msg = msg_fmt.copy()
             msg['code'] = c.value
             msg['hex'] = hex(c.value)
             msg['name'] = c.name
             msg['missing'] = True
-    text = json.dumps(data, indent=4, ensure_ascii=False)
+            data[c.name] = msg
+
+
+    # manual corrections
+
+
+    sorted_items = sorted(
+        data.items(),
+        key=lambda kv: kv[1]["code"]  # kv = (key, value)
+    )
+    d_sorted = dict(sorted_items)
+    text = json.dumps(d_sorted, indent=4, ensure_ascii=False)
     with open("lib/msp_messages.json", "w", encoding="utf-8") as f:
         f.write(text)

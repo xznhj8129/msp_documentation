@@ -7,9 +7,6 @@ import enum
 import keyword
 import sys
 
-import unavlib
-from unavlib.enums import base_enums
-
 
 # --- Patterns ---
 # Enum block: Find complete `typedef enum { ... } name;` potentially spanning lines

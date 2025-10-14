@@ -1338,7 +1338,7 @@ These are commands originating from the MultiWii project.
     | Field | C Type | Size (Bytes) | Units | Description |
     |---|---|---|---|---|
     | `waypointIndex` | `uint8_t` | 1 | Index | Index of the returned waypoint. |
-    | `action` | `uint8_t` | 1 | Enum | Waypoint action type (`navWaypointAction_e`). |
+    | `action` | `uint8_t` | 1 | Enum | Waypoint action type Enum (`navWaypointAction_e`). |
     | `latitude` | `int32_t` | 4 | deg * 1e7 | Latitude coordinate. |
     | `longitude` | `int32_t` | 4 | deg * 1e7 | Longitude coordinate. |
     | `altitude` | `int32_t` | 4 | cm | Altitude coordinate (relative to home or sea level, see flag). |
@@ -1438,8 +1438,8 @@ These are commands originating from the MultiWii project.
 *   **Payload:** Repeated (`LED_MODE_COUNT * LED_DIRECTION_COUNT` + `LED_SPECIAL_COLOR_COUNT`) times:
     | Field | C Type | Size (Bytes) | Description |
     |---|---|---|---|
-    | `modeIndex` | `uint8_t` | 1 | Index of the LED mode (`ledModeIndex_e`). `LED_MODE_COUNT` for special colors. |
-    | `directionOrSpecialIndex` | `uint8_t` | 1 | Index of the direction (`ledDirection_e`) or special color (`ledSpecialColor_e`). |
+    | `modeIndex` | `uint8_t` | 1 | Index of the LED mode Enum (`ledModeIndex_e`). `LED_MODE_COUNT` for special colors. |
+    | `directionOrSpecialIndex` | `uint8_t` | 1 | Index of the direction Enum (`ledDirection_e`) or special color (`ledSpecialColor_e`). |
     | `colorIndex` | `uint8_t` | 1 | Index of the color assigned from `ledStripConfig()->colors`. |
 *   **Notes:** Only available if `USE_LED_STRIP` is defined. Allows mapping modes/directions/specials to configured colors.
 
@@ -1565,9 +1565,9 @@ These commands are sent *to* the FC.
     | `legacyMaxThrottle` | `uint16_t` | 2 | - | Ignored. |
     | `minCommand` | `uint16_t` | 2 | PWM | Sets `motorConfigMutable()->mincommand` (constrained 0-PWM_RANGE_MAX). |
     | `failsafeThrottle` | `uint16_t` | 2 | PWM | Sets `currentBatteryProfileMutable->failsafe_throttle` (constrained PWM_RANGE_MIN/MAX). |
-    | `gpsType` | `uint8_t` | 1 | Enum | `gpsProvider_e` (Sets `gpsConfigMutable()->provider`)|
+    | `gpsType` | `uint8_t` | 1 | Enum | Enum (`gpsProvider_e` (Sets `gpsConfigMutable()->provider`)|
     | `legacyGpsBaud` | `uint8_t` | 1 | - | Ignored. |
-    | `gpsSbasMode` | `uint8_t` | 1 | Enum | `sbasMode_e` (Sets `gpsConfigMutable()->sbasMode`) |
+    | `gpsSbasMode` | `uint8_t` | 1 | Enum | Enum (`sbasMode_e` (Sets `gpsConfigMutable()->sbasMode`) |
     | `legacyMwCurrentOut` | `uint8_t` | 1 | - | Ignored. |
     | `rssiChannel` | `uint8_t` | 1 | Index | Sets `rxConfigMutable()->rssi_channel` (constrained 0-MAX_SUPPORTED_RC_CHANNEL_COUNT). Updates source. |
     | `reserved1` | `uint8_t` | 1 | - | Ignored. |
@@ -1768,7 +1768,7 @@ These commands are sent *to* the FC.
 *   **Request Payload (Extended):**
     | Field | C Type | Size (Bytes) | Description |
     |---|---|---|---|
-    | `passthroughMode` | `uint8_t` | 1 | Type of passthrough (`mspPassthroughType_e`: Serial ID, Serial Function, ESC 4way). |
+    | `passthroughMode` | `uint8_t` | 1 | Type of passthrough Enum (`mspPassthroughType_e`: Serial ID, Serial Function, ESC 4way). |
     | `passthroughArgument` | `uint8_t` | 1 | Argument for the mode (e.g., Serial Port Identifier, Serial Function ID). Defaults to 0 if not sent. |
 *   **Reply Payload:**
     | Field | C Type | Size (Bytes) | Description |
@@ -2074,7 +2074,7 @@ These commands are part of the MSPv2 specification and are intended for general 
 *   **Payload:** Repeated for each available serial port:
     | Field | C Type | Size (Bytes) | Description |
     |---|---|---|---|
-    | `identifier` | `uint8_t` | 1 | Port identifier (`serialPortIdentifier_e`). |
+    | `identifier` | `uint8_t` | 1 | Port identifier Enum (`serialPortIdentifier_e`). |
     | `functionMask` | `uint32_t` | 4 | Bitmask of enabled functions (`FUNCTION_*`). |
     | `mspBaudIndex` | `uint8_t` | 1 | Baud rate index for MSP function. |
     | `gpsBaudIndex` | `uint8_t` | 1 | Baud rate index for GPS function. |
@@ -2089,7 +2089,7 @@ These commands are part of the MSPv2 specification and are intended for general 
 *   **Payload:** Repeated for each port being configured:
     | Field | C Type | Size (Bytes) | Description |
     |---|---|---|---|
-    | `identifier` | `uint8_t` | 1 | Port identifier (`serialPortIdentifier_e`). |
+    | `identifier` | `uint8_t` | 1 | Port identifier Enum (`serialPortIdentifier_e`). |
     | `functionMask` | `uint32_t` | 4 | Bitmask of functions to enable. |
     | `mspBaudIndex` | `uint8_t` | 1 | Baud rate index for MSP. |
     | `gpsBaudIndex` | `uint8_t` | 1 | Baud rate index for GPS. |
@@ -3323,12 +3323,12 @@ These commands are specific extensions added by the INAV project.
     | Field | C Type | Size (Bytes) | Description |
     |---|---|---|---|
     | `geozoneIndex` | `uint8_t` | 1 | Index requested. |
-    | `type` | `uint8_t` | 1 | Enum (`GEOZONE_TYPE_*`): Zone type (Inclusion/Exclusion). |
-    | `shape` | `uint8_t` | 1 | Enum (`GEOZONE_SHAPE_*`): Zone shape (Polygon/Circular). |
+    | `type` | `uint8_t` | 1 | Define (`GEOZONE_TYPE_EXCLUSIVE/INCLUSIVE`): Zone type (Inclusion/Exclusion). |
+    | `shape` | `uint8_t` | 1 | Define (`GEOZONE_SHAPE_CIRCULAR/POLYGHON`): Zone shape (Polygon/Circular). |
     | `minAltitude` | `uint32_t` | 4 | Minimum allowed altitude within the zone (cm). |
     | `maxAltitude` | `uint32_t` | 4 | Maximum allowed altitude within the zone (cm). |
     | `isSeaLevelRef` | `uint8_t` | 1 | Boolean: 1 if altitudes are relative to sea level, 0 if relative to home. |
-    | `fenceAction` | `uint8_t` | 1 | Enum (`GEOZONE_ACTION_*`): Action to take upon boundary violation. |
+    | `fenceAction` | `uint8_t` | 1 | Enum (`geozoneActionState_e`): Action to take upon boundary violation. |
     | `vertexCount` | `uint8_t` | 1 | Number of vertices defined for this zone. |
 *   **Notes:** Requires `USE_GEOZONE`. Used by `mspFcGeozoneOutCommand`.
 
@@ -3340,12 +3340,12 @@ These commands are specific extensions added by the INAV project.
     | Field | C Type | Size (Bytes) | Description |
     |---|---|---|---|
     | `geozoneIndex` | `uint8_t` | 1 | Index of the geozone (0 to `MAX_GEOZONES_IN_CONFIG - 1`). |
-    | `type` | `uint8_t` | 1 | Enum (`GEOZONE_TYPE_*`): Zone type. |
-    | `shape` | `uint8_t` | 1 | Enum (`GEOZONE_SHAPE_*`): Zone shape. |
+    | `type` | `uint8_t` | 1 | Define (`GEOZONE_TYPE_EXCLUSIVE/INCLUSIVE`): Zone type (Inclusion/Exclusion). |
+    | `shape` | `uint8_t` | 1 | Define (`GEOZONE_SHAPE_CIRCULAR/POLYGHON`): Zone shape (Polygon/Circular). |
     | `minAltitude` | `uint32_t` | 4 | Minimum allowed altitude (cm). |
     | `maxAltitude` | `uint32_t` | 4 | Maximum allowed altitude (cm). |
     | `isSeaLevelRef` | `uint8_t` | 1 | Boolean: Altitude reference. |
-    | `fenceAction` | `uint8_t` | 1 | Enum (`GEOZONE_ACTION_*`): Fence action. |
+    | `fenceAction` | `uint8_t` | 1 | Enum (`geozoneActionState_e`): Action to take upon boundary violation. |
     | `vertexCount` | `uint8_t` | 1 | Number of vertices to be defined (used for validation later). |
 *   **Notes:** Requires `USE_GEOZONE`. Expects 14 bytes. Returns error if index invalid. Calls `geozoneResetVertices()`. Vertices must be set subsequently using `MSP2_INAV_SET_GEOZONE_VERTEX`.
 

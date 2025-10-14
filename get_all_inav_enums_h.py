@@ -21,7 +21,7 @@ def strip_comments(text: str) -> str:
     text = re.sub(r'//.*', '', text)                         # line comments
     return text
 
-def extract_enums(text: str):
+def extract_enums(fn: str, text: str):
     text = strip_comments(text)
     enums = []
     i = 0
@@ -49,6 +49,7 @@ def extract_enums(text: str):
                         end = n
                     block = text[start:end+1]
                     if re.search(r'\}\s*[A-Za-z_]\w*\s*;', block):
+                        enums.append(f'// {fn}\n')
                         enums.append(block.strip() + '\n\n')
                     i = end + 1
                     break
@@ -63,9 +64,10 @@ for sd in SUBDIRS:
     if not root.is_dir():
         continue
     for fn in root.rglob('*'):
+        #print(fn)
         if fn.suffix in ('.c', '.h'):
             txt = fn.read_text(errors='ignore')
-            ret = extract_enums(txt)
+            ret = extract_enums(fn, txt)
             if ret: print(fn)
             all_enums.extend(ret)
 

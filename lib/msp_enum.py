@@ -1,8 +1,7 @@
 
 import enum
 
-class MultiWii(enum.IntEnum):
-    MSP_PROTOCOL_VERSION = 0
+class MSPCodes(enum.IntEnum):
     MSP_API_VERSION = 1
     MSP_FC_VARIANT = 2
     MSP_FC_VERSION = 3
@@ -81,6 +80,7 @@ class MultiWii(enum.IntEnum):
     MSP_SET_SENSOR_CONFIG = 97
     MSP_SPECIAL_PARAMETERS = 98
     MSP_SET_SPECIAL_PARAMETERS = 99
+    MSP_IDENT = 100
     MSP_STATUS = 101
     MSP_RAW_IMU = 102
     MSP_SERVO = 103
@@ -149,6 +149,7 @@ class MultiWii(enum.IntEnum):
     MSP_RESERVE_2 = 252
     MSP_DEBUGMSG = 253
     MSP_DEBUG = 254
+    MSP_V2_FRAME = 255
     MSP2_COMMON_TZ = 4097
     MSP2_COMMON_SET_TZ = 4098
     MSP2_COMMON_SETTING = 4099

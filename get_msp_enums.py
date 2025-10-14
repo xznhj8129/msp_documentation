@@ -11,7 +11,7 @@ SUBDIRS = [
 enumfile = """
 import enum
 
-class MultiWii(enum.IntEnum):
+class MSPCodes(enum.IntEnum):
 """
 
 def strip_comments(text: str) -> str:
@@ -79,7 +79,14 @@ for l in all_out_lines:
     num = int(value, 0)
     asddsa[name] = num
 
+# manual corrections
+asddsa["MSP_IDENT"] = 100
+asddsa["MSP_V2_FRAME"] = 255
+
 inav_msp_msgs = dict(sorted(asddsa.items(), key=lambda x:x[1]))
+
+del inav_msp_msgs["MSP_PROTOCOL_VERSION"]
+
 for key in inav_msp_msgs:
     enumfile += f"    {key} = {inav_msp_msgs[key]}\n"
     print(key,":", inav_msp_msgs[key])
