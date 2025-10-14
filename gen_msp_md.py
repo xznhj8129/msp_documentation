@@ -77,7 +77,7 @@ def sizeof_entry(field: Dict[str, Any]) -> str:
 
 # ---- Markdown rendering -----------------------------------------------------
 
-inav_wiki_url = "https://github.com/xznhj8129/msp_documentation/blob/master/"
+inav_wiki_url = "https://github.com/xznhj8129/msp_documentation/blob/master/docs/"
 #inav_wiki_url = "https://github.com/iNavFlight/inav/wiki/"
 
 def units_cell(field: Dict[str, Any]) -> str:
