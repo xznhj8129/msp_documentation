@@ -77,14 +77,15 @@ def sizeof_entry(field: Dict[str, Any]) -> str:
 
 # ---- Markdown rendering -----------------------------------------------------
 
-inav_wiki_url = "https://github.com/iNavFlight/inav/wiki/"
+inav_wiki_url = "https://github.com/xznhj8129/msp_documentation/blob/master/"
+#inav_wiki_url = "https://github.com/iNavFlight/inav/wiki/"
 
 def units_cell(field: Dict[str, Any]) -> str:
     if "enum" in field:
         if field["enum"]=="?_e":
             return "[ENUM_NAME](LINK_TO_ENUM)"
         else:
-            return f"[{field['enum']}](#{field['enum'].lower()})"
+            return f"[{field['enum']}]({inav_wiki_url}/inav_enums_ref.md#{field['enum'].lower()})"
     u = (field.get("units") or "").strip()
     return u if u else "-"
 

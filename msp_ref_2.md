@@ -698,7 +698,7 @@
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
-| `serialRxProvider` | `uint8_t` | 1 | [rxSerialReceiverType_e](#rxserialreceivertype_e) | Serial RX provider type (`rxConfig()->serialrx_provider`). |
+| `serialRxProvider` | `uint8_t` | 1 | [rxSerialReceiverType_e](https://github.com/xznhj8129/msp_documentation/blob/master//inav_enums_ref.md#rxserialreceivertype_e) | Serial RX provider type (`rxConfig()->serialrx_provider`). |
 | `maxCheck` | `uint16_t` | 2 | PWM | Upper channel value threshold for stick commands (`rxConfig()->maxcheck`). |
 | `midRc` | `uint16_t` | 2 | PWM | Center channel value (`PWM_RANGE_MIDDLE`, typically 1500). |
 | `minCheck` | `uint16_t` | 2 | PWM | Lower channel value threshold for stick commands (`rxConfig()->mincheck`). |
@@ -1011,7 +1011,7 @@
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
 | `sdCardSupported` | `uint8_t` | 1 | - | Bitmask: Bit 0 = 1 if SD card support compiled in (`USE_SDCARD`). |
-| `sdCardState` | `uint8_t` | 1 | [mspSDCardState_e](#mspsdcardstate_e) | Enum (`mspSDCardState_e`): Current state (Not Present, Fatal, Card Init, FS Init, Ready). 0 if `USE_SDCARD` disabled. |
+| `sdCardState` | `uint8_t` | 1 | [mspSDCardState_e](https://github.com/xznhj8129/msp_documentation/blob/master//inav_enums_ref.md#mspsdcardstate_e) | Enum (`mspSDCardState_e`): Current state (Not Present, Fatal, Card Init, FS Init, Ready). 0 if `USE_SDCARD` disabled. |
 | `fsError` | `uint8_t` | 1 | - | Last filesystem error code (`afatfs_getLastError()`). 0 if `USE_SDCARD` disabled. |
 | `freeSpaceKB` | `uint32_t` | 4 | - | Free space in KiB (`afatfs_getContiguousFreeSpace() / 1024`). 0 if `USE_SDCARD` disabled. |
 | `totalSpaceKB` | `uint32_t` | 4 | - | Total space in KiB (`sdcard_getMetadata()->numBlocks / 2`). 0 if `USE_SDCARD` disabled. |
@@ -1077,7 +1077,7 @@
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
-| `vtxDeviceType` | `uint8_t` | 1 | [VTXDEV_*](#vtxdev_*) | Enum (`VTXDEV_*`): Type of VTX device detected/configured. `VTXDEV_UNKNOWN` if none. |
+| `vtxDeviceType` | `uint8_t` | 1 | [VTXDEV_*](https://github.com/xznhj8129/msp_documentation/blob/master//inav_enums_ref.md#vtxdev_*) | Enum (`VTXDEV_*`): Type of VTX device detected/configured. `VTXDEV_UNKNOWN` if none. |
 | `band` | `uint8_t` | 1 | - | VTX band number (from `vtxSettingsConfig`). |
 | `channel` | `uint8_t` | 1 | - | VTX channel number (from `vtxSettingsConfig`). |
 | `power` | `uint8_t` | 1 | - | VTX power level index (from `vtxSettingsConfig`). |
@@ -1211,12 +1211,12 @@
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
-| `accHardware` | `uint8_t` | 1 | [accHardware_e](#acchardware_e) | Enum (`accHardware_e`): Accelerometer hardware type (`accelerometerConfig()->acc_hardware`). |
-| `baroHardware` | `uint8_t` | 1 | [baroHardware_e](#barohardware_e) | Enum (`baroHardware_e`): Barometer hardware type (`barometerConfig()->baro_hardware`). 0 if `USE_BARO` disabled. |
-| `magHardware` | `uint8_t` | 1 | [magHardware_e](#maghardware_e) | Enum (`magHardware_e`): Magnetometer hardware type (`compassConfig()->mag_hardware`). 0 if `USE_MAG` disabled. |
-| `pitotHardware` | `uint8_t` | 1 | [pitotHardware_e](#pitothardware_e) | Enum (`pitotHardware_e`): Pitot tube hardware type (`pitotmeterConfig()->pitot_hardware`). 0 if `USE_PITOT` disabled. |
-| `rangefinderHardware` | `uint8_t` | 1 | [rangefinderHardware_e](#rangefinderhardware_e) | Enum (`rangefinderHardware_e`): Rangefinder hardware type (`rangefinderConfig()->rangefinder_hardware`). 0 if `USE_RANGEFINDER` disabled. |
-| `opflowHardware` | `uint8_t` | 1 | [opticalFlowHardware_e](#opticalflowhardware_e) | Enum (`opticalFlowHardware_e`): Optical flow hardware type (`opticalFlowConfig()->opflow_hardware`). 0 if `USE_OPFLOW` disabled. |
+| `accHardware` | `uint8_t` | 1 | [accHardware_e](https://github.com/xznhj8129/msp_documentation/blob/master//inav_enums_ref.md#acchardware_e) | Enum (`accHardware_e`): Accelerometer hardware type (`accelerometerConfig()->acc_hardware`). |
+| `baroHardware` | `uint8_t` | 1 | [baroHardware_e](https://github.com/xznhj8129/msp_documentation/blob/master//inav_enums_ref.md#barohardware_e) | Enum (`baroHardware_e`): Barometer hardware type (`barometerConfig()->baro_hardware`). 0 if `USE_BARO` disabled. |
+| `magHardware` | `uint8_t` | 1 | [magHardware_e](https://github.com/xznhj8129/msp_documentation/blob/master//inav_enums_ref.md#maghardware_e) | Enum (`magHardware_e`): Magnetometer hardware type (`compassConfig()->mag_hardware`). 0 if `USE_MAG` disabled. |
+| `pitotHardware` | `uint8_t` | 1 | [pitotHardware_e](https://github.com/xznhj8129/msp_documentation/blob/master//inav_enums_ref.md#pitothardware_e) | Enum (`pitotHardware_e`): Pitot tube hardware type (`pitotmeterConfig()->pitot_hardware`). 0 if `USE_PITOT` disabled. |
+| `rangefinderHardware` | `uint8_t` | 1 | [rangefinderHardware_e](https://github.com/xznhj8129/msp_documentation/blob/master//inav_enums_ref.md#rangefinderhardware_e) | Enum (`rangefinderHardware_e`): Rangefinder hardware type (`rangefinderConfig()->rangefinder_hardware`). 0 if `USE_RANGEFINDER` disabled. |
+| `opflowHardware` | `uint8_t` | 1 | [opticalFlowHardware_e](https://github.com/xznhj8129/msp_documentation/blob/master//inav_enums_ref.md#opticalflowhardware_e) | Enum (`opticalFlowHardware_e`): Optical flow hardware type (`opticalFlowConfig()->opflow_hardware`). 0 if `USE_OPFLOW` disabled. |
 
 ## <a id="msp_set_sensor_config"></a>`MSP_SET_SENSOR_CONFIG (97 / 0x61)`
 **Description:** Sets the configured hardware type for various sensors.
@@ -1462,7 +1462,7 @@
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
 | `waypointIndex` | `uint8_t` | 1 | Index | Index of the returned waypoint. |
-| `action` | `uint8_t` | 1 | [navWaypointAction_e](#navwaypointaction_e) | Waypoint action type Enum (`navWaypointAction_e`). |
+| `action` | `uint8_t` | 1 | [navWaypointAction_e](https://github.com/xznhj8129/msp_documentation/blob/master//inav_enums_ref.md#navwaypointaction_e) | Waypoint action type Enum (`navWaypointAction_e`). |
 | `latitude` | `int32_t` | 4 | deg * 1e7 | Latitude coordinate. |
 | `longitude` | `int32_t` | 4 | deg * 1e7 | Longitude coordinate. |
 | `altitude` | `int32_t` | 4 | cm | Altitude coordinate (relative to home or sea level, see flag). |
@@ -1506,11 +1506,11 @@
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
-| `navMode` | `uint8_t` | 1 | [NAV_MODE_*](#nav_mode_*) | Enum (`NAV_MODE_*`): Current navigation mode (None, RTH, WP, Hold, etc.) (`NAV_Status.mode`). |
-| `navState` | `uint8_t` | 1 | [NAV_STATE_*](#nav_state_*) | Enum (`NAV_STATE_*`): Current navigation state (`NAV_Status.state`). |
-| `activeWpAction` | `uint8_t` | 1 | [navWaypointAction_e](#navwaypointaction_e) | Enum (`navWaypointAction_e`): Action of the currently executing waypoint (`NAV_Status.activeWpAction`). |
+| `navMode` | `uint8_t` | 1 | [NAV_MODE_*](https://github.com/xznhj8129/msp_documentation/blob/master//inav_enums_ref.md#nav_mode_*) | Enum (`NAV_MODE_*`): Current navigation mode (None, RTH, WP, Hold, etc.) (`NAV_Status.mode`). |
+| `navState` | `uint8_t` | 1 | [NAV_STATE_*](https://github.com/xznhj8129/msp_documentation/blob/master//inav_enums_ref.md#nav_state_*) | Enum (`NAV_STATE_*`): Current navigation state (`NAV_Status.state`). |
+| `activeWpAction` | `uint8_t` | 1 | [navWaypointAction_e](https://github.com/xznhj8129/msp_documentation/blob/master//inav_enums_ref.md#navwaypointaction_e) | Enum (`navWaypointAction_e`): Action of the currently executing waypoint (`NAV_Status.activeWpAction`). |
 | `activeWpNumber` | `uint8_t` | 1 | - | Index: Index of the currently executing waypoint (`NAV_Status.activeWpNumber`). |
-| `navError` | `uint8_t` | 1 | [NAV_ERROR_*](#nav_error_*) | Enum (`NAV_ERROR_*`): Current navigation error code (`NAV_Status.error`). |
+| `navError` | `uint8_t` | 1 | [NAV_ERROR_*](https://github.com/xznhj8129/msp_documentation/blob/master//inav_enums_ref.md#nav_error_*) | Enum (`NAV_ERROR_*`): Current navigation error code (`NAV_Status.error`). |
 | `targetHeading` | `int16_t` | 2 | - | degrees: Target heading for heading controller (`getHeadingHoldTarget()`). |
 
 **Notes:** Requires `USE_GPS`.
@@ -1561,8 +1561,8 @@
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
-| `modeIndex` | `uint8_t` | 1 | [ledModeIndex_e](#ledmodeindex_e) | Index of the LED mode Enum (`ledModeIndex_e`). `LED_MODE_COUNT` for special colors. |
-| `directionOrSpecialIndex` | `uint8_t` | 1 | [ledDirection_e](#leddirection_e) | Index of the direction Enum (`ledDirection_e`) or special color (`ledSpecialColor_e`). |
+| `modeIndex` | `uint8_t` | 1 | [ledModeIndex_e](https://github.com/xznhj8129/msp_documentation/blob/master//inav_enums_ref.md#ledmodeindex_e) | Index of the LED mode Enum (`ledModeIndex_e`). `LED_MODE_COUNT` for special colors. |
+| `directionOrSpecialIndex` | `uint8_t` | 1 | [ledDirection_e](https://github.com/xznhj8129/msp_documentation/blob/master//inav_enums_ref.md#leddirection_e) | Index of the direction Enum (`ledDirection_e`) or special color (`ledSpecialColor_e`). |
 | `colorIndex` | `uint8_t` | 1 | - | Index of the color assigned from `ledStripConfig()->colors`. |
 
 **Notes:** Only available if `USE_LED_STRIP` is defined. Allows mapping modes/directions/specials to configured colors.
@@ -1710,7 +1710,7 @@
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
-| `rssiSource` | `uint8_t` | 1 | [getRSSISource()](#getrssisource()) | Enum: Source of the RSSI value (`getRSSISource()`). |
+| `rssiSource` | `uint8_t` | 1 | [getRSSISource()](https://github.com/xznhj8129/msp_documentation/blob/master//inav_enums_ref.md#getrssisource()) | Enum: Source of the RSSI value (`getRSSISource()`). |
 | `rtcDateTimeIsSet` | `uint8_t` | 1 | - | Boolean: 1 if the RTC has been set, 0 otherwise. |
 
 **Notes:** See `rssiSource_e`.
@@ -1791,9 +1791,9 @@
 | `legacyMaxThrottle` | `uint16_t` | 2 | - | Ignored. |
 | `minCommand` | `uint16_t` | 2 | PWM | Sets `motorConfigMutable()->mincommand` (constrained 0-PWM_RANGE_MAX). |
 | `failsafeThrottle` | `uint16_t` | 2 | PWM | Sets `currentBatteryProfileMutable->failsafe_throttle` (constrained PWM_RANGE_MIN/MAX). |
-| `gpsType` | `uint8_t` | 1 | [gpsProvider_e](#gpsprovider_e) | Enum (`gpsProvider_e` (Sets `gpsConfigMutable()->provider`) |
+| `gpsType` | `uint8_t` | 1 | [gpsProvider_e](https://github.com/xznhj8129/msp_documentation/blob/master//inav_enums_ref.md#gpsprovider_e) | Enum (`gpsProvider_e` (Sets `gpsConfigMutable()->provider`) |
 | `legacyGpsBaud` | `uint8_t` | 1 | - | Ignored. |
-| `gpsSbasMode` | `uint8_t` | 1 | [sbasMode_e](#sbasmode_e) | Enum (`sbasMode_e` (Sets `gpsConfigMutable()->sbasMode`) |
+| `gpsSbasMode` | `uint8_t` | 1 | [sbasMode_e](https://github.com/xznhj8129/msp_documentation/blob/master//inav_enums_ref.md#sbasmode_e) | Enum (`sbasMode_e` (Sets `gpsConfigMutable()->sbasMode`) |
 | `legacyMwCurrentOut` | `uint8_t` | 1 | - | Ignored. |
 | `rssiChannel` | `uint8_t` | 1 | Index | Sets `rxConfigMutable()->rssi_channel` (constrained 0-MAX_SUPPORTED_RC_CHANNEL_COUNT). Updates source. |
 | `reserved1` | `uint8_t` | 1 | - | Ignored. |
@@ -2146,7 +2146,7 @@
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
-| `identifier` | `uint8_t` | 1 | [serialPortIdentifier_e](#serialportidentifier_e) | Port identifier Enum (`serialPortIdentifier_e`). |
+| `identifier` | `uint8_t` | 1 | [serialPortIdentifier_e](https://github.com/xznhj8129/msp_documentation/blob/master//inav_enums_ref.md#serialportidentifier_e) | Port identifier Enum (`serialPortIdentifier_e`). |
 | `functionMask` | `uint32_t` | 4 | - | Bitmask of enabled functions (`FUNCTION_*`). |
 | `mspBaudIndex` | `uint8_t` | 1 | - | Baud rate index for MSP function. |
 | `gpsBaudIndex` | `uint8_t` | 1 | - | Baud rate index for GPS function. |
@@ -2160,7 +2160,7 @@
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
-| `identifier` | `uint8_t` | 1 | [serialPortIdentifier_e](#serialportidentifier_e) | Port identifier Enum (`serialPortIdentifier_e`). |
+| `identifier` | `uint8_t` | 1 | [serialPortIdentifier_e](https://github.com/xznhj8129/msp_documentation/blob/master//inav_enums_ref.md#serialportidentifier_e) | Port identifier Enum (`serialPortIdentifier_e`). |
 | `functionMask` | `uint32_t` | 4 | - | Bitmask of functions to enable. |
 | `mspBaudIndex` | `uint8_t` | 1 | - | Baud rate index for MSP. |
 | `gpsBaudIndex` | `uint8_t` | 1 | - | Baud rate index for GPS. |
@@ -2358,7 +2358,7 @@
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
-| `batteryFlags` | `uint8_t` | 1 | [getBatteryState()](#getbatterystate()) | Battery status flags: Bit 0=Full on plug-in, Bit 1=Use capacity threshold, Bit 2-3=Battery State enum (`getBatteryState()`), Bit 4-7=Cell Count (`getBatteryCellCount()`). |
+| `batteryFlags` | `uint8_t` | 1 | [getBatteryState()](https://github.com/xznhj8129/msp_documentation/blob/master//inav_enums_ref.md#getbatterystate()) | Battery status flags: Bit 0=Full on plug-in, Bit 1=Use capacity threshold, Bit 2-3=Battery State enum (`getBatteryState()`), Bit 4-7=Cell Count (`getBatteryCellCount()`). |
 | `vbat` | `uint16_t` | 2 | 0.01V | Battery voltage (`getBatteryVoltage()`). |
 | `amperage` | `uint16_t` | 2 | 0.01A | Current draw (`getAmperage()`). |
 | `powerDraw` | `uint32_t` | 4 | mW | Power draw (`getPower()`). |
@@ -2586,7 +2586,7 @@
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
 | `timerIndex` | `uint8_t` | 1 | - | Timer index. |
-| `outputMode` | `uint8_t` | 1 | [TIMER_OUTPUT_MODE_*](#timer_output_mode_*) | Output mode override (`TIMER_OUTPUT_MODE_*` enum). |
+| `outputMode` | `uint8_t` | 1 | [TIMER_OUTPUT_MODE_*](https://github.com/xznhj8129/msp_documentation/blob/master//inav_enums_ref.md#timer_output_mode_*) | Output mode override (`TIMER_OUTPUT_MODE_*` enum). |
 
 **Notes:** Only available on non-SITL builds. `HARDWARE_TIMER_DEFINITION_COUNT` varies by target.
 
@@ -2596,7 +2596,7 @@
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
 | `timerIndex` | `uint8_t` | 1 | - | Index of the hardware timer definition. |
-| `outputMode` | `uint8_t` | 1 | [TIMER_OUTPUT_MODE_*](#timer_output_mode_*) | Output mode override (`TIMER_OUTPUT_MODE_*` enum) to set. |
+| `outputMode` | `uint8_t` | 1 | [TIMER_OUTPUT_MODE_*](https://github.com/xznhj8129/msp_documentation/blob/master//inav_enums_ref.md#timer_output_mode_*) | Output mode override (`TIMER_OUTPUT_MODE_*` enum) to set. |
 **Reply Payload:** None
 
 **Notes:** Only available on non-SITL builds. Expects 2 bytes. Returns error if `timerIndex` is invalid.
@@ -2610,9 +2610,9 @@
 | `motorDirectionInverted` | `uint8_t` | 1 | - | Boolean: 1 if motor direction is reversed globally (`mixerConfig()->motorDirectionInverted`). |
 | `reserved1` | `uint8_t` | 1 | - | Always 0 (Was yaw jump prevention limit). |
 | `motorStopOnLow` | `uint8_t` | 1 | - | Boolean: 1 if motors stop at minimum throttle (`mixerConfig()->motorstopOnLow`). |
-| `platformType` | `uint8_t` | 1 | [platformType_e](#platformtype_e) | Enum (`platformType_e`): Vehicle platform type (Multirotor, Airplane, etc.) (`mixerConfig()->platformType`). |
+| `platformType` | `uint8_t` | 1 | [platformType_e](https://github.com/xznhj8129/msp_documentation/blob/master//inav_enums_ref.md#platformtype_e) | Enum (`platformType_e`): Vehicle platform type (Multirotor, Airplane, etc.) (`mixerConfig()->platformType`). |
 | `hasFlaps` | `uint8_t` | 1 | - | Boolean: 1 if the current mixer configuration includes flaps (`mixerConfig()->hasFlaps`). |
-| `appliedMixerPreset` | `uint16_t` | 2 | [mixerPreset_e](#mixerpreset_e) | Enum (`mixerPreset_e`): Mixer preset currently applied (`mixerConfig()->appliedMixerPreset`). |
+| `appliedMixerPreset` | `uint16_t` | 2 | [mixerPreset_e](https://github.com/xznhj8129/msp_documentation/blob/master//inav_enums_ref.md#mixerpreset_e) | Enum (`mixerPreset_e`): Mixer preset currently applied (`mixerConfig()->appliedMixerPreset`). |
 | `maxMotors` | `uint8_t` | 1 | - | Constant: Maximum motors supported (`MAX_SUPPORTED_MOTORS`). |
 | `maxServos` | `uint8_t` | 1 | - | Constant: Maximum servos supported (`MAX_SUPPORTED_SERVOS`). |
 
@@ -2650,7 +2650,7 @@
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
 | `layoutIndex` | `uint8_t` | 1 | Index | Index of the OSD layout (0 to `OSD_LAYOUT_COUNT - 1`). |
-| `itemIndex` | `uint8_t` | 1 | [OSD_ITEM_*](#osd_item_*) | Index of the OSD item (`OSD_ITEM_*` enum). |
+| `itemIndex` | `uint8_t` | 1 | [OSD_ITEM_*](https://github.com/xznhj8129/msp_documentation/blob/master//inav_enums_ref.md#osd_item_*) | Index of the OSD item (`OSD_ITEM_*` enum). |
 | `itemPosition` | `uint16_t` | 2 | Coordinates | Packed X/Y position (`(Y << 8) |
 **Reply Payload:** None
 
@@ -2708,15 +2708,15 @@
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
-| `videoSystem` | `uint8_t` | 1 | [osdConfig()->video_system](#osdconfig()->video_system) | Enum: Video system (Auto/PAL/NTSC) (`osdConfig()->video_system`). |
+| `videoSystem` | `uint8_t` | 1 | [osdConfig()->video_system](https://github.com/xznhj8129/msp_documentation/blob/master//inav_enums_ref.md#osdconfig()->video_system) | Enum: Video system (Auto/PAL/NTSC) (`osdConfig()->video_system`). |
 | `mainVoltageDecimals` | `uint8_t` | 1 | - | Count: Decimal places for main voltage display (`osdConfig()->main_voltage_decimals`). |
 | `ahiReverseRoll` | `uint8_t` | 1 | - | Boolean: Reverse roll direction on Artificial Horizon (`osdConfig()->ahi_reverse_roll`). |
-| `crosshairsStyle` | `uint8_t` | 1 | [osdConfig()->crosshairs_style](#osdconfig()->crosshairs_style) | Enum: Style of the center crosshairs (`osdConfig()->crosshairs_style`). |
+| `crosshairsStyle` | `uint8_t` | 1 | [osdConfig()->crosshairs_style](https://github.com/xznhj8129/msp_documentation/blob/master//inav_enums_ref.md#osdconfig()->crosshairs_style) | Enum: Style of the center crosshairs (`osdConfig()->crosshairs_style`). |
 | `leftSidebarScroll` | `uint8_t` | 1 | - | Boolean: Enable scrolling for left sidebar (`osdConfig()->left_sidebar_scroll`). |
 | `rightSidebarScroll` | `uint8_t` | 1 | - | Boolean: Enable scrolling for right sidebar (`osdConfig()->right_sidebar_scroll`). |
 | `sidebarScrollArrows` | `uint8_t` | 1 | - | Boolean: Show arrows for scrollable sidebars (`osdConfig()->sidebar_scroll_arrows`). |
-| `units` | `uint8_t` | 1 | [osdConfig()->units](#osdconfig()->units) | Enum: Measurement units (Metric/Imperial) (`osdConfig()->units`). |
-| `statsEnergyUnit` | `uint8_t` | 1 | [osdConfig()->stats_energy_unit](#osdconfig()->stats_energy_unit) | Enum: Unit for energy display in post-flight stats (`osdConfig()->stats_energy_unit`). |
+| `units` | `uint8_t` | 1 | [osdConfig()->units](https://github.com/xznhj8129/msp_documentation/blob/master//inav_enums_ref.md#osdconfig()->units) | Enum: Measurement units (Metric/Imperial) (`osdConfig()->units`). |
+| `statsEnergyUnit` | `uint8_t` | 1 | [osdConfig()->stats_energy_unit](https://github.com/xznhj8129/msp_documentation/blob/master//inav_enums_ref.md#osdconfig()->stats_energy_unit) | Enum: Unit for energy display in post-flight stats (`osdConfig()->stats_energy_unit`). |
 
 **Notes:** Requires `USE_OSD`.
 
@@ -2759,7 +2759,7 @@
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
 | `blackboxSupported` | `uint8_t` | 1 | - | Boolean: 1 if Blackbox is supported (`USE_BLACKBOX`), 0 otherwise. |
-| `blackboxDevice` | `uint8_t` | 1 | [blackboxDevice_e](#blackboxdevice_e) | Enum (`blackboxDevice_e`): Target device for logging (`blackboxConfig()->device`). 0 if not supported. |
+| `blackboxDevice` | `uint8_t` | 1 | [blackboxDevice_e](https://github.com/xznhj8129/msp_documentation/blob/master//inav_enums_ref.md#blackboxdevice_e) | Enum (`blackboxDevice_e`): Target device for logging (`blackboxConfig()->device`). 0 if not supported. |
 | `blackboxRateNum` | `uint16_t` | 2 | - | Numerator for logging rate divider (`blackboxConfig()->rate_num`). 0 if not supported. |
 | `blackboxRateDenom` | `uint16_t` | 2 | - | Denominator for logging rate divider (`blackboxConfig()->rate_denom`). 0 if not supported. |
 | `blackboxIncludeFlags` | `uint32_t` | 4 | - | Bitmask: Flags for fields included/excluded from logging (`blackboxConfig()->includeFlags`). |
@@ -2785,7 +2785,7 @@
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
-| `type` | `uint8_t` | 1 | [tempSensorType_e](#tempsensortype_e) | Enum (`tempSensorType_e`): Type of the temperature sensor. |
+| `type` | `uint8_t` | 1 | [tempSensorType_e](https://github.com/xznhj8129/msp_documentation/blob/master//inav_enums_ref.md#tempsensortype_e) | Enum (`tempSensorType_e`): Type of the temperature sensor. |
 | `address` | `uint64_t` | 8 | - | Sensor address/ID (e.g., for 1-Wire sensors). |
 | `alarmMin` | `uint16_t` | 2 | - | Min temperature alarm threshold (degrees C). |
 | `alarmMax` | `uint16_t` | 2 | - | Max temperature alarm threshold (degrees C). |
@@ -2884,7 +2884,7 @@
 |---|---|---|---|---|
 | `ruleIndex` | `uint8_t` | 1 | - | Index of the rule to set (0 to `MAX_SERVO_RULES - 1`). |
 | `targetChannel` | `uint8_t` | 1 | - | Servo output channel index. |
-| `inputSource` | `uint8_t` | 1 | [mixerSource_t](#mixersource_t) | Enum: Input source (`mixerSource_t`). |
+| `inputSource` | `uint8_t` | 1 | [mixerSource_t](https://github.com/xznhj8129/msp_documentation/blob/master//inav_enums_ref.md#mixersource_t) | Enum: Input source (`mixerSource_t`). |
 | `rate` | `uint16_t` | 2 | - | Mixing rate/weight. |
 | `speed` | `uint8_t` | 1 | - | Speed/Slew rate limit (0-100). |
 | `conditionId` | `uint8_t` | 1 | - | Logic Condition ID (255/-1 if none). Ignored if `USE_PROGRAMMING_FRAMEWORK` is disabled. |
@@ -2900,10 +2900,10 @@
 |---|---|---|---|---|
 | `enabled` | `uint8_t` | 1 | - | Boolean: 1 if the condition is enabled. |
 | `activatorId` | `uint8_t` | 1 | - | ID of the activator condition (if any, 255 if none). |
-| `operation` | `uint8_t` | 1 | [logicConditionOp_e](#logicconditionop_e) | Enum (`logicConditionOp_e`): Logical operation (AND, OR, XOR, etc.). |
-| `operandAType` | `uint8_t` | 1 | [logicOperandType_e](#logicoperandtype_e) | Enum (`logicOperandType_e`): Type of the first operand (Flight Mode, GVAR, etc.). |
+| `operation` | `uint8_t` | 1 | [logicConditionOp_e](https://github.com/xznhj8129/msp_documentation/blob/master//inav_enums_ref.md#logicconditionop_e) | Enum (`logicConditionOp_e`): Logical operation (AND, OR, XOR, etc.). |
+| `operandAType` | `uint8_t` | 1 | [logicOperandType_e](https://github.com/xznhj8129/msp_documentation/blob/master//inav_enums_ref.md#logicoperandtype_e) | Enum (`logicOperandType_e`): Type of the first operand (Flight Mode, GVAR, etc.). |
 | `operandAValue` | `uint32_t` | 4 | - | Value/ID of the first operand. |
-| `operandBType` | `uint8_t` | 1 | [logicOperandType_e](#logicoperandtype_e) | Enum (`logicOperandType_e`): Type of the second operand. |
+| `operandBType` | `uint8_t` | 1 | [logicOperandType_e](https://github.com/xznhj8129/msp_documentation/blob/master//inav_enums_ref.md#logicoperandtype_e) | Enum (`logicOperandType_e`): Type of the second operand. |
 | `operandBValue` | `uint32_t` | 4 | - | Value/ID of the second operand. |
 | `flags` | `uint8_t` | 1 | - | Bitmask: Condition flags (e.g., `LC_FLAG_FIRST_TIME_TRUE`). |
 
@@ -2962,9 +2962,9 @@
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
 | `enabled` | `uint8_t` | 1 | - | Boolean: 1 if the PID is enabled. |
-| `setpointType` | `uint8_t` | 1 | [logicOperandType_e](#logicoperandtype_e) | Enum (`logicOperandType_e`): Type of the setpoint source. |
+| `setpointType` | `uint8_t` | 1 | [logicOperandType_e](https://github.com/xznhj8129/msp_documentation/blob/master//inav_enums_ref.md#logicoperandtype_e) | Enum (`logicOperandType_e`): Type of the setpoint source. |
 | `setpointValue` | `uint32_t` | 4 | - | Value/ID of the setpoint source. |
-| `measurementType` | `uint8_t` | 1 | [logicOperandType_e](#logicoperandtype_e) | Enum (`logicOperandType_e`): Type of the measurement source. |
+| `measurementType` | `uint8_t` | 1 | [logicOperandType_e](https://github.com/xznhj8129/msp_documentation/blob/master//inav_enums_ref.md#logicoperandtype_e) | Enum (`logicOperandType_e`): Type of the measurement source. |
 | `measurementValue` | `uint32_t` | 4 | - | Value/ID of the measurement source. |
 | `gainP` | `uint16_t` | 2 | - | Proportional gain. |
 | `gainI` | `uint16_t` | 2 | - | Integral gain. |
@@ -3328,7 +3328,7 @@
 |---|---|---|---|---|
 | `timerId` | `uint8_t` | 1 | - | Hardware timer identifier (e.g., `TIM1`, `TIM2`). SITL uses index. |
 | `usageFlags` | `uint32_t` | 4 | - | Full 32-bit timer usage flags (`TIM_USE_*`). |
-| `pinLabel` | `uint8_t` | 1 | [PIN_LABEL_*](#pin_label_*) | Label for special pin usage (`PIN_LABEL_*` enum, e.g., `PIN_LABEL_LED`). 0 (`PIN_LABEL_NONE`) otherwise. |
+| `pinLabel` | `uint8_t` | 1 | [PIN_LABEL_*](https://github.com/xznhj8129/msp_documentation/blob/master//inav_enums_ref.md#pin_label_*) | Label for special pin usage (`PIN_LABEL_*` enum, e.g., `PIN_LABEL_LED`). 0 (`PIN_LABEL_NONE`) otherwise. |
 
 **Notes:** Provides complete usage flags and helps identify pins repurposed for functions like LED strip.
 
@@ -3372,7 +3372,7 @@
 | `minAltitude` | `uint32_t` | 4 | - | Minimum allowed altitude within the zone (cm). |
 | `maxAltitude` | `uint32_t` | 4 | - | Maximum allowed altitude within the zone (cm). |
 | `isSeaLevelRef` | `uint8_t` | 1 | - | Boolean: 1 if altitudes are relative to sea level, 0 if relative to home. |
-| `fenceAction` | `uint8_t` | 1 | [geozoneActionState_e](#geozoneactionstate_e) | Enum (`geozoneActionState_e`): Action to take upon boundary violation. |
+| `fenceAction` | `uint8_t` | 1 | [geozoneActionState_e](https://github.com/xznhj8129/msp_documentation/blob/master//inav_enums_ref.md#geozoneactionstate_e) | Enum (`geozoneActionState_e`): Action to take upon boundary violation. |
 | `vertexCount` | `uint8_t` | 1 | - | Number of vertices defined for this zone. |
 
 **Notes:** Requires `USE_GEOZONE`. Used by `mspFcGeozoneOutCommand`.
@@ -3388,7 +3388,7 @@
 | `minAltitude` | `uint32_t` | 4 | - | Minimum allowed altitude (cm). |
 | `maxAltitude` | `uint32_t` | 4 | - | Maximum allowed altitude (cm). |
 | `isSeaLevelRef` | `uint8_t` | 1 | - | Boolean: Altitude reference. |
-| `fenceAction` | `uint8_t` | 1 | [geozoneActionState_e](#geozoneactionstate_e) | Enum (`geozoneActionState_e`): Action to take upon boundary violation. |
+| `fenceAction` | `uint8_t` | 1 | [geozoneActionState_e](https://github.com/xznhj8129/msp_documentation/blob/master//inav_enums_ref.md#geozoneactionstate_e) | Enum (`geozoneActionState_e`): Action to take upon boundary violation. |
 | `vertexCount` | `uint8_t` | 1 | - | Number of vertices to be defined (used for validation later). |
 **Reply Payload:** None
 
