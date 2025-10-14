@@ -157,7 +157,7 @@ For details on the structure of MSP, see [The wiki page](https://github.com/iNav
 *   **Payload:**
     | Field | C Type | Size (Bytes) | Units | Description |
     |---|---|---|---|---|
-    | `userControlMode` | `uint8_t` | 1 | Enum | Navigation user control mode (`navConfig()->general.flags.user_control_mode`). |
+    | `userControlMode` | `uint8_t` | 1 | - | Navigation user control mode NAV_GPS_ATTI (0) or NAV_GPS_CRUISE (1). |
     | `maxAutoSpeed` | `uint16_t` | 2 | cm/s | Max speed in autonomous modes (`navConfig()->general.max_auto_speed`). |
     | `maxAutoClimbRate` | `uint16_t` | 2 | cm/s | Max climb rate in autonomous modes (uses `fw.max_auto_climb_rate` or `mc.max_auto_climb_rate` based on platform). |
     | `maxManualSpeed` | `uint16_t` | 2 | cm/s | Max speed in manual modes with GPS aiding (`navConfig()->general.max_manual_speed`). |
@@ -610,7 +610,7 @@ These commands were often introduced by Cleanflight or Betaflight and adopted/ad
     | `auxChannelIndex` | `uint8_t` | 1 | 0-based index of the AUX channel controlling the adjustment value. |
     | `rangeStartStep` | `uint8_t` | 1 | Start step (0-20) of the control channel range. |
     | `rangeEndStep` | `uint8_t` | 1 | End step (0-20) of the control channel range. |
-    | `adjustmentFunction` | `uint8_t` | 1 | Function/parameter being adjusted (e.g., PID gain, rate). See `rcAdjustments.h` enum. |
+    | `adjustmentFunction` | `uint8_t` | 1 | Function/parameter being adjusted (e.g., PID gain, rate). See `rcAdjustments.h`. |
     | `auxSwitchChannelIndex` | `uint8_t` | 1 | 0-based index of the AUX channel acting as an enable switch (or 0 if always enabled). |
 *   **Notes:** See `adjustmentRange_t`.
 
@@ -2714,9 +2714,9 @@ These commands are specific extensions added by the INAV project.
     | `hitlFlags` | `uint8_t` | 1 | Bitmask: Options for HITL (`HITL_*` flags). |
     | `gpsFixType` | `uint8_t` | 1 | (If `HITL_HAS_NEW_GPS_DATA`) Simulated GPS fix type. |
     | `gpsNumSat` | `uint8_t` | 1 | (If `HITL_HAS_NEW_GPS_DATA`) Simulated satellite count. |
-    | `gpsLat` | `uint32_t` | 4 | (If `HITL_HAS_NEW_GPS_DATA`) Simulated latitude (1e7 deg). |
-    | `gpsLon` | `uint32_t` | 4 | (If `HITL_HAS_NEW_GPS_DATA`) Simulated longitude (1e7 deg). |
-    | `gpsAlt` | `uint32_t` | 4 | (If `HITL_HAS_NEW_GPS_DATA`) Simulated altitude (cm). |
+    | `gpsLat` | `int32_t` | 4 | (If `HITL_HAS_NEW_GPS_DATA`) Simulated latitude (1e7 deg). |
+    | `gpsLon` | `int32_t` | 4 | (If `HITL_HAS_NEW_GPS_DATA`) Simulated longitude (1e7 deg). |
+    | `gpsAlt` | `int32_t` | 4 | (If `HITL_HAS_NEW_GPS_DATA`) Simulated altitude (cm). |
     | `gpsSpeed` | `uint16_t` | 2 | (If `HITL_HAS_NEW_GPS_DATA`) Simulated ground speed (cm/s). |
     | `gpsCourse` | `uint16_t` | 2 | (If `HITL_HAS_NEW_GPS_DATA`) Simulated ground course (deci-deg). |
     | `gpsVelN` | `int16_t` | 2 | (If `HITL_HAS_NEW_GPS_DATA`) Simulated North velocity (cm/s). |

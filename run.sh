@@ -47,15 +47,3 @@ python mspref.py
 read -n 1 -s -r -p "Press any key to continue"
 
 
-echo "###########"
-echo get_all_inav_enums_h.py
-python get_all_inav_enums_h
-
-echo "###########"
-echo gen_msp_md.py
-python gen_msp_md.py
-
-echo "###########"
-echo gen_enum_doc.py
-python gen_enum_doc.py
-read -n 1 -s -r -p "Press any key to continue"

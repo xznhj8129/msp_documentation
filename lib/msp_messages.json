@@ -427,9 +427,7 @@
                 {
                     "name": "userControlMode",
                     "ctype": "uint8_t",
-                    "desc": "Navigation user control mode (`navConfig()->general.flags.user_control_mode`).",
-                    "units": "Enum",
-                    "enum": "?_e"
+                    "desc": "Navigation user control mode NAV_GPS_ATTI (0) or NAV_GPS_CRUISE (1)."
                 },
                 {
                     "name": "maxAutoSpeed",
@@ -2018,9 +2016,8 @@
                 {
                     "name": "adjustmentFunction",
                     "ctype": "uint8_t",
-                    "desc": "Function/parameter being adjusted (e.g., PID gain, rate). See `rcAdjustments.h` enum.",
-                    "units": "",
-                    "enum": "rcAdjustments.h"
+                    "desc": "Function/parameter being adjusted (e.g., PID gain, rate). See `rcAdjustments.h`.",
+                    "units": ""
                 },
                 {
                     "name": "auxSwitchChannelIndex",
@@ -9121,7 +9118,7 @@
         "direction": 2,
         "request": {
             "size": 58,
-            "struct": "<BBBBIIIHHhhhhhhhhhhhhIhhhBHB",
+            "struct": "<BBBBiiiHHhhhhhhhhhhhhIhhhBHB",
             "payload": [
                 {
                     "name": "simulatorVersion",
@@ -9149,19 +9146,19 @@
                 },
                 {
                     "name": "gpsLat",
-                    "ctype": "uint32_t",
+                    "ctype": "int32_t",
                     "desc": "(If `HITL_HAS_NEW_GPS_DATA`) Simulated latitude (1e7 deg).",
                     "units": ""
                 },
                 {
                     "name": "gpsLon",
-                    "ctype": "uint32_t",
+                    "ctype": "int32_t",
                     "desc": "(If `HITL_HAS_NEW_GPS_DATA`) Simulated longitude (1e7 deg).",
                     "units": ""
                 },
                 {
                     "name": "gpsAlt",
-                    "ctype": "uint32_t",
+                    "ctype": "int32_t",
                     "desc": "(If `HITL_HAS_NEW_GPS_DATA`) Simulated altitude (cm).",
                     "units": ""
                 },

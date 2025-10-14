@@ -4,23 +4,21 @@
 """
 enumdoc.py — Generate Markdown documentation from C enums (no expression eval).
 
-What it does
-- Finds: `typedef enum { ... } EnumName;`
-- Reads a `// path` comment immediately above the typedef as the "Source"
-- Tracks #if/#ifdef/#ifndef/#elif/#else/#endif and records active condition text
-- Handles multi-line enumerators; splits on first top-level comma
-- Does NOT evaluate expressions:
-    * If the assignment is a plain integer literal (dec/hex/bin/oct), it’s used as Value
-    * Otherwise Value is left blank and Expression shows the original text
-- Auto-increments only while the previous known value is numeric; stops when unknown
-
-Outputs Markdown to `inav_enums_ref.md`.
+Rules:
+- One Value column only.
+  * If explicit assignment is a plain int literal (dec/hex/bin/oct) -> show that number.
+  * If explicit assignment is anything else -> show the raw expression text.
+  * If no assignment -> auto-increment.
+- If auto-increment occurs inside an active preprocessor condition, wrap the number
+  in parentheses to indicate conditional numbering: e.g., 3, 4, #ifdef, (5), (6).
+- Tracks nested #if/#ifdef/#ifndef/#elif/#else/#endif and shows Condition text.
+- Handles multiline enumerators (split at the first top-level comma).
 """
 
 import sys
 import re
 from pathlib import Path
-from typing import List, Dict, Optional
+from typing import List, Optional
 
 # ---------- Helpers ----------
 
@@ -45,15 +43,11 @@ def find_top_level_comma(s: str) -> int:
 def is_plain_int_literal(expr: str) -> Optional[int]:
     """
     Return int value if expr is a plain integer literal (dec/hex/bin/oct),
-    otherwise None. Whitespace is allowed; no unary ops or casts.
+    otherwise None. Whitespace ok; no unary ops/casts/suffixes.
     """
     t = expr.strip()
-    # Allow underscores inside literals? (C doesn't, so we won't.)
-    # Accept standard C-style integer prefixes.
-    # Just try int(t, 0) but reject if t has anything but [0-9a-fxobA-F] prefix.
     if not t:
         return None
-    # Must be purely a literal (no spaces in the middle, no ops)
     if re.fullmatch(r'0[xX][0-9A-Fa-f]+', t) or \
        re.fullmatch(r'0[bB][01]+', t) or \
        re.fullmatch(r'0[0-7]*', t) or \
@@ -103,14 +97,15 @@ class ConditionStack:
         if self.stack: self.stack.pop()
     def current(self) -> str:
         return " AND ".join(self.stack) if self.stack else ""
+    def has_active(self) -> bool:
+        return bool(self.stack)
 
 # ---------- Model ----------
 
 class EnumItem:
-    def __init__(self, name: str, value_str: str, expr_str: str, cond: str):
+    def __init__(self, name: str, value_display: str, cond: str):
         self.name = name
-        self.value_str = value_str  # shown in Value column ('' if unknown/non-numeric)
-        self.expr_str = expr_str    # original expression ('' if none)
+        self.value_display = value_display  # number, (number), or raw expr string
         self.cond = cond
 
 class EnumDef:
@@ -153,22 +148,21 @@ def parse_files(paths: List[Path]) -> List[EnumDef]:
                 body_lines: List[str] = []
                 i += 1
                 local_i = i
-                # collect raw body, including nested preproc lines
                 while local_i < len(lines):
                     ln = lines[local_i]
                     if RE_ENUM_END.match(ln):
                         enum_name = RE_ENUM_END.match(ln).group(1)
                         enum = EnumDef(enum_name, source_note)
 
-                        # second pass: parse enumerators robustly
+                        # second pass: parse enumerators
                         inner = ConditionStack()
-                        current_numeric: Optional[int] = -1  # only tracks when last value known numeric
+                        current_numeric: Optional[int] = -1  # known numeric head; None means unknown
 
                         idx = 0
                         while idx < len(body_lines):
                             bl = body_lines[idx]
 
-                            # handle nested preproc
+                            # inner preproc
                             if m := RE_IFDEF.match(bl):   inner.push_ifdef(m.group(1)); idx += 1; continue
                             if m := RE_IFNDEF.match(bl):  inner.push_ifndef(m.group(1)); idx += 1; continue
                             if m := RE_IF.match(bl):      inner.push_if(m.group(1)); idx += 1; continue
@@ -176,7 +170,7 @@ def parse_files(paths: List[Path]) -> List[EnumDef]:
                             if RE_ELSE.match(bl):         inner.else_(); idx += 1; continue
                             if RE_ENDIF.match(bl):        inner.endif(); idx += 1; continue
 
-                            # accumulate one item
+                            # accumulate one item across lines
                             buf = [bl]
                             while True:
                                 combined = strip_comments(" ".join(buf)).strip()
@@ -200,7 +194,7 @@ def parse_files(paths: List[Path]) -> List[EnumDef]:
                                 idx += 1
                                 continue
 
-                            # Parse NAME or NAME = expr
+                            # NAME or NAME = expr
                             mitem = re.match(r'^\s*([A-Za-z_]\w*)\s*(?:=\s*(.*))?$', item_text)
                             if not mitem:
                                 idx += 1
@@ -209,32 +203,33 @@ def parse_files(paths: List[Path]) -> List[EnumDef]:
                             name = mitem.group(1)
                             expr = (mitem.group(2) or "").strip()
 
-                            # Compute condition
+                            # active condition text
                             cond_parts = [p for p in (outer_cond.current(), inner.current()) if p]
                             cond_text = " AND ".join(cond_parts)
 
-                            # Decide value_str and expr_str (no evaluation)
+                            # determine display value
                             if expr:
-                                # numeric literal?
                                 lit = is_plain_int_literal(expr)
                                 if lit is not None:
-                                    value_str = str(lit)
-                                    expr_str = expr  # still show original expression text (literal)
+                                    # explicit numeric literal
+                                    value_display = str(lit)
                                     current_numeric = lit
                                 else:
-                                    value_str = ""
-                                    expr_str = expr
-                                    current_numeric = None  # unknown now; stop auto-incrementing
+                                    # show raw expression; numeric chain becomes unknown
+                                    value_display = expr
+                                    current_numeric = None
                             else:
-                                # auto-increment only if we know a prior numeric value
+                                # auto-increment if we know a numeric head; else unknown
                                 if current_numeric is None:
-                                    value_str = ""  # unknown
+                                    value_display = ""
                                 else:
                                     current_numeric += 1
-                                    value_str = str(current_numeric)
-                                expr_str = ""
+                                    if inner.has_active():
+                                        value_display = f"({current_numeric})"
+                                    else:
+                                        value_display = str(current_numeric)
 
-                            enum.items.append(EnumItem(name=name, value_str=value_str, expr_str=expr_str, cond=cond_text))
+                            enum.items.append(EnumItem(name=name, value_display=value_display, cond=cond_text))
                             idx += 1
 
                         enums.append(enum)
@@ -244,7 +239,6 @@ def parse_files(paths: List[Path]) -> List[EnumDef]:
                         body_lines.append(lines[local_i])
                         local_i += 1
                 else:
-                    # unmatched }
                     i = local_i
                     continue
             else:
@@ -266,15 +260,13 @@ def render_markdown(enums: List[EnumDef]) -> str:
         out.append(f"## <a id=\"enum-{e.name.lower()}\"></a>`{e.name}`\n")
         if e.source_note:
             out.append(f"> Source: {e.source_note}\n")
-        out.append("| Enumerator | Value | Condition | Expression |")
-        out.append("|---|---:|---|---|")
+        out.append("| Enumerator | Value | Condition |")
+        out.append("|---|---:|---|")
         for it in e.items:
             name_md = f"`{it.name}`"
-            val = it.value_str
+            val = it.value_display
             cond = it.cond
-            expr = it.expr_str
-            expr_md = f"`{expr}`" if expr else ""
-            out.append(f"| {name_md} | {val} | {cond} | {expr_md} |")
+            out.append(f"| {name_md} | {val} | {cond} |")
         out.append("")
     return "\n".join(out)
 
