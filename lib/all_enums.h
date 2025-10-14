@@ -1,4 +1,4 @@
-// Consolidated enums — generated on 2025-10-14 14:43:54.766494
+// Consolidated enums — generated on 2025-10-14 14:47:49.567545
 
 // ../inav/src/main/sensors/battery_config_structs.h
 typedef enum {

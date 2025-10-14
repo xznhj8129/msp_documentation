@@ -133,7 +133,7 @@ def render_message(name: str, msg: Dict[str, Any]) -> Tuple[str, str]:
     #heading = f"### `{name}` ({code} / {hex_str})"
     out = [heading + "\n"]
     if description:
-        out.append(f"**Description:** {description}\n")
+        out.append(f"**Description:** {description}  \n")
 
     if complex_flag:
         out.append("**Special case, skipped for now**\n\n")
@@ -145,12 +145,12 @@ def render_message(name: str, msg: Dict[str, Any]) -> Tuple[str, str]:
     if has_fields(req):
         out.append(table_with_units(get_fields(req), "Request Payload"))
     else:
-        out.append("**Request Payload:** None\n")
+        out.append("\n**Request Payload:** None  \n")
 
     if has_fields(rep):
         out.append(table_with_units(get_fields(rep), "Reply Payload"))
     else:
-        out.append("**Reply Payload:** None\n")
+        out.append("\n**Reply Payload:** None\n")
 
     if notes:
         out.append(f"\n**Notes:** {notes}\n")

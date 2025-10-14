@@ -251,8 +251,9 @@
 - [MSP2_BETAFLIGHT_BIND (12288 / 0x3000)](#msp2_betaflight_bind)
 
 ## <a id="msp_api_version"></a>`MSP_API_VERSION (1 / 0x1)`
-**Description:** Provides the MSP protocol version and the INAV API version.
-**Request Payload:** None
+**Description:** Provides the MSP protocol version and the INAV API version.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -263,8 +264,9 @@
 **Notes:** Used by configurators to check compatibility.
 
 ## <a id="msp_fc_variant"></a>`MSP_FC_VARIANT (2 / 0x2)`
-**Description:** Identifies the flight controller firmware variant (e.g., INAV, Betaflight).
-**Request Payload:** None
+**Description:** Identifies the flight controller firmware variant (e.g., INAV, Betaflight).  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -273,8 +275,9 @@
 **Notes:** See `FLIGHT_CONTROLLER_IDENTIFIER_LENGTH`.
 
 ## <a id="msp_fc_version"></a>`MSP_FC_VERSION (3 / 0x3)`
-**Description:** Provides the specific version number of the flight controller firmware.
-**Request Payload:** None
+**Description:** Provides the specific version number of the flight controller firmware.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -283,8 +286,9 @@
 | `fcVersionPatch` | `uint8_t` | 1 | - | Firmware Patch level (`FC_VERSION_PATCH_LEVEL`). |
 
 ## <a id="msp_board_info"></a>`MSP_BOARD_INFO (4 / 0x4)`
-**Description:** Provides information about the specific hardware board and its capabilities.
-**Request Payload:** None
+**Description:** Provides information about the specific hardware board and its capabilities.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -298,8 +302,9 @@
 **Notes:** `BOARD_IDENTIFIER_LENGTH` is 4.
 
 ## <a id="msp_build_info"></a>`MSP_BUILD_INFO (5 / 0x5)`
-**Description:** Provides build date, time, and Git revision of the firmware.
-**Request Payload:** None
+**Description:** Provides build date, time, and Git revision of the firmware.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -308,8 +313,9 @@
 | `gitRevision` | `char[7]` | 7 | - | Short Git revision string. `GIT_SHORT_REVISION_LENGTH`. |
 
 ## <a id="msp_inav_pid"></a>`MSP_INAV_PID (6 / 0x6)`
-**Description:** Retrieves legacy INAV-specific PID controller related settings. Many fields are now obsolete or placeholders.
-**Request Payload:** None
+**Description:** Retrieves legacy INAV-specific PID controller related settings. Many fields are now obsolete or placeholders.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -329,7 +335,7 @@
 **Notes:** Superseded by `MSP2_PID` for core PIDs and other specific messages for filter settings.
 
 ## <a id="msp_set_inav_pid"></a>`MSP_SET_INAV_PID (7 / 0x7)`
-**Description:** Sets legacy INAV-specific PID controller related settings.
+**Description:** Sets legacy INAV-specific PID controller related settings.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -345,31 +351,35 @@
 | `reserved2` | `uint8_t` | 1 | - | Ignored. |
 | `reserved3` | `uint8_t` | 1 | - | Ignored. |
 | `reserved4` | `uint8_t` | 1 | - | Ignored. |
+
 **Reply Payload:** None
 
 **Notes:** Expects 15 bytes.
 
 ## <a id="msp_name"></a>`MSP_NAME (10 / 0xa)`
-**Description:** Returns the user-defined craft name.
-**Request Payload:** None
+**Description:** Returns the user-defined craft name.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
 | `craftName` | `char[]` | - | - | The craft name string (`systemConfig()->craftName`). Null termination is *not* explicitly sent, the length is determined by the payload size. |
 
 ## <a id="msp_set_name"></a>`MSP_SET_NAME (11 / 0xb)`
-**Description:** Sets the user-defined craft name.
+**Description:** Sets the user-defined craft name.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
 | `craftName` | `char[]` | - | - | The new craft name string. Automatically null-terminated by the FC. |
+
 **Reply Payload:** None
 
 **Notes:** Maximum length is `MAX_NAME_LENGTH`.
 
 ## <a id="msp_nav_poshold"></a>`MSP_NAV_POSHOLD (12 / 0xc)`
-**Description:** Retrieves navigation position hold and general manual/auto flight parameters. Some parameters depend on the platform type (Multirotor vs Fixed Wing).
-**Request Payload:** None
+**Description:** Retrieves navigation position hold and general manual/auto flight parameters. Some parameters depend on the platform type (Multirotor vs Fixed Wing).  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -383,7 +393,7 @@
 | `mcHoverThrottle` | `uint16_t` | 2 | PWM | Multirotor hover throttle (`currentBatteryProfile->nav.mc.hover_throttle`). |
 
 ## <a id="msp_set_nav_poshold"></a>`MSP_SET_NAV_POSHOLD (13 / 0xd)`
-**Description:** Sets navigation position hold and general manual/auto flight parameters.
+**Description:** Sets navigation position hold and general manual/auto flight parameters.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -395,13 +405,15 @@
 | `mcMaxBankAngle` | `uint8_t` | 1 | degrees | Sets `navConfigMutable()->mc.max_bank_angle`. |
 | `mcAltHoldThrottleType` | `uint8_t` | 1 | [ENUM_NAME](LINK_TO_ENUM) | Sets `navConfigMutable()->mc.althold_throttle_type`. |
 | `mcHoverThrottle` | `uint16_t` | 2 | PWM | Sets `currentBatteryProfileMutable->nav.mc.hover_throttle`. |
+
 **Reply Payload:** None
 
 **Notes:** Expects 13 bytes.
 
 ## <a id="msp_calibration_data"></a>`MSP_CALIBRATION_DATA (14 / 0xe)`
-**Description:** Retrieves sensor calibration data (Accelerometer zero/gain, Magnetometer zero/gain, Optical Flow scale).
-**Request Payload:** None
+**Description:** Retrieves sensor calibration data (Accelerometer zero/gain, Magnetometer zero/gain, Optical Flow scale).  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -423,7 +435,7 @@
 **Notes:** Total size 27 bytes. Fields related to optional sensors are zero if the sensor is not used.
 
 ## <a id="msp_set_calibration_data"></a>`MSP_SET_CALIBRATION_DATA (15 / 0xf)`
-**Description:** Sets sensor calibration data.
+**Description:** Sets sensor calibration data.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -440,13 +452,15 @@
 | `magGainX` | `uint16_t` | 2 | Raw ADC | Sets `compassConfigMutable()->magGain[X]` (if `USE_MAG`). |
 | `magGainY` | `uint16_t` | 2 | Raw ADC | Sets `compassConfigMutable()->magGain[Y]` (if `USE_MAG`). |
 | `magGainZ` | `uint16_t` | 2 | Raw ADC | Sets `compassConfigMutable()->magGain[Z]` (if `USE_MAG`). |
+
 **Reply Payload:** None
 
 **Notes:** Expects 26 bytes. Ignores values for sensors not enabled by `USE_*` defines.
 
 ## <a id="msp_position_estimation_config"></a>`MSP_POSITION_ESTIMATION_CONFIG (16 / 0x10)`
-**Description:** Retrieves parameters related to the INAV position estimation fusion weights and GPS minimum satellite count.
-**Request Payload:** None
+**Description:** Retrieves parameters related to the INAV position estimation fusion weights and GPS minimum satellite count.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -459,7 +473,7 @@
 | `useGPSVelNED` | `uint8_t` | 1 | Boolean | Legacy flag, always 1 (GPS velocity is always used if available). |
 
 ## <a id="msp_set_position_estimation_config"></a>`MSP_SET_POSITION_ESTIMATION_CONFIG (17 / 0x11)`
-**Description:** Sets parameters related to the INAV position estimation fusion weights and GPS minimum satellite count.
+**Description:** Sets parameters related to the INAV position estimation fusion weights and GPS minimum satellite count.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -470,33 +484,37 @@
 | `weightXYGPSV` | `uint16_t` | 2 | Weight * 100 | Sets `positionEstimationConfigMutable()->w_xy_gps_v = value / 100.0f` (constrained 0.0-10.0). |
 | `minSats` | `uint8_t` | 1 | Count | Sets `gpsConfigMutable()->gpsMinSats` (constrained 5-10). |
 | `useGPSVelNED` | `uint8_t` | 1 | Boolean | Legacy flag, ignored. |
+
 **Reply Payload:** None
 
 **Notes:** Expects 12 bytes.
 
 ## <a id="msp_wp_mission_load"></a>`MSP_WP_MISSION_LOAD (18 / 0x12)`
-**Description:** Commands the FC to load the waypoint mission stored in non-volatile memory (e.g., EEPROM or FlashFS) into the active mission buffer.
+**Description:** Commands the FC to load the waypoint mission stored in non-volatile memory (e.g., EEPROM or FlashFS) into the active mission buffer.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
 | `missionID` | `uint8_t` | 1 | - | Reserved for future use, currently ignored. |
+
 **Reply Payload:** None
 
 **Notes:** Only functional if `NAV_NON_VOLATILE_WAYPOINT_STORAGE` is defined. Requires 1 byte payload. Returns error if loading fails.
 
 ## <a id="msp_wp_mission_save"></a>`MSP_WP_MISSION_SAVE (19 / 0x13)`
-**Description:** Commands the FC to save the currently active waypoint mission from RAM to non-volatile memory (e.g., EEPROM or FlashFS).
+**Description:** Commands the FC to save the currently active waypoint mission from RAM to non-volatile memory (e.g., EEPROM or FlashFS).  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
 | `missionID` | `uint8_t` | 1 | - | Reserved for future use, currently ignored. |
+
 **Reply Payload:** None
 
 **Notes:** Only functional if `NAV_NON_VOLATILE_WAYPOINT_STORAGE` is defined. Requires 1 byte payload. Returns error if saving fails.
 
 ## <a id="msp_wp_getinfo"></a>`MSP_WP_GETINFO (20 / 0x14)`
-**Description:** Retrieves information about the waypoint mission capabilities and the status of the currently loaded mission.
-**Request Payload:** None
+**Description:** Retrieves information about the waypoint mission capabilities and the status of the currently loaded mission.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -506,8 +524,9 @@
 | `waypointCount` | `uint8_t` | 1 | - | Number of waypoints currently defined in the mission (`getWaypointCount()`). |
 
 ## <a id="msp_rth_and_land_config"></a>`MSP_RTH_AND_LAND_CONFIG (21 / 0x15)`
-**Description:** Retrieves configuration parameters related to Return-to-Home (RTH) and automatic landing behaviors.
-**Request Payload:** None
+**Description:** Retrieves configuration parameters related to Return-to-Home (RTH) and automatic landing behaviors.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -526,7 +545,7 @@
 | `emergDescentRate` | `uint16_t` | 2 | cm/s | Vertical speed during emergency landing descent (`navConfig()->general.emerg_descent_rate`). |
 
 ## <a id="msp_set_rth_and_land_config"></a>`MSP_SET_RTH_AND_LAND_CONFIG (22 / 0x16)`
-**Description:** Sets configuration parameters related to Return-to-Home (RTH) and automatic landing behaviors.
+**Description:** Sets configuration parameters related to Return-to-Home (RTH) and automatic landing behaviors.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -543,13 +562,15 @@
 | `landSlowdownMinAlt` | `uint16_t` | 2 | meters | Sets `navConfigMutable()->general.land_slowdown_minalt`. |
 | `landSlowdownMaxAlt` | `uint16_t` | 2 | meters | Sets `navConfigMutable()->general.land_slowdown_maxalt`. |
 | `emergDescentRate` | `uint16_t` | 2 | cm/s | Sets `navConfigMutable()->general.emerg_descent_rate`. |
+
 **Reply Payload:** None
 
 **Notes:** Expects 21 bytes.
 
 ## <a id="msp_fw_config"></a>`MSP_FW_CONFIG (23 / 0x17)`
-**Description:** Retrieves configuration parameters specific to Fixed Wing navigation.
-**Request Payload:** None
+**Description:** Retrieves configuration parameters specific to Fixed Wing navigation.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -563,7 +584,7 @@
 | `loiterRadius` | `uint16_t` | 2 | meters | Default loiter radius (`navConfig()->fw.loiter_radius`). |
 
 ## <a id="msp_set_fw_config"></a>`MSP_SET_FW_CONFIG (24 / 0x18)`
-**Description:** Sets configuration parameters specific to Fixed Wing navigation.
+**Description:** Sets configuration parameters specific to Fixed Wing navigation.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -575,13 +596,15 @@
 | `maxDiveAngle` | `uint8_t` | 1 | degrees | Sets `navConfigMutable()->fw.max_dive_angle`. |
 | `pitchToThrottle` | `uint8_t` | 1 | Ratio (%) | Sets `currentBatteryProfileMutable->nav.fw.pitch_to_throttle`. |
 | `loiterRadius` | `uint16_t` | 2 | meters | Sets `navConfigMutable()->fw.loiter_radius`. |
+
 **Reply Payload:** None
 
 **Notes:** Expects 12 bytes.
 
 ## <a id="msp_mode_ranges"></a>`MSP_MODE_RANGES (34 / 0x22)`
-**Description:** Returns all defined mode activation ranges (aux channel assignments for flight modes).
-**Request Payload:** None
+**Description:** Returns all defined mode activation ranges (aux channel assignments for flight modes).  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -593,7 +616,7 @@
 **Notes:** The number of steps and mapping to PWM values depends on internal range calculations.
 
 ## <a id="msp_set_mode_range"></a>`MSP_SET_MODE_RANGE (35 / 0x23)`
-**Description:** Sets a single mode activation range by its index.
+**Description:** Sets a single mode activation range by its index.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -602,13 +625,15 @@
 | `auxChannelIndex` | `uint8_t` | 1 | Index | 0-based index of the AUX channel. |
 | `rangeStartStep` | `uint8_t` | 1 | 0-20 | Start step for activation. |
 | `rangeEndStep` | `uint8_t` | 1 | 0-20 | End step for activation. |
+
 **Reply Payload:** None
 
 **Notes:** Expects 5 bytes. Updates the mode configuration and recalculates used mode flags. Returns error if `rangeIndex` or `modePermanentId` is invalid.
 
 ## <a id="msp_feature"></a>`MSP_FEATURE (36 / 0x24)`
-**Description:** Returns a bitmask of enabled features.
-**Request Payload:** None
+**Description:** Returns a bitmask of enabled features.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -617,18 +642,20 @@
 **Notes:** Feature bits are defined in `feature.h`.
 
 ## <a id="msp_set_feature"></a>`MSP_SET_FEATURE (37 / 0x25)`
-**Description:** Sets the enabled features using a bitmask. Clears all previous features first.
+**Description:** Sets the enabled features using a bitmask. Clears all previous features first.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
 | `featureMask` | `uint32_t` | 4 | - | Bitmask of features to enable. |
+
 **Reply Payload:** None
 
 **Notes:** Expects 4 bytes. Updates feature configuration and related settings (e.g., RSSI source).
 
 ## <a id="msp_board_alignment"></a>`MSP_BOARD_ALIGNMENT (38 / 0x26)`
-**Description:** Returns the sensor board alignment angles relative to the craft frame.
-**Request Payload:** None
+**Description:** Returns the sensor board alignment angles relative to the craft frame.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -637,20 +664,22 @@
 | `yawAlign` | `uint16_t` | 2 | deci-degrees | Board alignment yaw angle (`boardAlignment()->yawDeciDegrees`). |
 
 ## <a id="msp_set_board_alignment"></a>`MSP_SET_BOARD_ALIGNMENT (39 / 0x27)`
-**Description:** Sets the sensor board alignment angles.
+**Description:** Sets the sensor board alignment angles.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
 | `rollAlign` | `uint16_t` | 2 | deci-degrees | Sets `boardAlignmentMutable()->rollDeciDegrees`. |
 | `pitchAlign` | `uint16_t` | 2 | deci-degrees | Sets `boardAlignmentMutable()->pitchDeciDegrees`. |
 | `yawAlign` | `uint16_t` | 2 | deci-degrees | Sets `boardAlignmentMutable()->yawDeciDegrees`. |
+
 **Reply Payload:** None
 
 **Notes:** Expects 6 bytes.
 
 ## <a id="msp_current_meter_config"></a>`MSP_CURRENT_METER_CONFIG (40 / 0x28)`
-**Description:** Retrieves the configuration for the current sensor.
-**Request Payload:** None
+**Description:** Retrieves the configuration for the current sensor.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -660,7 +689,7 @@
 | `capacity` | `uint16_t` | 2 | mAh (legacy) | Battery capacity (constrained 0-65535) (`currentBatteryProfile->capacity.value`). Note: This is legacy, use `MSP2_INAV_BATTERY_CONFIG` for full 32-bit capacity. |
 
 ## <a id="msp_set_current_meter_config"></a>`MSP_SET_CURRENT_METER_CONFIG (41 / 0x29)`
-**Description:** Sets the configuration for the current sensor.
+**Description:** Sets the configuration for the current sensor.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -668,13 +697,15 @@
 | `offset` | `uint16_t` | 2 | mV | Sets `batteryMetersConfigMutable()->current.offset`. |
 | `type` | `uint8_t` | 1 | [ENUM_NAME](LINK_TO_ENUM) | Sets `batteryMetersConfigMutable()->current.type`. |
 | `capacity` | `uint16_t` | 2 | mAh (legacy) | Sets `currentBatteryProfileMutable->capacity.value` (truncated to 16 bits). |
+
 **Reply Payload:** None
 
 **Notes:** Expects 7 bytes.
 
 ## <a id="msp_mixer"></a>`MSP_MIXER (42 / 0x2a)`
-**Description:** Retrieves the mixer type (Legacy, INAV always returns QuadX).
-**Request Payload:** None
+**Description:** Retrieves the mixer type (Legacy, INAV always returns QuadX).  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -683,18 +714,20 @@
 **Notes:** This command is largely obsolete. Mixer configuration is handled differently in INAV (presets, custom mixes). See `MSP2_INAV_MIXER`.
 
 ## <a id="msp_set_mixer"></a>`MSP_SET_MIXER (43 / 0x2b)`
-**Description:** Sets the mixer type (Legacy, ignored by INAV).
+**Description:** Sets the mixer type (Legacy, ignored by INAV).  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
 | `mixerMode` | `uint8_t` | 1 | - | Mixer mode to set (ignored by INAV). |
+
 **Reply Payload:** None
 
 **Notes:** Expects 1 byte. Calls `mixerUpdateStateFlags()` for potential side effects related to presets.
 
 ## <a id="msp_rx_config"></a>`MSP_RX_CONFIG (44 / 0x2c)`
-**Description:** Retrieves receiver configuration settings. Some fields are Betaflight compatibility placeholders.
-**Request Payload:** None
+**Description:** Retrieves receiver configuration settings. Some fields are Betaflight compatibility placeholders.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -715,7 +748,7 @@
 | `receiverType` | `uint8_t` | 1 | [ENUM_NAME](LINK_TO_ENUM) | Receiver type (Parallel PWM, PPM, Serial) (`rxConfig()->receiverType`). |
 
 ## <a id="msp_set_rx_config"></a>`MSP_SET_RX_CONFIG (45 / 0x2d)`
-**Description:** Sets receiver configuration settings.
+**Description:** Sets receiver configuration settings.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -734,13 +767,15 @@
 | `reserved3` | `uint8_t` | 1 | - | Ignored. |
 | `bfCompatFpvCamAngle` | `uint8_t` | 1 | - | Ignored. |
 | `receiverType` | `uint8_t` | 1 | [ENUM_NAME](LINK_TO_ENUM) | Sets `rxConfigMutable()->receiverType`. |
+
 **Reply Payload:** None
 
 **Notes:** Expects 24 bytes.
 
 ## <a id="msp_led_colors"></a>`MSP_LED_COLORS (46 / 0x2e)`
-**Description:** Retrieves the HSV color definitions for configurable LED colors.
-**Request Payload:** None
+**Description:** Retrieves the HSV color definitions for configurable LED colors.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -751,20 +786,22 @@
 **Notes:** Only available if `USE_LED_STRIP` is defined.
 
 ## <a id="msp_set_led_colors"></a>`MSP_SET_LED_COLORS (47 / 0x2f)`
-**Description:** Sets the HSV color definitions for configurable LED colors.
+**Description:** Sets the HSV color definitions for configurable LED colors.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
 | `hue` | `uint16_t` | 2 | - | Hue value (0-359). |
 | `saturation` | `uint8_t` | 1 | - | Saturation value (0-255). |
 | `value` | `uint8_t` | 1 | - | Value/Brightness (0-255). |
+
 **Reply Payload:** None
 
 **Notes:** Only available if `USE_LED_STRIP` is defined. Expects `LED_CONFIGURABLE_COLOR_COUNT * 4` bytes.
 
 ## <a id="msp_led_strip_config"></a>`MSP_LED_STRIP_CONFIG (48 / 0x30)`
-**Description:** Retrieves the configuration for each LED on the strip (legacy packed format).
-**Request Payload:** None
+**Description:** Retrieves the configuration for each LED on the strip (legacy packed format).  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -773,37 +810,41 @@
 **Notes:** Only available if `USE_LED_STRIP` is defined. Superseded by `MSP2_INAV_LED_STRIP_CONFIG_EX` which uses a clearer struct.
 
 ## <a id="msp_set_led_strip_config"></a>`MSP_SET_LED_STRIP_CONFIG (49 / 0x31)`
-**Description:** Sets the configuration for a single LED on the strip using the legacy packed format.
+**Description:** Sets the configuration for a single LED on the strip using the legacy packed format.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
 | `ledIndex` | `uint8_t` | 1 | - | Index of the LED to configure (0 to `LED_MAX_STRIP_LENGTH - 1`). |
 | `legacyLedConfig` | `uint32_t` | 4 | - | Packed LED configuration to set. |
+
 **Reply Payload:** None
 
 **Notes:** Only available if `USE_LED_STRIP` is defined. Expects 5 bytes. Calls `reevaluateLedConfig()`. Superseded by `MSP2_INAV_SET_LED_STRIP_CONFIG_EX`.
 
 ## <a id="msp_rssi_config"></a>`MSP_RSSI_CONFIG (50 / 0x32)`
-**Description:** Retrieves the channel used for analog RSSI input.
-**Request Payload:** None
+**Description:** Retrieves the channel used for analog RSSI input.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
 | `rssiChannel` | `uint8_t` | 1 | - | AUX channel index (1-based) used for RSSI, or 0 if disabled (`rxConfig()->rssi_channel`). |
 
 ## <a id="msp_set_rssi_config"></a>`MSP_SET_RSSI_CONFIG (51 / 0x33)`
-**Description:** Sets the channel used for analog RSSI input.
+**Description:** Sets the channel used for analog RSSI input.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
 | `rssiChannel` | `uint8_t` | 1 | - | AUX channel index (1-based) to use for RSSI, or 0 to disable. |
+
 **Reply Payload:** None
 
 **Notes:** Expects 1 byte. Input value is constrained 0 to `MAX_SUPPORTED_RC_CHANNEL_COUNT`. Updates the effective RSSI source.
 
 ## <a id="msp_adjustment_ranges"></a>`MSP_ADJUSTMENT_RANGES (52 / 0x34)`
-**Description:** Returns all defined RC adjustment ranges (tuning via aux channels).
-**Request Payload:** None
+**Description:** Returns all defined RC adjustment ranges (tuning via aux channels).  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -817,7 +858,7 @@
 **Notes:** See `adjustmentRange_t`.
 
 ## <a id="msp_set_adjustment_range"></a>`MSP_SET_ADJUSTMENT_RANGE (53 / 0x35)`
-**Description:** Sets a single RC adjustment range configuration by its index.
+**Description:** Sets a single RC adjustment range configuration by its index.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -828,27 +869,33 @@
 | `rangeEndStep` | `uint8_t` | 1 | - | End step (0-20). |
 | `adjustmentFunction` | `uint8_t` | 1 | - | Function/parameter being adjusted. |
 | `auxSwitchChannelIndex` | `uint8_t` | 1 | - | 0-based index of the enable switch AUX channel (or 0). |
+
 **Reply Payload:** None
 
 **Notes:** Expects 7 bytes. Returns error if `rangeIndex` or `adjustmentIndex` is invalid.
 
 ## <a id="msp_cf_serial_config"></a>`MSP_CF_SERIAL_CONFIG (54 / 0x36)`
-**Description:** Deprecated command to get serial port configuration.
-**Request Payload:** None
+**Description:** Deprecated command to get serial port configuration.  
+
+**Request Payload:** None  
+
 **Reply Payload:** None
 
 **Notes:** Not implemented in INAV `fc_msp.c`. Use `MSP2_COMMON_SERIAL_CONFIG`.
 
 ## <a id="msp_set_cf_serial_config"></a>`MSP_SET_CF_SERIAL_CONFIG (55 / 0x37)`
-**Description:** Deprecated command to set serial port configuration.
-**Request Payload:** None
+**Description:** Deprecated command to set serial port configuration.  
+
+**Request Payload:** None  
+
 **Reply Payload:** None
 
 **Notes:** Not implemented in INAV `fc_msp.c`. Use `MSP2_COMMON_SET_SERIAL_CONFIG`.
 
 ## <a id="msp_voltage_meter_config"></a>`MSP_VOLTAGE_METER_CONFIG (56 / 0x38)`
-**Description:** Retrieves legacy voltage meter configuration (scaled values).
-**Request Payload:** None
+**Description:** Retrieves legacy voltage meter configuration (scaled values).  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -860,7 +907,7 @@
 **Notes:** Superseded by `MSP2_INAV_BATTERY_CONFIG`.
 
 ## <a id="msp_set_voltage_meter_config"></a>`MSP_SET_VOLTAGE_METER_CONFIG (57 / 0x39)`
-**Description:** Sets legacy voltage meter configuration (scaled values).
+**Description:** Sets legacy voltage meter configuration (scaled values).  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -868,21 +915,24 @@
 | `vbatMinCell` | `uint8_t` | 1 | 0.1V | Sets `currentBatteryProfileMutable->voltage.cellMin = value * 10` (if `USE_ADC`). |
 | `vbatMaxCell` | `uint8_t` | 1 | 0.1V | Sets `currentBatteryProfileMutable->voltage.cellMax = value * 10` (if `USE_ADC`). |
 | `vbatWarningCell` | `uint8_t` | 1 | 0.1V | Sets `currentBatteryProfileMutable->voltage.cellWarning = value * 10` (if `USE_ADC`). |
+
 **Reply Payload:** None
 
 **Notes:** Expects 4 bytes. Superseded by `MSP2_INAV_SET_BATTERY_CONFIG`.
 
 ## <a id="msp_sonar_altitude"></a>`MSP_SONAR_ALTITUDE (58 / 0x3a)`
-**Description:** Retrieves the altitude measured by the primary rangefinder (sonar or lidar).
-**Request Payload:** None
+**Description:** Retrieves the altitude measured by the primary rangefinder (sonar or lidar).  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
 | `rangefinderAltitude` | `uint32_t` | 4 | cm | Latest altitude reading from the rangefinder (`rangefinderGetLatestAltitude()`). 0 if `USE_RANGEFINDER` disabled or no reading. |
 
 ## <a id="msp_rx_map"></a>`MSP_RX_MAP (64 / 0x40)`
-**Description:** Retrieves the RC channel mapping array (AETR, etc.).
-**Request Payload:** None
+**Description:** Retrieves the RC channel mapping array (AETR, etc.).  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -891,25 +941,29 @@
 **Notes:** `MAX_MAPPABLE_RX_INPUTS` is typically 8 or more.
 
 ## <a id="msp_set_rx_map"></a>`MSP_SET_RX_MAP (65 / 0x41)`
-**Description:** Sets the RC channel mapping array.
+**Description:** Sets the RC channel mapping array.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
 | `rcMap` | `uint8_t[MAX_MAPPABLE_RX_INPUTS]` | MAX_MAPPABLE_RX_INPUTS * 1 | - | Array defining the new channel mapping. |
+
 **Reply Payload:** None
 
 **Notes:** Expects `MAX_MAPPABLE_RX_INPUTS` bytes.
 
 ## <a id="msp_reboot"></a>`MSP_REBOOT (68 / 0x44)`
-**Description:** Commands the flight controller to reboot.
-**Request Payload:** None
+**Description:** Commands the flight controller to reboot.  
+
+**Request Payload:** None  
+
 **Reply Payload:** None
 
 **Notes:** The FC sends an ACK *before* rebooting. The `mspPostProcessFn` is set to `mspRebootFn` to perform the reboot after the reply is sent. Will fail if the craft is armed.
 
 ## <a id="msp_dataflash_summary"></a>`MSP_DATAFLASH_SUMMARY (70 / 0x46)`
-**Description:** Retrieves summary information about the onboard dataflash chip (if present and used for Blackbox via FlashFS).
-**Request Payload:** None
+**Description:** Retrieves summary information about the onboard dataflash chip (if present and used for Blackbox via FlashFS).  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -921,7 +975,7 @@
 **Notes:** Requires `USE_FLASHFS`.
 
 ## <a id="msp_dataflash_read"></a>`MSP_DATAFLASH_READ (71 / 0x47)`
-**Description:** Reads a block of data from the onboard dataflash (FlashFS).
+**Description:** Reads a block of data from the onboard dataflash (FlashFS).  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -936,15 +990,18 @@
 **Notes:** Requires `USE_FLASHFS`. Read length may be truncated by buffer size or end of flashfs volume.
 
 ## <a id="msp_dataflash_erase"></a>`MSP_DATAFLASH_ERASE (72 / 0x48)`
-**Description:** Erases the entire onboard dataflash chip (FlashFS volume).
-**Request Payload:** None
+**Description:** Erases the entire onboard dataflash chip (FlashFS volume).  
+
+**Request Payload:** None  
+
 **Reply Payload:** None
 
 **Notes:** Requires `USE_FLASHFS`. This is a potentially long operation. Use with caution.
 
 ## <a id="msp_loop_time"></a>`MSP_LOOP_TIME (73 / 0x49)`
-**Description:** Retrieves the configured loop time (PID loop frequency denominator).
-**Request Payload:** None
+**Description:** Retrieves the configured loop time (PID loop frequency denominator).  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -953,18 +1010,20 @@
 **Notes:** This is the *configured* target loop time, not necessarily the *actual* measured cycle time (see `MSP_STATUS`).
 
 ## <a id="msp_set_loop_time"></a>`MSP_SET_LOOP_TIME (74 / 0x4a)`
-**Description:** Sets the configured loop time.
+**Description:** Sets the configured loop time.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
 | `looptime` | `uint16_t` | 2 | µs | New loop time to set (`gyroConfigMutable()->looptime`). |
+
 **Reply Payload:** None
 
 **Notes:** Expects 2 bytes.
 
 ## <a id="msp_failsafe_config"></a>`MSP_FAILSAFE_CONFIG (75 / 0x4b)`
-**Description:** Retrieves the failsafe configuration settings.
-**Request Payload:** None
+**Description:** Retrieves the failsafe configuration settings.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -983,7 +1042,7 @@
 | `failsafeMinDistanceProc` | `uint8_t` | 1 | [ENUM_NAME](LINK_TO_ENUM) | Failsafe procedure if below min distance (`failsafeConfig()->failsafe_min_distance_procedure`). |
 
 ## <a id="msp_set_failsafe_config"></a>`MSP_SET_FAILSAFE_CONFIG (76 / 0x4c)`
-**Description:** Sets the failsafe configuration settings.
+**Description:** Sets the failsafe configuration settings.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1000,13 +1059,15 @@
 | `failsafeStickThreshold` | `uint16_t` | 2 | PWM units | Sets `failsafeConfigMutable()->failsafe_stick_motion_threshold`. |
 | `failsafeMinDistance` | `uint16_t` | 2 | meters | Sets `failsafeConfigMutable()->failsafe_min_distance`. |
 | `failsafeMinDistanceProc` | `uint8_t` | 1 | [ENUM_NAME](LINK_TO_ENUM) | Sets `failsafeConfigMutable()->failsafe_min_distance_procedure`. |
+
 **Reply Payload:** None
 
 **Notes:** Expects 20 bytes.
 
 ## <a id="msp_sdcard_summary"></a>`MSP_SDCARD_SUMMARY (79 / 0x4f)`
-**Description:** Retrieves summary information about the SD card status and filesystem.
-**Request Payload:** None
+**Description:** Retrieves summary information about the SD card status and filesystem.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1019,8 +1080,9 @@
 **Notes:** Requires `USE_SDCARD` and `USE_ASYNCFATFS`.
 
 ## <a id="msp_blackbox_config"></a>`MSP_BLACKBOX_CONFIG (80 / 0x50)`
-**Description:** Legacy command to retrieve Blackbox configuration. Superseded by `MSP2_BLACKBOX_CONFIG`.
-**Request Payload:** None
+**Description:** Legacy command to retrieve Blackbox configuration. Superseded by `MSP2_BLACKBOX_CONFIG`.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1032,48 +1094,57 @@
 **Notes:** Returns fixed zero values. Use `MSP2_BLACKBOX_CONFIG`.
 
 ## <a id="msp_set_blackbox_config"></a>`MSP_SET_BLACKBOX_CONFIG (81 / 0x51)`
-**Description:** Legacy command to set Blackbox configuration. Superseded by `MSP2_SET_BLACKBOX_CONFIG`.
-**Request Payload:** None
+**Description:** Legacy command to set Blackbox configuration. Superseded by `MSP2_SET_BLACKBOX_CONFIG`.  
+
+**Request Payload:** None  
+
 **Reply Payload:** None
 
 **Notes:** Not implemented in `fc_msp.c`. Use `MSP2_SET_BLACKBOX_CONFIG`.
 
 ## <a id="msp_transponder_config"></a>`MSP_TRANSPONDER_CONFIG (82 / 0x52)`
-**Description:** Get VTX Transponder settings (likely specific to RaceFlight/Betaflight, not standard INAV VTX).
-**Request Payload:** None
+**Description:** Get VTX Transponder settings (likely specific to RaceFlight/Betaflight, not standard INAV VTX).  
+
+**Request Payload:** None  
+
 **Reply Payload:** None
 
 **Notes:** Not implemented in INAV `fc_msp.c`.
 
 ## <a id="msp_set_transponder_config"></a>`MSP_SET_TRANSPONDER_CONFIG (83 / 0x53)`
-**Description:** Set VTX Transponder settings.
-**Request Payload:** None
+**Description:** Set VTX Transponder settings.  
+
+**Request Payload:** None  
+
 **Reply Payload:** None
 
 **Notes:** Not implemented in INAV `fc_msp.c`.
 
 ## <a id="msp_osd_config"></a>`MSP_OSD_CONFIG (84 / 0x54)`
-**Description:** Retrieves OSD configuration settings and layout for screen 0.
+**Description:** Retrieves OSD configuration settings and layout for screen 0.  
 **Special case, skipped for now**
 
 ## <a id="msp_set_osd_config"></a>`MSP_SET_OSD_CONFIG (85 / 0x55)`
-**Description:** Sets OSD configuration or a single item's position on screen 0.
+**Description:** Sets OSD configuration or a single item's position on screen 0.  
 **Special case, skipped for now**
 
 ## <a id="msp_osd_char_read"></a>`MSP_OSD_CHAR_READ (86 / 0x56)`
-**Description:** Reads character data from the OSD font memory.
-**Request Payload:** None
+**Description:** Reads character data from the OSD font memory.  
+
+**Request Payload:** None  
+
 **Reply Payload:** None
 
 **Notes:** Not implemented in INAV `fc_msp.c`. Requires direct hardware access, typically done via DisplayPort.
 
 ## <a id="msp_osd_char_write"></a>`MSP_OSD_CHAR_WRITE (87 / 0x57)`
-**Description:** Writes character data to the OSD font memory.
+**Description:** Writes character data to the OSD font memory.  
 **Special case, skipped for now**
 
 ## <a id="msp_vtx_config"></a>`MSP_VTX_CONFIG (88 / 0x58)`
-**Description:** Retrieves the current VTX (Video Transmitter) configuration and capabilities.
-**Request Payload:** None
+**Description:** Retrieves the current VTX (Video Transmitter) configuration and capabilities.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1092,12 +1163,13 @@
 **Notes:** BF compatibility field `frequency` (uint16) is missing compared to some BF versions. Use `MSP_VTXTABLE_BAND` and `MSP_VTXTABLE_POWERLEVEL` for details.
 
 ## <a id="msp_set_vtx_config"></a>`MSP_SET_VTX_CONFIG (89 / 0x59)`
-**Description:** Sets the VTX configuration (band, channel, power, pit mode). Supports multiple protocol versions/extensions based on payload size.
+**Description:** Sets the VTX configuration (band, channel, power, pit mode). Supports multiple protocol versions/extensions based on payload size.  
 **Special case, skipped for now**
 
 ## <a id="msp_advanced_config"></a>`MSP_ADVANCED_CONFIG (90 / 0x5a)`
-**Description:** Retrieves advanced hardware-related configuration (PWM protocols, rates). Some fields are BF compatibility placeholders.
-**Request Payload:** None
+**Description:** Retrieves advanced hardware-related configuration (PWM protocols, rates). Some fields are BF compatibility placeholders.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1110,7 +1182,7 @@
 | `legacyGyroSync` | `uint8_t` | 1 | - | Always 0 (BF compatibility). |
 
 ## <a id="msp_set_advanced_config"></a>`MSP_SET_ADVANCED_CONFIG (91 / 0x5b)`
-**Description:** Sets advanced hardware-related configuration (PWM protocols, rates).
+**Description:** Sets advanced hardware-related configuration (PWM protocols, rates).  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1121,13 +1193,15 @@
 | `motorPwmRate` | `uint16_t` | 2 | - | Sets `motorConfigMutable()->motorPwmRate`. |
 | `servoPwmRate` | `uint16_t` | 2 | - | Sets `servoConfigMutable()->servoPwmRate`. |
 | `legacyGyroSync` | `uint8_t` | 1 | - | Ignored. |
+
 **Reply Payload:** None
 
 **Notes:** Expects 9 bytes.
 
 ## <a id="msp_filter_config"></a>`MSP_FILTER_CONFIG (92 / 0x5c)`
-**Description:** Retrieves filter configuration settings (Gyro, D-term, Yaw, Accel). Some fields are BF compatibility placeholders or legacy.
-**Request Payload:** None
+**Description:** Retrieves filter configuration settings (Gyro, D-term, Yaw, Accel). Some fields are BF compatibility placeholders or legacy.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1145,7 +1219,7 @@
 | `legacyGyroStage2LpfHz` | `uint16_t` | 2 | - | Always 0 (Legacy). |
 
 ## <a id="msp_set_filter_config"></a>`MSP_SET_FILTER_CONFIG (93 / 0x5d)`
-**Description:** Sets filter configuration settings. Handles different payload lengths for backward compatibility.
+**Description:** Sets filter configuration settings. Handles different payload lengths for backward compatibility.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1161,13 +1235,15 @@
 | `accNotchHz` | `uint16_t` | 2 | Hz | Sets `accelerometerConfigMutable()->acc_notch_hz` (constrained 0-255). (Size >= 21) |
 | `accNotchCutoff` | `uint16_t` | 2 | Hz | Sets `accelerometerConfigMutable()->acc_notch_cutoff` (constrained 1-255). (Size >= 21) |
 | `legacyGyroStage2LpfHz` | `uint16_t` | 2 | - | Ignored. (Size >= 22) |
+
 **Reply Payload:** None
 
 **Notes:** Requires specific payload sizes (5, 9, 13, 17, 21, or 22 bytes) to be accepted. Calls `pidInitFilters()` if size >= 13.
 
 ## <a id="msp_pid_advanced"></a>`MSP_PID_ADVANCED (94 / 0x5e)`
-**Description:** Retrieves advanced PID tuning parameters. Many fields are BF compatibility placeholders.
-**Request Payload:** None
+**Description:** Retrieves advanced PID tuning parameters. Many fields are BF compatibility placeholders.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1186,7 +1262,7 @@
 **Notes:** Acceleration limits are scaled by 10 for compatibility.
 
 ## <a id="msp_set_pid_advanced"></a>`MSP_SET_PID_ADVANCED (95 / 0x5f)`
-**Description:** Sets advanced PID tuning parameters.
+**Description:** Sets advanced PID tuning parameters.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1201,13 +1277,15 @@
 | `bfCompatItermThrottleGain` | `uint8_t` | 1 | - | Ignored. |
 | `accelLimitRollPitch` | `uint16_t` | 2 | dps / 10 | Sets `pidProfileMutable()->axisAccelerationLimitRollPitch = value * 10`. |
 | `accelLimitYaw` | `uint16_t` | 2 | dps / 10 | Sets `pidProfileMutable()->axisAccelerationLimitYaw = value * 10`. |
+
 **Reply Payload:** None
 
 **Notes:** Expects 17 bytes.
 
 ## <a id="msp_sensor_config"></a>`MSP_SENSOR_CONFIG (96 / 0x60)`
-**Description:** Retrieves the configured hardware type for various sensors.
-**Request Payload:** None
+**Description:** Retrieves the configured hardware type for various sensors.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1219,7 +1297,7 @@
 | `opflowHardware` | `uint8_t` | 1 | [opticalFlowHardware_e](https://github.com/xznhj8129/msp_documentation/blob/master//inav_enums_ref.md#opticalflowhardware_e) | Enum (`opticalFlowHardware_e`): Optical flow hardware type (`opticalFlowConfig()->opflow_hardware`). 0 if `USE_OPFLOW` disabled. |
 
 ## <a id="msp_set_sensor_config"></a>`MSP_SET_SENSOR_CONFIG (97 / 0x61)`
-**Description:** Sets the configured hardware type for various sensors.
+**Description:** Sets the configured hardware type for various sensors.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1229,27 +1307,33 @@
 | `pitotHardware` | `uint8_t` | 1 | - | Sets `pitotmeterConfigMutable()->pitot_hardware` (if `USE_PITOT`). |
 | `rangefinderHardware` | `uint8_t` | 1 | - | Sets `rangefinderConfigMutable()->rangefinder_hardware` (if `USE_RANGEFINDER`). |
 | `opflowHardware` | `uint8_t` | 1 | - | Sets `opticalFlowConfigMutable()->opflow_hardware` (if `USE_OPFLOW`). |
+
 **Reply Payload:** None
 
 **Notes:** Expects 6 bytes.
 
 ## <a id="msp_special_parameters"></a>`MSP_SPECIAL_PARAMETERS (98 / 0x62)`
-**Description:** Betaflight specific, likely unused/unimplemented in INAV.
-**Request Payload:** None
+**Description:** Betaflight specific, likely unused/unimplemented in INAV.  
+
+**Request Payload:** None  
+
 **Reply Payload:** None
 
 **Notes:** Not implemented in INAV `fc_msp.c`.
 
 ## <a id="msp_set_special_parameters"></a>`MSP_SET_SPECIAL_PARAMETERS (99 / 0x63)`
-**Description:** Betaflight specific, likely unused/unimplemented in INAV.
-**Request Payload:** None
+**Description:** Betaflight specific, likely unused/unimplemented in INAV.  
+
+**Request Payload:** None  
+
 **Reply Payload:** None
 
 **Notes:** Not implemented in INAV `fc_msp.c`.
 
 ## <a id="msp_ident"></a>`MSP_IDENT (100 / 0x64)`
-**Description:** Provides basic flight controller identity information. Not implemented in modern INAV, but used by legacy versions and MultiWii.
-**Request Payload:** None
+**Description:** Provides basic flight controller identity information. Not implemented in modern INAV, but used by legacy versions and MultiWii.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1261,8 +1345,9 @@
 **Notes:** Obsolete. Listed for legacy compatibility only.
 
 ## <a id="msp_status"></a>`MSP_STATUS (101 / 0x65)`
-**Description:** Provides basic flight controller status including cycle time, errors, sensor status, active modes (first 32), and the current configuration profile.
-**Request Payload:** None
+**Description:** Provides basic flight controller status including cycle time, errors, sensor status, active modes (first 32), and the current configuration profile.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1275,8 +1360,9 @@
 **Notes:** Superseded by `MSP_STATUS_EX` and `MSP2_INAV_STATUS`. `sensorStatus` bitmask: (Bit 0: ACC, 1: BARO, 2: MAG, 3: GPS, 4: RANGEFINDER, 5: GYRO). `activeModesLow` only contains the first 32 modes; use `MSP_ACTIVEBOXES` for the full set.
 
 ## <a id="msp_raw_imu"></a>`MSP_RAW_IMU (102 / 0x66)`
-**Description:** Provides raw sensor readings from the IMU (Accelerometer, Gyroscope, Magnetometer).
-**Request Payload:** None
+**Description:** Provides raw sensor readings from the IMU (Accelerometer, Gyroscope, Magnetometer).  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1293,32 +1379,36 @@
 **Notes:** Acc scaling is approximate (512 LSB/G). Mag units depend on the sensor.
 
 ## <a id="msp_servo"></a>`MSP_SERVO (103 / 0x67)`
-**Description:** Provides the current output values for all supported servos.
-**Request Payload:** None
+**Description:** Provides the current output values for all supported servos.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
 | `servoOutputs` | `int16_t[MAX_SUPPORTED_SERVOS]` | MAX_SUPPORTED_SERVOS * 2 | PWM | Array of current servo output values (typically 1000-2000). |
 
 ## <a id="msp_motor"></a>`MSP_MOTOR (104 / 0x68)`
-**Description:** Provides the current output values for the first 8 motors.
-**Request Payload:** None
+**Description:** Provides the current output values for the first 8 motors.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
 | `motorOutputs` | `uint16_t[8]` | 16 | PWM | Array of current motor output values (typically 1000-2000). Values beyond `MAX_SUPPORTED_MOTORS` are 0. |
 
 ## <a id="msp_rc"></a>`MSP_RC (105 / 0x69)`
-**Description:** Provides the current values of the received RC channels.
-**Request Payload:** None
+**Description:** Provides the current values of the received RC channels.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
 | `rcChannels` | `uint16_t[]` | - | PWM | Array of current RC channel values (typically 1000-2000). Length depends on detected channels. |
 
 ## <a id="msp_raw_gps"></a>`MSP_RAW_GPS (106 / 0x6a)`
-**Description:** Provides raw GPS data (fix status, coordinates, altitude, speed, course).
-**Request Payload:** None
+**Description:** Provides raw GPS data (fix status, coordinates, altitude, speed, course).  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1334,8 +1424,9 @@
 **Notes:** Only available if `USE_GPS` is defined. Altitude is truncated to meters.
 
 ## <a id="msp_comp_gps"></a>`MSP_COMP_GPS (107 / 0x6b)`
-**Description:** Provides computed GPS values: distance and direction to home.
-**Request Payload:** None
+**Description:** Provides computed GPS values: distance and direction to home.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1346,8 +1437,9 @@
 **Notes:** Only available if `USE_GPS` is defined.
 
 ## <a id="msp_attitude"></a>`MSP_ATTITUDE (108 / 0x6c)`
-**Description:** Provides the current attitude estimate (roll, pitch, yaw).
-**Request Payload:** None
+**Description:** Provides the current attitude estimate (roll, pitch, yaw).  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1358,8 +1450,9 @@
 **Notes:** Yaw is converted from deci-degrees to degrees.
 
 ## <a id="msp_altitude"></a>`MSP_ALTITUDE (109 / 0x6d)`
-**Description:** Provides estimated altitude, vertical speed (variometer), and raw barometric altitude.
-**Request Payload:** None
+**Description:** Provides estimated altitude, vertical speed (variometer), and raw barometric altitude.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1368,8 +1461,9 @@
 | `baroAltitude` | `int32_t` | 4 | cm | Latest raw altitude from barometer (`baroGetLatestAltitude()`). 0 if `USE_BARO` disabled. |
 
 ## <a id="msp_analog"></a>`MSP_ANALOG (110 / 0x6e)`
-**Description:** Provides analog sensor readings: battery voltage, current consumption (mAh), RSSI, and current draw (Amps).
-**Request Payload:** None
+**Description:** Provides analog sensor readings: battery voltage, current consumption (mAh), RSSI, and current draw (Amps).  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1381,8 +1475,9 @@
 **Notes:** Superseded by `MSP2_INAV_ANALOG` which provides higher precision and more fields.
 
 ## <a id="msp_rc_tuning"></a>`MSP_RC_TUNING (111 / 0x6f)`
-**Description:** Retrieves RC tuning parameters (rates, expos, TPA) for the current control rate profile.
-**Request Payload:** None
+**Description:** Retrieves RC tuning parameters (rates, expos, TPA) for the current control rate profile.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1400,8 +1495,9 @@
 **Notes:** Superseded by `MSP2_INAV_RATE_PROFILE` which includes manual rates/expos.
 
 ## <a id="msp_activeboxes"></a>`MSP_ACTIVEBOXES (113 / 0x71)`
-**Description:** Provides the full bitmask of currently active flight modes (boxes).
-**Request Payload:** None
+**Description:** Provides the full bitmask of currently active flight modes (boxes).  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1410,8 +1506,9 @@
 **Notes:** Use this instead of `MSP_STATUS` or `MSP_STATUS_EX` if more than 32 modes are possible.
 
 ## <a id="msp_misc"></a>`MSP_MISC (114 / 0x72)`
-**Description:** Retrieves miscellaneous configuration settings, mostly related to RC, GPS, Mag, and Battery voltage (legacy formats).
-**Request Payload:** None
+**Description:** Retrieves miscellaneous configuration settings, mostly related to RC, GPS, Mag, and Battery voltage (legacy formats).  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1435,8 +1532,9 @@
 **Notes:** Superseded by `MSP2_INAV_MISC` and other specific commands which offer better precision and more fields.
 
 ## <a id="msp_boxnames"></a>`MSP_BOXNAMES (116 / 0x74)`
-**Description:** Provides a semicolon-separated string containing the names of all available flight modes (boxes).
-**Request Payload:** None
+**Description:** Provides a semicolon-separated string containing the names of all available flight modes (boxes).  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1445,15 +1543,16 @@
 **Notes:** The exact set of names depends on compiled features and configuration. Due to the size of the payload, it is recommended that [`MSP_BOXIDS`](#msp_boxids-119--0x77) is used instead.
 
 ## <a id="msp_pidnames"></a>`MSP_PIDNAMES (117 / 0x75)`
-**Description:** Provides a semicolon-separated string containing the names of the PID controllers.
-**Request Payload:** None
+**Description:** Provides a semicolon-separated string containing the names of the PID controllers.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
 | `pidNamesString` | `char[]` | - | - | String "ROLL;PITCH;YAW;ALT;Pos;PosR;NavR;LEVEL;MAG;VEL;". Null termination not guaranteed by MSP. |
 
 ## <a id="msp_wp"></a>`MSP_WP (118 / 0x76)`
-**Description:** Get/Set a single waypoint from the mission plan.
+**Description:** Get/Set a single waypoint from the mission plan.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1474,8 +1573,9 @@
 **Notes:** See `navWaypoint_t` and `navWaypointAction_e`.
 
 ## <a id="msp_boxids"></a>`MSP_BOXIDS (119 / 0x77)`
-**Description:** Provides a list of permanent IDs associated with the available flight modes (boxes).
-**Request Payload:** None
+**Description:** Provides a list of permanent IDs associated with the available flight modes (boxes).  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1484,8 +1584,9 @@
 **Notes:** Useful for mapping mode range configurations (`MSP_MODE_RANGES`) back to user-understandable modes via `MSP_BOXNAMES`.
 
 ## <a id="msp_servo_configurations"></a>`MSP_SERVO_CONFIGURATIONS (120 / 0x78)`
-**Description:** Retrieves the configuration parameters for all supported servos (min, max, middle, rate). Legacy format with unused fields.
-**Request Payload:** None
+**Description:** Retrieves the configuration parameters for all supported servos (min, max, middle, rate). Legacy format with unused fields.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1501,8 +1602,9 @@
 **Notes:** Superseded by `MSP2_INAV_SERVO_CONFIG` which has a cleaner structure.
 
 ## <a id="msp_nav_status"></a>`MSP_NAV_STATUS (121 / 0x79)`
-**Description:** Retrieves the current status of the navigation system.
-**Request Payload:** None
+**Description:** Retrieves the current status of the navigation system.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1516,12 +1618,15 @@
 **Notes:** Requires `USE_GPS`.
 
 ## <a id="msp_nav_config"></a>`MSP_NAV_CONFIG (122 / 0x7a)`
-**Request Payload:** None
+
+**Request Payload:** None  
+
 **Reply Payload:** None
 
 ## <a id="msp_3d"></a>`MSP_3D (124 / 0x7c)`
-**Description:** Retrieves settings related to 3D/reversible motor operation.
-**Request Payload:** None
+**Description:** Retrieves settings related to 3D/reversible motor operation.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1532,8 +1637,9 @@
 **Notes:** Requires reversible motor support.
 
 ## <a id="msp_rc_deadband"></a>`MSP_RC_DEADBAND (125 / 0x7d)`
-**Description:** Retrieves RC input deadband settings.
-**Request Payload:** None
+**Description:** Retrieves RC input deadband settings.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1543,8 +1649,9 @@
 | `throttleDeadband` | `uint16_t` | 2 | PWM | Deadband around throttle mid-stick (`rcControlsConfig()->mid_throttle_deadband`). |
 
 ## <a id="msp_sensor_alignment"></a>`MSP_SENSOR_ALIGNMENT (126 / 0x7e)`
-**Description:** Retrieves sensor alignment settings (legacy format).
-**Request Payload:** None
+**Description:** Retrieves sensor alignment settings (legacy format).  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1556,8 +1663,9 @@
 **Notes:** Board alignment is now typically handled by `MSP_BOARD_ALIGNMENT`. This returns legacy enum values where applicable.
 
 ## <a id="msp_led_strip_modecolor"></a>`MSP_LED_STRIP_MODECOLOR (127 / 0x7f)`
-**Description:** Retrieves the color index assigned to each LED mode and function/direction combination, including special colors.
-**Request Payload:** None
+**Description:** Retrieves the color index assigned to each LED mode and function/direction combination, including special colors.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1568,8 +1676,9 @@
 **Notes:** Only available if `USE_LED_STRIP` is defined. Allows mapping modes/directions/specials to configured colors.
 
 ## <a id="msp_battery_state"></a>`MSP_BATTERY_STATE (130 / 0x82)`
-**Description:** Provides battery state information, formatted primarily for DJI FPV Goggles compatibility.
-**Request Payload:** None
+**Description:** Provides battery state information, formatted primarily for DJI FPV Goggles compatibility.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1584,14 +1693,16 @@
 **Notes:** Only available if `USE_DJI_HD_OSD` or `USE_MSP_DISPLAYPORT` is defined. Some values are duplicated from `MSP_ANALOG` / `MSP2_INAV_ANALOG` but potentially with different scaling/types.
 
 ## <a id="msp_vtxtable_band"></a>`MSP_VTXTABLE_BAND (137 / 0x89)`
-**Description:** Retrieves information about a specific VTX band from the VTX table. (Implementation missing in provided `fc_msp.c`)
-**Request Payload:** None
+**Description:** Retrieves information about a specific VTX band from the VTX table. (Implementation missing in provided `fc_msp.c`)  
+
+**Request Payload:** None  
+
 **Reply Payload:** None
 
 **Notes:** The ID is defined, but no handler exists in the provided C code. Likely intended to query band names and frequencies.
 
 ## <a id="msp_vtxtable_powerlevel"></a>`MSP_VTXTABLE_POWERLEVEL (138 / 0x8a)`
-**Description:** Retrieves information about a specific VTX power level from the VTX table.
+**Description:** Retrieves information about a specific VTX power level from the VTX table.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1607,8 +1718,9 @@
 **Notes:** Requires `USE_VTX_CONTROL`. Returns error if index is out of bounds. The `powerValue` field is unused.
 
 ## <a id="msp_status_ex"></a>`MSP_STATUS_EX (150 / 0x96)`
-**Description:** Provides extended flight controller status, including CPU load, arming flags, and calibration status, in addition to `MSP_STATUS` fields.
-**Request Payload:** None
+**Description:** Provides extended flight controller status, including CPU load, arming flags, and calibration status, in addition to `MSP_STATUS` fields.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1624,8 +1736,9 @@
 **Notes:** Superseded by `MSP2_INAV_STATUS` which provides the full 32-bit `armingFlags` and other enhancements.
 
 ## <a id="msp_sensor_status"></a>`MSP_SENSOR_STATUS (151 / 0x97)`
-**Description:** Provides the hardware status for each individual sensor system.
-**Request Payload:** None
+**Description:** Provides the hardware status for each individual sensor system.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1642,8 +1755,9 @@
 **Notes:** Status values likely correspond to `SENSOR_STATUS_*` enums (e.g., OK, Unhealthy, Not Present).
 
 ## <a id="msp_uid"></a>`MSP_UID (160 / 0xa0)`
-**Description:** Provides the unique identifier of the microcontroller.
-**Request Payload:** None
+**Description:** Provides the unique identifier of the microcontroller.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1654,8 +1768,9 @@
 **Notes:** Total 12 bytes, representing a 96-bit unique ID.
 
 ## <a id="msp_gpssvinfo"></a>`MSP_GPSSVINFO (164 / 0xa4)`
-**Description:** Provides satellite signal strength information (legacy U-Blox compatibility stub).
-**Request Payload:** None
+**Description:** Provides satellite signal strength information (legacy U-Blox compatibility stub).  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1667,8 +1782,9 @@
 **Notes:** Requires `USE_GPS`. This is just a stub in INAV and does not provide actual per-satellite signal info. `hdopUnits` duplicates `hdopHundreds`.
 
 ## <a id="msp_gpsstatistics"></a>`MSP_GPSSTATISTICS (166 / 0xa6)`
-**Description:** Provides debugging statistics for the GPS communication link.
-**Request Payload:** None
+**Description:** Provides debugging statistics for the GPS communication link.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1683,30 +1799,38 @@
 **Notes:** Requires `USE_GPS`.
 
 ## <a id="msp_osd_video_config"></a>`MSP_OSD_VIDEO_CONFIG (180 / 0xb4)`
-**Request Payload:** None
+
+**Request Payload:** None  
+
 **Reply Payload:** None
 
 ## <a id="msp_set_osd_video_config"></a>`MSP_SET_OSD_VIDEO_CONFIG (181 / 0xb5)`
-**Request Payload:** None
+
+**Request Payload:** None  
+
 **Reply Payload:** None
 
 ## <a id="msp_displayport"></a>`MSP_DISPLAYPORT (182 / 0xb6)`
-**Request Payload:** None
+
+**Request Payload:** None  
+
 **Reply Payload:** None
 
 ## <a id="msp_set_tx_info"></a>`MSP_SET_TX_INFO (186 / 0xba)`
-**Description:** Allows a transmitter LUA script (or similar) to send runtime information (currently only RSSI) to the firmware.
+**Description:** Allows a transmitter LUA script (or similar) to send runtime information (currently only RSSI) to the firmware.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
 | `rssi` | `uint8_t` | 1 | % | RSSI value (0-100) provided by the external source. |
+
 **Reply Payload:** None
 
 **Notes:** Calls `setRSSIFromMSP()`. Expects 1 byte.
 
 ## <a id="msp_tx_info"></a>`MSP_TX_INFO (187 / 0xbb)`
-**Description:** Provides information potentially useful for transmitter LUA scripts.
-**Request Payload:** None
+**Description:** Provides information potentially useful for transmitter LUA scripts.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1716,17 +1840,18 @@
 **Notes:** See `rssiSource_e`.
 
 ## <a id="msp_set_raw_rc"></a>`MSP_SET_RAW_RC (200 / 0xc8)`
-**Description:** Provides raw RC channel data to the flight controller, typically used when the receiver is connected via MSP (e.g., MSP RX feature).
+**Description:** Provides raw RC channel data to the flight controller, typically used when the receiver is connected via MSP (e.g., MSP RX feature).  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
 | `rcChannels` | `uint16_t[]` | - | PWM | Array of RC channel values (typically 1000-2000). Number of channels determined by payload size. |
+
 **Reply Payload:** None
 
 **Notes:** Requires `USE_RX_MSP`. Maximum channels `MAX_SUPPORTED_RC_CHANNEL_COUNT`. Calls `rxMspFrameReceive()`.
 
 ## <a id="msp_set_raw_gps"></a>`MSP_SET_RAW_GPS (201 / 0xc9)`
-**Description:** Provides raw GPS data to the flight controller, typically for simulation or external GPS injection.
+**Description:** Provides raw GPS data to the flight controller, typically for simulation or external GPS injection.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1737,19 +1862,22 @@
 | `altitude` | `int16_t` | 2 | meters | Altitude (converted to cm internally). |
 | `speed` | `uint16_t` | 2 | cm/s | Ground speed. |
 | `groundCourse` | `uint16_t` | 2 | ??? | Ground course (units unclear from code, likely degrees or deci-degrees, ignored in current code). |
+
 **Reply Payload:** None
 
 **Notes:** Requires `USE_GPS`. Expects 14 bytes. Updates `gpsSol` structure and calls `onNewGPSData()`. Note the altitude unit mismatch (meters in MSP, cm internal). Does not provide velocity components.
 
 ## <a id="msp_set_box"></a>`MSP_SET_BOX (203 / 0xcb)`
-**Description:** Sets the state of flight modes (boxes). (Likely unused/obsolete in INAV).
-**Request Payload:** None
+**Description:** Sets the state of flight modes (boxes). (Likely unused/obsolete in INAV).  
+
+**Request Payload:** None  
+
 **Reply Payload:** None
 
 **Notes:** Not implemented in INAV `fc_msp.c`. Mode changes are typically handled via RC channels (`MSP_MODE_RANGES`).
 
 ## <a id="msp_set_rc_tuning"></a>`MSP_SET_RC_TUNING (204 / 0xcc)`
-**Description:** Sets RC tuning parameters (rates, expos, TPA) for the current control rate profile.
+**Description:** Sets RC tuning parameters (rates, expos, TPA) for the current control rate profile.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1763,26 +1891,31 @@
 | `throttleExpo` | `uint8_t` | 1 | - | Sets `currentControlRateProfile->throttle.rcExpo8`. |
 | `tpaBreakpoint` | `uint16_t` | 2 | - | Sets `currentControlRateProfile->throttle.pa_breakpoint`. |
 | `rcYawExpo` | `uint8_t` | 1 | - | (Optional) Sets `currentControlRateProfile->stabilized.rcYawExpo8`. |
+
 **Reply Payload:** None
 
 **Notes:** Expects 10 or 11 bytes. Calls `schedulePidGainsUpdate()`. Superseded by `MSP2_INAV_SET_RATE_PROFILE`.
 
 ## <a id="msp_acc_calibration"></a>`MSP_ACC_CALIBRATION (205 / 0xcd)`
-**Description:** Starts the accelerometer calibration procedure.
-**Request Payload:** None
+**Description:** Starts the accelerometer calibration procedure.  
+
+**Request Payload:** None  
+
 **Reply Payload:** None
 
 **Notes:** Will fail if armed. Calls `accStartCalibration()`.
 
 ## <a id="msp_mag_calibration"></a>`MSP_MAG_CALIBRATION (206 / 0xce)`
-**Description:** Starts the magnetometer calibration procedure.
-**Request Payload:** None
+**Description:** Starts the magnetometer calibration procedure.  
+
+**Request Payload:** None  
+
 **Reply Payload:** None
 
 **Notes:** Will fail if armed. Enables the `CALIBRATE_MAG` state flag.
 
 ## <a id="msp_set_misc"></a>`MSP_SET_MISC (207 / 0xcf)`
-**Description:** Sets miscellaneous configuration settings (legacy formats/scaling).
+**Description:** Sets miscellaneous configuration settings (legacy formats/scaling).  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1802,19 +1935,22 @@
 | `vbatMinCell` | `uint8_t` | 1 | 0.1V | Sets `currentBatteryProfileMutable->voltage.cellMin = value * 10` (if `USE_ADC`). |
 | `vbatMaxCell` | `uint8_t` | 1 | 0.1V | Sets `currentBatteryProfileMutable->voltage.cellMax = value * 10` (if `USE_ADC`). |
 | `vbatWarningCell` | `uint8_t` | 1 | 0.1V | Sets `currentBatteryProfileMutable->voltage.cellWarning = value * 10` (if `USE_ADC`). |
+
 **Reply Payload:** None
 
 **Notes:** Expects 22 bytes. Superseded by `MSP2_INAV_SET_MISC`.
 
 ## <a id="msp_reset_conf"></a>`MSP_RESET_CONF (208 / 0xd0)`
-**Description:** Resets all configuration settings to their default values and saves to EEPROM.
-**Request Payload:** None
+**Description:** Resets all configuration settings to their default values and saves to EEPROM.  
+
+**Request Payload:** None  
+
 **Reply Payload:** None
 
 **Notes:** Will fail if armed. Suspends RX, calls `resetEEPROM()`, `writeEEPROM()`, `readEEPROM()`, resumes RX. Use with caution!
 
 ## <a id="msp_set_wp"></a>`MSP_SET_WP (209 / 0xd1)`
-**Description:** Sets a single waypoint in the mission plan.
+**Description:** Sets a single waypoint in the mission plan.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1827,32 +1963,35 @@
 | `param2` | `uint16_t` | 2 | Varies | Parameter 2. |
 | `param3` | `uint16_t` | 2 | Varies | Parameter 3. |
 | `flag` | `uint8_t` | 1 | Bitmask | Waypoint flags. |
+
 **Reply Payload:** None
 
 **Notes:** Expects 21 bytes. Calls `setWaypoint()`. If `USE_FW_AUTOLAND` is enabled, this also interacts with autoland approach settings based on waypoint index and flags.
 
 ## <a id="msp_select_setting"></a>`MSP_SELECT_SETTING (210 / 0xd2)`
-**Description:** Selects the active configuration profile and saves it.
+**Description:** Selects the active configuration profile and saves it.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
 | `profileIndex` | `uint8_t` | 1 | - | Index of the profile to activate (0-based). |
+
 **Reply Payload:** None
 
 **Notes:** Will fail if armed. Calls `setConfigProfileAndWriteEEPROM()`.
 
 ## <a id="msp_set_head"></a>`MSP_SET_HEAD (211 / 0xd3)`
-**Description:** Sets the target heading for the heading hold controller (e.g., during MAG mode).
+**Description:** Sets the target heading for the heading hold controller (e.g., during MAG mode).  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
 | `heading` | `int16_t` | 2 | degrees | Target heading (0-359). |
+
 **Reply Payload:** None
 
 **Notes:** Expects 2 bytes. Calls `updateHeadingHoldTarget()`.
 
 ## <a id="msp_set_servo_configuration"></a>`MSP_SET_SERVO_CONFIGURATION (212 / 0xd4)`
-**Description:** Sets the configuration for a single servo (legacy format).
+**Description:** Sets the configuration for a single servo (legacy format).  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1865,38 +2004,43 @@
 | `reserved2` | `uint8_t` | 1 | - | Ignored. |
 | `legacyForwardChan` | `uint8_t` | 1 | - | Ignored. |
 | `legacyReversedSources` | `uint32_t` | 4 | - | Ignored. |
+
 **Reply Payload:** None
 
 **Notes:** Expects 15 bytes. Returns error if index is invalid. Calls `servoComputeScalingFactors()`. Superseded by `MSP2_INAV_SET_SERVO_CONFIG`.
 
 ## <a id="msp_set_motor"></a>`MSP_SET_MOTOR (214 / 0xd6)`
-**Description:** Sets the disarmed motor values, typically used for motor testing or propeller balancing functions in a configurator.
+**Description:** Sets the disarmed motor values, typically used for motor testing or propeller balancing functions in a configurator.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
 | `motorValues` | `uint16_t[8]` | 16 | PWM | Array of motor values to set when disarmed. Only affects first `MAX_SUPPORTED_MOTORS`. |
+
 **Reply Payload:** None
 
 **Notes:** Expects 16 bytes. Modifies the `motor_disarmed` array. These values are *not* saved persistently.
 
 ## <a id="msp_set_nav_config"></a>`MSP_SET_NAV_CONFIG (215 / 0xd7)`
-**Request Payload:** None
+
+**Request Payload:** None  
+
 **Reply Payload:** None
 
 ## <a id="msp_set_3d"></a>`MSP_SET_3D (217 / 0xd9)`
-**Description:** Sets parameters related to 3D/reversible motor operation.
+**Description:** Sets parameters related to 3D/reversible motor operation.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
 | `deadbandLow` | `uint16_t` | 2 | PWM | Sets `reversibleMotorsConfigMutable()->deadband_low`. |
 | `deadbandHigh` | `uint16_t` | 2 | PWM | Sets `reversibleMotorsConfigMutable()->deadband_high`. |
 | `neutral` | `uint16_t` | 2 | PWM | Sets `reversibleMotorsConfigMutable()->neutral`. |
+
 **Reply Payload:** None
 
 **Notes:** Expects 6 bytes. Requires reversible motor support.
 
 ## <a id="msp_set_rc_deadband"></a>`MSP_SET_RC_DEADBAND (218 / 0xda)`
-**Description:** Sets RC input deadband values.
+**Description:** Sets RC input deadband values.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1904,19 +2048,22 @@
 | `yawDeadband` | `uint8_t` | 1 | PWM | Sets `rcControlsConfigMutable()->yaw_deadband`. |
 | `altHoldDeadband` | `uint8_t` | 1 | PWM | Sets `rcControlsConfigMutable()->alt_hold_deadband`. |
 | `throttleDeadband` | `uint16_t` | 2 | PWM | Sets `rcControlsConfigMutable()->mid_throttle_deadband`. |
+
 **Reply Payload:** None
 
 **Notes:** Expects 5 bytes.
 
 ## <a id="msp_set_reset_curr_pid"></a>`MSP_SET_RESET_CURR_PID (219 / 0xdb)`
-**Description:** Resets the PIDs of the *current* profile to their default values. Does not save.
-**Request Payload:** None
+**Description:** Resets the PIDs of the *current* profile to their default values. Does not save.  
+
+**Request Payload:** None  
+
 **Reply Payload:** None
 
 **Notes:** Calls `PG_RESET_CURRENT(pidProfile)`. To save, follow with `MSP_EEPROM_WRITE`.
 
 ## <a id="msp_set_sensor_alignment"></a>`MSP_SET_SENSOR_ALIGNMENT (220 / 0xdc)`
-**Description:** Sets sensor alignment (legacy format).
+**Description:** Sets sensor alignment (legacy format).  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1924,39 +2071,46 @@
 | `accAlign` | `uint8_t` | 1 | - | Ignored. |
 | `magAlign` | `uint8_t` | 1 | - | Sets `compassConfigMutable()->mag_align` (if `USE_MAG`). |
 | `opflowAlign` | `uint8_t` | 1 | - | Sets `opticalFlowConfigMutable()->opflow_align` (if `USE_OPFLOW`). |
+
 **Reply Payload:** None
 
 **Notes:** Expects 4 bytes. Use `MSP_SET_BOARD_ALIGNMENT` for primary board orientation.
 
 ## <a id="msp_set_led_strip_modecolor"></a>`MSP_SET_LED_STRIP_MODECOLOR (221 / 0xdd)`
-**Description:** Sets the color index for a specific LED mode/function combination.
+**Description:** Sets the color index for a specific LED mode/function combination.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
 | `modeIndex` | `uint8_t` | 1 | - | Index of the LED mode (`ledModeIndex_e` or `LED_MODE_COUNT` for special). |
 | `directionOrSpecialIndex` | `uint8_t` | 1 | - | Index of the direction or special color. |
 | `colorIndex` | `uint8_t` | 1 | - | Index of the color to assign from `ledStripConfig()->colors`. |
+
 **Reply Payload:** None
 
 **Notes:** Only available if `USE_LED_STRIP` is defined. Expects 3 bytes. Returns error if setting fails (invalid index).
 
 ## <a id="msp_set_acc_trim"></a>`MSP_SET_ACC_TRIM (239 / 0xef)`
-**Description:** Sets the accelerometer trim values (leveling calibration).
-**Request Payload:** None
+**Description:** Sets the accelerometer trim values (leveling calibration).  
+
+**Request Payload:** None  
+
 **Reply Payload:** None
 
 **Notes:** Not implemented in INAV `fc_msp.c`. Use `MSP_ACC_CALIBRATION`.
 
 ## <a id="msp_acc_trim"></a>`MSP_ACC_TRIM (240 / 0xf0)`
-**Description:** Gets the accelerometer trim values.
-**Request Payload:** None
+**Description:** Gets the accelerometer trim values.  
+
+**Request Payload:** None  
+
 **Reply Payload:** None
 
 **Notes:** Not implemented in INAV `fc_msp.c`. Calibration data via `MSP_CALIBRATION_DATA`.
 
 ## <a id="msp_servo_mix_rules"></a>`MSP_SERVO_MIX_RULES (241 / 0xf1)`
-**Description:** Retrieves the custom servo mixer rules (legacy format).
-**Request Payload:** None
+**Description:** Retrieves the custom servo mixer rules (legacy format).  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1971,7 +2125,7 @@
 **Notes:** Superseded by `MSP2_INAV_SERVO_MIXER`.
 
 ## <a id="msp_set_servo_mix_rule"></a>`MSP_SET_SERVO_MIX_RULE (242 / 0xf2)`
-**Description:** Sets a single custom servo mixer rule (legacy format).
+**Description:** Sets a single custom servo mixer rule (legacy format).  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1982,13 +2136,15 @@
 | `speed` | `uint8_t` | 1 | 0-100 | Speed/Slew rate limit. |
 | `legacyMinMax` | `uint16_t` | 2 | - | Ignored. |
 | `legacyBox` | `uint8_t` | 1 | - | Ignored. |
+
 **Reply Payload:** None
 
 **Notes:** Expects 9 bytes. Returns error if index invalid. Calls `loadCustomServoMixer()`. Superseded by `MSP2_INAV_SET_SERVO_MIXER`.
 
 ## <a id="msp_set_passthrough"></a>`MSP_SET_PASSTHROUGH (245 / 0xf5)`
-**Description:** Enables serial passthrough mode to peripherals like ESCs (BLHeli 4-way) or other serial devices.
-**Request Payload:** None
+**Description:** Enables serial passthrough mode to peripherals like ESCs (BLHeli 4-way) or other serial devices.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1997,8 +2153,9 @@
 **Notes:** If successful, sets `mspPostProcessFn` to the appropriate handler (`mspSerialPassthroughFn` or `esc4wayProcess`). This handler takes over the serial port after the reply is sent. Requires `USE_SERIAL_4WAY_BLHELI_INTERFACE` for ESC passthrough.
 
 ## <a id="msp_rtc"></a>`MSP_RTC (246 / 0xf6)`
-**Description:** Retrieves the current Real-Time Clock time.
-**Request Payload:** None
+**Description:** Retrieves the current Real-Time Clock time.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2008,42 +2165,51 @@
 **Notes:** Requires RTC hardware/support. Returns (0, 0) if time is not available/set.
 
 ## <a id="msp_set_rtc"></a>`MSP_SET_RTC (247 / 0xf7)`
-**Description:** Sets the Real-Time Clock time.
+**Description:** Sets the Real-Time Clock time.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
 | `seconds` | `int32_t` | 4 | Seconds | Seconds component of time to set. |
 | `millis` | `uint16_t` | 2 | Milliseconds | Millisecond component of time to set. |
+
 **Reply Payload:** None
 
 **Notes:** Requires RTC hardware/support. Expects 6 bytes. Uses `rtcSet()`.
 
 ## <a id="msp_eeprom_write"></a>`MSP_EEPROM_WRITE (250 / 0xfa)`
-**Description:** Saves the current configuration from RAM to non-volatile memory (EEPROM/Flash).
-**Request Payload:** None
+**Description:** Saves the current configuration from RAM to non-volatile memory (EEPROM/Flash).  
+
+**Request Payload:** None  
+
 **Reply Payload:** None
 
 **Notes:** Will fail if armed. Suspends RX, calls `writeEEPROM()`, `readEEPROM()`, resumes RX.
 
 ## <a id="msp_reserve_1"></a>`MSP_RESERVE_1 (251 / 0xfb)`
-**Request Payload:** None
+
+**Request Payload:** None  
+
 **Reply Payload:** None
 
 ## <a id="msp_reserve_2"></a>`MSP_RESERVE_2 (252 / 0xfc)`
-**Request Payload:** None
+
+**Request Payload:** None  
+
 **Reply Payload:** None
 
 ## <a id="msp_debugmsg"></a>`MSP_DEBUGMSG (253 / 0xfd)`
-**Description:** Retrieves debug ("serial printf") messages from the firmware.
-**Request Payload:** None
+**Description:** Retrieves debug ("serial printf") messages from the firmware.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
 | `Message Text` | `char[]` | - | - | NUL` terminated [debug message](https://github.com/iNavFlight/inav/blob/master/docs/development/serial_printf_debugging.md) text. |
 
 ## <a id="msp_debug"></a>`MSP_DEBUG (254 / 0xfe)`
-**Description:** Retrieves values from the firmware's `debug[]` array (legacy 16-bit version).
-**Request Payload:** None
+**Description:** Retrieves values from the firmware's `debug[]` array (legacy 16-bit version).  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2052,15 +2218,18 @@
 **Notes:** Useful for developers. See `MSP2_INAV_DEBUG` for 32-bit values.
 
 ## <a id="msp_v2_frame"></a>`MSP_V2_FRAME (255 / 0xff)`
-**Description:** This ID is used as a *payload indicator* within an MSPv1 message structure (`$M>`) to signify that the following payload conforms to the MSPv2 format. It's not a command itself.
-**Request Payload:** None
+**Description:** This ID is used as a *payload indicator* within an MSPv1 message structure (`$M>`) to signify that the following payload conforms to the MSPv2 format. It's not a command itself.  
+
+**Request Payload:** None  
+
 **Reply Payload:** None
 
 **Notes:** See MSPv2 documentation for the actual frame structure that follows this indicator.
 
 ## <a id="msp2_common_tz"></a>`MSP2_COMMON_TZ (4097 / 0x1001)`
-**Description:** Gets the time zone offset configuration.
-**Request Payload:** None
+**Description:** Gets the time zone offset configuration.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2068,11 +2237,11 @@
 | `tzAutoDst` | `uint8_t` | 1 | Boolean | Automatic daylight saving time enabled (`timeConfig()->tz_automatic_dst`). |
 
 ## <a id="msp2_common_set_tz"></a>`MSP2_COMMON_SET_TZ (4098 / 0x1002)`
-**Description:** Sets the time zone offset configuration.
+**Description:** Sets the time zone offset configuration.  
 **Special case, skipped for now**
 
 ## <a id="msp2_common_setting"></a>`MSP2_COMMON_SETTING (4099 / 0x1003)`
-**Description:** Gets the value of a specific configuration setting, identified by name or index.
+**Description:** Gets the value of a specific configuration setting, identified by name or index.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2085,15 +2254,15 @@
 **Notes:** Returns error if setting not found. Use `MSP2_COMMON_SETTING_INFO` to discover settings, types, and sizes.
 
 ## <a id="msp2_common_set_setting"></a>`MSP2_COMMON_SET_SETTING (4100 / 0x1004)`
-**Description:** Sets the value of a specific configuration setting, identified by name or index.
+**Description:** Sets the value of a specific configuration setting, identified by name or index.  
 **Special case, skipped for now**
 
 ## <a id="msp2_common_motor_mixer"></a>`MSP2_COMMON_MOTOR_MIXER (4101 / 0x1005)`
-**Description:** Retrieves the current motor mixer configuration (throttle, roll, pitch, yaw weights for each motor) for the primary and secondary mixer profiles.
+**Description:** Retrieves the current motor mixer configuration (throttle, roll, pitch, yaw weights for each motor) for the primary and secondary mixer profiles.  
 **Special case, skipped for now**
 
 ## <a id="msp2_common_set_motor_mixer"></a>`MSP2_COMMON_SET_MOTOR_MIXER (4102 / 0x1006)`
-**Description:** Sets the motor mixer weights for a single motor in the primary mixer profile.
+**Description:** Sets the motor mixer weights for a single motor in the primary mixer profile.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2102,13 +2271,15 @@
 | `rollWeight` | `uint16_t` | 2 | Scaled (0-4000) | Sets roll weight from `(value / 1000.0) - 2.0`. |
 | `pitchWeight` | `uint16_t` | 2 | Scaled (0-4000) | Sets pitch weight from `(value / 1000.0) - 2.0`. |
 | `yawWeight` | `uint16_t` | 2 | Scaled (0-4000) | Sets yaw weight from `(value / 1000.0) - 2.0`. |
+
 **Reply Payload:** None
 
 **Notes:** Expects 9 bytes. Modifies `primaryMotorMixerMutable()`. Returns error if index is invalid.
 
 ## <a id="msp2_common_setting_info"></a>`MSP2_COMMON_SETTING_INFO (4103 / 0x1007)`
-**Description:** Gets detailed information about a specific configuration setting (name, type, range, flags, current value, etc.).
-**Request Payload:** None
+**Description:** Gets detailed information about a specific configuration setting (name, type, range, flags, current value, etc.).  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2126,7 +2297,7 @@
 | `settingValue` | `uint8_t[]` | - | - | Current raw byte value of the setting. |
 
 ## <a id="msp2_common_pg_list"></a>`MSP2_COMMON_PG_LIST (4104 / 0x1008)`
-**Description:** Gets a list of Parameter Group Numbers (PGNs) used by settings, along with the start and end setting indexes for each group. Can request info for a single PGN.
+**Description:** Gets a list of Parameter Group Numbers (PGNs) used by settings, along with the start and end setting indexes for each group. Can request info for a single PGN.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2141,8 +2312,9 @@
 **Notes:** Allows efficient fetching of related settings by group.
 
 ## <a id="msp2_common_serial_config"></a>`MSP2_COMMON_SERIAL_CONFIG (4105 / 0x1009)`
-**Description:** Retrieves the configuration for all available serial ports.
-**Request Payload:** None
+**Description:** Retrieves the configuration for all available serial ports.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2156,7 +2328,7 @@
 **Notes:** Baud rate indexes map to actual baud rates (e.g., 9600, 115200). See `baudRates` array.
 
 ## <a id="msp2_common_set_serial_config"></a>`MSP2_COMMON_SET_SERIAL_CONFIG (4106 / 0x100a)`
-**Description:** Sets the configuration for one or more serial ports.
+**Description:** Sets the configuration for one or more serial ports.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2166,12 +2338,13 @@
 | `gpsBaudIndex` | `uint8_t` | 1 | - | Baud rate index for GPS. |
 | `telemetryBaudIndex` | `uint8_t` | 1 | - | Baud rate index for Telemetry. |
 | `peripheralBaudIndex` | `uint8_t` | 1 | - | Baud rate index for peripherals. |
+
 **Reply Payload:** None
 
 **Notes:** Payload size must be a multiple of the size of one port config entry (1 + 4 + 4 = 9 bytes). Returns error if identifier is invalid or size is incorrect. Baud rate indexes are constrained `BAUD_MIN` to `BAUD_MAX`.
 
 ## <a id="msp2_common_set_radar_pos"></a>`MSP2_COMMON_SET_RADAR_POS (4107 / 0x100b)`
-**Description:** Sets the position and status information for a "radar" Point of Interest (POI). Used for displaying other craft/objects on the OSD map.
+**Description:** Sets the position and status information for a "radar" Point of Interest (POI). Used for displaying other craft/objects on the OSD map.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2183,19 +2356,22 @@
 | `heading` | `int16_t` | 2 | degrees | Heading of the POI. |
 | `speed` | `uint16_t` | 2 | cm/s | Speed of the POI. |
 | `linkQuality` | `uint8_t` | 1 | 0-4 | Link quality indicator. |
+
 **Reply Payload:** None
 
 **Notes:** Expects 19 bytes. Updates the `radar_pois` array.
 
 ## <a id="msp2_common_set_radar_itd"></a>`MSP2_COMMON_SET_RADAR_ITD (4108 / 0x100c)`
-**Description:** Sets radar information to display (likely internal/unused).
-**Request Payload:** None
+**Description:** Sets radar information to display (likely internal/unused).  
+
+**Request Payload:** None  
+
 **Reply Payload:** None
 
 **Notes:** Not implemented in INAV `fc_msp.c`.
 
 ## <a id="msp2_common_set_msp_rc_link_stats"></a>`MSP2_COMMON_SET_MSP_RC_LINK_STATS (4109 / 0x100d)`
-**Description:** Provides RC link statistics (RSSI, LQ) to the FC, typically from an MSP-based RC link (like ExpressLRS). Sent periodically by the RC link.
+**Description:** Provides RC link statistics (RSSI, LQ) to the FC, typically from an MSP-based RC link (like ExpressLRS). Sent periodically by the RC link.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2206,12 +2382,13 @@
 | `downlinkLQ` | `uint8_t` | 1 | % | Downlink Link Quality (0-100). |
 | `uplinkLQ` | `uint8_t` | 1 | % | Uplink Link Quality (0-100). |
 | `uplinkSNR` | `int8_t` | 1 | dB | Uplink Signal-to-Noise Ratio. |
+
 **Reply Payload:** None
 
 **Notes:** Requires `USE_RX_MSP`. Expects at least 7 bytes. Updates `rxLinkStatistics` and sets RSSI via `setRSSIFromMSP_RC()` only if `sublinkID` is 0. This message expects **no reply** (`MSP_RESULT_NO_REPLY`).
 
 ## <a id="msp2_common_set_msp_rc_info"></a>`MSP2_COMMON_SET_MSP_RC_INFO (4110 / 0x100e)`
-**Description:** Provides additional RC link information (power levels, band, mode) to the FC from an MSP-based RC link. Sent less frequently than link stats.
+**Description:** Provides additional RC link information (power levels, band, mode) to the FC from an MSP-based RC link. Sent less frequently than link stats.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2220,35 +2397,38 @@
 | `downlinkTxPower` | `uint16_t` | 2 | mW? | Downlink transmitter power level. |
 | `band` | `char[4]` | 4 | - | Operating band string (e.g., "2G4", "900"). |
 | `mode` | `char[6]` | 6 | - | Operating mode/rate string (e.g., "100HZ", "F1000"). |
+
 **Reply Payload:** None
 
 **Notes:** Requires `USE_RX_MSP`. Expects at least 15 bytes. Updates `rxLinkStatistics` only if `sublinkID` is 0. Converts band/mode strings to uppercase. This message expects **no reply** (`MSP_RESULT_NO_REPLY`).
 
 ## <a id="msp2_sensor_rangefinder"></a>`MSP2_SENSOR_RANGEFINDER (7937 / 0x1f01)`
-**Description:** Provides rangefinder data (distance, quality) from an external MSP-based sensor.
+**Description:** Provides rangefinder data (distance, quality) from an external MSP-based sensor.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
 | `quality` | `uint8_t` | 1 | 0-255 | Quality of the measurement. |
 | `distanceMm` | `int32_t` | 4 | mm | Measured distance. Negative value indicates out of range. |
+
 **Reply Payload:** None
 
 **Notes:** Requires `USE_RANGEFINDER_MSP`. Calls `mspRangefinderReceiveNewData()`.
 
 ## <a id="msp2_sensor_optic_flow"></a>`MSP2_SENSOR_OPTIC_FLOW (7938 / 0x1f02)`
-**Description:** Provides optical flow data (motion, quality) from an external MSP-based sensor.
+**Description:** Provides optical flow data (motion, quality) from an external MSP-based sensor.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
 | `quality` | `uint8_t` | 1 | - | Quality of the measurement (0-255). |
 | `motionX` | `int32_t` | 4 | - | Raw integrated flow value X. |
 | `motionY` | `int32_t` | 4 | - | Raw integrated flow value Y. |
+
 **Reply Payload:** None
 
 **Notes:** Requires `USE_OPFLOW_MSP`. Calls `mspOpflowReceiveNewData()`.
 
 ## <a id="msp2_sensor_gps"></a>`MSP2_SENSOR_GPS (7939 / 0x1f03)`
-**Description:** Provides detailed GPS data from an external MSP-based GPS module.
+**Description:** Provides detailed GPS data from an external MSP-based GPS module.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2275,12 +2455,13 @@
 | `hour` | `uint8_t` | 1 | - | Hour (0-23). |
 | `min` | `uint8_t` | 1 | - | Minute (0-59). |
 | `sec` | `uint8_t` | 1 | - | Second (0-59). |
+
 **Reply Payload:** None
 
 **Notes:** Requires `USE_GPS_PROTO_MSP`. Calls `mspGPSReceiveNewData()`.
 
 ## <a id="msp2_sensor_compass"></a>`MSP2_SENSOR_COMPASS (7940 / 0x1f04)`
-**Description:** Provides magnetometer data from an external MSP-based compass module.
+**Description:** Provides magnetometer data from an external MSP-based compass module.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2289,12 +2470,13 @@
 | `magX` | `int16_t` | 2 | mGauss | Front component reading. |
 | `magY` | `int16_t` | 2 | mGauss | Right component reading. |
 | `magZ` | `int16_t` | 2 | mGauss | Down component reading. |
+
 **Reply Payload:** None
 
 **Notes:** Requires `USE_MAG_MSP`. Calls `mspMagReceiveNewData()`.
 
 ## <a id="msp2_sensor_barometer"></a>`MSP2_SENSOR_BAROMETER (7941 / 0x1f05)`
-**Description:** Provides barometer data from an external MSP-based barometer module.
+**Description:** Provides barometer data from an external MSP-based barometer module.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2302,12 +2484,13 @@
 | `timeMs` | `uint32_t` | 4 | ms | Timestamp from the sensor. |
 | `pressurePa` | `float` | 4 | Pa | Absolute pressure. |
 | `temp` | `int16_t` | 2 | 0.01 deg C | Temperature. |
+
 **Reply Payload:** None
 
 **Notes:** Requires `USE_BARO_MSP`. Calls `mspBaroReceiveNewData()`.
 
 ## <a id="msp2_sensor_airspeed"></a>`MSP2_SENSOR_AIRSPEED (7942 / 0x1f06)`
-**Description:** Provides airspeed data from an external MSP-based pitot sensor module.
+**Description:** Provides airspeed data from an external MSP-based pitot sensor module.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2315,17 +2498,19 @@
 | `timeMs` | `uint32_t` | 4 | ms | Timestamp from the sensor. |
 | `diffPressurePa` | `float` | 4 | Pa | Differential pressure. |
 | `temp` | `int16_t` | 2 | 0.01 deg C | Temperature. |
+
 **Reply Payload:** None
 
 **Notes:** Requires `USE_PITOT_MSP`. Calls `mspPitotmeterReceiveNewData()`.
 
 ## <a id="msp2_sensor_headtracker"></a>`MSP2_SENSOR_HEADTRACKER (7943 / 0x1f07)`
-**Description:** Provides head tracker orientation data.
+**Description:** Provides head tracker orientation data.  
 **Special case, skipped for now**
 
 ## <a id="msp2_inav_status"></a>`MSP2_INAV_STATUS (8192 / 0x2000)`
-**Description:** Provides comprehensive flight controller status, extending `MSP_STATUS_EX` with full arming flags, battery profile, and mixer profile.
-**Request Payload:** None
+**Description:** Provides comprehensive flight controller status, extending `MSP_STATUS_EX` with full arming flags, battery profile, and mixer profile.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2339,8 +2524,9 @@
 | `mixerProfile` | `uint8_t` | 1 | Index | Current mixer profile index (`getConfigMixerProfile()`). |
 
 ## <a id="msp2_inav_optical_flow"></a>`MSP2_INAV_OPTICAL_FLOW (8193 / 0x2001)`
-**Description:** Provides data from the optical flow sensor.
-**Request Payload:** None
+**Description:** Provides data from the optical flow sensor.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2353,8 +2539,9 @@
 **Notes:** Requires `USE_OPFLOW`.
 
 ## <a id="msp2_inav_analog"></a>`MSP2_INAV_ANALOG (8194 / 0x2002)`
-**Description:** Provides detailed analog sensor readings, superseding `MSP_ANALOG` with higher precision and additional fields.
-**Request Payload:** None
+**Description:** Provides detailed analog sensor readings, superseding `MSP_ANALOG` with higher precision and additional fields.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2369,8 +2556,9 @@
 | `rssi` | `uint16_t` | 2 | 0-1023 or % | RSSI value (`getRSSI()`). |
 
 ## <a id="msp2_inav_misc"></a>`MSP2_INAV_MISC (8195 / 0x2003)`
-**Description:** Retrieves miscellaneous configuration settings, superseding `MSP_MISC` with higher precision and capacity fields.
-**Request Payload:** None
+**Description:** Retrieves miscellaneous configuration settings, superseding `MSP_MISC` with higher precision and capacity fields.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2397,7 +2585,7 @@
 | `capacityUnit` | `uint8_t` | 1 | [ENUM_NAME](LINK_TO_ENUM) | Capacity unit (`batteryMetersConfig()->capacity_unit`). |
 
 ## <a id="msp2_inav_set_misc"></a>`MSP2_INAV_SET_MISC (8196 / 0x2004)`
-**Description:** Sets miscellaneous configuration settings, superseding `MSP_SET_MISC`.
+**Description:** Sets miscellaneous configuration settings, superseding `MSP_SET_MISC`.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2422,13 +2610,15 @@
 | `capacityWarning` | `uint32_t` | 4 | mAh/mWh | Sets `currentBatteryProfileMutable->capacity.warning`. |
 | `capacityCritical` | `uint32_t` | 4 | mAh/mWh | Sets `currentBatteryProfileMutable->capacity.critical`. |
 | `capacityUnit` | `uint8_t` | 1 | [ENUM_NAME](LINK_TO_ENUM) | Sets `batteryMetersConfigMutable()->capacity_unit` (validated). Updates OSD energy unit if changed. |
+
 **Reply Payload:** None
 
 **Notes:** Expects 41 bytes. Performs validation on `vbatSource` and `capacityUnit`.
 
 ## <a id="msp2_inav_battery_config"></a>`MSP2_INAV_BATTERY_CONFIG (8197 / 0x2005)`
-**Description:** Retrieves the configuration specific to the battery voltage and current sensors and capacity settings for the current battery profile.
-**Request Payload:** None
+**Description:** Retrieves the configuration specific to the battery voltage and current sensors and capacity settings for the current battery profile.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2449,7 +2639,7 @@
 **Notes:** Fields are 0 if `USE_ADC` is not defined.
 
 ## <a id="msp2_inav_set_battery_config"></a>`MSP2_INAV_SET_BATTERY_CONFIG (8198 / 0x2006)`
-**Description:** Sets the battery voltage/current sensor configuration and capacity settings for the current battery profile.
+**Description:** Sets the battery voltage/current sensor configuration and capacity settings for the current battery profile.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2466,13 +2656,15 @@
 | `capacityWarning` | `uint32_t` | 4 | mAh/mWh | Sets `currentBatteryProfileMutable->capacity.warning`. |
 | `capacityCritical` | `uint32_t` | 4 | mAh/mWh | Sets `currentBatteryProfileMutable->capacity.critical`. |
 | `capacityUnit` | `uint8_t` | 1 | [ENUM_NAME](LINK_TO_ENUM) | Sets `batteryMetersConfigMutable()->capacity_unit` (validated). Updates OSD energy unit if changed. |
+
 **Reply Payload:** None
 
 **Notes:** Expects 29 bytes. Performs validation on `vbatSource` and `capacityUnit`.
 
 ## <a id="msp2_inav_rate_profile"></a>`MSP2_INAV_RATE_PROFILE (8199 / 0x2007)`
-**Description:** Retrieves the rates and expos for the current control rate profile, including both stabilized and manual flight modes. Supersedes `MSP_RC_TUNING`.
-**Request Payload:** None
+**Description:** Retrieves the rates and expos for the current control rate profile, including both stabilized and manual flight modes. Supersedes `MSP_RC_TUNING`.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2492,7 +2684,7 @@
 | `manualYawRate` | `uint8_t` | 1 | - | Manual Yaw Rate (`currentControlRateProfile->manual.rates[FD_YAW]`). |
 
 ## <a id="msp2_inav_set_rate_profile"></a>`MSP2_INAV_SET_RATE_PROFILE (8200 / 0x2008)`
-**Description:** Sets the rates and expos for the current control rate profile (stabilized and manual). Supersedes `MSP_SET_RC_TUNING`.
+**Description:** Sets the rates and expos for the current control rate profile (stabilized and manual). Supersedes `MSP_SET_RC_TUNING`.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2510,13 +2702,15 @@
 | `manualRollRate` | `uint8_t` | 1 | - | Sets `currentControlRateProfile_p->manual.rates[FD_ROLL]` (constrained). |
 | `manualPitchRate` | `uint8_t` | 1 | - | Sets `currentControlRateProfile_p->manual.rates[FD_PITCH]` (constrained). |
 | `manualYawRate` | `uint8_t` | 1 | - | Sets `currentControlRateProfile_p->manual.rates[FD_YAW]` (constrained). |
+
 **Reply Payload:** None
 
 **Notes:** Expects 15 bytes. Constraints applied to rates based on axis.
 
 ## <a id="msp2_inav_air_speed"></a>`MSP2_INAV_AIR_SPEED (8201 / 0x2009)`
-**Description:** Retrieves the estimated or measured airspeed.
-**Request Payload:** None
+**Description:** Retrieves the estimated or measured airspeed.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2525,8 +2719,9 @@
 **Notes:** Requires `USE_PITOT` for measured airspeed. May return GPS ground speed if pitot unavailable but GPS is present and configured.
 
 ## <a id="msp2_inav_output_mapping"></a>`MSP2_INAV_OUTPUT_MAPPING (8202 / 0x200a)`
-**Description:** Retrieves the output mapping configuration (identifies which timer outputs are used for Motors/Servos). Legacy version sending only 8-bit usage flags.
-**Request Payload:** None
+**Description:** Retrieves the output mapping configuration (identifies which timer outputs are used for Motors/Servos). Legacy version sending only 8-bit usage flags.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2535,8 +2730,9 @@
 **Notes:** Superseded by `MSP2_INAV_OUTPUT_MAPPING_EXT2`. Only includes timers *not* used for PPM/PWM input.
 
 ## <a id="msp2_inav_mc_braking"></a>`MSP2_INAV_MC_BRAKING (8203 / 0x200b)`
-**Description:** Retrieves configuration parameters for the multirotor braking mode feature.
-**Request Payload:** None
+**Description:** Retrieves configuration parameters for the multirotor braking mode feature.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2552,7 +2748,7 @@
 **Notes:** Payload is empty if `USE_MR_BRAKING_MODE` is not defined.
 
 ## <a id="msp2_inav_set_mc_braking"></a>`MSP2_INAV_SET_MC_BRAKING (8204 / 0x200c)`
-**Description:** Sets configuration parameters for the multirotor braking mode feature.
+**Description:** Sets configuration parameters for the multirotor braking mode feature.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2564,13 +2760,15 @@
 | `brakingBoostSpeedThreshold` | `uint16_t` | 2 | cm/s | Sets `navConfigMutable()->mc.braking_boost_speed_threshold`. |
 | `brakingBoostDisengageSpeed` | `uint16_t` | 2 | cm/s | Sets `navConfigMutable()->mc.braking_boost_disengage_speed`. |
 | `brakingBankAngle` | `uint8_t` | 1 | degrees | Sets `navConfigMutable()->mc.braking_bank_angle`. |
+
 **Reply Payload:** None
 
 **Notes:** Expects 14 bytes. Returns error if `USE_MR_BRAKING_MODE` is not defined.
 
 ## <a id="msp2_inav_output_mapping_ext"></a>`MSP2_INAV_OUTPUT_MAPPING_EXT (8205 / 0x200d)`
-**Description:** Retrieves extended output mapping configuration (timer ID and usage flags). Obsolete, use `MSP2_INAV_OUTPUT_MAPPING_EXT2`.
-**Request Payload:** None
+**Description:** Retrieves extended output mapping configuration (timer ID and usage flags). Obsolete, use `MSP2_INAV_OUTPUT_MAPPING_EXT2`.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2580,8 +2778,9 @@
 **Notes:** Usage flags are truncated to 8 bits. `timerId` mapping is target-specific.
 
 ## <a id="msp2_inav_timer_output_mode"></a>`MSP2_INAV_TIMER_OUTPUT_MODE (8206 / 0x200e)`
-**Description:** Get or list the output mode override for hardware timers (e.g., force ONESHOT, DSHOT).
-**Request Payload:** None
+**Description:** Get or list the output mode override for hardware timers (e.g., force ONESHOT, DSHOT).  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2591,19 +2790,21 @@
 **Notes:** Only available on non-SITL builds. `HARDWARE_TIMER_DEFINITION_COUNT` varies by target.
 
 ## <a id="msp2_inav_set_timer_output_mode"></a>`MSP2_INAV_SET_TIMER_OUTPUT_MODE (8207 / 0x200f)`
-**Description:** Set the output mode override for a specific hardware timer.
+**Description:** Set the output mode override for a specific hardware timer.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
 | `timerIndex` | `uint8_t` | 1 | - | Index of the hardware timer definition. |
 | `outputMode` | `uint8_t` | 1 | [TIMER_OUTPUT_MODE_*](https://github.com/xznhj8129/msp_documentation/blob/master//inav_enums_ref.md#timer_output_mode_*) | Output mode override (`TIMER_OUTPUT_MODE_*` enum) to set. |
+
 **Reply Payload:** None
 
 **Notes:** Only available on non-SITL builds. Expects 2 bytes. Returns error if `timerIndex` is invalid.
 
 ## <a id="msp2_inav_mixer"></a>`MSP2_INAV_MIXER (8208 / 0x2010)`
-**Description:** Retrieves INAV-specific mixer configuration details.
-**Request Payload:** None
+**Description:** Retrieves INAV-specific mixer configuration details.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2617,7 +2818,7 @@
 | `maxServos` | `uint8_t` | 1 | - | Constant: Maximum servos supported (`MAX_SUPPORTED_SERVOS`). |
 
 ## <a id="msp2_inav_set_mixer"></a>`MSP2_INAV_SET_MIXER (8209 / 0x2011)`
-**Description:** Sets INAV-specific mixer configuration details.
+**Description:** Sets INAV-specific mixer configuration details.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2629,13 +2830,15 @@
 | `appliedMixerPreset` | `uint16_t` | 2 | - | Sets `mixerConfigMutable()->appliedMixerPreset`. |
 | `maxMotors` | `uint8_t` | 1 | - | Ignored. |
 | `maxServos` | `uint8_t` | 1 | - | Ignored. |
+
 **Reply Payload:** None
 
 **Notes:** Expects 9 bytes. Calls `mixerUpdateStateFlags()`.
 
 ## <a id="msp2_inav_osd_layouts"></a>`MSP2_INAV_OSD_LAYOUTS (8210 / 0x2012)`
-**Description:** Gets OSD layout information (counts, positions for a specific layout, or position for a specific item).
-**Request Payload:** None
+**Description:** Gets OSD layout information (counts, positions for a specific layout, or position for a specific item).  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2645,20 +2848,22 @@
 **Notes:** Requires `USE_OSD`. Returns error if indexes are invalid.
 
 ## <a id="msp2_inav_osd_set_layout_item"></a>`MSP2_INAV_OSD_SET_LAYOUT_ITEM (8211 / 0x2013)`
-**Description:** Sets the position of a single OSD item within a specific layout.
+**Description:** Sets the position of a single OSD item within a specific layout.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
 | `layoutIndex` | `uint8_t` | 1 | Index | Index of the OSD layout (0 to `OSD_LAYOUT_COUNT - 1`). |
 | `itemIndex` | `uint8_t` | 1 | [OSD_ITEM_*](https://github.com/xznhj8129/msp_documentation/blob/master//inav_enums_ref.md#osd_item_*) | Index of the OSD item (`OSD_ITEM_*` enum). |
 | `itemPosition` | `uint16_t` | 2 | Coordinates | Packed X/Y position (`(Y << 8) |
+
 **Reply Payload:** None
 
 **Notes:** Requires `USE_OSD`. Expects 4 bytes. Returns error if indexes are invalid. If the modified layout is not the currently active one, it temporarily overrides the active layout for 10 seconds to show the change. Otherwise, triggers a full OSD redraw.
 
 ## <a id="msp2_inav_osd_alarms"></a>`MSP2_INAV_OSD_ALARMS (8212 / 0x2014)`
-**Description:** Retrieves OSD alarm threshold settings.
-**Request Payload:** None
+**Description:** Retrieves OSD alarm threshold settings.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2681,7 +2886,7 @@
 **Notes:** Requires `USE_OSD`.
 
 ## <a id="msp2_inav_osd_set_alarms"></a>`MSP2_INAV_OSD_SET_ALARMS (8213 / 0x2015)`
-**Description:** Sets OSD alarm threshold settings.
+**Description:** Sets OSD alarm threshold settings.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2698,13 +2903,15 @@
 | `imuTempMaxAlarm` | `uint16_t` | 2 | degrees C | Sets `osdConfigMutable()->imu_temp_alarm_max`. |
 | `baroTempMinAlarm` | `uint16_t` | 2 | degrees C | Sets `osdConfigMutable()->baro_temp_alarm_min` (if `USE_BARO`). |
 | `baroTempMaxAlarm` | `uint16_t` | 2 | degrees C | Sets `osdConfigMutable()->baro_temp_alarm_max` (if `USE_BARO`). |
+
 **Reply Payload:** None
 
 **Notes:** Requires `USE_OSD`. Expects 24 bytes. ADSB alarms are not settable via this message.
 
 ## <a id="msp2_inav_osd_preferences"></a>`MSP2_INAV_OSD_PREFERENCES (8214 / 0x2016)`
-**Description:** Retrieves OSD display preferences (video system, units, styles, etc.).
-**Request Payload:** None
+**Description:** Retrieves OSD display preferences (video system, units, styles, etc.).  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2721,7 +2928,7 @@
 **Notes:** Requires `USE_OSD`.
 
 ## <a id="msp2_inav_osd_set_preferences"></a>`MSP2_INAV_OSD_SET_PREFERENCES (8215 / 0x2017)`
-**Description:** Sets OSD display preferences.
+**Description:** Sets OSD display preferences.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2734,27 +2941,30 @@
 | `sidebarScrollArrows` | `uint8_t` | 1 | - | Sets `osdConfigMutable()->sidebar_scroll_arrows`. |
 | `units` | `uint8_t` | 1 | - | Sets `osdConfigMutable()->units`. |
 | `statsEnergyUnit` | `uint8_t` | 1 | - | Sets `osdConfigMutable()->stats_energy_unit`. |
+
 **Reply Payload:** None
 
 **Notes:** Requires `USE_OSD`. Expects 9 bytes. Triggers a full OSD redraw.
 
 ## <a id="msp2_inav_select_battery_profile"></a>`MSP2_INAV_SELECT_BATTERY_PROFILE (8216 / 0x2018)`
-**Description:** Selects the active battery profile and saves configuration.
+**Description:** Selects the active battery profile and saves configuration.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
 | `batteryProfileIndex` | `uint8_t` | 1 | - | Index of the battery profile to activate (0-based). |
+
 **Reply Payload:** None
 
 **Notes:** Expects 1 byte. Will fail if armed. Calls `setConfigBatteryProfileAndWriteEEPROM()`.
 
 ## <a id="msp2_inav_debug"></a>`MSP2_INAV_DEBUG (8217 / 0x2019)`
-**Description:** Retrieves values from the firmware's 32-bit `debug[]` array. Supersedes `MSP_DEBUG`.
+**Description:** Retrieves values from the firmware's 32-bit `debug[]` array. Supersedes `MSP_DEBUG`.  
 **Special case, skipped for now**
 
 ## <a id="msp2_blackbox_config"></a>`MSP2_BLACKBOX_CONFIG (8218 / 0x201a)`
-**Description:** Retrieves the Blackbox configuration. Supersedes `MSP_BLACKBOX_CONFIG`.
-**Request Payload:** None
+**Description:** Retrieves the Blackbox configuration. Supersedes `MSP_BLACKBOX_CONFIG`.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2767,7 +2977,7 @@
 **Notes:** Requires `USE_BLACKBOX`.
 
 ## <a id="msp2_set_blackbox_config"></a>`MSP2_SET_BLACKBOX_CONFIG (8219 / 0x201b)`
-**Description:** Sets the Blackbox configuration. Supersedes `MSP_SET_BLACKBOX_CONFIG`.
+**Description:** Sets the Blackbox configuration. Supersedes `MSP_SET_BLACKBOX_CONFIG`.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2775,13 +2985,15 @@
 | `blackboxRateNum` | `uint16_t` | 2 | - | Sets `blackboxConfigMutable()->rate_num`. |
 | `blackboxRateDenom` | `uint16_t` | 2 | - | Sets `blackboxConfigMutable()->rate_denom`. |
 | `blackboxIncludeFlags` | `uint32_t` | 4 | - | Sets `blackboxConfigMutable()->includeFlags`. |
+
 **Reply Payload:** None
 
 **Notes:** Requires `USE_BLACKBOX`. Expects 9 bytes. Returns error if Blackbox is currently logging (`!blackboxMayEditConfig()`).
 
 ## <a id="msp2_inav_temp_sensor_config"></a>`MSP2_INAV_TEMP_SENSOR_CONFIG (8220 / 0x201c)`
-**Description:** Retrieves the configuration for all onboard temperature sensors.
-**Request Payload:** None
+**Description:** Retrieves the configuration for all onboard temperature sensors.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2795,7 +3007,7 @@
 **Notes:** Requires `USE_TEMPERATURE_SENSOR`.
 
 ## <a id="msp2_inav_set_temp_sensor_config"></a>`MSP2_INAV_SET_TEMP_SENSOR_CONFIG (8221 / 0x201d)`
-**Description:** Sets the configuration for all onboard temperature sensors.
+**Description:** Sets the configuration for all onboard temperature sensors.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2805,13 +3017,15 @@
 | `alarmMax` | `uint16_t` | 2 | - | Sets max alarm threshold. |
 | `osdSymbol` | `uint8_t` | 1 | - | Sets OSD symbol index (validated). |
 | `label` | `char[TEMPERATURE_LABEL_LEN]` | TEMPERATURE_LABEL_LEN | - | Sets sensor label (converted to uppercase). |
+
 **Reply Payload:** None
 
 **Notes:** Requires `USE_TEMPERATURE_SENSOR`. Expects `MAX_TEMP_SENSORS * sizeof(tempSensorConfig_t)` bytes.
 
 ## <a id="msp2_inav_temperatures"></a>`MSP2_INAV_TEMPERATURES (8222 / 0x201e)`
-**Description:** Retrieves the current readings from all configured temperature sensors.
-**Request Payload:** None
+**Description:** Retrieves the current readings from all configured temperature sensors.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2820,7 +3034,7 @@
 **Notes:** Requires `USE_TEMPERATURE_SENSOR`.
 
 ## <a id="msp_simulator"></a>`MSP_SIMULATOR (8223 / 0x201f)`
-**Description:** Handles Hardware-in-the-Loop (HITL) simulation data exchange. Receives simulated sensor data and options, sends back control outputs and debug info.
+**Description:** Handles Hardware-in-the-Loop (HITL) simulation data exchange. Receives simulated sensor data and options, sends back control outputs and debug info.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2874,11 +3088,11 @@
 **Notes:** Requires `USE_SIMULATOR`. Complex message handling state changes for enabling/disabling HITL. Sensor data is injected directly. OSD data is sent using a custom RLE scheme. See `simulatorData` struct and associated code for details.
 
 ## <a id="msp2_inav_servo_mixer"></a>`MSP2_INAV_SERVO_MIXER (8224 / 0x2020)`
-**Description:** Retrieves the custom servo mixer rules, including programming framework condition IDs, for primary and secondary mixer profiles. Supersedes `MSP_SERVO_MIX_RULES`.
+**Description:** Retrieves the custom servo mixer rules, including programming framework condition IDs, for primary and secondary mixer profiles. Supersedes `MSP_SERVO_MIX_RULES`.  
 **Special case, skipped for now**
 
 ## <a id="msp2_inav_set_servo_mixer"></a>`MSP2_INAV_SET_SERVO_MIXER (8225 / 0x2021)`
-**Description:** Sets a single custom servo mixer rule, including programming framework condition ID. Supersedes `MSP_SET_SERVO_MIX_RULE`.
+**Description:** Sets a single custom servo mixer rule, including programming framework condition ID. Supersedes `MSP_SET_SERVO_MIX_RULE`.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2888,13 +3102,15 @@
 | `rate` | `uint16_t` | 2 | - | Mixing rate/weight. |
 | `speed` | `uint8_t` | 1 | - | Speed/Slew rate limit (0-100). |
 | `conditionId` | `uint8_t` | 1 | - | Logic Condition ID (255/-1 if none). Ignored if `USE_PROGRAMMING_FRAMEWORK` is disabled. |
+
 **Reply Payload:** None
 
 **Notes:** Expects 7 bytes. Returns error if index invalid. Calls `loadCustomServoMixer()`.
 
 ## <a id="msp2_inav_logic_conditions"></a>`MSP2_INAV_LOGIC_CONDITIONS (8226 / 0x2022)`
-**Description:** Retrieves the configuration of all defined Logic Conditions.
-**Request Payload:** None
+**Description:** Retrieves the configuration of all defined Logic Conditions.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2910,7 +3126,7 @@
 **Notes:** Requires `USE_PROGRAMMING_FRAMEWORK`. See `logicCondition_t` structure.
 
 ## <a id="msp2_inav_set_logic_conditions"></a>`MSP2_INAV_SET_LOGIC_CONDITIONS (8227 / 0x2023)`
-**Description:** Sets the configuration for a single Logic Condition by its index.
+**Description:** Sets the configuration for a single Logic Condition by its index.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2923,21 +3139,27 @@
 | `operandBType` | `uint8_t` | 1 | [ENUM_NAME](LINK_TO_ENUM) | Enum: Type of operand B. |
 | `operandBValue` | `uint32_t` | 4 | - | Value/ID of operand B. |
 | `flags` | `uint8_t` | 1 | - | Bitmask: Condition flags. |
+
 **Reply Payload:** None
 
 **Notes:** Requires `USE_PROGRAMMING_FRAMEWORK`. Expects 15 bytes. Returns error if index is invalid.
 
 ## <a id="msp2_inav_global_functions"></a>`MSP2_INAV_GLOBAL_FUNCTIONS (8228 / 0x2024)`
-**Request Payload:** None
+
+**Request Payload:** None  
+
 **Reply Payload:** None
 
 ## <a id="msp2_inav_set_global_functions"></a>`MSP2_INAV_SET_GLOBAL_FUNCTIONS (8229 / 0x2025)`
-**Request Payload:** None
+
+**Request Payload:** None  
+
 **Reply Payload:** None
 
 ## <a id="msp2_inav_logic_conditions_status"></a>`MSP2_INAV_LOGIC_CONDITIONS_STATUS (8230 / 0x2026)`
-**Description:** Retrieves the current evaluated status (true/false or numerical value) of all logic conditions.
-**Request Payload:** None
+**Description:** Retrieves the current evaluated status (true/false or numerical value) of all logic conditions.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2946,8 +3168,9 @@
 **Notes:** Requires `USE_PROGRAMMING_FRAMEWORK`.
 
 ## <a id="msp2_inav_gvar_status"></a>`MSP2_INAV_GVAR_STATUS (8231 / 0x2027)`
-**Description:** Retrieves the current values of all Global Variables (GVARS).
-**Request Payload:** None
+**Description:** Retrieves the current values of all Global Variables (GVARS).  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2956,8 +3179,9 @@
 **Notes:** Requires `USE_PROGRAMMING_FRAMEWORK`.
 
 ## <a id="msp2_inav_programming_pid"></a>`MSP2_INAV_PROGRAMMING_PID (8232 / 0x2028)`
-**Description:** Retrieves the configuration of all Programming PIDs.
-**Request Payload:** None
+**Description:** Retrieves the configuration of all Programming PIDs.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2974,7 +3198,7 @@
 **Notes:** Requires `USE_PROGRAMMING_FRAMEWORK`. See `programmingPid_t` structure.
 
 ## <a id="msp2_inav_set_programming_pid"></a>`MSP2_INAV_SET_PROGRAMMING_PID (8233 / 0x2029)`
-**Description:** Sets the configuration for a single Programming PID by its index.
+**Description:** Sets the configuration for a single Programming PID by its index.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2988,13 +3212,15 @@
 | `gainI` | `uint16_t` | 2 | - | Integral gain. |
 | `gainD` | `uint16_t` | 2 | - | Derivative gain. |
 | `gainFF` | `uint16_t` | 2 | - | Feed-forward gain. |
+
 **Reply Payload:** None
 
 **Notes:** Requires `USE_PROGRAMMING_FRAMEWORK`. Expects 20 bytes. Returns error if index is invalid.
 
 ## <a id="msp2_inav_programming_pid_status"></a>`MSP2_INAV_PROGRAMMING_PID_STATUS (8234 / 0x202a)`
-**Description:** Retrieves the current output value of all Programming PIDs.
-**Request Payload:** None
+**Description:** Retrieves the current output value of all Programming PIDs.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -3003,8 +3229,9 @@
 **Notes:** Requires `USE_PROGRAMMING_FRAMEWORK`.
 
 ## <a id="msp2_pid"></a>`MSP2_PID (8240 / 0x2030)`
-**Description:** Retrieves the standard PID controller gains (P, I, D, FF) for the current PID profile.
-**Request Payload:** None
+**Description:** Retrieves the standard PID controller gains (P, I, D, FF) for the current PID profile.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -3016,7 +3243,7 @@
 **Notes:** `PID_ITEM_COUNT` defines the number of standard PID controllers (Roll, Pitch, Yaw, Alt, Vel, etc.). Updates from EZ-Tune if enabled.
 
 ## <a id="msp2_set_pid"></a>`MSP2_SET_PID (8241 / 0x2031)`
-**Description:** Sets the standard PID controller gains (P, I, D, FF) for the current PID profile.
+**Description:** Sets the standard PID controller gains (P, I, D, FF) for the current PID profile.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -3024,63 +3251,73 @@
 | `I` | `uint8_t` | 1 | - | Sets Integral gain (`pidBankMutable()->pid[i].I`). |
 | `D` | `uint8_t` | 1 | - | Sets Derivative gain (`pidBankMutable()->pid[i].D`). |
 | `FF` | `uint8_t` | 1 | - | Sets Feed-forward gain (`pidBankMutable()->pid[i].FF`). |
+
 **Reply Payload:** None
 
 **Notes:** Expects `PID_ITEM_COUNT * 4` bytes. Calls `schedulePidGainsUpdate()` and `navigationUsePIDs()`.
 
 ## <a id="msp2_inav_opflow_calibration"></a>`MSP2_INAV_OPFLOW_CALIBRATION (8242 / 0x2032)`
-**Description:** Starts the optical flow sensor calibration procedure.
-**Request Payload:** None
+**Description:** Starts the optical flow sensor calibration procedure.  
+
+**Request Payload:** None  
+
 **Reply Payload:** None
 
 **Notes:** Requires `USE_OPFLOW`. Will fail if armed. Calls `opflowStartCalibration()`.
 
 ## <a id="msp2_inav_fwupdt_prepare"></a>`MSP2_INAV_FWUPDT_PREPARE (8243 / 0x2033)`
-**Description:** Prepares the flight controller to receive a firmware update via MSP.
+**Description:** Prepares the flight controller to receive a firmware update via MSP.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
 | `firmwareSize` | `uint32_t` | 4 | - | Total size of the incoming firmware file in bytes. |
+
 **Reply Payload:** None
 
 **Notes:** Requires `MSP_FIRMWARE_UPDATE`. Expects 4 bytes. Returns error if preparation fails (e.g., no storage, invalid size). Calls `firmwareUpdatePrepare()`.
 
 ## <a id="msp2_inav_fwupdt_store"></a>`MSP2_INAV_FWUPDT_STORE (8244 / 0x2034)`
-**Description:** Stores a chunk of firmware data received via MSP.
+**Description:** Stores a chunk of firmware data received via MSP.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
 | `firmwareChunk` | `uint8_t[]` | - | - | Chunk of firmware data. |
+
 **Reply Payload:** None
 
 **Notes:** Requires `MSP_FIRMWARE_UPDATE`. Returns error if storage fails (e.g., out of space, checksum error). Called repeatedly until the entire firmware is transferred. Calls `firmwareUpdateStore()`.
 
 ## <a id="msp2_inav_fwupdt_exec"></a>`MSP2_INAV_FWUPDT_EXEC (8245 / 0x2035)`
-**Description:** Executes the firmware update process (flashes the stored firmware and reboots).
+**Description:** Executes the firmware update process (flashes the stored firmware and reboots).  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
 | `updateType` | `uint8_t` | 1 | - | Type of update (e.g., full flash, specific section - currently ignored/unused). |
+
 **Reply Payload:** None
 
 **Notes:** Requires `MSP_FIRMWARE_UPDATE`. Expects 1 byte. Returns error if update cannot start (e.g., not fully received). Calls `firmwareUpdateExec()`. If successful, the device will reboot into the new firmware.
 
 ## <a id="msp2_inav_fwupdt_rollback_prepare"></a>`MSP2_INAV_FWUPDT_ROLLBACK_PREPARE (8246 / 0x2036)`
-**Description:** Prepares the flight controller to perform a firmware rollback to the previously stored version.
-**Request Payload:** None
+**Description:** Prepares the flight controller to perform a firmware rollback to the previously stored version.  
+
+**Request Payload:** None  
+
 **Reply Payload:** None
 
 **Notes:** Requires `MSP_FIRMWARE_UPDATE`. Returns error if rollback preparation fails (e.g., no rollback image available). Calls `firmwareUpdateRollbackPrepare()`.
 
 ## <a id="msp2_inav_fwupdt_rollback_exec"></a>`MSP2_INAV_FWUPDT_ROLLBACK_EXEC (8247 / 0x2037)`
-**Description:** Executes the firmware rollback process (flashes the stored backup firmware and reboots).
-**Request Payload:** None
+**Description:** Executes the firmware rollback process (flashes the stored backup firmware and reboots).  
+
+**Request Payload:** None  
+
 **Reply Payload:** None
 
 **Notes:** Requires `MSP_FIRMWARE_UPDATE`. Returns error if rollback cannot start. Calls `firmwareUpdateRollbackExec()`. If successful, the device will reboot into the backup firmware.
 
 ## <a id="msp2_inav_safehome"></a>`MSP2_INAV_SAFEHOME (8248 / 0x2038)`
-**Description:** Get or Set configuration for a specific Safe Home location.
+**Description:** Get or Set configuration for a specific Safe Home location.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -3096,7 +3333,7 @@
 **Notes:** Requires `USE_SAFE_HOME`. Used by `mspFcSafeHomeOutCommand`. See `MSP2_INAV_SET_SAFEHOME` for setting.
 
 ## <a id="msp2_inav_set_safehome"></a>`MSP2_INAV_SET_SAFEHOME (8249 / 0x2039)`
-**Description:** Sets the configuration for a specific Safe Home location.
+**Description:** Sets the configuration for a specific Safe Home location.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -3104,13 +3341,15 @@
 | `enabled` | `uint8_t` | 1 | - | Boolean: 1 to enable this safe home. |
 | `latitude` | `int32_t` | 4 | - | Latitude (1e7 deg). |
 | `longitude` | `int32_t` | 4 | - | Longitude (1e7 deg). |
+
 **Reply Payload:** None
 
 **Notes:** Requires `USE_SAFE_HOME`. Expects 10 bytes. Returns error if index invalid. Resets corresponding FW autoland approach if `USE_FW_AUTOLAND` is enabled.
 
 ## <a id="msp2_inav_misc2"></a>`MSP2_INAV_MISC2 (8250 / 0x203a)`
-**Description:** Retrieves miscellaneous runtime information including timers and throttle status.
-**Request Payload:** None
+**Description:** Retrieves miscellaneous runtime information including timers and throttle status.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -3120,7 +3359,7 @@
 | `autoThrottleFlag` | `uint8_t` | 1 | Boolean | 1 if navigation is controlling throttle, 0 otherwise (`navigationIsControllingThrottle()`). |
 
 ## <a id="msp2_inav_logic_conditions_single"></a>`MSP2_INAV_LOGIC_CONDITIONS_SINGLE (8251 / 0x203b)`
-**Description:** Gets the configuration for a single Logic Condition by its index.
+**Description:** Gets the configuration for a single Logic Condition by its index.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -3140,8 +3379,9 @@
 **Notes:** Requires `USE_PROGRAMMING_FRAMEWORK`. Used by `mspFcLogicConditionCommand`.
 
 ## <a id="msp2_inav_esc_rpm"></a>`MSP2_INAV_ESC_RPM (8256 / 0x2040)`
-**Description:** Retrieves the RPM reported by each ESC via telemetry.
-**Request Payload:** None
+**Description:** Retrieves the RPM reported by each ESC via telemetry.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -3150,19 +3390,19 @@
 **Notes:** Requires `USE_ESC_SENSOR`. Payload size depends on the number of detected motors with telemetry.
 
 ## <a id="msp2_inav_esc_telem"></a>`MSP2_INAV_ESC_TELEM (8257 / 0x2041)`
-**Description:** Retrieves the full telemetry data structure reported by each ESC.
+**Description:** Retrieves the full telemetry data structure reported by each ESC.  
 **Special case, skipped for now**
 
 ## <a id="msp2_inav_led_strip_config_ex"></a>`MSP2_INAV_LED_STRIP_CONFIG_EX (8264 / 0x2048)`
-**Description:** Retrieves the full configuration for each LED on the strip using the `ledConfig_t` structure. Supersedes `MSP_LED_STRIP_CONFIG`.
+**Description:** Retrieves the full configuration for each LED on the strip using the `ledConfig_t` structure. Supersedes `MSP_LED_STRIP_CONFIG`.  
 **Special case, skipped for now**
 
 ## <a id="msp2_inav_set_led_strip_config_ex"></a>`MSP2_INAV_SET_LED_STRIP_CONFIG_EX (8265 / 0x2049)`
-**Description:** Sets the configuration for a single LED on the strip using the `ledConfig_t` structure. Supersedes `MSP_SET_LED_STRIP_CONFIG`.
+**Description:** Sets the configuration for a single LED on the strip using the `ledConfig_t` structure. Supersedes `MSP_SET_LED_STRIP_CONFIG`.  
 **Special case, skipped for now**
 
 ## <a id="msp2_inav_fw_approach"></a>`MSP2_INAV_FW_APPROACH (8266 / 0x204a)`
-**Description:** Get or Set configuration for a specific Fixed Wing Autoland approach.
+**Description:** Get or Set configuration for a specific Fixed Wing Autoland approach.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -3181,7 +3421,7 @@
 **Notes:** Requires `USE_FW_AUTOLAND`. Used by `mspFwApproachOutCommand`. See `MSP2_INAV_SET_FW_APPROACH` for setting.
 
 ## <a id="msp2_inav_set_fw_approach"></a>`MSP2_INAV_SET_FW_APPROACH (8267 / 0x204b)`
-**Description:** Sets the configuration for a specific Fixed Wing Autoland approach.
+**Description:** Sets the configuration for a specific Fixed Wing Autoland approach.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -3192,23 +3432,26 @@
 | `landHeading1` | `int16_t` | 2 | degrees | Sets primary landing heading. |
 | `landHeading2` | `int16_t` | 2 | degrees | Sets secondary landing heading. |
 | `isSeaLevelRef` | `uint8_t` | 1 | Boolean | Sets altitude reference. |
+
 **Reply Payload:** None
 
 **Notes:** Requires `USE_FW_AUTOLAND`. Expects 15 bytes. Returns error if index invalid.
 
 ## <a id="msp2_inav_gps_ublox_command"></a>`MSP2_INAV_GPS_UBLOX_COMMAND (8272 / 0x2050)`
-**Description:** Sends a raw command directly to a U-Blox GPS module connected to the FC.
+**Description:** Sends a raw command directly to a U-Blox GPS module connected to the FC.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
 | `ubxCommand` | `uint8_t[]` | - | - | Raw U-Blox UBX protocol command frame (including header, class, ID, length, payload, checksum). |
+
 **Reply Payload:** None
 
 **Notes:** Requires GPS feature enabled (`FEATURE_GPS`) and the GPS driver to be U-Blox (`isGpsUblox()`). Payload must be at least 8 bytes (minimum UBX frame size). Use with extreme caution, incorrect commands can misconfigure the GPS module. Calls `gpsUbloxSendCommand()`.
 
 ## <a id="msp2_inav_rate_dynamics"></a>`MSP2_INAV_RATE_DYNAMICS (8288 / 0x2060)`
-**Description:** Retrieves Rate Dynamics configuration parameters for the current control rate profile.
-**Request Payload:** None
+**Description:** Retrieves Rate Dynamics configuration parameters for the current control rate profile.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -3222,7 +3465,7 @@
 **Notes:** Requires `USE_RATE_DYNAMICS`.
 
 ## <a id="msp2_inav_set_rate_dynamics"></a>`MSP2_INAV_SET_RATE_DYNAMICS (8289 / 0x2061)`
-**Description:** Sets Rate Dynamics configuration parameters for the current control rate profile.
+**Description:** Sets Rate Dynamics configuration parameters for the current control rate profile.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -3232,13 +3475,15 @@
 | `correctionEnd` | `uint8_t` | 1 | % | Sets correction at ends. |
 | `weightCenter` | `uint8_t` | 1 | % | Sets weight at center. |
 | `weightEnd` | `uint8_t` | 1 | % | Sets weight at ends. |
+
 **Reply Payload:** None
 
 **Notes:** Requires `USE_RATE_DYNAMICS`. Expects 6 bytes.
 
 ## <a id="msp2_inav_ez_tune"></a>`MSP2_INAV_EZ_TUNE (8304 / 0x2070)`
-**Description:** Retrieves the current EZ-Tune parameters.
-**Request Payload:** None
+**Description:** Retrieves the current EZ-Tune parameters.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -3256,7 +3501,7 @@
 **Notes:** Requires `USE_EZ_TUNE`. Calls `ezTuneUpdate()` before sending.
 
 ## <a id="msp2_inav_ez_tune_set"></a>`MSP2_INAV_EZ_TUNE_SET (8305 / 0x2071)`
-**Description:** Sets the EZ-Tune parameters and triggers an update.
+**Description:** Sets the EZ-Tune parameters and triggers an update.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -3270,30 +3515,35 @@
 | `rate` | `uint8_t` | 1 | - | Sets rate setting. |
 | `expo` | `uint8_t` | 1 | - | Sets expo setting. |
 | `snappiness` | `uint8_t` | 1 | - | (Optional) Sets snappiness preference. |
+
 **Reply Payload:** None
 
 **Notes:** Requires `USE_EZ_TUNE`. Expects 10 or 11 bytes. Calls `ezTuneUpdate()` after setting parameters.
 
 ## <a id="msp2_inav_select_mixer_profile"></a>`MSP2_INAV_SELECT_MIXER_PROFILE (8320 / 0x2080)`
-**Description:** Selects the active mixer profile and saves configuration.
+**Description:** Selects the active mixer profile and saves configuration.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
 | `mixerProfileIndex` | `uint8_t` | 1 | - | Index of the mixer profile to activate (0-based). |
+
 **Reply Payload:** None
 
 **Notes:** Expects 1 byte. Will fail if armed. Calls `setConfigMixerProfileAndWriteEEPROM()`. Only applicable if `MAX_MIXER_PROFILE_COUNT` > 1.
 
 ## <a id="msp2_adsb_vehicle_list"></a>`MSP2_ADSB_VEHICLE_LIST (8336 / 0x2090)`
-**Description:** Retrieves the list of currently tracked ADSB (Automatic Dependent Surveillance–Broadcast) vehicles.
-**Request Payload:** None
+**Description:** Retrieves the list of currently tracked ADSB (Automatic Dependent Surveillance–Broadcast) vehicles.  
+
+**Request Payload:** None  
+
 **Reply Payload:** None
 
 **Notes:** Requires `USE_ADSB`.
 
 ## <a id="msp2_inav_custom_osd_elements"></a>`MSP2_INAV_CUSTOM_OSD_ELEMENTS (8448 / 0x2100)`
-**Description:** Retrieves counts related to custom OSD elements defined by the programming framework.
-**Request Payload:** None
+**Description:** Retrieves counts related to custom OSD elements defined by the programming framework.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -3304,25 +3554,29 @@
 **Notes:** Requires `USE_PROGRAMMING_FRAMEWORK`.
 
 ## <a id="msp2_inav_custom_osd_element"></a>`MSP2_INAV_CUSTOM_OSD_ELEMENT (8449 / 0x2101)`
-**Description:** Gets the configuration of a single custom OSD element defined by the programming framework.
+**Description:** Gets the configuration of a single custom OSD element defined by the programming framework.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
 | `elementIndex` | `uint8_t` | 1 | - | Index of the custom element (0 to `MAX_CUSTOM_ELEMENTS - 1`). |
+
 **Reply Payload:** None
 
 **Notes:** Requires `USE_PROGRAMMING_FRAMEWORK`. See `osdCustomElement_t`.
 
 ## <a id="msp2_inav_set_custom_osd_elements"></a>`MSP2_INAV_SET_CUSTOM_OSD_ELEMENTS (8450 / 0x2102)`
-**Description:** Sets the configuration of a single custom OSD element defined by the programming framework.
-**Request Payload:** None
+**Description:** Sets the configuration of a single custom OSD element defined by the programming framework.  
+
+**Request Payload:** None  
+
 **Reply Payload:** None
 
 **Notes:** Requires `USE_PROGRAMMING_FRAMEWORK`. Expects `1 + (CUSTOM_ELEMENTS_PARTS * 3) + 3 + (OSD_CUSTOM_ELEMENT_TEXT_SIZE - 1)` bytes. Returns error if index or part type is invalid. Null-terminates the text internally.
 
 ## <a id="msp2_inav_output_mapping_ext2"></a>`MSP2_INAV_OUTPUT_MAPPING_EXT2 (8461 / 0x210d)`
-**Description:** Retrieves the full extended output mapping configuration (timer ID, full 32-bit usage flags, and pin label). Supersedes `MSP2_INAV_OUTPUT_MAPPING_EXT`.
-**Request Payload:** None
+**Description:** Retrieves the full extended output mapping configuration (timer ID, full 32-bit usage flags, and pin label). Supersedes `MSP2_INAV_OUTPUT_MAPPING_EXT`.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -3333,8 +3587,9 @@
 **Notes:** Provides complete usage flags and helps identify pins repurposed for functions like LED strip.
 
 ## <a id="msp2_inav_servo_config"></a>`MSP2_INAV_SERVO_CONFIG (8704 / 0x2200)`
-**Description:** Retrieves the configuration parameters for all supported servos (min, max, middle, rate). Supersedes `MSP_SERVO_CONFIGURATIONS`.
-**Request Payload:** None
+**Description:** Retrieves the configuration parameters for all supported servos (min, max, middle, rate). Supersedes `MSP_SERVO_CONFIGURATIONS`.  
+
+**Request Payload:** None  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -3344,7 +3599,7 @@
 | `rate` | `uint8_t` | 1 | % (-100 to 100) | Servo rate/scaling (`servoParams(i)->rate`). |
 
 ## <a id="msp2_inav_set_servo_config"></a>`MSP2_INAV_SET_SERVO_CONFIG (8705 / 0x2201)`
-**Description:** Sets the configuration parameters for a single servo. Supersedes `MSP_SET_SERVO_CONFIGURATION`.
+**Description:** Sets the configuration parameters for a single servo. Supersedes `MSP_SET_SERVO_CONFIGURATION`.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -3353,12 +3608,13 @@
 | `max` | `uint16_t` | 2 | PWM | Sets maximum servo endpoint. |
 | `middle` | `uint16_t` | 2 | PWM | Sets middle/neutral servo position. |
 | `rate` | `uint8_t` | 1 | % | Sets servo rate/scaling. |
+
 **Reply Payload:** None
 
 **Notes:** Expects 8 bytes. Returns error if index invalid. Calls `servoComputeScalingFactors()`.
 
 ## <a id="msp2_inav_geozone"></a>`MSP2_INAV_GEOZONE (8720 / 0x2210)`
-**Description:** Get configuration for a specific Geozone.
+**Description:** Get configuration for a specific Geozone.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -3378,7 +3634,7 @@
 **Notes:** Requires `USE_GEOZONE`. Used by `mspFcGeozoneOutCommand`.
 
 ## <a id="msp2_inav_set_geozone"></a>`MSP2_INAV_SET_GEOZONE (8721 / 0x2211)`
-**Description:** Sets the main configuration for a specific Geozone (type, shape, altitude, action). **This command resets (clears) all vertices associated with the zone.**
+**Description:** Sets the main configuration for a specific Geozone (type, shape, altitude, action). **This command resets (clears) all vertices associated with the zone.**  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -3390,12 +3646,13 @@
 | `isSeaLevelRef` | `uint8_t` | 1 | - | Boolean: Altitude reference. |
 | `fenceAction` | `uint8_t` | 1 | [geozoneActionState_e](https://github.com/xznhj8129/msp_documentation/blob/master//inav_enums_ref.md#geozoneactionstate_e) | Enum (`geozoneActionState_e`): Action to take upon boundary violation. |
 | `vertexCount` | `uint8_t` | 1 | - | Number of vertices to be defined (used for validation later). |
+
 **Reply Payload:** None
 
 **Notes:** Requires `USE_GEOZONE`. Expects 14 bytes. Returns error if index invalid. Calls `geozoneResetVertices()`. Vertices must be set subsequently using `MSP2_INAV_SET_GEOZONE_VERTEX`.
 
 ## <a id="msp2_inav_geozone_vertex"></a>`MSP2_INAV_GEOZONE_VERTEX (8722 / 0x2212)`
-**Description:** Get a specific vertex (or center+radius for circular zones) of a Geozone.
+**Description:** Get a specific vertex (or center+radius for circular zones) of a Geozone.  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -3412,12 +3669,14 @@
 **Notes:** Requires `USE_GEOZONE`. Returns error if indexes are invalid or vertex doesn't exist. For circular zones, the radius is stored internally as the 'latitude' of the vertex with index 1.
 
 ## <a id="msp2_inav_set_geozone_vertex"></a>`MSP2_INAV_SET_GEOZONE_VERTEX (8723 / 0x2213)`
-**Description:** Sets a specific vertex (or center+radius for circular zones) for a Geozone.
+**Description:** Sets a specific vertex (or center+radius for circular zones) for a Geozone.  
 **Special case, skipped for now**
 
 ## <a id="msp2_betaflight_bind"></a>`MSP2_BETAFLIGHT_BIND (12288 / 0x3000)`
-**Description:** Initiates the receiver binding procedure for supported serial protocols (CRSF, SRXL2).
-**Request Payload:** None
+**Description:** Initiates the receiver binding procedure for supported serial protocols (CRSF, SRXL2).  
+
+**Request Payload:** None  
+
 **Reply Payload:** None
 
 **Notes:** Requires `rxConfig()->receiverType == RX_TYPE_SERIAL`. Requires `USE_SERIALRX_CRSF` or `USE_SERIALRX_SRXL2`. Calls `crsfBind()` or `srxl2Bind()` respectively. Returns error if receiver type or provider is not supported for binding.
