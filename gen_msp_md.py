@@ -103,7 +103,7 @@ def get_fields(section: Any) -> List[Dict[str, Any]]:
 
 def table_with_units(fields: List[Dict[str, Any]], label: str) -> str:
     header = (
-        f"**{label}:**\n"
+        f"  \n**{label}:**\n"
         "| Field | C Type | Size (Bytes) | Units | Description |\n"
         "|---|---|---|---|---|\n"
     )

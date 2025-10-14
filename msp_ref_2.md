@@ -254,6 +254,7 @@
 **Description:** Provides the MSP protocol version and the INAV API version.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -267,6 +268,7 @@
 **Description:** Identifies the flight controller firmware variant (e.g., INAV, Betaflight).  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -278,6 +280,7 @@
 **Description:** Provides the specific version number of the flight controller firmware.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -289,6 +292,7 @@
 **Description:** Provides information about the specific hardware board and its capabilities.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -305,6 +309,7 @@
 **Description:** Provides build date, time, and Git revision of the firmware.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -316,6 +321,7 @@
 **Description:** Retrieves legacy INAV-specific PID controller related settings. Many fields are now obsolete or placeholders.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -336,6 +342,7 @@
 
 ## <a id="msp_set_inav_pid"></a>`MSP_SET_INAV_PID (7 / 0x7)`
 **Description:** Sets legacy INAV-specific PID controller related settings.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -360,6 +367,7 @@
 **Description:** Returns the user-defined craft name.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -367,6 +375,7 @@
 
 ## <a id="msp_set_name"></a>`MSP_SET_NAME (11 / 0xb)`
 **Description:** Sets the user-defined craft name.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -380,6 +389,7 @@
 **Description:** Retrieves navigation position hold and general manual/auto flight parameters. Some parameters depend on the platform type (Multirotor vs Fixed Wing).  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -394,6 +404,7 @@
 
 ## <a id="msp_set_nav_poshold"></a>`MSP_SET_NAV_POSHOLD (13 / 0xd)`
 **Description:** Sets navigation position hold and general manual/auto flight parameters.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -414,6 +425,7 @@
 **Description:** Retrieves sensor calibration data (Accelerometer zero/gain, Magnetometer zero/gain, Optical Flow scale).  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -436,6 +448,7 @@
 
 ## <a id="msp_set_calibration_data"></a>`MSP_SET_CALIBRATION_DATA (15 / 0xf)`
 **Description:** Sets sensor calibration data.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -461,6 +474,7 @@
 **Description:** Retrieves parameters related to the INAV position estimation fusion weights and GPS minimum satellite count.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -474,6 +488,7 @@
 
 ## <a id="msp_set_position_estimation_config"></a>`MSP_SET_POSITION_ESTIMATION_CONFIG (17 / 0x11)`
 **Description:** Sets parameters related to the INAV position estimation fusion weights and GPS minimum satellite count.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -491,6 +506,7 @@
 
 ## <a id="msp_wp_mission_load"></a>`MSP_WP_MISSION_LOAD (18 / 0x12)`
 **Description:** Commands the FC to load the waypoint mission stored in non-volatile memory (e.g., EEPROM or FlashFS) into the active mission buffer.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -502,6 +518,7 @@
 
 ## <a id="msp_wp_mission_save"></a>`MSP_WP_MISSION_SAVE (19 / 0x13)`
 **Description:** Commands the FC to save the currently active waypoint mission from RAM to non-volatile memory (e.g., EEPROM or FlashFS).  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -515,6 +532,7 @@
 **Description:** Retrieves information about the waypoint mission capabilities and the status of the currently loaded mission.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -527,6 +545,7 @@
 **Description:** Retrieves configuration parameters related to Return-to-Home (RTH) and automatic landing behaviors.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -546,6 +565,7 @@
 
 ## <a id="msp_set_rth_and_land_config"></a>`MSP_SET_RTH_AND_LAND_CONFIG (22 / 0x16)`
 **Description:** Sets configuration parameters related to Return-to-Home (RTH) and automatic landing behaviors.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -571,6 +591,7 @@
 **Description:** Retrieves configuration parameters specific to Fixed Wing navigation.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -585,6 +606,7 @@
 
 ## <a id="msp_set_fw_config"></a>`MSP_SET_FW_CONFIG (24 / 0x18)`
 **Description:** Sets configuration parameters specific to Fixed Wing navigation.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -605,6 +627,7 @@
 **Description:** Returns all defined mode activation ranges (aux channel assignments for flight modes).  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -617,6 +640,7 @@
 
 ## <a id="msp_set_mode_range"></a>`MSP_SET_MODE_RANGE (35 / 0x23)`
 **Description:** Sets a single mode activation range by its index.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -634,6 +658,7 @@
 **Description:** Returns a bitmask of enabled features.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -643,6 +668,7 @@
 
 ## <a id="msp_set_feature"></a>`MSP_SET_FEATURE (37 / 0x25)`
 **Description:** Sets the enabled features using a bitmask. Clears all previous features first.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -656,6 +682,7 @@
 **Description:** Returns the sensor board alignment angles relative to the craft frame.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -665,6 +692,7 @@
 
 ## <a id="msp_set_board_alignment"></a>`MSP_SET_BOARD_ALIGNMENT (39 / 0x27)`
 **Description:** Sets the sensor board alignment angles.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -680,6 +708,7 @@
 **Description:** Retrieves the configuration for the current sensor.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -690,6 +719,7 @@
 
 ## <a id="msp_set_current_meter_config"></a>`MSP_SET_CURRENT_METER_CONFIG (41 / 0x29)`
 **Description:** Sets the configuration for the current sensor.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -706,6 +736,7 @@
 **Description:** Retrieves the mixer type (Legacy, INAV always returns QuadX).  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -715,6 +746,7 @@
 
 ## <a id="msp_set_mixer"></a>`MSP_SET_MIXER (43 / 0x2b)`
 **Description:** Sets the mixer type (Legacy, ignored by INAV).  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -728,6 +760,7 @@
 **Description:** Retrieves receiver configuration settings. Some fields are Betaflight compatibility placeholders.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -749,6 +782,7 @@
 
 ## <a id="msp_set_rx_config"></a>`MSP_SET_RX_CONFIG (45 / 0x2d)`
 **Description:** Sets receiver configuration settings.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -776,6 +810,7 @@
 **Description:** Retrieves the HSV color definitions for configurable LED colors.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -787,6 +822,7 @@
 
 ## <a id="msp_set_led_colors"></a>`MSP_SET_LED_COLORS (47 / 0x2f)`
 **Description:** Sets the HSV color definitions for configurable LED colors.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -802,6 +838,7 @@
 **Description:** Retrieves the configuration for each LED on the strip (legacy packed format).  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -811,6 +848,7 @@
 
 ## <a id="msp_set_led_strip_config"></a>`MSP_SET_LED_STRIP_CONFIG (49 / 0x31)`
 **Description:** Sets the configuration for a single LED on the strip using the legacy packed format.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -825,6 +863,7 @@
 **Description:** Retrieves the channel used for analog RSSI input.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -832,6 +871,7 @@
 
 ## <a id="msp_set_rssi_config"></a>`MSP_SET_RSSI_CONFIG (51 / 0x33)`
 **Description:** Sets the channel used for analog RSSI input.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -845,6 +885,7 @@
 **Description:** Returns all defined RC adjustment ranges (tuning via aux channels).  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -859,6 +900,7 @@
 
 ## <a id="msp_set_adjustment_range"></a>`MSP_SET_ADJUSTMENT_RANGE (53 / 0x35)`
 **Description:** Sets a single RC adjustment range configuration by its index.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -896,6 +938,7 @@
 **Description:** Retrieves legacy voltage meter configuration (scaled values).  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -908,6 +951,7 @@
 
 ## <a id="msp_set_voltage_meter_config"></a>`MSP_SET_VOLTAGE_METER_CONFIG (57 / 0x39)`
 **Description:** Sets legacy voltage meter configuration (scaled values).  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -924,6 +968,7 @@
 **Description:** Retrieves the altitude measured by the primary rangefinder (sonar or lidar).  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -933,6 +978,7 @@
 **Description:** Retrieves the RC channel mapping array (AETR, etc.).  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -942,6 +988,7 @@
 
 ## <a id="msp_set_rx_map"></a>`MSP_SET_RX_MAP (65 / 0x41)`
 **Description:** Sets the RC channel mapping array.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -964,6 +1011,7 @@
 **Description:** Retrieves summary information about the onboard dataflash chip (if present and used for Blackbox via FlashFS).  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -976,11 +1024,13 @@
 
 ## <a id="msp_dataflash_read"></a>`MSP_DATAFLASH_READ (71 / 0x47)`
 **Description:** Reads a block of data from the onboard dataflash (FlashFS).  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
 | `address` | `uint32_t` | 4 | - | Starting address to read from within the FlashFS volume. |
 | `size` | `uint16_t` | 2 | - | (Optional) Number of bytes to read. Defaults to 128 if not provided. |
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1002,6 +1052,7 @@
 **Description:** Retrieves the configured loop time (PID loop frequency denominator).  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1011,6 +1062,7 @@
 
 ## <a id="msp_set_loop_time"></a>`MSP_SET_LOOP_TIME (74 / 0x4a)`
 **Description:** Sets the configured loop time.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1024,6 +1076,7 @@
 **Description:** Retrieves the failsafe configuration settings.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1043,6 +1096,7 @@
 
 ## <a id="msp_set_failsafe_config"></a>`MSP_SET_FAILSAFE_CONFIG (76 / 0x4c)`
 **Description:** Sets the failsafe configuration settings.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1068,6 +1122,7 @@
 **Description:** Retrieves summary information about the SD card status and filesystem.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1083,6 +1138,7 @@
 **Description:** Legacy command to retrieve Blackbox configuration. Superseded by `MSP2_BLACKBOX_CONFIG`.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1145,6 +1201,7 @@
 **Description:** Retrieves the current VTX (Video Transmitter) configuration and capabilities.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1170,6 +1227,7 @@
 **Description:** Retrieves advanced hardware-related configuration (PWM protocols, rates). Some fields are BF compatibility placeholders.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1183,6 +1241,7 @@
 
 ## <a id="msp_set_advanced_config"></a>`MSP_SET_ADVANCED_CONFIG (91 / 0x5b)`
 **Description:** Sets advanced hardware-related configuration (PWM protocols, rates).  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1202,6 +1261,7 @@
 **Description:** Retrieves filter configuration settings (Gyro, D-term, Yaw, Accel). Some fields are BF compatibility placeholders or legacy.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1220,6 +1280,7 @@
 
 ## <a id="msp_set_filter_config"></a>`MSP_SET_FILTER_CONFIG (93 / 0x5d)`
 **Description:** Sets filter configuration settings. Handles different payload lengths for backward compatibility.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1244,6 +1305,7 @@
 **Description:** Retrieves advanced PID tuning parameters. Many fields are BF compatibility placeholders.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1263,6 +1325,7 @@
 
 ## <a id="msp_set_pid_advanced"></a>`MSP_SET_PID_ADVANCED (95 / 0x5f)`
 **Description:** Sets advanced PID tuning parameters.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1286,6 +1349,7 @@
 **Description:** Retrieves the configured hardware type for various sensors.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1298,6 +1362,7 @@
 
 ## <a id="msp_set_sensor_config"></a>`MSP_SET_SENSOR_CONFIG (97 / 0x61)`
 **Description:** Sets the configured hardware type for various sensors.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1334,6 +1399,7 @@
 **Description:** Provides basic flight controller identity information. Not implemented in modern INAV, but used by legacy versions and MultiWii.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1348,6 +1414,7 @@
 **Description:** Provides basic flight controller status including cycle time, errors, sensor status, active modes (first 32), and the current configuration profile.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1363,6 +1430,7 @@
 **Description:** Provides raw sensor readings from the IMU (Accelerometer, Gyroscope, Magnetometer).  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1382,6 +1450,7 @@
 **Description:** Provides the current output values for all supported servos.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1391,6 +1460,7 @@
 **Description:** Provides the current output values for the first 8 motors.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1400,6 +1470,7 @@
 **Description:** Provides the current values of the received RC channels.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1409,6 +1480,7 @@
 **Description:** Provides raw GPS data (fix status, coordinates, altitude, speed, course).  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1427,6 +1499,7 @@
 **Description:** Provides computed GPS values: distance and direction to home.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1440,6 +1513,7 @@
 **Description:** Provides the current attitude estimate (roll, pitch, yaw).  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1453,6 +1527,7 @@
 **Description:** Provides estimated altitude, vertical speed (variometer), and raw barometric altitude.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1464,6 +1539,7 @@
 **Description:** Provides analog sensor readings: battery voltage, current consumption (mAh), RSSI, and current draw (Amps).  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1478,6 +1554,7 @@
 **Description:** Retrieves RC tuning parameters (rates, expos, TPA) for the current control rate profile.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1498,6 +1575,7 @@
 **Description:** Provides the full bitmask of currently active flight modes (boxes).  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1509,6 +1587,7 @@
 **Description:** Retrieves miscellaneous configuration settings, mostly related to RC, GPS, Mag, and Battery voltage (legacy formats).  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1535,6 +1614,7 @@
 **Description:** Provides a semicolon-separated string containing the names of all available flight modes (boxes).  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1546,6 +1626,7 @@
 **Description:** Provides a semicolon-separated string containing the names of the PID controllers.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1553,10 +1634,12 @@
 
 ## <a id="msp_wp"></a>`MSP_WP (118 / 0x76)`
 **Description:** Get/Set a single waypoint from the mission plan.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
 | `waypointIndex` | `uint8_t` | 1 | - | Index of the waypoint to retrieve (0 to `NAV_MAX_WAYPOINTS - 1`). |
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1576,6 +1659,7 @@
 **Description:** Provides a list of permanent IDs associated with the available flight modes (boxes).  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1587,6 +1671,7 @@
 **Description:** Retrieves the configuration parameters for all supported servos (min, max, middle, rate). Legacy format with unused fields.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1605,6 +1690,7 @@
 **Description:** Retrieves the current status of the navigation system.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1627,6 +1713,7 @@
 **Description:** Retrieves settings related to 3D/reversible motor operation.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1640,6 +1727,7 @@
 **Description:** Retrieves RC input deadband settings.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1652,6 +1740,7 @@
 **Description:** Retrieves sensor alignment settings (legacy format).  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1666,6 +1755,7 @@
 **Description:** Retrieves the color index assigned to each LED mode and function/direction combination, including special colors.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1679,6 +1769,7 @@
 **Description:** Provides battery state information, formatted primarily for DJI FPV Goggles compatibility.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1703,10 +1794,12 @@
 
 ## <a id="msp_vtxtable_powerlevel"></a>`MSP_VTXTABLE_POWERLEVEL (138 / 0x8a)`
 **Description:** Retrieves information about a specific VTX power level from the VTX table.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
 | `powerLevelIndex` | `uint8_t` | 1 | - | 1-based index of the power level to query. |
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1721,6 +1814,7 @@
 **Description:** Provides extended flight controller status, including CPU load, arming flags, and calibration status, in addition to `MSP_STATUS` fields.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1739,6 +1833,7 @@
 **Description:** Provides the hardware status for each individual sensor system.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1758,6 +1853,7 @@
 **Description:** Provides the unique identifier of the microcontroller.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1771,6 +1867,7 @@
 **Description:** Provides satellite signal strength information (legacy U-Blox compatibility stub).  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1785,6 +1882,7 @@
 **Description:** Provides debugging statistics for the GPS communication link.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1818,6 +1916,7 @@
 
 ## <a id="msp_set_tx_info"></a>`MSP_SET_TX_INFO (186 / 0xba)`
 **Description:** Allows a transmitter LUA script (or similar) to send runtime information (currently only RSSI) to the firmware.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1831,6 +1930,7 @@
 **Description:** Provides information potentially useful for transmitter LUA scripts.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1841,6 +1941,7 @@
 
 ## <a id="msp_set_raw_rc"></a>`MSP_SET_RAW_RC (200 / 0xc8)`
 **Description:** Provides raw RC channel data to the flight controller, typically used when the receiver is connected via MSP (e.g., MSP RX feature).  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1852,6 +1953,7 @@
 
 ## <a id="msp_set_raw_gps"></a>`MSP_SET_RAW_GPS (201 / 0xc9)`
 **Description:** Provides raw GPS data to the flight controller, typically for simulation or external GPS injection.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1878,6 +1980,7 @@
 
 ## <a id="msp_set_rc_tuning"></a>`MSP_SET_RC_TUNING (204 / 0xcc)`
 **Description:** Sets RC tuning parameters (rates, expos, TPA) for the current control rate profile.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1916,6 +2019,7 @@
 
 ## <a id="msp_set_misc"></a>`MSP_SET_MISC (207 / 0xcf)`
 **Description:** Sets miscellaneous configuration settings (legacy formats/scaling).  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1951,6 +2055,7 @@
 
 ## <a id="msp_set_wp"></a>`MSP_SET_WP (209 / 0xd1)`
 **Description:** Sets a single waypoint in the mission plan.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1970,6 +2075,7 @@
 
 ## <a id="msp_select_setting"></a>`MSP_SELECT_SETTING (210 / 0xd2)`
 **Description:** Selects the active configuration profile and saves it.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1981,6 +2087,7 @@
 
 ## <a id="msp_set_head"></a>`MSP_SET_HEAD (211 / 0xd3)`
 **Description:** Sets the target heading for the heading hold controller (e.g., during MAG mode).  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -1992,6 +2099,7 @@
 
 ## <a id="msp_set_servo_configuration"></a>`MSP_SET_SERVO_CONFIGURATION (212 / 0xd4)`
 **Description:** Sets the configuration for a single servo (legacy format).  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2011,6 +2119,7 @@
 
 ## <a id="msp_set_motor"></a>`MSP_SET_MOTOR (214 / 0xd6)`
 **Description:** Sets the disarmed motor values, typically used for motor testing or propeller balancing functions in a configurator.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2028,6 +2137,7 @@
 
 ## <a id="msp_set_3d"></a>`MSP_SET_3D (217 / 0xd9)`
 **Description:** Sets parameters related to 3D/reversible motor operation.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2041,6 +2151,7 @@
 
 ## <a id="msp_set_rc_deadband"></a>`MSP_SET_RC_DEADBAND (218 / 0xda)`
 **Description:** Sets RC input deadband values.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2064,6 +2175,7 @@
 
 ## <a id="msp_set_sensor_alignment"></a>`MSP_SET_SENSOR_ALIGNMENT (220 / 0xdc)`
 **Description:** Sets sensor alignment (legacy format).  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2078,6 +2190,7 @@
 
 ## <a id="msp_set_led_strip_modecolor"></a>`MSP_SET_LED_STRIP_MODECOLOR (221 / 0xdd)`
 **Description:** Sets the color index for a specific LED mode/function combination.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2111,6 +2224,7 @@
 **Description:** Retrieves the custom servo mixer rules (legacy format).  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2126,6 +2240,7 @@
 
 ## <a id="msp_set_servo_mix_rule"></a>`MSP_SET_SERVO_MIX_RULE (242 / 0xf2)`
 **Description:** Sets a single custom servo mixer rule (legacy format).  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2145,6 +2260,7 @@
 **Description:** Enables serial passthrough mode to peripherals like ESCs (BLHeli 4-way) or other serial devices.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2156,6 +2272,7 @@
 **Description:** Retrieves the current Real-Time Clock time.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2166,6 +2283,7 @@
 
 ## <a id="msp_set_rtc"></a>`MSP_SET_RTC (247 / 0xf7)`
 **Description:** Sets the Real-Time Clock time.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2201,6 +2319,7 @@
 **Description:** Retrieves debug ("serial printf") messages from the firmware.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2210,6 +2329,7 @@
 **Description:** Retrieves values from the firmware's `debug[]` array (legacy 16-bit version).  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2230,6 +2350,7 @@
 **Description:** Gets the time zone offset configuration.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2242,10 +2363,12 @@
 
 ## <a id="msp2_common_setting"></a>`MSP2_COMMON_SETTING (4099 / 0x1003)`
 **Description:** Gets the value of a specific configuration setting, identified by name or index.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
 | `settingName` | `char[]` | - | - | Null-terminated string containing the setting name (e.g., "gyro_main_lpf_hz"). |
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2263,6 +2386,7 @@
 
 ## <a id="msp2_common_set_motor_mixer"></a>`MSP2_COMMON_SET_MOTOR_MIXER (4102 / 0x1006)`
 **Description:** Sets the motor mixer weights for a single motor in the primary mixer profile.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2280,6 +2404,7 @@
 **Description:** Gets detailed information about a specific configuration setting (name, type, range, flags, current value, etc.).  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2298,10 +2423,12 @@
 
 ## <a id="msp2_common_pg_list"></a>`MSP2_COMMON_PG_LIST (4104 / 0x1008)`
 **Description:** Gets a list of Parameter Group Numbers (PGNs) used by settings, along with the start and end setting indexes for each group. Can request info for a single PGN.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
 | `pgn` | `uint16_t` | 2 | - | PGN ID to query. If omitted, returns all used PGNs. |
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2315,6 +2442,7 @@
 **Description:** Retrieves the configuration for all available serial ports.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2329,6 +2457,7 @@
 
 ## <a id="msp2_common_set_serial_config"></a>`MSP2_COMMON_SET_SERIAL_CONFIG (4106 / 0x100a)`
 **Description:** Sets the configuration for one or more serial ports.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2345,6 +2474,7 @@
 
 ## <a id="msp2_common_set_radar_pos"></a>`MSP2_COMMON_SET_RADAR_POS (4107 / 0x100b)`
 **Description:** Sets the position and status information for a "radar" Point of Interest (POI). Used for displaying other craft/objects on the OSD map.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2372,6 +2502,7 @@
 
 ## <a id="msp2_common_set_msp_rc_link_stats"></a>`MSP2_COMMON_SET_MSP_RC_LINK_STATS (4109 / 0x100d)`
 **Description:** Provides RC link statistics (RSSI, LQ) to the FC, typically from an MSP-based RC link (like ExpressLRS). Sent periodically by the RC link.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2389,6 +2520,7 @@
 
 ## <a id="msp2_common_set_msp_rc_info"></a>`MSP2_COMMON_SET_MSP_RC_INFO (4110 / 0x100e)`
 **Description:** Provides additional RC link information (power levels, band, mode) to the FC from an MSP-based RC link. Sent less frequently than link stats.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2404,6 +2536,7 @@
 
 ## <a id="msp2_sensor_rangefinder"></a>`MSP2_SENSOR_RANGEFINDER (7937 / 0x1f01)`
 **Description:** Provides rangefinder data (distance, quality) from an external MSP-based sensor.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2416,6 +2549,7 @@
 
 ## <a id="msp2_sensor_optic_flow"></a>`MSP2_SENSOR_OPTIC_FLOW (7938 / 0x1f02)`
 **Description:** Provides optical flow data (motion, quality) from an external MSP-based sensor.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2429,6 +2563,7 @@
 
 ## <a id="msp2_sensor_gps"></a>`MSP2_SENSOR_GPS (7939 / 0x1f03)`
 **Description:** Provides detailed GPS data from an external MSP-based GPS module.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2462,6 +2597,7 @@
 
 ## <a id="msp2_sensor_compass"></a>`MSP2_SENSOR_COMPASS (7940 / 0x1f04)`
 **Description:** Provides magnetometer data from an external MSP-based compass module.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2477,6 +2613,7 @@
 
 ## <a id="msp2_sensor_barometer"></a>`MSP2_SENSOR_BAROMETER (7941 / 0x1f05)`
 **Description:** Provides barometer data from an external MSP-based barometer module.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2491,6 +2628,7 @@
 
 ## <a id="msp2_sensor_airspeed"></a>`MSP2_SENSOR_AIRSPEED (7942 / 0x1f06)`
 **Description:** Provides airspeed data from an external MSP-based pitot sensor module.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2511,6 +2649,7 @@
 **Description:** Provides comprehensive flight controller status, extending `MSP_STATUS_EX` with full arming flags, battery profile, and mixer profile.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2527,6 +2666,7 @@
 **Description:** Provides data from the optical flow sensor.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2542,6 +2682,7 @@
 **Description:** Provides detailed analog sensor readings, superseding `MSP_ANALOG` with higher precision and additional fields.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2559,6 +2700,7 @@
 **Description:** Retrieves miscellaneous configuration settings, superseding `MSP_MISC` with higher precision and capacity fields.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2586,6 +2728,7 @@
 
 ## <a id="msp2_inav_set_misc"></a>`MSP2_INAV_SET_MISC (8196 / 0x2004)`
 **Description:** Sets miscellaneous configuration settings, superseding `MSP_SET_MISC`.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2619,6 +2762,7 @@
 **Description:** Retrieves the configuration specific to the battery voltage and current sensors and capacity settings for the current battery profile.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2640,6 +2784,7 @@
 
 ## <a id="msp2_inav_set_battery_config"></a>`MSP2_INAV_SET_BATTERY_CONFIG (8198 / 0x2006)`
 **Description:** Sets the battery voltage/current sensor configuration and capacity settings for the current battery profile.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2665,6 +2810,7 @@
 **Description:** Retrieves the rates and expos for the current control rate profile, including both stabilized and manual flight modes. Supersedes `MSP_RC_TUNING`.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2685,6 +2831,7 @@
 
 ## <a id="msp2_inav_set_rate_profile"></a>`MSP2_INAV_SET_RATE_PROFILE (8200 / 0x2008)`
 **Description:** Sets the rates and expos for the current control rate profile (stabilized and manual). Supersedes `MSP_SET_RC_TUNING`.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2711,6 +2858,7 @@
 **Description:** Retrieves the estimated or measured airspeed.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2722,6 +2870,7 @@
 **Description:** Retrieves the output mapping configuration (identifies which timer outputs are used for Motors/Servos). Legacy version sending only 8-bit usage flags.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2733,6 +2882,7 @@
 **Description:** Retrieves configuration parameters for the multirotor braking mode feature.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2749,6 +2899,7 @@
 
 ## <a id="msp2_inav_set_mc_braking"></a>`MSP2_INAV_SET_MC_BRAKING (8204 / 0x200c)`
 **Description:** Sets configuration parameters for the multirotor braking mode feature.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2769,6 +2920,7 @@
 **Description:** Retrieves extended output mapping configuration (timer ID and usage flags). Obsolete, use `MSP2_INAV_OUTPUT_MAPPING_EXT2`.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2781,6 +2933,7 @@
 **Description:** Get or list the output mode override for hardware timers (e.g., force ONESHOT, DSHOT).  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2791,6 +2944,7 @@
 
 ## <a id="msp2_inav_set_timer_output_mode"></a>`MSP2_INAV_SET_TIMER_OUTPUT_MODE (8207 / 0x200f)`
 **Description:** Set the output mode override for a specific hardware timer.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2805,6 +2959,7 @@
 **Description:** Retrieves INAV-specific mixer configuration details.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2819,6 +2974,7 @@
 
 ## <a id="msp2_inav_set_mixer"></a>`MSP2_INAV_SET_MIXER (8209 / 0x2011)`
 **Description:** Sets INAV-specific mixer configuration details.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2839,6 +2995,7 @@
 **Description:** Gets OSD layout information (counts, positions for a specific layout, or position for a specific item).  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2849,6 +3006,7 @@
 
 ## <a id="msp2_inav_osd_set_layout_item"></a>`MSP2_INAV_OSD_SET_LAYOUT_ITEM (8211 / 0x2013)`
 **Description:** Sets the position of a single OSD item within a specific layout.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2864,6 +3022,7 @@
 **Description:** Retrieves OSD alarm threshold settings.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2887,6 +3046,7 @@
 
 ## <a id="msp2_inav_osd_set_alarms"></a>`MSP2_INAV_OSD_SET_ALARMS (8213 / 0x2015)`
 **Description:** Sets OSD alarm threshold settings.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2912,6 +3072,7 @@
 **Description:** Retrieves OSD display preferences (video system, units, styles, etc.).  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2929,6 +3090,7 @@
 
 ## <a id="msp2_inav_osd_set_preferences"></a>`MSP2_INAV_OSD_SET_PREFERENCES (8215 / 0x2017)`
 **Description:** Sets OSD display preferences.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2948,6 +3110,7 @@
 
 ## <a id="msp2_inav_select_battery_profile"></a>`MSP2_INAV_SELECT_BATTERY_PROFILE (8216 / 0x2018)`
 **Description:** Selects the active battery profile and saves configuration.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2965,6 +3128,7 @@
 **Description:** Retrieves the Blackbox configuration. Supersedes `MSP_BLACKBOX_CONFIG`.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2978,6 +3142,7 @@
 
 ## <a id="msp2_set_blackbox_config"></a>`MSP2_SET_BLACKBOX_CONFIG (8219 / 0x201b)`
 **Description:** Sets the Blackbox configuration. Supersedes `MSP_SET_BLACKBOX_CONFIG`.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -2994,6 +3159,7 @@
 **Description:** Retrieves the configuration for all onboard temperature sensors.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -3008,6 +3174,7 @@
 
 ## <a id="msp2_inav_set_temp_sensor_config"></a>`MSP2_INAV_SET_TEMP_SENSOR_CONFIG (8221 / 0x201d)`
 **Description:** Sets the configuration for all onboard temperature sensors.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -3026,6 +3193,7 @@
 **Description:** Retrieves the current readings from all configured temperature sensors.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -3035,6 +3203,7 @@
 
 ## <a id="msp_simulator"></a>`MSP_SIMULATOR (8223 / 0x201f)`
 **Description:** Handles Hardware-in-the-Loop (HITL) simulation data exchange. Receives simulated sensor data and options, sends back control outputs and debug info.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -3066,6 +3235,7 @@
 | `vbat` | `uint8_t` | 1 | - | (If `HITL_EXT_BATTERY_VOLTAGE`) Simulated battery voltage (0.1V units). |
 | `airspeed` | `uint16_t` | 2 | - | (If `HITL_AIRSPEED`) Simulated airspeed (cm/s). |
 | `extFlags` | `uint8_t` | 1 | - | (If `HITL_EXTENDED_FLAGS`) Additional flags (upper 8 bits). |
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -3093,6 +3263,7 @@
 
 ## <a id="msp2_inav_set_servo_mixer"></a>`MSP2_INAV_SET_SERVO_MIXER (8225 / 0x2021)`
 **Description:** Sets a single custom servo mixer rule, including programming framework condition ID. Supersedes `MSP_SET_SERVO_MIX_RULE`.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -3111,6 +3282,7 @@
 **Description:** Retrieves the configuration of all defined Logic Conditions.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -3127,6 +3299,7 @@
 
 ## <a id="msp2_inav_set_logic_conditions"></a>`MSP2_INAV_SET_LOGIC_CONDITIONS (8227 / 0x2023)`
 **Description:** Sets the configuration for a single Logic Condition by its index.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -3160,6 +3333,7 @@
 **Description:** Retrieves the current evaluated status (true/false or numerical value) of all logic conditions.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -3171,6 +3345,7 @@
 **Description:** Retrieves the current values of all Global Variables (GVARS).  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -3182,6 +3357,7 @@
 **Description:** Retrieves the configuration of all Programming PIDs.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -3199,6 +3375,7 @@
 
 ## <a id="msp2_inav_set_programming_pid"></a>`MSP2_INAV_SET_PROGRAMMING_PID (8233 / 0x2029)`
 **Description:** Sets the configuration for a single Programming PID by its index.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -3221,6 +3398,7 @@
 **Description:** Retrieves the current output value of all Programming PIDs.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -3232,6 +3410,7 @@
 **Description:** Retrieves the standard PID controller gains (P, I, D, FF) for the current PID profile.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -3244,6 +3423,7 @@
 
 ## <a id="msp2_set_pid"></a>`MSP2_SET_PID (8241 / 0x2031)`
 **Description:** Sets the standard PID controller gains (P, I, D, FF) for the current PID profile.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -3267,6 +3447,7 @@
 
 ## <a id="msp2_inav_fwupdt_prepare"></a>`MSP2_INAV_FWUPDT_PREPARE (8243 / 0x2033)`
 **Description:** Prepares the flight controller to receive a firmware update via MSP.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -3278,6 +3459,7 @@
 
 ## <a id="msp2_inav_fwupdt_store"></a>`MSP2_INAV_FWUPDT_STORE (8244 / 0x2034)`
 **Description:** Stores a chunk of firmware data received via MSP.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -3289,6 +3471,7 @@
 
 ## <a id="msp2_inav_fwupdt_exec"></a>`MSP2_INAV_FWUPDT_EXEC (8245 / 0x2035)`
 **Description:** Executes the firmware update process (flashes the stored firmware and reboots).  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -3318,10 +3501,12 @@
 
 ## <a id="msp2_inav_safehome"></a>`MSP2_INAV_SAFEHOME (8248 / 0x2038)`
 **Description:** Get or Set configuration for a specific Safe Home location.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
 | `safehomeIndex` | `uint8_t` | 1 | - | Index of the safe home location (0 to `MAX_SAFE_HOMES - 1`). |
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -3334,6 +3519,7 @@
 
 ## <a id="msp2_inav_set_safehome"></a>`MSP2_INAV_SET_SAFEHOME (8249 / 0x2039)`
 **Description:** Sets the configuration for a specific Safe Home location.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -3350,6 +3536,7 @@
 **Description:** Retrieves miscellaneous runtime information including timers and throttle status.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -3360,10 +3547,12 @@
 
 ## <a id="msp2_inav_logic_conditions_single"></a>`MSP2_INAV_LOGIC_CONDITIONS_SINGLE (8251 / 0x203b)`
 **Description:** Gets the configuration for a single Logic Condition by its index.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
 | `conditionIndex` | `uint8_t` | 1 | - | Index of the condition to retrieve (0 to `MAX_LOGIC_CONDITIONS - 1`). |
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -3382,6 +3571,7 @@
 **Description:** Retrieves the RPM reported by each ESC via telemetry.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -3403,10 +3593,12 @@
 
 ## <a id="msp2_inav_fw_approach"></a>`MSP2_INAV_FW_APPROACH (8266 / 0x204a)`
 **Description:** Get or Set configuration for a specific Fixed Wing Autoland approach.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
 | `approachIndex` | `uint8_t` | 1 | - | Index of the approach setting (0 to `MAX_FW_LAND_APPOACH_SETTINGS - 1`). |
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -3422,6 +3614,7 @@
 
 ## <a id="msp2_inav_set_fw_approach"></a>`MSP2_INAV_SET_FW_APPROACH (8267 / 0x204b)`
 **Description:** Sets the configuration for a specific Fixed Wing Autoland approach.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -3439,6 +3632,7 @@
 
 ## <a id="msp2_inav_gps_ublox_command"></a>`MSP2_INAV_GPS_UBLOX_COMMAND (8272 / 0x2050)`
 **Description:** Sends a raw command directly to a U-Blox GPS module connected to the FC.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -3452,6 +3646,7 @@
 **Description:** Retrieves Rate Dynamics configuration parameters for the current control rate profile.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -3466,6 +3661,7 @@
 
 ## <a id="msp2_inav_set_rate_dynamics"></a>`MSP2_INAV_SET_RATE_DYNAMICS (8289 / 0x2061)`
 **Description:** Sets Rate Dynamics configuration parameters for the current control rate profile.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -3484,6 +3680,7 @@
 **Description:** Retrieves the current EZ-Tune parameters.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -3502,6 +3699,7 @@
 
 ## <a id="msp2_inav_ez_tune_set"></a>`MSP2_INAV_EZ_TUNE_SET (8305 / 0x2071)`
 **Description:** Sets the EZ-Tune parameters and triggers an update.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -3522,6 +3720,7 @@
 
 ## <a id="msp2_inav_select_mixer_profile"></a>`MSP2_INAV_SELECT_MIXER_PROFILE (8320 / 0x2080)`
 **Description:** Selects the active mixer profile and saves configuration.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -3544,6 +3743,7 @@
 **Description:** Retrieves counts related to custom OSD elements defined by the programming framework.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -3555,6 +3755,7 @@
 
 ## <a id="msp2_inav_custom_osd_element"></a>`MSP2_INAV_CUSTOM_OSD_ELEMENT (8449 / 0x2101)`
 **Description:** Gets the configuration of a single custom OSD element defined by the programming framework.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -3577,6 +3778,7 @@
 **Description:** Retrieves the full extended output mapping configuration (timer ID, full 32-bit usage flags, and pin label). Supersedes `MSP2_INAV_OUTPUT_MAPPING_EXT`.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -3590,6 +3792,7 @@
 **Description:** Retrieves the configuration parameters for all supported servos (min, max, middle, rate). Supersedes `MSP_SERVO_CONFIGURATIONS`.  
 
 **Request Payload:** None  
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -3600,6 +3803,7 @@
 
 ## <a id="msp2_inav_set_servo_config"></a>`MSP2_INAV_SET_SERVO_CONFIG (8705 / 0x2201)`
 **Description:** Sets the configuration parameters for a single servo. Supersedes `MSP_SET_SERVO_CONFIGURATION`.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -3615,10 +3819,12 @@
 
 ## <a id="msp2_inav_geozone"></a>`MSP2_INAV_GEOZONE (8720 / 0x2210)`
 **Description:** Get configuration for a specific Geozone.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
 | `geozoneIndex` | `uint8_t` | 1 | - | Index of the geozone (0 to `MAX_GEOZONES_IN_CONFIG - 1`). |
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -3635,6 +3841,7 @@
 
 ## <a id="msp2_inav_set_geozone"></a>`MSP2_INAV_SET_GEOZONE (8721 / 0x2211)`
 **Description:** Sets the main configuration for a specific Geozone (type, shape, altitude, action). **This command resets (clears) all vertices associated with the zone.**  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
@@ -3653,11 +3860,13 @@
 
 ## <a id="msp2_inav_geozone_vertex"></a>`MSP2_INAV_GEOZONE_VERTEX (8722 / 0x2212)`
 **Description:** Get a specific vertex (or center+radius for circular zones) of a Geozone.  
+  
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
 | `geozoneIndex` | `uint8_t` | 1 | - | Index of the geozone. |
 | `vertexId` | `uint8_t` | 1 | - | Index of the vertex within the zone (0-based). For circles, 0 = center. |
+  
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
