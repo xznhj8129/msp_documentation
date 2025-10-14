@@ -85,7 +85,7 @@ def units_cell(field: Dict[str, Any]) -> str:
         if field["enum"]=="?_e":
             return "[ENUM_NAME](LINK_TO_ENUM)"
         else:
-            return f"[{field['enum']}]({inav_wiki_url}/inav_enums_ref.md#enum-{field['enum'].lower()})"
+            return f"[{field['enum']}]({inav_wiki_url}inav_enums_ref.md#enum-{field['enum'].lower()})"
     u = (field.get("units") or "").strip()
     return u if u else "-"
 

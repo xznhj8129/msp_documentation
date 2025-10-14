@@ -2,6 +2,62 @@
 
 ## Table of contents
 
+- [zeroCalibrationState_e](#enum-zerocalibrationstate_e)
+- [colorComponent_e](#enum-colorcomponent_e)
+- [hsvColorComponent_e](#enum-hsvcolorcomponent_e)
+- [axis_e](#enum-axis_e)
+- [flight_dynamics_index_t](#enum-flight_dynamics_index_t)
+- [angle_index_t](#enum-angle_index_t)
+- [tristate_e](#enum-tristate_e)
+- [logTopic_e](#enum-logtopic_e)
+- [pidControllerFlags_e](#enum-pidcontrollerflags_e)
+- [tz_automatic_dst_e](#enum-tz_automatic_dst_e)
+- [filterType_e](#enum-filtertype_e)
+- [biquadFilterType_e](#enum-biquadfiltertype_e)
+- [navSetWaypointFlags_t](#enum-navsetwaypointflags_t)
+- [climbRateToAltitudeControllerMode_e](#enum-climbratetoaltitudecontrollermode_e)
+- [navigationEstimateStatus_e](#enum-navigationestimatestatus_e)
+- [navigationHomeFlags_t](#enum-navigationhomeflags_t)
+- [navigationFSMEvent_t](#enum-navigationfsmevent_t)
+- [navigationPersistentId_e](#enum-navigationpersistentid_e)
+- [navigationFSMState_t](#enum-navigationfsmstate_t)
+- [navigationFSMStateFlags_t](#enum-navigationfsmstateflags_t)
+- [fwAutolandWaypoint_t](#enum-fwautolandwaypoint_t)
+- [rthTargetMode_e](#enum-rthtargetmode_e)
+- [navAGLEstimateQuality_e](#enum-navaglestimatequality_e)
+- [navPositionEstimationFlags_e](#enum-navpositionestimationflags_e)
+- [navDefaultAltitudeSensor_e](#enum-navdefaultaltitudesensor_e)
+- [fixedWingLaunchMessage_t](#enum-fixedwinglaunchmessage_t)
+- [fixedWingLaunchEvent_t](#enum-fixedwinglaunchevent_t)
+- [fixedWingLaunchState_t](#enum-fixedwinglaunchstate_t)
+- [safehomeUsageMode_e](#enum-safehomeusagemode_e)
+- [fwAutolandApproachDirection_e](#enum-fwautolandapproachdirection_e)
+- [fwAutolandState_t](#enum-fwautolandstate_t)
+- [geozoneMessageState_e](#enum-geozonemessagestate_e)
+- [nav_reset_type_e](#enum-nav_reset_type_e)
+- [navRTHAllowLanding_e](#enum-navrthallowlanding_e)
+- [navExtraArmingSafety_e](#enum-navextraarmingsafety_e)
+- [navArmingBlocker_e](#enum-navarmingblocker_e)
+- [navOverridesMotorStop_e](#enum-navoverridesmotorstop_e)
+- [navRTHClimbFirst_e](#enum-navrthclimbfirst_e)
+- [navFwLaunchStatus_e](#enum-navfwlaunchstatus_e)
+- [wpMissionPlannerStatus_e](#enum-wpmissionplannerstatus_e)
+- [navMissionRestart_e](#enum-navmissionrestart_e)
+- [rthTrackbackMode_e](#enum-rthtrackbackmode_e)
+- [wpFwTurnSmoothing_e](#enum-wpfwturnsmoothing_e)
+- [navMcAltHoldThrottle_e](#enum-navmcaltholdthrottle_e)
+- [navWaypointActions_e](#enum-navwaypointactions_e)
+- [navWaypointHeadings_e](#enum-navwaypointheadings_e)
+- [navWaypointFlags_e](#enum-navwaypointflags_e)
+- [navWaypointP3Flags_e](#enum-navwaypointp3flags_e)
+- [navSystemStatus_Mode_e](#enum-navsystemstatus_mode_e)
+- [navSystemStatus_State_e](#enum-navsystemstatus_state_e)
+- [navSystemStatus_Error_e](#enum-navsystemstatus_error_e)
+- [navSystemStatus_Flags_e](#enum-navsystemstatus_flags_e)
+- [geoAltitudeConversionMode_e](#enum-geoaltitudeconversionmode_e)
+- [geoOriginResetMode_e](#enum-geooriginresetmode_e)
+- [geoAltitudeDatumFlag_e](#enum-geoaltitudedatumflag_e)
+- [geozoneActionState_e](#enum-geozoneactionstate_e)
 - [currentSensor_e](#enum-currentsensor_e)
 - [voltageSensor_e](#enum-voltagesensor_e)
 - [batCapacityUnit_e](#enum-batcapacityunit_e)
@@ -207,6 +263,846 @@
 - [stateFlags_t](#enum-stateflags_t)
 - [flightModeForTelemetry_e](#enum-flightmodefortelemetry_e)
 - [simulatorFlags_t](#enum-simulatorflags_t)
+
+---
+## <a id="enum-zerocalibrationstate_e"></a>`zeroCalibrationState_e`
+
+> Source: ../inav/src/main/common/calibration.h
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `ZERO_CALIBRATION_NONE` | 0 |  |
+| `ZERO_CALIBRATION_IN_PROGRESS` | 1 |  |
+| `ZERO_CALIBRATION_DONE` | 2 |  |
+| `ZERO_CALIBRATION_FAIL` | 3 |  |
+
+---
+## <a id="enum-colorcomponent_e"></a>`colorComponent_e`
+
+> Source: ../inav/src/main/common/color.h
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `RGB_RED` | 0 |  |
+| `RGB_GREEN` | 1 |  |
+| `RGB_BLUE` | 2 |  |
+
+---
+## <a id="enum-hsvcolorcomponent_e"></a>`hsvColorComponent_e`
+
+> Source: ../inav/src/main/common/color.h
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `HSV_HUE` | 0 |  |
+| `HSV_SATURATION` | 1 |  |
+| `HSV_VALUE` | 2 |  |
+
+---
+## <a id="enum-axis_e"></a>`axis_e`
+
+> Source: ../inav/src/main/common/axis.h
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `X` | 0 |  |
+| `Y` | 1 |  |
+| `Z` | 2 |  |
+
+---
+## <a id="enum-flight_dynamics_index_t"></a>`flight_dynamics_index_t`
+
+> Source: ../inav/src/main/common/axis.h
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `FD_ROLL` | 0 |  |
+| `FD_PITCH` | 1 |  |
+| `FD_YAW` | 2 |  |
+
+---
+## <a id="enum-angle_index_t"></a>`angle_index_t`
+
+> Source: ../inav/src/main/common/axis.h
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `AI_ROLL` | 0 |  |
+| `AI_PITCH` | 1 |  |
+
+---
+## <a id="enum-tristate_e"></a>`tristate_e`
+
+> Source: ../inav/src/main/common/tristate.h
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `TRISTATE_AUTO` | 0 |  |
+| `TRISTATE_ON` | 1 |  |
+| `TRISTATE_OFF` | 2 |  |
+
+---
+## <a id="enum-logtopic_e"></a>`logTopic_e`
+
+> Source: ../inav/src/main/common/log.h
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `LOG_TOPIC_SYSTEM` | 0 |  |
+| `LOG_TOPIC_GYRO` | 1 |  |
+| `LOG_TOPIC_BARO` | 2 |  |
+| `LOG_TOPIC_PITOT` | 3 |  |
+| `LOG_TOPIC_PWM` | 4 |  |
+| `LOG_TOPIC_TIMER` | 5 |  |
+| `LOG_TOPIC_IMU` | 6 |  |
+| `LOG_TOPIC_TEMPERATURE` | 7 |  |
+| `LOG_TOPIC_POS_ESTIMATOR` | 8 |  |
+| `LOG_TOPIC_VTX` | 9 |  |
+| `LOG_TOPIC_OSD` | 10 |  |
+| `LOG_TOPIC_COUNT` | 11 |  |
+
+---
+## <a id="enum-pidcontrollerflags_e"></a>`pidControllerFlags_e`
+
+> Source: ../inav/src/main/common/fp_pid.h
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `PID_DTERM_FROM_ERROR` | 1 << 0 |  |
+| `PID_ZERO_INTEGRATOR` | 1 << 1 |  |
+| `PID_SHRINK_INTEGRATOR` | 1 << 2 |  |
+| `PID_LIMIT_INTEGRATOR` | 1 << 3 |  |
+| `PID_FREEZE_INTEGRATOR` | 1 << 4 |  |
+
+---
+## <a id="enum-tz_automatic_dst_e"></a>`tz_automatic_dst_e`
+
+> Source: ../inav/src/main/common/time.h
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `TZ_AUTO_DST_OFF` | 0 |  |
+| `TZ_AUTO_DST_EU` | 1 |  |
+| `TZ_AUTO_DST_USA` | 2 |  |
+
+---
+## <a id="enum-filtertype_e"></a>`filterType_e`
+
+> Source: ../inav/src/main/common/filter.h
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `FILTER_PT1` | 0 |  |
+| `FILTER_BIQUAD` | 1 |  |
+| `FILTER_PT2` | 2 |  |
+| `FILTER_PT3` | 3 |  |
+| `FILTER_LULU` | 4 |  |
+
+---
+## <a id="enum-biquadfiltertype_e"></a>`biquadFilterType_e`
+
+> Source: ../inav/src/main/common/filter.h
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `FILTER_LPF` | 0 |  |
+| `FILTER_NOTCH` | 1 |  |
+
+---
+## <a id="enum-navsetwaypointflags_t"></a>`navSetWaypointFlags_t`
+
+> Source: ../inav/src/main/navigation/navigation_private.h
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `NAV_POS_UPDATE_NONE` | 0 |  |
+| `NAV_POS_UPDATE_Z` | 1 << 1 |  |
+| `NAV_POS_UPDATE_XY` | 1 << 0 |  |
+| `NAV_POS_UPDATE_HEADING` | 1 << 2 |  |
+| `NAV_POS_UPDATE_BEARING` | 1 << 3 |  |
+| `NAV_POS_UPDATE_BEARING_TAIL_FIRST` | 1 << 4 |  |
+
+---
+## <a id="enum-climbratetoaltitudecontrollermode_e"></a>`climbRateToAltitudeControllerMode_e`
+
+> Source: ../inav/src/main/navigation/navigation_private.h
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `ROC_TO_ALT_CURRENT` | 0 |  |
+| `ROC_TO_ALT_CONSTANT` | 1 |  |
+| `ROC_TO_ALT_TARGET` | 2 |  |
+
+---
+## <a id="enum-navigationestimatestatus_e"></a>`navigationEstimateStatus_e`
+
+> Source: ../inav/src/main/navigation/navigation_private.h
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `EST_NONE` | 0 |  |
+| `EST_USABLE` | 1 |  |
+| `EST_TRUSTED` | 2 |  |
+
+---
+## <a id="enum-navigationhomeflags_t"></a>`navigationHomeFlags_t`
+
+> Source: ../inav/src/main/navigation/navigation_private.h
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `NAV_HOME_INVALID` | 0 |  |
+| `NAV_HOME_VALID_XY` | 1 << 0 |  |
+| `NAV_HOME_VALID_Z` | 1 << 1 |  |
+| `NAV_HOME_VALID_HEADING` | 1 << 2 |  |
+| `NAV_HOME_VALID_ALL` | NAV_HOME_VALID_XY | NAV_HOME_VALID_Z | NAV_HOME_VALID_HEADING |  |
+
+---
+## <a id="enum-navigationfsmevent_t"></a>`navigationFSMEvent_t`
+
+> Source: ../inav/src/main/navigation/navigation_private.h
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `NAV_FSM_EVENT_NONE` | 0 |  |
+| `NAV_FSM_EVENT_TIMEOUT` | 1 |  |
+| `NAV_FSM_EVENT_SUCCESS` | 2 |  |
+| `NAV_FSM_EVENT_ERROR` | 3 |  |
+| `NAV_FSM_EVENT_SWITCH_TO_IDLE` | 4 |  |
+| `NAV_FSM_EVENT_SWITCH_TO_ALTHOLD` | 5 |  |
+| `NAV_FSM_EVENT_SWITCH_TO_POSHOLD_3D` | 6 |  |
+| `NAV_FSM_EVENT_SWITCH_TO_RTH` | 7 |  |
+| `NAV_FSM_EVENT_SWITCH_TO_WAYPOINT` | 8 |  |
+| `NAV_FSM_EVENT_SWITCH_TO_EMERGENCY_LANDING` | 9 |  |
+| `NAV_FSM_EVENT_SWITCH_TO_LAUNCH` | 10 |  |
+| `NAV_FSM_EVENT_SWITCH_TO_COURSE_HOLD` | 11 |  |
+| `NAV_FSM_EVENT_SWITCH_TO_CRUISE` | 12 |  |
+| `NAV_FSM_EVENT_SWITCH_TO_COURSE_ADJ` | 13 |  |
+| `NAV_FSM_EVENT_SWITCH_TO_MIXERAT` | 14 |  |
+| `NAV_FSM_EVENT_SWITCH_TO_NAV_STATE_FW_LANDING` | 15 |  |
+| `NAV_FSM_EVENT_SWITCH_TO_SEND_TO` | 16 |  |
+| `NAV_FSM_EVENT_STATE_SPECIFIC_1` | 17 |  |
+| `NAV_FSM_EVENT_STATE_SPECIFIC_2` | 18 |  |
+| `NAV_FSM_EVENT_STATE_SPECIFIC_3` | 19 |  |
+| `NAV_FSM_EVENT_STATE_SPECIFIC_4` | 20 |  |
+| `NAV_FSM_EVENT_STATE_SPECIFIC_5` | 21 |  |
+| `NAV_FSM_EVENT_SWITCH_TO_NAV_STATE_FW_LANDING_ABORT` | NAV_FSM_EVENT_STATE_SPECIFIC_1 |  |
+| `NAV_FSM_EVENT_SWITCH_TO_NAV_STATE_FW_LANDING_FINISHED` | NAV_FSM_EVENT_STATE_SPECIFIC_2 |  |
+| `NAV_FSM_EVENT_SWITCH_TO_WAYPOINT_HOLD_TIME` | NAV_FSM_EVENT_STATE_SPECIFIC_1 |  |
+| `NAV_FSM_EVENT_SWITCH_TO_WAYPOINT_RTH_LAND` | NAV_FSM_EVENT_STATE_SPECIFIC_2 |  |
+| `NAV_FSM_EVENT_SWITCH_TO_WAYPOINT_FINISHED` | NAV_FSM_EVENT_STATE_SPECIFIC_3 |  |
+| `NAV_FSM_EVENT_SWITCH_TO_NAV_STATE_RTH_INITIALIZE` | NAV_FSM_EVENT_STATE_SPECIFIC_1 |  |
+| `NAV_FSM_EVENT_SWITCH_TO_NAV_STATE_RTH_TRACKBACK` | NAV_FSM_EVENT_STATE_SPECIFIC_2 |  |
+| `NAV_FSM_EVENT_SWITCH_TO_RTH_HEAD_HOME` | NAV_FSM_EVENT_STATE_SPECIFIC_3 |  |
+| `NAV_FSM_EVENT_SWITCH_TO_RTH_LOITER_ABOVE_HOME` | NAV_FSM_EVENT_STATE_SPECIFIC_4 |  |
+| `NAV_FSM_EVENT_SWITCH_TO_RTH_LANDING` | NAV_FSM_EVENT_STATE_SPECIFIC_5 |  |
+| `NAV_FSM_EVENT_COUNT` |  |  |
+
+---
+## <a id="enum-navigationpersistentid_e"></a>`navigationPersistentId_e`
+
+> Source: ../inav/src/main/navigation/navigation_private.h
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `NAV_PERSISTENT_ID_UNDEFINED` | 0 |  |
+| `NAV_PERSISTENT_ID_IDLE` | 1 |  |
+| `NAV_PERSISTENT_ID_ALTHOLD_INITIALIZE` | 2 |  |
+| `NAV_PERSISTENT_ID_ALTHOLD_IN_PROGRESS` | 3 |  |
+| `NAV_PERSISTENT_ID_UNUSED_1` | 4 |  |
+| `NAV_PERSISTENT_ID_UNUSED_2` | 5 |  |
+| `NAV_PERSISTENT_ID_POSHOLD_3D_INITIALIZE` | 6 |  |
+| `NAV_PERSISTENT_ID_POSHOLD_3D_IN_PROGRESS` | 7 |  |
+| `NAV_PERSISTENT_ID_RTH_INITIALIZE` | 8 |  |
+| `NAV_PERSISTENT_ID_RTH_CLIMB_TO_SAFE_ALT` | 9 |  |
+| `NAV_PERSISTENT_ID_RTH_HEAD_HOME` | 10 |  |
+| `NAV_PERSISTENT_ID_RTH_LOITER_PRIOR_TO_LANDING` | 11 |  |
+| `NAV_PERSISTENT_ID_RTH_LANDING` | 12 |  |
+| `NAV_PERSISTENT_ID_RTH_FINISHING` | 13 |  |
+| `NAV_PERSISTENT_ID_RTH_FINISHED` | 14 |  |
+| `NAV_PERSISTENT_ID_WAYPOINT_INITIALIZE` | 15 |  |
+| `NAV_PERSISTENT_ID_WAYPOINT_PRE_ACTION` | 16 |  |
+| `NAV_PERSISTENT_ID_WAYPOINT_IN_PROGRESS` | 17 |  |
+| `NAV_PERSISTENT_ID_WAYPOINT_REACHED` | 18 |  |
+| `NAV_PERSISTENT_ID_WAYPOINT_NEXT` | 19 |  |
+| `NAV_PERSISTENT_ID_WAYPOINT_FINISHED` | 20 |  |
+| `NAV_PERSISTENT_ID_WAYPOINT_RTH_LAND` | 21 |  |
+| `NAV_PERSISTENT_ID_EMERGENCY_LANDING_INITIALIZE` | 22 |  |
+| `NAV_PERSISTENT_ID_EMERGENCY_LANDING_IN_PROGRESS` | 23 |  |
+| `NAV_PERSISTENT_ID_EMERGENCY_LANDING_FINISHED` | 24 |  |
+| `NAV_PERSISTENT_ID_LAUNCH_INITIALIZE` | 25 |  |
+| `NAV_PERSISTENT_ID_LAUNCH_WAIT` | 26 |  |
+| `NAV_PERSISTENT_ID_UNUSED_3` | 27 |  |
+| `NAV_PERSISTENT_ID_LAUNCH_IN_PROGRESS` | 28 |  |
+| `NAV_PERSISTENT_ID_COURSE_HOLD_INITIALIZE` | 29 |  |
+| `NAV_PERSISTENT_ID_COURSE_HOLD_IN_PROGRESS` | 30 |  |
+| `NAV_PERSISTENT_ID_COURSE_HOLD_ADJUSTING` | 31 |  |
+| `NAV_PERSISTENT_ID_CRUISE_INITIALIZE` | 32 |  |
+| `NAV_PERSISTENT_ID_CRUISE_IN_PROGRESS` | 33 |  |
+| `NAV_PERSISTENT_ID_CRUISE_ADJUSTING` | 34 |  |
+| `NAV_PERSISTENT_ID_WAYPOINT_HOLD_TIME` | 35 |  |
+| `NAV_PERSISTENT_ID_RTH_LOITER_ABOVE_HOME` | 36 |  |
+| `NAV_PERSISTENT_ID_UNUSED_4` | 37 |  |
+| `NAV_PERSISTENT_ID_RTH_TRACKBACK` | 38 |  |
+| `NAV_PERSISTENT_ID_MIXERAT_INITIALIZE` | 39 |  |
+| `NAV_PERSISTENT_ID_MIXERAT_IN_PROGRESS` | 40 |  |
+| `NAV_PERSISTENT_ID_MIXERAT_ABORT` | 41 |  |
+| `NAV_PERSISTENT_ID_FW_LANDING_CLIMB_TO_LOITER` | 42 |  |
+| `NAV_PERSISTENT_ID_FW_LANDING_LOITER` | 43 |  |
+| `NAV_PERSISTENT_ID_FW_LANDING_APPROACH` | 44 |  |
+| `NAV_PERSISTENT_ID_FW_LANDING_GLIDE` | 45 |  |
+| `NAV_PERSISTENT_ID_FW_LANDING_FLARE` | 46 |  |
+| `NAV_PERSISTENT_ID_FW_LANDING_ABORT` | 47 |  |
+| `NAV_PERSISTENT_ID_FW_LANDING_FINISHED` | 48 |  |
+| `NAV_PERSISTENT_ID_SEND_TO_INITALIZE` | 49 |  |
+| `NAV_PERSISTENT_ID_SEND_TO_IN_PROGRES` | 50 |  |
+| `NAV_PERSISTENT_ID_SEND_TO_FINISHED` | 51 |  |
+
+---
+## <a id="enum-navigationfsmstate_t"></a>`navigationFSMState_t`
+
+> Source: ../inav/src/main/navigation/navigation_private.h
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `NAV_STATE_UNDEFINED` | 0 |  |
+| `NAV_STATE_IDLE` | 1 |  |
+| `NAV_STATE_ALTHOLD_INITIALIZE` | 2 |  |
+| `NAV_STATE_ALTHOLD_IN_PROGRESS` | 3 |  |
+| `NAV_STATE_POSHOLD_3D_INITIALIZE` | 4 |  |
+| `NAV_STATE_POSHOLD_3D_IN_PROGRESS` | 5 |  |
+| `NAV_STATE_RTH_INITIALIZE` | 6 |  |
+| `NAV_STATE_RTH_CLIMB_TO_SAFE_ALT` | 7 |  |
+| `NAV_STATE_RTH_TRACKBACK` | 8 |  |
+| `NAV_STATE_RTH_HEAD_HOME` | 9 |  |
+| `NAV_STATE_RTH_LOITER_PRIOR_TO_LANDING` | 10 |  |
+| `NAV_STATE_RTH_LOITER_ABOVE_HOME` | 11 |  |
+| `NAV_STATE_RTH_LANDING` | 12 |  |
+| `NAV_STATE_RTH_FINISHING` | 13 |  |
+| `NAV_STATE_RTH_FINISHED` | 14 |  |
+| `NAV_STATE_WAYPOINT_INITIALIZE` | 15 |  |
+| `NAV_STATE_WAYPOINT_PRE_ACTION` | 16 |  |
+| `NAV_STATE_WAYPOINT_IN_PROGRESS` | 17 |  |
+| `NAV_STATE_WAYPOINT_REACHED` | 18 |  |
+| `NAV_STATE_WAYPOINT_HOLD_TIME` | 19 |  |
+| `NAV_STATE_WAYPOINT_NEXT` | 20 |  |
+| `NAV_STATE_WAYPOINT_FINISHED` | 21 |  |
+| `NAV_STATE_WAYPOINT_RTH_LAND` | 22 |  |
+| `NAV_STATE_EMERGENCY_LANDING_INITIALIZE` | 23 |  |
+| `NAV_STATE_EMERGENCY_LANDING_IN_PROGRESS` | 24 |  |
+| `NAV_STATE_EMERGENCY_LANDING_FINISHED` | 25 |  |
+| `NAV_STATE_LAUNCH_INITIALIZE` | 26 |  |
+| `NAV_STATE_LAUNCH_WAIT` | 27 |  |
+| `NAV_STATE_LAUNCH_IN_PROGRESS` | 28 |  |
+| `NAV_STATE_COURSE_HOLD_INITIALIZE` | 29 |  |
+| `NAV_STATE_COURSE_HOLD_IN_PROGRESS` | 30 |  |
+| `NAV_STATE_COURSE_HOLD_ADJUSTING` | 31 |  |
+| `NAV_STATE_CRUISE_INITIALIZE` | 32 |  |
+| `NAV_STATE_CRUISE_IN_PROGRESS` | 33 |  |
+| `NAV_STATE_CRUISE_ADJUSTING` | 34 |  |
+| `NAV_STATE_FW_LANDING_CLIMB_TO_LOITER` | 35 |  |
+| `NAV_STATE_FW_LANDING_LOITER` | 36 |  |
+| `NAV_STATE_FW_LANDING_APPROACH` | 37 |  |
+| `NAV_STATE_FW_LANDING_GLIDE` | 38 |  |
+| `NAV_STATE_FW_LANDING_FLARE` | 39 |  |
+| `NAV_STATE_FW_LANDING_FINISHED` | 40 |  |
+| `NAV_STATE_FW_LANDING_ABORT` | 41 |  |
+| `NAV_STATE_MIXERAT_INITIALIZE` | 42 |  |
+| `NAV_STATE_MIXERAT_IN_PROGRESS` | 43 |  |
+| `NAV_STATE_MIXERAT_ABORT` | 44 |  |
+| `NAV_STATE_SEND_TO_INITALIZE` | 45 |  |
+| `NAV_STATE_SEND_TO_IN_PROGESS` | 46 |  |
+| `NAV_STATE_SEND_TO_FINISHED` | 47 |  |
+| `NAV_STATE_COUNT` | 48 |  |
+
+---
+## <a id="enum-navigationfsmstateflags_t"></a>`navigationFSMStateFlags_t`
+
+> Source: ../inav/src/main/navigation/navigation_private.h
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `NAV_CTL_ALT` | (1 << 0) |  |
+| `NAV_CTL_POS` | (1 << 1) |  |
+| `NAV_CTL_YAW` | (1 << 2) |  |
+| `NAV_CTL_EMERG` | (1 << 3) |  |
+| `NAV_CTL_LAUNCH` | (1 << 4) |  |
+| `NAV_REQUIRE_ANGLE` | (1 << 5) |  |
+| `NAV_REQUIRE_ANGLE_FW` | (1 << 6) |  |
+| `NAV_REQUIRE_MAGHOLD` | (1 << 7) |  |
+| `NAV_REQUIRE_THRTILT` | (1 << 8) |  |
+| `NAV_AUTO_RTH` | (1 << 9) |  |
+| `NAV_AUTO_WP` | (1 << 10) |  |
+| `NAV_RC_ALT` | (1 << 11) |  |
+| `NAV_RC_POS` | (1 << 12) |  |
+| `NAV_RC_YAW` | (1 << 13) |  |
+| `NAV_CTL_LAND` | (1 << 14) |  |
+| `NAV_AUTO_WP_DONE` | (1 << 15) |  |
+| `NAV_MIXERAT` | (1 << 16) |  |
+| `NAV_CTL_HOLD` | (1 << 17) |  |
+
+---
+## <a id="enum-fwautolandwaypoint_t"></a>`fwAutolandWaypoint_t`
+
+> Source: ../inav/src/main/navigation/navigation_private.h
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `FW_AUTOLAND_WP_TURN` | 0 |  |
+| `FW_AUTOLAND_WP_FINAL_APPROACH` | 1 |  |
+| `FW_AUTOLAND_WP_LAND` | 2 |  |
+| `FW_AUTOLAND_WP_COUNT` | 3 |  |
+
+---
+## <a id="enum-rthtargetmode_e"></a>`rthTargetMode_e`
+
+> Source: ../inav/src/main/navigation/navigation_private.h
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `RTH_HOME_ENROUTE_INITIAL` | 0 |  |
+| `RTH_HOME_ENROUTE_PROPORTIONAL` | 1 |  |
+| `RTH_HOME_ENROUTE_FINAL` | 2 |  |
+| `RTH_HOME_FINAL_LOITER` | 3 |  |
+| `RTH_HOME_FINAL_LAND` | 4 |  |
+
+---
+## <a id="enum-navaglestimatequality_e"></a>`navAGLEstimateQuality_e`
+
+> Source: ../inav/src/main/navigation/navigation_pos_estimator_private.h
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `SURFACE_QUAL_LOW` | 0 |  |
+| `SURFACE_QUAL_MID` | 1 |  |
+| `SURFACE_QUAL_HIGH` | 2 |  |
+
+---
+## <a id="enum-navpositionestimationflags_e"></a>`navPositionEstimationFlags_e`
+
+> Source: ../inav/src/main/navigation/navigation_pos_estimator_private.h
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `EST_GPS_XY_VALID` | (1 << 0) |  |
+| `EST_GPS_Z_VALID` | (1 << 1) |  |
+| `EST_BARO_VALID` | (1 << 2) |  |
+| `EST_SURFACE_VALID` | (1 << 3) |  |
+| `EST_FLOW_VALID` | (1 << 4) |  |
+| `EST_XY_VALID` | (1 << 5) |  |
+| `EST_Z_VALID` | (1 << 6) |  |
+
+---
+## <a id="enum-navdefaultaltitudesensor_e"></a>`navDefaultAltitudeSensor_e`
+
+> Source: ../inav/src/main/navigation/navigation_pos_estimator_private.h
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `ALTITUDE_SOURCE_GPS` | 0 |  |
+| `ALTITUDE_SOURCE_BARO` | 1 |  |
+| `ALTITUDE_SOURCE_GPS_ONLY` | 2 |  |
+| `ALTITUDE_SOURCE_BARO_ONLY` | 3 |  |
+
+---
+## <a id="enum-fixedwinglaunchmessage_t"></a>`fixedWingLaunchMessage_t`
+
+> Source: ../inav/src/main/navigation/navigation_fw_launch.c
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `FW_LAUNCH_MESSAGE_TYPE_NONE` | 0 |  |
+| `FW_LAUNCH_MESSAGE_TYPE_WAIT_THROTTLE` | 1 |  |
+| `FW_LAUNCH_MESSAGE_TYPE_WAIT_IDLE` | 2 |  |
+| `FW_LAUNCH_MESSAGE_TYPE_WAIT_DETECTION` | 3 |  |
+| `FW_LAUNCH_MESSAGE_TYPE_IN_PROGRESS` | 4 |  |
+| `FW_LAUNCH_MESSAGE_TYPE_FINISHING` | 5 |  |
+
+---
+## <a id="enum-fixedwinglaunchevent_t"></a>`fixedWingLaunchEvent_t`
+
+> Source: ../inav/src/main/navigation/navigation_fw_launch.c
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `FW_LAUNCH_EVENT_NONE` | 0 |  |
+| `FW_LAUNCH_EVENT_SUCCESS` | 1 |  |
+| `FW_LAUNCH_EVENT_GOTO_DETECTION` | 2 |  |
+| `FW_LAUNCH_EVENT_ABORT` | 3 |  |
+| `FW_LAUNCH_EVENT_THROTTLE_LOW` | 4 |  |
+| `FW_LAUNCH_EVENT_COUNT` | 5 |  |
+
+---
+## <a id="enum-fixedwinglaunchstate_t"></a>`fixedWingLaunchState_t`
+
+> Source: ../inav/src/main/navigation/navigation_fw_launch.c
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `FW_LAUNCH_STATE_WAIT_THROTTLE` | 0 |  |
+| `FW_LAUNCH_STATE_IDLE_WIGGLE_WAIT` | 1 |  |
+| `FW_LAUNCH_STATE_IDLE_MOTOR_DELAY` | 2 |  |
+| `FW_LAUNCH_STATE_MOTOR_IDLE` | 3 |  |
+| `FW_LAUNCH_STATE_WAIT_DETECTION` | 4 |  |
+| `FW_LAUNCH_STATE_DETECTED` | 5 |  |
+| `FW_LAUNCH_STATE_MOTOR_DELAY` | 6 |  |
+| `FW_LAUNCH_STATE_MOTOR_SPINUP` | 7 |  |
+| `FW_LAUNCH_STATE_IN_PROGRESS` | 8 |  |
+| `FW_LAUNCH_STATE_FINISH` | 9 |  |
+| `FW_LAUNCH_STATE_ABORTED` | 10 |  |
+| `FW_LAUNCH_STATE_FLYING` | 11 |  |
+| `FW_LAUNCH_STATE_COUNT` | 12 |  |
+
+---
+## <a id="enum-safehomeusagemode_e"></a>`safehomeUsageMode_e`
+
+> Source: ../inav/src/main/navigation/navigation.h
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `SAFEHOME_USAGE_OFF` | 0 |  |
+| `SAFEHOME_USAGE_RTH` | 1 |  |
+| `SAFEHOME_USAGE_RTH_FS` | 2 |  |
+
+---
+## <a id="enum-fwautolandapproachdirection_e"></a>`fwAutolandApproachDirection_e`
+
+> Source: ../inav/src/main/navigation/navigation.h
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `FW_AUTOLAND_APPROACH_DIRECTION_LEFT` | 0 |  |
+| `FW_AUTOLAND_APPROACH_DIRECTION_RIGHT` | 1 |  |
+
+---
+## <a id="enum-fwautolandstate_t"></a>`fwAutolandState_t`
+
+> Source: ../inav/src/main/navigation/navigation.h
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `FW_AUTOLAND_STATE_IDLE` | 0 |  |
+| `FW_AUTOLAND_STATE_LOITER` | 1 |  |
+| `FW_AUTOLAND_STATE_DOWNWIND` | 2 |  |
+| `FW_AUTOLAND_STATE_BASE_LEG` | 3 |  |
+| `FW_AUTOLAND_STATE_FINAL_APPROACH` | 4 |  |
+| `FW_AUTOLAND_STATE_GLIDE` | 5 |  |
+| `FW_AUTOLAND_STATE_FLARE` | 6 |  |
+
+---
+## <a id="enum-geozonemessagestate_e"></a>`geozoneMessageState_e`
+
+> Source: ../inav/src/main/navigation/navigation.h
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `GEOZONE_MESSAGE_STATE_NONE` | 0 |  |
+| `GEOZONE_MESSAGE_STATE_NFZ` | 1 |  |
+| `GEOZONE_MESSAGE_STATE_LEAVING_FZ` | 2 |  |
+| `GEOZONE_MESSAGE_STATE_OUTSIDE_FZ` | 3 |  |
+| `GEOZONE_MESSAGE_STATE_ENTERING_NFZ` | 4 |  |
+| `GEOZONE_MESSAGE_STATE_AVOIDING_FB` | 5 |  |
+| `GEOZONE_MESSAGE_STATE_RETURN_TO_ZONE` | 6 |  |
+| `GEOZONE_MESSAGE_STATE_FLYOUT_NFZ` | 7 |  |
+| `GEOZONE_MESSAGE_STATE_AVOIDING_ALTITUDE_BREACH` | 8 |  |
+| `GEOZONE_MESSAGE_STATE_POS_HOLD` | 9 |  |
+
+---
+## <a id="enum-nav_reset_type_e"></a>`nav_reset_type_e`
+
+> Source: ../inav/src/main/navigation/navigation.h
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `NAV_RESET_NEVER` | 0 |  |
+| `NAV_RESET_ON_FIRST_ARM` | 1 |  |
+| `NAV_RESET_ON_EACH_ARM` | 2 |  |
+
+---
+## <a id="enum-navrthallowlanding_e"></a>`navRTHAllowLanding_e`
+
+> Source: ../inav/src/main/navigation/navigation.h
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `NAV_RTH_ALLOW_LANDING_NEVER` | 0 |  |
+| `NAV_RTH_ALLOW_LANDING_ALWAYS` | 1 |  |
+| `NAV_RTH_ALLOW_LANDING_FS_ONLY` | 2 |  |
+
+---
+## <a id="enum-navextraarmingsafety_e"></a>`navExtraArmingSafety_e`
+
+> Source: ../inav/src/main/navigation/navigation.h
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `NAV_EXTRA_ARMING_SAFETY_ON` | 0 |  |
+| `NAV_EXTRA_ARMING_SAFETY_ALLOW_BYPASS` | 1 |  |
+
+---
+## <a id="enum-navarmingblocker_e"></a>`navArmingBlocker_e`
+
+> Source: ../inav/src/main/navigation/navigation.h
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `NAV_ARMING_BLOCKER_NONE` | 0 |  |
+| `NAV_ARMING_BLOCKER_MISSING_GPS_FIX` | 1 |  |
+| `NAV_ARMING_BLOCKER_NAV_IS_ALREADY_ACTIVE` | 2 |  |
+| `NAV_ARMING_BLOCKER_FIRST_WAYPOINT_TOO_FAR` | 3 |  |
+| `NAV_ARMING_BLOCKER_JUMP_WAYPOINT_ERROR` | 4 |  |
+
+---
+## <a id="enum-navoverridesmotorstop_e"></a>`navOverridesMotorStop_e`
+
+> Source: ../inav/src/main/navigation/navigation.h
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `NOMS_OFF_ALWAYS` | 0 |  |
+| `NOMS_OFF` | 1 |  |
+| `NOMS_AUTO_ONLY` | 2 |  |
+| `NOMS_ALL_NAV` | 3 |  |
+
+---
+## <a id="enum-navrthclimbfirst_e"></a>`navRTHClimbFirst_e`
+
+> Source: ../inav/src/main/navigation/navigation.h
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `RTH_CLIMB_OFF` | 0 |  |
+| `RTH_CLIMB_ON` | 1 |  |
+| `RTH_CLIMB_ON_FW_SPIRAL` | 2 |  |
+
+---
+## <a id="enum-navfwlaunchstatus_e"></a>`navFwLaunchStatus_e`
+
+> Source: ../inav/src/main/navigation/navigation.h
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `FW_LAUNCH_DETECTED` | 5 |  |
+| `FW_LAUNCH_ABORTED` | 10 |  |
+| `FW_LAUNCH_FLYING` | 11 |  |
+
+---
+## <a id="enum-wpmissionplannerstatus_e"></a>`wpMissionPlannerStatus_e`
+
+> Source: ../inav/src/main/navigation/navigation.h
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `WP_PLAN_WAIT` | 0 |  |
+| `WP_PLAN_SAVE` | 1 |  |
+| `WP_PLAN_OK` | 2 |  |
+| `WP_PLAN_FULL` | 3 |  |
+
+---
+## <a id="enum-navmissionrestart_e"></a>`navMissionRestart_e`
+
+> Source: ../inav/src/main/navigation/navigation.h
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `WP_MISSION_START` | 0 |  |
+| `WP_MISSION_RESUME` | 1 |  |
+| `WP_MISSION_SWITCH` | 2 |  |
+
+---
+## <a id="enum-rthtrackbackmode_e"></a>`rthTrackbackMode_e`
+
+> Source: ../inav/src/main/navigation/navigation.h
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `RTH_TRACKBACK_OFF` | 0 |  |
+| `RTH_TRACKBACK_ON` | 1 |  |
+| `RTH_TRACKBACK_FS` | 2 |  |
+
+---
+## <a id="enum-wpfwturnsmoothing_e"></a>`wpFwTurnSmoothing_e`
+
+> Source: ../inav/src/main/navigation/navigation.h
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `WP_TURN_SMOOTHING_OFF` | 0 |  |
+| `WP_TURN_SMOOTHING_ON` | 1 |  |
+| `WP_TURN_SMOOTHING_CUT` | 2 |  |
+
+---
+## <a id="enum-navmcaltholdthrottle_e"></a>`navMcAltHoldThrottle_e`
+
+> Source: ../inav/src/main/navigation/navigation.h
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `MC_ALT_HOLD_STICK` | 0 |  |
+| `MC_ALT_HOLD_MID` | 1 |  |
+| `MC_ALT_HOLD_HOVER` | 2 |  |
+
+---
+## <a id="enum-navwaypointactions_e"></a>`navWaypointActions_e`
+
+> Source: ../inav/src/main/navigation/navigation.h
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `NAV_WP_ACTION_WAYPOINT` | 1 |  |
+| `NAV_WP_ACTION_HOLD_TIME` | 3 |  |
+| `NAV_WP_ACTION_RTH` | 4 |  |
+| `NAV_WP_ACTION_SET_POI` | 5 |  |
+| `NAV_WP_ACTION_JUMP` | 6 |  |
+| `NAV_WP_ACTION_SET_HEAD` | 7 |  |
+| `NAV_WP_ACTION_LAND` | 8 |  |
+
+---
+## <a id="enum-navwaypointheadings_e"></a>`navWaypointHeadings_e`
+
+> Source: ../inav/src/main/navigation/navigation.h
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `NAV_WP_HEAD_MODE_NONE` | 0 |  |
+| `NAV_WP_HEAD_MODE_POI` | 1 |  |
+| `NAV_WP_HEAD_MODE_FIXED` | 2 |  |
+
+---
+## <a id="enum-navwaypointflags_e"></a>`navWaypointFlags_e`
+
+> Source: ../inav/src/main/navigation/navigation.h
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `NAV_WP_FLAG_HOME` | 72 |  |
+| `NAV_WP_FLAG_LAST` | 165 |  |
+
+---
+## <a id="enum-navwaypointp3flags_e"></a>`navWaypointP3Flags_e`
+
+> Source: ../inav/src/main/navigation/navigation.h
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `NAV_WP_ALTMODE` | (1<<0) |  |
+| `NAV_WP_USER1` | (1<<1) |  |
+| `NAV_WP_USER2` | (1<<2) |  |
+| `NAV_WP_USER3` | (1<<3) |  |
+| `NAV_WP_USER4` | (1<<4) |  |
+
+---
+## <a id="enum-navsystemstatus_mode_e"></a>`navSystemStatus_Mode_e`
+
+> Source: ../inav/src/main/navigation/navigation.h
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `MW_GPS_MODE_NONE` | 0 |  |
+| `MW_GPS_MODE_HOLD` | 1 |  |
+| `MW_GPS_MODE_RTH` | 2 |  |
+| `MW_GPS_MODE_NAV` | 3 |  |
+| `MW_GPS_MODE_EMERG` | 15 |  |
+
+---
+## <a id="enum-navsystemstatus_state_e"></a>`navSystemStatus_State_e`
+
+> Source: ../inav/src/main/navigation/navigation.h
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `MW_NAV_STATE_NONE` | 0 |  |
+| `MW_NAV_STATE_RTH_START` | 1 |  |
+| `MW_NAV_STATE_RTH_ENROUTE` | 2 |  |
+| `MW_NAV_STATE_HOLD_INFINIT` | 3 |  |
+| `MW_NAV_STATE_HOLD_TIMED` | 4 |  |
+| `MW_NAV_STATE_WP_ENROUTE` | 5 |  |
+| `MW_NAV_STATE_PROCESS_NEXT` | 6 |  |
+| `MW_NAV_STATE_DO_JUMP` | 7 |  |
+| `MW_NAV_STATE_LAND_START` | 8 |  |
+| `MW_NAV_STATE_LAND_IN_PROGRESS` | 9 |  |
+| `MW_NAV_STATE_LANDED` | 10 |  |
+| `MW_NAV_STATE_LAND_SETTLE` | 11 |  |
+| `MW_NAV_STATE_LAND_START_DESCENT` | 12 |  |
+| `MW_NAV_STATE_HOVER_ABOVE_HOME` | 13 |  |
+| `MW_NAV_STATE_EMERGENCY_LANDING` | 14 |  |
+| `MW_NAV_STATE_RTH_CLIMB` | 15 |  |
+
+---
+## <a id="enum-navsystemstatus_error_e"></a>`navSystemStatus_Error_e`
+
+> Source: ../inav/src/main/navigation/navigation.h
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `MW_NAV_ERROR_NONE` | 0 |  |
+| `MW_NAV_ERROR_TOOFAR` | 1 |  |
+| `MW_NAV_ERROR_SPOILED_GPS` | 2 |  |
+| `MW_NAV_ERROR_WP_CRC` | 3 |  |
+| `MW_NAV_ERROR_FINISH` | 4 |  |
+| `MW_NAV_ERROR_TIMEWAIT` | 5 |  |
+| `MW_NAV_ERROR_INVALID_JUMP` | 6 |  |
+| `MW_NAV_ERROR_INVALID_DATA` | 7 |  |
+| `MW_NAV_ERROR_WAIT_FOR_RTH_ALT` | 8 |  |
+| `MW_NAV_ERROR_GPS_FIX_LOST` | 9 |  |
+| `MW_NAV_ERROR_DISARMED` | 10 |  |
+| `MW_NAV_ERROR_LANDING` | 11 |  |
+
+---
+## <a id="enum-navsystemstatus_flags_e"></a>`navSystemStatus_Flags_e`
+
+> Source: ../inav/src/main/navigation/navigation.h
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `MW_NAV_FLAG_ADJUSTING_POSITION` | 1 << 0 |  |
+| `MW_NAV_FLAG_ADJUSTING_ALTITUDE` | 1 << 1 |  |
+
+---
+## <a id="enum-geoaltitudeconversionmode_e"></a>`geoAltitudeConversionMode_e`
+
+> Source: ../inav/src/main/navigation/navigation.h
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `GEO_ALT_ABSOLUTE` | 0 |  |
+| `GEO_ALT_RELATIVE` | 1 |  |
+
+---
+## <a id="enum-geooriginresetmode_e"></a>`geoOriginResetMode_e`
+
+> Source: ../inav/src/main/navigation/navigation.h
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `GEO_ORIGIN_SET` | 0 |  |
+| `GEO_ORIGIN_RESET_ALTITUDE` | 1 |  |
+
+---
+## <a id="enum-geoaltitudedatumflag_e"></a>`geoAltitudeDatumFlag_e`
+
+> Source: ../inav/src/main/navigation/navigation.h
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `NAV_WP_TAKEOFF_DATUM` | 0 |  |
+| `NAV_WP_MSL_DATUM` | 1 |  |
+
+---
+## <a id="enum-geozoneactionstate_e"></a>`geozoneActionState_e`
+
+> Source: ../inav/src/main/navigation/navigation_geozone.c
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `GEOZONE_ACTION_STATE_NONE` | 0 |  |
+| `GEOZONE_ACTION_STATE_AVOIDING` | 1 |  |
+| `GEOZONE_ACTION_STATE_AVOIDING_UPWARD` | 2 |  |
+| `GEOZONE_ACTION_STATE_AVOIDING_ALTITUDE` | 3 |  |
+| `GEOZONE_ACTION_STATE_RETURN_TO_FZ` | 4 |  |
+| `GEOZONE_ACTION_STATE_FLYOUT_NFZ` | 5 |  |
+| `GEOZONE_ACTION_STATE_POSHOLD` | 6 |  |
+| `GEOZONE_ACTION_STATE_RTH` | 7 |  |
 
 ---
 ## <a id="enum-currentsensor_e"></a>`currentSensor_e`

@@ -5,7 +5,7 @@ from pathlib import Path
 
 BASE = Path('../inav/src/main')
 SUBDIRS = [
-    'common'
+    'common',
     'navigation',
     'sensors',
     'programming',
@@ -64,7 +64,7 @@ for sd in SUBDIRS:
     if not root.is_dir():
         continue
     for fn in root.rglob('*'):
-        #print(fn)
+        print(fn)
         if fn.suffix in ('.c', '.h'):
             txt = fn.read_text(errors='ignore')
             ret = extract_enums(fn, txt)
