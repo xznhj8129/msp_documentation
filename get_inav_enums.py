@@ -9,12 +9,17 @@ import sys
 
 
 # --- Patterns ---
-# Enum block: Find complete `typedef enum { ... } name;` potentially spanning lines
+# Enum block: support both
+#   typedef enum { ... } Name;
+#   typedef enum Tag { ... } Name;
 enum_block_re = re.compile(
-    r'typedef\s+enum\s*\{'      # Start
-    r'(.*?)'                    # Capture content (non-greedy)
-    r'\}\s*([a-zA-Z_][a-zA-Z0-9_]+)\s*;', # Closing brace, capture name, semicolon
-    re.IGNORECASE | re.DOTALL   # Ignore case, '.' matches newline
+    r'typedef\s+enum\s*'                 # typedef enum
+    r'(?:[a-zA-Z_][a-zA-Z0-9_]*\s*)?'    # optional tag (non-capturing)
+    r'\{'                                # opening brace
+    r'(.*?)'                             # enum body (non-greedy)
+    r'\}\s*'                             # closing brace
+    r'([a-zA-Z_][a-zA-Z0-9_]*)\s*;'      # typedef name
+    , re.IGNORECASE | re.DOTALL
 )
 
 # Enum member: Parse 'NAME [= VALUE]' within a block
@@ -330,6 +335,7 @@ def generate_python_code(all_data, base_enums_dict):
     enum_count = 0
     member_count = 0
     skipped_member_count = 0
+    sep = "    "
     output_lines.append("\n# --- Enums ---")
     output_lines.append("\nclass InavEnums:")
     for name, (members, rel_path) in sorted(consolidated_enums.items()):
@@ -338,10 +344,10 @@ def generate_python_code(all_data, base_enums_dict):
         #     output_lines.append(f"\n# Source: {rel_path}")
         #     last_rel_path_enum = rel_path
         # OR add source comment for EVERY enum
-        output_lines.append(f"\n    # Source: {rel_path}")
+        output_lines.append(f"{sep * 1}# Source: {rel_path}")
 
 
-        output_lines.append(f"    class {name}(enum.IntEnum):")
+        output_lines.append(f"{sep * 1}class {name}(enum.IntEnum):")
         enum_count += 1
         member_lines = []
         processed_member_names_in_enum = set()
@@ -358,24 +364,24 @@ def generate_python_code(all_data, base_enums_dict):
 
             if fmt_val is not None:
                  if safe_m_name == fmt_val:
-                      member_lines.append(f"    # Skipped Member: {safe_m_name} = {m_val_str} # (Self-Referential)")
+                      member_lines.append(f"{sep * 1}# Skipped Member: {safe_m_name} = {m_val_str} # (Self-Referential)")
                       skipped_member_count += 1
                  else:
                      # Ensure value isn't empty after formatting (can happen with only casts/suffixes)
                      if fmt_val.strip():
-                          member_lines.append(f"        {safe_m_name} = {fmt_val}")
+                          member_lines.append(f"{sep * 2}{safe_m_name} = {fmt_val}")
                           member_count += 1
                      else:
-                          member_lines.append(f"        # Skipped Member: {safe_m_name} = {m_val_str} # (Empty after formatting)")
+                          member_lines.append(f"{sep * 2}# Skipped Member: {safe_m_name} = {m_val_str} # (Empty after formatting)")
                           skipped_member_count += 1
                  processed_member_names_in_enum.add(safe_m_name)
             else:
-                member_lines.append(f"    # Skipped Member: {safe_m_name} = {m_val_str} # (Unparseable/Complex/Filtered)")
+                member_lines.append(f"{sep * 1}# Skipped Member: {safe_m_name} = {m_val_str} # (Unparseable/Complex/Filtered)")
                 skipped_member_count += 1
                 processed_member_names_in_enum.add(safe_m_name)
 
         if not member_lines or all('# Skipped' in line or not line.strip() for line in member_lines):
-            output_lines.append("        pass # No valid members generated or all skipped")
+            output_lines.append(f"{sep * 2}pass # No valid members generated or all skipped")
         else:
             # Filter out empty lines that might result from skipped members
             output_lines.extend([line for line in member_lines if line.strip()])

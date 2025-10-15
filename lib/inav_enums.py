@@ -8,12 +8,124 @@ from typing import Union, Dict, Any
 # --- Enums ---
 
 class InavEnums:
+    # Source: blackbox/blackbox_io.h
+    class BlackboxDevice(enum.IntEnum):
+        BLACKBOX_DEVICE_SERIAL = 0
+        BLACKBOX_DEVICE_FLASH = 1
+        BLACKBOX_DEVICE_SDCARD = 2
+        BLACKBOX_DEVICE_FILE = 3
+        BLACKBOX_DEVICE_END = 4
+
+    # Source: blackbox/blackbox_fielddefs.h
+    class FlightLogEvent(enum.IntEnum):
+        FLIGHT_LOG_EVENT_SYNC_BEEP = 0
+        FLIGHT_LOG_EVENT_INFLIGHT_ADJUSTMENT = 13
+        FLIGHT_LOG_EVENT_LOGGING_RESUME = 14
+        FLIGHT_LOG_EVENT_FLIGHTMODE = 30
+        FLIGHT_LOG_EVENT_IMU_FAILURE = 40
+        FLIGHT_LOG_EVENT_LOG_END = 255
+
+    # Source: blackbox/blackbox_fielddefs.h
+    class FlightLogFieldCondition(enum.IntEnum):
+        FLIGHT_LOG_FIELD_CONDITION_ALWAYS = 0
+        FLIGHT_LOG_FIELD_CONDITION_MOTORS = 1
+        FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_MOTORS_1 = 2
+        FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_MOTORS_2 = 3
+        FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_MOTORS_3 = 4
+        FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_MOTORS_4 = 5
+        FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_MOTORS_5 = 6
+        FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_MOTORS_6 = 7
+        FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_MOTORS_7 = 8
+        FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_MOTORS_8 = 9
+        FLIGHT_LOG_FIELD_CONDITION_SERVOS = 10
+        FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_1 = 11
+        FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_2 = 12
+        FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_3 = 13
+        FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_4 = 14
+        FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_5 = 15
+        FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_6 = 16
+        FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_7 = 17
+        FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_8 = 18
+        FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_9 = 19
+        FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_10 = 20
+        FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_11 = 21
+        FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_12 = 22
+        FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_13 = 23
+        FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_14 = 24
+        FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_15 = 25
+        FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_16 = 26
+        FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_17 = 27
+        FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_18 = 28
+        FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_19 = 29
+        FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_20 = 30
+        FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_21 = 31
+        FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_22 = 32
+        FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_23 = 33
+        FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_24 = 34
+        FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_25 = 35
+        FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_26 = 36
+        FLIGHT_LOG_FIELD_CONDITION_MAG = 37
+        FLIGHT_LOG_FIELD_CONDITION_BARO = 38
+        FLIGHT_LOG_FIELD_CONDITION_PITOT = 39
+        FLIGHT_LOG_FIELD_CONDITION_VBAT = 40
+        FLIGHT_LOG_FIELD_CONDITION_AMPERAGE = 41
+        FLIGHT_LOG_FIELD_CONDITION_SURFACE = 42
+        FLIGHT_LOG_FIELD_CONDITION_FIXED_WING_NAV = 43
+        FLIGHT_LOG_FIELD_CONDITION_MC_NAV = 44
+        FLIGHT_LOG_FIELD_CONDITION_RSSI = 45
+        FLIGHT_LOG_FIELD_CONDITION_NONZERO_PID_D_0 = 46
+        FLIGHT_LOG_FIELD_CONDITION_NONZERO_PID_D_1 = 47
+        FLIGHT_LOG_FIELD_CONDITION_NONZERO_PID_D_2 = 48
+        FLIGHT_LOG_FIELD_CONDITION_NOT_LOGGING_EVERY_FRAME = 49
+        FLIGHT_LOG_FIELD_CONDITION_DEBUG = 50
+        FLIGHT_LOG_FIELD_CONDITION_NAV_ACC = 51
+        FLIGHT_LOG_FIELD_CONDITION_NAV_POS = 52
+        FLIGHT_LOG_FIELD_CONDITION_NAV_PID = 53
+        FLIGHT_LOG_FIELD_CONDITION_ACC = 54
+        FLIGHT_LOG_FIELD_CONDITION_ATTITUDE = 55
+        FLIGHT_LOG_FIELD_CONDITION_RC_DATA = 56
+        FLIGHT_LOG_FIELD_CONDITION_RC_COMMAND = 57
+        FLIGHT_LOG_FIELD_CONDITION_GYRO_RAW = 58
+        FLIGHT_LOG_FIELD_CONDITION_GYRO_PEAKS_ROLL = 59
+        FLIGHT_LOG_FIELD_CONDITION_GYRO_PEAKS_PITCH = 60
+        FLIGHT_LOG_FIELD_CONDITION_GYRO_PEAKS_YAW = 61
+        FLIGHT_LOG_FIELD_CONDITION_NEVER = 62
+        FLIGHT_LOG_FIELD_CONDITION_FIRST = FLIGHT_LOG_FIELD_CONDITION_ALWAYS
+        FLIGHT_LOG_FIELD_CONDITION_LAST = FLIGHT_LOG_FIELD_CONDITION_NEVER
+
+    # Source: blackbox/blackbox_fielddefs.h
+    class FlightLogFieldEncoding(enum.IntEnum):
+        FLIGHT_LOG_FIELD_ENCODING_SIGNED_VB = 0
+        FLIGHT_LOG_FIELD_ENCODING_UNSIGNED_VB = 1
+        FLIGHT_LOG_FIELD_ENCODING_NEG_14BIT = 3
+        FLIGHT_LOG_FIELD_ENCODING_TAG8_8SVB = 6
+        FLIGHT_LOG_FIELD_ENCODING_TAG2_3S32 = 7
+        FLIGHT_LOG_FIELD_ENCODING_TAG8_4S16 = 8
+        FLIGHT_LOG_FIELD_ENCODING_NULL = 9
+
+    # Source: blackbox/blackbox_fielddefs.h
+    class FlightLogFieldPredictor(enum.IntEnum):
+        FLIGHT_LOG_FIELD_PREDICTOR_0 = 0
+        FLIGHT_LOG_FIELD_PREDICTOR_PREVIOUS = 1
+        FLIGHT_LOG_FIELD_PREDICTOR_STRAIGHT_LINE = 2
+        FLIGHT_LOG_FIELD_PREDICTOR_AVERAGE_2 = 3
+        FLIGHT_LOG_FIELD_PREDICTOR_MINTHROTTLE = 4
+        FLIGHT_LOG_FIELD_PREDICTOR_MOTOR_0 = 5
+        FLIGHT_LOG_FIELD_PREDICTOR_INC = 6
+        FLIGHT_LOG_FIELD_PREDICTOR_HOME_COORD = 7
+        FLIGHT_LOG_FIELD_PREDICTOR_1500 = 8
+        FLIGHT_LOG_FIELD_PREDICTOR_VBATREF = 9
+        FLIGHT_LOG_FIELD_PREDICTOR_LAST_MAIN_FRAME_TIME = 10
+
+    # Source: blackbox/blackbox_fielddefs.h
+    class FlightLogFieldSign(enum.IntEnum):
+        FLIGHT_LOG_FIELD_UNSIGNED = 0
+        FLIGHT_LOG_FIELD_SIGNED = 1
 
     # Source: io/rcdevice.h
     class RCDEVICE_5key_connection_event_e(enum.IntEnum):
         RCDEVICE_PROTOCOL_5KEY_CONNECTION_OPEN = 0x01
         RCDEVICE_PROTOCOL_5KEY_CONNECTION_CLOSE = 0x02
-
 
     # Source: rx/srxl2_types.h
     class Srxl2BindRequest(enum.IntEnum):
@@ -21,7 +133,6 @@ class InavEnums:
         RequestBindStatus = 0xB5
         BoundDataReport = 0xDB
         SetBindInfo = 0x5B
-
 
     # Source: rx/srxl2_types.h
     class Srxl2BindType(enum.IntEnum):
@@ -35,20 +146,17 @@ class InavEnums:
         DSMR_11ms_22ms = 0xE2
         DSMR_5_5ms = 0xE4
 
-
     # Source: rx/srxl2_types.h
     class Srxl2ControlDataCommand(enum.IntEnum):
         ChannelData = 0x00
         FailsafeChannelData = 0x01
         VTXData = 0x02
 
-
     # Source: rx/srxl2_types.h
     class Srxl2DeviceId(enum.IntEnum):
         FlightControllerDefault = 0x30
         FlightControllerMax = 0x3
         Broadcast = 0xFF
-
 
     # Source: rx/srxl2_types.h
     class Srxl2DeviceType(enum.IntEnum):
@@ -62,7 +170,6 @@ class InavEnums:
         SRXLServo_2 = 7
         VTX = 8
 
-
     # Source: rx/srxl2_types.h
     class Srxl2PacketType(enum.IntEnum):
         Handshake = 0x21
@@ -72,7 +179,6 @@ class InavEnums:
         TelemetrySensorData = 0x80
         ControlData = 0xCD
 
-
     # Source: rx/srxl2_types.h
     class Srxl2State(enum.IntEnum):
         Disabled = 0
@@ -80,7 +186,6 @@ class InavEnums:
         SendHandshake = 2
         ListenForHandshake = 3
         Running = 4
-
 
     # Source: sensors/acceleration.h
     class accelerationSensor_e(enum.IntEnum):
@@ -97,7 +202,6 @@ class InavEnums:
         ACC_LSM6DXX = 10
         ACC_FAKE = 11
         ACC_MAX = ACC_FAKE
-
 
     # Source: fc/rc_adjustments.h
     class adjustmentFunction_e(enum.IntEnum):
@@ -164,12 +268,10 @@ class InavEnums:
         ADJUSTMENT_NAV_FW_ALT_CONTROL_RESPONSE = 60
         ADJUSTMENT_FUNCTION_COUNT = 61
 
-
     # Source: fc/rc_adjustments.h
     class adjustmentMode_e(enum.IntEnum):
         ADJUSTMENT_MODE_STEP = 0
         ADJUSTMENT_MODE_SELECT = 1
-
 
     # Source: fc/rc_controls.h
     class airmodeHandlingType_e(enum.IntEnum):
@@ -177,12 +279,10 @@ class InavEnums:
         THROTTLE_THRESHOLD = 1
         STICK_CENTER_ONCE = 2
 
-
     # Source: common/axis.h
     class angle_index_t(enum.IntEnum):
         AI_ROLL = 0
         AI_PITCH = 1
-
 
     # Source: config/general_settings.h
     class appliedDefaults_e(enum.IntEnum):
@@ -191,7 +291,6 @@ class InavEnums:
         APPLIED_DEFAULTS_MULTIROTOR = 2
         APPLIED_DEFAULTS_AIRPLANE_WITH_TAIL = 3
         APPLIED_DEFAULTS_AIRPLANE_WITHOUT_TAIL = 4
-
 
     # Source: fc/runtime_config.h
     class armingFlag_e(enum.IntEnum):
@@ -233,7 +332,6 @@ class InavEnums:
                                                        ARMING_DISABLED_PWM_OUTPUT_ERROR | ARMING_DISABLED_NO_PREARM | ARMING_DISABLED_DSHOT_BEEPER |
                                                        ARMING_DISABLED_LANDING_DETECTED)
 
-
     # Source: sensors/barometer.h
     class baroSensor_e(enum.IntEnum):
         BARO_NONE = 0
@@ -251,18 +349,15 @@ class InavEnums:
         BARO_FAKE = 12
         BARO_MAX = BARO_FAKE
 
-
     # Source: sensors/battery_config_structs.h
     class batCapacityUnit_e(enum.IntEnum):
         BAT_CAPACITY_UNIT_MAH = 0
         BAT_CAPACITY_UNIT_MWH = 1
 
-
     # Source: sensors/battery_config_structs.h
     class batVoltageSource_e(enum.IntEnum):
         BAT_VOLTAGE_RAW = 0
         BAT_VOLTAGE_SAG_COMP = 1
-
 
     # Source: sensors/battery.h
     class batteryState_e(enum.IntEnum):
@@ -270,7 +365,6 @@ class InavEnums:
         BATTERY_WARNING = 1
         BATTERY_CRITICAL = 2
         BATTERY_NOT_PRESENT = 3
-
 
     # Source: io/serial.h
     class baudRate_e(enum.IntEnum):
@@ -293,7 +387,6 @@ class InavEnums:
         BAUD_2470000 = 16
         BAUD_MIN = BAUD_AUTO
         BAUD_MAX = BAUD_2470000
-
 
     # Source: io/beeper.h
     class beeperMode_e(enum.IntEnum):
@@ -325,19 +418,16 @@ class InavEnums:
         BEEPER_ALL = 25
         BEEPER_PREFERENCE = 26
 
-
     # Source: common/filter.h
     class biquadFilterType_e(enum.IntEnum):
         FILTER_LPF = 0
         FILTER_NOTCH = 1
-
 
     # Source: blackbox/blackbox_io.h
     class blackboxBufferReserveStatus_e(enum.IntEnum):
         BLACKBOX_RESERVE_SUCCESS = 0
         BLACKBOX_RESERVE_TEMPORARY_FAILURE = 1
         BLACKBOX_RESERVE_PERMANENT_FAILURE = 2
-
 
     # Source: blackbox/blackbox.h
     class blackboxFeatureMask_e(enum.IntEnum):
@@ -355,7 +445,6 @@ class InavEnums:
         BLACKBOX_FEATURE_GYRO_PEAKS_PITCH = 1 << 11
         BLACKBOX_FEATURE_GYRO_PEAKS_YAW = 1 << 12
         BLACKBOX_FEATURE_SERVOS = 1 << 13
-
 
     # Source: fc/rc_modes.h
     class boxId_e(enum.IntEnum):
@@ -420,20 +509,17 @@ class InavEnums:
         BOXGIMBALHTRK = 59
         CHECKBOX_ITEM_COUNT = 60
 
-
     # Source: navigation/navigation_private.h
     class climbRateToAltitudeControllerMode_e(enum.IntEnum):
         ROC_TO_ALT_CURRENT = 0
         ROC_TO_ALT_CONSTANT = 1
         ROC_TO_ALT_TARGET = 2
 
-
     # Source: common/color.h
     class colorComponent_e(enum.IntEnum):
         RGB_RED = 0
         RGB_GREEN = 1
         RGB_BLUE = 2
-
 
     # Source: io/ledstrip.h
     class colorId_e(enum.IntEnum):
@@ -452,7 +538,6 @@ class InavEnums:
         COLOR_MAGENTA = 12
         COLOR_DEEP_PINK = 13
 
-
     # Source: rx/crsf.h
     class crsfAddress_e(enum.IntEnum):
         CRSF_ADDRESS_BROADCAST = 0x00
@@ -468,7 +553,6 @@ class InavEnums:
         CRSF_ADDRESS_RADIO_TRANSMITTER = 0xEA
         CRSF_ADDRESS_CRSF_RECEIVER = 0xEC
         CRSF_ADDRESS_CRSF_TRANSMITTER = 0xEE
-
 
     # Source: rx/crsf.h
     class crsfFrameType_e(enum.IntEnum):
@@ -490,7 +574,6 @@ class InavEnums:
         CRSF_FRAMETYPE_MSP_WRITE = 0x7C
         CRSF_FRAMETYPE_DISPLAYPORT_CMD = 0x7D
 
-
     # Source: sensors/battery_config_structs.h
     class currentSensor_e(enum.IntEnum):
         CURRENT_SENSOR_NONE = 0
@@ -500,6 +583,17 @@ class InavEnums:
         CURRENT_SENSOR_ESC = 4
         CURRENT_SENSOR_MAX = CURRENT_SENSOR_FAKE
 
+    # Source: fc/fc_core.h
+    class disarmReason_t(enum.IntEnum):
+        DISARM_NONE = 0
+        DISARM_TIMEOUT = 1
+        DISARM_STICKS = 2
+        DISARM_SWITCH_3D = 3
+        DISARM_SWITCH = 4
+        DISARM_FAILSAFE = 6
+        DISARM_NAVIGATION = 7
+        DISARM_LANDING = 8
+        DISARM_REASON_COUNT = 9
 
     # Source: io/displayport_msp.h
     class displayportMspCommand_e(enum.IntEnum):
@@ -512,19 +606,16 @@ class InavEnums:
         MSP_DP_SYS = 6
         MSP_DP_COUNT = 7
 
-
     # Source: sensors/gyro.h
     class dynamicGyroNotchMode_e(enum.IntEnum):
         DYNAMIC_NOTCH_MODE_2D = 0
         DYNAMIC_NOTCH_MODE_3D = 1
-
 
     # Source: flight/failsafe.h
     class emergLandState_e(enum.IntEnum):
         EMERG_LAND_IDLE = 0
         EMERG_LAND_IN_PROGRESS = 1
         EMERG_LAND_HAS_LANDED = 2
-
 
     # Source: flight/failsafe.h
     class failsafePhase_e(enum.IntEnum):
@@ -537,7 +628,6 @@ class InavEnums:
         FAILSAFE_RX_LOSS_MONITORING = 6
         FAILSAFE_RX_LOSS_RECOVERED = 7
 
-
     # Source: flight/failsafe.h
     class failsafeProcedure_e(enum.IntEnum):
         FAILSAFE_PROCEDURE_AUTO_LANDING = 0
@@ -545,12 +635,10 @@ class InavEnums:
         FAILSAFE_PROCEDURE_RTH = 2
         FAILSAFE_PROCEDURE_NONE = 3
 
-
     # Source: flight/failsafe.h
     class failsafeRxLinkState_e(enum.IntEnum):
         FAILSAFE_RXLINK_DOWN = 0
         FAILSAFE_RXLINK_UP = 1
-
 
     # Source: fc/config.h
     class features_e(enum.IntEnum):
@@ -587,7 +675,6 @@ class InavEnums:
         FEATURE_FW_LAUNCH = 1 << 30
         FEATURE_FW_AUTOTRIM = 1 << 31
 
-
     # Source: common/filter.h
     class filterType_e(enum.IntEnum):
         FILTER_PT1 = 0
@@ -595,7 +682,6 @@ class InavEnums:
         FILTER_PT2 = 2
         FILTER_PT3 = 3
         FILTER_LULU = 4
-
 
     # Source: fc/runtime_config.h
     class flightModeFlags_e(enum.IntEnum):
@@ -620,7 +706,6 @@ class InavEnums:
         NAV_FW_AUTOLAND = (1 << 18)
         NAV_SEND_TO = (1 << 19)
 
-
     # Source: fc/runtime_config.h
     class flightModeForTelemetry_e(enum.IntEnum):
         FLM_MANUAL = 0
@@ -639,13 +724,11 @@ class InavEnums:
         FLM_ANGLEHOLD = 13
         FLM_COUNT = 14
 
-
     # Source: common/axis.h
     class flight_dynamics_index_t(enum.IntEnum):
         FD_ROLL = 0
         FD_PITCH = 1
         FD_YAW = 2
-
 
     # Source: flight/mixer.h
     class flyingPlatformType_e(enum.IntEnum):
@@ -656,14 +739,12 @@ class InavEnums:
         PLATFORM_ROVER = 4
         PLATFORM_BOAT = 5
 
-
     # Source: io/frsky_osd.h
     class frskyOSDColor_e(enum.IntEnum):
         FRSKY_OSD_COLOR_BLACK = 0
         FRSKY_OSD_COLOR_TRANSPARENT = 1
         FRSKY_OSD_COLOR_WHITE = 2
         FRSKY_OSD_COLOR_GRAY = 3
-
 
     # Source: io/frsky_osd.h
     class frskyOSDLineOutlineType_e(enum.IntEnum):
@@ -673,12 +754,10 @@ class InavEnums:
         FRSKY_OSD_OUTLINE_TYPE_BOTTOM = 1 << 2
         FRSKY_OSD_OUTLINE_TYPE_LEFT = 1 << 3
 
-
     # Source: io/frsky_osd.h
     class frskyOSDTransactionOptions_e(enum.IntEnum):
         FRSKY_OSD_TRANSACTION_OPT_PROFILED = 1 << 0
         FRSKY_OSD_TRANSACTION_OPT_RESET_DRAWING = 1 << 1
-
 
     # Source: io/frsky_osd.h
     class frskyOSDWidgetID_e(enum.IntEnum):
@@ -700,12 +779,10 @@ class InavEnums:
         FRSKY_OSD_WIDGET_ID_CHARGAUGE_FIRST = FRSKY_OSD_WIDGET_ID_CHARGAUGE_0
         FRSKY_OSD_WIDGET_ID_CHARGAUGE_LAST = FRSKY_OSD_WIDGET_ID_CHARGAUGE_3
 
-
     # Source: navigation/navigation.h
     class fwAutolandApproachDirection_e(enum.IntEnum):
         FW_AUTOLAND_APPROACH_DIRECTION_LEFT = 0
         FW_AUTOLAND_APPROACH_DIRECTION_RIGHT = 1
-
 
     # Source: navigation/navigation.h
     class fwAutolandState_t(enum.IntEnum):
@@ -717,7 +794,6 @@ class InavEnums:
         FW_AUTOLAND_STATE_GLIDE = 5
         FW_AUTOLAND_STATE_FLARE = 6
 
-
     # Source: navigation/navigation_private.h
     class fwAutolandWaypoint_t(enum.IntEnum):
         FW_AUTOLAND_WP_TURN = 0
@@ -725,31 +801,26 @@ class InavEnums:
         FW_AUTOLAND_WP_LAND = 2
         FW_AUTOLAND_WP_COUNT = 3
 
-
     # Source: flight/pid.h
     class fw_autotune_rate_adjustment_e(enum.IntEnum):
         FIXED = 0
         LIMIT = 1
         AUTO = 2
 
-
     # Source: navigation/navigation.h
     class geoAltitudeConversionMode_e(enum.IntEnum):
         GEO_ALT_ABSOLUTE = 0
         GEO_ALT_RELATIVE = 1
-
 
     # Source: navigation/navigation.h
     class geoAltitudeDatumFlag_e(enum.IntEnum):
         NAV_WP_TAKEOFF_DATUM = 0
         NAV_WP_MSL_DATUM = 1
 
-
     # Source: navigation/navigation.h
     class geoOriginResetMode_e(enum.IntEnum):
         GEO_ORIGIN_SET = 0
         GEO_ORIGIN_RESET_ALTITUDE = 1
-
 
     # Source: navigation/navigation.h
     class geozoneMessageState_e(enum.IntEnum):
@@ -764,7 +835,6 @@ class InavEnums:
         GEOZONE_MESSAGE_STATE_AVOIDING_ALTITUDE_BREACH = 8
         GEOZONE_MESSAGE_STATE_POS_HOLD = 9
 
-
     # Source: rx/ghst_protocol.h
     class ghstAddr_e(enum.IntEnum):
         GHST_ADDR_RADIO = 0x80
@@ -778,7 +848,6 @@ class InavEnums:
         GHST_ADDR_5G_CLK = 0x87
         GHST_ADDR_RX = 0x89
 
-
     # Source: rx/ghst_protocol.h
     class ghstDl_e(enum.IntEnum):
         GHST_DL_OPENTX_SYNC = 0x20
@@ -787,7 +856,6 @@ class InavEnums:
         GHST_DL_PACK_STAT = 0x23
         GHST_DL_GPS_PRIMARY = 0x25
         GHST_DL_GPS_SECONDARY = 0x26
-
 
     # Source: rx/ghst_protocol.h
     class ghstUl_e(enum.IntEnum):
@@ -798,7 +866,6 @@ class InavEnums:
         GHST_UL_RC_CHANS_HS4_RSSI = 0x13
         GHST_UL_RC_CHANS_HS4_LAST = 0x1
 
-
     # Source: io/gimbal_serial.h
     class gimbalHeadtrackerState_e(enum.IntEnum):
         WAITING_HDR1 = 0
@@ -807,18 +874,15 @@ class InavEnums:
         WAITING_CRCH = 3
         WAITING_CRCL = 4
 
-
     # Source: io/gps.h
     class gpsAutoBaud_e(enum.IntEnum):
         GPS_AUTOBAUD_OFF = 0
         GPS_AUTOBAUD_ON = 1
 
-
     # Source: io/gps.h
     class gpsAutoConfig_e(enum.IntEnum):
         GPS_AUTOCONFIG_OFF = 0
         GPS_AUTOCONFIG_ON = 1
-
 
     # Source: io/gps.h
     class gpsBaudRate_e(enum.IntEnum):
@@ -832,7 +896,6 @@ class InavEnums:
         GPS_BAUDRATE_921600 = 7
         GPS_BAUDRATE_COUNT = 8
 
-
     # Source: io/gps.h
     class gpsDynModel_e(enum.IntEnum):
         GPS_DYNMODEL_PEDESTRIAN = 0
@@ -843,13 +906,11 @@ class InavEnums:
         GPS_DYNMODEL_SEA = 5
         GPS_DYNMODEL_MOWER = 6
 
-
     # Source: io/gps.h
     class gpsFixType_e(enum.IntEnum):
         GPS_NO_FIX = 0
         GPS_FIX_2D = 1
         GPS_FIX_3D = 2
-
 
     # Source: io/gps.h
     class gpsProvider_e(enum.IntEnum):
@@ -858,7 +919,6 @@ class InavEnums:
         GPS_FAKE = 2
         GPS_PROVIDER_COUNT = 3
 
-
     # Source: io/gps_private.h
     class gpsState_e(enum.IntEnum):
         GPS_UNKNOWN = 0
@@ -866,14 +926,12 @@ class InavEnums:
         GPS_RUNNING = 2
         GPS_LOST_COMMUNICATION = 3
 
-
     # Source: sensors/gyro.h
     class gyroFilterMode_e(enum.IntEnum):
         GYRO_FILTER_MODE_OFF = 0
         GYRO_FILTER_MODE_STATIC = 1
         GYRO_FILTER_MODE_DYNAMIC = 2
         GYRO_FILTER_MODE_ADAPTIVE = 3
-
 
     # Source: sensors/gyro.h
     class gyroSensor_e(enum.IntEnum):
@@ -890,14 +948,12 @@ class InavEnums:
         GYRO_LSM6DXX = 10
         GYRO_FAKE = 11
 
-
     # Source: sensors/diagnostics.h
     class hardwareSensorStatus_e(enum.IntEnum):
         HW_SENSOR_NONE = 0
         HW_SENSOR_OK = 1
         HW_SENSOR_UNAVAILABLE = 2
         HW_SENSOR_UNHEALTHY = 3
-
 
     # Source: telemetry/hott.h
     class hottEamAlarm1Flag_e(enum.IntEnum):
@@ -911,7 +967,6 @@ class InavEnums:
         HOTT_EAM_ALARM1_FLAG_CURRENT = (1 << 6)
         HOTT_EAM_ALARM1_FLAG_MAIN_VOLTAGE = (1 << 7)
 
-
     # Source: telemetry/hott.h
     class hottEamAlarm2Flag_e(enum.IntEnum):
         HOTT_EAM_ALARM2_FLAG_NONE = 0
@@ -924,13 +979,11 @@ class InavEnums:
         HOTT_EAM_ALARM2_FLAG_UNKNOWN_2 = (1 << 6)
         HOTT_EAM_ALARM2_FLAG_ON_SIGN_OR_TEXT_ACTIVE = (1 << 7)
 
-
     # Source: common/color.h
     class hsvColorComponent_e(enum.IntEnum):
         HSV_HUE = 0
         HSV_SATURATION = 1
         HSV_VALUE = 2
-
 
     # Source: telemetry/ibus_shared.h
     class ibusSensorType1_e(enum.IntEnum):
@@ -971,7 +1024,6 @@ class InavEnums:
         IBUS_MEAS_TYPE1_S89 = 0x89
         IBUS_MEAS_TYPE1_S8a = 0x8a
 
-
     # Source: telemetry/ibus_shared.h
     class ibusSensorType_e(enum.IntEnum):
         IBUS_MEAS_TYPE_INTERNAL_VOLTAGE = 0x00
@@ -1004,7 +1056,6 @@ class InavEnums:
         IBUS_MEAS_TYPE_S8A = 0x8A
         IBUS_MEAS_TYPE_GALT = 0xf9
         IBUS_MEAS_TYPE_GPS = 0xfd
-
 
     # Source: telemetry/ibus_shared.h
     class ibusSensorValue_e(enum.IntEnum):
@@ -1046,13 +1097,11 @@ class InavEnums:
         IBUS_MEAS_VALUE_GPS_LON2 = 0x91
         IBUS_MEAS_VALUE_GPS = 0xfd
 
-
     # Source: flight/imu.h
     class imu_inertia_comp_method_e(enum.IntEnum):
         COMPMETHOD_VELNED = 0
         COMPMETHOD_TURNRATE = 1
         COMPMETHOD_ADAPTIVE = 2
-
 
     # Source: flight/servos.h
     class inputSource_e(enum.IntEnum):
@@ -1118,13 +1167,11 @@ class InavEnums:
         INPUT_RC_CH34 = 59
         INPUT_SOURCE_COUNT = 60
 
-
     # Source: flight/pid.h
     class itermRelax_e(enum.IntEnum):
         ITERM_RELAX_OFF = 0
         ITERM_RELAX_RP = 1
         ITERM_RELAX_RPY = 2
-
 
     # Source: io/ledstrip.h
     class ledBaseFunctionId_e(enum.IntEnum):
@@ -1137,7 +1184,6 @@ class InavEnums:
         LED_FUNCTION_THRUST_RING = 6
         LED_FUNCTION_CHANNEL = 7
 
-
     # Source: io/ledstrip.h
     class ledDirectionId_e(enum.IntEnum):
         LED_DIRECTION_NORTH = 0
@@ -1146,7 +1192,6 @@ class InavEnums:
         LED_DIRECTION_WEST = 3
         LED_DIRECTION_UP = 4
         LED_DIRECTION_DOWN = 5
-
 
     # Source: io/ledstrip.h
     class ledModeIndex_e(enum.IntEnum):
@@ -1158,7 +1203,6 @@ class InavEnums:
         LED_MODE_BARO = 5
         LED_SPECIAL = 6
 
-
     # Source: io/ledstrip.h
     class ledOverlayId_e(enum.IntEnum):
         LED_OVERLAY_THROTTLE = 0
@@ -1168,7 +1212,6 @@ class InavEnums:
         LED_OVERLAY_INDICATOR = 4
         LED_OVERLAY_WARNING = 5
         LED_OVERLAY_STROBE = 6
-
 
     # Source: io/ledstrip.h
     class ledSpecialColorIds_e(enum.IntEnum):
@@ -1181,7 +1224,6 @@ class InavEnums:
         LED_SCOLOR_GPSNOLOCK = 6
         LED_SCOLOR_GPSLOCKED = 7
         LED_SCOLOR_STROBE = 8
-
 
     # Source: common/log.h
     class logTopic_e(enum.IntEnum):
@@ -1198,12 +1240,10 @@ class InavEnums:
         LOG_TOPIC_OSD = 10
         LOG_TOPIC_COUNT = 11
 
-
     # Source: programming/logic_condition.h
     class logicConditionFlags_e(enum.IntEnum):
         LOGIC_CONDITION_FLAG_LATCH = 1 << 0
         LOGIC_CONDITION_FLAG_TIMEOUT_SATISFIED = 1 << 1
-
 
     # Source: programming/logic_condition.h
     class logicConditionsGlobalFlags_t(enum.IntEnum):
@@ -1219,7 +1259,6 @@ class InavEnums:
         LOGIC_CONDITION_GLOBAL_FLAG_OVERRIDE_LOITER_RADIUS = (1 << 9)
         LOGIC_CONDITION_GLOBAL_FLAG_OVERRIDE_FLIGHT_AXIS = (1 << 10)
         LOGIC_CONDITION_GLOBAL_FLAG_DISABLE_GPS_FIX = (1 << 11)
-
 
     # Source: programming/logic_condition.h
     class logicFlightModeOperands_e(enum.IntEnum):
@@ -1240,7 +1279,6 @@ class InavEnums:
         LOGIC_CONDITION_OPERAND_FLIGHT_MODE_ACRO = 14
         LOGIC_CONDITION_OPERAND_FLIGHT_MODE_WAYPOINT_MISSION = 15
         LOGIC_CONDITION_OPERAND_FLIGHT_MODE_ANGLEHOLD = 16
-
 
     # Source: programming/logic_condition.h
     class logicFlightOperands_e(enum.IntEnum):
@@ -1291,6 +1329,17 @@ class InavEnums:
         LOGIC_CONDITION_OPERAND_FLIGHT_LQ_DOWNLINK = 44
         LOGIC_CONDITION_OPERAND_FLIGHT_UPLINK_RSSI_DBM = 45
 
+    # Source: programming/logic_condition.h
+    class logicOperandType_e(enum.IntEnum):
+        LOGIC_CONDITION_OPERAND_TYPE_VALUE = 0
+        LOGIC_CONDITION_OPERAND_TYPE_RC_CHANNEL = 1
+        LOGIC_CONDITION_OPERAND_TYPE_FLIGHT = 2
+        LOGIC_CONDITION_OPERAND_TYPE_FLIGHT_MODE = 3
+        LOGIC_CONDITION_OPERAND_TYPE_LC = 4
+        LOGIC_CONDITION_OPERAND_TYPE_GVAR = 5
+        LOGIC_CONDITION_OPERAND_TYPE_PID = 6
+        LOGIC_CONDITION_OPERAND_TYPE_WAYPOINTS = 7
+        LOGIC_CONDITION_OPERAND_TYPE_LAST = 8
 
     # Source: programming/logic_condition.h
     class logicOperation_e(enum.IntEnum):
@@ -1351,7 +1400,6 @@ class InavEnums:
         LOGIC_CONDITION_RESET_MAG_CALIBRATION = 54
         LOGIC_CONDITION_LAST = 55
 
-
     # Source: programming/logic_condition.h
     class logicWaypointOperands_e(enum.IntEnum):
         LOGIC_CONDITION_OPERAND_WAYPOINTS_IS_WP = 0
@@ -1371,19 +1419,16 @@ class InavEnums:
         LOGIC_CONDITION_OPERAND_WAYPOINTS_BEARING = 14
         LOGIC_CONDITION_OPERAND_WAYPOINTS_ELEVATION = 15
 
-
     # Source: telemetry/telemetry.h
     class ltmUpdateRate_e(enum.IntEnum):
         LTM_RATE_NORMAL = 0
         LTM_RATE_MEDIUM = 1
         LTM_RATE_SLOW = 2
 
-
     # Source: telemetry/ltm.h
     class ltm_frame_e(enum.IntEnum):
         LTM_FRAME_START = 0
         LTM_AFRAME = LTM_FRAME_START
-
 
     # Source: telemetry/ltm.h
     class ltm_modes_e(enum.IntEnum):
@@ -1410,7 +1455,6 @@ class InavEnums:
         LTM_MODE_LAUNCH = 20
         LTM_MODE_AUTOTUNE = 21
 
-
     # Source: sensors/compass.h
     class magSensor_e(enum.IntEnum):
         MAG_NONE = 0
@@ -1431,13 +1475,11 @@ class InavEnums:
         MAG_FAKE = 15
         MAG_MAX = MAG_FAKE
 
-
     # Source: telemetry/telemetry.h
     class mavlinkRadio_e(enum.IntEnum):
         MAVLINK_RADIO_GENERIC = 0
         MAVLINK_RADIO_ELRS = 1
         MAVLINK_RADIO_SIK = 2
-
 
     # Source: flight/mixer_profile.h
     class mixerProfileATRequest_e(enum.IntEnum):
@@ -1446,7 +1488,6 @@ class InavEnums:
         MIXERAT_REQUEST_LAND = 2
         MIXERAT_REQUEST_ABORT = 3
 
-
     # Source: flight/mixer_profile.h
     class mixerProfileATState_e(enum.IntEnum):
         MIXERAT_PHASE_IDLE = 0
@@ -1454,12 +1495,10 @@ class InavEnums:
         MIXERAT_PHASE_TRANSITIONING = 2
         MIXERAT_PHASE_DONE = 3
 
-
     # Source: fc/rc_modes.h
     class modeActivationOperator_e(enum.IntEnum):
         MODE_OPERATOR_OR = 0
         MODE_OPERATOR_AND = 1
-
 
     # Source: flight/mixer.h
     class motorStatus_e(enum.IntEnum):
@@ -1467,18 +1506,15 @@ class InavEnums:
         MOTOR_STOPPED_AUTO = 1
         MOTOR_RUNNING = 2
 
-
     # Source: msp/msp_serial.h
     class mspEvaluateNonMspData_e(enum.IntEnum):
         MSP_EVALUATE_NON_MSP_DATA = 0
         MSP_SKIP_NON_MSP_DATA = 1
 
-
     # Source: msp/msp.h
     class mspFlags_e(enum.IntEnum):
         MSP_FLAG_DONT_REPLY = (1 << 0)
         MSP_FLAG_ILMI = (1 << 1)
-
 
     # Source: msp/msp_serial.h
     class mspPendingSystemRequest_e(enum.IntEnum):
@@ -1486,13 +1522,11 @@ class InavEnums:
         MSP_PENDING_BOOTLOADER = 1
         MSP_PENDING_CLI = 2
 
-
     # Source: msp/msp.h
     class mspResult_e(enum.IntEnum):
         MSP_RESULT_ACK = 1
         MSP_RESULT_ERROR = -1
         MSP_RESULT_NO_REPLY = 0
-
 
     # Source: msp/msp_serial.h
     class mspState_e(enum.IntEnum):
@@ -1511,7 +1545,6 @@ class InavEnums:
         MSP_CHECKSUM_V2_NATIVE = 12
         MSP_COMMAND_RECEIVED = 13
 
-
     # Source: msp/msp.h
     class mspVersion_e(enum.IntEnum):
         MSP_V1 = 0
@@ -1519,13 +1552,11 @@ class InavEnums:
         MSP_V2_NATIVE = 2
         MSP_VERSION_COUNT = 3
 
-
     # Source: fc/multifunction.h
     class multiFunctionFlags_e(enum.IntEnum):
         MF_SUSPEND_SAFEHOMES = (1 << 0)
         MF_SUSPEND_TRACKBACK = (1 << 1)
         MF_TURTLE_MODE = (1 << 2)
-
 
     # Source: fc/multifunction.h
     class multi_function_e(enum.IntEnum):
@@ -1538,13 +1569,11 @@ class InavEnums:
         MULTI_FUNC_6 = 6
         MULTI_FUNC_END = 7
 
-
     # Source: navigation/navigation_pos_estimator_private.h
     class navAGLEstimateQuality_e(enum.IntEnum):
         SURFACE_QUAL_LOW = 0
         SURFACE_QUAL_MID = 1
         SURFACE_QUAL_HIGH = 2
-
 
     # Source: navigation/navigation.h
     class navArmingBlocker_e(enum.IntEnum):
@@ -1554,7 +1583,6 @@ class InavEnums:
         NAV_ARMING_BLOCKER_FIRST_WAYPOINT_TOO_FAR = 3
         NAV_ARMING_BLOCKER_JUMP_WAYPOINT_ERROR = 4
 
-
     # Source: navigation/navigation_pos_estimator_private.h
     class navDefaultAltitudeSensor_e(enum.IntEnum):
         ALTITUDE_SOURCE_GPS = 0
@@ -1562,12 +1590,10 @@ class InavEnums:
         ALTITUDE_SOURCE_GPS_ONLY = 2
         ALTITUDE_SOURCE_BARO_ONLY = 3
 
-
     # Source: navigation/navigation.h
     class navExtraArmingSafety_e(enum.IntEnum):
         NAV_EXTRA_ARMING_SAFETY_ON = 0
         NAV_EXTRA_ARMING_SAFETY_ALLOW_BYPASS = 1
-
 
     # Source: navigation/navigation.h
     class navFwLaunchStatus_e(enum.IntEnum):
@@ -1575,13 +1601,11 @@ class InavEnums:
         FW_LAUNCH_ABORTED = 10
         FW_LAUNCH_FLYING = 11
 
-
     # Source: navigation/navigation.h
     class navMcAltHoldThrottle_e(enum.IntEnum):
         MC_ALT_HOLD_STICK = 0
         MC_ALT_HOLD_MID = 1
         MC_ALT_HOLD_HOVER = 2
-
 
     # Source: navigation/navigation.h
     class navMissionRestart_e(enum.IntEnum):
@@ -1589,14 +1613,12 @@ class InavEnums:
         WP_MISSION_RESUME = 1
         WP_MISSION_SWITCH = 2
 
-
     # Source: navigation/navigation.h
     class navOverridesMotorStop_e(enum.IntEnum):
         NOMS_OFF_ALWAYS = 0
         NOMS_OFF = 1
         NOMS_AUTO_ONLY = 2
         NOMS_ALL_NAV = 3
-
 
     # Source: navigation/navigation_pos_estimator_private.h
     class navPositionEstimationFlags_e(enum.IntEnum):
@@ -1608,20 +1630,17 @@ class InavEnums:
         EST_XY_VALID = (1 << 5)
         EST_Z_VALID = (1 << 6)
 
-
     # Source: navigation/navigation.h
     class navRTHAllowLanding_e(enum.IntEnum):
         NAV_RTH_ALLOW_LANDING_NEVER = 0
         NAV_RTH_ALLOW_LANDING_ALWAYS = 1
         NAV_RTH_ALLOW_LANDING_FS_ONLY = 2
 
-
     # Source: navigation/navigation.h
     class navRTHClimbFirst_e(enum.IntEnum):
         RTH_CLIMB_OFF = 0
         RTH_CLIMB_ON = 1
         RTH_CLIMB_ON_FW_SPIRAL = 2
-
 
     # Source: navigation/navigation_private.h
     class navSetWaypointFlags_t(enum.IntEnum):
@@ -1631,7 +1650,6 @@ class InavEnums:
         NAV_POS_UPDATE_HEADING = 1 << 2
         NAV_POS_UPDATE_BEARING = 1 << 3
         NAV_POS_UPDATE_BEARING_TAIL_FIRST = 1 << 4
-
 
     # Source: navigation/navigation.h
     class navSystemStatus_Error_e(enum.IntEnum):
@@ -1648,12 +1666,10 @@ class InavEnums:
         MW_NAV_ERROR_DISARMED = 10
         MW_NAV_ERROR_LANDING = 11
 
-
     # Source: navigation/navigation.h
     class navSystemStatus_Flags_e(enum.IntEnum):
         MW_NAV_FLAG_ADJUSTING_POSITION = 1 << 0
         MW_NAV_FLAG_ADJUSTING_ALTITUDE = 1 << 1
-
 
     # Source: navigation/navigation.h
     class navSystemStatus_Mode_e(enum.IntEnum):
@@ -1662,7 +1678,6 @@ class InavEnums:
         MW_GPS_MODE_RTH = 2
         MW_GPS_MODE_NAV = 3
         MW_GPS_MODE_EMERG = 15
-
 
     # Source: navigation/navigation.h
     class navSystemStatus_State_e(enum.IntEnum):
@@ -1683,7 +1698,6 @@ class InavEnums:
         MW_NAV_STATE_EMERGENCY_LANDING = 14
         MW_NAV_STATE_RTH_CLIMB = 15
 
-
     # Source: navigation/navigation.h
     class navWaypointActions_e(enum.IntEnum):
         NAV_WP_ACTION_WAYPOINT = 0x01
@@ -1694,19 +1708,16 @@ class InavEnums:
         NAV_WP_ACTION_SET_HEAD = 0x07
         NAV_WP_ACTION_LAND = 0x08
 
-
     # Source: navigation/navigation.h
     class navWaypointFlags_e(enum.IntEnum):
         NAV_WP_FLAG_HOME = 0x48
         NAV_WP_FLAG_LAST = 0xA5
-
 
     # Source: navigation/navigation.h
     class navWaypointHeadings_e(enum.IntEnum):
         NAV_WP_HEAD_MODE_NONE = 0
         NAV_WP_HEAD_MODE_POI = 1
         NAV_WP_HEAD_MODE_FIXED = 2
-
 
     # Source: navigation/navigation.h
     class navWaypointP3Flags_e(enum.IntEnum):
@@ -1716,20 +1727,17 @@ class InavEnums:
         NAV_WP_USER3 = (1<<3)
         NAV_WP_USER4 = (1<<4)
 
-
     # Source: navigation/navigation.h
     class nav_reset_type_e(enum.IntEnum):
         NAV_RESET_NEVER = 0
         NAV_RESET_ON_FIRST_ARM = 1
         NAV_RESET_ON_EACH_ARM = 2
 
-
     # Source: navigation/navigation_private.h
     class navigationEstimateStatus_e(enum.IntEnum):
         EST_NONE = 0
         EST_USABLE = 1
         EST_TRUSTED = 2
-
 
     # Source: navigation/navigation_private.h
     class navigationFSMEvent_t(enum.IntEnum):
@@ -1766,7 +1774,6 @@ class InavEnums:
         NAV_FSM_EVENT_SWITCH_TO_RTH_LOITER_ABOVE_HOME = NAV_FSM_EVENT_STATE_SPECIFIC_4
         NAV_FSM_EVENT_SWITCH_TO_RTH_LANDING = NAV_FSM_EVENT_STATE_SPECIFIC_5
 
-
     # Source: navigation/navigation_private.h
     class navigationFSMStateFlags_t(enum.IntEnum):
         NAV_CTL_ALT = (1 << 0)
@@ -1787,7 +1794,6 @@ class InavEnums:
         NAV_AUTO_WP_DONE = (1 << 15)
         NAV_MIXERAT = (1 << 16)
         NAV_CTL_HOLD = (1 << 17)
-
 
     # Source: navigation/navigation_private.h
     class navigationFSMState_t(enum.IntEnum):
@@ -1841,7 +1847,6 @@ class InavEnums:
         NAV_STATE_SEND_TO_FINISHED = 47
         NAV_STATE_COUNT = 48
 
-
     # Source: navigation/navigation_private.h
     class navigationHomeFlags_t(enum.IntEnum):
         NAV_HOME_INVALID = 0
@@ -1849,7 +1854,6 @@ class InavEnums:
         NAV_HOME_VALID_Z = 1 << 1
         NAV_HOME_VALID_HEADING = 1 << 2
         NAV_HOME_VALID_ALL = NAV_HOME_VALID_XY | NAV_HOME_VALID_Z | NAV_HOME_VALID_HEADING
-
 
     # Source: navigation/navigation_private.h
     class navigationPersistentId_e(enum.IntEnum):
@@ -1906,12 +1910,10 @@ class InavEnums:
         NAV_PERSISTENT_ID_SEND_TO_IN_PROGRES = 50
         NAV_PERSISTENT_ID_SEND_TO_FINISHED = 51
 
-
     # Source: sensors/opflow.h
     class opflowQuality_e(enum.IntEnum):
         OPFLOW_QUALITY_INVALID = 0
         OPFLOW_QUALITY_VALID = 1
-
 
     # Source: sensors/opflow.h
     class opticalFlowSensor_e(enum.IntEnum):
@@ -1920,12 +1922,10 @@ class InavEnums:
         OPFLOW_MSP = 2
         OPFLOW_FAKE = 3
 
-
     # Source: io/osd_common.h
     class osdDrawPointType_e(enum.IntEnum):
         OSD_DRAW_POINT_TYPE_GRID = 0
         OSD_DRAW_POINT_TYPE_PIXEL = 1
-
 
     # Source: io/osd_common.h
     class osdSpeedSource_e(enum.IntEnum):
@@ -1933,18 +1933,15 @@ class InavEnums:
         OSD_SPEED_SOURCE_3D = 1
         OSD_SPEED_SOURCE_AIR = 2
 
-
     # Source: io/osd.h
     class osd_ahi_style_e(enum.IntEnum):
         OSD_AHI_STYLE_DEFAULT = 0
         OSD_AHI_STYLE_LINE = 1
 
-
     # Source: io/osd.h
     class osd_alignment_e(enum.IntEnum):
         OSD_ALIGN_LEFT = 0
         OSD_ALIGN_RIGHT = 1
-
 
     # Source: io/osd.h
     class osd_crosshairs_style_e(enum.IntEnum):
@@ -1956,13 +1953,11 @@ class InavEnums:
         OSD_CROSSHAIRS_STYLE_TYPE6 = 5
         OSD_CROSSHAIRS_STYLE_TYPE7 = 6
 
-
     # Source: io/osd.h
     class osd_crsf_lq_format_e(enum.IntEnum):
         OSD_CRSF_LQ_TYPE1 = 0
         OSD_CRSF_LQ_TYPE2 = 1
         OSD_CRSF_LQ_TYPE3 = 2
-
 
     # Source: io/osd.h
     class osd_items_e(enum.IntEnum):
@@ -2135,7 +2130,6 @@ class InavEnums:
         OSD_NAV_FW_ALT_CONTROL_RESPONSE = 166
         OSD_ITEM_COUNT = 167
 
-
     # Source: io/osd.h
     class osd_sidebar_scroll_e(enum.IntEnum):
         OSD_SIDEBAR_SCROLL_NONE = 0
@@ -2144,12 +2138,10 @@ class InavEnums:
         OSD_SIDEBAR_SCROLL_HOME_DISTANCE = 3
         OSD_SIDEBAR_SCROLL_MAX = OSD_SIDEBAR_SCROLL_HOME_DISTANCE
 
-
     # Source: io/osd.h
     class osd_stats_energy_unit_e(enum.IntEnum):
         OSD_STATS_ENERGY_UNIT_MAH = 0
         OSD_STATS_ENERGY_UNIT_WH = 1
-
 
     # Source: io/osd.h
     class osd_unit_e(enum.IntEnum):
@@ -2160,7 +2152,6 @@ class InavEnums:
         OSD_UNIT_GA = 4
         OSD_UNIT_MAX = OSD_UNIT_GA
 
-
     # Source: flight/mixer.h
     class outputMode_e(enum.IntEnum):
         OUTPUT_MODE_AUTO = 0
@@ -2168,19 +2159,16 @@ class InavEnums:
         OUTPUT_MODE_SERVOS = 2
         OUTPUT_MODE_LED = 3
 
-
     # Source: io/dashboard.h
     class pageId_e(enum.IntEnum):
         PAGE_WELCOME = 0
         PAGE_ARMED = 1
         PAGE_STATUS = 2
 
-
     # Source: config/parameter_group.h
     class pgRegistryFlags_e(enum.IntEnum):
         PGRF_NONE = 0
         PGRF_CLASSIFICATON_BIT = (1 << 0)
-
 
     # Source: config/parameter_group.h
     class pgRegistryInternal_e(enum.IntEnum):
@@ -2190,7 +2178,6 @@ class InavEnums:
         PGR_SIZE_SYSTEM_FLAG = 0x0000
         PGR_SIZE_PROFILE_FLAG = 0x8000
 
-
     # Source: common/fp_pid.h
     class pidControllerFlags_e(enum.IntEnum):
         PID_DTERM_FROM_ERROR = 1 << 0
@@ -2198,7 +2185,6 @@ class InavEnums:
         PID_SHRINK_INTEGRATOR = 1 << 2
         PID_LIMIT_INTEGRATOR = 1 << 3
         PID_FREEZE_INTEGRATOR = 1 << 4
-
 
     # Source: flight/pid.h
     class pidIndex_e(enum.IntEnum):
@@ -2215,14 +2201,12 @@ class InavEnums:
         PID_POS_HEADING = 10
         PID_ITEM_COUNT = 11
 
-
     # Source: flight/pid.h
     class pidType_e(enum.IntEnum):
         PID_TYPE_NONE = 0
         PID_TYPE_PID = 1
         PID_TYPE_PIFF = 2
         PID_TYPE_AUTO = 3
-
 
     # Source: sensors/pitotmeter.h
     class pitotSensor_e(enum.IntEnum):
@@ -2235,13 +2219,11 @@ class InavEnums:
         PITOT_MSP = 6
         PITOT_DLVR = 7
 
-
     # Source: io/serial.h
     class portSharing_e(enum.IntEnum):
         PORTSHARING_UNUSED = 0
         PORTSHARING_NOT_SHARED = 1
         PORTSHARING_SHARED = 2
-
 
     # Source: sensors/rangefinder.h
     class rangefinderType_e(enum.IntEnum):
@@ -2258,6 +2240,42 @@ class InavEnums:
         RANGEFINDER_USD1_V0 = 10
         RANGEFINDER_NANORADAR = 11
 
+    # Source: fc/rc_controls.h
+    class rc_alias_e(enum.IntEnum):
+        ROLL = 0
+        PITCH = 1
+        YAW = 2
+        THROTTLE = 3
+        AUX1 = 4
+        AUX2 = 5
+        AUX3 = 6
+        AUX4 = 7
+        AUX5 = 8
+        AUX6 = 9
+        AUX7 = 10
+        AUX8 = 11
+        AUX9 = 12
+        AUX10 = 13
+        AUX11 = 14
+        AUX12 = 15
+        AUX13 = 16
+        AUX14 = 17
+        AUX15 = 18
+        AUX16 = 19
+        AUX17 = 20
+        AUX18 = 21
+        AUX19 = 22
+        AUX20 = 23
+        AUX21 = 24
+        AUX22 = 25
+        AUX23 = 26
+        AUX24 = 27
+        AUX25 = 28
+        AUX26 = 29
+        AUX27 = 30
+        AUX28 = 31
+        AUX29 = 32
+        AUX30 = 33
 
     # Source: io/rcdevice.h
     class rcdeviceCamSimulationKeyEvent_e(enum.IntEnum):
@@ -2271,13 +2289,11 @@ class InavEnums:
         RCDEVICE_CAM_KEY_CONNECTION_OPEN = 7
         RCDEVICE_CAM_KEY_RELEASE = 8
 
-
     # Source: io/rcdevice.h
     class rcdeviceResponseStatus_e(enum.IntEnum):
         RCDEVICE_RESP_SUCCESS = 0
         RCDEVICE_RESP_INCORRECT_CRC = 1
         RCDEVICE_RESP_TIMEOUT = 2
-
 
     # Source: io/rcdevice.h
     class rcdevice_5key_simulation_operation_e(enum.IntEnum):
@@ -2288,7 +2304,6 @@ class InavEnums:
         RCDEVICE_PROTOCOL_5KEY_SIMULATION_UP = 0x04
         RCDEVICE_PROTOCOL_5KEY_SIMULATION_DOWN = 0x05
 
-
     # Source: io/rcdevice.h
     class rcdevice_camera_control_opeation_e(enum.IntEnum):
         RCDEVICE_PROTOCOL_CAM_CTRL_SIMULATE_WIFI_BTN = 0x00
@@ -2297,7 +2312,6 @@ class InavEnums:
         RCDEVICE_PROTOCOL_CAM_CTRL_START_RECORDING = 0x03
         RCDEVICE_PROTOCOL_CAM_CTRL_STOP_RECORDING = 0x04
         RCDEVICE_PROTOCOL_CAM_CTRL_UNKNOWN_CAMERA_OPERATION = 0xFF
-
 
     # Source: io/rcdevice.h
     class rcdevice_features_e(enum.IntEnum):
@@ -2309,13 +2323,11 @@ class InavEnums:
         RCDEVICE_PROTOCOL_FEATURE_STOP_RECORDING = (1 << 7)
         RCDEVICE_PROTOCOL_FEATURE_CMS_MENU = (1 << 8)
 
-
     # Source: io/rcdevice.h
     class rcdevice_protocol_version_e(enum.IntEnum):
         RCDEVICE_PROTOCOL_RCSPLIT_VERSION = 0x00
         RCDEVICE_PROTOCOL_VERSION_1_0 = 0x01
         RCDEVICE_PROTOCOL_UNKNOWN = 2
-
 
     # Source: flight/mixer.h
     class reversibleMotorsThrottleState_e(enum.IntEnum):
@@ -2323,12 +2335,10 @@ class InavEnums:
         MOTOR_DIRECTION_BACKWARD = 1
         MOTOR_DIRECTION_DEADBAND = 2
 
-
     # Source: fc/rc_controls.h
     class rollPitchStatus_e(enum.IntEnum):
         NOT_CENTERED = 0
         CENTERED = 1
-
 
     # Source: rx/rx.h
     class rssiSource_e(enum.IntEnum):
@@ -2339,13 +2349,11 @@ class InavEnums:
         RSSI_SOURCE_RX_PROTOCOL = 4
         RSSI_SOURCE_MSP = 5
 
-
     # Source: flight/failsafe.h
     class rthState_e(enum.IntEnum):
         RTH_IDLE = 0
         RTH_IN_PROGRESS = 1
         RTH_HAS_LANDED = 2
-
 
     # Source: navigation/navigation_private.h
     class rthTargetMode_e(enum.IntEnum):
@@ -2355,13 +2363,11 @@ class InavEnums:
         RTH_HOME_FINAL_LOITER = 3
         RTH_HOME_FINAL_LAND = 4
 
-
     # Source: navigation/navigation.h
     class rthTrackbackMode_e(enum.IntEnum):
         RTH_TRACKBACK_OFF = 0
         RTH_TRACKBACK_ON = 1
         RTH_TRACKBACK_FS = 2
-
 
     # Source: rx/rx.h
     class rxFrameState_e(enum.IntEnum):
@@ -2371,14 +2377,12 @@ class InavEnums:
         RX_FRAME_PROCESSING_REQUIRED = (1 << 2)
         RX_FRAME_DROPPED = (1 << 3)
 
-
     # Source: rx/rx.h
     class rxReceiverType_e(enum.IntEnum):
         RX_TYPE_NONE = 0
         RX_TYPE_SERIAL = 1
         RX_TYPE_MSP = 2
         RX_TYPE_SIM = 3
-
 
     # Source: rx/rx.h
     class rxSerialReceiverType_e(enum.IntEnum):
@@ -2398,13 +2402,11 @@ class InavEnums:
         SERIALRX_FBUS = 13
         SERIALRX_SBUS2 = 14
 
-
     # Source: navigation/navigation.h
     class safehomeUsageMode_e(enum.IntEnum):
         SAFEHOME_USAGE_OFF = 0
         SAFEHOME_USAGE_RTH = 1
         SAFEHOME_USAGE_RTH_FS = 2
-
 
     # Source: io/gps.h
     class sbasMode_e(enum.IntEnum):
@@ -2416,7 +2418,6 @@ class InavEnums:
         SBAS_SPAN = 5
         SBAS_NONE = 6
 
-
     # Source: sensors/sensors.h
     class sensorIndex_e(enum.IntEnum):
         SENSOR_INDEX_GYRO = 0
@@ -2427,7 +2428,6 @@ class InavEnums:
         SENSOR_INDEX_PITOT = 5
         SENSOR_INDEX_OPFLOW = 6
         SENSOR_INDEX_COUNT = 7
-
 
     # Source: sensors/sensors.h
     class sensors_e(enum.IntEnum):
@@ -2441,7 +2441,6 @@ class InavEnums:
         SENSOR_GPS = 1 << 7
         SENSOR_GPSMAG = 1 << 8
         SENSOR_TEMP = 1 << 9
-
 
     # Source: io/serial.h
     class serialPortFunction_e(enum.IntEnum):
@@ -2475,7 +2474,6 @@ class InavEnums:
         FUNCTION_GIMBAL = (1 << 26)
         FUNCTION_GIMBAL_HEADTRACKER = (1 << 27)
 
-
     # Source: io/serial.h
     class serialPortIdentifier_e(enum.IntEnum):
         SERIAL_PORT_NONE = -1
@@ -2491,7 +2489,6 @@ class InavEnums:
         SERIAL_PORT_SOFTSERIAL1 = 30
         SERIAL_PORT_SOFTSERIAL2 = 31
         SERIAL_PORT_IDENTIFIER_MAX = SERIAL_PORT_SOFTSERIAL2
-
 
     # Source: flight/servos.h
     class servoIndex_e(enum.IntEnum):
@@ -2510,7 +2507,6 @@ class InavEnums:
         SERVO_SINGLECOPTER_3 = 5
         SERVO_SINGLECOPTER_4 = 6
 
-
     # Source: telemetry/sim.h
     class simTxFlags_e(enum.IntEnum):
         SIM_TX_FLAG = (1 << 0)
@@ -2519,7 +2515,6 @@ class InavEnums:
         SIM_TX_FLAG_ACC = (1 << 3)
         SIM_TX_FLAG_LOW_ALT = (1 << 4)
         SIM_TX_FLAG_RESPONSE = (1 << 5)
-
 
     # Source: fc/runtime_config.h
     class simulatorFlags_t(enum.IntEnum):
@@ -2535,7 +2530,6 @@ class InavEnums:
         HITL_GPS_TIMEOUT = (1 << 8)
         HITL_PITOT_FAILURE = (1 << 9)
 
-
     # Source: io/vtx_smartaudio.h
     class smartAudioVersion_e(enum.IntEnum):
         SA_UNKNOWN = 0
@@ -2543,13 +2537,11 @@ class InavEnums:
         SA_2_0 = 2
         SA_2_1 = 3
 
-
     # Source: telemetry/telemetry.h
     class smartportFuelUnit_e(enum.IntEnum):
         SMARTPORT_FUEL_UNIT_PERCENT = 0
         SMARTPORT_FUEL_UNIT_MAH = 1
         SMARTPORT_FUEL_UNIT_MWH = 2
-
 
     # Source: fc/runtime_config.h
     class stateFlags_t(enum.IntEnum):
@@ -2583,11 +2575,9 @@ class InavEnums:
         IN_FLIGHT_EMERG_REARM = (1 << 27)
         TAILSITTER = (1 << 28)
 
-
     # Source: fc/rc_controls.h
     class stickPositions_e(enum.IntEnum):
         pass # No valid members generated or all skipped
-
 
     # Source: fc/fc_init.h
     class systemState_e(enum.IntEnum):
@@ -2598,25 +2588,21 @@ class InavEnums:
         SYSTEM_STATE_TRANSPONDER_ENABLED = (1 << 3)
         SYSTEM_STATE_READY = (1 << 7)
 
-
     # Source: sensors/temperature.h
     class tempSensorType_e(enum.IntEnum):
         TEMP_SENSOR_NONE = 0
         TEMP_SENSOR_LM75 = 1
         TEMP_SENSOR_DS18B20 = 2
 
-
     # Source: fc/rc_controls.h
     class throttleStatusType_e(enum.IntEnum):
         THROTTLE_STATUS_TYPE_RC = 0
         THROTTLE_STATUS_TYPE_COMMAND = 1
 
-
     # Source: fc/rc_controls.h
     class throttleStatus_e(enum.IntEnum):
         THROTTLE_LOW = 0
         THROTTLE_HIGH = 1
-
 
     # Source: common/tristate.h
     class tristate_e(enum.IntEnum):
@@ -2624,20 +2610,17 @@ class InavEnums:
         TRISTATE_ON = 1
         TRISTATE_OFF = 2
 
-
     # Source: common/time.h
     class tz_automatic_dst_e(enum.IntEnum):
         TZ_AUTO_DST_OFF = 0
         TZ_AUTO_DST_EU = 1
         TZ_AUTO_DST_USA = 2
 
-
     # Source: io/gps_ublox.h
     class ublox_nav_sig_health_e(enum.IntEnum):
         UBLOX_SIG_HEALTH_UNKNOWN = 0
         UBLOX_SIG_HEALTH_HEALTHY = 1
         UBLOX_SIG_HEALTH_UNHEALTHY = 2
-
 
     # Source: io/gps_ublox.h
     class ublox_nav_sig_quality(enum.IntEnum):
@@ -2650,7 +2633,6 @@ class InavEnums:
         UBLOX_SIG_QUALITY_CODE_CARRIER_LOCK_TIME_SYNC2 = 6
         UBLOX_SIG_QUALITY_CODE_CARRIER_LOCK_TIME_SYNC3 = 7
 
-
     # Source: io/gps_ublox.h
     class ubs_nav_fix_type_t(enum.IntEnum):
         FIX_NONE = 0
@@ -2660,18 +2642,15 @@ class InavEnums:
         FIX_GPS_DEAD_RECKONING = 4
         FIX_TIME = 5
 
-
     # Source: io/gps_ublox.h
     class ubx_ack_state_t(enum.IntEnum):
         UBX_ACK_WAITING = 0
         UBX_ACK_GOT_ACK = 1
         UBX_ACK_GOT_NAK = 2
 
-
     # Source: io/gps_ublox.h
     class ubx_nav_status_bits_t(enum.IntEnum):
         NAV_STATUS_FIX_VALID = 1
-
 
     # Source: io/gps_ublox.h
     class ubx_protocol_bytes_t(enum.IntEnum):
@@ -2709,14 +2688,12 @@ class InavEnums:
         MSG_MON_GNSS = 0x28
         MSG_NAV_SIG = 0x43
 
-
     # Source: sensors/battery_config_structs.h
     class voltageSensor_e(enum.IntEnum):
         VOLTAGE_SENSOR_NONE = 0
         VOLTAGE_SENSOR_ADC = 1
         VOLTAGE_SENSOR_ESC = 2
         VOLTAGE_SENSOR_FAKE = 3
-
 
     # Source: io/smartport_master.h
     class vs600Band_e(enum.IntEnum):
@@ -2727,7 +2704,6 @@ class InavEnums:
         VS600_BAND_E = 4
         VS600_BAND_F = 5
 
-
     # Source: io/smartport_master.h
     class vs600Power_e(enum.IntEnum):
         VS600_POWER_PIT = 0
@@ -2735,13 +2711,11 @@ class InavEnums:
         VS600_POWER_200MW = 2
         VS600_POWER_600MW = 3
 
-
     # Source: io/vtx.h
     class vtxLowerPowerDisarm_e(enum.IntEnum):
         VTX_LOW_POWER_DISARM_OFF = 0
         VTX_LOW_POWER_DISARM_ALWAYS = 1
         VTX_LOW_POWER_DISARM_UNTIL_FIRST_ARM = 2
-
 
     # Source: navigation/navigation.h
     class wpFwTurnSmoothing_e(enum.IntEnum):
@@ -2749,14 +2723,12 @@ class InavEnums:
         WP_TURN_SMOOTHING_ON = 1
         WP_TURN_SMOOTHING_CUT = 2
 
-
     # Source: navigation/navigation.h
     class wpMissionPlannerStatus_e(enum.IntEnum):
         WP_PLAN_WAIT = 0
         WP_PLAN_SAVE = 1
         WP_PLAN_OK = 2
         WP_PLAN_FULL = 3
-
 
     # Source: common/calibration.h
     class zeroCalibrationState_e(enum.IntEnum):
