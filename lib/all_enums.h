@@ -1,4 +1,4 @@
-// Consolidated enums — generated on 2025-10-15 16:25:53.365321
+// Consolidated enums — generated on 2025-10-21 23:38:24.682036
 
 // ../inav/src/main/common/calibration.h
 typedef enum {
@@ -815,6 +815,13 @@ typedef enum {
     SENSOR_TEMP = 1 << 9
 } sensors_e;
 
+// ../inav/src/main/sensors/sensors.h
+typedef enum {
+    SENSOR_TEMP_CAL_INITIALISE,
+    SENSOR_TEMP_CAL_IN_PROGRESS,
+    SENSOR_TEMP_CAL_COMPLETE,
+} sensorTempCalState_e;
+
 // ../inav/src/main/sensors/barometer.c
 typedef enum {
     BAROMETER_NEEDS_SAMPLES = 0,
@@ -942,7 +949,8 @@ typedef enum {
     LOGIC_CONDITION_LED_PIN_PWM                 = 52,
     LOGIC_CONDITION_DISABLE_GPS_FIX             = 53,
     LOGIC_CONDITION_RESET_MAG_CALIBRATION       = 54,
-    LOGIC_CONDITION_LAST                        = 55,
+    LOGIC_CONDITION_SET_GIMBAL_SENSITIVITY      = 55,
+    LOGIC_CONDITION_LAST                        = 56,
 } logicOperation_e;
 
 // ../inav/src/main/programming/logic_condition.h
@@ -1045,8 +1053,6 @@ typedef enum {
     LOGIC_CONDITION_OPERAND_WAYPOINTS_USER2_ACTION_NEXT_WP,                 
     LOGIC_CONDITION_OPERAND_WAYPOINTS_USER3_ACTION_NEXT_WP,                 
     LOGIC_CONDITION_OPERAND_WAYPOINTS_USER4_ACTION_NEXT_WP,                 
-    LOGIC_CONDITION_OPERAND_WAYPOINTS_BEARING,                              
-    LOGIC_CONDITION_OPERAND_WAYPOINTS_ELEVATION,                            
 } logicWaypointOperands_e;
 
 // ../inav/src/main/programming/logic_condition.h
@@ -1141,6 +1147,7 @@ typedef enum {
     CRSF_FRAMETYPE_GPS = 0x02,
     CRSF_FRAMETYPE_VARIO_SENSOR = 0x07,
     CRSF_FRAMETYPE_BATTERY_SENSOR = 0x08,
+    CRSF_FRAMETYPE_BAROMETER_ALTITUDE = 0x09,
     CRSF_FRAMETYPE_LINK_STATISTICS = 0x14,
     CRSF_FRAMETYPE_RC_CHANNELS_PACKED = 0x16,
     CRSF_FRAMETYPE_ATTITUDE = 0x1E,
@@ -1327,6 +1334,7 @@ typedef enum {
     CRSF_FRAME_FLIGHT_MODE_INDEX,
     CRSF_FRAME_GPS_INDEX,
     CRSF_FRAME_VARIO_SENSOR_INDEX,
+    CRSF_FRAME_BAROMETER_ALTITUDE_INDEX,
     CRSF_SCHEDULE_COUNT_MAX
 } crsfFrameTypeIndex_e;
 

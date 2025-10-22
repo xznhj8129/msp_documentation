@@ -16,6 +16,21 @@ class InavEnums:
         BLACKBOX_DEVICE_FILE = 3
         BLACKBOX_DEVICE_END = 4
 
+    # Source: blackbox/blackbox.h
+    class BlackboxState(enum.IntEnum):
+        BLACKBOX_STATE_DISABLED = 0
+        BLACKBOX_STATE_STOPPED = 1
+        BLACKBOX_STATE_PREPARE_LOG_FILE = 2
+        BLACKBOX_STATE_SEND_HEADER = 3
+        BLACKBOX_STATE_SEND_MAIN_FIELD_HEADER = 4
+        BLACKBOX_STATE_SEND_GPS_H_HEADER = 5
+        BLACKBOX_STATE_SEND_GPS_G_HEADER = 6
+        BLACKBOX_STATE_SEND_SLOW_HEADER = 7
+        BLACKBOX_STATE_SEND_SYSINFO = 8
+        BLACKBOX_STATE_PAUSED = 9
+        BLACKBOX_STATE_RUNNING = 10
+        BLACKBOX_STATE_SHUTTING_DOWN = 11
+
     # Source: blackbox/blackbox_fielddefs.h
     class FlightLogEvent(enum.IntEnum):
         FLIGHT_LOG_EVENT_SYNC_BEEP = 0
@@ -559,6 +574,7 @@ class InavEnums:
         CRSF_FRAMETYPE_GPS = 0x02
         CRSF_FRAMETYPE_VARIO_SENSOR = 0x07
         CRSF_FRAMETYPE_BATTERY_SENSOR = 0x08
+        CRSF_FRAMETYPE_BAROMETER_ALTITUDE = 0x09
         CRSF_FRAMETYPE_LINK_STATISTICS = 0x14
         CRSF_FRAMETYPE_RC_CHANNELS_PACKED = 0x16
         CRSF_FRAMETYPE_ATTITUDE = 0x1E
@@ -1398,7 +1414,8 @@ class InavEnums:
         LOGIC_CONDITION_LED_PIN_PWM = 52
         LOGIC_CONDITION_DISABLE_GPS_FIX = 53
         LOGIC_CONDITION_RESET_MAG_CALIBRATION = 54
-        LOGIC_CONDITION_LAST = 55
+        LOGIC_CONDITION_SET_GIMBAL_SENSITIVITY = 55
+        LOGIC_CONDITION_LAST = 56
 
     # Source: programming/logic_condition.h
     class logicWaypointOperands_e(enum.IntEnum):
@@ -1416,8 +1433,6 @@ class InavEnums:
         LOGIC_CONDITION_OPERAND_WAYPOINTS_USER2_ACTION_NEXT_WP = 11
         LOGIC_CONDITION_OPERAND_WAYPOINTS_USER3_ACTION_NEXT_WP = 12
         LOGIC_CONDITION_OPERAND_WAYPOINTS_USER4_ACTION_NEXT_WP = 13
-        LOGIC_CONDITION_OPERAND_WAYPOINTS_BEARING = 14
-        LOGIC_CONDITION_OPERAND_WAYPOINTS_ELEVATION = 15
 
     # Source: telemetry/telemetry.h
     class ltmUpdateRate_e(enum.IntEnum):
@@ -2428,6 +2443,12 @@ class InavEnums:
         SENSOR_INDEX_PITOT = 5
         SENSOR_INDEX_OPFLOW = 6
         SENSOR_INDEX_COUNT = 7
+
+    # Source: sensors/sensors.h
+    class sensorTempCalState_e(enum.IntEnum):
+        SENSOR_TEMP_CAL_INITIALISE = 0
+        SENSOR_TEMP_CAL_IN_PROGRESS = 1
+        SENSOR_TEMP_CAL_COMPLETE = 2
 
     # Source: sensors/sensors.h
     class sensors_e(enum.IntEnum):

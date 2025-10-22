@@ -6790,6 +6790,18 @@
         "notes": "Requires `USE_RX_MSP`. Expects at least 15 bytes. Updates `rxLinkStatistics` only if `sublinkID` is 0. Converts band/mode strings to uppercase. This message expects **no reply** (`MSP_RESULT_NO_REPLY`).",
         "description": "Provides additional RC link information (power levels, band, mode) to the FC from an MSP-based RC link. Sent less frequently than link stats."
     },
+    "MSP2_COMMON_GET_RADAR_GPS": {
+        "code": 4111,
+        "hex": "0x100f",
+        "mspv": null,
+        "direction": null,
+        "request": null,
+        "reply": null,
+        "variable_len": false,
+        "complex": false,
+        "name": "MSP2_COMMON_GET_RADAR_GPS",
+        "missing": true
+    },
     "MSP2_SENSOR_RANGEFINDER": {
         "code": 7937,
         "hex": "0x1f01",

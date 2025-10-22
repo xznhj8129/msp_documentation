@@ -75,6 +75,7 @@
 - [escSensorFrameStatus_t](#enum-escsensorframestatus_t)
 - [sensorIndex_e](#enum-sensorindex_e)
 - [sensors_e](#enum-sensors_e)
+- [sensorTempCalState_e](#enum-sensortempcalstate_e)
 - [barometerState_e](#enum-barometerstate_e)
 - [accelerationSensor_e](#enum-accelerationsensor_e)
 - [baroSensor_e](#enum-barosensor_e)
@@ -1330,6 +1331,17 @@
 | `SENSOR_TEMP` | 1 << 9 |  |
 
 ---
+## <a id="enum-sensortempcalstate_e"></a>`sensorTempCalState_e`
+
+> Source: ../inav/src/main/sensors/sensors.h
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `SENSOR_TEMP_CAL_INITIALISE` | 0 |  |
+| `SENSOR_TEMP_CAL_IN_PROGRESS` | 1 |  |
+| `SENSOR_TEMP_CAL_COMPLETE` | 2 |  |
+
+---
 ## <a id="enum-barometerstate_e"></a>`barometerState_e`
 
 > Source: ../inav/src/main/sensors/barometer.c
@@ -1481,7 +1493,8 @@
 | `LOGIC_CONDITION_LED_PIN_PWM` | 52 |  |
 | `LOGIC_CONDITION_DISABLE_GPS_FIX` | 53 |  |
 | `LOGIC_CONDITION_RESET_MAG_CALIBRATION` | 54 |  |
-| `LOGIC_CONDITION_LAST` | 55 |  |
+| `LOGIC_CONDITION_SET_GIMBAL_SENSITIVITY` | 55 |  |
+| `LOGIC_CONDITION_LAST` | 56 |  |
 
 ---
 ## <a id="enum-logicflightoperands_e"></a>`logicFlightOperands_e`
@@ -1583,8 +1596,6 @@
 | `LOGIC_CONDITION_OPERAND_WAYPOINTS_USER2_ACTION_NEXT_WP` | 11 |  |
 | `LOGIC_CONDITION_OPERAND_WAYPOINTS_USER3_ACTION_NEXT_WP` | 12 |  |
 | `LOGIC_CONDITION_OPERAND_WAYPOINTS_USER4_ACTION_NEXT_WP` | 13 |  |
-| `LOGIC_CONDITION_OPERAND_WAYPOINTS_BEARING` | 14 |  |
-| `LOGIC_CONDITION_OPERAND_WAYPOINTS_ELEVATION` | 15 |  |
 
 ---
 ## <a id="enum-logicconditionsglobalflags_t"></a>`logicConditionsGlobalFlags_t`
@@ -1709,6 +1720,7 @@
 | `CRSF_FRAMETYPE_GPS` | 2 |  |
 | `CRSF_FRAMETYPE_VARIO_SENSOR` | 7 |  |
 | `CRSF_FRAMETYPE_BATTERY_SENSOR` | 8 |  |
+| `CRSF_FRAMETYPE_BAROMETER_ALTITUDE` | 9 |  |
 | `CRSF_FRAMETYPE_LINK_STATISTICS` | 20 |  |
 | `CRSF_FRAMETYPE_RC_CHANNELS_PACKED` | 22 |  |
 | `CRSF_FRAMETYPE_ATTITUDE` | 30 |  |
@@ -1962,6 +1974,7 @@
 | `CRSF_FRAME_FLIGHT_MODE_INDEX` |  |  |
 | `CRSF_FRAME_GPS_INDEX` |  |  |
 | `CRSF_FRAME_VARIO_SENSOR_INDEX` |  |  |
+| `CRSF_FRAME_BAROMETER_ALTITUDE_INDEX` |  |  |
 | `CRSF_SCHEDULE_COUNT_MAX` |  |  |
 
 ---

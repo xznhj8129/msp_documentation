@@ -163,6 +163,7 @@
 - [MSP2_COMMON_SET_RADAR_ITD (4108 / 0x100c)](#msp2_common_set_radar_itd)
 - [MSP2_COMMON_SET_MSP_RC_LINK_STATS (4109 / 0x100d)](#msp2_common_set_msp_rc_link_stats)
 - [MSP2_COMMON_SET_MSP_RC_INFO (4110 / 0x100e)](#msp2_common_set_msp_rc_info)
+- [MSP2_COMMON_GET_RADAR_GPS (4111 / 0x100f)](#msp2_common_get_radar_gps)
 - [MSP2_SENSOR_RANGEFINDER (7937 / 0x1f01)](#msp2_sensor_rangefinder)
 - [MSP2_SENSOR_OPTIC_FLOW (7938 / 0x1f02)](#msp2_sensor_optic_flow)
 - [MSP2_SENSOR_GPS (7939 / 0x1f03)](#msp2_sensor_gps)
@@ -2533,6 +2534,12 @@
 **Reply Payload:** None
 
 **Notes:** Requires `USE_RX_MSP`. Expects at least 15 bytes. Updates `rxLinkStatistics` only if `sublinkID` is 0. Converts band/mode strings to uppercase. This message expects **no reply** (`MSP_RESULT_NO_REPLY`).
+
+## <a id="msp2_common_get_radar_gps"></a>`MSP2_COMMON_GET_RADAR_GPS (4111 / 0x100f)`
+
+**Request Payload:** None  
+
+**Reply Payload:** None
 
 ## <a id="msp2_sensor_rangefinder"></a>`MSP2_SENSOR_RANGEFINDER (7937 / 0x1f01)`
 **Description:** Provides rangefinder data (distance, quality) from an external MSP-based sensor.  
