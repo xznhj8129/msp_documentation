@@ -332,8 +332,8 @@
 | `headingHoldRateLimit` | `uint8_t` | 1 | deg/s | Max rate for heading hold P term (`pidProfile()->heading_hold_rate_limit`). |
 | `headingHoldLpfFreq` | `uint8_t` | 1 | Hz | Fixed LPF frequency for heading hold error (`HEADING_HOLD_ERROR_LPF_FREQ`). |
 | `legacyYawJumpLimit` | `uint16_t` | 2 | - | Legacy, unused. Always 0. |
-| `legacyGyroLpf` | `uint8_t` | 1 | [ENUM_NAME](LINK_TO_ENUM) | Fixed value `GYRO_LPF_256HZ`. |
-| `accLpfHz` | `uint8_t` | 1 | Hz | Accelerometer LPF frequency (`accelerometerConfig()->acc_lpf_hz`). |
+| `legacyGyroLpf` | `uint8_t` | 1 | Hz | Fixed value `GYRO_LPF_256HZ`. |
+| `accLpfHz` | `uint8_t` | 1 | Hz | Accelerometer LPF frequency (`accelerometerConfig()->acc_lpf_hz`) cutoff frequency for the low pass filter used on the acc z-axis for althold in Hz. |
 | `reserved1` | `uint8_t` | 1 | - | Reserved. Always 0. |
 | `reserved2` | `uint8_t` | 1 | - | Reserved. Always 0. |
 | `reserved3` | `uint8_t` | 1 | - | Reserved. Always 0. |
@@ -2383,7 +2383,22 @@
 
 ## <a id="msp2_common_motor_mixer"></a>`MSP2_COMMON_MOTOR_MIXER (4101 / 0x1005)`
 **Description:** Retrieves the current motor mixer configuration (throttle, roll, pitch, yaw weights for each motor) for the primary and secondary mixer profiles.  
-**Special case, skipped for now**
+
+**Request Payload:** None  
+  
+**Reply Payload:**
+| Field | C Type | Size (Bytes) | Units | Description |
+|---|---|---|---|---|
+| `throttleWeight` | `uint16_t` | 2 | Scaled (0-4000) | Throttle weight * 1000, offset by 2000. (Range -2.0 to +2.0 -> 0 to 4000). |
+| `rollWeight` | `uint16_t` | 2 | Scaled (0-4000) | Roll weight * 1000, offset by 2000. |
+| `pitchWeight` | `uint16_t` | 2 | Scaled (0-4000) | Pitch weight * 1000, offset by 2000. |
+| `yawWeight` | `uint16_t` | 2 | Scaled (0-4000) | Yaw weight * 1000, offset by 2000. |
+| `throttleWeight` | `uint16_t` | 2 | (Optional) Scaled (0-4000) | Profile 2 Throttle weight. |
+| `rollWeight` | `uint16_t` | 2 | (Optional) Scaled (0-4000) | Profile 2 Roll weight. |
+| `pitchWeight` | `uint16_t` | 2 | (Optional) Scaled (0-4000) | Profile 2 Pitch weight. |
+| `yawWeight` | `uint16_t` | 2 | (Optional) Scaled (0-4000) | Profile 2 Yaw weight. |
+
+**Notes:** Scaling is `(float_weight + 2.0) * 1000`. `primaryMotorMixer()` provides the data.
 
 ## <a id="msp2_common_set_motor_mixer"></a>`MSP2_COMMON_SET_MOTOR_MIXER (4102 / 0x1006)`
 **Description:** Sets the motor mixer weights for a single motor in the primary mixer profile.  
@@ -2428,7 +2443,7 @@
 **Request Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
-| `pgn` | `uint16_t` | 2 | - | PGN ID to query. If omitted, returns all used PGNs. |
+| `pgn` | `uint16_t` | 2 | - | (Optional) PGN ID to query. If omitted, returns all used PGNs. |
   
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
@@ -3266,7 +3281,24 @@
 
 ## <a id="msp2_inav_servo_mixer"></a>`MSP2_INAV_SERVO_MIXER (8224 / 0x2020)`
 **Description:** Retrieves the custom servo mixer rules, including programming framework condition IDs, for primary and secondary mixer profiles. Supersedes `MSP_SERVO_MIX_RULES`.  
-**Special case, skipped for now**
+
+**Request Payload:** None  
+  
+**Reply Payload:**
+| Field | C Type | Size (Bytes) | Units | Description |
+|---|---|---|---|---|
+| `targetChannel` | `uint8_t` | 1 | - | Servo output channel index (0-based). |
+| `inputSource` | `uint8_t` | 1 | [mixerSource_t](https://github.com/xznhj8129/msp_documentation/blob/master/docs/inav_enums_ref.md#enum-mixersource_t) | Enum: Input source (`mixerSource_t`). |
+| `rate` | `uint16_t` | 2 | - | Mixing rate/weight. |
+| `speed` | `uint8_t` | 1 | - | Speed/Slew rate limit (0-100). |
+| `conditionId` | `uint8_t` | 1 | - | Logic Condition ID (0 to `MAX_LOGIC_CONDITIONS - 1`, or 255/-1 if none/disabled). |
+| `targetChannel` | `uint8_t` | 1 | - | (Optional) Profile 2 Target channel. |
+| `inputSource` | `uint8_t` | 1 | - | (Optional) Profile 2 Input source. |
+| `rate` | `uint16_t` | 2 | - | (Optional) Profile 2 Rate. |
+| `speed` | `uint8_t` | 1 | - | (Optional) Profile 2 Speed. |
+| `conditionId` | `uint8_t` | 1 | - | (Optional) Profile 2 Logic Condition ID. |
+
+**Notes:** `conditionId` requires `USE_PROGRAMMING_FRAMEWORK`.
 
 ## <a id="msp2_inav_set_servo_mixer"></a>`MSP2_INAV_SET_SERVO_MIXER (8225 / 0x2021)`
 **Description:** Sets a single custom servo mixer rule, including programming framework condition ID. Supersedes `MSP_SET_SERVO_MIX_RULE`.  
