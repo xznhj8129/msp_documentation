@@ -244,13 +244,12 @@
                     "name": "legacyGyroLpf",
                     "ctype": "uint8_t",
                     "desc": "Fixed value `GYRO_LPF_256HZ`.",
-                    "units": "Enum",
-                    "enum": "?_e"
+                    "units": "Hz"
                 },
                 {
                     "name": "accLpfHz",
                     "ctype": "uint8_t",
-                    "desc": "Accelerometer LPF frequency (`accelerometerConfig()->acc_lpf_hz`).",
+                    "desc": "Accelerometer LPF frequency (`accelerometerConfig()->acc_lpf_hz`) cutoff frequency for the low pass filter used on the acc z-axis for althold in Hz.",
                     "units": "Hz"
                 },
                 {
@@ -6296,9 +6295,63 @@
         "mspv": 2,
         "direction": 1,
         "request": null,
-        "reply": null,
-        "variable_len": false,
-        "complex": true,
+        "reply": {
+            "size": 16,
+            "struct": "<HHHHHHHH",
+            "payload": [
+                {
+                    "name": "throttleWeight",
+                    "ctype": "uint16_t",
+                    "desc": "Throttle weight * 1000, offset by 2000. (Range -2.0 to +2.0 -> 0 to 4000).",
+                    "units": "Scaled (0-4000)"
+                },
+                {
+                    "name": "rollWeight",
+                    "ctype": "uint16_t",
+                    "desc": "Roll weight * 1000, offset by 2000.",
+                    "units": "Scaled (0-4000)"
+                },
+                {
+                    "name": "pitchWeight",
+                    "ctype": "uint16_t",
+                    "desc": "Pitch weight * 1000, offset by 2000.",
+                    "units": "Scaled (0-4000)"
+                },
+                {
+                    "name": "yawWeight",
+                    "ctype": "uint16_t",
+                    "desc": "Yaw weight * 1000, offset by 2000.",
+                    "units": "Scaled (0-4000)"
+                },
+                {
+                    "name": "throttleWeight",
+                    "ctype": "uint16_t",
+                    "desc": "Profile 2 Throttle weight.",
+                    "units": "(Optional) Scaled (0-4000)"
+                },
+                {
+                    "name": "rollWeight",
+                    "ctype": "uint16_t",
+                    "desc": "Profile 2 Roll weight.",
+                    "units": "(Optional) Scaled (0-4000)"
+                },
+                {
+                    "name": "pitchWeight",
+                    "ctype": "uint16_t",
+                    "desc": "Profile 2 Pitch weight.",
+                    "units": "(Optional) Scaled (0-4000)"
+                },
+                {
+                    "name": "yawWeight",
+                    "ctype": "uint16_t",
+                    "desc": "Profile 2 Yaw weight.",
+                    "units": "(Optional) Scaled (0-4000)"
+                }
+            ],
+            "repeating": "MAX_SUPPORTED_MOTORS"
+        },
+        "variable_len": "MAX_SUPPORTED_MOTORS",
+        "complex": false,
         "notes": "Scaling is `(float_weight + 2.0) * 1000`. `primaryMotorMixer()` provides the data.",
         "description": "Retrieves the current motor mixer configuration (throttle, roll, pitch, yaw weights for each motor) for the primary and secondary mixer profiles."
     },
@@ -6459,8 +6512,9 @@
                 {
                     "name": "pgn",
                     "ctype": "uint16_t",
-                    "desc": "PGN ID to query. If omitted, returns all used PGNs.",
-                    "units": ""
+                    "desc": "(Optional) PGN ID to query. If omitted, returns all used PGNs.",
+                    "units": "",
+                    "optional": true
                 }
             ]
         },
@@ -9412,9 +9466,81 @@
         "mspv": 2,
         "direction": 1,
         "request": null,
-        "reply": null,
-        "variable_len": false,
-        "complex": true,
+        "reply": {
+            "size": 12,
+            "struct": "<BBHBBBBHBB",
+            "payload": [
+                {
+                    "name": "targetChannel",
+                    "ctype": "uint8_t",
+                    "desc": "Servo output channel index (0-based).",
+                    "units": ""
+                },
+                {
+                    "name": "inputSource",
+                    "ctype": "uint8_t",
+                    "desc": "Enum: Input source (`mixerSource_t`).",
+                    "units": "",
+                    "enum": "mixerSource_t"
+                },
+                {
+                    "name": "rate",
+                    "ctype": "uint16_t",
+                    "desc": "Mixing rate/weight.",
+                    "units": ""
+                },
+                {
+                    "name": "speed",
+                    "ctype": "uint8_t",
+                    "desc": "Speed/Slew rate limit (0-100).",
+                    "units": ""
+                },
+                {
+                    "name": "conditionId",
+                    "ctype": "uint8_t",
+                    "desc": "Logic Condition ID (0 to `MAX_LOGIC_CONDITIONS - 1`, or 255/-1 if none/disabled).",
+                    "units": ""
+                },
+                {
+                    "name": "targetChannel",
+                    "ctype": "uint8_t",
+                    "desc": "(Optional) Profile 2 Target channel.",
+                    "units": "",
+                    "optional": true
+                },
+                {
+                    "name": "inputSource",
+                    "ctype": "uint8_t",
+                    "desc": "(Optional) Profile 2 Input source.",
+                    "units": "",
+                    "optional": true
+                },
+                {
+                    "name": "rate",
+                    "ctype": "uint16_t",
+                    "desc": "(Optional) Profile 2 Rate.",
+                    "units": "",
+                    "optional": true
+                },
+                {
+                    "name": "speed",
+                    "ctype": "uint8_t",
+                    "desc": "(Optional) Profile 2 Speed.",
+                    "units": "",
+                    "optional": true
+                },
+                {
+                    "name": "conditionId",
+                    "ctype": "uint8_t",
+                    "desc": "(Optional) Profile 2 Logic Condition ID.",
+                    "units": "",
+                    "optional": true
+                }
+            ],
+            "repeating": "MAX_SERVO_RULES"
+        },
+        "variable_len": "MAX_SERVO_RULES",
+        "complex": false,
         "notes": "`conditionId` requires `USE_PROGRAMMING_FRAMEWORK`.",
         "description": "Retrieves the custom servo mixer rules, including programming framework condition IDs, for primary and secondary mixer profiles. Supersedes `MSP_SERVO_MIX_RULES`."
     },

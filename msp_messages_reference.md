@@ -102,8 +102,8 @@ For details on the structure of MSP, see [The wiki page](https://github.com/iNav
     | `headingHoldRateLimit` | `uint8_t` | 1 | deg/s | Max rate for heading hold P term (`pidProfile()->heading_hold_rate_limit`). |
     | `headingHoldLpfFreq` | `uint8_t` | 1 | Hz | Fixed LPF frequency for heading hold error (`HEADING_HOLD_ERROR_LPF_FREQ`). |
     | `legacyYawJumpLimit` | `uint16_t` | 2 | - | Legacy, unused. Always 0. |
-    | `legacyGyroLpf` | `uint8_t` | 1 | Enum | Fixed value `GYRO_LPF_256HZ`. |
-    | `accLpfHz` | `uint8_t` | 1 | Hz | Accelerometer LPF frequency (`accelerometerConfig()->acc_lpf_hz`). |
+    | `legacyGyroLpf` | `uint8_t` | 1 | Hz | Fixed value `GYRO_LPF_256HZ`. |
+    | `accLpfHz` | `uint8_t` | 1 | Hz | Accelerometer LPF frequency (`accelerometerConfig()->acc_lpf_hz`) cutoff frequency for the low pass filter used on the acc z-axis for althold in Hz. |
     | `reserved1` | `uint8_t` | 1 | - | Reserved. Always 0. |
     | `reserved2` | `uint8_t` | 1 | - | Reserved. Always 0. |
     | `reserved3` | `uint8_t` | 1 | - | Reserved. Always 0. |
@@ -2003,13 +2003,10 @@ These commands are part of the MSPv2 specification and are intended for general 
     | `rollWeight` | `uint16_t` | 2 | Scaled (0-4000) | Roll weight * 1000, offset by 2000. |
     | `pitchWeight` | `uint16_t` | 2 | Scaled (0-4000) | Pitch weight * 1000, offset by 2000. |
     | `yawWeight` | `uint16_t` | 2 | Scaled (0-4000) | Yaw weight * 1000, offset by 2000. |
-*   **Payload (Profile 2 - Optional):** Repeated `MAX_SUPPORTED_MOTORS` times (only if `MAX_MIXER_PROFILE_COUNT` > 1):
-    | Field | C Type | Size (Bytes) | Units | Description |
-    |---|---|---|---|---|
-    | `throttleWeight` | `uint16_t` | 2 | Scaled (0-4000) | Profile 2 Throttle weight. |
-    | `rollWeight` | `uint16_t` | 2 | Scaled (0-4000) | Profile 2 Roll weight. |
-    | `pitchWeight` | `uint16_t` | 2 | Scaled (0-4000) | Profile 2 Pitch weight. |
-    | `yawWeight` | `uint16_t` | 2 | Scaled (0-4000) | Profile 2 Yaw weight. |
+    | `throttleWeight` | `uint16_t` | 2 | (Optional) Scaled (0-4000) | Profile 2 Throttle weight. |
+    | `rollWeight` | `uint16_t` | 2 | (Optional) Scaled (0-4000) | Profile 2 Roll weight. |
+    | `pitchWeight` | `uint16_t` | 2 | (Optional) Scaled (0-4000) | Profile 2 Pitch weight. |
+    | `yawWeight` | `uint16_t` | 2 | (Optional) Scaled (0-4000) | Profile 2 Yaw weight. |
 *   **Notes:** Scaling is `(float_weight + 2.0) * 1000`. `primaryMotorMixer()` provides the data.
 
 ### `MSP2_COMMON_SET_MOTOR_MIXER` (0x1006 / 4102)
@@ -2055,10 +2052,10 @@ These commands are part of the MSPv2 specification and are intended for general 
 
 *   **Direction:** In/Out
 *   **Description:** Gets a list of Parameter Group Numbers (PGNs) used by settings, along with the start and end setting indexes for each group. Can request info for a single PGN.
-*   **Request Payload (Optional):**
+*   **Request Payload:**
     | Field | C Type | Size (Bytes) | Description |
     |---|---|---|---|
-    | `pgn` | `uint16_t` | 2 | PGN ID to query. If omitted, returns all used PGNs. |
+    | `pgn` | `uint16_t` | 2 | (Optional) PGN ID to query. If omitted, returns all used PGNs. |
 *   **Reply Payload:** Repeated for each PGN found:
     | Field | C Type | Size (Bytes) | Description |
     |---|---|---|---|
@@ -2770,14 +2767,11 @@ These commands are specific extensions added by the INAV project.
     | `rate` | `uint16_t` | 2 | Mixing rate/weight. |
     | `speed` | `uint8_t` | 1 | Speed/Slew rate limit (0-100). |
     | `conditionId` | `uint8_t` | 1 | Logic Condition ID (0 to `MAX_LOGIC_CONDITIONS - 1`, or 255/-1 if none/disabled). |
-*   **Payload (Profile 2 - Optional):** Repeated `MAX_SERVO_RULES` times (only if `MAX_MIXER_PROFILE_COUNT` > 1):
-    | Field | C Type | Size (Bytes) | Description |
-    |---|---|---|---|
-    | `targetChannel` | `uint8_t` | 1 | Profile 2 Target channel. |
-    | `inputSource` | `uint8_t` | 1 | Profile 2 Input source. |
-    | `rate` | `uint16_t` | 2 | Profile 2 Rate. |
-    | `speed` | `uint8_t` | 1 | Profile 2 Speed. |
-    | `conditionId` | `uint8_t` | 1 | Profile 2 Logic Condition ID. |
+    | `targetChannel` | `uint8_t` | 1 | (Optional) Profile 2 Target channel. |
+    | `inputSource` | `uint8_t` | 1 | (Optional) Profile 2 Input source. |
+    | `rate` | `uint16_t` | 2 | (Optional) Profile 2 Rate. |
+    | `speed` | `uint8_t` | 1 | (Optional) Profile 2 Speed. |
+    | `conditionId` | `uint8_t` | 1 | (Optional) Profile 2 Logic Condition ID. |
 *   **Notes:** `conditionId` requires `USE_PROGRAMMING_FRAMEWORK`.
 
 ### `MSP2_INAV_SET_SERVO_MIXER` (0x2021 / 8225)

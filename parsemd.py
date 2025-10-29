@@ -443,7 +443,11 @@ def _find_payload_blocks(msg_content: str, direction: int) -> tuple[str, str]:
     if not req or not rep:
         blocks = _iter_generic_payload_blocks(msg_content)
         if len(blocks) > 1:
-            raise ValueError("Multiple generic '**Payload' sections found; unsupported multi-profile payload.")
+            print(blocks)
+            for i in blocks:
+                print(i)
+                print('####\n')
+            raise KeyError("Multiple generic '**Payload' sections found; unsupported multi-profile payload.")
         if blocks:
             g = blocks[0]  # string, not list
             if not req and direction == 0:
@@ -577,7 +581,7 @@ def generate_msp_dict(markdown_content: str) -> Dict[str, Any]:
             notes_str = ""
         try:
             req_block, rep_block = _find_payload_blocks(msg_content, direction_val)
-        except: #MSP2_COMMON_MOTOR_MIXER
+        except KeyError: #MSP2_COMMON_MOTOR_MIXER
             msg = msg_fmt.copy()
             msg["hex"] = hex(msg_code)
             msg["code"] = msg_code
