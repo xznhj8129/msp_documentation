@@ -1736,7 +1736,7 @@ These commands are sent *to* the FC.
     | Field | C Type | Size (Bytes) | Units | Description |
     |---|---|---|---|---|
     | `targetChannel` | `uint8_t` | 1 | Index | Servo output channel index (0-based) |
-    | `inputSource` | `uint8_t` | 1 | Enum | Input source for the mix (RC chan, Roll, Pitch...). See `mixerSource_t` |
+    | `inputSource` | `uint8_t` | 1 | Enum | Enum `inputSource_e` Input source for the mix (RC chan, Roll, Pitch...) |
     | `rate` | `uint16_t` | 2 | % * 100? | Mixing rate/weight. Needs scaling check |
     | `speed` | `uint8_t` | 1 | 0-100 | Speed/Slew rate limit |
     | `reserved1` | `uint8_t` | 1 | - | Always 0 |
@@ -1753,7 +1753,7 @@ These commands are sent *to* the FC.
     |---|---|---|---|---|
     | `ruleIndex` | `uint8_t` | 1 | Index | Index of the rule to set (0 to `MAX_SERVO_RULES - 1`) |
     | `targetChannel` | `uint8_t` | 1 | Index | Servo output channel index |
-    | `inputSource` | `uint8_t` | 1 | Enum | Input source for the mix |
+    | `inputSource` | `uint8_t` | 1 | Enum | Enum `inputSource_e` Input source for the mix |
     | `rate` | `uint16_t` | 2 | % * 100? | Mixing rate/weight |
     | `speed` | `uint8_t` | 1 | 0-100 | Speed/Slew rate limit |
     | `legacyMinMax` | `uint16_t` | 2 | - | Ignored |
@@ -2763,12 +2763,12 @@ These commands are specific extensions added by the INAV project.
     | Field | C Type | Size (Bytes) | Description |
     |---|---|---|---|
     | `targetChannel` | `uint8_t` | 1 | Servo output channel index (0-based) |
-    | `inputSource` | `uint8_t` | 1 | Enum: Input source (`mixerSource_t`) |
+    | `inputSource` | `uint8_t` | 1 | Enum `inputSource_e` Input source |
     | `rate` | `uint16_t` | 2 | Mixing rate/weight |
     | `speed` | `uint8_t` | 1 | Speed/Slew rate limit (0-100) |
     | `conditionId` | `uint8_t` | 1 | Logic Condition ID (0 to `MAX_LOGIC_CONDITIONS - 1`, or 255/-1 if none/disabled) |
     | `targetChannel` | `uint8_t` | 1 | (Optional) Profile 2 Target channel |
-    | `inputSource` | `uint8_t` | 1 | (Optional) Profile 2 Input source |
+    | `inputSource` | `uint8_t` | 1 | (Optional) Profile 2 Enum `inputSource_e` Input source |
     | `rate` | `uint16_t` | 2 | (Optional) Profile 2 Rate |
     | `speed` | `uint8_t` | 1 | (Optional) Profile 2 Speed |
     | `conditionId` | `uint8_t` | 1 | (Optional) Profile 2 Logic Condition ID |
@@ -2783,7 +2783,7 @@ These commands are specific extensions added by the INAV project.
     |---|---|---|---|
     | `ruleIndex` | `uint8_t` | 1 | Index of the rule to set (0 to `MAX_SERVO_RULES - 1`) |
     | `targetChannel` | `uint8_t` | 1 | Servo output channel index |
-    | `inputSource` | `uint8_t` | 1 | Enum: Input source (`mixerSource_t`) |
+    | `inputSource` | `uint8_t` | 1 | Enum `inputSource_e` Input source |
     | `rate` | `uint16_t` | 2 | Mixing rate/weight |
     | `speed` | `uint8_t` | 1 | Speed/Slew rate limit (0-100) |
     | `conditionId` | `uint8_t` | 1 | Logic Condition ID (255/-1 if none). Ignored if `USE_PROGRAMMING_FRAMEWORK` is disabled |
@@ -2798,7 +2798,7 @@ These commands are specific extensions added by the INAV project.
     |---|---|---|---|
     | `enabled` | `uint8_t` | 1 | Boolean: 1 if the condition is enabled |
     | `activatorId` | `uint8_t` | 1 | ID of the activator condition (if any, 255 if none) |
-    | `operation` | `uint8_t` | 1 | Enum `logicConditionOp_e`: Logical operation (AND, OR, XOR, etc.) |
+    | `operation` | `uint8_t` | 1 | Enum `logicConditionOp_e` Logical operation (AND, OR, XOR, etc.) |
     | `operandAType` | `uint8_t` | 1 | Enum `logicOperandType_e` Type of the first operand (Flight Mode, GVAR, etc.) |
     | `operandAValue` | `uint32_t` | 4 | Value/ID of the first operand |
     | `operandBType` | `uint8_t` | 1 | Enum `logicOperandType_e`: Type of the second operand |
@@ -2816,10 +2816,10 @@ These commands are specific extensions added by the INAV project.
     | `conditionIndex` | `uint8_t` | 1 | Index of the condition to set (0 to `MAX_LOGIC_CONDITIONS - 1`) |
     | `enabled` | `uint8_t` | 1 | Boolean: 1 to enable the condition |
     | `activatorId` | `uint8_t` | 1 | Activator condition ID |
-    | `operation` | `uint8_t` | 1 | Enum `logicConditionOp_e`: Logical operation |
-    | `operandAType` | `uint8_t` | 1 | Enum `logicOperandType_e`: Type of operand A |
+    | `operation` | `uint8_t` | 1 | Enum `logicConditionOp_e` Logical operation |
+    | `operandAType` | `uint8_t` | 1 | Enum `logicOperandType_e` Type of operand A |
     | `operandAValue` | `uint32_t` | 4 | Value/ID of operand A |
-    | `operandBType` | `uint8_t` | 1 | Enum `logicOperandType_e`: Type of operand B |
+    | `operandBType` | `uint8_t` | 1 | Enum `logicOperandType_e` Type of operand B |
     | `operandBValue` | `uint32_t` | 4 | Value/ID of operand B |
     | `flags` | `uint8_t` | 1 | Bitmask: Condition flags |
 *   **Notes:** Requires `USE_PROGRAMMING_FRAMEWORK`. Expects 15 bytes. Returns error if index is invalid.
@@ -2860,9 +2860,9 @@ These commands are specific extensions added by the INAV project.
     | Field | C Type | Size (Bytes) | Description |
     |---|---|---|---|
     | `enabled` | `uint8_t` | 1 | Boolean: 1 if the PID is enabled |
-    | `setpointType` | `uint8_t` | 1 | Enum (`logicOperandType_e`): Type of the setpoint source |
+    | `setpointType` | `uint8_t` | 1 | Enum (`logicOperandType_e`) Type of the setpoint source |
     | `setpointValue` | `uint32_t` | 4 | Value/ID of the setpoint source |
-    | `measurementType` | `uint8_t` | 1 | Enum (`logicOperandType_e`): Type of the measurement source |
+    | `measurementType` | `uint8_t` | 1 | Enum (`logicOperandType_e`) Type of the measurement source |
     | `measurementValue` | `uint32_t` | 4 | Value/ID of the measurement source |
     | `gainP` | `uint16_t` | 2 | Proportional gain |
     | `gainI` | `uint16_t` | 2 | Integral gain |
@@ -2879,9 +2879,9 @@ These commands are specific extensions added by the INAV project.
     |---|---|---|---|
     | `pidIndex` | `uint8_t` | 1 | Index of the Programming PID to set (0 to `MAX_PROGRAMMING_PID_COUNT - 1`) |
     | `enabled` | `uint8_t` | 1 | Boolean: 1 to enable the PID |
-    | `setpointType` | `uint8_t` | 1 | Enum: Type of the setpoint source |
+    | `setpointType` | `uint8_t` | 1 | Enum (`logicOperandType_e`) Type of the setpoint source |
     | `setpointValue` | `uint32_t` | 4 | Value/ID of the setpoint source |
-    | `measurementType` | `uint8_t` | 1 | Enum: Type of the measurement source |
+    | `measurementType` | `uint8_t` | 1 | Enum (`logicOperandType_e`) Type of the measurement source |
     | `measurementValue` | `uint32_t` | 4 | Value/ID of the measurement source |
     | `gainP` | `uint16_t` | 2 | Proportional gain |
     | `gainI` | `uint16_t` | 2 | Integral gain |
@@ -3031,7 +3031,7 @@ These commands are specific extensions added by the INAV project.
     |---|---|---|---|
     | `enabled` | `uint8_t` | 1 | Boolean: 1 if enabled |
     | `activatorId` | `uint8_t` | 1 | Activator ID |
-    | `operation` | `uint8_t` | 1 | Enum: Logical operation |
+    | `operation` | `uint8_t` | 1 | Enum `logicConditionOp_e` Logical operation |
     | `operandAType` | `uint8_t` | 1 | Enum `logicOperandType_e` Type of operand A |
     | `operandAValue` | `uint32_t` | 4 | Value/ID of operand A |
     | `operandBType` | `uint8_t` | 1 | Enum `logicOperandType_e` Type of operand B |

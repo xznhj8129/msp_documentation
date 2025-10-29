@@ -299,6 +299,7 @@ def main():
         sys.exit(3)
 
     resolved = resolve_safe_values(macros, order)
+    resolved["DEBUG32_VALUE_COUNT"] = 8
     write_python_base(OUT_FILE, order, macros, leftover, resolved)
 
     if try_exec_and_fix(OUT_FILE):

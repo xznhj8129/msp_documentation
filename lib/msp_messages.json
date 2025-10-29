@@ -6,8 +6,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 3,
-            "struct": "<BBB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "mspProtocolVersion",
@@ -41,8 +41,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 4,
-            "struct": "<cccc",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "fcVariantIdentifier",
@@ -67,8 +67,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 3,
-            "struct": "<BBB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "fcVersionMajor",
@@ -102,8 +102,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 10,
-            "struct": "<ccccHBBBs",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "boardIdentifier",
@@ -161,8 +161,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 26,
-            "struct": "<cccccccccccccccccccccccccc",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "buildDate",
@@ -205,8 +205,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 15,
-            "struct": "<BHHBBHBBBBBB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "legacyAsyncProcessing",
@@ -293,8 +293,8 @@
         "mspv": 1,
         "direction": 0,
         "request": {
-            "size": 15,
-            "struct": "<BHHBBHBBBBBB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "legacyAsyncProcessing",
@@ -376,8 +376,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 1,
-            "struct": "<s",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "craftName",
@@ -401,8 +401,8 @@
         "mspv": 1,
         "direction": 0,
         "request": {
-            "size": 1,
-            "struct": "<s",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "craftName",
@@ -428,8 +428,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 13,
-            "struct": "<BHHHHBBH",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "userControlMode",
@@ -492,8 +492,8 @@
         "mspv": 1,
         "direction": 0,
         "request": {
-            "size": 13,
-            "struct": "<BHHHHBBH",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "userControlMode",
@@ -560,8 +560,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 27,
-            "struct": "<BHHHHHHHHHHHHH",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "accCalibAxisFlags",
@@ -660,8 +660,8 @@
         "mspv": 1,
         "direction": 0,
         "request": {
-            "size": 26,
-            "struct": "<HHHHHHHHHHHHH",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "accZeroX",
@@ -756,8 +756,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 12,
-            "struct": "<HHHHHBB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "weightZBaroP",
@@ -815,8 +815,8 @@
         "mspv": 1,
         "direction": 0,
         "request": {
-            "size": 12,
-            "struct": "<HHHHHBB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "weightZBaroP",
@@ -874,8 +874,8 @@
         "mspv": 1,
         "direction": 0,
         "request": {
-            "size": 1,
-            "struct": "<B",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "missionID",
@@ -897,8 +897,8 @@
         "mspv": 1,
         "direction": 0,
         "request": {
-            "size": 1,
-            "struct": "<B",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "missionID",
@@ -921,8 +921,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 4,
-            "struct": "<BBBB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "wpCapabilities",
@@ -963,8 +963,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 21,
-            "struct": "<HBBBBBHHHHHHH",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "minRthDistance",
@@ -1058,8 +1058,8 @@
         "mspv": 1,
         "direction": 0,
         "request": {
-            "size": 21,
-            "struct": "<HBBBBBHHHHHHH",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "minRthDistance",
@@ -1155,8 +1155,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 12,
-            "struct": "<HHHBBBBH",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "cruiseThrottle",
@@ -1219,8 +1219,8 @@
         "mspv": 1,
         "direction": 0,
         "request": {
-            "size": 12,
-            "struct": "<HHHBBBBH",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "cruiseThrottle",
@@ -1285,8 +1285,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 4,
-            "struct": "<BBBB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "modePermanentId",
@@ -1326,8 +1326,8 @@
         "mspv": 1,
         "direction": 0,
         "request": {
-            "size": 5,
-            "struct": "<BBBBB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "rangeIndex",
@@ -1374,8 +1374,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 4,
-            "struct": "<I",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "featureMask",
@@ -1396,8 +1396,8 @@
         "mspv": 1,
         "direction": 0,
         "request": {
-            "size": 4,
-            "struct": "<I",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "featureMask",
@@ -1420,8 +1420,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 6,
-            "struct": "<HHH",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "rollAlign",
@@ -1454,8 +1454,8 @@
         "mspv": 1,
         "direction": 0,
         "request": {
-            "size": 6,
-            "struct": "<HHH",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "rollAlign",
@@ -1490,8 +1490,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 7,
-            "struct": "<HHBH",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "scale",
@@ -1531,8 +1531,8 @@
         "mspv": 1,
         "direction": 0,
         "request": {
-            "size": 7,
-            "struct": "<HHBH",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "scale",
@@ -1574,8 +1574,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 1,
-            "struct": "<B",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "mixerMode",
@@ -1597,8 +1597,8 @@
         "mspv": 1,
         "direction": 0,
         "request": {
-            "size": 1,
-            "struct": "<B",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "mixerMode",
@@ -1621,8 +1621,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 24,
-            "struct": "<BHHHBHHBBHBIBBB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "serialRxProvider",
@@ -1659,13 +1659,13 @@
                     "name": "rxMinUsec",
                     "ctype": "uint16_t",
                     "desc": "Minimum expected pulse width (`rxConfig()->rx_min_usec`)",
-                    "units": "\u00b5s"
+                    "units": "µs"
                 },
                 {
                     "name": "rxMaxUsec",
                     "ctype": "uint16_t",
                     "desc": "Maximum expected pulse width (`rxConfig()->rx_max_usec`)",
-                    "units": "\u00b5s"
+                    "units": "µs"
                 },
                 {
                     "name": "bfCompatRcInterpolation",
@@ -1729,8 +1729,8 @@
         "mspv": 1,
         "direction": 0,
         "request": {
-            "size": 24,
-            "struct": "<BHHHBHHBBHBIBBB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "serialRxProvider",
@@ -1767,13 +1767,13 @@
                     "name": "rxMinUsec",
                     "ctype": "uint16_t",
                     "desc": "Sets `rxConfigMutable()->rx_min_usec",
-                    "units": "\u00b5s"
+                    "units": "µs"
                 },
                 {
                     "name": "rxMaxUsec",
                     "ctype": "uint16_t",
                     "desc": "Sets `rxConfigMutable()->rx_max_usec",
-                    "units": "\u00b5s"
+                    "units": "µs"
                 },
                 {
                     "name": "bfCompatRcInterpolation",
@@ -1832,8 +1832,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 4,
-            "struct": "<HBB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "hue",
@@ -1867,8 +1867,8 @@
         "mspv": 1,
         "direction": 0,
         "request": {
-            "size": 4,
-            "struct": "<HBB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "hue",
@@ -1904,8 +1904,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 4,
-            "struct": "<I",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "legacyLedConfig",
@@ -1927,8 +1927,8 @@
         "mspv": 1,
         "direction": 0,
         "request": {
-            "size": 5,
-            "struct": "<BI",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "ledIndex",
@@ -1957,8 +1957,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 1,
-            "struct": "<B",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "rssiChannel",
@@ -1979,8 +1979,8 @@
         "mspv": 1,
         "direction": 0,
         "request": {
-            "size": 1,
-            "struct": "<B",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "rssiChannel",
@@ -2003,8 +2003,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 6,
-            "struct": "<BBBBBB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "adjustmentIndex",
@@ -2056,8 +2056,8 @@
         "mspv": 1,
         "direction": 0,
         "request": {
-            "size": 7,
-            "struct": "<BBBBBBB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "rangeIndex",
@@ -2140,8 +2140,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 4,
-            "struct": "<BBBB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "vbatScale",
@@ -2180,8 +2180,8 @@
         "mspv": 1,
         "direction": 0,
         "request": {
-            "size": 4,
-            "struct": "<BBBB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "vbatScale",
@@ -2222,8 +2222,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 4,
-            "struct": "<I",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "rangefinderAltitude",
@@ -2246,7 +2246,7 @@
         "request": null,
         "reply": {
             "size": 0,
-            "struct": "<BBBB",
+            "struct": "",
             "payload": [
                 {
                     "name": "rcMap",
@@ -2271,7 +2271,7 @@
         "direction": 0,
         "request": {
             "size": 0,
-            "struct": "<BBBB",
+            "struct": "",
             "payload": [
                 {
                     "name": "rcMap",
@@ -2309,8 +2309,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 13,
-            "struct": "<BIII",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "flashReady",
@@ -2349,8 +2349,8 @@
         "mspv": 1,
         "direction": 2,
         "request": {
-            "size": 6,
-            "struct": "<IH",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "address",
@@ -2368,8 +2368,8 @@
             ]
         },
         "reply": {
-            "size": 14,
-            "struct": "<II",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "address",
@@ -2412,14 +2412,14 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 2,
-            "struct": "<H",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "looptime",
                     "ctype": "uint16_t",
                     "desc": "Configured loop time (`gyroConfig()->looptime`)",
-                    "units": "\u00b5s"
+                    "units": "µs"
                 }
             ]
         },
@@ -2434,14 +2434,14 @@
         "mspv": 1,
         "direction": 0,
         "request": {
-            "size": 2,
-            "struct": "<H",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "looptime",
                     "ctype": "uint16_t",
                     "desc": "New loop time to set (`gyroConfigMutable()->looptime`)",
-                    "units": "\u00b5s"
+                    "units": "µs"
                 }
             ]
         },
@@ -2458,8 +2458,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 20,
-            "struct": "<BBHBHBBHHHHHB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "failsafeDelay",
@@ -2554,8 +2554,8 @@
         "mspv": 1,
         "direction": 0,
         "request": {
-            "size": 20,
-            "struct": "<BBHBHBBHHHHHB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "failsafeDelay",
@@ -2651,8 +2651,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 11,
-            "struct": "<BBBII",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "sdCardSupported",
@@ -2699,8 +2699,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 4,
-            "struct": "<BBBB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "blackboxDevice",
@@ -2780,8 +2780,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 14,
-            "struct": "<BBBBHHHHH",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "osdDriverType",
@@ -2852,7 +2852,7 @@
             ]
         },
         "variable_len": true,
-        "complex": true,
+        "complex": false,
         "notes": "Requires `USE_OSD` for meaningful data, but payload is always sent. Coordinates are packed: `(Y << 8) | X`. See `MSP2_INAV_OSD_*` commands for more detail and multi-layout support.",
         "description": "Retrieves OSD configuration settings and layout for screen 0."
     },
@@ -2887,7 +2887,7 @@
         "direction": 0,
         "request": {
             "size": 0,
-            "struct": "<",
+            "struct": "",
             "payload": [
                 {
                     "name": "address",
@@ -2920,8 +2920,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 11,
-            "struct": "<BBBBBBBBBBB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "vtxDeviceType",
@@ -3016,8 +3016,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 9,
-            "struct": "<BBBBHHB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "gyroSyncDenom",
@@ -3078,8 +3078,8 @@
         "mspv": 1,
         "direction": 0,
         "request": {
-            "size": 9,
-            "struct": "<BBBBHHB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "gyroSyncDenom",
@@ -3138,8 +3138,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 23,
-            "struct": "<BHHHHHHHHHHH",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "gyroMainLpfHz",
@@ -3226,8 +3226,8 @@
         "mspv": 1,
         "direction": 0,
         "request": {
-            "size": 23,
-            "struct": "<BHHHHHHHHHHH",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "gyroMainLpfHz",
@@ -3309,8 +3309,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 17,
-            "struct": "<HHHBBBBHBHH",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "legacyRollPitchItermIgnore",
@@ -3391,8 +3391,8 @@
         "mspv": 1,
         "direction": 0,
         "request": {
-            "size": 17,
-            "struct": "<HHHBBBBHBHH",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "legacyRollPitchItermIgnore",
@@ -3466,8 +3466,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 6,
-            "struct": "<BBBBBB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "accHardware",
@@ -3524,8 +3524,8 @@
         "mspv": 1,
         "direction": 0,
         "request": {
-            "size": 6,
-            "struct": "<BBBBBB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "accHardware",
@@ -3602,8 +3602,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 7,
-            "struct": "<BBBI",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "MultiWii version",
@@ -3644,14 +3644,14 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 11,
-            "struct": "<HHHIB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "cycleTime",
                     "ctype": "uint16_t",
                     "desc": "Main loop cycle time (`cycleTime`)",
-                    "units": "\u00b5s"
+                    "units": "µs"
                 },
                 {
                     "name": "i2cErrors",
@@ -3691,8 +3691,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 18,
-            "struct": "<hhhhhhhhh",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "accX",
@@ -3763,7 +3763,7 @@
         "request": null,
         "reply": {
             "size": 0,
-            "struct": "<hhhhhhhhhhhhhhhhhh",
+            "struct": "",
             "payload": [
                 {
                     "name": "servoOutputs",
@@ -3789,7 +3789,7 @@
         "request": null,
         "reply": {
             "size": 0,
-            "struct": "<HHHHHHHH",
+            "struct": "",
             "payload": [
                 {
                     "name": "motorOutputs",
@@ -3815,7 +3815,7 @@
         "request": null,
         "reply": {
             "size": 0,
-            "struct": "<HHHHHHHH",
+            "struct": "",
             "payload": [
                 {
                     "name": "rcChannels",
@@ -3840,8 +3840,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 18,
-            "struct": "<BBiihHHH",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "fixType",
@@ -3906,8 +3906,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 5,
-            "struct": "<HHB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "distanceToHome",
@@ -3941,8 +3941,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 6,
-            "struct": "<hhh",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "roll",
@@ -3976,8 +3976,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 10,
-            "struct": "<ihi",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "estimatedAltitude",
@@ -4011,8 +4011,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 7,
-            "struct": "<BHHh",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "vbat",
@@ -4052,8 +4052,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 11,
-            "struct": "<BBBBBBBBHB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "legacyRcRate",
@@ -4130,8 +4130,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 8,
-            "struct": "<Q",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "activeModes",
@@ -4153,8 +4153,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 22,
-            "struct": "<HHHHHBBBBBBHBBBB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "midRc",
@@ -4268,8 +4268,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 1,
-            "struct": "<s",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "boxNamesString",
@@ -4294,8 +4294,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 1,
-            "struct": "<s",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "pidNamesString",
@@ -4319,8 +4319,8 @@
         "mspv": 1,
         "direction": 2,
         "request": {
-            "size": 1,
-            "struct": "<B",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "waypointIndex",
@@ -4331,8 +4331,8 @@
             ]
         },
         "reply": {
-            "size": 22,
-            "struct": "<BBiiiHHHB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "waypointIndex",
@@ -4403,8 +4403,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 1,
-            "struct": "<B",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "boxIds",
@@ -4429,8 +4429,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 14,
-            "struct": "<HHHBBBBI",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "min",
@@ -4495,8 +4495,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 7,
-            "struct": "<BBBBBh",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "navMode",
@@ -4558,8 +4558,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 6,
-            "struct": "<HHH",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "deadbandLow",
@@ -4593,8 +4593,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 5,
-            "struct": "<BBBH",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "deadband",
@@ -4634,24 +4634,22 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 4,
-            "struct": "<BBBB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "gyroAlign",
                     "ctype": "uint8_t",
                     "desc": "Always 0 (Legacy alignment enum)",
                     "units": "",
-                    "value": 0,
-                    "enum": "?_e"
+                    "value": 0
                 },
                 {
                     "name": "accAlign",
                     "ctype": "uint8_t",
                     "desc": "Always 0 (Legacy alignment enum)",
                     "units": "",
-                    "value": 0,
-                    "enum": "?_e"
+                    "value": 0
                 },
                 {
                     "name": "magAlign",
@@ -4679,8 +4677,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 3,
-            "struct": "<BBB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "modeIndex",
@@ -4717,8 +4715,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 11,
-            "struct": "<BHBHhBH",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "cellCount",
@@ -4788,8 +4786,8 @@
         "mspv": 1,
         "direction": 2,
         "request": {
-            "size": 1,
-            "struct": "<B",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "powerLevelIndex",
@@ -4800,8 +4798,8 @@
             ]
         },
         "reply": {
-            "size": 6,
-            "struct": "<BHBs",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "powerLevelIndex",
@@ -4845,14 +4843,14 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 16,
-            "struct": "<HHHIBHHB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "cycleTime",
                     "ctype": "uint16_t",
                     "desc": "Main loop cycle time",
-                    "units": "\u00b5s"
+                    "units": "µs"
                 },
                 {
                     "name": "i2cErrors",
@@ -4910,8 +4908,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 9,
-            "struct": "<BBBBBBBBB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "overallHealth",
@@ -4989,8 +4987,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 12,
-            "struct": "<III",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "uid0",
@@ -5024,8 +5022,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 4,
-            "struct": "<BBBB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "protocolVersion",
@@ -5067,8 +5065,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 20,
-            "struct": "<HIIIHHH",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "lastMessageDt",
@@ -5161,8 +5159,8 @@
         "mspv": 1,
         "direction": 0,
         "request": {
-            "size": 1,
-            "struct": "<B",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "rssi",
@@ -5185,8 +5183,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 2,
-            "struct": "<BB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "rssiSource",
@@ -5214,8 +5212,8 @@
         "mspv": 1,
         "direction": 0,
         "request": {
-            "size": 1,
-            "struct": "<B",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "rcChannels",
@@ -5240,8 +5238,8 @@
         "mspv": 1,
         "direction": 0,
         "request": {
-            "size": 16,
-            "struct": "<BBiihHH",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "fixType",
@@ -5312,8 +5310,8 @@
         "mspv": 1,
         "direction": 0,
         "request": {
-            "size": 11,
-            "struct": "<BBBBBBBBHB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "legacyRcRate",
@@ -5414,8 +5412,8 @@
         "mspv": 1,
         "direction": 0,
         "request": {
-            "size": 22,
-            "struct": "<HHHHHBBBBBBHBBBB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "midRc",
@@ -5536,8 +5534,8 @@
         "mspv": 1,
         "direction": 0,
         "request": {
-            "size": 21,
-            "struct": "<BBiiiHHHB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "waypointIndex",
@@ -5608,8 +5606,8 @@
         "mspv": 1,
         "direction": 0,
         "request": {
-            "size": 1,
-            "struct": "<B",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "profileIndex",
@@ -5631,8 +5629,8 @@
         "mspv": 1,
         "direction": 0,
         "request": {
-            "size": 2,
-            "struct": "<h",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "heading",
@@ -5654,8 +5652,8 @@
         "mspv": 1,
         "direction": 0,
         "request": {
-            "size": 15,
-            "struct": "<BHHHBBBBI",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "servoIndex",
@@ -5722,7 +5720,7 @@
         "direction": 0,
         "request": {
             "size": 0,
-            "struct": "<HHHHHHHH",
+            "struct": "",
             "payload": [
                 {
                     "name": "motorValues",
@@ -5753,8 +5751,8 @@
         "mspv": 1,
         "direction": 0,
         "request": {
-            "size": 6,
-            "struct": "<HHH",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "deadbandLow",
@@ -5788,8 +5786,8 @@
         "mspv": 1,
         "direction": 0,
         "request": {
-            "size": 5,
-            "struct": "<BBBH",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "deadband",
@@ -5841,8 +5839,8 @@
         "mspv": 1,
         "direction": 0,
         "request": {
-            "size": 4,
-            "struct": "<BBBB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "gyroAlign",
@@ -5882,8 +5880,8 @@
         "mspv": 1,
         "direction": 0,
         "request": {
-            "size": 3,
-            "struct": "<BBB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "modeIndex",
@@ -5942,8 +5940,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 8,
-            "struct": "<BBHBBBB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "targetChannel",
@@ -5954,9 +5952,9 @@
                 {
                     "name": "inputSource",
                     "ctype": "uint8_t",
-                    "desc": "Input source for the mix (RC chan, Roll, Pitch...). See `mixerSource_t",
+                    "desc": "Enum `inputSource_e` Input source for the mix (RC chan, Roll, Pitch...)",
                     "units": "Enum",
-                    "enum": "?_e"
+                    "enum": "inputSource_e"
                 },
                 {
                     "name": "rate",
@@ -6002,8 +6000,8 @@
         "mspv": 1,
         "direction": 0,
         "request": {
-            "size": 9,
-            "struct": "<BBBHBHB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "ruleIndex",
@@ -6020,9 +6018,9 @@
                 {
                     "name": "inputSource",
                     "ctype": "uint8_t",
-                    "desc": "Input source for the mix",
+                    "desc": "Enum `inputSource_e` Input source for the mix",
                     "units": "Enum",
-                    "enum": "?_e"
+                    "enum": "inputSource_e"
                 },
                 {
                     "name": "rate",
@@ -6061,8 +6059,8 @@
         "direction": 2,
         "request": null,
         "reply": {
-            "size": 1,
-            "struct": "<B",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "status",
@@ -6084,8 +6082,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 6,
-            "struct": "<iH",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "seconds",
@@ -6112,8 +6110,8 @@
         "mspv": 1,
         "direction": 0,
         "request": {
-            "size": 6,
-            "struct": "<iH",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "seconds",
@@ -6178,8 +6176,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 1,
-            "struct": "<s",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "Message Text",
@@ -6205,7 +6203,7 @@
         "request": null,
         "reply": {
             "size": 0,
-            "struct": "<HHHH",
+            "struct": "",
             "payload": [
                 {
                     "name": "debugValues",
@@ -6242,8 +6240,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 3,
-            "struct": "<hB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "tzOffsetMinutes",
@@ -6282,8 +6280,8 @@
         "mspv": 2,
         "direction": 2,
         "request": {
-            "size": 1,
-            "struct": "<s",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "settingName",
@@ -6297,8 +6295,8 @@
             ]
         },
         "reply": {
-            "size": 2,
-            "struct": "<s",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "settingValue",
@@ -6323,7 +6321,7 @@
         "direction": 0,
         "request": {
             "size": 0,
-            "struct": "<",
+            "struct": "",
             "payload": [
                 {
                     "name": "settingIdentifier",
@@ -6356,8 +6354,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 16,
-            "struct": "<HHHHHHHH",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "throttleWeight",
@@ -6421,8 +6419,8 @@
         "mspv": 2,
         "direction": 0,
         "request": {
-            "size": 9,
-            "struct": "<BHHHH",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "motorIndex",
@@ -6469,8 +6467,8 @@
         "direction": 2,
         "request": null,
         "reply": {
-            "size": 20,
-            "struct": "<sHBBBiIHBBss",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "settingName",
@@ -6566,8 +6564,8 @@
         "mspv": 2,
         "direction": 2,
         "request": {
-            "size": 2,
-            "struct": "<H",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "pgn",
@@ -6579,8 +6577,8 @@
             ]
         },
         "reply": {
-            "size": 8,
-            "struct": "<HHH",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "pgn",
@@ -6615,8 +6613,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 9,
-            "struct": "<BIBBBB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "identifier",
@@ -6669,8 +6667,8 @@
         "mspv": 2,
         "direction": 0,
         "request": {
-            "size": 9,
-            "struct": "<BIBBBB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "identifier",
@@ -6724,8 +6722,8 @@
         "mspv": 2,
         "direction": 0,
         "request": {
-            "size": 19,
-            "struct": "<BBiiihHB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "poiIndex",
@@ -6802,8 +6800,8 @@
         "mspv": 2,
         "direction": 0,
         "request": {
-            "size": 7,
-            "struct": "<BBBBBBb",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "sublinkID",
@@ -6860,8 +6858,8 @@
         "mspv": 2,
         "direction": 0,
         "request": {
-            "size": 15,
-            "struct": "<BHHcccccccccc",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "sublinkID",
@@ -6922,8 +6920,8 @@
         "mspv": 2,
         "direction": 0,
         "request": {
-            "size": 5,
-            "struct": "<Bi",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "quality",
@@ -6951,8 +6949,8 @@
         "mspv": 2,
         "direction": 0,
         "request": {
-            "size": 9,
-            "struct": "<Bii",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "quality",
@@ -6986,8 +6984,8 @@
         "mspv": 2,
         "direction": 0,
         "request": {
-            "size": 52,
-            "struct": "<BHIBBHHHHiiiiiiHHHBBBBB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "instance",
@@ -7134,8 +7132,8 @@
         "mspv": 2,
         "direction": 0,
         "request": {
-            "size": 11,
-            "struct": "<BIhhh",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "instance",
@@ -7180,8 +7178,8 @@
         "mspv": 2,
         "direction": 0,
         "request": {
-            "size": 11,
-            "struct": "<BIfh",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "instance",
@@ -7220,8 +7218,8 @@
         "mspv": 2,
         "direction": 0,
         "request": {
-            "size": 11,
-            "struct": "<BIfh",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "instance",
@@ -7261,7 +7259,7 @@
         "direction": 0,
         "request": {
             "size": 0,
-            "struct": "<",
+            "struct": "",
             "payload": [
                 {
                     "name": "...",
@@ -7285,14 +7283,14 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 22,
-            "struct": "<HHHHBIQB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "cycleTime",
                     "ctype": "uint16_t",
                     "desc": "Main loop cycle time",
-                    "units": "\u00b5s"
+                    "units": "µs"
                 },
                 {
                     "name": "i2cErrors",
@@ -7350,8 +7348,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 9,
-            "struct": "<Bhhhh",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "quality",
@@ -7397,8 +7395,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 24,
-            "struct": "<BHHIIIIBH",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "batteryFlags",
@@ -7469,8 +7467,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 41,
-            "struct": "<HHHHHBBBBHHBBHHHHIIIB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "midRc",
@@ -7615,8 +7613,8 @@
         "mspv": 2,
         "direction": 0,
         "request": {
-            "size": 41,
-            "struct": "<HHHHHBBBBHHBBHHHHIIIB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "midRc",
@@ -7760,8 +7758,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 29,
-            "struct": "<HBBHHHHHHIIIB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "vbatScale",
@@ -7856,8 +7854,8 @@
         "mspv": 2,
         "direction": 0,
         "request": {
-            "size": 29,
-            "struct": "<HBBHHHHHHIIIB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "vbatScale",
@@ -7954,8 +7952,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 15,
-            "struct": "<BBBHBBBBBBBBBB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "throttleMid",
@@ -8054,8 +8052,8 @@
         "mspv": 2,
         "direction": 0,
         "request": {
-            "size": 15,
-            "struct": "<BBBHBBBBBBBBBB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "throttleMid",
@@ -8156,8 +8154,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 4,
-            "struct": "<I",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "airspeed",
@@ -8179,8 +8177,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 1,
-            "struct": "<B",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "usageFlags",
@@ -8203,8 +8201,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 14,
-            "struct": "<HHHBHHHB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "brakingSpeedThreshold",
@@ -8267,8 +8265,8 @@
         "mspv": 2,
         "direction": 0,
         "request": {
-            "size": 14,
-            "struct": "<HHHBHHHB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "brakingSpeedThreshold",
@@ -8333,8 +8331,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 2,
-            "struct": "<BB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "timerId",
@@ -8363,8 +8361,8 @@
         "direction": 2,
         "request": null,
         "reply": {
-            "size": 2,
-            "struct": "<BB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "timerIndex",
@@ -8393,8 +8391,8 @@
         "mspv": 2,
         "direction": 0,
         "request": {
-            "size": 2,
-            "struct": "<BB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "timerIndex",
@@ -8424,8 +8422,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 9,
-            "struct": "<BBBBBHBB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "motorDirectionInverted",
@@ -8491,8 +8489,8 @@
         "mspv": 2,
         "direction": 0,
         "request": {
-            "size": 9,
-            "struct": "<BBBBBHBB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "motorDirectionInverted",
@@ -8557,8 +8555,8 @@
         "direction": 2,
         "request": null,
         "reply": {
-            "size": 2,
-            "struct": "<BB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "layoutCount",
@@ -8585,8 +8583,8 @@
         "mspv": 2,
         "direction": 0,
         "request": {
-            "size": 4,
-            "struct": "<BBH",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "layoutIndex",
@@ -8622,8 +8620,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 28,
-            "struct": "<BHHHHHhhBHHHHHH",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "rssiAlarm",
@@ -8728,8 +8726,8 @@
         "mspv": 2,
         "direction": 0,
         "request": {
-            "size": 24,
-            "struct": "<BHHHHHhhBHHHH",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "rssiAlarm",
@@ -8824,8 +8822,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 9,
-            "struct": "<BBBBBBBBB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "videoSystem",
@@ -8898,8 +8896,8 @@
         "mspv": 2,
         "direction": 0,
         "request": {
-            "size": 9,
-            "struct": "<BBBBBBBBB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "videoSystem",
@@ -8970,8 +8968,8 @@
         "mspv": 2,
         "direction": 0,
         "request": {
-            "size": 1,
-            "struct": "<B",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "batteryProfileIndex",
@@ -8995,7 +8993,7 @@
         "request": null,
         "reply": {
             "size": 0,
-            "struct": "<",
+            "struct": "",
             "payload": [
                 {
                     "name": "debugValues",
@@ -9009,7 +9007,7 @@
             ]
         },
         "variable_len": true,
-        "complex": true,
+        "complex": false,
         "notes": "`DEBUG32_VALUE_COUNT` is usually 8.",
         "description": "Retrieves values from the firmware's 32-bit `debug[]` array. Supersedes `MSP_DEBUG`."
     },
@@ -9020,8 +9018,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 10,
-            "struct": "<BBHHI",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "blackboxSupported",
@@ -9067,8 +9065,8 @@
         "mspv": 2,
         "direction": 0,
         "request": {
-            "size": 9,
-            "struct": "<BHHI",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "blackboxDevice",
@@ -9109,8 +9107,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 15,
-            "struct": "<BQHHBs",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "type",
@@ -9166,8 +9164,8 @@
         "mspv": 2,
         "direction": 0,
         "request": {
-            "size": 15,
-            "struct": "<BQHHBs",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "type",
@@ -9224,8 +9222,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 2,
-            "struct": "<h",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "temperature",
@@ -9247,8 +9245,8 @@
         "mspv": 2,
         "direction": 2,
         "request": {
-            "size": 58,
-            "struct": "<BBBBiiiHHhhhhhhhhhhhhIhhhBHB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "simulatorVersion",
@@ -9421,8 +9419,8 @@
             ]
         },
         "reply": {
-            "size": 83,
-            "struct": "<HHHHBIhhhBBBBBB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "stabilizedRoll",
@@ -9531,8 +9529,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 12,
-            "struct": "<BBHBBBBHBB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "targetChannel",
@@ -9543,9 +9541,9 @@
                 {
                     "name": "inputSource",
                     "ctype": "uint8_t",
-                    "desc": "Enum: Input source (`mixerSource_t`)",
+                    "desc": "Enum `inputSource_e` Input source",
                     "units": "",
-                    "enum": "mixerSource_t"
+                    "enum": "inputSource_e"
                 },
                 {
                     "name": "rate",
@@ -9575,9 +9573,10 @@
                 {
                     "name": "inputSource",
                     "ctype": "uint8_t",
-                    "desc": "(Optional) Profile 2 Input source",
+                    "desc": "(Optional) Profile 2 Enum `inputSource_e` Input source",
                     "units": "",
-                    "optional": true
+                    "optional": true,
+                    "enum": "inputSource_e"
                 },
                 {
                     "name": "rate",
@@ -9614,8 +9613,8 @@
         "mspv": 2,
         "direction": 0,
         "request": {
-            "size": 7,
-            "struct": "<BBBHBB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "ruleIndex",
@@ -9632,9 +9631,9 @@
                 {
                     "name": "inputSource",
                     "ctype": "uint8_t",
-                    "desc": "Enum: Input source (`mixerSource_t`)",
+                    "desc": "Enum `inputSource_e` Input source",
                     "units": "",
-                    "enum": "mixerSource_t"
+                    "enum": "inputSource_e"
                 },
                 {
                     "name": "rate",
@@ -9669,8 +9668,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 14,
-            "struct": "<BBBBIBIB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "enabled",
@@ -9687,7 +9686,7 @@
                 {
                     "name": "operation",
                     "ctype": "uint8_t",
-                    "desc": "Enum `logicConditionOp_e`: Logical operation (AND, OR, XOR, etc.)",
+                    "desc": "Enum `logicConditionOp_e` Logical operation (AND, OR, XOR, etc.)",
                     "units": "",
                     "enum": "logicConditionOp_e"
                 },
@@ -9737,8 +9736,8 @@
         "mspv": 2,
         "direction": 0,
         "request": {
-            "size": 15,
-            "struct": "<BBBBBIBIB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "conditionIndex",
@@ -9761,14 +9760,14 @@
                 {
                     "name": "operation",
                     "ctype": "uint8_t",
-                    "desc": "Enum `logicConditionOp_e`: Logical operation",
+                    "desc": "Enum `logicConditionOp_e` Logical operation",
                     "units": "",
                     "enum": "logicConditionOp_e"
                 },
                 {
                     "name": "operandAType",
                     "ctype": "uint8_t",
-                    "desc": "Enum `logicOperandType_e`: Type of operand A",
+                    "desc": "Enum `logicOperandType_e` Type of operand A",
                     "units": "",
                     "enum": "logicOperandType_e"
                 },
@@ -9781,7 +9780,7 @@
                 {
                     "name": "operandBType",
                     "ctype": "uint8_t",
-                    "desc": "Enum `logicOperandType_e`: Type of operand B",
+                    "desc": "Enum `logicOperandType_e` Type of operand B",
                     "units": "",
                     "enum": "logicOperandType_e"
                 },
@@ -9825,7 +9824,7 @@
         "request": null,
         "reply": {
             "size": 0,
-            "struct": "<IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII",
+            "struct": "",
             "payload": [
                 {
                     "name": "conditionValues",
@@ -9851,7 +9850,7 @@
         "request": null,
         "reply": {
             "size": 0,
-            "struct": "<IIIIIIII",
+            "struct": "",
             "payload": [
                 {
                     "name": "gvarValues",
@@ -9876,8 +9875,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 19,
-            "struct": "<BBIBIHHHH",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "enabled",
@@ -9888,7 +9887,7 @@
                 {
                     "name": "setpointType",
                     "ctype": "uint8_t",
-                    "desc": "Enum (`logicOperandType_e`): Type of the setpoint source",
+                    "desc": "Enum (`logicOperandType_e`) Type of the setpoint source",
                     "units": "",
                     "enum": "logicOperandType_e"
                 },
@@ -9901,7 +9900,7 @@
                 {
                     "name": "measurementType",
                     "ctype": "uint8_t",
-                    "desc": "Enum (`logicOperandType_e`): Type of the measurement source",
+                    "desc": "Enum (`logicOperandType_e`) Type of the measurement source",
                     "units": "",
                     "enum": "logicOperandType_e"
                 },
@@ -9949,8 +9948,8 @@
         "mspv": 2,
         "direction": 0,
         "request": {
-            "size": 20,
-            "struct": "<BBBIBIHHHH",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "pidIndex",
@@ -9967,9 +9966,9 @@
                 {
                     "name": "setpointType",
                     "ctype": "uint8_t",
-                    "desc": "Enum: Type of the setpoint source",
+                    "desc": "Enum (`logicOperandType_e`) Type of the setpoint source",
                     "units": "",
-                    "enum": "?_e"
+                    "enum": "logicOperandType_e"
                 },
                 {
                     "name": "setpointValue",
@@ -9980,9 +9979,9 @@
                 {
                     "name": "measurementType",
                     "ctype": "uint8_t",
-                    "desc": "Enum: Type of the measurement source",
+                    "desc": "Enum (`logicOperandType_e`) Type of the measurement source",
                     "units": "",
-                    "enum": "?_e"
+                    "enum": "logicOperandType_e"
                 },
                 {
                     "name": "measurementValue",
@@ -10030,7 +10029,7 @@
         "request": null,
         "reply": {
             "size": 0,
-            "struct": "<IIII",
+            "struct": "",
             "payload": [
                 {
                     "name": "pidOutputs",
@@ -10055,8 +10054,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 4,
-            "struct": "<BBBB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "P",
@@ -10096,8 +10095,8 @@
         "mspv": 2,
         "direction": 0,
         "request": {
-            "size": 4,
-            "struct": "<BBBB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "P",
@@ -10150,8 +10149,8 @@
         "mspv": 2,
         "direction": 0,
         "request": {
-            "size": 4,
-            "struct": "<I",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "firmwareSize",
@@ -10173,8 +10172,8 @@
         "mspv": 2,
         "direction": 0,
         "request": {
-            "size": 4,
-            "struct": "<I",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "firmwareChunk",
@@ -10199,8 +10198,8 @@
         "mspv": 2,
         "direction": 0,
         "request": {
-            "size": 1,
-            "struct": "<B",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "updateType",
@@ -10246,8 +10245,8 @@
         "mspv": 2,
         "direction": 2,
         "request": {
-            "size": 1,
-            "struct": "<B",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "safehomeIndex",
@@ -10258,8 +10257,8 @@
             ]
         },
         "reply": {
-            "size": 11,
-            "struct": "<BBii",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "safehomeIndex",
@@ -10298,8 +10297,8 @@
         "mspv": 2,
         "direction": 0,
         "request": {
-            "size": 10,
-            "struct": "<BBii",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "safehomeIndex",
@@ -10340,8 +10339,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 10,
-            "struct": "<IIBB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "uptimeSeconds",
@@ -10380,8 +10379,8 @@
         "mspv": 2,
         "direction": 2,
         "request": {
-            "size": 1,
-            "struct": "<B",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "conditionIndex",
@@ -10392,8 +10391,8 @@
             ]
         },
         "reply": {
-            "size": 15,
-            "struct": "<BBBBIBIB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "enabled",
@@ -10410,9 +10409,9 @@
                 {
                     "name": "operation",
                     "ctype": "uint8_t",
-                    "desc": "Enum: Logical operation",
+                    "desc": "Enum `logicConditionOp_e` Logical operation",
                     "units": "",
-                    "enum": "?_e"
+                    "enum": "logicConditionOp_e"
                 },
                 {
                     "name": "operandAType",
@@ -10460,8 +10459,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 4,
-            "struct": "<I",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "escRpm",
@@ -10484,8 +10483,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 1,
-            "struct": "<B",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "motorCount",
@@ -10505,7 +10504,7 @@
             ]
         },
         "variable_len": true,
-        "complex": true,
+        "complex": false,
         "notes": "Requires `USE_ESC_SENSOR`. See `escSensorData_t` in `sensors/esc_sensor.h` for the exact structure fields.",
         "description": "Retrieves the full telemetry data structure reported by each ESC."
     },
@@ -10517,7 +10516,7 @@
         "request": null,
         "reply": {
             "size": 0,
-            "struct": "<",
+            "struct": "",
             "payload": [
                 {
                     "name": "ledConfig",
@@ -10529,7 +10528,7 @@
             "repeating": "LED_MAX_STRIP_LENGTH"
         },
         "variable_len": "LED_MAX_STRIP_LENGTH",
-        "complex": true,
+        "complex": false,
         "notes": "Requires `USE_LED_STRIP`. See `ledConfig_t` in `io/ledstrip.h` for structure fields (position, function, overlay, color, direction, params).",
         "description": "Retrieves the full configuration for each LED on the strip using the `ledConfig_t` structure. Supersedes `MSP_LED_STRIP_CONFIG`."
     },
@@ -10539,8 +10538,8 @@
         "mspv": 2,
         "direction": 0,
         "request": {
-            "size": 1,
-            "struct": "<B",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "ledIndex",
@@ -10558,7 +10557,7 @@
         },
         "reply": null,
         "variable_len": false,
-        "complex": true,
+        "complex": false,
         "notes": "Requires `USE_LED_STRIP`. Expects `1 + sizeof(ledConfig_t)` bytes. Returns error if index invalid. Calls `reevaluateLedConfig()`.",
         "description": "Sets the configuration for a single LED on the strip using the `ledConfig_t` structure. Supersedes `MSP_SET_LED_STRIP_CONFIG`."
     },
@@ -10568,8 +10567,8 @@
         "mspv": 2,
         "direction": 2,
         "request": {
-            "size": 1,
-            "struct": "<B",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "approachIndex",
@@ -10580,8 +10579,8 @@
             ]
         },
         "reply": {
-            "size": 16,
-            "struct": "<BIIBhhB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "approachIndex",
@@ -10639,8 +10638,8 @@
         "mspv": 2,
         "direction": 0,
         "request": {
-            "size": 15,
-            "struct": "<BIIBhhB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "approachIndex",
@@ -10699,8 +10698,8 @@
         "mspv": 2,
         "direction": 0,
         "request": {
-            "size": 1,
-            "struct": "<B",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "ubxCommand",
@@ -10726,8 +10725,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 6,
-            "struct": "<BBBBBB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "sensitivityCenter",
@@ -10778,8 +10777,8 @@
         "mspv": 2,
         "direction": 0,
         "request": {
-            "size": 6,
-            "struct": "<BBBBBB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "sensitivityCenter",
@@ -10832,8 +10831,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 11,
-            "struct": "<BHBBBBBBBB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "enabled",
@@ -10908,8 +10907,8 @@
         "mspv": 2,
         "direction": 0,
         "request": {
-            "size": 11,
-            "struct": "<BHBBBBBBBB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "enabled",
@@ -10986,8 +10985,8 @@
         "mspv": 2,
         "direction": 0,
         "request": {
-            "size": 1,
-            "struct": "<B",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "mixerProfileIndex",
@@ -11013,7 +11012,7 @@
         "variable_len": "maxVehicles",
         "complex": false,
         "notes": "Requires `USE_ADSB`.",
-        "description": "Retrieves the list of currently tracked ADSB (Automatic Dependent Surveillance\u2013Broadcast) vehicles."
+        "description": "Retrieves the list of currently tracked ADSB (Automatic Dependent Surveillance–Broadcast) vehicles."
     },
     "MSP2_INAV_CUSTOM_OSD_ELEMENTS": {
         "code": 8448,
@@ -11022,8 +11021,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 3,
-            "struct": "<BBB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "maxElements",
@@ -11056,8 +11055,8 @@
         "mspv": 2,
         "direction": 2,
         "request": {
-            "size": 1,
-            "struct": "<B",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "elementIndex",
@@ -11092,8 +11091,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 6,
-            "struct": "<BIB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "timerId",
@@ -11129,8 +11128,8 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 7,
-            "struct": "<HHHB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "min",
@@ -11170,8 +11169,8 @@
         "mspv": 2,
         "direction": 0,
         "request": {
-            "size": 8,
-            "struct": "<BHHHB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "servoIndex",
@@ -11217,8 +11216,8 @@
         "mspv": 2,
         "direction": 2,
         "request": {
-            "size": 1,
-            "struct": "<B",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "geozoneIndex",
@@ -11229,8 +11228,8 @@
             ]
         },
         "reply": {
-            "size": 15,
-            "struct": "<BBBIIBBB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "geozoneIndex",
@@ -11294,8 +11293,8 @@
         "mspv": 2,
         "direction": 0,
         "request": {
-            "size": 14,
-            "struct": "<BBBIIBBB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "geozoneIndex",
@@ -11360,8 +11359,8 @@
         "mspv": 2,
         "direction": 2,
         "request": {
-            "size": 2,
-            "struct": "<BB",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "geozoneIndex",
@@ -11378,8 +11377,8 @@
             ]
         },
         "reply": {
-            "size": 12,
-            "struct": "<BBii",
+            "size": 0,
+            "struct": "",
             "payload": [
                 {
                     "name": "geozoneIndex",

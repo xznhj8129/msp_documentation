@@ -399,7 +399,7 @@ def _parse_table_from_block(block: str) -> List[Dict[str, Any]]:
 
         if isoptional:
             val["optional"] = True 
-        if isenum:
+        if isenum and always is None:
             # if True without a specific name, annotate opaque enum
             if isinstance(isenum, str):
                 val["enum"] = isenum

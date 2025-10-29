@@ -60,10 +60,12 @@ for msg_code in msp:
                             except:
                                 defval = get_define(idx)
                             if not defval:
-                                print("NEVERMIND THIS ONE")
-                                msp[msg_code]['complex'] = True
-                                abort = True
-                                break
+                                defval = 0
+                                #raise Exception
+                                #print("NEVERMIND THIS ONE")
+                                #msp[msg_code]['complex'] = True
+                                #abort = True
+                                #break
                             char_code = dt * defval
                             print(defval, char_code)
 
