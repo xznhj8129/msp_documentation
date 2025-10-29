@@ -81,7 +81,8 @@ for msg_code in msp:
                             char_code = dt
                 msp[msg_code][direction]["payload"][fieldidx]["struct"] = char_code
                 print("char_code", char_code)
-                structstr += char_code  
+                if char_code!= "struct":
+                    structstr += char_code  
 
 
                 if char_code in ['x']: # padding byte, counts as 1

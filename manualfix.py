@@ -8,7 +8,8 @@ MSP_SET_VTX_CONFIG = """{
             {
                 "name": "newFrequency",
                 "ctype": "uint16_t",
-                "desc": "If <= VTXCOMMON_MSP_BANDCHAN_CHKVAL, value encodes (band,channel) as ((band-1)*8 + (channel-1)). Otherwise raw frequency (MHz)."
+                "desc": "If <= VTXCOMMON_MSP_BANDCHAN_CHKVAL, value encodes (band,channel) as ((band-1)*8 + (channel-1)). Otherwise raw frequency (MHz).",
+                "struct": "H"
             },
 
             
@@ -18,12 +19,14 @@ MSP_SET_VTX_CONFIG = """{
                 {
                     "name": "newPower",
                     "ctype": "uint8_t",
-                    "desc": "VTX power level index."
+                    "desc": "VTX power level index.",
+                    "struct": "B"
                 },
                 {
                     "name": "newPitmode",
                     "ctype": "uint8_t",
-                    "desc": "Pit mode (0/1)."
+                    "desc": "Pit mode (0/1).",
+                    "struct": "B"
                 },
 
                 {
@@ -32,7 +35,8 @@ MSP_SET_VTX_CONFIG = """{
                     {
                         "name": "lowPowerDisarm",
                         "ctype": "uint8_t",
-                        "desc": "Low power on disarm (0/1)."
+                        "desc": "Low power on disarm (0/1).",
+                        "struct": "B"
                     }
                     ]
                 },
@@ -43,7 +47,8 @@ MSP_SET_VTX_CONFIG = """{
                     {
                         "name": "pitModeFreq",
                         "ctype": "uint16_t",
-                        "desc": "Pit mode frequency (skipped by firmware if present)."
+                        "desc": "Pit mode frequency (skipped by firmware if present).",
+                        "struct": "H"
                     }
                     ]
                 },
@@ -54,12 +59,14 @@ MSP_SET_VTX_CONFIG = """{
                     {
                         "name": "bandOverride",
                         "ctype": "uint8_t",
-                        "desc": "Explicit band (overrides encoded band if provided)."
+                        "desc": "Explicit band (overrides encoded band if provided).",
+                        "struct": "B"
                     },
                     {
                         "name": "channelOverride",
                         "ctype": "uint8_t",
-                        "desc": "Explicit channel (overrides encoded channel if provided)."
+                        "desc": "Explicit channel (overrides encoded channel if provided).",
+                        "struct": "B"
                     }
                     ]
                 },
@@ -70,7 +77,8 @@ MSP_SET_VTX_CONFIG = """{
                     {
                         "name": "freqOverride",
                         "ctype": "uint16_t",
-                        "desc": "Explicit frequency (MHz)."
+                        "desc": "Explicit frequency (MHz).",
+                        "struct": "H"
                     }
                     ]
                 },
@@ -81,17 +89,20 @@ MSP_SET_VTX_CONFIG = """{
                     {
                         "name": "bandCount",
                         "ctype": "uint8_t",
-                        "desc": "Reported band count."
+                        "desc": "Reported band count.",
+                        "struct": "B"
                     },
                     {
                         "name": "channelCount",
                         "ctype": "uint8_t",
-                        "desc": "Reported channels per band."
+                        "desc": "Reported channels per band.",
+                        "struct": "B"
                     },
                     {
                         "name": "powerCount",
                         "ctype": "uint8_t",
-                        "desc": "Reported power level count (may clamp device capability)."
+                        "desc": "Reported power level count (may clamp device capability).",
+                        "struct": "B"
                     }
                     ]
                 }
@@ -119,50 +130,58 @@ fixes = """{
                         "ctype": "uint8_t",
                         "desc": "Enum `videoSystem_e`: Video system (Auto/PAL/NTSC) (`osdConfig()->video_system`). Sent even if OSD disabled",
                         "units": "Enum",
-                        "enum": "videoSystem_e"
+                        "enum": "videoSystem_e",
+                        "struct": "B"
                     },
                     {
                         "name": "units",
                         "ctype": "uint8_t",
                         "desc": "Enum `osd_unit_e` Measurement units (Metric/Imperial) (`osdConfig()->units`). Sent even if OSD disabled",
                         "units": "Enum",
-                        "enum": "osd_unit_e"
+                        "enum": "osd_unit_e",
+                        "struct": "B"
                     },
                     {
                         "name": "rssiAlarm",
                         "ctype": "uint8_t",
                         "desc": "RSSI alarm threshold (`osdConfig()->rssi_alarm`). Sent even if OSD disabled",
-                        "units": "%"
+                        "units": "%",
+                        "struct": "B"
                     },
                     {
                         "name": "capAlarm",
                         "ctype": "uint16_t",
                         "desc": "Capacity alarm threshold (`currentBatteryProfile->capacity.warning`). Sent even if OSD disabled",
-                        "units": "mAh/mWh"
+                        "units": "mAh/mWh",
+                        "struct": "H"
                     },
                     {
                         "name": "timerAlarm",
                         "ctype": "uint16_t",
                         "desc": "Timer alarm threshold (`osdConfig()->time_alarm`). Sent even if OSD disabled",
-                        "units": "seconds"
+                        "units": "seconds",
+                        "struct": "H"
                     },
                     {
                         "name": "altAlarm",
                         "ctype": "uint16_t",
                         "desc": "Altitude alarm threshold (`osdConfig()->alt_alarm`). Sent even if OSD disabled",
-                        "units": "meters"
+                        "units": "meters",
+                        "struct": "H"
                     },
                     {
                         "name": "distAlarm",
                         "ctype": "uint16_t",
                         "desc": "Distance alarm threshold (`osdConfig()->dist_alarm`). Sent even if OSD disabled",
-                        "units": "meters"
+                        "units": "meters",
+                        "struct": "H"
                     },
                     {
                         "name": "negAltAlarm",
                         "ctype": "uint16_t",
                         "desc": "Negative altitude alarm threshold (`osdConfig()->neg_alt_alarm`). Sent even if OSD disabled",
-                        "units": "meters"
+                        "units": "meters",
+                        "struct": "H"
                     }
                 ],
                 "reply": null
@@ -179,7 +198,8 @@ fixes = """{
                         "array": true,
                         "array_ctype": "uint16_t",
                         "array_size": "OSD_ITEM_COUNT",
-                        "units": "Coordinates"
+                        "units": "Coordinates",
+                        "struct": "H"
                     }
                 ]   
 
@@ -199,7 +219,8 @@ fixes = """{
                 {
                 "name": "address",
                 "ctype": "uint16_t",
-                "desc": "16-bit character address"
+                "desc": "16-bit character address",
+                "struct": "H"
                 },
                 {
                 "name": "charData",
@@ -207,7 +228,8 @@ fixes = """{
                 "desc": "Full character bytes (with metadata)",
                 "array": true,
                 "array_ctype": "uint8_t",
-                "array_size": "OSD_CHAR_BYTES"
+                "array_size": "OSD_CHAR_BYTES",
+                "struct": "B"
                 }
             ]
             },
@@ -221,7 +243,8 @@ fixes = """{
                 {
                 "name": "address",
                 "ctype": "uint8_t",
-                "desc": "8-bit character address"
+                "desc": "8-bit character address",
+                "struct": "B"
                 },
                 {
                 "name": "charData",
@@ -229,7 +252,8 @@ fixes = """{
                 "desc": "Full character bytes (with metadata)",
                 "array": true,
                 "array_ctype": "uint8_t",
-                "array_size": "OSD_CHAR_BYTES"
+                "array_size": "OSD_CHAR_BYTES",
+                "struct": "B"
                 }
             ]
             },
@@ -243,7 +267,8 @@ fixes = """{
                 {
                 "name": "address",
                 "ctype": "uint16_t",
-                "desc": "16-bit character address"
+                "desc": "16-bit character address",
+                "struct": "H"
                 },
                 {
                 "name": "charData",
@@ -251,7 +276,8 @@ fixes = """{
                 "desc": "Only visible character bytes (no metadata)",
                 "array": true,
                 "array_ctype": "uint8_t",
-                "array_size": "OSD_CHAR_VISIBLE_BYTES"
+                "array_size": "OSD_CHAR_VISIBLE_BYTES",
+                "struct": "B"
                 }
             ]
             },
@@ -265,7 +291,8 @@ fixes = """{
                 {
                 "name": "address",
                 "ctype": "uint8_t",
-                "desc": "8-bit character address"
+                "desc": "8-bit character address",
+                "struct": "B"
                 },
                 {
                 "name": "charData",
@@ -273,7 +300,8 @@ fixes = """{
                 "desc": "Only visible character bytes (no metadata)",
                 "array": true,
                 "array_ctype": "uint8_t",
-                "array_size": "OSD_CHAR_VISIBLE_BYTES"
+                "array_size": "OSD_CHAR_VISIBLE_BYTES",
+                "struct": "B"
                 }
             ]
             },
@@ -294,7 +322,8 @@ fixes = """{
                 "name": "tz_offset",
                 "ctype": "int16_t",
                 "desc": "Timezone offset from UTC.",
-                "units": "minutes"
+                "units": "minutes",
+                "struct": "h"
                 }
             ]
             },
@@ -309,13 +338,15 @@ fixes = """{
                 "name": "tz_offset",
                 "ctype": "int16_t",
                 "desc": "Timezone offset from UTC.",
-                "units": "minutes"
+                "units": "minutes",
+                "struct": "h"
                 },
                 {
                 "name": "tz_automatic_dst",
                 "ctype": "uint8_t",
                 "desc": "Automatic DST enable (0/1).",
-                "units": "bool"
+                "units": "bool",
+                "struct": "B"
                 }
             ]
             },
@@ -364,7 +395,7 @@ structs = {
         { "name": "rpm",         "ctype": "uint32_t" }
     ]
 }
-fmt = "<" + "".join(bin_type_map[f["ctype"]] for f in structs["escSensorData_t"])
+fmt = "".join(bin_type_map[f["ctype"]] for f in structs["escSensorData_t"])
 msp["MSP2_INAV_ESC_TELEM"]["reply"]["payload"][1]["struct"] = fmt
 
 with open("lib/msp_messages.json","w+") as file:

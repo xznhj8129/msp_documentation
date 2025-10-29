@@ -1179,11 +1179,33 @@
 
 ## <a id="msp_osd_config"></a>`MSP_OSD_CONFIG (84 / 0x54)`
 **Description:** Retrieves OSD configuration settings and layout for screen 0.  
-**Special case, skipped for now**
+
+**Request Payload:** None  
+  
+**Reply Payload:**
+| Field | C Type | Size (Bytes) | Units | Description |
+|---|---|---|---|---|
+| `osdDriverType` | `uint8_t` | 1 | [OSD_DRIVER_MAX7456](https://github.com/xznhj8129/msp_documentation/blob/master/docs/inav_enums_ref.md#enum-osd_driver_max7456) | Enum `OSD_DRIVER_MAX7456` if `USE_OSD`, else `OSD_DRIVER_NONE |
+| `videoSystem` | `uint8_t` | 1 | [videoSystem_e](https://github.com/xznhj8129/msp_documentation/blob/master/docs/inav_enums_ref.md#enum-videosystem_e) | Enum `videoSystem_e`: Video system (Auto/PAL/NTSC) (`osdConfig()->video_system`). Sent even if OSD disabled |
+| `units` | `uint8_t` | 1 | [osd_unit_e](https://github.com/xznhj8129/msp_documentation/blob/master/docs/inav_enums_ref.md#enum-osd_unit_e) | Enum `osd_unit_e` Measurement units (Metric/Imperial) (`osdConfig()->units`). Sent even if OSD disabled |
+| `rssiAlarm` | `uint8_t` | 1 | % | RSSI alarm threshold (`osdConfig()->rssi_alarm`). Sent even if OSD disabled |
+| `capAlarm` | `uint16_t` | 2 | mAh/mWh | Capacity alarm threshold (`currentBatteryProfile->capacity.warning`). Sent even if OSD disabled |
+| `timerAlarm` | `uint16_t` | 2 | seconds | Timer alarm threshold (`osdConfig()->time_alarm`). Sent even if OSD disabled |
+| `altAlarm` | `uint16_t` | 2 | meters | Altitude alarm threshold (`osdConfig()->alt_alarm`). Sent even if OSD disabled |
+| `distAlarm` | `uint16_t` | 2 | meters | Distance alarm threshold (`osdConfig()->dist_alarm`). Sent even if OSD disabled |
+| `negAltAlarm` | `uint16_t` | 2 | meters | Negative altitude alarm threshold (`osdConfig()->neg_alt_alarm`). Sent even if OSD disabled |
+| `itemPositions` | `uint16_t[OSD_ITEM_COUNT]` | OSD_ITEM_COUNT * 2 | Coordinates | Packed X/Y position for each OSD item on screen 0 (`osdLayoutsConfig()->item_pos[0][i]`). Sent even if OSD disabled |
+
+**Notes:** Requires `USE_OSD` for meaningful data, but payload is always sent. Coordinates are packed: `(Y << 8) | X`. See `MSP2_INAV_OSD_*` commands for more detail and multi-layout support.
 
 ## <a id="msp_set_osd_config"></a>`MSP_SET_OSD_CONFIG (85 / 0x55)`
 **Description:** Sets OSD configuration or a single item's position on screen 0.  
-**Special case, skipped for now**
+
+**Request Payload:** None  
+
+**Reply Payload:** None
+
+**Notes:** Requires `USE_OSD`. Distinguishes formats based on the first byte. Format 1 requires at least 10 bytes. Format 2 requires 3 bytes. Triggers an OSD redraw. See `MSP2_INAV_OSD_SET_*` for more advanced control.
 
 ## <a id="msp_osd_char_read"></a>`MSP_OSD_CHAR_READ (86 / 0x56)`
 **Description:** Reads character data from the OSD font memory.  
@@ -1196,7 +1218,16 @@
 
 ## <a id="msp_osd_char_write"></a>`MSP_OSD_CHAR_WRITE (87 / 0x57)`
 **Description:** Writes character data to the OSD font memory.  
-**Special case, skipped for now**
+  
+**Request Payload:**
+| Field | C Type | Size (Bytes) | Units | Description |
+|---|---|---|---|---|
+| `address` | `uint8_t` or `uint16_t` | - | - | Starting address in font memory. Size depends on total payload size |
+| `charData` | `uint8_t[]` | - | - | Character bitmap data (54 or 64 bytes per char, depending on format) |
+
+**Reply Payload:** None
+
+**Notes:** Requires `USE_OSD`. Payload size determines address size (8/16 bit) and character data size (visible bytes only or full char with metadata). Uses `displayWriteFontCharacter()`. Requires OSD hardware (like MAX7456) to be present and functional.
 
 ## <a id="msp_vtx_config"></a>`MSP_VTX_CONFIG (88 / 0x58)`
 **Description:** Retrieves the current VTX (Video Transmitter) configuration and capabilities.  
@@ -1206,7 +1237,7 @@
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
-| `vtxDeviceType` | `uint8_t` | 1 | [VTXDEV_*](https://github.com/xznhj8129/msp_documentation/blob/master/docs/inav_enums_ref.md#enum-vtxdev_*) | Enum (`VTXDEV_*`): Type of VTX device detected/configured. `VTXDEV_UNKNOWN` if none |
+| `vtxDeviceType` | `uint8_t` | 1 | [vtxDevType_e](https://github.com/xznhj8129/msp_documentation/blob/master/docs/inav_enums_ref.md#enum-vtxdevtype_e) | Enum (`vtxDevType_e`): Type of VTX device detected/configured. `VTXDEV_UNKNOWN` if none |
 | `band` | `uint8_t` | 1 | - | VTX band number (from `vtxSettingsConfig`) |
 | `channel` | `uint8_t` | 1 | - | VTX channel number (from `vtxSettingsConfig`) |
 | `power` | `uint8_t` | 1 | - | VTX power level index (from `vtxSettingsConfig`) |
@@ -1745,8 +1776,8 @@
 **Reply Payload:**
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
-| `gyroAlign` | `uint8_t` | 1 | [ENUM_NAME](LINK_TO_ENUM) | Always 0 (Legacy alignment enum) |
-| `accAlign` | `uint8_t` | 1 | [ENUM_NAME](LINK_TO_ENUM) | Always 0 (Legacy alignment enum) |
+| `gyroAlign` | `uint8_t` | 1 | - | Always 0 (Legacy alignment enum) |
+| `accAlign` | `uint8_t` | 1 | - | Always 0 (Legacy alignment enum) |
 | `magAlign` | `uint8_t` | 1 | - | Magnetometer alignment (`compassConfig()->mag_align`). 0 if `USE_MAG` disabled |
 | `opflowAlign` | `uint8_t` | 1 | - | Optical flow alignment (`opticalFlowConfig()->opflow_align`). 0 if `USE_OPFLOW` disabled |
 
@@ -2230,7 +2261,7 @@
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
 | `targetChannel` | `uint8_t` | 1 | Index | Servo output channel index (0-based) |
-| `inputSource` | `uint8_t` | 1 | [ENUM_NAME](LINK_TO_ENUM) | Input source for the mix (RC chan, Roll, Pitch...). See `mixerSource_t |
+| `inputSource` | `uint8_t` | 1 | [inputSource_e](https://github.com/xznhj8129/msp_documentation/blob/master/docs/inav_enums_ref.md#enum-inputsource_e) | Enum `inputSource_e` Input source for the mix (RC chan, Roll, Pitch...) |
 | `rate` | `uint16_t` | 2 | % * 100? | Mixing rate/weight. Needs scaling check |
 | `speed` | `uint8_t` | 1 | 0-100 | Speed/Slew rate limit |
 | `reserved1` | `uint8_t` | 1 | - | Always 0 |
@@ -2247,7 +2278,7 @@
 |---|---|---|---|---|
 | `ruleIndex` | `uint8_t` | 1 | Index | Index of the rule to set (0 to `MAX_SERVO_RULES - 1`) |
 | `targetChannel` | `uint8_t` | 1 | Index | Servo output channel index |
-| `inputSource` | `uint8_t` | 1 | [ENUM_NAME](LINK_TO_ENUM) | Input source for the mix |
+| `inputSource` | `uint8_t` | 1 | [inputSource_e](https://github.com/xznhj8129/msp_documentation/blob/master/docs/inav_enums_ref.md#enum-inputsource_e) | Enum `inputSource_e` Input source for the mix |
 | `rate` | `uint16_t` | 2 | % * 100? | Mixing rate/weight |
 | `speed` | `uint8_t` | 1 | 0-100 | Speed/Slew rate limit |
 | `legacyMinMax` | `uint16_t` | 2 | - | Ignored |
@@ -2360,7 +2391,12 @@
 
 ## <a id="msp2_common_set_tz"></a>`MSP2_COMMON_SET_TZ (4098 / 0x1002)`
 **Description:** Sets the time zone offset configuration.  
-**Special case, skipped for now**
+
+**Request Payload:** None  
+
+**Reply Payload:** None
+
+**Notes:** Accepts 2 or 3 bytes.
 
 ## <a id="msp2_common_setting"></a>`MSP2_COMMON_SETTING (4099 / 0x1003)`
 **Description:** Gets the value of a specific configuration setting, identified by name or index.  
@@ -3144,7 +3180,15 @@
 
 ## <a id="msp2_inav_debug"></a>`MSP2_INAV_DEBUG (8217 / 0x2019)`
 **Description:** Retrieves values from the firmware's 32-bit `debug[]` array. Supersedes `MSP_DEBUG`.  
-**Special case, skipped for now**
+
+**Request Payload:** None  
+  
+**Reply Payload:**
+| Field | C Type | Size (Bytes) | Units | Description |
+|---|---|---|---|---|
+| `debugValues` | `uint32_t[DEBUG32_VALUE_COUNT]` | DEBUG32_VALUE_COUNT * 4 | - | Values from the `debug` array (typically 8 values) |
+
+**Notes:** `DEBUG32_VALUE_COUNT` is usually 8.
 
 ## <a id="msp2_blackbox_config"></a>`MSP2_BLACKBOX_CONFIG (8218 / 0x201a)`
 **Description:** Retrieves the Blackbox configuration. Supersedes `MSP_BLACKBOX_CONFIG`.  
@@ -3288,12 +3332,12 @@
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
 | `targetChannel` | `uint8_t` | 1 | - | Servo output channel index (0-based) |
-| `inputSource` | `uint8_t` | 1 | [mixerSource_t](https://github.com/xznhj8129/msp_documentation/blob/master/docs/inav_enums_ref.md#enum-mixersource_t) | Enum: Input source (`mixerSource_t`) |
+| `inputSource` | `uint8_t` | 1 | [inputSource_e](https://github.com/xznhj8129/msp_documentation/blob/master/docs/inav_enums_ref.md#enum-inputsource_e) | Enum `inputSource_e` Input source |
 | `rate` | `uint16_t` | 2 | - | Mixing rate/weight |
 | `speed` | `uint8_t` | 1 | - | Speed/Slew rate limit (0-100) |
 | `conditionId` | `uint8_t` | 1 | - | Logic Condition ID (0 to `MAX_LOGIC_CONDITIONS - 1`, or 255/-1 if none/disabled) |
 | `targetChannel` | `uint8_t` | 1 | - | (Optional) Profile 2 Target channel |
-| `inputSource` | `uint8_t` | 1 | - | (Optional) Profile 2 Input source |
+| `inputSource` | `uint8_t` | 1 | [inputSource_e](https://github.com/xznhj8129/msp_documentation/blob/master/docs/inav_enums_ref.md#enum-inputsource_e) | (Optional) Profile 2 Enum `inputSource_e` Input source |
 | `rate` | `uint16_t` | 2 | - | (Optional) Profile 2 Rate |
 | `speed` | `uint8_t` | 1 | - | (Optional) Profile 2 Speed |
 | `conditionId` | `uint8_t` | 1 | - | (Optional) Profile 2 Logic Condition ID |
@@ -3308,7 +3352,7 @@
 |---|---|---|---|---|
 | `ruleIndex` | `uint8_t` | 1 | - | Index of the rule to set (0 to `MAX_SERVO_RULES - 1`) |
 | `targetChannel` | `uint8_t` | 1 | - | Servo output channel index |
-| `inputSource` | `uint8_t` | 1 | [mixerSource_t](https://github.com/xznhj8129/msp_documentation/blob/master/docs/inav_enums_ref.md#enum-mixersource_t) | Enum: Input source (`mixerSource_t`) |
+| `inputSource` | `uint8_t` | 1 | [inputSource_e](https://github.com/xznhj8129/msp_documentation/blob/master/docs/inav_enums_ref.md#enum-inputsource_e) | Enum `inputSource_e` Input source |
 | `rate` | `uint16_t` | 2 | - | Mixing rate/weight |
 | `speed` | `uint8_t` | 1 | - | Speed/Slew rate limit (0-100) |
 | `conditionId` | `uint8_t` | 1 | - | Logic Condition ID (255/-1 if none). Ignored if `USE_PROGRAMMING_FRAMEWORK` is disabled |
@@ -3327,7 +3371,7 @@
 |---|---|---|---|---|
 | `enabled` | `uint8_t` | 1 | - | Boolean: 1 if the condition is enabled |
 | `activatorId` | `uint8_t` | 1 | - | ID of the activator condition (if any, 255 if none) |
-| `operation` | `uint8_t` | 1 | [logicConditionOp_e](https://github.com/xznhj8129/msp_documentation/blob/master/docs/inav_enums_ref.md#enum-logicconditionop_e) | Enum `logicConditionOp_e`: Logical operation (AND, OR, XOR, etc.) |
+| `operation` | `uint8_t` | 1 | [logicConditionOp_e](https://github.com/xznhj8129/msp_documentation/blob/master/docs/inav_enums_ref.md#enum-logicconditionop_e) | Enum `logicConditionOp_e` Logical operation (AND, OR, XOR, etc.) |
 | `operandAType` | `uint8_t` | 1 | [logicOperandType_e](https://github.com/xznhj8129/msp_documentation/blob/master/docs/inav_enums_ref.md#enum-logicoperandtype_e) | Enum `logicOperandType_e` Type of the first operand (Flight Mode, GVAR, etc.) |
 | `operandAValue` | `uint32_t` | 4 | - | Value/ID of the first operand |
 | `operandBType` | `uint8_t` | 1 | [logicOperandType_e](https://github.com/xznhj8129/msp_documentation/blob/master/docs/inav_enums_ref.md#enum-logicoperandtype_e) | Enum `logicOperandType_e`: Type of the second operand |
@@ -3345,10 +3389,10 @@
 | `conditionIndex` | `uint8_t` | 1 | - | Index of the condition to set (0 to `MAX_LOGIC_CONDITIONS - 1`) |
 | `enabled` | `uint8_t` | 1 | - | Boolean: 1 to enable the condition |
 | `activatorId` | `uint8_t` | 1 | - | Activator condition ID |
-| `operation` | `uint8_t` | 1 | [logicConditionOp_e](https://github.com/xznhj8129/msp_documentation/blob/master/docs/inav_enums_ref.md#enum-logicconditionop_e) | Enum `logicConditionOp_e`: Logical operation |
-| `operandAType` | `uint8_t` | 1 | [logicOperandType_e](https://github.com/xznhj8129/msp_documentation/blob/master/docs/inav_enums_ref.md#enum-logicoperandtype_e) | Enum `logicOperandType_e`: Type of operand A |
+| `operation` | `uint8_t` | 1 | [logicConditionOp_e](https://github.com/xznhj8129/msp_documentation/blob/master/docs/inav_enums_ref.md#enum-logicconditionop_e) | Enum `logicConditionOp_e` Logical operation |
+| `operandAType` | `uint8_t` | 1 | [logicOperandType_e](https://github.com/xznhj8129/msp_documentation/blob/master/docs/inav_enums_ref.md#enum-logicoperandtype_e) | Enum `logicOperandType_e` Type of operand A |
 | `operandAValue` | `uint32_t` | 4 | - | Value/ID of operand A |
-| `operandBType` | `uint8_t` | 1 | [logicOperandType_e](https://github.com/xznhj8129/msp_documentation/blob/master/docs/inav_enums_ref.md#enum-logicoperandtype_e) | Enum `logicOperandType_e`: Type of operand B |
+| `operandBType` | `uint8_t` | 1 | [logicOperandType_e](https://github.com/xznhj8129/msp_documentation/blob/master/docs/inav_enums_ref.md#enum-logicoperandtype_e) | Enum `logicOperandType_e` Type of operand B |
 | `operandBValue` | `uint32_t` | 4 | - | Value/ID of operand B |
 | `flags` | `uint8_t` | 1 | - | Bitmask: Condition flags |
 
@@ -3401,9 +3445,9 @@
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
 | `enabled` | `uint8_t` | 1 | - | Boolean: 1 if the PID is enabled |
-| `setpointType` | `uint8_t` | 1 | [logicOperandType_e](https://github.com/xznhj8129/msp_documentation/blob/master/docs/inav_enums_ref.md#enum-logicoperandtype_e) | Enum (`logicOperandType_e`): Type of the setpoint source |
+| `setpointType` | `uint8_t` | 1 | [logicOperandType_e](https://github.com/xznhj8129/msp_documentation/blob/master/docs/inav_enums_ref.md#enum-logicoperandtype_e) | Enum (`logicOperandType_e`) Type of the setpoint source |
 | `setpointValue` | `uint32_t` | 4 | - | Value/ID of the setpoint source |
-| `measurementType` | `uint8_t` | 1 | [logicOperandType_e](https://github.com/xznhj8129/msp_documentation/blob/master/docs/inav_enums_ref.md#enum-logicoperandtype_e) | Enum (`logicOperandType_e`): Type of the measurement source |
+| `measurementType` | `uint8_t` | 1 | [logicOperandType_e](https://github.com/xznhj8129/msp_documentation/blob/master/docs/inav_enums_ref.md#enum-logicoperandtype_e) | Enum (`logicOperandType_e`) Type of the measurement source |
 | `measurementValue` | `uint32_t` | 4 | - | Value/ID of the measurement source |
 | `gainP` | `uint16_t` | 2 | - | Proportional gain |
 | `gainI` | `uint16_t` | 2 | - | Integral gain |
@@ -3420,9 +3464,9 @@
 |---|---|---|---|---|
 | `pidIndex` | `uint8_t` | 1 | - | Index of the Programming PID to set (0 to `MAX_PROGRAMMING_PID_COUNT - 1`) |
 | `enabled` | `uint8_t` | 1 | - | Boolean: 1 to enable the PID |
-| `setpointType` | `uint8_t` | 1 | [ENUM_NAME](LINK_TO_ENUM) | Enum: Type of the setpoint source |
+| `setpointType` | `uint8_t` | 1 | [logicOperandType_e](https://github.com/xznhj8129/msp_documentation/blob/master/docs/inav_enums_ref.md#enum-logicoperandtype_e) | Enum (`logicOperandType_e`) Type of the setpoint source |
 | `setpointValue` | `uint32_t` | 4 | - | Value/ID of the setpoint source |
-| `measurementType` | `uint8_t` | 1 | [ENUM_NAME](LINK_TO_ENUM) | Enum: Type of the measurement source |
+| `measurementType` | `uint8_t` | 1 | [logicOperandType_e](https://github.com/xznhj8129/msp_documentation/blob/master/docs/inav_enums_ref.md#enum-logicoperandtype_e) | Enum (`logicOperandType_e`) Type of the measurement source |
 | `measurementValue` | `uint32_t` | 4 | - | Value/ID of the measurement source |
 | `gainP` | `uint16_t` | 2 | - | Proportional gain |
 | `gainI` | `uint16_t` | 2 | - | Integral gain |
@@ -3597,7 +3641,7 @@
 |---|---|---|---|---|
 | `enabled` | `uint8_t` | 1 | - | Boolean: 1 if enabled |
 | `activatorId` | `uint8_t` | 1 | - | Activator ID |
-| `operation` | `uint8_t` | 1 | [ENUM_NAME](LINK_TO_ENUM) | Enum: Logical operation |
+| `operation` | `uint8_t` | 1 | [logicConditionOp_e](https://github.com/xznhj8129/msp_documentation/blob/master/docs/inav_enums_ref.md#enum-logicconditionop_e) | Enum `logicConditionOp_e` Logical operation |
 | `operandAType` | `uint8_t` | 1 | [logicOperandType_e](https://github.com/xznhj8129/msp_documentation/blob/master/docs/inav_enums_ref.md#enum-logicoperandtype_e) | Enum `logicOperandType_e` Type of operand A |
 | `operandAValue` | `uint32_t` | 4 | - | Value/ID of operand A |
 | `operandBType` | `uint8_t` | 1 | [logicOperandType_e](https://github.com/xznhj8129/msp_documentation/blob/master/docs/inav_enums_ref.md#enum-logicoperandtype_e) | Enum `logicOperandType_e` Type of operand B |
@@ -3620,15 +3664,41 @@
 
 ## <a id="msp2_inav_esc_telem"></a>`MSP2_INAV_ESC_TELEM (8257 / 0x2041)`
 **Description:** Retrieves the full telemetry data structure reported by each ESC.  
-**Special case, skipped for now**
+
+**Request Payload:** None  
+  
+**Reply Payload:**
+| Field | C Type | Size (Bytes) | Units | Description |
+|---|---|---|---|---|
+| `motorCount` | `uint8_t` | 1 | - | Number of motors reporting telemetry (`getMotorCount()`) |
+| `escData` | `escSensorData_t[]` | - | - | Array of `escSensorData_t` structures containing voltage, current, temp, RPM, errors etc. for each ESC |
+
+**Notes:** Requires `USE_ESC_SENSOR`. See `escSensorData_t` in `sensors/esc_sensor.h` for the exact structure fields.
 
 ## <a id="msp2_inav_led_strip_config_ex"></a>`MSP2_INAV_LED_STRIP_CONFIG_EX (8264 / 0x2048)`
 **Description:** Retrieves the full configuration for each LED on the strip using the `ledConfig_t` structure. Supersedes `MSP_LED_STRIP_CONFIG`.  
-**Special case, skipped for now**
+
+**Request Payload:** None  
+  
+**Reply Payload:**
+| Field | C Type | Size (Bytes) | Units | Description |
+|---|---|---|---|---|
+| `ledConfig` | `uint16_t` | 2 | - | Full configuration structure for the LED, size sizeof(ledConfig_t) |
+
+**Notes:** Requires `USE_LED_STRIP`. See `ledConfig_t` in `io/ledstrip.h` for structure fields (position, function, overlay, color, direction, params).
 
 ## <a id="msp2_inav_set_led_strip_config_ex"></a>`MSP2_INAV_SET_LED_STRIP_CONFIG_EX (8265 / 0x2049)`
 **Description:** Sets the configuration for a single LED on the strip using the `ledConfig_t` structure. Supersedes `MSP_SET_LED_STRIP_CONFIG`.  
-**Special case, skipped for now**
+  
+**Request Payload:**
+| Field | C Type | Size (Bytes) | Units | Description |
+|---|---|---|---|---|
+| `ledIndex` | `uint8_t` | 1 | - | Index of the LED to configure (0 to `LED_MAX_STRIP_LENGTH - 1`) |
+| `ledConfig` | `uint16_t` | 2 | - |  |
+
+**Reply Payload:** None
+
+**Notes:** Requires `USE_LED_STRIP`. Expects `1 + sizeof(ledConfig_t)` bytes. Returns error if index invalid. Calls `reevaluateLedConfig()`.
 
 ## <a id="msp2_inav_fw_approach"></a>`MSP2_INAV_FW_APPROACH (8266 / 0x204a)`
 **Description:** Get or Set configuration for a specific Fixed Wing Autoland approach.  
