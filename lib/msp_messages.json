@@ -109,7 +109,7 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 10,
+            "size": 0,
             "struct": "<ccccHBBBs",
             "payload": [
                 {
@@ -416,7 +416,7 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 1,
+            "size": 0,
             "struct": "<s",
             "payload": [
                 {
@@ -442,7 +442,7 @@
         "mspv": 1,
         "direction": 0,
         "request": {
-            "size": 1,
+            "size": 0,
             "struct": "<s",
             "payload": [
                 {
@@ -1432,7 +1432,7 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 4,
+            "size": 0,
             "struct": "<BBBB",
             "payload": [
                 {
@@ -2036,7 +2036,7 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 4,
+            "size": 0,
             "struct": "<HBB",
             "payload": [
                 {
@@ -2074,7 +2074,7 @@
         "mspv": 1,
         "direction": 0,
         "request": {
-            "size": 4,
+            "size": 0,
             "struct": "<HBB",
             "payload": [
                 {
@@ -2114,7 +2114,7 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 4,
+            "size": 0,
             "struct": "<I",
             "payload": [
                 {
@@ -2218,7 +2218,7 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 6,
+            "size": 0,
             "struct": "<BBBBBB",
             "payload": [
                 {
@@ -2592,7 +2592,7 @@
         "mspv": 1,
         "direction": 2,
         "request": {
-            "size": 6,
+            "size": 0,
             "struct": "<IH",
             "payload": [
                 {
@@ -2613,7 +2613,7 @@
             ]
         },
         "reply": {
-            "size": 11,
+            "size": 0,
             "struct": "<IB",
             "payload": [
                 {
@@ -3064,7 +3064,7 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 16,
+            "size": 0,
             "struct": "<BBBBHHHHHH",
             "payload": [
                 {
@@ -3266,7 +3266,7 @@
         "mspv": 1,
         "direction": 0,
         "request": {
-            "size": 1,
+            "size": 0,
             "struct": "<B",
             "payload": [
                 {
@@ -4397,7 +4397,7 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 2,
+            "size": 0,
             "struct": "<H",
             "payload": [
                 {
@@ -4900,7 +4900,7 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 1,
+            "size": 0,
             "struct": "<s",
             "payload": [
                 {
@@ -4927,7 +4927,7 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 1,
+            "size": 0,
             "struct": "<s",
             "payload": [
                 {
@@ -5047,7 +5047,7 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 1,
+            "size": 0,
             "struct": "<B",
             "payload": [
                 {
@@ -5074,7 +5074,7 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 14,
+            "size": 0,
             "struct": "<HHHBBBBI",
             "payload": [
                 {
@@ -5347,7 +5347,7 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 3,
+            "size": 0,
             "struct": "<BBB",
             "payload": [
                 {
@@ -5466,7 +5466,7 @@
         "mspv": 1,
         "direction": 2,
         "request": {
-            "size": 1,
+            "size": 0,
             "struct": "<B",
             "payload": [
                 {
@@ -5479,7 +5479,7 @@
             ]
         },
         "reply": {
-            "size": 6,
+            "size": 0,
             "struct": "<BHBs",
             "payload": [
                 {
@@ -5931,7 +5931,7 @@
         "mspv": 1,
         "direction": 0,
         "request": {
-            "size": 2,
+            "size": 0,
             "struct": "<H",
             "payload": [
                 {
@@ -6728,7 +6728,7 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 8,
+            "size": 0,
             "struct": "<BBHBBBB",
             "payload": [
                 {
@@ -6983,7 +6983,7 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 1,
+            "size": 0,
             "struct": "<s",
             "payload": [
                 {
@@ -7132,7 +7132,7 @@
         "mspv": 2,
         "direction": 2,
         "request": {
-            "size": 1,
+            "size": 0,
             "struct": "<s",
             "payload": [
                 {
@@ -7148,7 +7148,7 @@
             ]
         },
         "reply": {
-            "size": 2,
+            "size": 0,
             "struct": "<B",
             "payload": [
                 {
@@ -7174,7 +7174,7 @@
         "mspv": 2,
         "direction": 0,
         "request": {
-            "size": 2,
+            "size": 0,
             "struct": "<BB",
             "payload": [
                 {
@@ -7210,7 +7210,7 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 16,
+            "size": 0,
             "struct": "<HHHHHHHH",
             "payload": [
                 {
@@ -7336,7 +7336,7 @@
         "direction": 2,
         "request": null,
         "reply": {
-            "size": 20,
+            "size": 0,
             "struct": "<sHBBBiIHBBsB",
             "payload": [
                 {
@@ -7445,7 +7445,7 @@
         "mspv": 2,
         "direction": 2,
         "request": {
-            "size": 2,
+            "size": 0,
             "struct": "<H",
             "payload": [
                 {
@@ -7459,7 +7459,7 @@
             ]
         },
         "reply": {
-            "size": 8,
+            "size": 0,
             "struct": "<HHH",
             "payload": [
                 {
@@ -7498,7 +7498,7 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 9,
+            "size": 0,
             "struct": "<BIBBBB",
             "payload": [
                 {
@@ -7558,7 +7558,7 @@
         "mspv": 2,
         "direction": 0,
         "request": {
-            "size": 9,
+            "size": 0,
             "struct": "<BIBBBB",
             "payload": [
                 {
@@ -9255,7 +9255,7 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 1,
+            "size": 0,
             "struct": "<B",
             "payload": [
                 {
@@ -9426,7 +9426,7 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 2,
+            "size": 0,
             "struct": "<BB",
             "payload": [
                 {
@@ -9458,7 +9458,7 @@
         "direction": 2,
         "request": null,
         "reply": {
-            "size": 2,
+            "size": 0,
             "struct": "<BB",
             "payload": [
                 {
@@ -10161,7 +10161,7 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 4,
+            "size": 0,
             "struct": "<I",
             "payload": [
                 {
@@ -10286,7 +10286,7 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 15,
+            "size": 0,
             "struct": "<BQHHBs",
             "payload": [
                 {
@@ -10349,7 +10349,7 @@
         "mspv": 2,
         "direction": 0,
         "request": {
-            "size": 15,
+            "size": 0,
             "struct": "<BQHHBs",
             "payload": [
                 {
@@ -10413,7 +10413,7 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 2,
+            "size": 0,
             "struct": "<h",
             "payload": [
                 {
@@ -10437,7 +10437,7 @@
         "mspv": 2,
         "direction": 2,
         "request": {
-            "size": 58,
+            "size": 0,
             "struct": "<BBBBiiiHHhhhhhhhhhhhhIhhhBHB",
             "payload": [
                 {
@@ -10639,7 +10639,7 @@
             ]
         },
         "reply": {
-            "size": 83,
+            "size": 0,
             "struct": "<HHHHBIhhhBBBBBB",
             "payload": [
                 {
@@ -10764,7 +10764,7 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 12,
+            "size": 0,
             "struct": "<BBHBBBBHBB",
             "payload": [
                 {
@@ -10919,7 +10919,7 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 14,
+            "size": 0,
             "struct": "<BBBBIBIB",
             "payload": [
                 {
@@ -11145,7 +11145,7 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 19,
+            "size": 0,
             "struct": "<BBIBIHHHH",
             "payload": [
                 {
@@ -11344,7 +11344,7 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 4,
+            "size": 0,
             "struct": "<BBBB",
             "payload": [
                 {
@@ -11389,7 +11389,7 @@
         "mspv": 2,
         "direction": 0,
         "request": {
-            "size": 4,
+            "size": 0,
             "struct": "<BBBB",
             "payload": [
                 {
@@ -11471,7 +11471,7 @@
         "mspv": 2,
         "direction": 0,
         "request": {
-            "size": 1,
+            "size": 0,
             "struct": "<B",
             "payload": [
                 {
@@ -11782,7 +11782,7 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 4,
+            "size": 0,
             "struct": "<I",
             "payload": [
                 {
@@ -11807,7 +11807,7 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 1,
+            "size": 0,
             "struct": "<B",
             "payload": [
                 {
@@ -11841,7 +11841,7 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 2,
+            "size": 0,
             "struct": "<H",
             "payload": [
                 {
@@ -12042,7 +12042,7 @@
         "mspv": 2,
         "direction": 0,
         "request": {
-            "size": 1,
+            "size": 0,
             "struct": "<B",
             "payload": [
                 {
@@ -12436,7 +12436,7 @@
         "mspv": 2,
         "direction": 2,
         "request": {
-            "size": 1,
+            "size": 0,
             "struct": "<B",
             "payload": [
                 {
@@ -12473,7 +12473,7 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 6,
+            "size": 0,
             "struct": "<BIB",
             "payload": [
                 {
@@ -12513,7 +12513,7 @@
         "direction": 1,
         "request": null,
         "reply": {
-            "size": 7,
+            "size": 0,
             "struct": "<HHHB",
             "payload": [
                 {

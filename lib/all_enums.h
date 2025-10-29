@@ -1,4 +1,4 @@
-// Consolidated enums — generated on 2025-10-29 19:06:49.546839
+// Consolidated enums — generated on 2025-10-29 19:13:42.104479
 
 // ../inav/src/main/common/calibration.h
 typedef enum {

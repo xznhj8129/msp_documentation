@@ -106,6 +106,8 @@ for msg_code in msp:
                 #    print(f"Warning: Unknown char_code '{char_code}' in byte count for {msg_name}")
             print('\t\tStruct:',structstr)
             print('\t\tBytes:',total_bytes)
+            if msp[msg_code]["variable_len"]:
+                total_bytes = 0
             msp[msg_code][direction]["struct"] = structstr
             msp[msg_code][direction]["size"] = total_bytes
             #if msg_code=="MSP_OSD_CONFIG":
