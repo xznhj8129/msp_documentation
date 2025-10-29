@@ -4979,9 +4979,9 @@
                 {
                     "name": "action",
                     "ctype": "uint8_t",
-                    "desc": "Enum `navWaypointAction_e` Waypoint action type",
+                    "desc": "Enum `navWaypointActions_e` Waypoint action type",
                     "units": "Enum",
-                    "enum": "navWaypointAction_e",
+                    "enum": "navWaypointActions_e",
                     "struct": "B"
                 },
                 {
@@ -5037,7 +5037,7 @@
         },
         "variable_len": false,
         "complex": false,
-        "notes": "See `navWaypoint_t` and `navWaypointAction_e`.",
+        "notes": "See `navWaypoint_t` and `navWaypointActions_e`.",
         "description": "Get/Set a single waypoint from the mission plan."
     },
     "MSP_BOXIDS": {
@@ -5170,9 +5170,9 @@
                 {
                     "name": "activeWpAction",
                     "ctype": "uint8_t",
-                    "desc": "Enum (`navWaypointAction_e`): Action of the currently executing waypoint (`NAV_Status.activeWpAction`)",
+                    "desc": "Enum (`navWaypointActions_e`): Action of the currently executing waypoint (`NAV_Status.activeWpAction`)",
                     "units": "",
-                    "enum": "navWaypointAction_e",
+                    "enum": "navWaypointActions_e",
                     "struct": "B"
                 },
                 {

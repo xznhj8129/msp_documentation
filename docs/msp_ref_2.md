@@ -1692,7 +1692,7 @@
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
 | `waypointIndex` | `uint8_t` | 1 | Index | Index of the returned waypoint |
-| `action` | `uint8_t` | 1 | [navWaypointAction_e](https://github.com/xznhj8129/msp_documentation/blob/master/docs/inav_enums_ref.md#enum-navwaypointaction_e) | Enum `navWaypointAction_e` Waypoint action type |
+| `action` | `uint8_t` | 1 | [navWaypointActions_e](https://github.com/xznhj8129/msp_documentation/blob/master/docs/inav_enums_ref.md#enum-navwaypointactions_e) | Enum `navWaypointActions_e` Waypoint action type |
 | `latitude` | `int32_t` | 4 | deg * 1e7 | Latitude coordinate |
 | `longitude` | `int32_t` | 4 | deg * 1e7 | Longitude coordinate |
 | `altitude` | `int32_t` | 4 | cm | Altitude coordinate (relative to home or sea level, see flag) |
@@ -1701,7 +1701,7 @@
 | `param3` | `uint16_t` | 2 | Varies | Parameter 3 (meaning depends on action) |
 | `flag` | `uint8_t` | 1 | Bitmask | Waypoint flags (`NAV_WP_FLAG_*`) |
 
-**Notes:** See `navWaypoint_t` and `navWaypointAction_e`.
+**Notes:** See `navWaypoint_t` and `navWaypointActions_e`.
 
 ## <a id="msp_boxids"></a>`MSP_BOXIDS (119 / 0x77)`
 **Description:** Provides a list of permanent IDs associated with the available flight modes (boxes).  
@@ -1744,7 +1744,7 @@
 |---|---|---|---|---|
 | `navMode` | `uint8_t` | 1 | [NAV_MODE_*](https://github.com/xznhj8129/msp_documentation/blob/master/docs/inav_enums_ref.md#enum-nav_mode_*) | Enum (`NAV_MODE_*`): Current navigation mode (None, RTH, WP, Hold, etc.) (`NAV_Status.mode`) |
 | `navState` | `uint8_t` | 1 | [NAV_STATE_*](https://github.com/xznhj8129/msp_documentation/blob/master/docs/inav_enums_ref.md#enum-nav_state_*) | Enum (`NAV_STATE_*`): Current navigation state (`NAV_Status.state`) |
-| `activeWpAction` | `uint8_t` | 1 | [navWaypointAction_e](https://github.com/xznhj8129/msp_documentation/blob/master/docs/inav_enums_ref.md#enum-navwaypointaction_e) | Enum (`navWaypointAction_e`): Action of the currently executing waypoint (`NAV_Status.activeWpAction`) |
+| `activeWpAction` | `uint8_t` | 1 | [navWaypointActions_e](https://github.com/xznhj8129/msp_documentation/blob/master/docs/inav_enums_ref.md#enum-navwaypointactions_e) | Enum (`navWaypointActions_e`): Action of the currently executing waypoint (`NAV_Status.activeWpAction`) |
 | `activeWpNumber` | `uint8_t` | 1 | - | Index: Index of the currently executing waypoint (`NAV_Status.activeWpNumber`) |
 | `navError` | `uint8_t` | 1 | [NAV_ERROR_*](https://github.com/xznhj8129/msp_documentation/blob/master/docs/inav_enums_ref.md#enum-nav_error_*) | Enum (`NAV_ERROR_*`): Current navigation error code (`NAV_Status.error`) |
 | `targetHeading` | `int16_t` | 2 | - | degrees: Target heading for heading controller (`getHeadingHoldTarget()`) |
