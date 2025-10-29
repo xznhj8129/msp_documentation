@@ -16,6 +16,7 @@ import sys
 import json
 import re
 import unicodedata
+import manual_docs_fix
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
@@ -248,6 +249,14 @@ def generate_markdown(defs: Dict[str, Any]) -> str:
     sections = []
     for _, name, body in items:
         sec, _heading = render_message(name, body)
+        if name == "MSP_SET_VTX_CONFIG":
+            sec = manual_docs_fix.MSP_SET_VTX_CONFIG
+        if name == "MSP2_COMMON_SET_SETTING":
+            sec = manual_docs_fix.MSP2_COMMON_SET_SETTING
+        if name == "MSP2_INAV_SET_GEOZONE_VERTEX":
+            sec = manual_docs_fix.MSP2_INAV_SET_GEOZONE_VERTEX
+        if name == "MSP2_SENSOR_HEADTRACKER": 
+            sec = manual_docs_fix.MSP2_SENSOR_HEADTRACKER
         sections.append(sec)
 
     index_md = build_index(json_by_code)

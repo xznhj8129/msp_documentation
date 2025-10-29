@@ -1251,10 +1251,26 @@
 
 **Notes:** BF compatibility field `frequency` (uint16) is missing compared to some BF versions. Use `MSP_VTXTABLE_BAND` and `MSP_VTXTABLE_POWERLEVEL` for details.
 
-## <a id="msp_set_vtx_config"></a>`MSP_SET_VTX_CONFIG (89 / 0x59)`
-**Description:** Sets the VTX configuration (band, channel, power, pit mode). Supports multiple protocol versions/extensions based on payload size.  
-**Special case, skipped for now**
-
+*   **Direction:** In
+*   **Description:** Sets the VTX configuration (band, channel, power, pit mode). Supports multiple protocol versions/extensions based on payload size.
+*   **Payload (Minimum):**
+    | Field | C Type | Size (Bytes) | Description |
+    |---|---|---|---|
+    | `bandChannelEncoded` | `uint16_t` | 2 | Encoded band/channel value: `(band-1)*8 + (channel-1)`. If <= `VTXCOMMON_MSP_BANDCHAN_CHKVAL` |
+*   **Payload (Extended):** (Fields added sequentially based on size)
+    | Field | C Type | Size (Bytes) | Description |
+    |---|---|---|---|
+    | `power` | `uint8_t` | 1 | Power level index to set (`vtxSettingsConfigMutable()->power`) |
+    | `pitMode` | `uint8_t` | 1 | Pit mode state to set (0=off, 1=on). Directly calls `vtxCommonSetPitMode` |
+    | `lowPowerDisarm` | `uint8_t` | 1 | Low power on disarm setting (`vtxSettingsConfigMutable()->lowPowerDisarm`) |
+    | `pitModeFreq` | `uint16_t` | 2 | *Ignored*. Betaflight extension |
+    | `band` | `uint8_t` | 1 | Explicit band number to set (`vtxSettingsConfigMutable()->band`). Overrides encoded value if present |
+    | `channel` | `uint8_t` | 1 | Explicit channel number to set (`vtxSettingsConfigMutable()->channel`). Overrides encoded value if present |
+    | `frequency` | `uint16_t` | 2 | *Ignored*. Betaflight extension |
+    | `bandCount` | `uint8_t` | 1 | *Ignored*. Betaflight extension |
+    | `channelCount` | `uint8_t` | 1 | *Ignored*. Betaflight extension |
+    | `powerCount` | `uint8_t` | 1 | *Ignored*. Betaflight extension (can potentially reduce reported power count if valid) |
+*   **Notes:** Requires `USE_VTX_CONTROL`. Minimum size 2 bytes. Applies settings to `vtxSettingsConfig` and potentially directly to the device (pit mode).
 ## <a id="msp_advanced_config"></a>`MSP_ADVANCED_CONFIG (90 / 0x5a)`
 **Description:** Retrieves advanced hardware-related configuration (PWM protocols, rates). Some fields are BF compatibility placeholders.  
 
@@ -2413,11 +2429,14 @@
 
 **Notes:** Returns error if setting not found. Use `MSP2_COMMON_SETTING_INFO` to discover settings, types, and sizes.
 
-## <a id="msp2_common_set_setting"></a>`MSP2_COMMON_SET_SETTING (4100 / 0x1004)`
-**Description:** Sets the value of a specific configuration setting, identified by name or index.  
-**Special case, skipped for now**
-
-## <a id="msp2_common_motor_mixer"></a>`MSP2_COMMON_MOTOR_MIXER (4101 / 0x1005)`
+*   **Direction:** In
+*   **Description:** Sets the value of a specific configuration setting, identified by name or index.
+*   **Payload:**
+    | Field | C Type | Size (Bytes) | Description |
+    |---|---|---|---|
+    | `settingIdentifier` | Varies | Variable | Setting name (null-terminated string) OR Index (0x00 followed by `uint16_t` index) |
+    | `settingValue` | `uint8_t[]` | Variable | Raw byte value to set for the setting. Size must match the setting's type |
+*   **Notes:** Performs type checking and range validation (min/max). Returns error if setting not found, value size mismatch, or value out of range. Handles different data types (`uint8`, `int16`, `float`, `string`, etc.) internally.## <a id="msp2_common_motor_mixer"></a>`MSP2_COMMON_MOTOR_MIXER (4101 / 0x1005)`
 **Description:** Retrieves the current motor mixer configuration (throttle, roll, pitch, yaw weights for each motor) for the primary and secondary mixer profiles.  
 
 **Request Payload:** None  
@@ -2699,11 +2718,13 @@
 
 **Notes:** Requires `USE_PITOT_MSP`. Calls `mspPitotmeterReceiveNewData()`.
 
-## <a id="msp2_sensor_headtracker"></a>`MSP2_SENSOR_HEADTRACKER (7943 / 0x1f07)`
-**Description:** Provides head tracker orientation data.  
-**Special case, skipped for now**
-
-## <a id="msp2_inav_status"></a>`MSP2_INAV_STATUS (8192 / 0x2000)`
+*   **Direction:** In
+*   **Description:** Provides head tracker orientation data.
+*   **Payload:** (Structure not defined in provided headers, but likely Roll, Pitch, Yaw angles)
+    | Field | C Type | Size (Bytes) | Units | Description |
+    |---|---|---|---|---|
+    | `...` | Varies | Variable | Head tracker angles (e.g., int16 Roll, Pitch, Yaw in deci-degrees) |
+*   **Notes:** Requires `USE_HEADTRACKER` and `USE_HEADTRACKER_MSP`. Calls `mspHeadTrackerReceiverNewData()`. Payload structure needs verification from `mspHeadTrackerReceiverNewData` implementation.## <a id="msp2_inav_status"></a>`MSP2_INAV_STATUS (8192 / 0x2000)`
 **Description:** Provides comprehensive flight controller status, extending `MSP_STATUS_EX` with full arming flags, battery profile, and mixer profile.  
 
 **Request Payload:** None  
@@ -3986,11 +4007,20 @@
 
 **Notes:** Requires `USE_GEOZONE`. Returns error if indexes are invalid or vertex doesn't exist. For circular zones, the radius is stored internally as the 'latitude' of the vertex with index 1.
 
-## <a id="msp2_inav_set_geozone_vertex"></a>`MSP2_INAV_SET_GEOZONE_VERTEX (8723 / 0x2213)`
-**Description:** Sets a specific vertex (or center+radius for circular zones) for a Geozone.  
-**Special case, skipped for now**
-
-## <a id="msp2_betaflight_bind"></a>`MSP2_BETAFLIGHT_BIND (12288 / 0x3000)`
+*   **Direction:** In
+*   **Description:** Sets the main configuration for a specific Geozone (type, shape, altitude, action). **This command resets (clears) all vertices associated with the zone.**
+*   **Payload:**
+    | Field | C Type | Size (Bytes) | Description |
+    |---|---|---|---|
+    | `geozoneIndex` | `uint8_t` | 1 | Index of the geozone (0 to `MAX_GEOZONES_IN_CONFIG - 1`) |
+    | `type` | `uint8_t` | 1 | Define (`GEOZONE_TYPE_EXCLUSIVE/INCLUSIVE`): Zone type (Inclusion/Exclusion) |
+    | `shape` | `uint8_t` | 1 | Define (`GEOZONE_SHAPE_CIRCULAR/POLYGHON`): Zone shape (Polygon/Circular) |
+    | `minAltitude` | `uint32_t` | 4 | Minimum allowed altitude (cm) |
+    | `maxAltitude` | `uint32_t` | 4 | Maximum allowed altitude (cm) |
+    | `isSeaLevelRef` | `uint8_t` | 1 | Boolean: Altitude reference |
+    | `fenceAction` | `uint8_t` | 1 | Enum (`geozoneActionState_e`): Action to take upon boundary violation |
+    | `vertexCount` | `uint8_t` | 1 | Number of vertices to be defined (used for validation later) |
+*   **Notes:** Requires `USE_GEOZONE`. Expects 14 bytes. Returns error if index invalid. Calls `geozoneResetVertices()`. Vertices must be set subsequently using `MSP2_INAV_SET_GEOZONE_VERTEX`.## <a id="msp2_betaflight_bind"></a>`MSP2_BETAFLIGHT_BIND (12288 / 0x3000)`
 **Description:** Initiates the receiver binding procedure for supported serial protocols (CRSF, SRXL2).  
 
 **Request Payload:** None  
