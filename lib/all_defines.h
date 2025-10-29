@@ -1,4 +1,4 @@
-// Consolidated defines - generated on 2025-10-29 15:17:40.233054
+// Consolidated defines - generated on 2025-10-29 16:37:33.390391
 
 
 // ../inav/src/main/sensors/pitotmeter.c

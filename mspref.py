@@ -100,6 +100,5 @@ def correct_enum(msgcode, direction, field, e_type):
 
 correct_enum("MSP_RX_CONFIG", "reply", "serialRxProvider", "rxSerialReceiverType_e")
 
-
 with open("lib/msp_messages.json","w+") as file:
     file.write(json.dumps(msp,indent=4))

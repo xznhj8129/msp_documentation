@@ -390,6 +390,13 @@ def _parse_table_from_block(block: str) -> List[Dict[str, Any]]:
         if units!="-":
             val['units'] = units
         val['desc'] = desc
+
+        pat = re.compile(r'always *([+-]?\d+)', re.I)
+        m = pat.search(desc)  # DO NOT use match/fullmatch
+        always = int(m.group(1)) if m else None
+        if always is not None:
+            val['value'] = always
+
         if isoptional:
             val["optional"] = True 
         if isenum:
