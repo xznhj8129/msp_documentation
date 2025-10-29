@@ -7543,9 +7543,9 @@
                 {
                     "name": "vbatSource",
                     "ctype": "uint8_t",
-                    "desc": "Voltage source (`batteryMetersConfig()->voltageSource`). 0 if `USE_ADC` disabled",
+                    "desc": "Enum `batVoltageSource_e` Voltage source (`batteryMetersConfig()->voltageSource`). 0 if `USE_ADC` disabled",
                     "units": "Enum",
-                    "enum": "?_e"
+                    "enum": "batVoltageSource_e"
                 },
                 {
                     "name": "cellCount",
@@ -7686,9 +7686,9 @@
                 {
                     "name": "vbatSource",
                     "ctype": "uint8_t",
-                    "desc": "Sets `batteryMetersConfigMutable()->voltageSource` (if `USE_ADC`, validated)",
+                    "desc": "Enum `batVoltageSource_e` Sets `batteryMetersConfigMutable()->voltageSource` (if `USE_ADC`, validated)",
                     "units": "Enum",
-                    "enum": "?_e"
+                    "enum": "batVoltageSource_e"
                 },
                 {
                     "name": "cellCount",
@@ -7772,9 +7772,9 @@
                 {
                     "name": "vbatSource",
                     "ctype": "uint8_t",
-                    "desc": "Voltage source (`batteryMetersConfig()->voltageSource`)",
+                    "desc": "Enum `batVoltageSource_e` Voltage source (`batteryMetersConfig()->voltageSource`)",
                     "units": "Enum",
-                    "enum": "?_e"
+                    "enum": "batVoltageSource_e"
                 },
                 {
                     "name": "cellCount",
@@ -7868,9 +7868,9 @@
                 {
                     "name": "vbatSource",
                     "ctype": "uint8_t",
-                    "desc": "Sets `batteryMetersConfigMutable()->voltageSource` (if `USE_ADC`, validated)",
+                    "desc": "Enum `batVoltageSource_e` Sets `batteryMetersConfigMutable()->voltageSource` (if `USE_ADC`, validated)",
                     "units": "Enum",
-                    "enum": "?_e"
+                    "enum": "batVoltageSource_e"
                 },
                 {
                     "name": "cellCount",

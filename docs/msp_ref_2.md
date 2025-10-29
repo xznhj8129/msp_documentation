@@ -2737,7 +2737,7 @@
 | `rssiChannel` | `uint8_t` | 1 | Index | RSSI channel index (1-based) (`rxConfig()->rssi_channel`) |
 | `magDeclination` | `uint16_t` | 2 | 0.1 degrees | Magnetic declination / 10 (`compassConfig()->mag_declination / 10`). 0 if `USE_MAG` disabled |
 | `vbatScale` | `uint16_t` | 2 | Scale | Voltage scale (`batteryMetersConfig()->voltage.scale`). 0 if `USE_ADC` disabled |
-| `vbatSource` | `uint8_t` | 1 | [ENUM_NAME](LINK_TO_ENUM) | Voltage source (`batteryMetersConfig()->voltageSource`). 0 if `USE_ADC` disabled |
+| `vbatSource` | `uint8_t` | 1 | [batVoltageSource_e](https://github.com/xznhj8129/msp_documentation/blob/master/docs/inav_enums_ref.md#enum-batvoltagesource_e) | Enum `batVoltageSource_e` Voltage source (`batteryMetersConfig()->voltageSource`). 0 if `USE_ADC` disabled |
 | `cellCount` | `uint8_t` | 1 | Count | Configured cell count (`currentBatteryProfile->cells`). 0 if `USE_ADC` disabled |
 | `vbatCellDetect` | `uint16_t` | 2 | 0.01V | Cell detection voltage (`currentBatteryProfile->voltage.cellDetect`). 0 if `USE_ADC` disabled |
 | `vbatMinCell` | `uint16_t` | 2 | 0.01V | Min cell voltage (`currentBatteryProfile->voltage.cellMin`). 0 if `USE_ADC` disabled |
@@ -2765,7 +2765,7 @@
 | `rssiChannel` | `uint8_t` | 1 | Index | Sets `rxConfigMutable()->rssi_channel` (constrained). Updates source |
 | `magDeclination` | `uint16_t` | 2 | 0.1 degrees | Sets `compassConfigMutable()->mag_declination = value * 10` (if `USE_MAG`) |
 | `vbatScale` | `uint16_t` | 2 | Scale | Sets `batteryMetersConfigMutable()->voltage.scale` (if `USE_ADC`) |
-| `vbatSource` | `uint8_t` | 1 | [ENUM_NAME](LINK_TO_ENUM) | Sets `batteryMetersConfigMutable()->voltageSource` (if `USE_ADC`, validated) |
+| `vbatSource` | `uint8_t` | 1 | [batVoltageSource_e](https://github.com/xznhj8129/msp_documentation/blob/master/docs/inav_enums_ref.md#enum-batvoltagesource_e) | Enum `batVoltageSource_e` Sets `batteryMetersConfigMutable()->voltageSource` (if `USE_ADC`, validated) |
 | `cellCount` | `uint8_t` | 1 | Count | Sets `currentBatteryProfileMutable->cells` (if `USE_ADC`) |
 | `vbatCellDetect` | `uint16_t` | 2 | 0.01V | Sets `currentBatteryProfileMutable->voltage.cellDetect` (if `USE_ADC`) |
 | `vbatMinCell` | `uint16_t` | 2 | 0.01V | Sets `currentBatteryProfileMutable->voltage.cellMin` (if `USE_ADC`) |
@@ -2789,7 +2789,7 @@
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
 | `vbatScale` | `uint16_t` | 2 | Scale | Voltage scale (`batteryMetersConfig()->voltage.scale`) |
-| `vbatSource` | `uint8_t` | 1 | [ENUM_NAME](LINK_TO_ENUM) | Voltage source (`batteryMetersConfig()->voltageSource`) |
+| `vbatSource` | `uint8_t` | 1 | [batVoltageSource_e](https://github.com/xznhj8129/msp_documentation/blob/master/docs/inav_enums_ref.md#enum-batvoltagesource_e) | Enum `batVoltageSource_e` Voltage source (`batteryMetersConfig()->voltageSource`) |
 | `cellCount` | `uint8_t` | 1 | Count | Configured cell count (`currentBatteryProfile->cells`) |
 | `vbatCellDetect` | `uint16_t` | 2 | 0.01V | Cell detection voltage (`currentBatteryProfile->voltage.cellDetect`) |
 | `vbatMinCell` | `uint16_t` | 2 | 0.01V | Min cell voltage (`currentBatteryProfile->voltage.cellMin`) |
@@ -2811,7 +2811,7 @@
 | Field | C Type | Size (Bytes) | Units | Description |
 |---|---|---|---|---|
 | `vbatScale` | `uint16_t` | 2 | Scale | Sets `batteryMetersConfigMutable()->voltage.scale` (if `USE_ADC`) |
-| `vbatSource` | `uint8_t` | 1 | [ENUM_NAME](LINK_TO_ENUM) | Sets `batteryMetersConfigMutable()->voltageSource` (if `USE_ADC`, validated) |
+| `vbatSource` | `uint8_t` | 1 | [batVoltageSource_e](https://github.com/xznhj8129/msp_documentation/blob/master/docs/inav_enums_ref.md#enum-batvoltagesource_e) | Enum `batVoltageSource_e` Sets `batteryMetersConfigMutable()->voltageSource` (if `USE_ADC`, validated) |
 | `cellCount` | `uint8_t` | 1 | Count | Sets `currentBatteryProfileMutable->cells` (if `USE_ADC`) |
 | `vbatCellDetect` | `uint16_t` | 2 | 0.01V | Sets `currentBatteryProfileMutable->voltage.cellDetect` (if `USE_ADC`) |
 | `vbatMinCell` | `uint16_t` | 2 | 0.01V | Sets `currentBatteryProfileMutable->voltage.cellMin` (if `USE_ADC`) |
