@@ -921,7 +921,7 @@ These commands originated in Baseflight or were added later in similar ranges.
 *   **Payload:** (Only sent if `USE_VTX_CONTROL` is defined and a VTX device is configured)
     | Field | C Type | Size (Bytes) | Description |
     |---|---|---|---|
-    | `vtxDeviceType` | `uint8_t` | 1 | Enum (`VTXDEV_*`): Type of VTX device detected/configured. `VTXDEV_UNKNOWN` if none |
+    | `vtxDeviceType` | `uint8_t` | 1 | Enum (`vtxDevType_e`): Type of VTX device detected/configured. `VTXDEV_UNKNOWN` if none |
     | `band` | `uint8_t` | 1 | VTX band number (from `vtxSettingsConfig`) |
     | `channel` | `uint8_t` | 1 | VTX channel number (from `vtxSettingsConfig`) |
     | `power` | `uint8_t` | 1 | VTX power level index (from `vtxSettingsConfig`) |
@@ -3067,7 +3067,7 @@ These commands are specific extensions added by the INAV project.
 *   **Payload:** Repeated `LED_MAX_STRIP_LENGTH` times:
     | Field | C Type | Size (Bytes) | Description |
     |---|---|---|---|
-    | `ledConfig` | `ledConfig_t` | `sizeof(ledConfig_t)` | Full configuration structure for the LED |
+    | `ledConfig` | `uint16_t` | 6 | Full configuration structure for the LED, size sizeof(ledConfig_t) |
 *   **Notes:** Requires `USE_LED_STRIP`. See `ledConfig_t` in `io/ledstrip.h` for structure fields (position, function, overlay, color, direction, params).
 
 ### `MSP2_INAV_SET_LED_STRIP_CONFIG_EX` (0x2049 / 8265)
@@ -3078,7 +3078,7 @@ These commands are specific extensions added by the INAV project.
     | Field | C Type | Size (Bytes) | Description |
     |---|---|---|---|
     | `ledIndex` | `uint8_t` | 1 | Index of the LED to configure (0 to `LED_MAX_STRIP_LENGTH - 1`) |
-    | `ledConfig` | `ledConfig_t` | `sizeof(ledConfig_t)` | Full configuration structure for the LED |
+    | `ledConfig` |`uint16_t` | 6  Full configuration structure for the LED , size sizeof(ledConfig_t) |
 *   **Notes:** Requires `USE_LED_STRIP`. Expects `1 + sizeof(ledConfig_t)` bytes. Returns error if index invalid. Calls `reevaluateLedConfig()`.
 
 ### `MSP2_INAV_FW_APPROACH` (0x204A / 8266)

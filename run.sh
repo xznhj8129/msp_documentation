@@ -12,22 +12,22 @@ touch lib/msp_enum.py
 echo "###########"
 echo get_msp_enums.py
 python get_msp_enums.py
-read -n 1 -s -r -p "Press any key to continue"
+#read -n 1 -s -r -p "Press any key to continue"
 
 echo "###########"
 echo parsemd.py
 python parsemd.py
-read -n 1 -s -r -p "Press any key to continue"
+#read -n 1 -s -r -p "Press any key to continue"
 
 echo "###########"
 echo get_inav_defines.py
 python get_inav_defines.py
-read -n 1 -s -r -p "Press any key to continue"
+#read -n 1 -s -r -p "Press any key to continue"
 
 echo "###########"
 echo get_inav_enums.py
 python get_inav_enums.py
-read -n 1 -s -r -p "Press any key to continue"
+#read -n 1 -s -r -p "Press any key to continue"
 
 #echo "###########"
 #echo h_to_enum.py
@@ -38,12 +38,16 @@ read -n 1 -s -r -p "Press any key to continue"
 echo "###########"
 echo bad_define_parse.py
 python bad_define_parse.py
-read -n 1 -s -r -p "Press any key to continue"
+#read -n 1 -s -r -p "Press any key to continue"
 
 
 echo "###########"
 echo mspref.py
 python mspref.py
-read -n 1 -s -r -p "Press any key to continue"
+#read -n 1 -s -r -p "Press any key to continue"
 
+echo "###########"
+echo mspref.py
+python mspref.py
+#read -n 1 -s -r -p "Press any key to continue"
 

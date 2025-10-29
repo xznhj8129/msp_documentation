@@ -22,18 +22,23 @@ for msg_code in msp:
             break
         print('\t',direction)
         if direction in msp[msg_code] and msp[msg_code][direction] is not None:
-            for dat in msp[msg_code][direction]["payload"]:
+            for fieldidx, dat in enumerate(msp[msg_code][direction]["payload"]):
+
                 #print(dat)
                 key = dat["name"]
                 ctype = dat["ctype"]
                 print(f'\t\t {key} : {ctype}')
+                char_code = None
                 if ctype.startswith("char["):
                     m = re.search(r'\[(\d+)\]', ctype)
                     if m:
                         number = int(m.group(1))
                         char_code = 'c' * number
+                        print("num*char_code", char_code)
                     else:
                         char_code = 's'
+                        print("char_code", char_code)
+                    #msp[msg_code][direction]["payload"][fieldidx]["struct"]=char_code
                 else:
                     try:
                         
@@ -43,10 +48,14 @@ for msg_code in msp:
                         try:
                             dt = bin_type_map[ctype[:ctype.find('[')]]
                         except KeyError:
-                            print("NEVERMIND THIS ONE")
-                            msp[msg_code]['complex'] = True
-                            abort = True
-                            break
+                            if "_t" in ctype:
+                                dt = 'struct'
+                                
+                            elif ' or ' not in ctype and 'Varie' not in ctype:
+                                print("NEVERMIND THIS ONE", ctype)
+                                msp[msg_code]['complex'] = True
+                                abort = True
+                                break
                         print('dt',dt)
                         m = re.search(r'\[\s*([^\]]+)\s*\]', ctype)
 
@@ -60,7 +69,7 @@ for msg_code in msp:
                             except:
                                 defval = get_define(idx)
                             if not defval:
-                                defval = 0
+                                defval = 1
                                 #raise Exception
                                 #print("NEVERMIND THIS ONE")
                                 #msp[msg_code]['complex'] = True
@@ -68,8 +77,12 @@ for msg_code in msp:
                                 #break
                             char_code = dt * defval
                             print(defval, char_code)
+                        else:
+                            char_code = dt
+                msp[msg_code][direction]["payload"][fieldidx]["struct"] = char_code
+                print("char_code", char_code)
+                structstr += char_code  
 
-                structstr += char_code
 
                 if char_code in ['x']: # padding byte, counts as 1
                     total_bytes += 1
@@ -94,13 +107,9 @@ for msg_code in msp:
             print('\t\tBytes:',total_bytes)
             msp[msg_code][direction]["struct"] = structstr
             msp[msg_code][direction]["size"] = total_bytes
+            #if msg_code=="MSP_OSD_CONFIG":
+            #    raise Exception
 
-# MANUAL CORRECTONS
-def correct_enum(msgcode, direction, field, e_type):
-    idx = next(i for i, f in enumerate(msp[msgcode][direction]["payload"]) if f.get("name","") == field)
-    msp[msgcode][direction]["payload"][idx]["enum"] = e_type
-
-correct_enum("MSP_RX_CONFIG", "reply", "serialRxProvider", "rxSerialReceiverType_e")
 
 with open("lib/msp_messages.json","w+") as file:
     file.write(json.dumps(msp,indent=4))
