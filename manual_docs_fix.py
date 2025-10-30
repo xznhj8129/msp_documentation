@@ -1,4 +1,5 @@
-MSP_SET_VTX_CONFIG = """*   **Direction:** In
+MSP_SET_VTX_CONFIG = """**Temporary definition**
+*   **Direction:** In
 *   **Description:** Sets the VTX configuration (band, channel, power, pit mode). Supports multiple protocol versions/extensions based on payload size.
 *   **Payload (Minimum):**
     | Field | C Type | Size (Bytes) | Description |
@@ -19,7 +20,8 @@ MSP_SET_VTX_CONFIG = """*   **Direction:** In
     | `powerCount` | `uint8_t` | 1 | *Ignored*. Betaflight extension (can potentially reduce reported power count if valid) |
 *   **Notes:** Requires `USE_VTX_CONTROL`. Minimum size 2 bytes. Applies settings to `vtxSettingsConfig` and potentially directly to the device (pit mode).
 """
-MSP2_INAV_SET_GEOZONE_VERTEX = """*   **Direction:** In
+MSP2_INAV_SET_GEOZONE_VERTEX = """**Temporary definition**
+*   **Direction:** In
 *   **Description:** Sets the main configuration for a specific Geozone (type, shape, altitude, action). **This command resets (clears) all vertices associated with the zone.**
 *   **Payload:**
     | Field | C Type | Size (Bytes) | Description |
@@ -33,7 +35,8 @@ MSP2_INAV_SET_GEOZONE_VERTEX = """*   **Direction:** In
     | `fenceAction` | `uint8_t` | 1 | Enum (`geozoneActionState_e`): Action to take upon boundary violation |
     | `vertexCount` | `uint8_t` | 1 | Number of vertices to be defined (used for validation later) |
 *   **Notes:** Requires `USE_GEOZONE`. Expects 14 bytes. Returns error if index invalid. Calls `geozoneResetVertices()`. Vertices must be set subsequently using `MSP2_INAV_SET_GEOZONE_VERTEX`.""" 
-MSP2_COMMON_SET_SETTING = """*   **Direction:** In
+MSP2_COMMON_SET_SETTING = """**Temporary definition**
+*   **Direction:** In
 *   **Description:** Sets the value of a specific configuration setting, identified by name or index.
 *   **Payload:**
     | Field | C Type | Size (Bytes) | Description |
@@ -41,7 +44,8 @@ MSP2_COMMON_SET_SETTING = """*   **Direction:** In
     | `settingIdentifier` | Varies | Variable | Setting name (null-terminated string) OR Index (0x00 followed by `uint16_t` index) |
     | `settingValue` | `uint8_t[]` | Variable | Raw byte value to set for the setting. Size must match the setting's type |
 *   **Notes:** Performs type checking and range validation (min/max). Returns error if setting not found, value size mismatch, or value out of range. Handles different data types (`uint8`, `int16`, `float`, `string`, etc.) internally."""
-MSP2_SENSOR_HEADTRACKER = """*   **Direction:** In
+MSP2_SENSOR_HEADTRACKER = """**Temporary definition**
+*   **Direction:** In
 *   **Description:** Provides head tracker orientation data.
 *   **Payload:** (Structure not defined in provided headers, but likely Roll, Pitch, Yaw angles)
     | Field | C Type | Size (Bytes) | Units | Description |

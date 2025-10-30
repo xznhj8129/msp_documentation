@@ -133,6 +133,8 @@ def render_message(name: str, msg: Dict[str, Any]) -> Tuple[str, str]:
     heading = f'## <a id="{name.lower()}"></a>`{name} ({code} / {hex_str})`'
     #heading = f"### `{name}` ({code} / {hex_str})"
     out = [heading + "\n"]
+
+    #out.append("\n**Request Payload:** **None**  \n")
     if description:
         out.append(f"**Description:** {description}  \n")
 
@@ -146,12 +148,12 @@ def render_message(name: str, msg: Dict[str, Any]) -> Tuple[str, str]:
     if has_fields(req):
         out.append(table_with_units(get_fields(req), "Request Payload"))
     else:
-        out.append("\n**Request Payload:** None  \n")
+        out.append("\n**Request Payload:** **None**  \n")
 
     if has_fields(rep):
         out.append(table_with_units(get_fields(rep), "Reply Payload"))
     else:
-        out.append("\n**Reply Payload:** None\n")
+        out.append("\n**Reply Payload:** **None**  \n")
 
     if notes:
         out.append(f"\n**Notes:** {notes}\n")
@@ -216,13 +218,12 @@ def enforce_strict_match(json_by_code: Dict[int, str], mw_by_code: Dict[int, str
 def build_index(json_by_code: Dict[int, str]) -> str:
     """
     Build a compact index linking to each heading.
-    Uses the exact heading text for slug creation: ### `NAME` (code / 0xHEX)
     """
     v1 = []
     v2 = []
     for code, name in sorted(json_by_code.items()):
         hex_str = hex(code)
-        item = f"- [{name} ({code} / {hex_str})](#{name.lower()})"
+        item = f"[{code} - {name}](#{name.lower()})  "
         if 0 <= code <= 255:
             v1.append(item)
         elif 4096 <= code <= 20000:
@@ -249,18 +250,26 @@ def generate_markdown(defs: Dict[str, Any]) -> str:
     sections = []
     for _, name, body in items:
         sec, _heading = render_message(name, body)
+
         if name == "MSP_SET_VTX_CONFIG":
+            sections.append(sec.split('\n')[0]+'\n')
             sec = manual_docs_fix.MSP_SET_VTX_CONFIG
         if name == "MSP2_COMMON_SET_SETTING":
+            sections.append(sec.split('\n')[0]+'\n')
             sec = manual_docs_fix.MSP2_COMMON_SET_SETTING
         if name == "MSP2_INAV_SET_GEOZONE_VERTEX":
+            sections.append(sec.split('\n')[0]+'\n')
             sec = manual_docs_fix.MSP2_INAV_SET_GEOZONE_VERTEX
         if name == "MSP2_SENSOR_HEADTRACKER": 
+            sections.append(sec.split('\n')[0]+'\n')
             sec = manual_docs_fix.MSP2_SENSOR_HEADTRACKER
         sections.append(sec)
 
+    with open("docs_v2_header.md", "r", encoding="utf-8") as f:
+        header = f.read()
+
     index_md = build_index(json_by_code)
-    return index_md + "\n" + "".join(sections)
+    return header + "\n" + index_md + "\n" + "".join(sections)
 
 def main():
     in_path = Path(sys.argv[1]) if len(sys.argv) >= 2 else Path("lib/msp_messages.json")
