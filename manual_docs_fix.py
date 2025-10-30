@@ -43,7 +43,8 @@ MSP2_COMMON_SET_SETTING = """**Temporary definition**
     |---|---|---|---|
     | `settingIdentifier` | Varies | Variable | Setting name (null-terminated string) OR Index (0x00 followed by `uint16_t` index) |
     | `settingValue` | `uint8_t[]` | Variable | Raw byte value to set for the setting. Size must match the setting's type |
-*   **Notes:** Performs type checking and range validation (min/max). Returns error if setting not found, value size mismatch, or value out of range. Handles different data types (`uint8`, `int16`, `float`, `string`, etc.) internally."""
+*   **Notes:** Performs type checking and range validation (min/max). Returns error if setting not found, value size mismatch, or value out of range. Handles different data types (`uint8`, `int16`, `float`, `string`, etc.) internally.
+"""
 MSP2_SENSOR_HEADTRACKER = """**Temporary definition**
 *   **Direction:** In
 *   **Description:** Provides head tracker orientation data.
@@ -51,4 +52,5 @@ MSP2_SENSOR_HEADTRACKER = """**Temporary definition**
     | Field | C Type | Size (Bytes) | Units | Description |
     |---|---|---|---|---|
     | `...` | Varies | Variable | Head tracker angles (e.g., int16 Roll, Pitch, Yaw in deci-degrees) |
-*   **Notes:** Requires `USE_HEADTRACKER` and `USE_HEADTRACKER_MSP`. Calls `mspHeadTrackerReceiverNewData()`. Payload structure needs verification from `mspHeadTrackerReceiverNewData` implementation."""
+*   **Notes:** Requires `USE_HEADTRACKER` and `USE_HEADTRACKER_MSP`. Calls `mspHeadTrackerReceiverNewData()`. Payload structure needs verification from `mspHeadTrackerReceiverNewData` implementation.
+"""
