@@ -274,13 +274,13 @@ def render_markdown(enums: List[EnumDef]) -> str:
 # ---------- Main ----------
 
 def main() -> int:
-    path = Path("lib/all_enums.h")
+    path = Path("all_enums.h")
     if not path.exists():
         print(f"Error: {path} not found", file=sys.stderr)
         return 1
     enums = parse_files([path])
     md = render_markdown(enums)
-    Path("docs/inav_enums_ref.md").write_text(md, encoding="utf-8")
+    Path("inav_enums_ref.md").write_text(md, encoding="utf-8")
     return 0
 
 if __name__ == "__main__":

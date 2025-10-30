@@ -687,6 +687,8 @@ def generate_msp_dict(markdown_content: str) -> Dict[str, Any]:
         print(msg_name) 
         for key, value in msp_references[msg_name].items(): 
             print("\t", key, ":", value) 
+        if msg_name=="MSP2_ADSB_VEHICLE_LIST":
+            raise Exception
 
     return msp_references
 

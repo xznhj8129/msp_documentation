@@ -3,7 +3,7 @@ import datetime
 import re
 from pathlib import Path
 
-BASE = Path('../inav/src/main')
+BASE = Path('../../../src/main')
 SUBDIRS = [
     'common',
     'navigation',
@@ -71,7 +71,7 @@ for sd in SUBDIRS:
             if ret: print(fn)
             all_enums.extend(ret)
 
-with open('lib/all_enums.h', 'w') as out:
+with open('all_enums.h', 'w') as out:
     out.write(f"// Consolidated enums — generated on {datetime.datetime.now()}\n\n")
     out.writelines(all_enums)
 
