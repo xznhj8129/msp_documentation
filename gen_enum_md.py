@@ -251,11 +251,12 @@ def parse_files(paths: List[Path]) -> List[EnumDef]:
 def render_markdown(enums: List[EnumDef]) -> str:
     out = []
     out.append("# Enumerations\n")
+    out.append("**Auto-generated reference for MSP, refer to source for development, not this file, due to variations with #ifdefs which needs verification.**\n")
     out.append("## Table of contents\n")
-    for e in enums:
+    for e in sorted(enums, key=lambda x: x.name.lower()):
         out.append(f"- [{e.name}](#enum-{e.name.lower()})")
     out.append("")
-    for e in enums:
+    for e in sorted(enums, key=lambda x: x.name.lower()):
         out.append("---")
         out.append(f"## <a id=\"enum-{e.name.lower()}\"></a>`{e.name}`\n")
         if e.source_note:
