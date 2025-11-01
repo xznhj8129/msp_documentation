@@ -9102,7 +9102,7 @@
                     "units": ""
                 },
                 {
-                    "name": "hitlFlags",
+                    "name": "simulatorFlags_t",
                     "ctype": "uint8_t",
                     "desc": "Bitmask: Options for HITL (`HITL_*` flags)",
                     "units": ""
@@ -9559,7 +9559,8 @@
                     "name": "flags",
                     "ctype": "uint8_t",
                     "desc": "Bitmask: Condition flags (e.g., `LC_FLAG_FIRST_TIME_TRUE`)",
-                    "units": ""
+                    "units": "",
+                    "enum": "logicConditionFlags_e"
                 }
             ],
             "repeating": "MAX_LOGIC_CONDITIONS"

@@ -54,7 +54,7 @@ msg_fmt = {
 
 type_fmt = {
     "size": 0,
-    "struct": "",
+    #"struct": "",
     "payload": None
     #"variants": 
 }

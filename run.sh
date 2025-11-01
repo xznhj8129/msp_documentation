@@ -14,9 +14,9 @@ echo get_msp_enums.py
 python get_msp_enums.py
 #read -n 1 -s -r -p "Press any key to continue"
 
-echo "###########"
-echo parsemd.py
-python parsemd.py
+#echo "###########"
+#echo parsemd.py
+#python parsemd.py
 #read -n 1 -s -r -p "Press any key to continue"
 
 echo "###########"
@@ -41,13 +41,13 @@ python bad_define_parse.py
 #read -n 1 -s -r -p "Press any key to continue"
 
 
-echo "###########"
-echo mspref.py
-python mspref.py
+#echo "###########"
+#echo mspref.py
+#python mspref.py
 #read -n 1 -s -r -p "Press any key to continue"
 
-echo "###########"
-echo manualfix.py
-python manualfix.py
+#echo "###########"
+#echo manualfix.py
+#python manualfix.py
 #read -n 1 -s -r -p "Press any key to continue"
 
