@@ -1,7 +1,7 @@
 
 # INAV MSP Messages reference
  
-**This page is auto-generated from the [Master INAV-MSP definition file](https://github.com/xznhj8129/msp_documentation/blob/master/lib/msp_messages.json)**  
+**This page is auto-generated from the [Master INAV-MSP definition file](https://github.com/xznhj8129/msp_documentation/blob/master/msp_messages.json)**  
 
 For details on the structure of MSP, see [The wiki page](https://github.com/iNavFlight/inav/wiki/MSP-V2)
 

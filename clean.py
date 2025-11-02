@@ -5,7 +5,7 @@ import json
 from pathlib import Path
 from typing import Any, Iterable
 
-REMOVE_KEYS: frozenset[str] = frozenset({"struct", "size"})
+REMOVE_KEYS: frozenset[str] = frozenset({"struct", "size","hex"})
 
 def scrub(node: Any, remove: Iterable[str] = REMOVE_KEYS) -> Any:
     if isinstance(node, dict):

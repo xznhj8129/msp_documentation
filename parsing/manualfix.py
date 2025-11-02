@@ -373,7 +373,7 @@ a = json.loads(fixes)
 #a = json.loads(MSP_SET_VTX_CONFIG)
 
 ## manual message fix
-with open("lib/msp_messages.json","r") as file:
+with open("msp_messages.json","r") as file:
     f = file.read()
     msp = json.loads(f)
 
@@ -398,5 +398,5 @@ structs = {
 fmt = "".join(bin_type_map[f["ctype"]] for f in structs["escSensorData_t"])
 msp["MSP2_INAV_ESC_TELEM"]["reply"]["payload"][1]["struct"] = fmt
 
-with open("lib/msp_messages.json","w+") as file:
+with open("msp_messages.json","w+") as file:
     file.write(json.dumps(msp,indent=4))

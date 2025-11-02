@@ -721,5 +721,5 @@ if __name__ == "__main__":
     )
     d_sorted = dict(sorted_items)
     text = json.dumps(d_sorted, indent=4, ensure_ascii=False)
-    with open("lib/msp_messages.json", "w", encoding="utf-8") as f:
+    with open("msp_messages.json", "w", encoding="utf-8") as f:
         f.write(text)

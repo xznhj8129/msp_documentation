@@ -92,7 +92,7 @@ for key in inav_msp_msgs:
     print(key,":", inav_msp_msgs[key])
 
 import json
-with open('lib/msp_enum.py', 'w') as out:
+with open('msp_enum.py', 'w') as out:
     out.write(enumfile)
 
 #print(f"Found {total_defines} #define entries across {file_hits} files")

@@ -438,7 +438,7 @@ if __name__ == '__main__':
 
     # --- Determine Output Path ---
     try:
-        with open("lib/inav_enums.py", "w", encoding='utf-8') as file:
+        with open("inav_enums.py", "w", encoding='utf-8') as file:
             file.write(python_code)
         print("Done.")
     except Exception as e:

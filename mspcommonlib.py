@@ -42,7 +42,6 @@ bin_type_map = {
 ## Commented out = Optional
 msg_fmt = {
     "code": 0,
-    "hex": "",
     "mspv": None,
     "direction": None,
     "request": None,
@@ -53,10 +52,8 @@ msg_fmt = {
 }
 
 type_fmt = {
-    "size": 0,
-    #"struct": "",
     "payload": None
-    #"variants": 
+    #"variants": None,
 }
 
 val_fmt = {
@@ -65,8 +62,9 @@ val_fmt = {
     #"size": None,
     #"units": None,
     "desc": None,
-    #"enum": None,
-    #"bitmask": None,
+    #"enum": False,
+    #"bitmask": False,
+    #"array": False,
 }
 
 # Byte sizes for struct format chars

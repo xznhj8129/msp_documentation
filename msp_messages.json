@@ -1,7 +1,6 @@
 {
     "MSP_API_VERSION": {
         "code": 1,
-        "hex": "0x1",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -34,7 +33,6 @@
     },
     "MSP_FC_VARIANT": {
         "code": 2,
-        "hex": "0x2",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -58,7 +56,6 @@
     },
     "MSP_FC_VERSION": {
         "code": 3,
-        "hex": "0x3",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -91,7 +88,6 @@
     },
     "MSP_BOARD_INFO": {
         "code": 4,
-        "hex": "0x4",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -121,8 +117,9 @@
                 {
                     "name": "commCapabilities",
                     "ctype": "uint8_t",
-                    "desc": "Communication capabilities bitmask: Bit 0=VCP support (`USE_VCP`), Bit 1=SoftSerial support (`USE_SOFTSERIAL1`/`2`)",
-                    "units": ""
+                    "desc": "Bitmask: Communication capabilities: Bit 0=VCP support (`USE_VCP`), Bit 1=SoftSerial support (`USE_SOFTSERIAL1`/`2`)",
+                    "units": "Bitmask",
+                    "bitmask": true
                 },
                 {
                     "name": "targetNameLength",
@@ -148,7 +145,6 @@
     },
     "MSP_BUILD_INFO": {
         "code": 5,
-        "hex": "0x5",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -190,7 +186,6 @@
     },
     "MSP_INAV_PID": {
         "code": 6,
-        "hex": "0x6",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -277,7 +272,6 @@
     },
     "MSP_SET_INAV_PID": {
         "code": 7,
-        "hex": "0x7",
         "mspv": 1,
         "direction": 0,
         "request": {
@@ -357,7 +351,6 @@
     },
     "MSP_NAME": {
         "code": 10,
-        "hex": "0xa",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -381,7 +374,6 @@
     },
     "MSP_SET_NAME": {
         "code": 11,
-        "hex": "0xb",
         "mspv": 1,
         "direction": 0,
         "request": {
@@ -405,7 +397,6 @@
     },
     "MSP_NAV_POSHOLD": {
         "code": 12,
-        "hex": "0xc",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -468,7 +459,6 @@
     },
     "MSP_SET_NAV_POSHOLD": {
         "code": 13,
-        "hex": "0xd",
         "mspv": 1,
         "direction": 0,
         "request": {
@@ -533,7 +523,6 @@
     },
     "MSP_CALIBRATION_DATA": {
         "code": 14,
-        "hex": "0xe",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -542,8 +531,9 @@
                 {
                     "name": "accCalibAxisFlags",
                     "ctype": "uint8_t",
-                    "desc": "Flags indicating which axes of the accelerometer have been calibrated (`accGetCalibrationAxisFlags()`)",
-                    "units": "Bitmask"
+                    "desc": "Bitmask: Flags indicating which axes of the accelerometer have been calibrated (`accGetCalibrationAxisFlags()`)",
+                    "units": "Bitmask",
+                    "bitmask": true
                 },
                 {
                     "name": "accZeroX",
@@ -632,7 +622,6 @@
     },
     "MSP_SET_CALIBRATION_DATA": {
         "code": 15,
-        "hex": "0xf",
         "mspv": 1,
         "direction": 0,
         "request": {
@@ -725,7 +714,6 @@
     },
     "MSP_POSITION_ESTIMATION_CONFIG": {
         "code": 16,
-        "hex": "0x10",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -783,7 +771,6 @@
     },
     "MSP_SET_POSITION_ESTIMATION_CONFIG": {
         "code": 17,
-        "hex": "0x11",
         "mspv": 1,
         "direction": 0,
         "request": {
@@ -840,7 +827,6 @@
     },
     "MSP_WP_MISSION_LOAD": {
         "code": 18,
-        "hex": "0x12",
         "mspv": 1,
         "direction": 0,
         "request": {
@@ -861,7 +847,6 @@
     },
     "MSP_WP_MISSION_SAVE": {
         "code": 19,
-        "hex": "0x13",
         "mspv": 1,
         "direction": 0,
         "request": {
@@ -882,7 +867,6 @@
     },
     "MSP_WP_GETINFO": {
         "code": 20,
-        "hex": "0x14",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -922,7 +906,6 @@
     },
     "MSP_RTH_AND_LAND_CONFIG": {
         "code": 21,
-        "hex": "0x15",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -1016,7 +999,6 @@
     },
     "MSP_SET_RTH_AND_LAND_CONFIG": {
         "code": 22,
-        "hex": "0x16",
         "mspv": 1,
         "direction": 0,
         "request": {
@@ -1110,7 +1092,6 @@
     },
     "MSP_FW_CONFIG": {
         "code": 23,
-        "hex": "0x17",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -1173,7 +1154,6 @@
     },
     "MSP_SET_FW_CONFIG": {
         "code": 24,
-        "hex": "0x18",
         "mspv": 1,
         "direction": 0,
         "request": {
@@ -1236,7 +1216,6 @@
     },
     "MSP_MODE_RANGES": {
         "code": 34,
-        "hex": "0x22",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -1276,7 +1255,6 @@
     },
     "MSP_SET_MODE_RANGE": {
         "code": 35,
-        "hex": "0x23",
         "mspv": 1,
         "direction": 0,
         "request": {
@@ -1321,7 +1299,6 @@
     },
     "MSP_FEATURE": {
         "code": 36,
-        "hex": "0x24",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -1330,8 +1307,9 @@
                 {
                     "name": "featureMask",
                     "ctype": "uint32_t",
-                    "desc": "Bitmask of active features (see `featureMask()`)",
-                    "units": ""
+                    "desc": "Bitmask: active features (see `featureMask()`)",
+                    "units": "Bitmask",
+                    "bitmask": true
                 }
             ]
         },
@@ -1342,7 +1320,6 @@
     },
     "MSP_SET_FEATURE": {
         "code": 37,
-        "hex": "0x25",
         "mspv": 1,
         "direction": 0,
         "request": {
@@ -1350,8 +1327,9 @@
                 {
                     "name": "featureMask",
                     "ctype": "uint32_t",
-                    "desc": "Bitmask of features to enable",
-                    "units": ""
+                    "desc": "Bitmask: features to enable",
+                    "units": "Bitmask",
+                    "bitmask": true
                 }
             ]
         },
@@ -1363,7 +1341,6 @@
     },
     "MSP_BOARD_ALIGNMENT": {
         "code": 38,
-        "hex": "0x26",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -1396,7 +1373,6 @@
     },
     "MSP_SET_BOARD_ALIGNMENT": {
         "code": 39,
-        "hex": "0x27",
         "mspv": 1,
         "direction": 0,
         "request": {
@@ -1429,7 +1405,6 @@
     },
     "MSP_CURRENT_METER_CONFIG": {
         "code": 40,
-        "hex": "0x28",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -1469,7 +1444,6 @@
     },
     "MSP_SET_CURRENT_METER_CONFIG": {
         "code": 41,
-        "hex": "0x29",
         "mspv": 1,
         "direction": 0,
         "request": {
@@ -1509,7 +1483,6 @@
     },
     "MSP_MIXER": {
         "code": 42,
-        "hex": "0x2a",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -1531,7 +1504,6 @@
     },
     "MSP_SET_MIXER": {
         "code": 43,
-        "hex": "0x2b",
         "mspv": 1,
         "direction": 0,
         "request": {
@@ -1552,7 +1524,6 @@
     },
     "MSP_RX_CONFIG": {
         "code": 44,
-        "hex": "0x2c",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -1659,7 +1630,6 @@
     },
     "MSP_SET_RX_CONFIG": {
         "code": 45,
-        "hex": "0x2d",
         "mspv": 1,
         "direction": 0,
         "request": {
@@ -1759,7 +1729,6 @@
     },
     "MSP_LED_COLORS": {
         "code": 46,
-        "hex": "0x2e",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -1793,7 +1762,6 @@
     },
     "MSP_SET_LED_COLORS": {
         "code": 47,
-        "hex": "0x2f",
         "mspv": 1,
         "direction": 0,
         "request": {
@@ -1827,7 +1795,6 @@
     },
     "MSP_LED_STRIP_CONFIG": {
         "code": 48,
-        "hex": "0x30",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -1849,7 +1816,6 @@
     },
     "MSP_SET_LED_STRIP_CONFIG": {
         "code": 49,
-        "hex": "0x31",
         "mspv": 1,
         "direction": 0,
         "request": {
@@ -1876,7 +1842,6 @@
     },
     "MSP_RSSI_CONFIG": {
         "code": 50,
-        "hex": "0x32",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -1897,7 +1862,6 @@
     },
     "MSP_SET_RSSI_CONFIG": {
         "code": 51,
-        "hex": "0x33",
         "mspv": 1,
         "direction": 0,
         "request": {
@@ -1918,7 +1882,6 @@
     },
     "MSP_ADJUSTMENT_RANGES": {
         "code": 52,
-        "hex": "0x34",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -1970,7 +1933,6 @@
     },
     "MSP_SET_ADJUSTMENT_RANGE": {
         "code": 53,
-        "hex": "0x35",
         "mspv": 1,
         "direction": 0,
         "request": {
@@ -2027,9 +1989,9 @@
     },
     "MSP_CF_SERIAL_CONFIG": {
         "code": 54,
-        "hex": "0x36",
         "mspv": 1,
         "direction": 1,
+        "implemented": false,
         "request": null,
         "reply": null,
         "variable_len": false,
@@ -2039,9 +2001,9 @@
     },
     "MSP_SET_CF_SERIAL_CONFIG": {
         "code": 55,
-        "hex": "0x37",
         "mspv": 1,
         "direction": 0,
+        "implemented": false,
         "request": null,
         "reply": null,
         "variable_len": false,
@@ -2051,7 +2013,6 @@
     },
     "MSP_VOLTAGE_METER_CONFIG": {
         "code": 56,
-        "hex": "0x38",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -2090,7 +2051,6 @@
     },
     "MSP_SET_VOLTAGE_METER_CONFIG": {
         "code": 57,
-        "hex": "0x39",
         "mspv": 1,
         "direction": 0,
         "request": {
@@ -2129,7 +2089,6 @@
     },
     "MSP_SONAR_ALTITUDE": {
         "code": 58,
-        "hex": "0x3a",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -2150,7 +2109,6 @@
     },
     "MSP_RX_MAP": {
         "code": 64,
-        "hex": "0x40",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -2174,7 +2132,6 @@
     },
     "MSP_SET_RX_MAP": {
         "code": 65,
-        "hex": "0x41",
         "mspv": 1,
         "direction": 0,
         "request": {
@@ -2198,7 +2155,6 @@
     },
     "MSP_REBOOT": {
         "code": 68,
-        "hex": "0x44",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -2210,7 +2166,6 @@
     },
     "MSP_DATAFLASH_SUMMARY": {
         "code": 70,
-        "hex": "0x46",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -2249,7 +2204,6 @@
     },
     "MSP_DATAFLASH_READ": {
         "code": 71,
-        "hex": "0x47",
         "mspv": 1,
         "direction": 2,
         "request": {
@@ -2295,7 +2249,6 @@
     },
     "MSP_DATAFLASH_ERASE": {
         "code": 72,
-        "hex": "0x48",
         "mspv": 1,
         "direction": 0,
         "request": null,
@@ -2307,7 +2260,6 @@
     },
     "MSP_LOOP_TIME": {
         "code": 73,
-        "hex": "0x49",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -2328,7 +2280,6 @@
     },
     "MSP_SET_LOOP_TIME": {
         "code": 74,
-        "hex": "0x4a",
         "mspv": 1,
         "direction": 0,
         "request": {
@@ -2349,7 +2300,6 @@
     },
     "MSP_FAILSAFE_CONFIG": {
         "code": 75,
-        "hex": "0x4b",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -2444,7 +2394,6 @@
     },
     "MSP_SET_FAILSAFE_CONFIG": {
         "code": 76,
-        "hex": "0x4c",
         "mspv": 1,
         "direction": 0,
         "request": {
@@ -2538,7 +2487,6 @@
     },
     "MSP_SDCARD_SUMMARY": {
         "code": 79,
-        "hex": "0x4f",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -2548,7 +2496,8 @@
                     "name": "sdCardSupported",
                     "ctype": "uint8_t",
                     "desc": "Bitmask: Bit 0 = 1 if SD card support compiled in (`USE_SDCARD`)",
-                    "units": ""
+                    "units": "Bitmask",
+                    "bitmask": true
                 },
                 {
                     "name": "sdCardState",
@@ -2584,7 +2533,6 @@
     },
     "MSP_BLACKBOX_CONFIG": {
         "code": 80,
-        "hex": "0x50",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -2627,9 +2575,9 @@
     },
     "MSP_SET_BLACKBOX_CONFIG": {
         "code": 81,
-        "hex": "0x51",
         "mspv": 1,
         "direction": 0,
+        "implemented": false,
         "request": null,
         "reply": null,
         "variable_len": false,
@@ -2639,9 +2587,9 @@
     },
     "MSP_TRANSPONDER_CONFIG": {
         "code": 82,
-        "hex": "0x52",
         "mspv": 1,
         "direction": 1,
+        "implemented": false,
         "request": null,
         "reply": null,
         "variable_len": false,
@@ -2651,9 +2599,9 @@
     },
     "MSP_SET_TRANSPONDER_CONFIG": {
         "code": 83,
-        "hex": "0x53",
         "mspv": 1,
         "direction": 0,
+        "implemented": false,
         "request": null,
         "reply": null,
         "variable_len": false,
@@ -2663,7 +2611,6 @@
     },
     "MSP_OSD_CONFIG": {
         "code": 84,
-        "hex": "0x54",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -2744,7 +2691,6 @@
     },
     "MSP_SET_OSD_CONFIG": {
         "code": 85,
-        "hex": "0x55",
         "mspv": 1,
         "direction": 0,
         "request": null,
@@ -2831,9 +2777,9 @@
     },
     "MSP_OSD_CHAR_READ": {
         "code": 86,
-        "hex": "0x56",
         "mspv": 1,
         "direction": 1,
+        "implemented": false,
         "request": null,
         "reply": null,
         "variable_len": false,
@@ -2843,7 +2789,6 @@
     },
     "MSP_OSD_CHAR_WRITE": {
         "code": 87,
-        "hex": "0x57",
         "mspv": 1,
         "direction": 0,
         "request": {
@@ -2960,7 +2905,6 @@
     },
     "MSP_VTX_CONFIG": {
         "code": 88,
-        "hex": "0x58",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -3042,7 +2986,6 @@
     },
     "MSP_SET_VTX_CONFIG": {
         "code": 89,
-        "hex": "0x59",
         "mspv": 1,
         "direction": 0,
         "request": null,
@@ -3054,7 +2997,6 @@
     },
     "MSP_ADVANCED_CONFIG": {
         "code": 90,
-        "hex": "0x5a",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -3115,7 +3057,6 @@
     },
     "MSP_SET_ADVANCED_CONFIG": {
         "code": 91,
-        "hex": "0x5b",
         "mspv": 1,
         "direction": 0,
         "request": {
@@ -3172,7 +3113,6 @@
     },
     "MSP_FILTER_CONFIG": {
         "code": 92,
-        "hex": "0x5c",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -3259,7 +3199,6 @@
     },
     "MSP_SET_FILTER_CONFIG": {
         "code": 93,
-        "hex": "0x5d",
         "mspv": 1,
         "direction": 0,
         "request": {
@@ -3339,7 +3278,6 @@
     },
     "MSP_PID_ADVANCED": {
         "code": 94,
-        "hex": "0x5e",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -3420,7 +3358,6 @@
     },
     "MSP_SET_PID_ADVANCED": {
         "code": 95,
-        "hex": "0x5f",
         "mspv": 1,
         "direction": 0,
         "request": {
@@ -3492,7 +3429,6 @@
     },
     "MSP_SENSOR_CONFIG": {
         "code": 96,
-        "hex": "0x60",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -3549,7 +3485,6 @@
     },
     "MSP_SET_SENSOR_CONFIG": {
         "code": 97,
-        "hex": "0x61",
         "mspv": 1,
         "direction": 0,
         "request": {
@@ -3558,37 +3493,43 @@
                     "name": "accHardware",
                     "ctype": "uint8_t",
                     "desc": "Sets `accelerometerConfigMutable()->acc_hardware",
-                    "units": ""
+                    "units": "",
+                    "enum": "accHardware_e"
                 },
                 {
                     "name": "baroHardware",
                     "ctype": "uint8_t",
                     "desc": "Sets `barometerConfigMutable()->baro_hardware` (if `USE_BARO`)",
-                    "units": ""
+                    "units": "",
+                    "enum": "baroHardware_e"
                 },
                 {
                     "name": "magHardware",
                     "ctype": "uint8_t",
                     "desc": "Sets `compassConfigMutable()->mag_hardware` (if `USE_MAG`)",
-                    "units": ""
+                    "units": "",
+                    "enum": "magHardware_e"
                 },
                 {
                     "name": "pitotHardware",
                     "ctype": "uint8_t",
                     "desc": "Sets `pitotmeterConfigMutable()->pitot_hardware` (if `USE_PITOT`)",
-                    "units": ""
+                    "units": "",
+                    "enum": "pitotHardware_e"
                 },
                 {
                     "name": "rangefinderHardware",
                     "ctype": "uint8_t",
                     "desc": "Sets `rangefinderConfigMutable()->rangefinder_hardware` (if `USE_RANGEFINDER`)",
-                    "units": ""
+                    "units": "",
+                    "enum": "rangefinderHardware_e"
                 },
                 {
                     "name": "opflowHardware",
                     "ctype": "uint8_t",
                     "desc": "Sets `opticalFlowConfigMutable()->opflow_hardware` (if `USE_OPFLOW`)",
-                    "units": ""
+                    "units": "",
+                    "enum": "opticalFlowHardware_e"
                 }
             ]
         },
@@ -3600,33 +3541,33 @@
     },
     "MSP_SPECIAL_PARAMETERS": {
         "code": 98,
-        "hex": "0x62",
         "mspv": 1,
         "direction": 1,
+        "implemented": false,
         "request": null,
         "reply": null,
         "variable_len": false,
         "complex": false,
         "notes": "Not implemented in INAV `fc_msp.c`.",
-        "description": "Betaflight specific, likely unused/unimplemented in INAV."
+        "description": "Betaflight specific"
     },
     "MSP_SET_SPECIAL_PARAMETERS": {
         "code": 99,
-        "hex": "0x63",
         "mspv": 1,
         "direction": 0,
+        "implemented": false,
         "request": null,
         "reply": null,
         "variable_len": false,
         "complex": false,
         "notes": "Not implemented in INAV `fc_msp.c`.",
-        "description": "Betaflight specific, likely unused/unimplemented in INAV."
+        "description": "Betaflight specific"
     },
     "MSP_IDENT": {
         "code": 100,
-        "hex": "0x64",
         "mspv": 1,
         "direction": 1,
+        "implemented": false,
         "request": null,
         "reply": {
             "payload": [
@@ -3652,8 +3593,9 @@
                 {
                     "name": "Platform Capability",
                     "ctype": "uint32_t",
-                    "desc": "",
-                    "units": "Bitmask of MW capabilities"
+                    "desc": "Bitmask: MW capabilities",
+                    "units": "Bitmask",
+                    "bitmask": true
                 }
             ]
         },
@@ -3664,7 +3606,6 @@
     },
     "MSP_STATUS": {
         "code": 101,
-        "hex": "0x65",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -3685,14 +3626,16 @@
                 {
                     "name": "sensorStatus",
                     "ctype": "uint16_t",
-                    "desc": "Bitmask indicating available/active sensors (`packSensorStatus()`). See notes",
-                    "units": "Bitmask"
+                    "desc": "Bitmask: available/active sensors (`packSensorStatus()`). See notes",
+                    "units": "Bitmask",
+                    "bitmask": true
                 },
                 {
                     "name": "activeModesLow",
                     "ctype": "uint32_t",
-                    "desc": "First 32 bits of the active flight modes bitmask (`packBoxModeFlags()`)",
-                    "units": "Bitmask"
+                    "desc": "Bitmask: First 32 bits of the active flight modes bitmask (`packBoxModeFlags()`)",
+                    "units": "Bitmask",
+                    "bitmask": true
                 },
                 {
                     "name": "profile",
@@ -3709,7 +3652,6 @@
     },
     "MSP_RAW_IMU": {
         "code": 102,
-        "hex": "0x66",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -3778,7 +3720,6 @@
     },
     "MSP_SERVO": {
         "code": 103,
-        "hex": "0x67",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -3802,7 +3743,6 @@
     },
     "MSP_MOTOR": {
         "code": 104,
-        "hex": "0x68",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -3826,7 +3766,6 @@
     },
     "MSP_RC": {
         "code": 105,
-        "hex": "0x69",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -3850,7 +3789,6 @@
     },
     "MSP_RAW_GPS": {
         "code": 106,
-        "hex": "0x6a",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -3885,7 +3823,7 @@
                     "name": "altitude",
                     "ctype": "int16_t",
                     "desc": "Altitude above MSL (`gpsSol.llh.alt / 100`)",
-                    "units": "meters"
+                    "units": "cm"
                 },
                 {
                     "name": "speed",
@@ -3914,7 +3852,6 @@
     },
     "MSP_COMP_GPS": {
         "code": 107,
-        "hex": "0x6b",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -3947,7 +3884,6 @@
     },
     "MSP_ATTITUDE": {
         "code": 108,
-        "hex": "0x6c",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -3980,7 +3916,6 @@
     },
     "MSP_ALTITUDE": {
         "code": 109,
-        "hex": "0x6d",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -4013,7 +3948,6 @@
     },
     "MSP_ANALOG": {
         "code": 110,
-        "hex": "0x6e",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -4052,7 +3986,6 @@
     },
     "MSP_RC_TUNING": {
         "code": 111,
-        "hex": "0x6f",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -4128,7 +4061,6 @@
     },
     "MSP_ACTIVEBOXES": {
         "code": 113,
-        "hex": "0x71",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -4137,8 +4069,9 @@
                 {
                     "name": "activeModes",
                     "ctype": "boxBitmask_t",
-                    "desc": "Bitmask of all active modes (`packBoxModeFlags()`). Size depends on `boxBitmask_t` definition",
-                    "units": ""
+                    "desc": "Bitmask: all active modes (`packBoxModeFlags()`). Size depends on `boxBitmask_t` definition",
+                    "units": "Bitmask",
+                    "bitmask": true
                 }
             ]
         },
@@ -4149,7 +4082,6 @@
     },
     "MSP_MISC": {
         "code": 114,
-        "hex": "0x72",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -4262,7 +4194,6 @@
     },
     "MSP_BOXNAMES": {
         "code": 116,
-        "hex": "0x74",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -4286,7 +4217,6 @@
     },
     "MSP_PIDNAMES": {
         "code": 117,
-        "hex": "0x75",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -4310,7 +4240,6 @@
     },
     "MSP_WP": {
         "code": 118,
-        "hex": "0x76",
         "mspv": 1,
         "direction": 2,
         "request": {
@@ -4377,8 +4306,9 @@
                 {
                     "name": "flag",
                     "ctype": "uint8_t",
-                    "desc": "Waypoint flags (`NAV_WP_FLAG_*`)",
-                    "units": "Bitmask"
+                    "desc": "Bitmask: Waypoint flags (`NAV_WP_FLAG_*`)",
+                    "units": "Bitmask",
+                    "bitmask": true
                 }
             ]
         },
@@ -4389,7 +4319,6 @@
     },
     "MSP_BOXIDS": {
         "code": 119,
-        "hex": "0x77",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -4413,7 +4342,6 @@
     },
     "MSP_SERVO_CONFIGURATIONS": {
         "code": 120,
-        "hex": "0x78",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -4477,7 +4405,6 @@
     },
     "MSP_NAV_STATUS": {
         "code": 121,
-        "hex": "0x79",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -4531,14 +4458,12 @@
         "description": "Retrieves the current status of the navigation system."
     },
     "MSP_NAV_CONFIG": {
-        "hex": "0x7a",
         "code": 122,
         "mspv": 1,
         "implemented": false
     },
     "MSP_3D": {
         "code": 124,
-        "hex": "0x7c",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -4571,7 +4496,6 @@
     },
     "MSP_RC_DEADBAND": {
         "code": 125,
-        "hex": "0x7d",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -4610,7 +4534,6 @@
     },
     "MSP_SENSOR_ALIGNMENT": {
         "code": 126,
-        "hex": "0x7e",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -4651,7 +4574,6 @@
     },
     "MSP_LED_STRIP_MODECOLOR": {
         "code": 127,
-        "hex": "0x7f",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -4687,7 +4609,6 @@
     },
     "MSP_BATTERY_STATE": {
         "code": 130,
-        "hex": "0x82",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -4745,7 +4666,6 @@
     },
     "MSP_VTXTABLE_BAND": {
         "code": 137,
-        "hex": "0x89",
         "mspv": 1,
         "direction": 2,
         "request": null,
@@ -4757,7 +4677,6 @@
     },
     "MSP_VTXTABLE_POWERLEVEL": {
         "code": 138,
-        "hex": "0x8a",
         "mspv": 1,
         "direction": 2,
         "request": {
@@ -4809,7 +4728,6 @@
     },
     "MSP_STATUS_EX": {
         "code": 150,
-        "hex": "0x96",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -4830,14 +4748,16 @@
                 {
                     "name": "sensorStatus",
                     "ctype": "uint16_t",
-                    "desc": "Sensor status bitmask",
-                    "units": "Bitmask"
+                    "desc": "Bitmask: Sensor status",
+                    "units": "Bitmask",
+                    "bitmask": true
                 },
                 {
                     "name": "activeModesLow",
                     "ctype": "uint32_t",
-                    "desc": "First 32 active modes",
-                    "units": "Bitmask"
+                    "desc": "Bitmask: First 32 active modes",
+                    "units": "Bitmask",
+                    "bitmask": true
                 },
                 {
                     "name": "profile",
@@ -4854,14 +4774,16 @@
                 {
                     "name": "armingFlags",
                     "ctype": "uint16_t",
-                    "desc": "Flight controller arming flags (`armingFlags`). Note: Truncated to 16 bits",
-                    "units": "Bitmask"
+                    "desc": "Bitmask: Flight controller arming flags (`armingFlags`). Note: Truncated to 16 bits",
+                    "units": "Bitmask",
+                    "bitmask": true
                 },
                 {
                     "name": "accCalibAxisFlags",
                     "ctype": "uint8_t",
-                    "desc": "Accelerometer calibrated axes flags (`accGetCalibrationAxisFlags()`)",
-                    "units": "Bitmask"
+                    "desc": "Bitmask: Accelerometer calibrated axes flags (`accGetCalibrationAxisFlags()`)",
+                    "units": "Bitmask",
+                    "bitmask": true
                 }
             ]
         },
@@ -4872,7 +4794,6 @@
     },
     "MSP_SENSOR_STATUS": {
         "code": 151,
-        "hex": "0x97",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -4949,7 +4870,6 @@
     },
     "MSP_UID": {
         "code": 160,
-        "hex": "0xa0",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -4982,7 +4902,6 @@
     },
     "MSP_GPSSVINFO": {
         "code": 164,
-        "hex": "0xa4",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -5023,7 +4942,6 @@
     },
     "MSP_GPSSTATISTICS": {
         "code": 166,
-        "hex": "0xa6",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -5080,7 +4998,6 @@
     },
     "MSP_OSD_VIDEO_CONFIG": {
         "code": 180,
-        "hex": "0xb4",
         "mspv": null,
         "direction": null,
         "request": null,
@@ -5092,7 +5009,6 @@
     },
     "MSP_SET_OSD_VIDEO_CONFIG": {
         "code": 181,
-        "hex": "0xb5",
         "mspv": null,
         "direction": null,
         "request": null,
@@ -5104,7 +5020,6 @@
     },
     "MSP_DISPLAYPORT": {
         "code": 182,
-        "hex": "0xb6",
         "mspv": null,
         "direction": null,
         "request": null,
@@ -5116,7 +5031,6 @@
     },
     "MSP_SET_TX_INFO": {
         "code": 186,
-        "hex": "0xba",
         "mspv": 1,
         "direction": 0,
         "request": {
@@ -5137,7 +5051,6 @@
     },
     "MSP_TX_INFO": {
         "code": 187,
-        "hex": "0xbb",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -5165,7 +5078,6 @@
     },
     "MSP_SET_RAW_RC": {
         "code": 200,
-        "hex": "0xc8",
         "mspv": 1,
         "direction": 0,
         "request": {
@@ -5189,7 +5101,6 @@
     },
     "MSP_SET_RAW_GPS": {
         "code": 201,
-        "hex": "0xc9",
         "mspv": 1,
         "direction": 0,
         "request": {
@@ -5247,9 +5158,9 @@
     },
     "MSP_SET_BOX": {
         "code": 203,
-        "hex": "0xcb",
         "mspv": 1,
         "direction": 0,
+        "implemented": false,
         "request": null,
         "reply": null,
         "variable_len": false,
@@ -5259,7 +5170,6 @@
     },
     "MSP_SET_RC_TUNING": {
         "code": 204,
-        "hex": "0xcc",
         "mspv": 1,
         "direction": 0,
         "request": {
@@ -5335,7 +5245,6 @@
     },
     "MSP_ACC_CALIBRATION": {
         "code": 205,
-        "hex": "0xcd",
         "mspv": 1,
         "direction": 0,
         "request": null,
@@ -5347,7 +5256,6 @@
     },
     "MSP_MAG_CALIBRATION": {
         "code": 206,
-        "hex": "0xce",
         "mspv": 1,
         "direction": 0,
         "request": null,
@@ -5359,7 +5267,6 @@
     },
     "MSP_SET_MISC": {
         "code": 207,
-        "hex": "0xcf",
         "mspv": 1,
         "direction": 0,
         "request": {
@@ -5467,7 +5374,6 @@
     },
     "MSP_RESET_CONF": {
         "code": 208,
-        "hex": "0xd0",
         "mspv": 1,
         "direction": 0,
         "request": null,
@@ -5479,7 +5385,6 @@
     },
     "MSP_SET_WP": {
         "code": 209,
-        "hex": "0xd1",
         "mspv": 1,
         "direction": 0,
         "request": {
@@ -5536,8 +5441,9 @@
                 {
                     "name": "flag",
                     "ctype": "uint8_t",
-                    "desc": "Waypoint flags",
-                    "units": "Bitmask"
+                    "desc": "Bitmask: Waypoint flags",
+                    "units": "Bitmask",
+                    "bitmask": true
                 }
             ]
         },
@@ -5549,7 +5455,6 @@
     },
     "MSP_SELECT_SETTING": {
         "code": 210,
-        "hex": "0xd2",
         "mspv": 1,
         "direction": 0,
         "request": {
@@ -5570,7 +5475,6 @@
     },
     "MSP_SET_HEAD": {
         "code": 211,
-        "hex": "0xd3",
         "mspv": 1,
         "direction": 0,
         "request": {
@@ -5591,7 +5495,6 @@
     },
     "MSP_SET_SERVO_CONFIGURATION": {
         "code": 212,
-        "hex": "0xd4",
         "mspv": 1,
         "direction": 0,
         "request": {
@@ -5656,7 +5559,6 @@
     },
     "MSP_SET_MOTOR": {
         "code": 214,
-        "hex": "0xd6",
         "mspv": 1,
         "direction": 0,
         "request": {
@@ -5679,14 +5581,12 @@
         "description": "Sets the disarmed motor values, typically used for motor testing or propeller balancing functions in a configurator."
     },
     "MSP_SET_NAV_CONFIG": {
-        "hex": "0xd7",
         "code": 215,
         "mspv": 1,
         "implemented": false
     },
     "MSP_SET_3D": {
         "code": 217,
-        "hex": "0xd9",
         "mspv": 1,
         "direction": 0,
         "request": {
@@ -5719,7 +5619,6 @@
     },
     "MSP_SET_RC_DEADBAND": {
         "code": 218,
-        "hex": "0xda",
         "mspv": 1,
         "direction": 0,
         "request": {
@@ -5758,7 +5657,6 @@
     },
     "MSP_SET_RESET_CURR_PID": {
         "code": 219,
-        "hex": "0xdb",
         "mspv": 1,
         "direction": 0,
         "request": null,
@@ -5770,7 +5668,6 @@
     },
     "MSP_SET_SENSOR_ALIGNMENT": {
         "code": 220,
-        "hex": "0xdc",
         "mspv": 1,
         "direction": 0,
         "request": {
@@ -5809,7 +5706,6 @@
     },
     "MSP_SET_LED_STRIP_MODECOLOR": {
         "code": 221,
-        "hex": "0xdd",
         "mspv": 1,
         "direction": 0,
         "request": {
@@ -5842,9 +5738,9 @@
     },
     "MSP_SET_ACC_TRIM": {
         "code": 239,
-        "hex": "0xef",
         "mspv": 1,
         "direction": 0,
+        "implemented": false,
         "request": null,
         "reply": null,
         "variable_len": false,
@@ -5854,9 +5750,9 @@
     },
     "MSP_ACC_TRIM": {
         "code": 240,
-        "hex": "0xf0",
         "mspv": 1,
         "direction": 1,
+        "implemented": false,
         "request": null,
         "reply": null,
         "variable_len": false,
@@ -5866,7 +5762,6 @@
     },
     "MSP_SERVO_MIX_RULES": {
         "code": 241,
-        "hex": "0xf1",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -5925,7 +5820,6 @@
     },
     "MSP_SET_SERVO_MIX_RULE": {
         "code": 242,
-        "hex": "0xf2",
         "mspv": 1,
         "direction": 0,
         "request": {
@@ -5981,7 +5875,6 @@
     },
     "MSP_SET_PASSTHROUGH": {
         "code": 245,
-        "hex": "0xf5",
         "mspv": 1,
         "direction": 2,
         "request": null,
@@ -6002,7 +5895,6 @@
     },
     "MSP_RTC": {
         "code": 246,
-        "hex": "0xf6",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -6029,7 +5921,6 @@
     },
     "MSP_SET_RTC": {
         "code": 247,
-        "hex": "0xf7",
         "mspv": 1,
         "direction": 0,
         "request": {
@@ -6056,7 +5947,6 @@
     },
     "MSP_EEPROM_WRITE": {
         "code": 250,
-        "hex": "0xfa",
         "mspv": 1,
         "direction": 0,
         "request": null,
@@ -6068,7 +5958,6 @@
     },
     "MSP_RESERVE_1": {
         "code": 251,
-        "hex": "0xfb",
         "mspv": null,
         "direction": null,
         "request": null,
@@ -6080,7 +5969,6 @@
     },
     "MSP_RESERVE_2": {
         "code": 252,
-        "hex": "0xfc",
         "mspv": null,
         "direction": null,
         "request": null,
@@ -6092,7 +5980,6 @@
     },
     "MSP_DEBUGMSG": {
         "code": 253,
-        "hex": "0xfd",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -6116,7 +6003,6 @@
     },
     "MSP_DEBUG": {
         "code": 254,
-        "hex": "0xfe",
         "mspv": 1,
         "direction": 1,
         "request": null,
@@ -6140,7 +6026,6 @@
     },
     "MSP_V2_FRAME": {
         "code": 255,
-        "hex": "0xff",
         "mspv": 1,
         "direction": -1,
         "request": null,
@@ -6152,7 +6037,6 @@
     },
     "MSP2_COMMON_TZ": {
         "code": 4097,
-        "hex": "0x1001",
         "mspv": 2,
         "direction": 1,
         "request": null,
@@ -6179,7 +6063,6 @@
     },
     "MSP2_COMMON_SET_TZ": {
         "code": 4098,
-        "hex": "0x1002",
         "mspv": 2,
         "direction": 0,
         "request": null,
@@ -6227,7 +6110,6 @@
     },
     "MSP2_COMMON_SETTING": {
         "code": 4099,
-        "hex": "0x1003",
         "mspv": 2,
         "direction": 2,
         "request": {
@@ -6263,7 +6145,6 @@
     },
     "MSP2_COMMON_SET_SETTING": {
         "code": 4100,
-        "hex": "0x1004",
         "mspv": 2,
         "direction": 0,
         "request": {
@@ -6294,7 +6175,6 @@
     },
     "MSP2_COMMON_MOTOR_MIXER": {
         "code": 4101,
-        "hex": "0x1005",
         "mspv": 2,
         "direction": 1,
         "request": null,
@@ -6358,7 +6238,6 @@
     },
     "MSP2_COMMON_SET_MOTOR_MIXER": {
         "code": 4102,
-        "hex": "0x1006",
         "mspv": 2,
         "direction": 0,
         "request": {
@@ -6403,7 +6282,6 @@
     },
     "MSP2_COMMON_SETTING_INFO": {
         "code": 4103,
-        "hex": "0x1007",
         "mspv": 2,
         "direction": 2,
         "request": null,
@@ -6499,7 +6377,6 @@
     },
     "MSP2_COMMON_PG_LIST": {
         "code": 4104,
-        "hex": "0x1008",
         "mspv": 2,
         "direction": 2,
         "request": {
@@ -6543,7 +6420,6 @@
     },
     "MSP2_COMMON_SERIAL_CONFIG": {
         "code": 4105,
-        "hex": "0x1009",
         "mspv": 2,
         "direction": 1,
         "request": null,
@@ -6559,8 +6435,9 @@
                 {
                     "name": "functionMask",
                     "ctype": "uint32_t",
-                    "desc": "Bitmask of enabled functions (`FUNCTION_*`)",
-                    "units": ""
+                    "desc": "Bitmask: enabled functions (`FUNCTION_*`)",
+                    "units": "Bitmask",
+                    "bitmask": true
                 },
                 {
                     "name": "mspBaudIndex",
@@ -6596,7 +6473,6 @@
     },
     "MSP2_COMMON_SET_SERIAL_CONFIG": {
         "code": 4106,
-        "hex": "0x100a",
         "mspv": 2,
         "direction": 0,
         "request": {
@@ -6611,8 +6487,9 @@
                 {
                     "name": "functionMask",
                     "ctype": "uint32_t",
-                    "desc": "Bitmask of functions to enable",
-                    "units": ""
+                    "desc": "Bitmask: functions to enable",
+                    "units": "Bitmask",
+                    "bitmask": true
                 },
                 {
                     "name": "mspBaudIndex",
@@ -6649,7 +6526,6 @@
     },
     "MSP2_COMMON_SET_RADAR_POS": {
         "code": 4107,
-        "hex": "0x100b",
         "mspv": 2,
         "direction": 0,
         "request": {
@@ -6713,7 +6589,6 @@
     },
     "MSP2_COMMON_SET_RADAR_ITD": {
         "code": 4108,
-        "hex": "0x100c",
         "mspv": 2,
         "direction": 0,
         "request": null,
@@ -6725,7 +6600,6 @@
     },
     "MSP2_COMMON_SET_MSP_RC_LINK_STATS": {
         "code": 4109,
-        "hex": "0x100d",
         "mspv": 2,
         "direction": 0,
         "request": {
@@ -6781,7 +6655,6 @@
     },
     "MSP2_COMMON_SET_MSP_RC_INFO": {
         "code": 4110,
-        "hex": "0x100e",
         "mspv": 2,
         "direction": 0,
         "request": {
@@ -6829,7 +6702,6 @@
     },
     "MSP2_COMMON_GET_RADAR_GPS": {
         "code": 4111,
-        "hex": "0x100f",
         "mspv": null,
         "direction": null,
         "request": null,
@@ -6841,7 +6713,6 @@
     },
     "MSP2_SENSOR_RANGEFINDER": {
         "code": 7937,
-        "hex": "0x1f01",
         "mspv": 2,
         "direction": 0,
         "request": {
@@ -6868,7 +6739,6 @@
     },
     "MSP2_SENSOR_OPTIC_FLOW": {
         "code": 7938,
-        "hex": "0x1f02",
         "mspv": 2,
         "direction": 0,
         "request": {
@@ -6901,7 +6771,6 @@
     },
     "MSP2_SENSOR_GPS": {
         "code": 7939,
-        "hex": "0x1f03",
         "mspv": 2,
         "direction": 0,
         "request": {
@@ -7047,7 +6916,6 @@
     },
     "MSP2_SENSOR_COMPASS": {
         "code": 7940,
-        "hex": "0x1f04",
         "mspv": 2,
         "direction": 0,
         "request": {
@@ -7091,7 +6959,6 @@
     },
     "MSP2_SENSOR_BAROMETER": {
         "code": 7941,
-        "hex": "0x1f05",
         "mspv": 2,
         "direction": 0,
         "request": {
@@ -7129,7 +6996,6 @@
     },
     "MSP2_SENSOR_AIRSPEED": {
         "code": 7942,
-        "hex": "0x1f06",
         "mspv": 2,
         "direction": 0,
         "request": {
@@ -7167,7 +7033,6 @@
     },
     "MSP2_SENSOR_HEADTRACKER": {
         "code": 7943,
-        "hex": "0x1f07",
         "mspv": 2,
         "direction": 0,
         "request": {
@@ -7189,7 +7054,6 @@
     },
     "MSP2_INAV_STATUS": {
         "code": 8192,
-        "hex": "0x2000",
         "mspv": 2,
         "direction": 1,
         "request": null,
@@ -7210,8 +7074,9 @@
                 {
                     "name": "sensorStatus",
                     "ctype": "uint16_t",
-                    "desc": "Sensor status bitmask",
-                    "units": "Bitmask"
+                    "desc": "Bitmask: Sensor status",
+                    "units": "Bitmask",
+                    "bitmask": true
                 },
                 {
                     "name": "cpuLoad",
@@ -7228,14 +7093,16 @@
                 {
                     "name": "armingFlags",
                     "ctype": "uint32_t",
-                    "desc": "Full 32-bit flight controller arming flags (`armingFlags`)",
-                    "units": "Bitmask"
+                    "desc": "Bitmask: Full 32-bit flight controller arming flags (`armingFlags`)",
+                    "units": "Bitmask",
+                    "bitmask": true
                 },
                 {
                     "name": "activeModes",
                     "ctype": "boxBitmask_t",
-                    "desc": "Full bitmask of active flight modes (`packBoxModeFlags()`)",
-                    "units": "Bitmask"
+                    "desc": "Bitmask: Full active flight modes (`packBoxModeFlags()`)",
+                    "units": "Bitmask",
+                    "bitmask": true
                 },
                 {
                     "name": "mixerProfile",
@@ -7252,7 +7119,6 @@
     },
     "MSP2_INAV_OPTICAL_FLOW": {
         "code": 8193,
-        "hex": "0x2001",
         "mspv": 2,
         "direction": 1,
         "request": null,
@@ -7297,7 +7163,6 @@
     },
     "MSP2_INAV_ANALOG": {
         "code": 8194,
-        "hex": "0x2002",
         "mspv": 2,
         "direction": 1,
         "request": null,
@@ -7307,7 +7172,7 @@
                     "name": "batteryFlags",
                     "ctype": "uint8_t",
                     "desc": "Battery status flags: Bit 0=Full on plug-in, Bit 1=Use capacity threshold, Bit 2-3=Battery State enum (`getBatteryState()`), Bit 4-7=Cell Count (`getBatteryCellCount()`)",
-                    "units": "Bitmask",
+                    "units": "Enum",
                     "enum": "getBatteryState()"
                 },
                 {
@@ -7367,7 +7232,6 @@
     },
     "MSP2_INAV_MISC": {
         "code": 8195,
-        "hex": "0x2003",
         "mspv": 2,
         "direction": 1,
         "request": null,
@@ -7512,7 +7376,6 @@
     },
     "MSP2_INAV_SET_MISC": {
         "code": 8196,
-        "hex": "0x2004",
         "mspv": 2,
         "direction": 0,
         "request": {
@@ -7654,7 +7517,6 @@
     },
     "MSP2_INAV_BATTERY_CONFIG": {
         "code": 8197,
-        "hex": "0x2005",
         "mspv": 2,
         "direction": 1,
         "request": null,
@@ -7749,7 +7611,6 @@
     },
     "MSP2_INAV_SET_BATTERY_CONFIG": {
         "code": 8198,
-        "hex": "0x2006",
         "mspv": 2,
         "direction": 0,
         "request": {
@@ -7844,7 +7705,6 @@
     },
     "MSP2_INAV_RATE_PROFILE": {
         "code": 8199,
-        "hex": "0x2007",
         "mspv": 2,
         "direction": 1,
         "request": null,
@@ -7943,7 +7803,6 @@
     },
     "MSP2_INAV_SET_RATE_PROFILE": {
         "code": 8200,
-        "hex": "0x2008",
         "mspv": 2,
         "direction": 0,
         "request": {
@@ -8042,7 +7901,6 @@
     },
     "MSP2_INAV_AIR_SPEED": {
         "code": 8201,
-        "hex": "0x2009",
         "mspv": 2,
         "direction": 1,
         "request": null,
@@ -8063,7 +7921,6 @@
     },
     "MSP2_INAV_OUTPUT_MAPPING": {
         "code": 8202,
-        "hex": "0x200a",
         "mspv": 2,
         "direction": 1,
         "request": null,
@@ -8085,7 +7942,6 @@
     },
     "MSP2_INAV_MC_BRAKING": {
         "code": 8203,
-        "hex": "0x200b",
         "mspv": 2,
         "direction": 1,
         "request": null,
@@ -8148,7 +8004,6 @@
     },
     "MSP2_INAV_SET_MC_BRAKING": {
         "code": 8204,
-        "hex": "0x200c",
         "mspv": 2,
         "direction": 0,
         "request": {
@@ -8211,7 +8066,6 @@
     },
     "MSP2_INAV_OUTPUT_MAPPING_EXT": {
         "code": 8205,
-        "hex": "0x200d",
         "mspv": 2,
         "direction": 1,
         "request": null,
@@ -8239,7 +8093,6 @@
     },
     "MSP2_INAV_TIMER_OUTPUT_MODE": {
         "code": 8206,
-        "hex": "0x200e",
         "mspv": 2,
         "direction": 2,
         "request": null,
@@ -8268,7 +8121,6 @@
     },
     "MSP2_INAV_SET_TIMER_OUTPUT_MODE": {
         "code": 8207,
-        "hex": "0x200f",
         "mspv": 2,
         "direction": 0,
         "request": {
@@ -8296,7 +8148,6 @@
     },
     "MSP2_INAV_MIXER": {
         "code": 8208,
-        "hex": "0x2010",
         "mspv": 2,
         "direction": 1,
         "request": null,
@@ -8362,7 +8213,6 @@
     },
     "MSP2_INAV_SET_MIXER": {
         "code": 8209,
-        "hex": "0x2011",
         "mspv": 2,
         "direction": 0,
         "request": {
@@ -8425,7 +8275,6 @@
     },
     "MSP2_INAV_OSD_LAYOUTS": {
         "code": 8210,
-        "hex": "0x2012",
         "mspv": 2,
         "direction": 2,
         "request": null,
@@ -8452,7 +8301,6 @@
     },
     "MSP2_INAV_OSD_SET_LAYOUT_ITEM": {
         "code": 8211,
-        "hex": "0x2013",
         "mspv": 2,
         "direction": 0,
         "request": {
@@ -8486,7 +8334,6 @@
     },
     "MSP2_INAV_OSD_ALARMS": {
         "code": 8212,
-        "hex": "0x2014",
         "mspv": 2,
         "direction": 1,
         "request": null,
@@ -8591,7 +8438,6 @@
     },
     "MSP2_INAV_OSD_SET_ALARMS": {
         "code": 8213,
-        "hex": "0x2015",
         "mspv": 2,
         "direction": 0,
         "request": {
@@ -8684,7 +8530,6 @@
     },
     "MSP2_INAV_OSD_PREFERENCES": {
         "code": 8214,
-        "hex": "0x2016",
         "mspv": 2,
         "direction": 1,
         "request": null,
@@ -8757,7 +8602,6 @@
     },
     "MSP2_INAV_OSD_SET_PREFERENCES": {
         "code": 8215,
-        "hex": "0x2017",
         "mspv": 2,
         "direction": 0,
         "request": {
@@ -8827,7 +8671,6 @@
     },
     "MSP2_INAV_SELECT_BATTERY_PROFILE": {
         "code": 8216,
-        "hex": "0x2018",
         "mspv": 2,
         "direction": 0,
         "request": {
@@ -8848,7 +8691,6 @@
     },
     "MSP2_INAV_DEBUG": {
         "code": 8217,
-        "hex": "0x2019",
         "mspv": 2,
         "direction": 1,
         "request": null,
@@ -8872,7 +8714,6 @@
     },
     "MSP2_BLACKBOX_CONFIG": {
         "code": 8218,
-        "hex": "0x201a",
         "mspv": 2,
         "direction": 1,
         "request": null,
@@ -8907,7 +8748,8 @@
                     "name": "blackboxIncludeFlags",
                     "ctype": "uint32_t",
                     "desc": "Bitmask: Flags for fields included/excluded from logging (`blackboxConfig()->includeFlags`)",
-                    "units": ""
+                    "units": "",
+                    "bitmask": true
                 }
             ]
         },
@@ -8918,7 +8760,6 @@
     },
     "MSP2_SET_BLACKBOX_CONFIG": {
         "code": 8219,
-        "hex": "0x201b",
         "mspv": 2,
         "direction": 0,
         "request": {
@@ -8957,7 +8798,6 @@
     },
     "MSP2_INAV_TEMP_SENSOR_CONFIG": {
         "code": 8220,
-        "hex": "0x201c",
         "mspv": 2,
         "direction": 1,
         "request": null,
@@ -9013,7 +8853,6 @@
     },
     "MSP2_INAV_SET_TEMP_SENSOR_CONFIG": {
         "code": 8221,
-        "hex": "0x201d",
         "mspv": 2,
         "direction": 0,
         "request": {
@@ -9068,7 +8907,6 @@
     },
     "MSP2_INAV_TEMPERATURES": {
         "code": 8222,
-        "hex": "0x201e",
         "mspv": 2,
         "direction": 1,
         "request": null,
@@ -9090,7 +8928,6 @@
     },
     "MSP_SIMULATOR": {
         "code": 8223,
-        "hex": "0x201f",
         "mspv": 2,
         "direction": 2,
         "request": {
@@ -9105,13 +8942,15 @@
                     "name": "simulatorFlags_t",
                     "ctype": "uint8_t",
                     "desc": "Bitmask: Options for HITL (`HITL_*` flags)",
-                    "units": ""
+                    "units": "Bitmask",
+                    "bitmask": true
                 },
                 {
                     "name": "gpsFixType",
                     "ctype": "uint8_t",
-                    "desc": "(If `HITL_HAS_NEW_GPS_DATA`) Simulated GPS fix type",
-                    "units": ""
+                    "desc": "Enum `gpsFixType_e` Type of GPS fix (If `HITL_HAS_NEW_GPS_DATA`)",
+                    "units": "Enum",
+                    "enum": "gpsFixType_e"
                 },
                 {
                     "name": "gpsNumSat",
@@ -9369,7 +9208,6 @@
     },
     "MSP2_INAV_SERVO_MIXER": {
         "code": 8224,
-        "hex": "0x2020",
         "mspv": 2,
         "direction": 1,
         "request": null,
@@ -9452,7 +9290,6 @@
     },
     "MSP2_INAV_SET_SERVO_MIXER": {
         "code": 8225,
-        "hex": "0x2021",
         "mspv": 2,
         "direction": 0,
         "request": {
@@ -9504,7 +9341,6 @@
     },
     "MSP2_INAV_LOGIC_CONDITIONS": {
         "code": 8226,
-        "hex": "0x2022",
         "mspv": 2,
         "direction": 1,
         "request": null,
@@ -9559,8 +9395,8 @@
                     "name": "flags",
                     "ctype": "uint8_t",
                     "desc": "Bitmask: Condition flags (e.g., `LC_FLAG_FIRST_TIME_TRUE`)",
-                    "units": "",
-                    "enum": "logicConditionFlags_e"
+                    "units": "Bitmask",
+                    "bitmask": true
                 }
             ],
             "repeating": "MAX_LOGIC_CONDITIONS"
@@ -9572,7 +9408,6 @@
     },
     "MSP2_INAV_SET_LOGIC_CONDITIONS": {
         "code": 8227,
-        "hex": "0x2023",
         "mspv": 2,
         "direction": 0,
         "request": {
@@ -9632,7 +9467,8 @@
                     "name": "flags",
                     "ctype": "uint8_t",
                     "desc": "Bitmask: Condition flags",
-                    "units": ""
+                    "units": "Bitmask",
+                    "bitmask": true
                 }
             ]
         },
@@ -9643,20 +9479,17 @@
         "description": "Sets the configuration for a single Logic Condition by its index."
     },
     "MSP2_INAV_GLOBAL_FUNCTIONS": {
-        "hex": "0x2024",
         "code": 8228,
         "mspv": 2,
         "implemented": false
     },
     "MSP2_INAV_SET_GLOBAL_FUNCTIONS": {
-        "hex": "0x2025",
         "code": 8229,
         "mspv": 2,
         "implemented": false
     },
     "MSP2_INAV_LOGIC_CONDITIONS_STATUS": {
         "code": 8230,
-        "hex": "0x2026",
         "mspv": 2,
         "direction": 1,
         "request": null,
@@ -9680,7 +9513,6 @@
     },
     "MSP2_INAV_GVAR_STATUS": {
         "code": 8231,
-        "hex": "0x2027",
         "mspv": 2,
         "direction": 1,
         "request": null,
@@ -9704,7 +9536,6 @@
     },
     "MSP2_INAV_PROGRAMMING_PID": {
         "code": 8232,
-        "hex": "0x2028",
         "mspv": 2,
         "direction": 1,
         "request": null,
@@ -9776,7 +9607,6 @@
     },
     "MSP2_INAV_SET_PROGRAMMING_PID": {
         "code": 8233,
-        "hex": "0x2029",
         "mspv": 2,
         "direction": 0,
         "request": {
@@ -9853,7 +9683,6 @@
     },
     "MSP2_INAV_PROGRAMMING_PID_STATUS": {
         "code": 8234,
-        "hex": "0x202a",
         "mspv": 2,
         "direction": 1,
         "request": null,
@@ -9877,7 +9706,6 @@
     },
     "MSP2_PID": {
         "code": 8240,
-        "hex": "0x2030",
         "mspv": 2,
         "direction": 1,
         "request": null,
@@ -9917,7 +9745,6 @@
     },
     "MSP2_SET_PID": {
         "code": 8241,
-        "hex": "0x2031",
         "mspv": 2,
         "direction": 0,
         "request": {
@@ -9957,7 +9784,6 @@
     },
     "MSP2_INAV_OPFLOW_CALIBRATION": {
         "code": 8242,
-        "hex": "0x2032",
         "mspv": 2,
         "direction": 0,
         "request": null,
@@ -9969,7 +9795,6 @@
     },
     "MSP2_INAV_FWUPDT_PREPARE": {
         "code": 8243,
-        "hex": "0x2033",
         "mspv": 2,
         "direction": 0,
         "request": {
@@ -9990,7 +9815,6 @@
     },
     "MSP2_INAV_FWUPDT_STORE": {
         "code": 8244,
-        "hex": "0x2034",
         "mspv": 2,
         "direction": 0,
         "request": {
@@ -10014,7 +9838,6 @@
     },
     "MSP2_INAV_FWUPDT_EXEC": {
         "code": 8245,
-        "hex": "0x2035",
         "mspv": 2,
         "direction": 0,
         "request": {
@@ -10035,7 +9858,6 @@
     },
     "MSP2_INAV_FWUPDT_ROLLBACK_PREPARE": {
         "code": 8246,
-        "hex": "0x2036",
         "mspv": 2,
         "direction": 0,
         "request": null,
@@ -10047,7 +9869,6 @@
     },
     "MSP2_INAV_FWUPDT_ROLLBACK_EXEC": {
         "code": 8247,
-        "hex": "0x2037",
         "mspv": 2,
         "direction": 0,
         "request": null,
@@ -10059,7 +9880,6 @@
     },
     "MSP2_INAV_SAFEHOME": {
         "code": 8248,
-        "hex": "0x2038",
         "mspv": 2,
         "direction": 2,
         "request": {
@@ -10107,7 +9927,6 @@
     },
     "MSP2_INAV_SET_SAFEHOME": {
         "code": 8249,
-        "hex": "0x2039",
         "mspv": 2,
         "direction": 0,
         "request": {
@@ -10146,7 +9965,6 @@
     },
     "MSP2_INAV_MISC2": {
         "code": 8250,
-        "hex": "0x203a",
         "mspv": 2,
         "direction": 1,
         "request": null,
@@ -10185,7 +10003,6 @@
     },
     "MSP2_INAV_LOGIC_CONDITIONS_SINGLE": {
         "code": 8251,
-        "hex": "0x203b",
         "mspv": 2,
         "direction": 2,
         "request": {
@@ -10249,7 +10066,8 @@
                     "name": "flags",
                     "ctype": "uint8_t",
                     "desc": "Bitmask: Condition flags",
-                    "units": ""
+                    "units": "Bitmask",
+                    "bitmask": true
                 }
             ]
         },
@@ -10260,7 +10078,6 @@
     },
     "MSP2_INAV_ESC_RPM": {
         "code": 8256,
-        "hex": "0x2040",
         "mspv": 2,
         "direction": 1,
         "request": null,
@@ -10282,7 +10099,6 @@
     },
     "MSP2_INAV_ESC_TELEM": {
         "code": 8257,
-        "hex": "0x2041",
         "mspv": 2,
         "direction": 1,
         "request": null,
@@ -10312,7 +10128,6 @@
     },
     "MSP2_INAV_LED_STRIP_CONFIG_EX": {
         "code": 8264,
-        "hex": "0x2048",
         "mspv": 2,
         "direction": 1,
         "request": null,
@@ -10334,7 +10149,6 @@
     },
     "MSP2_INAV_SET_LED_STRIP_CONFIG_EX": {
         "code": 8265,
-        "hex": "0x2049",
         "mspv": 2,
         "direction": 0,
         "request": {
@@ -10361,7 +10175,6 @@
     },
     "MSP2_INAV_FW_APPROACH": {
         "code": 8266,
-        "hex": "0x204a",
         "mspv": 2,
         "direction": 2,
         "request": {
@@ -10428,7 +10241,6 @@
     },
     "MSP2_INAV_SET_FW_APPROACH": {
         "code": 8267,
-        "hex": "0x204b",
         "mspv": 2,
         "direction": 0,
         "request": {
@@ -10486,7 +10298,6 @@
     },
     "MSP2_INAV_GPS_UBLOX_COMMAND": {
         "code": 8272,
-        "hex": "0x2050",
         "mspv": 2,
         "direction": 0,
         "request": {
@@ -10510,7 +10321,6 @@
     },
     "MSP2_INAV_RATE_DYNAMICS": {
         "code": 8288,
-        "hex": "0x2060",
         "mspv": 2,
         "direction": 1,
         "request": null,
@@ -10561,7 +10371,6 @@
     },
     "MSP2_INAV_SET_RATE_DYNAMICS": {
         "code": 8289,
-        "hex": "0x2061",
         "mspv": 2,
         "direction": 0,
         "request": {
@@ -10612,7 +10421,6 @@
     },
     "MSP2_INAV_EZ_TUNE": {
         "code": 8304,
-        "hex": "0x2070",
         "mspv": 2,
         "direction": 1,
         "request": null,
@@ -10687,7 +10495,6 @@
     },
     "MSP2_INAV_EZ_TUNE_SET": {
         "code": 8305,
-        "hex": "0x2071",
         "mspv": 2,
         "direction": 0,
         "request": {
@@ -10763,7 +10570,6 @@
     },
     "MSP2_INAV_SELECT_MIXER_PROFILE": {
         "code": 8320,
-        "hex": "0x2080",
         "mspv": 2,
         "direction": 0,
         "request": {
@@ -10784,7 +10590,6 @@
     },
     "MSP2_ADSB_VEHICLE_LIST": {
         "code": 8336,
-        "hex": "0x2090",
         "mspv": 2,
         "direction": 1,
         "request": null,
@@ -10832,7 +10637,6 @@
     },
     "MSP2_INAV_CUSTOM_OSD_ELEMENTS": {
         "code": 8448,
-        "hex": "0x2100",
         "mspv": 2,
         "direction": 1,
         "request": null,
@@ -10865,7 +10669,6 @@
     },
     "MSP2_INAV_CUSTOM_OSD_ELEMENT": {
         "code": 8449,
-        "hex": "0x2101",
         "mspv": 2,
         "direction": 2,
         "request": {
@@ -10886,7 +10689,6 @@
     },
     "MSP2_INAV_SET_CUSTOM_OSD_ELEMENTS": {
         "code": 8450,
-        "hex": "0x2102",
         "mspv": 2,
         "direction": 0,
         "request": null,
@@ -10898,7 +10700,6 @@
     },
     "MSP2_INAV_OUTPUT_MAPPING_EXT2": {
         "code": 8461,
-        "hex": "0x210d",
         "mspv": 2,
         "direction": 1,
         "request": null,
@@ -10933,7 +10734,6 @@
     },
     "MSP2_INAV_SERVO_CONFIG": {
         "code": 8704,
-        "hex": "0x2200",
         "mspv": 2,
         "direction": 1,
         "request": null,
@@ -10973,7 +10773,6 @@
     },
     "MSP2_INAV_SET_SERVO_CONFIG": {
         "code": 8705,
-        "hex": "0x2201",
         "mspv": 2,
         "direction": 0,
         "request": {
@@ -11018,7 +10817,6 @@
     },
     "MSP2_INAV_GEOZONE": {
         "code": 8720,
-        "hex": "0x2210",
         "mspv": 2,
         "direction": 2,
         "request": {
@@ -11091,7 +10889,6 @@
     },
     "MSP2_INAV_SET_GEOZONE": {
         "code": 8721,
-        "hex": "0x2211",
         "mspv": 2,
         "direction": 0,
         "request": {
@@ -11155,7 +10952,6 @@
     },
     "MSP2_INAV_GEOZONE_VERTEX": {
         "code": 8722,
-        "hex": "0x2212",
         "mspv": 2,
         "direction": 2,
         "request": {
@@ -11216,7 +11012,6 @@
     },
     "MSP2_INAV_SET_GEOZONE_VERTEX": {
         "code": 8723,
-        "hex": "0x2213",
         "mspv": 2,
         "direction": 0,
         "variants": {
@@ -11302,7 +11097,6 @@
     },
     "MSP2_BETAFLIGHT_BIND": {
         "code": 12288,
-        "hex": "0x3000",
         "mspv": 2,
         "direction": 0,
         "request": null,

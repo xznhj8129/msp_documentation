@@ -20,8 +20,8 @@ from collections import defaultdict
 from pathlib import Path
 import sys
 
-IN_FILE = Path("lib/all_defines.h")
-OUT_FILE = Path("lib/inav_defines.py")
+IN_FILE = Path("all_defines.h")
+OUT_FILE = Path("inav_defines.py")
 
 DEFINE_RE = re.compile(r'^\s*#\s*define\s+([A-Za-z_]\w*)(?:\s+(.*?))?\s*$')
 FUNC_LIKE_RE = re.compile(r'^\s*#\s*define\s+([A-Za-z_]\w*)\s*\(')

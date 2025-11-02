@@ -9,7 +9,7 @@ Strict + Index:
 - STRICT: If a code exists in one (MSPCodes vs JSON) but not the other, crash with details.
 - Index items link to headings via GitHub-style auto-anchors.
 - Tight layout; identical Request/Reply tables; skip complex=true with a stub.
-- Default input: lib/msp_messages.json ; default output: MSP_Doc.md
+- Default input: msp_messages.json ; default output: MSP_Doc.md
 """
 
 import sys
@@ -566,7 +566,7 @@ def generate_markdown(defs: Dict[str, Any]) -> str:
 
 def main():
     in_path = Path(sys.argv[1]) if len(sys.argv) >= 2 else Path("msp_messages.json")
-    out_path = Path(sys.argv[2]) if len(sys.argv) >= 3 else Path("msp_ref.md")
+    out_path = Path(sys.argv[2]) if len(sys.argv) >= 3 else Path("docs/msp_ref.md")
 
     with in_path.open("r", encoding="utf-8") as f:
         defs = json.load(f)

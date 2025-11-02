@@ -4,7 +4,7 @@ import os
 from lib.inav_defines import InavDefines  # the auto-generated module
 from mspcommonlib import *
 
-with open("lib/msp_messages.json","r") as file:
+with open("msp_messages.json","r") as file:
     f = file.read()
     msp = json.loads(f)
 
@@ -114,5 +114,5 @@ for msg_code in msp:
             #    raise Exception
 
 
-with open("lib/msp_messages.json","w+") as file:
+with open("msp_messages.json","w+") as file:
     file.write(json.dumps(msp,indent=4))
