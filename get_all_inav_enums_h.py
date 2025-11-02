@@ -3,7 +3,7 @@ import datetime
 import re
 from pathlib import Path
 
-BASE = Path('../../../src/main')
+BASE = Path('../inav/src/main')
 SUBDIRS = [
     'common',
     'navigation',
