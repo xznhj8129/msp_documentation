@@ -40,10 +40,10 @@ Also auto-generates markdown files\
 ## Message fields:
 **name**: MSP message name\
 **code**: Integer message code\
-**description**: String with description and details of message\
+**description**: String with description of message\
+**notes**: String with details of message\
 **request**: null or dict of data sent\
 **reply**: null or dict of data received\
-**description**: String with description and details of message\
 **variable_len**: Optional boolean, if true, message does not have a predefined fixed length and needs appropriate handling\
 **complex**: Optional boolean, if true, message is one of those special cases that isn't defined here yet\
 **variants**: Optional special case, message has different cases of reply/request
