@@ -5,13 +5,13 @@ import json
 from pathlib import Path
 from typing import Any, Iterable
 
-REMOVE_KEYS: frozenset[str] = frozenset({"struct", "size","hex"})
+REMOVE_KEYS: frozenset[str] = frozenset({"struct", "size", "hex", "direction"})
 
 def scrub(node: Any, remove: Iterable[str] = REMOVE_KEYS) -> Any:
     if isinstance(node, dict):
         # delete targeted keys first, then recurse into remaining values
         for key in list(node.keys()):
-            if key in remove:
+            if key in remove or (key in ("variable_len", "complex") and node[key] is False):
                 del node[key]
             else:
                 scrub(node[key], remove)
