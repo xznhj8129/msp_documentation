@@ -422,7 +422,7 @@
                     "name": "mcHoverThrottle",
                     "ctype": "uint16_t",
                     "desc": "Multirotor hover throttle PWM value (`currentBatteryProfile->nav.mc.hover_throttle`).",
-                    "units": "us"
+                    "units": "PWM"
                 }
             ]
         },
@@ -482,7 +482,7 @@
                     "name": "mcHoverThrottle",
                     "ctype": "uint16_t",
                     "desc": "Sets `currentBatteryProfileMutable->nav.mc.hover_throttle`.",
-                    "units": "us"
+                    "units": "PWM"
                 }
             ]
         },
@@ -1042,19 +1042,19 @@
                     "name": "cruiseThrottle",
                     "ctype": "uint16_t",
                     "desc": "Cruise throttle command (`currentBatteryProfile->nav.fw.cruise_throttle`).",
-                    "units": "us"
+                    "units": "PWM"
                 },
                 {
                     "name": "minThrottle",
                     "ctype": "uint16_t",
                     "desc": "Minimum throttle during autonomous flight (`currentBatteryProfile->nav.fw.min_throttle`).",
-                    "units": "us"
+                    "units": "PWM"
                 },
                 {
                     "name": "maxThrottle",
                     "ctype": "uint16_t",
                     "desc": "Maximum throttle during autonomous flight (`currentBatteryProfile->nav.fw.max_throttle`).",
-                    "units": "us"
+                    "units": "PWM"
                 },
                 {
                     "name": "maxBankAngle",
@@ -1100,19 +1100,19 @@
                     "name": "cruiseThrottle",
                     "ctype": "uint16_t",
                     "desc": "Sets `currentBatteryProfileMutable->nav.fw.cruise_throttle`.",
-                    "units": "us"
+                    "units": "PWM"
                 },
                 {
                     "name": "minThrottle",
                     "ctype": "uint16_t",
                     "desc": "Sets `currentBatteryProfileMutable->nav.fw.min_throttle`.",
-                    "units": "us"
+                    "units": "PWM"
                 },
                 {
                     "name": "maxThrottle",
                     "ctype": "uint16_t",
                     "desc": "Sets `currentBatteryProfileMutable->nav.fw.max_throttle`.",
-                    "units": "us"
+                    "units": "PWM"
                 },
                 {
                     "name": "maxBankAngle",
@@ -1469,13 +1469,13 @@
                     "name": "rxMinUsec",
                     "ctype": "uint16_t",
                     "desc": "Minimum expected pulse width (`rxConfig()->rx_min_usec`)",
-                    "units": "us"
+                    "units": "PWM"
                 },
                 {
                     "name": "rxMaxUsec",
                     "ctype": "uint16_t",
                     "desc": "Maximum expected pulse width (`rxConfig()->rx_max_usec`)",
-                    "units": "us"
+                    "units": "PWM"
                 },
                 {
                     "name": "bfCompatRcInterpolation",
@@ -1571,13 +1571,13 @@
                     "name": "rxMinUsec",
                     "ctype": "uint16_t",
                     "desc": "Sets `rxConfigMutable()->rx_min_usec`.",
-                    "units": "us"
+                    "units": "PWM"
                 },
                 {
                     "name": "rxMaxUsec",
                     "ctype": "uint16_t",
                     "desc": "Sets `rxConfigMutable()->rx_max_usec`.",
-                    "units": "us"
+                    "units": "PWM"
                 },
                 {
                     "name": "bfCompatRcInterpolation",
@@ -2115,7 +2115,7 @@
                     "name": "looptime",
                     "ctype": "uint16_t",
                     "desc": "Configured loop time (`gyroConfig()->looptime`)",
-                    "units": "us"
+                    "units": "PWM"
                 }
             ]
         },
@@ -2131,7 +2131,7 @@
                     "name": "looptime",
                     "ctype": "uint16_t",
                     "desc": "New loop time to set (`gyroConfigMutable()->looptime`)",
-                    "units": "us"
+                    "units": "PWM"
                 }
             ]
         },
@@ -3883,7 +3883,7 @@
                 {
                     "name": "yaw",
                     "ctype": "uint16_t",
-                    "desc": "Yaw/Heading angle (`(attitude.values.yaw)`)",
+                    "desc": "Yaw/Heading angle (`attitude.values.yaw`)",
                     "units": "deci-degrees"
                 }
             ]
