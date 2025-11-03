@@ -37,7 +37,7 @@
                 {
                     "name": "fcVariantIdentifier",
                     "ctype": "char[4]",
-                    "desc": "4-character identifier string (e.g., \"INAV\"). Defined by `flightControllerIdentifier",
+                    "desc": "4-character identifier string (e.g., \"INAV\"). Defined by `flightControllerIdentifier`.",
                     "array": true,
                     "array_ctype": "char",
                     "array_size": 4,
@@ -141,7 +141,7 @@
                 {
                     "name": "buildDate",
                     "ctype": "char[11]",
-                    "desc": "Build date string (e.g., \"Dec 31 2023\"). `BUILD_DATE_LENGTH",
+                    "desc": "Build date string (e.g., \"Dec 31 2023\"). `BUILD_DATE_LENGTH`.",
                     "array": true,
                     "array_ctype": "char",
                     "array_size": 11,
@@ -150,7 +150,7 @@
                 {
                     "name": "buildTime",
                     "ctype": "char[8]",
-                    "desc": "Build time string (e.g., \"23:59:59\"). `BUILD_TIME_LENGTH",
+                    "desc": "Build time string (e.g., \"23:59:59\"). `BUILD_TIME_LENGTH`.",
                     "array": true,
                     "array_ctype": "char",
                     "array_size": 8,
@@ -158,11 +158,11 @@
                 },
                 {
                     "name": "gitRevision",
-                    "ctype": "char[7]",
-                    "desc": "Short Git revision string. `GIT_SHORT_REVISION_LENGTH",
+                    "ctype": "char[8]",
+                    "desc": "Short Git revision string. `GIT_SHORT_REVISION_LENGTH`.",
                     "array": true,
                     "array_ctype": "char",
-                    "array_size": 7,
+                    "array_size": 8,
                     "units": ""
                 }
             ]
@@ -190,7 +190,7 @@
                 },
                 {
                     "name": "legacyAsyncValue2",
-                    "ctype": "uint16_t",
+                    "ctype": "int16_t",
                     "desc": "Legacy, unused. Always 0",
                     "value": 0
                 },
@@ -208,14 +208,14 @@
                 },
                 {
                     "name": "legacyYawJumpLimit",
-                    "ctype": "uint16_t",
+                    "ctype": "int16_t",
                     "desc": "Legacy, unused. Always 0",
                     "value": 0
                 },
                 {
                     "name": "legacyGyroLpf",
                     "ctype": "uint8_t",
-                    "desc": "Fixed value `GYRO_LPF_256HZ",
+                    "desc": "Fixed value `GYRO_LPF_256HZ`",
                     "units": "Hz"
                 },
                 {
@@ -265,18 +265,18 @@
                 },
                 {
                     "name": "legacyAsyncValue1",
-                    "ctype": "uint16_t",
+                    "ctype": "int16_t",
                     "desc": "Legacy, ignored"
                 },
                 {
                     "name": "legacyAsyncValue2",
-                    "ctype": "uint16_t",
+                    "ctype": "int16_t",
                     "desc": "Legacy, ignored"
                 },
                 {
                     "name": "headingHoldRateLimit",
                     "ctype": "uint8_t",
-                    "desc": "Sets `pidProfileMutable()->heading_hold_rate_limit",
+                    "desc": "Sets `pidProfileMutable()->heading_hold_rate_limit`.",
                     "units": "deg/s"
                 },
                 {
@@ -287,20 +287,19 @@
                 },
                 {
                     "name": "legacyYawJumpLimit",
-                    "ctype": "uint16_t",
+                    "ctype": "int16_t",
                     "desc": "Legacy, ignored"
                 },
                 {
                     "name": "legacyGyroLpf",
                     "ctype": "uint8_t",
-                    "desc": "Ignored (was gyro LPF)",
-                    "units": "Enum",
-                    "enum": "?_e"
+                    "desc": "Ignored (historically mapped to `gyro_lpf_e` values).",
+                    "units": ""
                 },
                 {
                     "name": "accLpfHz",
                     "ctype": "uint8_t",
-                    "desc": "Sets `accelerometerConfigMutable()->acc_lpf_hz",
+                    "desc": "Sets `accelerometerConfigMutable()->acc_lpf_hz`.",
                     "units": "Hz"
                 },
                 {
@@ -415,15 +414,15 @@
                 {
                     "name": "mcAltHoldThrottleType",
                     "ctype": "uint8_t",
-                    "desc": "Enum `navMcAltHoldThrottle_e` Sets 'navConfigMutable()->mc.althold_throttle_type'",
+                    "desc": "Enum `navMcAltHoldThrottle_e` mirrored from `navConfig()->mc.althold_throttle_type`.",
                     "units": "Enum",
                     "enum": "navMcAltHoldThrottle_e"
                 },
                 {
                     "name": "mcHoverThrottle",
                     "ctype": "uint16_t",
-                    "desc": "Multirotor hover throttle (`currentBatteryProfile->nav.mc.hover_throttle`)",
-                    "units": "PWM"
+                    "desc": "Multirotor hover throttle PWM value (`currentBatteryProfile->nav.mc.hover_throttle`).",
+                    "units": "us"
                 }
             ]
         },
@@ -438,52 +437,52 @@
                 {
                     "name": "userControlMode",
                     "ctype": "uint8_t",
-                    "desc": "Sets `navConfigMutable()->general.flags.user_control_mode",
+                    "desc": "Sets `navConfigMutable()->general.flags.user_control_mode`.",
                     "units": "Enum",
-                    "enum": "?_e"
+                    "enum": "navUserControlMode_e"
                 },
                 {
                     "name": "maxAutoSpeed",
                     "ctype": "uint16_t",
-                    "desc": "Sets `navConfigMutable()->general.max_auto_speed",
+                    "desc": "Sets `navConfigMutable()->general.max_auto_speed`.",
                     "units": "cm/s"
                 },
                 {
                     "name": "maxAutoClimbRate",
                     "ctype": "uint16_t",
-                    "desc": "Sets `fw.max_auto_climb_rate` or `mc.max_auto_climb_rate` based on current platform type",
+                    "desc": "Sets `navConfigMutable()->fw.max_auto_climb_rate` or `navConfigMutable()->mc.max_auto_climb_rate` based on `mixerConfig()->platformType`.",
                     "units": "cm/s"
                 },
                 {
                     "name": "maxManualSpeed",
                     "ctype": "uint16_t",
-                    "desc": "Sets `navConfigMutable()->general.max_manual_speed",
+                    "desc": "Sets `navConfigMutable()->general.max_manual_speed`.",
                     "units": "cm/s"
                 },
                 {
                     "name": "maxManualClimbRate",
                     "ctype": "uint16_t",
-                    "desc": "Sets `fw.max_manual_climb_rate` or `mc.max_manual_climb_rate",
+                    "desc": "Sets `navConfigMutable()->fw.max_manual_climb_rate` or `navConfigMutable()->mc.max_manual_climb_rate`.",
                     "units": "cm/s"
                 },
                 {
                     "name": "mcMaxBankAngle",
                     "ctype": "uint8_t",
-                    "desc": "Sets `navConfigMutable()->mc.max_bank_angle",
+                    "desc": "Sets `navConfigMutable()->mc.max_bank_angle`.",
                     "units": "degrees"
                 },
                 {
                     "name": "mcAltHoldThrottleType",
                     "ctype": "uint8_t",
-                    "desc": "Enum `navMcAltHoldThrottle_e` Sets 'navConfigMutable()->mc.althold_throttle_type'",
+                    "desc": "Enum `navMcAltHoldThrottle_e`; updates `navConfigMutable()->mc.althold_throttle_type`.",
                     "units": "Enum",
                     "enum": "navMcAltHoldThrottle_e"
                 },
                 {
                     "name": "mcHoverThrottle",
                     "ctype": "uint16_t",
-                    "desc": "Sets `currentBatteryProfileMutable->nav.mc.hover_throttle",
-                    "units": "PWM"
+                    "desc": "Sets `currentBatteryProfileMutable->nav.mc.hover_throttle`.",
+                    "units": "us"
                 }
             ]
         },
@@ -506,55 +505,55 @@
                 },
                 {
                     "name": "accZeroX",
-                    "ctype": "uint16_t",
+                    "ctype": "int16_t",
                     "desc": "Accelerometer zero offset for X-axis (`accelerometerConfig()->accZero.raw[X]`)",
                     "units": "Raw ADC"
                 },
                 {
                     "name": "accZeroY",
-                    "ctype": "uint16_t",
+                    "ctype": "int16_t",
                     "desc": "Accelerometer zero offset for Y-axis (`accelerometerConfig()->accZero.raw[Y]`)",
                     "units": "Raw ADC"
                 },
                 {
                     "name": "accZeroZ",
-                    "ctype": "uint16_t",
+                    "ctype": "int16_t",
                     "desc": "Accelerometer zero offset for Z-axis (`accelerometerConfig()->accZero.raw[Z]`)",
                     "units": "Raw ADC"
                 },
                 {
                     "name": "accGainX",
-                    "ctype": "uint16_t",
+                    "ctype": "int16_t",
                     "desc": "Accelerometer gain/scale for X-axis (`accelerometerConfig()->accGain.raw[X]`)",
                     "units": "Raw ADC"
                 },
                 {
                     "name": "accGainY",
-                    "ctype": "uint16_t",
+                    "ctype": "int16_t",
                     "desc": "Accelerometer gain/scale for Y-axis (`accelerometerConfig()->accGain.raw[Y]`)",
                     "units": "Raw ADC"
                 },
                 {
                     "name": "accGainZ",
-                    "ctype": "uint16_t",
+                    "ctype": "int16_t",
                     "desc": "Accelerometer gain/scale for Z-axis (`accelerometerConfig()->accGain.raw[Z]`)",
                     "units": "Raw ADC"
                 },
                 {
                     "name": "magZeroX",
-                    "ctype": "uint16_t",
+                    "ctype": "int16_t",
                     "desc": "Magnetometer zero offset for X-axis (`compassConfig()->magZero.raw[X]`). 0 if `USE_MAG` disabled",
                     "units": "Raw ADC"
                 },
                 {
                     "name": "magZeroY",
-                    "ctype": "uint16_t",
+                    "ctype": "int16_t",
                     "desc": "Magnetometer zero offset for Y-axis (`compassConfig()->magZero.raw[Y]`). 0 if `USE_MAG` disabled",
                     "units": "Raw ADC"
                 },
                 {
                     "name": "magZeroZ",
-                    "ctype": "uint16_t",
+                    "ctype": "int16_t",
                     "desc": "Magnetometer zero offset for Z-axis (`compassConfig()->magZero.raw[Z]`). 0 if `USE_MAG` disabled",
                     "units": "Raw ADC"
                 },
@@ -566,19 +565,19 @@
                 },
                 {
                     "name": "magGainX",
-                    "ctype": "uint16_t",
+                    "ctype": "int16_t",
                     "desc": "Magnetometer gain/scale for X-axis (`compassConfig()->magGain[X]`). 0 if `USE_MAG` disabled",
                     "units": "Raw ADC"
                 },
                 {
                     "name": "magGainY",
-                    "ctype": "uint16_t",
+                    "ctype": "int16_t",
                     "desc": "Magnetometer gain/scale for Y-axis (`compassConfig()->magGain[Y]`). 0 if `USE_MAG` disabled",
                     "units": "Raw ADC"
                 },
                 {
                     "name": "magGainZ",
-                    "ctype": "uint16_t",
+                    "ctype": "int16_t",
                     "desc": "Magnetometer gain/scale for Z-axis (`compassConfig()->magGain[Z]`). 0 if `USE_MAG` disabled",
                     "units": "Raw ADC"
                 }
@@ -594,55 +593,55 @@
             "payload": [
                 {
                     "name": "accZeroX",
-                    "ctype": "uint16_t",
-                    "desc": "Sets `accelerometerConfigMutable()->accZero.raw[X]",
+                    "ctype": "int16_t",
+                    "desc": "Sets `accelerometerConfigMutable()->accZero.raw[X]`.",
                     "units": "Raw ADC"
                 },
                 {
                     "name": "accZeroY",
-                    "ctype": "uint16_t",
-                    "desc": "Sets `accelerometerConfigMutable()->accZero.raw[Y]",
+                    "ctype": "int16_t",
+                    "desc": "Sets `accelerometerConfigMutable()->accZero.raw[Y]`.",
                     "units": "Raw ADC"
                 },
                 {
                     "name": "accZeroZ",
-                    "ctype": "uint16_t",
-                    "desc": "Sets `accelerometerConfigMutable()->accZero.raw[Z]",
+                    "ctype": "int16_t",
+                    "desc": "Sets `accelerometerConfigMutable()->accZero.raw[Z]`.",
                     "units": "Raw ADC"
                 },
                 {
                     "name": "accGainX",
-                    "ctype": "uint16_t",
-                    "desc": "Sets `accelerometerConfigMutable()->accGain.raw[X]",
+                    "ctype": "int16_t",
+                    "desc": "Sets `accelerometerConfigMutable()->accGain.raw[X]`.",
                     "units": "Raw ADC"
                 },
                 {
                     "name": "accGainY",
-                    "ctype": "uint16_t",
-                    "desc": "Sets `accelerometerConfigMutable()->accGain.raw[Y]",
+                    "ctype": "int16_t",
+                    "desc": "Sets `accelerometerConfigMutable()->accGain.raw[Y]`.",
                     "units": "Raw ADC"
                 },
                 {
                     "name": "accGainZ",
-                    "ctype": "uint16_t",
-                    "desc": "Sets `accelerometerConfigMutable()->accGain.raw[Z]",
+                    "ctype": "int16_t",
+                    "desc": "Sets `accelerometerConfigMutable()->accGain.raw[Z]`.",
                     "units": "Raw ADC"
                 },
                 {
                     "name": "magZeroX",
-                    "ctype": "uint16_t",
+                    "ctype": "int16_t",
                     "desc": "Sets `compassConfigMutable()->magZero.raw[X]` (if `USE_MAG`)",
                     "units": "Raw ADC"
                 },
                 {
                     "name": "magZeroY",
-                    "ctype": "uint16_t",
+                    "ctype": "int16_t",
                     "desc": "Sets `compassConfigMutable()->magZero.raw[Y]` (if `USE_MAG`)",
                     "units": "Raw ADC"
                 },
                 {
                     "name": "magZeroZ",
-                    "ctype": "uint16_t",
+                    "ctype": "int16_t",
                     "desc": "Sets `compassConfigMutable()->magZero.raw[Z]` (if `USE_MAG`)",
                     "units": "Raw ADC"
                 },
@@ -654,26 +653,26 @@
                 },
                 {
                     "name": "magGainX",
-                    "ctype": "uint16_t",
+                    "ctype": "int16_t",
                     "desc": "Sets `compassConfigMutable()->magGain[X]` (if `USE_MAG`)",
                     "units": "Raw ADC"
                 },
                 {
                     "name": "magGainY",
-                    "ctype": "uint16_t",
+                    "ctype": "int16_t",
                     "desc": "Sets `compassConfigMutable()->magGain[Y]` (if `USE_MAG`)",
                     "units": "Raw ADC"
                 },
                 {
                     "name": "magGainZ",
-                    "ctype": "uint16_t",
+                    "ctype": "int16_t",
                     "desc": "Sets `compassConfigMutable()->magGain[Z]` (if `USE_MAG`)",
                     "units": "Raw ADC"
                 }
             ]
         },
         "reply": null,
-        "notes": "Expects 26 bytes. Ignores values for sensors not enabled by `USE_*` defines.",
+        "notes": "Minimum payload 18 bytes. Adds +6 bytes for magnetometer zeros, +2 for optical flow scale, and +6 for magnetometer gains when those features (`USE_MAG`, `USE_OPFLOW`) are compiled in.",
         "description": "Sets sensor calibration data."
     },
     "MSP_POSITION_ESTIMATION_CONFIG": {
@@ -863,7 +862,7 @@
                     "name": "minRthDistance",
                     "ctype": "uint16_t",
                     "desc": "Minimum distance from home required for RTH to engage (`navConfig()->general.min_rth_distance`)",
-                    "units": "meters"
+                    "units": "cm"
                 },
                 {
                     "name": "rthClimbFirst",
@@ -880,7 +879,7 @@
                 {
                     "name": "rthTailFirst",
                     "ctype": "uint8_t",
-                    "desc": "Flag: Multirotor returns tail-first (`navConfig()->general.flags.rth_tail_first`)",
+                    "desc": "Flag: Return tail-first during RTH (`navConfig()->general.flags.rth_tail_first`)",
                     "units": "Boolean"
                 },
                 {
@@ -892,21 +891,21 @@
                 {
                     "name": "rthAltControlMode",
                     "ctype": "uint8_t",
-                    "desc": "RTH altitude control mode (`navConfig()->general.flags.rth_alt_control_mode`)",
+                    "desc": "RTH altitude control mode (`navConfig()->general.flags.rth_alt_control_mode`).",
                     "units": "Enum",
-                    "enum": "?_e"
+                    "enum": "navRthAltMode_e"
                 },
                 {
                     "name": "rthAbortThreshold",
                     "ctype": "uint16_t",
-                    "desc": "Stick input threshold to abort RTH (`navConfig()->general.rth_abort_threshold`)",
-                    "units": "cm/s"
+                    "desc": "Distance increase threshold to abort RTH (`navConfig()->general.rth_abort_threshold`)",
+                    "units": "cm"
                 },
                 {
                     "name": "rthAltitude",
                     "ctype": "uint16_t",
                     "desc": "Target RTH altitude (`navConfig()->general.rth_altitude`)",
-                    "units": "meters"
+                    "units": "cm"
                 },
                 {
                     "name": "landMinAltVspd",
@@ -924,13 +923,13 @@
                     "name": "landSlowdownMinAlt",
                     "ctype": "uint16_t",
                     "desc": "Altitude below which `landMinAltVspd` applies (`navConfig()->general.land_slowdown_minalt`)",
-                    "units": "meters"
+                    "units": "cm"
                 },
                 {
                     "name": "landSlowdownMaxAlt",
                     "ctype": "uint16_t",
                     "desc": "Altitude above which `landMaxAltVspd` applies (`navConfig()->general.land_slowdown_maxalt`)",
-                    "units": "meters"
+                    "units": "cm"
                 },
                 {
                     "name": "emergDescentRate",
@@ -951,80 +950,80 @@
                 {
                     "name": "minRthDistance",
                     "ctype": "uint16_t",
-                    "desc": "Sets `navConfigMutable()->general.min_rth_distance",
-                    "units": "meters"
+                    "desc": "Sets `navConfigMutable()->general.min_rth_distance`.",
+                    "units": "cm"
                 },
                 {
                     "name": "rthClimbFirst",
                     "ctype": "uint8_t",
-                    "desc": "Sets `navConfigMutable()->general.flags.rth_climb_first",
+                    "desc": "Sets `navConfigMutable()->general.flags.rth_climb_first`.",
                     "units": "Boolean"
                 },
                 {
                     "name": "rthClimbIgnoreEmerg",
                     "ctype": "uint8_t",
-                    "desc": "Sets `navConfigMutable()->general.flags.rth_climb_ignore_emerg",
+                    "desc": "Sets `navConfigMutable()->general.flags.rth_climb_ignore_emerg`.",
                     "units": "Boolean"
                 },
                 {
                     "name": "rthTailFirst",
                     "ctype": "uint8_t",
-                    "desc": "Sets `navConfigMutable()->general.flags.rth_tail_first",
+                    "desc": "Sets `navConfigMutable()->general.flags.rth_tail_first`.",
                     "units": "Boolean"
                 },
                 {
                     "name": "rthAllowLanding",
                     "ctype": "uint8_t",
-                    "desc": "Sets `navConfigMutable()->general.flags.rth_allow_landing",
+                    "desc": "Sets `navConfigMutable()->general.flags.rth_allow_landing`.",
                     "units": "Boolean"
                 },
                 {
                     "name": "rthAltControlMode",
                     "ctype": "uint8_t",
-                    "desc": "Sets `navConfigMutable()->general.flags.rth_alt_control_mode",
+                    "desc": "Sets `navConfigMutable()->general.flags.rth_alt_control_mode`.",
                     "units": "Enum",
-                    "enum": "?_e"
+                    "enum": "navRthAltMode_e"
                 },
                 {
                     "name": "rthAbortThreshold",
                     "ctype": "uint16_t",
-                    "desc": "Sets `navConfigMutable()->general.rth_abort_threshold",
-                    "units": "cm/s"
+                    "desc": "Sets `navConfigMutable()->general.rth_abort_threshold`.",
+                    "units": "cm"
                 },
                 {
                     "name": "rthAltitude",
                     "ctype": "uint16_t",
-                    "desc": "Sets `navConfigMutable()->general.rth_altitude",
-                    "units": "meters"
+                    "desc": "Sets `navConfigMutable()->general.rth_altitude`.",
+                    "units": "cm"
                 },
                 {
                     "name": "landMinAltVspd",
                     "ctype": "uint16_t",
-                    "desc": "Sets `navConfigMutable()->general.land_minalt_vspd",
+                    "desc": "Sets `navConfigMutable()->general.land_minalt_vspd`.",
                     "units": "cm/s"
                 },
                 {
                     "name": "landMaxAltVspd",
                     "ctype": "uint16_t",
-                    "desc": "Sets `navConfigMutable()->general.land_maxalt_vspd",
+                    "desc": "Sets `navConfigMutable()->general.land_maxalt_vspd`.",
                     "units": "cm/s"
                 },
                 {
                     "name": "landSlowdownMinAlt",
                     "ctype": "uint16_t",
-                    "desc": "Sets `navConfigMutable()->general.land_slowdown_minalt",
-                    "units": "meters"
+                    "desc": "Sets `navConfigMutable()->general.land_slowdown_minalt`.",
+                    "units": "cm"
                 },
                 {
                     "name": "landSlowdownMaxAlt",
                     "ctype": "uint16_t",
-                    "desc": "Sets `navConfigMutable()->general.land_slowdown_maxalt",
-                    "units": "meters"
+                    "desc": "Sets `navConfigMutable()->general.land_slowdown_maxalt`.",
+                    "units": "cm"
                 },
                 {
                     "name": "emergDescentRate",
                     "ctype": "uint16_t",
-                    "desc": "Sets `navConfigMutable()->general.emerg_descent_rate",
+                    "desc": "Sets `navConfigMutable()->general.emerg_descent_rate`.",
                     "units": "cm/s"
                 }
             ]
@@ -1042,20 +1041,20 @@
                 {
                     "name": "cruiseThrottle",
                     "ctype": "uint16_t",
-                    "desc": "Cruise throttle level (`currentBatteryProfile->nav.fw.cruise_throttle`)",
-                    "units": "PWM"
+                    "desc": "Cruise throttle command (`currentBatteryProfile->nav.fw.cruise_throttle`).",
+                    "units": "us"
                 },
                 {
                     "name": "minThrottle",
                     "ctype": "uint16_t",
-                    "desc": "Minimum throttle during autonomous flight (`currentBatteryProfile->nav.fw.min_throttle`)",
-                    "units": "PWM"
+                    "desc": "Minimum throttle during autonomous flight (`currentBatteryProfile->nav.fw.min_throttle`).",
+                    "units": "us"
                 },
                 {
                     "name": "maxThrottle",
                     "ctype": "uint16_t",
-                    "desc": "Maximum throttle during autonomous flight (`currentBatteryProfile->nav.fw.max_throttle`)",
-                    "units": "PWM"
+                    "desc": "Maximum throttle during autonomous flight (`currentBatteryProfile->nav.fw.max_throttle`).",
+                    "units": "us"
                 },
                 {
                     "name": "maxBankAngle",
@@ -1078,14 +1077,14 @@
                 {
                     "name": "pitchToThrottle",
                     "ctype": "uint8_t",
-                    "desc": "Pitch-to-throttle feed-forward ratio (`currentBatteryProfile->nav.fw.pitch_to_throttle`)",
-                    "units": "Ratio (%)"
+                    "desc": "Pitch-to-throttle gain (`currentBatteryProfile->nav.fw.pitch_to_throttle`); PWM microseconds per degree (10 units ≈ 1% throttle).",
+                    "units": "us/deg"
                 },
                 {
                     "name": "loiterRadius",
                     "ctype": "uint16_t",
-                    "desc": "Default loiter radius (`navConfig()->fw.loiter_radius`)",
-                    "units": "meters"
+                    "desc": "Default loiter radius (`navConfig()->fw.loiter_radius`).",
+                    "units": "cm"
                 }
             ]
         },
@@ -1100,50 +1099,50 @@
                 {
                     "name": "cruiseThrottle",
                     "ctype": "uint16_t",
-                    "desc": "Sets `currentBatteryProfileMutable->nav.fw.cruise_throttle",
-                    "units": "PWM"
+                    "desc": "Sets `currentBatteryProfileMutable->nav.fw.cruise_throttle`.",
+                    "units": "us"
                 },
                 {
                     "name": "minThrottle",
                     "ctype": "uint16_t",
-                    "desc": "Sets `currentBatteryProfileMutable->nav.fw.min_throttle",
-                    "units": "PWM"
+                    "desc": "Sets `currentBatteryProfileMutable->nav.fw.min_throttle`.",
+                    "units": "us"
                 },
                 {
                     "name": "maxThrottle",
                     "ctype": "uint16_t",
-                    "desc": "Sets `currentBatteryProfileMutable->nav.fw.max_throttle",
-                    "units": "PWM"
+                    "desc": "Sets `currentBatteryProfileMutable->nav.fw.max_throttle`.",
+                    "units": "us"
                 },
                 {
                     "name": "maxBankAngle",
                     "ctype": "uint8_t",
-                    "desc": "Sets `navConfigMutable()->fw.max_bank_angle",
+                    "desc": "Sets `navConfigMutable()->fw.max_bank_angle`.",
                     "units": "degrees"
                 },
                 {
                     "name": "maxClimbAngle",
                     "ctype": "uint8_t",
-                    "desc": "Sets `navConfigMutable()->fw.max_climb_angle",
+                    "desc": "Sets `navConfigMutable()->fw.max_climb_angle`.",
                     "units": "degrees"
                 },
                 {
                     "name": "maxDiveAngle",
                     "ctype": "uint8_t",
-                    "desc": "Sets `navConfigMutable()->fw.max_dive_angle",
+                    "desc": "Sets `navConfigMutable()->fw.max_dive_angle`.",
                     "units": "degrees"
                 },
                 {
                     "name": "pitchToThrottle",
                     "ctype": "uint8_t",
-                    "desc": "Sets `currentBatteryProfileMutable->nav.fw.pitch_to_throttle",
-                    "units": "Ratio (%)"
+                    "desc": "Sets `currentBatteryProfileMutable->nav.fw.pitch_to_throttle` (PWM microseconds per degree; 10 units ≈ 1% throttle).",
+                    "units": "us/deg"
                 },
                 {
                     "name": "loiterRadius",
                     "ctype": "uint16_t",
-                    "desc": "Sets `navConfigMutable()->fw.loiter_radius",
-                    "units": "meters"
+                    "desc": "Sets `navConfigMutable()->fw.loiter_radius`.",
+                    "units": "cm"
                 }
             ]
         },
