@@ -300,7 +300,7 @@ For current generation code, see [documentation project](https://github.com/xznh
 **Reply Payload:**
 |Field|C Type|Size (Bytes)|Description|
 |---|---|---|---|
-| `fcVariantIdentifier` | `char[4]` | 4 | 4-character identifier string (e.g., "INAV"). Defined by `flightControllerIdentifier |
+| `fcVariantIdentifier` | `char[4]` | 4 | 4-character identifier string (e.g., "INAV"). Defined by `flightControllerIdentifier`. |
 
 **Notes:** See `FLIGHT_CONTROLLER_IDENTIFIER_LENGTH`.
 
@@ -341,9 +341,9 @@ For current generation code, see [documentation project](https://github.com/xznh
 **Reply Payload:**
 |Field|C Type|Size (Bytes)|Description|
 |---|---|---|---|
-| `buildDate` | `char[11]` | 11 | Build date string (e.g., "Dec 31 2023"). `BUILD_DATE_LENGTH |
-| `buildTime` | `char[8]` | 8 | Build time string (e.g., "23:59:59"). `BUILD_TIME_LENGTH |
-| `gitRevision` | `char[7]` | 7 | Short Git revision string. `GIT_SHORT_REVISION_LENGTH |
+| `buildDate` | `char[11]` | 11 | Build date string (e.g., "Dec 31 2023"). `BUILD_DATE_LENGTH`. |
+| `buildTime` | `char[8]` | 8 | Build time string (e.g., "23:59:59"). `BUILD_TIME_LENGTH`. |
+| `gitRevision` | `char[8]` | 8 | Short Git revision string. `GIT_SHORT_REVISION_LENGTH`. |
 
 ## <a id="msp_inav_pid"></a>`MSP_INAV_PID (6 / 0x6)`
 **Description:** Retrieves legacy INAV-specific PID controller related settings. Many fields are now obsolete or placeholders.  
@@ -355,11 +355,11 @@ For current generation code, see [documentation project](https://github.com/xznh
 |---|---|---|---|---|
 | `legacyAsyncProcessing` | `uint8_t` | 1 | - | Legacy, unused. Always 0 |
 | `legacyAsyncValue1` | `uint16_t` | 2 | - | Legacy, unused. Always 0 |
-| `legacyAsyncValue2` | `uint16_t` | 2 | - | Legacy, unused. Always 0 |
+| `legacyAsyncValue2` | `int16_t` | 2 | - | Legacy, unused. Always 0 |
 | `headingHoldRateLimit` | `uint8_t` | 1 | deg/s | Max rate for heading hold P term (`pidProfile()->heading_hold_rate_limit`) |
 | `headingHoldLpfFreq` | `uint8_t` | 1 | Hz | Fixed LPF frequency for heading hold error (`HEADING_HOLD_ERROR_LPF_FREQ`) |
-| `legacyYawJumpLimit` | `uint16_t` | 2 | - | Legacy, unused. Always 0 |
-| `legacyGyroLpf` | `uint8_t` | 1 | Hz | Fixed value `GYRO_LPF_256HZ |
+| `legacyYawJumpLimit` | `int16_t` | 2 | - | Legacy, unused. Always 0 |
+| `legacyGyroLpf` | `uint8_t` | 1 | Hz | Fixed value `GYRO_LPF_256HZ` |
 | `accLpfHz` | `uint8_t` | 1 | Hz | Accelerometer LPF frequency (`accelerometerConfig()->acc_lpf_hz`) cutoff frequency for the low pass filter used on the acc z-axis for althold in Hz |
 | `reserved1` | `uint8_t` | 1 | - | Reserved. Always 0 |
 | `reserved2` | `uint8_t` | 1 | - | Reserved. Always 0 |
@@ -375,13 +375,13 @@ For current generation code, see [documentation project](https://github.com/xznh
 |Field|C Type|Size (Bytes)|Units|Description|
 |---|---|---|---|---|
 | `legacyAsyncProcessing` | `uint8_t` | 1 | - | Legacy, ignored |
-| `legacyAsyncValue1` | `uint16_t` | 2 | - | Legacy, ignored |
-| `legacyAsyncValue2` | `uint16_t` | 2 | - | Legacy, ignored |
-| `headingHoldRateLimit` | `uint8_t` | 1 | deg/s | Sets `pidProfileMutable()->heading_hold_rate_limit |
+| `legacyAsyncValue1` | `int16_t` | 2 | - | Legacy, ignored |
+| `legacyAsyncValue2` | `int16_t` | 2 | - | Legacy, ignored |
+| `headingHoldRateLimit` | `uint8_t` | 1 | deg/s | Sets `pidProfileMutable()->heading_hold_rate_limit`. |
 | `headingHoldLpfFreq` | `uint8_t` | 1 | Hz | Ignored (fixed value `HEADING_HOLD_ERROR_LPF_FREQ` used) |
-| `legacyYawJumpLimit` | `uint16_t` | 2 | - | Legacy, ignored |
-| `legacyGyroLpf` | `uint8_t` | 1 | [ENUM_NAME](LINK_TO_ENUM) | Ignored (was gyro LPF) |
-| `accLpfHz` | `uint8_t` | 1 | Hz | Sets `accelerometerConfigMutable()->acc_lpf_hz |
+| `legacyYawJumpLimit` | `int16_t` | 2 | - | Legacy, ignored |
+| `legacyGyroLpf` | `uint8_t` | 1 | - | Ignored (historically mapped to `gyro_lpf_e` values). |
+| `accLpfHz` | `uint8_t` | 1 | Hz | Sets `accelerometerConfigMutable()->acc_lpf_hz`. |
 | `reserved1` | `uint8_t` | 1 | - | Ignored |
 | `reserved2` | `uint8_t` | 1 | - | Ignored |
 | `reserved3` | `uint8_t` | 1 | - | Ignored |
@@ -427,8 +427,8 @@ For current generation code, see [documentation project](https://github.com/xznh
 | `maxManualSpeed` | `uint16_t` | 2 | cm/s | Max speed in manual modes with GPS aiding (`navConfig()->general.max_manual_speed`) |
 | `maxManualClimbRate` | `uint16_t` | 2 | cm/s | Max climb rate in manual modes with GPS aiding (uses `fw.max_manual_climb_rate` or `mc.max_manual_climb_rate`) |
 | `mcMaxBankAngle` | `uint8_t` | 1 | degrees | Max bank angle for multirotor position hold (`navConfig()->mc.max_bank_angle`) |
-| `mcAltHoldThrottleType` | `uint8_t` | 1 | [navMcAltHoldThrottle_e](https://github.com/iNavFlight/inav/wiki/Enums-reference#enum-navmcaltholdthrottle_e) | Enum `navMcAltHoldThrottle_e` Sets 'navConfigMutable()->mc.althold_throttle_type' |
-| `mcHoverThrottle` | `uint16_t` | 2 | PWM | Multirotor hover throttle (`currentBatteryProfile->nav.mc.hover_throttle`) |
+| `mcAltHoldThrottleType` | `uint8_t` | 1 | [navMcAltHoldThrottle_e](https://github.com/iNavFlight/inav/wiki/Enums-reference#enum-navmcaltholdthrottle_e) | Enum `navMcAltHoldThrottle_e` mirrored from `navConfig()->mc.althold_throttle_type`. |
+| `mcHoverThrottle` | `uint16_t` | 2 | us | Multirotor hover throttle PWM value (`currentBatteryProfile->nav.mc.hover_throttle`). |
 
 ## <a id="msp_set_nav_poshold"></a>`MSP_SET_NAV_POSHOLD (13 / 0xd)`
 **Description:** Sets navigation position hold and general manual/auto flight parameters.  
@@ -436,14 +436,14 @@ For current generation code, see [documentation project](https://github.com/xznh
 **Request Payload:**
 |Field|C Type|Size (Bytes)|Units|Description|
 |---|---|---|---|---|
-| `userControlMode` | `uint8_t` | 1 | [ENUM_NAME](LINK_TO_ENUM) | Sets `navConfigMutable()->general.flags.user_control_mode |
-| `maxAutoSpeed` | `uint16_t` | 2 | cm/s | Sets `navConfigMutable()->general.max_auto_speed |
-| `maxAutoClimbRate` | `uint16_t` | 2 | cm/s | Sets `fw.max_auto_climb_rate` or `mc.max_auto_climb_rate` based on current platform type |
-| `maxManualSpeed` | `uint16_t` | 2 | cm/s | Sets `navConfigMutable()->general.max_manual_speed |
-| `maxManualClimbRate` | `uint16_t` | 2 | cm/s | Sets `fw.max_manual_climb_rate` or `mc.max_manual_climb_rate |
-| `mcMaxBankAngle` | `uint8_t` | 1 | degrees | Sets `navConfigMutable()->mc.max_bank_angle |
-| `mcAltHoldThrottleType` | `uint8_t` | 1 | [navMcAltHoldThrottle_e](https://github.com/iNavFlight/inav/wiki/Enums-reference#enum-navmcaltholdthrottle_e) | Enum `navMcAltHoldThrottle_e` Sets 'navConfigMutable()->mc.althold_throttle_type' |
-| `mcHoverThrottle` | `uint16_t` | 2 | PWM | Sets `currentBatteryProfileMutable->nav.mc.hover_throttle |
+| `userControlMode` | `uint8_t` | 1 | [navUserControlMode_e](https://github.com/iNavFlight/inav/wiki/Enums-reference#enum-navusercontrolmode_e) | Sets `navConfigMutable()->general.flags.user_control_mode`. |
+| `maxAutoSpeed` | `uint16_t` | 2 | cm/s | Sets `navConfigMutable()->general.max_auto_speed`. |
+| `maxAutoClimbRate` | `uint16_t` | 2 | cm/s | Sets `navConfigMutable()->fw.max_auto_climb_rate` or `navConfigMutable()->mc.max_auto_climb_rate` based on `mixerConfig()->platformType`. |
+| `maxManualSpeed` | `uint16_t` | 2 | cm/s | Sets `navConfigMutable()->general.max_manual_speed`. |
+| `maxManualClimbRate` | `uint16_t` | 2 | cm/s | Sets `navConfigMutable()->fw.max_manual_climb_rate` or `navConfigMutable()->mc.max_manual_climb_rate`. |
+| `mcMaxBankAngle` | `uint8_t` | 1 | degrees | Sets `navConfigMutable()->mc.max_bank_angle`. |
+| `mcAltHoldThrottleType` | `uint8_t` | 1 | [navMcAltHoldThrottle_e](https://github.com/iNavFlight/inav/wiki/Enums-reference#enum-navmcaltholdthrottle_e) | Enum `navMcAltHoldThrottle_e`; updates `navConfigMutable()->mc.althold_throttle_type`. |
+| `mcHoverThrottle` | `uint16_t` | 2 | us | Sets `currentBatteryProfileMutable->nav.mc.hover_throttle`. |
 
 **Reply Payload:** **None**  
 
@@ -458,19 +458,19 @@ For current generation code, see [documentation project](https://github.com/xznh
 |Field|C Type|Size (Bytes)|Units|Description|
 |---|---|---|---|---|
 | `accCalibAxisFlags` | `uint8_t` | 1 | Bitmask | Bitmask: Flags indicating which axes of the accelerometer have been calibrated (`accGetCalibrationAxisFlags()`) |
-| `accZeroX` | `uint16_t` | 2 | Raw ADC | Accelerometer zero offset for X-axis (`accelerometerConfig()->accZero.raw[X]`) |
-| `accZeroY` | `uint16_t` | 2 | Raw ADC | Accelerometer zero offset for Y-axis (`accelerometerConfig()->accZero.raw[Y]`) |
-| `accZeroZ` | `uint16_t` | 2 | Raw ADC | Accelerometer zero offset for Z-axis (`accelerometerConfig()->accZero.raw[Z]`) |
-| `accGainX` | `uint16_t` | 2 | Raw ADC | Accelerometer gain/scale for X-axis (`accelerometerConfig()->accGain.raw[X]`) |
-| `accGainY` | `uint16_t` | 2 | Raw ADC | Accelerometer gain/scale for Y-axis (`accelerometerConfig()->accGain.raw[Y]`) |
-| `accGainZ` | `uint16_t` | 2 | Raw ADC | Accelerometer gain/scale for Z-axis (`accelerometerConfig()->accGain.raw[Z]`) |
-| `magZeroX` | `uint16_t` | 2 | Raw ADC | Magnetometer zero offset for X-axis (`compassConfig()->magZero.raw[X]`). 0 if `USE_MAG` disabled |
-| `magZeroY` | `uint16_t` | 2 | Raw ADC | Magnetometer zero offset for Y-axis (`compassConfig()->magZero.raw[Y]`). 0 if `USE_MAG` disabled |
-| `magZeroZ` | `uint16_t` | 2 | Raw ADC | Magnetometer zero offset for Z-axis (`compassConfig()->magZero.raw[Z]`). 0 if `USE_MAG` disabled |
+| `accZeroX` | `int16_t` | 2 | Raw ADC | Accelerometer zero offset for X-axis (`accelerometerConfig()->accZero.raw[X]`) |
+| `accZeroY` | `int16_t` | 2 | Raw ADC | Accelerometer zero offset for Y-axis (`accelerometerConfig()->accZero.raw[Y]`) |
+| `accZeroZ` | `int16_t` | 2 | Raw ADC | Accelerometer zero offset for Z-axis (`accelerometerConfig()->accZero.raw[Z]`) |
+| `accGainX` | `int16_t` | 2 | Raw ADC | Accelerometer gain/scale for X-axis (`accelerometerConfig()->accGain.raw[X]`) |
+| `accGainY` | `int16_t` | 2 | Raw ADC | Accelerometer gain/scale for Y-axis (`accelerometerConfig()->accGain.raw[Y]`) |
+| `accGainZ` | `int16_t` | 2 | Raw ADC | Accelerometer gain/scale for Z-axis (`accelerometerConfig()->accGain.raw[Z]`) |
+| `magZeroX` | `int16_t` | 2 | Raw ADC | Magnetometer zero offset for X-axis (`compassConfig()->magZero.raw[X]`). 0 if `USE_MAG` disabled |
+| `magZeroY` | `int16_t` | 2 | Raw ADC | Magnetometer zero offset for Y-axis (`compassConfig()->magZero.raw[Y]`). 0 if `USE_MAG` disabled |
+| `magZeroZ` | `int16_t` | 2 | Raw ADC | Magnetometer zero offset for Z-axis (`compassConfig()->magZero.raw[Z]`). 0 if `USE_MAG` disabled |
 | `opflowScale` | `uint16_t` | 2 | Scale * 256 | Optical flow scale factor (`opticalFlowConfig()->opflow_scale * 256`). 0 if `USE_OPFLOW` disabled |
-| `magGainX` | `uint16_t` | 2 | Raw ADC | Magnetometer gain/scale for X-axis (`compassConfig()->magGain[X]`). 0 if `USE_MAG` disabled |
-| `magGainY` | `uint16_t` | 2 | Raw ADC | Magnetometer gain/scale for Y-axis (`compassConfig()->magGain[Y]`). 0 if `USE_MAG` disabled |
-| `magGainZ` | `uint16_t` | 2 | Raw ADC | Magnetometer gain/scale for Z-axis (`compassConfig()->magGain[Z]`). 0 if `USE_MAG` disabled |
+| `magGainX` | `int16_t` | 2 | Raw ADC | Magnetometer gain/scale for X-axis (`compassConfig()->magGain[X]`). 0 if `USE_MAG` disabled |
+| `magGainY` | `int16_t` | 2 | Raw ADC | Magnetometer gain/scale for Y-axis (`compassConfig()->magGain[Y]`). 0 if `USE_MAG` disabled |
+| `magGainZ` | `int16_t` | 2 | Raw ADC | Magnetometer gain/scale for Z-axis (`compassConfig()->magGain[Z]`). 0 if `USE_MAG` disabled |
 
 **Notes:** Total size 27 bytes. Fields related to optional sensors are zero if the sensor is not used.
 
@@ -480,23 +480,23 @@ For current generation code, see [documentation project](https://github.com/xznh
 **Request Payload:**
 |Field|C Type|Size (Bytes)|Units|Description|
 |---|---|---|---|---|
-| `accZeroX` | `uint16_t` | 2 | Raw ADC | Sets `accelerometerConfigMutable()->accZero.raw[X] |
-| `accZeroY` | `uint16_t` | 2 | Raw ADC | Sets `accelerometerConfigMutable()->accZero.raw[Y] |
-| `accZeroZ` | `uint16_t` | 2 | Raw ADC | Sets `accelerometerConfigMutable()->accZero.raw[Z] |
-| `accGainX` | `uint16_t` | 2 | Raw ADC | Sets `accelerometerConfigMutable()->accGain.raw[X] |
-| `accGainY` | `uint16_t` | 2 | Raw ADC | Sets `accelerometerConfigMutable()->accGain.raw[Y] |
-| `accGainZ` | `uint16_t` | 2 | Raw ADC | Sets `accelerometerConfigMutable()->accGain.raw[Z] |
-| `magZeroX` | `uint16_t` | 2 | Raw ADC | Sets `compassConfigMutable()->magZero.raw[X]` (if `USE_MAG`) |
-| `magZeroY` | `uint16_t` | 2 | Raw ADC | Sets `compassConfigMutable()->magZero.raw[Y]` (if `USE_MAG`) |
-| `magZeroZ` | `uint16_t` | 2 | Raw ADC | Sets `compassConfigMutable()->magZero.raw[Z]` (if `USE_MAG`) |
+| `accZeroX` | `int16_t` | 2 | Raw ADC | Sets `accelerometerConfigMutable()->accZero.raw[X]`. |
+| `accZeroY` | `int16_t` | 2 | Raw ADC | Sets `accelerometerConfigMutable()->accZero.raw[Y]`. |
+| `accZeroZ` | `int16_t` | 2 | Raw ADC | Sets `accelerometerConfigMutable()->accZero.raw[Z]`. |
+| `accGainX` | `int16_t` | 2 | Raw ADC | Sets `accelerometerConfigMutable()->accGain.raw[X]`. |
+| `accGainY` | `int16_t` | 2 | Raw ADC | Sets `accelerometerConfigMutable()->accGain.raw[Y]`. |
+| `accGainZ` | `int16_t` | 2 | Raw ADC | Sets `accelerometerConfigMutable()->accGain.raw[Z]`. |
+| `magZeroX` | `int16_t` | 2 | Raw ADC | Sets `compassConfigMutable()->magZero.raw[X]` (if `USE_MAG`) |
+| `magZeroY` | `int16_t` | 2 | Raw ADC | Sets `compassConfigMutable()->magZero.raw[Y]` (if `USE_MAG`) |
+| `magZeroZ` | `int16_t` | 2 | Raw ADC | Sets `compassConfigMutable()->magZero.raw[Z]` (if `USE_MAG`) |
 | `opflowScale` | `uint16_t` | 2 | Scale * 256 | Sets `opticalFlowConfigMutable()->opflow_scale = value / 256.0f` (if `USE_OPFLOW`) |
-| `magGainX` | `uint16_t` | 2 | Raw ADC | Sets `compassConfigMutable()->magGain[X]` (if `USE_MAG`) |
-| `magGainY` | `uint16_t` | 2 | Raw ADC | Sets `compassConfigMutable()->magGain[Y]` (if `USE_MAG`) |
-| `magGainZ` | `uint16_t` | 2 | Raw ADC | Sets `compassConfigMutable()->magGain[Z]` (if `USE_MAG`) |
+| `magGainX` | `int16_t` | 2 | Raw ADC | Sets `compassConfigMutable()->magGain[X]` (if `USE_MAG`) |
+| `magGainY` | `int16_t` | 2 | Raw ADC | Sets `compassConfigMutable()->magGain[Y]` (if `USE_MAG`) |
+| `magGainZ` | `int16_t` | 2 | Raw ADC | Sets `compassConfigMutable()->magGain[Z]` (if `USE_MAG`) |
 
 **Reply Payload:** **None**  
 
-**Notes:** Expects 26 bytes. Ignores values for sensors not enabled by `USE_*` defines.
+**Notes:** Minimum payload 18 bytes. Adds +6 bytes for magnetometer zeros, +2 for optical flow scale, and +6 for magnetometer gains when those features (`USE_MAG`, `USE_OPFLOW`) are compiled in.
 
 ## <a id="msp_position_estimation_config"></a>`MSP_POSITION_ESTIMATION_CONFIG (16 / 0x10)`
 **Description:** Retrieves parameters related to the INAV position estimation fusion weights and GPS minimum satellite count.  
@@ -577,18 +577,18 @@ For current generation code, see [documentation project](https://github.com/xznh
 **Reply Payload:**
 |Field|C Type|Size (Bytes)|Units|Description|
 |---|---|---|---|---|
-| `minRthDistance` | `uint16_t` | 2 | meters | Minimum distance from home required for RTH to engage (`navConfig()->general.min_rth_distance`) |
+| `minRthDistance` | `uint16_t` | 2 | cm | Minimum distance from home required for RTH to engage (`navConfig()->general.min_rth_distance`) |
 | `rthClimbFirst` | `uint8_t` | 1 | Boolean | Flag: Climb to RTH altitude before returning (`navConfig()->general.flags.rth_climb_first`) |
 | `rthClimbIgnoreEmerg` | `uint8_t` | 1 | Boolean | Flag: Climb even in emergency RTH (`navConfig()->general.flags.rth_climb_ignore_emerg`) |
-| `rthTailFirst` | `uint8_t` | 1 | Boolean | Flag: Multirotor returns tail-first (`navConfig()->general.flags.rth_tail_first`) |
+| `rthTailFirst` | `uint8_t` | 1 | Boolean | Flag: Return tail-first during RTH (`navConfig()->general.flags.rth_tail_first`) |
 | `rthAllowLanding` | `uint8_t` | 1 | Boolean | Flag: Allow automatic landing after RTH (`navConfig()->general.flags.rth_allow_landing`) |
-| `rthAltControlMode` | `uint8_t` | 1 | [ENUM_NAME](LINK_TO_ENUM) | RTH altitude control mode (`navConfig()->general.flags.rth_alt_control_mode`) |
-| `rthAbortThreshold` | `uint16_t` | 2 | cm/s | Stick input threshold to abort RTH (`navConfig()->general.rth_abort_threshold`) |
-| `rthAltitude` | `uint16_t` | 2 | meters | Target RTH altitude (`navConfig()->general.rth_altitude`) |
+| `rthAltControlMode` | `uint8_t` | 1 | [navRthAltMode_e](https://github.com/iNavFlight/inav/wiki/Enums-reference#enum-navrthaltmode_e) | RTH altitude control mode (`navConfig()->general.flags.rth_alt_control_mode`). |
+| `rthAbortThreshold` | `uint16_t` | 2 | cm | Distance increase threshold to abort RTH (`navConfig()->general.rth_abort_threshold`) |
+| `rthAltitude` | `uint16_t` | 2 | cm | Target RTH altitude (`navConfig()->general.rth_altitude`) |
 | `landMinAltVspd` | `uint16_t` | 2 | cm/s | Landing vertical speed at minimum slowdown altitude (`navConfig()->general.land_minalt_vspd`) |
 | `landMaxAltVspd` | `uint16_t` | 2 | cm/s | Landing vertical speed at maximum slowdown altitude (`navConfig()->general.land_maxalt_vspd`) |
-| `landSlowdownMinAlt` | `uint16_t` | 2 | meters | Altitude below which `landMinAltVspd` applies (`navConfig()->general.land_slowdown_minalt`) |
-| `landSlowdownMaxAlt` | `uint16_t` | 2 | meters | Altitude above which `landMaxAltVspd` applies (`navConfig()->general.land_slowdown_maxalt`) |
+| `landSlowdownMinAlt` | `uint16_t` | 2 | cm | Altitude below which `landMinAltVspd` applies (`navConfig()->general.land_slowdown_minalt`) |
+| `landSlowdownMaxAlt` | `uint16_t` | 2 | cm | Altitude above which `landMaxAltVspd` applies (`navConfig()->general.land_slowdown_maxalt`) |
 | `emergDescentRate` | `uint16_t` | 2 | cm/s | Vertical speed during emergency landing descent (`navConfig()->general.emerg_descent_rate`) |
 
 ## <a id="msp_set_rth_and_land_config"></a>`MSP_SET_RTH_AND_LAND_CONFIG (22 / 0x16)`
@@ -597,19 +597,19 @@ For current generation code, see [documentation project](https://github.com/xznh
 **Request Payload:**
 |Field|C Type|Size (Bytes)|Units|Description|
 |---|---|---|---|---|
-| `minRthDistance` | `uint16_t` | 2 | meters | Sets `navConfigMutable()->general.min_rth_distance |
-| `rthClimbFirst` | `uint8_t` | 1 | Boolean | Sets `navConfigMutable()->general.flags.rth_climb_first |
-| `rthClimbIgnoreEmerg` | `uint8_t` | 1 | Boolean | Sets `navConfigMutable()->general.flags.rth_climb_ignore_emerg |
-| `rthTailFirst` | `uint8_t` | 1 | Boolean | Sets `navConfigMutable()->general.flags.rth_tail_first |
-| `rthAllowLanding` | `uint8_t` | 1 | Boolean | Sets `navConfigMutable()->general.flags.rth_allow_landing |
-| `rthAltControlMode` | `uint8_t` | 1 | [ENUM_NAME](LINK_TO_ENUM) | Sets `navConfigMutable()->general.flags.rth_alt_control_mode |
-| `rthAbortThreshold` | `uint16_t` | 2 | cm/s | Sets `navConfigMutable()->general.rth_abort_threshold |
-| `rthAltitude` | `uint16_t` | 2 | meters | Sets `navConfigMutable()->general.rth_altitude |
-| `landMinAltVspd` | `uint16_t` | 2 | cm/s | Sets `navConfigMutable()->general.land_minalt_vspd |
-| `landMaxAltVspd` | `uint16_t` | 2 | cm/s | Sets `navConfigMutable()->general.land_maxalt_vspd |
-| `landSlowdownMinAlt` | `uint16_t` | 2 | meters | Sets `navConfigMutable()->general.land_slowdown_minalt |
-| `landSlowdownMaxAlt` | `uint16_t` | 2 | meters | Sets `navConfigMutable()->general.land_slowdown_maxalt |
-| `emergDescentRate` | `uint16_t` | 2 | cm/s | Sets `navConfigMutable()->general.emerg_descent_rate |
+| `minRthDistance` | `uint16_t` | 2 | cm | Sets `navConfigMutable()->general.min_rth_distance`. |
+| `rthClimbFirst` | `uint8_t` | 1 | Boolean | Sets `navConfigMutable()->general.flags.rth_climb_first`. |
+| `rthClimbIgnoreEmerg` | `uint8_t` | 1 | Boolean | Sets `navConfigMutable()->general.flags.rth_climb_ignore_emerg`. |
+| `rthTailFirst` | `uint8_t` | 1 | Boolean | Sets `navConfigMutable()->general.flags.rth_tail_first`. |
+| `rthAllowLanding` | `uint8_t` | 1 | Boolean | Sets `navConfigMutable()->general.flags.rth_allow_landing`. |
+| `rthAltControlMode` | `uint8_t` | 1 | [navRthAltMode_e](https://github.com/iNavFlight/inav/wiki/Enums-reference#enum-navrthaltmode_e) | Sets `navConfigMutable()->general.flags.rth_alt_control_mode`. |
+| `rthAbortThreshold` | `uint16_t` | 2 | cm | Sets `navConfigMutable()->general.rth_abort_threshold`. |
+| `rthAltitude` | `uint16_t` | 2 | cm | Sets `navConfigMutable()->general.rth_altitude`. |
+| `landMinAltVspd` | `uint16_t` | 2 | cm/s | Sets `navConfigMutable()->general.land_minalt_vspd`. |
+| `landMaxAltVspd` | `uint16_t` | 2 | cm/s | Sets `navConfigMutable()->general.land_maxalt_vspd`. |
+| `landSlowdownMinAlt` | `uint16_t` | 2 | cm | Sets `navConfigMutable()->general.land_slowdown_minalt`. |
+| `landSlowdownMaxAlt` | `uint16_t` | 2 | cm | Sets `navConfigMutable()->general.land_slowdown_maxalt`. |
+| `emergDescentRate` | `uint16_t` | 2 | cm/s | Sets `navConfigMutable()->general.emerg_descent_rate`. |
 
 **Reply Payload:** **None**  
 
@@ -623,14 +623,14 @@ For current generation code, see [documentation project](https://github.com/xznh
 **Reply Payload:**
 |Field|C Type|Size (Bytes)|Units|Description|
 |---|---|---|---|---|
-| `cruiseThrottle` | `uint16_t` | 2 | PWM | Cruise throttle level (`currentBatteryProfile->nav.fw.cruise_throttle`) |
-| `minThrottle` | `uint16_t` | 2 | PWM | Minimum throttle during autonomous flight (`currentBatteryProfile->nav.fw.min_throttle`) |
-| `maxThrottle` | `uint16_t` | 2 | PWM | Maximum throttle during autonomous flight (`currentBatteryProfile->nav.fw.max_throttle`) |
+| `cruiseThrottle` | `uint16_t` | 2 | us | Cruise throttle command (`currentBatteryProfile->nav.fw.cruise_throttle`). |
+| `minThrottle` | `uint16_t` | 2 | us | Minimum throttle during autonomous flight (`currentBatteryProfile->nav.fw.min_throttle`). |
+| `maxThrottle` | `uint16_t` | 2 | us | Maximum throttle during autonomous flight (`currentBatteryProfile->nav.fw.max_throttle`). |
 | `maxBankAngle` | `uint8_t` | 1 | degrees | Maximum bank angle allowed (`navConfig()->fw.max_bank_angle`) |
 | `maxClimbAngle` | `uint8_t` | 1 | degrees | Maximum pitch angle during climb (`navConfig()->fw.max_climb_angle`) |
 | `maxDiveAngle` | `uint8_t` | 1 | degrees | Maximum negative pitch angle during descent (`navConfig()->fw.max_dive_angle`) |
-| `pitchToThrottle` | `uint8_t` | 1 | Ratio (%) | Pitch-to-throttle feed-forward ratio (`currentBatteryProfile->nav.fw.pitch_to_throttle`) |
-| `loiterRadius` | `uint16_t` | 2 | meters | Default loiter radius (`navConfig()->fw.loiter_radius`) |
+| `pitchToThrottle` | `uint8_t` | 1 | us/deg | Pitch-to-throttle gain (`currentBatteryProfile->nav.fw.pitch_to_throttle`); PWM microseconds per degree (10 units ≈ 1% throttle). |
+| `loiterRadius` | `uint16_t` | 2 | cm | Default loiter radius (`navConfig()->fw.loiter_radius`). |
 
 ## <a id="msp_set_fw_config"></a>`MSP_SET_FW_CONFIG (24 / 0x18)`
 **Description:** Sets configuration parameters specific to Fixed Wing navigation.  
@@ -638,14 +638,14 @@ For current generation code, see [documentation project](https://github.com/xznh
 **Request Payload:**
 |Field|C Type|Size (Bytes)|Units|Description|
 |---|---|---|---|---|
-| `cruiseThrottle` | `uint16_t` | 2 | PWM | Sets `currentBatteryProfileMutable->nav.fw.cruise_throttle |
-| `minThrottle` | `uint16_t` | 2 | PWM | Sets `currentBatteryProfileMutable->nav.fw.min_throttle |
-| `maxThrottle` | `uint16_t` | 2 | PWM | Sets `currentBatteryProfileMutable->nav.fw.max_throttle |
-| `maxBankAngle` | `uint8_t` | 1 | degrees | Sets `navConfigMutable()->fw.max_bank_angle |
-| `maxClimbAngle` | `uint8_t` | 1 | degrees | Sets `navConfigMutable()->fw.max_climb_angle |
-| `maxDiveAngle` | `uint8_t` | 1 | degrees | Sets `navConfigMutable()->fw.max_dive_angle |
-| `pitchToThrottle` | `uint8_t` | 1 | Ratio (%) | Sets `currentBatteryProfileMutable->nav.fw.pitch_to_throttle |
-| `loiterRadius` | `uint16_t` | 2 | meters | Sets `navConfigMutable()->fw.loiter_radius |
+| `cruiseThrottle` | `uint16_t` | 2 | us | Sets `currentBatteryProfileMutable->nav.fw.cruise_throttle`. |
+| `minThrottle` | `uint16_t` | 2 | us | Sets `currentBatteryProfileMutable->nav.fw.min_throttle`. |
+| `maxThrottle` | `uint16_t` | 2 | us | Sets `currentBatteryProfileMutable->nav.fw.max_throttle`. |
+| `maxBankAngle` | `uint8_t` | 1 | degrees | Sets `navConfigMutable()->fw.max_bank_angle`. |
+| `maxClimbAngle` | `uint8_t` | 1 | degrees | Sets `navConfigMutable()->fw.max_climb_angle`. |
+| `maxDiveAngle` | `uint8_t` | 1 | degrees | Sets `navConfigMutable()->fw.max_dive_angle`. |
+| `pitchToThrottle` | `uint8_t` | 1 | us/deg | Sets `currentBatteryProfileMutable->nav.fw.pitch_to_throttle` (PWM microseconds per degree; 10 units ≈ 1% throttle). |
+| `loiterRadius` | `uint16_t` | 2 | cm | Sets `navConfigMutable()->fw.loiter_radius`. |
 
 **Reply Payload:** **None**  
 
@@ -2187,7 +2187,6 @@ For current generation code, see [documentation project](https://github.com/xznh
 | `longitude` | `int32_t` | 4 | deg * 1e7 | Longitude |
 | `altitude` | `int16_t` | 2 | meters | Altitude (converted to cm internally) |
 | `speed` | `uint16_t` | 2 | cm/s | Ground speed |
-| `groundCourse` | `uint16_t` | 2 | ??? | Ground course (units unclear from code, likely degrees or deci-degrees, ignored in current code) |
 
 **Reply Payload:** **None**  
 

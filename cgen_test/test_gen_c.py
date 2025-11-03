@@ -165,7 +165,7 @@ def main():
     out.append(emit_header_preamble())
 
     # Forward declare a tag enum for message ids that maps to your existing defines - NO, AWFUL, BAD CLANKER, VERY BAD
-    
+
     # Emit one struct per message or per variant
     for msg_name, msg in data.items():
         desc = msg.get("description", "").strip()
@@ -176,8 +176,8 @@ def main():
         variants = msg.get("variants")
 
         safe_msg_name = norm_ident(msg_name)
-        base_struct = f"msp_{safe_msg_name}_reply_t"
-        base_req_struct = f"msp_{safe_msg_name}_request_t"
+        base_struct = f"{safe_msg_name}_reply_t"
+        base_req_struct = f"{safe_msg_name}_request_t"
 
         out.append(f"// {msg_name} (MSPv{mspv})")
         if desc:

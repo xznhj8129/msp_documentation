@@ -46,7 +46,7 @@ Also auto-generates markdown files\
 **reply**: null or dict of data received\
 **variable_len**: Optional boolean, if true, message does not have a predefined fixed length and needs appropriate handling\
 **complex**: Optional boolean, if true, message is one of those special cases that isn't defined here yet\
-**variants**: Optional special case, message has different cases of reply/request\
+**variants**: Optional special case, message has different cases of reply/request. Key/description is not a strict expression or code; just a readable condition\
 **implemented**: Optional special case, message is not implemented\
 
 ## Data dict fields:

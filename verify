@@ -5,4 +5,4 @@ Do not load entire msp_messages.json file, look for relevant json block (MSP_x c
 Do not load entire fc_msp file unless necessary, look for relevant code block first
 Refer to msp_documentation/README.md for primer on json structure, but defer to .json file for actual use. Correct README if necessary.
 fc_msp.c uses a sbufWriteU(n) function to pack and unpack, but it does not indicate correct sign. Set value must often be followed to it's structure definition a few levels down, or it's true type searched for elsewhere in the code. This is tedious, error prone, and the primary reason for this task.
-Take special care to verify integer signs and follow through structs and types.
+Take special care to verify integer signs, do not trust fc_msp.c, follow through structs and types to the true definition.
