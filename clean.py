@@ -22,12 +22,7 @@ def scrub(node: Any, remove: Iterable[str] = REMOVE_KEYS) -> Any:
 
 def main(in_path: str = "msp_messages.json", out_path: str = "msp_messages.json") -> None:
     data = json.loads(Path(in_path).read_text(encoding="utf-8"))
-    #scrub(data)
-    data["_version_major"] = 1
-    data["_version_minor"] = 0
-    data["_version_patch"] = 1
-    for i in data:
-        data[i]["verified"] = False
+    scrub(data)
     Path(out_path).write_text(json.dumps(data, indent=4, ensure_ascii=False), encoding="utf-8")
 
 if __name__ == "__main__":
