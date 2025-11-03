@@ -46,7 +46,8 @@ Also auto-generates markdown files\
 **reply**: null or dict of data received\
 **variable_len**: Optional boolean, if true, message does not have a predefined fixed length and needs appropriate handling\
 **complex**: Optional boolean, if true, message is one of those special cases that isn't defined here yet\
-**variants**: Optional special case, message has different cases of reply/request
+**variants**: Optional special case, message has different cases of reply/request\
+**implemented**: Optional special case, message is not implemented\
 
 ## Data dict fields:
 **payload**: Array of payload fields\
@@ -127,14 +128,6 @@ Nested array
     ]
 }
 ```
-
-
-### Keys: 
-**id**: Message code\
-**request**: Message payload to FC. If empty, no payload\
-**reply**: Message payload from FC, If empty, no payload\
-**complex**: Weird polymorphic message that is a problem for future me
-
 
 
 ## Done: Markdown parsing, deprecated, now we correct in fixed JSON

@@ -5046,12 +5046,6 @@
                     "ctype": "uint16_t",
                     "desc": "Ground speed",
                     "units": "cm/s"
-                },
-                {
-                    "name": "groundCourse",
-                    "ctype": "uint16_t",
-                    "desc": "Ground course (units unclear from code, likely degrees or deci-degrees, ignored in current code)",
-                    "units": "???"
                 }
             ]
         },
