@@ -3883,8 +3883,8 @@
                 {
                     "name": "yaw",
                     "ctype": "uint16_t",
-                    "desc": "Yaw/Heading angle (`DECIDEGREES_TO_DEGREES(attitude.values.yaw)`)",
-                    "units": "degrees"
+                    "desc": "Yaw/Heading angle (`(attitude.values.yaw)`)",
+                    "units": "deci-degrees"
                 }
             ]
         },
