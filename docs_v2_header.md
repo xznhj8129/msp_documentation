@@ -13,6 +13,8 @@ For current generation code, see [documentation project](https://github.com/xznh
 
 **Warning: Verification needed, exercise caution until completely verified for accuracy and cleared, especially for integer signs. Source-based generation/validation is forthcoming. Refer to source for absolute certainty** 
 
+**If you find an error, it must be corrected in the JSON spec, not this markdown.**
+
 **Note: A handful of complex, variable-payload messages have not been fully parsed, their documentation is temporary.**  
 
 **Guide:**
