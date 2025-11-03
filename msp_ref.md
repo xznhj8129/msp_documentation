@@ -430,7 +430,7 @@ For current generation code, see [documentation project](https://github.com/xznh
 | `maxManualClimbRate` | `uint16_t` | 2 | cm/s | Max climb rate in manual modes with GPS aiding (uses `fw.max_manual_climb_rate` or `mc.max_manual_climb_rate`) |
 | `mcMaxBankAngle` | `uint8_t` | 1 | degrees | Max bank angle for multirotor position hold (`navConfig()->mc.max_bank_angle`) |
 | `mcAltHoldThrottleType` | `uint8_t` | 1 | [navMcAltHoldThrottle_e](https://github.com/iNavFlight/inav/wiki/Enums-reference#enum-navmcaltholdthrottle_e) | Enum `navMcAltHoldThrottle_e` mirrored from `navConfig()->mc.althold_throttle_type`. |
-| `mcHoverThrottle` | `uint16_t` | 2 | us | Multirotor hover throttle PWM value (`currentBatteryProfile->nav.mc.hover_throttle`). |
+| `mcHoverThrottle` | `uint16_t` | 2 | PWM | Multirotor hover throttle PWM value (`currentBatteryProfile->nav.mc.hover_throttle`). |
 
 ## <a id="msp_set_nav_poshold"></a>`MSP_SET_NAV_POSHOLD (13 / 0xd)`
 **Description:** Sets navigation position hold and general manual/auto flight parameters.  
@@ -445,7 +445,7 @@ For current generation code, see [documentation project](https://github.com/xznh
 | `maxManualClimbRate` | `uint16_t` | 2 | cm/s | Sets `navConfigMutable()->fw.max_manual_climb_rate` or `navConfigMutable()->mc.max_manual_climb_rate`. |
 | `mcMaxBankAngle` | `uint8_t` | 1 | degrees | Sets `navConfigMutable()->mc.max_bank_angle`. |
 | `mcAltHoldThrottleType` | `uint8_t` | 1 | [navMcAltHoldThrottle_e](https://github.com/iNavFlight/inav/wiki/Enums-reference#enum-navmcaltholdthrottle_e) | Enum `navMcAltHoldThrottle_e`; updates `navConfigMutable()->mc.althold_throttle_type`. |
-| `mcHoverThrottle` | `uint16_t` | 2 | us | Sets `currentBatteryProfileMutable->nav.mc.hover_throttle`. |
+| `mcHoverThrottle` | `uint16_t` | 2 | PWM | Sets `currentBatteryProfileMutable->nav.mc.hover_throttle`. |
 
 **Reply Payload:** **None**  
 
@@ -625,9 +625,9 @@ For current generation code, see [documentation project](https://github.com/xznh
 **Reply Payload:**
 |Field|C Type|Size (Bytes)|Units|Description|
 |---|---|---|---|---|
-| `cruiseThrottle` | `uint16_t` | 2 | us | Cruise throttle command (`currentBatteryProfile->nav.fw.cruise_throttle`). |
-| `minThrottle` | `uint16_t` | 2 | us | Minimum throttle during autonomous flight (`currentBatteryProfile->nav.fw.min_throttle`). |
-| `maxThrottle` | `uint16_t` | 2 | us | Maximum throttle during autonomous flight (`currentBatteryProfile->nav.fw.max_throttle`). |
+| `cruiseThrottle` | `uint16_t` | 2 | PWM | Cruise throttle command (`currentBatteryProfile->nav.fw.cruise_throttle`). |
+| `minThrottle` | `uint16_t` | 2 | PWM | Minimum throttle during autonomous flight (`currentBatteryProfile->nav.fw.min_throttle`). |
+| `maxThrottle` | `uint16_t` | 2 | PWM | Maximum throttle during autonomous flight (`currentBatteryProfile->nav.fw.max_throttle`). |
 | `maxBankAngle` | `uint8_t` | 1 | degrees | Maximum bank angle allowed (`navConfig()->fw.max_bank_angle`) |
 | `maxClimbAngle` | `uint8_t` | 1 | degrees | Maximum pitch angle during climb (`navConfig()->fw.max_climb_angle`) |
 | `maxDiveAngle` | `uint8_t` | 1 | degrees | Maximum negative pitch angle during descent (`navConfig()->fw.max_dive_angle`) |
@@ -640,9 +640,9 @@ For current generation code, see [documentation project](https://github.com/xznh
 **Request Payload:**
 |Field|C Type|Size (Bytes)|Units|Description|
 |---|---|---|---|---|
-| `cruiseThrottle` | `uint16_t` | 2 | us | Sets `currentBatteryProfileMutable->nav.fw.cruise_throttle`. |
-| `minThrottle` | `uint16_t` | 2 | us | Sets `currentBatteryProfileMutable->nav.fw.min_throttle`. |
-| `maxThrottle` | `uint16_t` | 2 | us | Sets `currentBatteryProfileMutable->nav.fw.max_throttle`. |
+| `cruiseThrottle` | `uint16_t` | 2 | PWM | Sets `currentBatteryProfileMutable->nav.fw.cruise_throttle`. |
+| `minThrottle` | `uint16_t` | 2 | PWM | Sets `currentBatteryProfileMutable->nav.fw.min_throttle`. |
+| `maxThrottle` | `uint16_t` | 2 | PWM | Sets `currentBatteryProfileMutable->nav.fw.max_throttle`. |
 | `maxBankAngle` | `uint8_t` | 1 | degrees | Sets `navConfigMutable()->fw.max_bank_angle`. |
 | `maxClimbAngle` | `uint8_t` | 1 | degrees | Sets `navConfigMutable()->fw.max_climb_angle`. |
 | `maxDiveAngle` | `uint8_t` | 1 | degrees | Sets `navConfigMutable()->fw.max_dive_angle`. |
@@ -803,8 +803,8 @@ For current generation code, see [documentation project](https://github.com/xznh
 | `midRc` | `uint16_t` | 2 | PWM | Center channel value (`PWM_RANGE_MIDDLE`, typically 1500) |
 | `minCheck` | `uint16_t` | 2 | PWM | Lower channel value threshold for stick commands (`rxConfig()->mincheck`) |
 | `spektrumSatBind` | `uint8_t` | 1 | Count/Flag | Spektrum bind pulses (`rxConfig()->spektrum_sat_bind`). 0 if `USE_SPEKTRUM_BIND` disabled. |
-| `rxMinUsec` | `uint16_t` | 2 | us | Minimum expected pulse width (`rxConfig()->rx_min_usec`) |
-| `rxMaxUsec` | `uint16_t` | 2 | us | Maximum expected pulse width (`rxConfig()->rx_max_usec`) |
+| `rxMinUsec` | `uint16_t` | 2 | PWM | Minimum expected pulse width (`rxConfig()->rx_min_usec`) |
+| `rxMaxUsec` | `uint16_t` | 2 | PWM | Maximum expected pulse width (`rxConfig()->rx_max_usec`) |
 | `bfCompatRcInterpolation` | `uint8_t` | 1 | - | BF compatibility. Always 0 |
 | `bfCompatRcInterpolationInt` | `uint8_t` | 1 | - | BF compatibility. Always 0 |
 | `bfCompatAirModeThreshold` | `uint16_t` | 2 | - | BF compatibility. Always 0 |
@@ -825,8 +825,8 @@ For current generation code, see [documentation project](https://github.com/xznh
 | `midRc` | `uint16_t` | 2 | PWM | Ignored (`PWM_RANGE_MIDDLE` is used) |
 | `minCheck` | `uint16_t` | 2 | PWM | Sets `rxConfigMutable()->mincheck`. |
 | `spektrumSatBind` | `uint8_t` | 1 | Count/Flag | Sets `rxConfigMutable()->spektrum_sat_bind` (if `USE_SPEKTRUM_BIND`). |
-| `rxMinUsec` | `uint16_t` | 2 | us | Sets `rxConfigMutable()->rx_min_usec`. |
-| `rxMaxUsec` | `uint16_t` | 2 | us | Sets `rxConfigMutable()->rx_max_usec`. |
+| `rxMinUsec` | `uint16_t` | 2 | PWM | Sets `rxConfigMutable()->rx_min_usec`. |
+| `rxMaxUsec` | `uint16_t` | 2 | PWM | Sets `rxConfigMutable()->rx_max_usec`. |
 | `bfCompatRcInterpolation` | `uint8_t` | 1 | - | Ignored |
 | `bfCompatRcInterpolationInt` | `uint8_t` | 1 | - | Ignored |
 | `bfCompatAirModeThreshold` | `uint16_t` | 2 | - | Ignored |
@@ -1090,7 +1090,7 @@ For current generation code, see [documentation project](https://github.com/xznh
 **Reply Payload:**
 |Field|C Type|Size (Bytes)|Units|Description|
 |---|---|---|---|---|
-| `looptime` | `uint16_t` | 2 | us | Configured loop time (`gyroConfig()->looptime`) |
+| `looptime` | `uint16_t` | 2 | PWM | Configured loop time (`gyroConfig()->looptime`) |
 
 **Notes:** This is the *configured* target loop time, not necessarily the *actual* measured cycle time (see `MSP_STATUS`).
 
@@ -1100,7 +1100,7 @@ For current generation code, see [documentation project](https://github.com/xznh
 **Request Payload:**
 |Field|C Type|Size (Bytes)|Units|Description|
 |---|---|---|---|---|
-| `looptime` | `uint16_t` | 2 | us | New loop time to set (`gyroConfigMutable()->looptime`) |
+| `looptime` | `uint16_t` | 2 | PWM | New loop time to set (`gyroConfigMutable()->looptime`) |
 
 **Reply Payload:** **None**  
 
@@ -1763,7 +1763,7 @@ For current generation code, see [documentation project](https://github.com/xznh
 |---|---|---|---|---|
 | `roll` | `int16_t` | 2 | deci-degrees | Roll angle (`attitude.values.roll`) |
 | `pitch` | `int16_t` | 2 | deci-degrees | Pitch angle (`attitude.values.pitch`) |
-| `yaw` | `uint16_t` | 2 | degrees | Yaw/Heading angle (`DECIDEGREES_TO_DEGREES(attitude.values.yaw)`) |
+| `yaw` | `uint16_t` | 2 | deci-degrees | Yaw/Heading angle (`attitude.values.yaw`) |
 
 **Notes:** Yaw is converted from deci-degrees to degrees.
 
