@@ -3500,7 +3500,7 @@
                 {
                     "name": "accHardware",
                     "ctype": "uint8_t",
-                    "desc": "Sets `accelerometerConfigMutable()->acc_hardware",
+                    "desc": "Sets `accelerometerConfigMutable()->acc_hardware`",
                     "units": "",
                     "enum": "accHardware_e"
                 },
@@ -3641,7 +3641,7 @@
                 }
             ]
         },
-        "notes": "Superseded by `MSP_STATUS_EX` and `MSP2_INAV_STATUS`. `sensorStatus` bitmask: (Bit 0: ACC, 1: BARO, 2: MAG, 3: GPS, 4: RANGEFINDER, 5: GYRO). `activeModesLow` only contains the first 32 modes; use `MSP_ACTIVEBOXES` for the full set.",
+        "notes": "Superseded by `MSP_STATUS_EX` and `MSP2_INAV_STATUS`. `sensorStatus` bitmask: (Bit 0: ACC, 1: BARO, 2: MAG, 3: GPS, 4: RANGEFINDER, 5: OPFLOW, 6: PITOT, 7: TEMP; Bit 15: hardware failure). `activeModesLow` only contains the first 32 modes; use `MSP_ACTIVEBOXES` for the full set.",
         "description": "Provides basic flight controller status including cycle time, errors, sensor status, active modes (first 32), and the current configuration profile."
     },
     "MSP_RAW_IMU": {
@@ -3738,10 +3738,10 @@
             "payload": [
                 {
                     "name": "motorOutputs",
-                    "ctype": "uint16_t[8]",
+                    "ctype": "int16_t[8]",
                     "desc": "Array of current motor output values (typically 1000-2000). Values beyond `MAX_SUPPORTED_MOTORS` are 0",
                     "array": true,
-                    "array_ctype": "uint16_t",
+                    "array_ctype": "int16_t",
                     "array_size": 8,
                     "units": "PWM"
                 }
@@ -3758,17 +3758,17 @@
             "payload": [
                 {
                     "name": "rcChannels",
-                    "ctype": "uint16_t[]",
+                    "ctype": "int16_t[]",
                     "desc": "Array of current RC channel values (typically 1000-2000). Length depends on detected channels",
                     "array": true,
-                    "array_ctype": "uint16_t",
+                    "array_ctype": "int16_t",
                     "array_size": 0,
                     "units": "PWM"
                 }
             ]
         },
         "variable_len": true,
-        "notes": "",
+        "notes": "Array length equals `rxRuntimeConfig.channelCount`.",
         "description": "Provides the current values of the received RC channels."
     },
     "MSP_RAW_GPS": {
@@ -3805,18 +3805,18 @@
                 {
                     "name": "altitude",
                     "ctype": "int16_t",
-                    "desc": "Altitude above MSL (`gpsSol.llh.alt / 100`)",
+                    "desc": "Altitude above MSL (`gpsSol.llh.alt`) sent as centimeters",
                     "units": "cm"
                 },
                 {
                     "name": "speed",
-                    "ctype": "uint16_t",
+                    "ctype": "int16_t",
                     "desc": "Ground speed (`gpsSol.groundSpeed`)",
                     "units": "cm/s"
                 },
                 {
                     "name": "groundCourse",
-                    "ctype": "uint16_t",
+                    "ctype": "int16_t",
                     "desc": "Ground course (`gpsSol.groundCourse`)",
                     "units": "deci-degrees"
                 },
@@ -3845,7 +3845,7 @@
                 },
                 {
                     "name": "directionToHome",
-                    "ctype": "uint16_t",
+                    "ctype": "int16_t",
                     "desc": "Direction to the home point (0-360) (`GPS_directionToHome`)",
                     "units": "degrees"
                 },
@@ -3880,7 +3880,7 @@
                 },
                 {
                     "name": "yaw",
-                    "ctype": "int16_t",
+                    "ctype": "uint16_t",
                     "desc": "Yaw/Heading angle (`DECIDEGREES_TO_DEGREES(attitude.values.yaw)`)",
                     "units": "degrees"
                 }
@@ -4242,19 +4242,19 @@
                 },
                 {
                     "name": "param1",
-                    "ctype": "uint16_t",
+                    "ctype": "int16_t",
                     "desc": "Parameter 1 (meaning depends on action)",
                     "units": "Varies"
                 },
                 {
                     "name": "param2",
-                    "ctype": "uint16_t",
+                    "ctype": "int16_t",
                     "desc": "Parameter 2 (meaning depends on action)",
                     "units": "Varies"
                 },
                 {
                     "name": "param3",
-                    "ctype": "uint16_t",
+                    "ctype": "int16_t",
                     "desc": "Parameter 3 (meaning depends on action)",
                     "units": "Varies"
                 },
@@ -4299,26 +4299,26 @@
             "payload": [
                 {
                     "name": "min",
-                    "ctype": "uint16_t",
+                    "ctype": "int16_t",
                     "desc": "Minimum servo endpoint (`servoParams(i)->min`)",
                     "units": "PWM"
                 },
                 {
                     "name": "max",
-                    "ctype": "uint16_t",
+                    "ctype": "int16_t",
                     "desc": "Maximum servo endpoint (`servoParams(i)->max`)",
                     "units": "PWM"
                 },
                 {
                     "name": "middle",
-                    "ctype": "uint16_t",
+                    "ctype": "int16_t",
                     "desc": "Middle/Neutral servo position (`servoParams(i)->middle`)",
                     "units": "PWM"
                 },
                 {
                     "name": "rate",
-                    "ctype": "uint8_t",
-                    "desc": "Servo rate/scaling (`servoParams(i)->rate`)",
+                    "ctype": "int8_t",
+                    "desc": "Servo rate/scaling (`servoParams(i)->rate`, -125..125). Encoded as two's complement",
                     "units": "% (-100 to 100)"
                 },
                 {
@@ -4361,16 +4361,16 @@
                 {
                     "name": "navMode",
                     "ctype": "uint8_t",
-                    "desc": "Enum (`NAV_MODE_*`): Current navigation mode (None, RTH, WP, Hold, etc.) (`NAV_Status.mode`)",
+                    "desc": "Enum (`navSystemStatus_Mode_e`): Current navigation mode (None, RTH, NAV, Hold, etc.) (`NAV_Status.mode`)",
                     "units": "",
-                    "enum": "NAV_MODE_*"
+                    "enum": "navSystemStatus_Mode_e"
                 },
                 {
                     "name": "navState",
                     "ctype": "uint8_t",
-                    "desc": "Enum (`NAV_STATE_*`): Current navigation state (`NAV_Status.state`)",
+                    "desc": "Enum (`navSystemStatus_State_e`): Current navigation state (`NAV_Status.state`)",
                     "units": "",
-                    "enum": "NAV_STATE_*"
+                    "enum": "navSystemStatus_State_e"
                 },
                 {
                     "name": "activeWpAction",
@@ -4388,15 +4388,15 @@
                 {
                     "name": "navError",
                     "ctype": "uint8_t",
-                    "desc": "Enum (`NAV_ERROR_*`): Current navigation error code (`NAV_Status.error`)",
+                    "desc": "Enum (`navSystemStatus_Error_e`): Current navigation error code (`NAV_Status.error`)",
                     "units": "",
-                    "enum": "NAV_ERROR_*"
+                    "enum": "navSystemStatus_Error_e"
                 },
                 {
                     "name": "targetHeading",
                     "ctype": "int16_t",
-                    "desc": "degrees: Target heading for heading controller (`getHeadingHoldTarget()`)",
-                    "units": ""
+                    "desc": "Target heading for heading controller (`getHeadingHoldTarget()`)",
+                    "units": "degrees"
                 }
             ]
         },
@@ -4525,21 +4525,20 @@
                 {
                     "name": "directionOrSpecialIndex",
                     "ctype": "uint8_t",
-                    "desc": "Index of the direction Enum (`ledDirection_e`) or special color (`ledSpecialColor_e`)",
-                    "units": "",
-                    "enum": "ledDirection_e"
+                    "desc": "Index of the direction (`ledDirection_e`) or special color (`ledSpecialColor_e`)",
+                    "units": ""
                 },
                 {
                     "name": "colorIndex",
                     "ctype": "uint8_t",
-                    "desc": "Index of the color assigned from `ledStripConfig()->colors",
+                    "desc": "Index of the color assigned from `ledStripConfig()->colors`",
                     "units": ""
                 }
             ],
-            "repeating": "LED_MODE_COUNT * LED_DIRECTION_COUNT"
+            "repeating": "LED_MODE_COUNT * LED_DIRECTION_COUNT + LED_SPECIAL_COLOR_COUNT"
         },
-        "variable_len": "LED_MODE_COUNT * LED_DIRECTION_COUNT",
-        "notes": "Only available if `USE_LED_STRIP` is defined. Allows mapping modes/directions/specials to configured colors.",
+        "variable_len": "LED_MODE_COUNT * LED_DIRECTION_COUNT + LED_SPECIAL_COLOR_COUNT",
+        "notes": "Only available if `USE_LED_STRIP` is defined. Entries where `modeIndex == LED_MODE_COUNT` describe special colors.",
         "description": "Retrieves the color index assigned to each LED mode and function/direction combination, including special colors."
     },
     "MSP_BATTERY_STATE": {
@@ -5032,7 +5031,7 @@
                 },
                 {
                     "name": "speed",
-                    "ctype": "uint16_t",
+                    "ctype": "int16_t",
                     "desc": "Ground speed",
                     "units": "cm/s"
                 }
