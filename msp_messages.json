@@ -9815,8 +9815,8 @@
             "payload": [
                 {
                     "name": "ledConfig",
-                    "ctype": "uint16_t",
-                    "desc": "Full configuration structure for the LED, size sizeof(ledConfig_t)",
+                    "ctype": "ledConfig_t",
+                    "desc": "Raw `ledConfig_t` structure (6 bytes) holding position, function, overlay, color, direction, and params bitfields (`io/ledstrip.h`).",
                     "units": ""
                 }
             ],
@@ -9839,8 +9839,8 @@
                 },
                 {
                     "name": "ledConfig",
-                    "ctype": "uint16_t",
-                    "desc": "",
+                    "ctype": "ledConfig_t",
+                    "desc": "Raw `ledConfig_t` structure (6 bytes) mirroring the firmware layout.",
                     "units": ""
                 }
             ]
@@ -9872,14 +9872,14 @@
                 },
                 {
                     "name": "approachAlt",
-                    "ctype": "uint32_t",
-                    "desc": "Altitude for the approach phase",
+                    "ctype": "int32_t",
+                    "desc": "Signed altitude for the approach phase (`navFwAutolandApproach_t.approachAlt`)",
                     "units": "cm"
                 },
                 {
                     "name": "landAlt",
-                    "ctype": "uint32_t",
-                    "desc": "Altitude for the final landing phase",
+                    "ctype": "int32_t",
+                    "desc": "Signed altitude for the final landing phase (`navFwAutolandApproach_t.landAlt`)",
                     "units": "cm"
                 },
                 {
@@ -9925,14 +9925,14 @@
                 },
                 {
                     "name": "approachAlt",
-                    "ctype": "uint32_t",
-                    "desc": "Sets approach altitude",
+                    "ctype": "int32_t",
+                    "desc": "Signed approach altitude (`navFwAutolandApproach_t.approachAlt`)",
                     "units": "cm"
                 },
                 {
                     "name": "landAlt",
-                    "ctype": "uint32_t",
-                    "desc": "Sets landing altitude",
+                    "ctype": "int32_t",
+                    "desc": "Signed landing altitude (`navFwAutolandApproach_t.landAlt`)",
                     "units": "cm"
                 },
                 {
@@ -10275,13 +10275,61 @@
                     "repeating": "maxVehicles",
                     "payload": [
                         {
-                            "name": "adsbVehicle",
-                            "ctype": "adsbVehicle_t[]",
-                            "desc": "Array of `adsbVehicle_t` Repeated `maxVehicles` times",
-                            "repeating": "maxVehicles",
+                            "name": "callsign",
+                            "ctype": "char[ADSB_CALL_SIGN_MAX_LENGTH]",
+                            "desc": "Fixed-length callsign from `adsbVehicle->vehicleValues.callsign` (padded with NULs if shorter).",
                             "array": true,
-                            "array_ctype": "adsbVehicle_t",
-                            "array_size": 0,
+                            "array_ctype": "char",
+                            "array_size": "ADSB_CALL_SIGN_MAX_LENGTH",
+                            "units": ""
+                        },
+                        {
+                            "name": "icao",
+                            "ctype": "uint32_t",
+                            "desc": "ICAO address (`adsbVehicle->vehicleValues.icao`).",
+                            "units": ""
+                        },
+                        {
+                            "name": "lat",
+                            "ctype": "int32_t",
+                            "desc": "Latitude in degrees * 1e7 (`adsbVehicle->vehicleValues.lat`).",
+                            "units": "1e-7 deg"
+                        },
+                        {
+                            "name": "lon",
+                            "ctype": "int32_t",
+                            "desc": "Longitude in degrees * 1e7 (`adsbVehicle->vehicleValues.lon`).",
+                            "units": "1e-7 deg"
+                        },
+                        {
+                            "name": "alt",
+                            "ctype": "int32_t",
+                            "desc": "Altitude above sea level (`adsbVehicle->vehicleValues.alt`).",
+                            "units": "cm"
+                        },
+                        {
+                            "name": "headingDeg",
+                            "ctype": "uint16_t",
+                            "desc": "Course over ground in whole degrees (`CENTIDEGREES_TO_DEGREES(vehicleValues.heading)`).",
+                            "units": "deg"
+                        },
+                        {
+                            "name": "tslc",
+                            "ctype": "uint8_t",
+                            "desc": "Time since last communication (`adsbVehicle->vehicleValues.tslc`).",
+                            "units": "s"
+                        },
+                        {
+                            "name": "emitterType",
+                            "ctype": "uint8_t",
+                            "desc": "Emitter category (`adsbVehicle->vehicleValues.emitterType`).",
+                            "units": "",
+                            "enum": "ADSB_EMITTER_TYPE"
+                        },
+                        {
+                            "name": "ttl",
+                            "ctype": "uint8_t",
+                            "desc": "TTL counter used for list maintenance (`adsbVehicle->ttl`).",
                             "units": ""
                         }
                     ]
@@ -10289,7 +10337,7 @@
             ]
         },
         "variable_len": "maxVehicles",
-        "notes": "Requires `USE_ADSB`.",
+        "notes": "Requires `USE_ADSB`. Only a subset of `adsbVehicle_t` is transmitted (callsign, core values, heading in whole degrees, TSLC, emitter type, TTL).",
         "description": "Retrieves the list of currently tracked ADSB (Automatic Dependent Surveillance–Broadcast) vehicles. See `adsbVehicle_t` and `adsbVehicleValues_t` in `io/adsb.h` for the exact structure fields."
     },
     "MSP2_INAV_CUSTOM_OSD_ELEMENTS": {
@@ -10466,27 +10514,27 @@
             "payload": [
                 {
                     "name": "min",
-                    "ctype": "uint16_t",
+                    "ctype": "int16_t",
                     "desc": "Minimum servo endpoint (`servoParams(i)->min`)",
                     "units": "PWM"
                 },
                 {
                     "name": "max",
-                    "ctype": "uint16_t",
+                    "ctype": "int16_t",
                     "desc": "Maximum servo endpoint (`servoParams(i)->max`)",
                     "units": "PWM"
                 },
                 {
                     "name": "middle",
-                    "ctype": "uint16_t",
+                    "ctype": "int16_t",
                     "desc": "Middle/Neutral servo position (`servoParams(i)->middle`)",
                     "units": "PWM"
                 },
                 {
                     "name": "rate",
-                    "ctype": "uint8_t",
+                    "ctype": "int8_t",
                     "desc": "Servo rate/scaling (`servoParams(i)->rate`)",
-                    "units": "% (-100 to 100)"
+                    "units": "% (-125 to 125)"
                 }
             ],
             "repeating": "MAX_SUPPORTED_SERVOS"
@@ -10508,27 +10556,27 @@
                 },
                 {
                     "name": "min",
-                    "ctype": "uint16_t",
+                    "ctype": "int16_t",
                     "desc": "Sets minimum servo endpoint",
                     "units": "PWM"
                 },
                 {
                     "name": "max",
-                    "ctype": "uint16_t",
+                    "ctype": "int16_t",
                     "desc": "Sets maximum servo endpoint",
                     "units": "PWM"
                 },
                 {
                     "name": "middle",
-                    "ctype": "uint16_t",
+                    "ctype": "int16_t",
                     "desc": "Sets middle/neutral servo position",
                     "units": "PWM"
                 },
                 {
                     "name": "rate",
-                    "ctype": "uint8_t",
+                    "ctype": "int8_t",
                     "desc": "Sets servo rate/scaling",
-                    "units": "%"
+                    "units": "% (-125 to 125)"
                 }
             ]
         },
@@ -10566,20 +10614,20 @@
                 {
                     "name": "shape",
                     "ctype": "uint8_t",
-                    "desc": "Define (`GEOZONE_SHAPE_CIRCULAR/POLYGHON`): Zone shape (Polygon/Circular)",
+                    "desc": "Define (`GEOZONE_SHAPE_CIRCULAR/POLYGON`): Zone shape (Polygon/Circular)",
                     "units": ""
                 },
                 {
                     "name": "minAltitude",
-                    "ctype": "uint32_t",
-                    "desc": "Minimum allowed altitude within the zone (cm)",
-                    "units": ""
+                    "ctype": "int32_t",
+                    "desc": "Minimum allowed altitude within the zone (`geoZonesConfig(idx)->minAltitude`)",
+                    "units": "cm"
                 },
                 {
                     "name": "maxAltitude",
-                    "ctype": "uint32_t",
-                    "desc": "Maximum allowed altitude within the zone (cm)",
-                    "units": ""
+                    "ctype": "int32_t",
+                    "desc": "Maximum allowed altitude within the zone (`geoZonesConfig(idx)->maxAltitude`)",
+                    "units": "cm"
                 },
                 {
                     "name": "isSeaLevelRef",
@@ -10590,9 +10638,9 @@
                 {
                     "name": "fenceAction",
                     "ctype": "uint8_t",
-                    "desc": "Enum (`geozoneActionState_e`): Action to take upon boundary violation",
+                    "desc": "Enum (`fenceAction_e`): Action to take upon boundary violation",
                     "units": "",
-                    "enum": "geozoneActionState_e"
+                    "enum": "fenceAction_e"
                 },
                 {
                     "name": "vertexCount",
@@ -10625,20 +10673,20 @@
                 {
                     "name": "shape",
                     "ctype": "uint8_t",
-                    "desc": "Define (`GEOZONE_SHAPE_CIRCULAR/POLYGHON`): Zone shape (Polygon/Circular)",
+                    "desc": "Define (`GEOZONE_SHAPE_CIRCULAR/POLYGON`): Zone shape (Polygon/Circular)",
                     "units": ""
                 },
                 {
                     "name": "minAltitude",
-                    "ctype": "uint32_t",
-                    "desc": "Minimum allowed altitude (cm)",
-                    "units": ""
+                    "ctype": "int32_t",
+                    "desc": "Minimum allowed altitude (`geoZonesConfigMutable()->minAltitude`)",
+                    "units": "cm"
                 },
                 {
                     "name": "maxAltitude",
-                    "ctype": "uint32_t",
-                    "desc": "Maximum allowed altitude (cm)",
-                    "units": ""
+                    "ctype": "int32_t",
+                    "desc": "Maximum allowed altitude (`geoZonesConfigMutable()->maxAltitude`)",
+                    "units": "cm"
                 },
                 {
                     "name": "isSeaLevelRef",
@@ -10649,9 +10697,9 @@
                 {
                     "name": "fenceAction",
                     "ctype": "uint8_t",
-                    "desc": "Enum (`geozoneActionState_e`): Action to take upon boundary violation",
+                    "desc": "Enum (`fenceAction_e`): Action to take upon boundary violation",
                     "units": "",
-                    "enum": "geozoneActionState_e"
+                    "enum": "fenceAction_e"
                 },
                 {
                     "name": "vertexCount",
@@ -10712,7 +10760,7 @@
                 },
                 {
                     "name": "radius",
-                    "ctype": "uint32_t",
+                    "ctype": "int32_t",
                     "desc": "If vertex is circle, Radius of the circular zone",
                     "units": "cm",
                     "optional": true
@@ -10791,7 +10839,7 @@
                         },
                         {
                             "name": "radius",
-                            "ctype": "uint32_t",
+                            "ctype": "int32_t",
                             "desc": "Radius of the circular zone",
                             "units": "cm"
                         }
