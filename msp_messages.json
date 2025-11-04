@@ -6830,11 +6830,8 @@
                 },
                 {
                     "name": "activeModes",
-                    "ctype": "uint32_t[]",
-                    "desc": "Bitmask words for active flight modes (`packBoxModeFlags()`), length = ceil(`CHECKBOX_ITEM_COUNT` / 32)",
-                    "array": true,
-                    "array_ctype": "uint32_t",
-                    "array_size": 0,
+                    "ctype": "boxBitmask_t",
+                    "desc": "Bitmask words for active flight modes (`packBoxModeFlags()`)",
                     "units": "Bitmask",
                     "bitmask": true
                 },
@@ -7015,12 +7012,12 @@
                 {
                     "name": "rssiChannel",
                     "ctype": "uint8_t",
-                    "desc": "RSSI channel index (1-based) (`rxConfig()->rssi_channel`)",
+                    "desc": "RSSI channel index (1-based, 0 disables) (`rxConfig()->rssi_channel`)",
                     "units": "Index"
                 },
                 {
                     "name": "magDeclination",
-                    "ctype": "uint16_t",
+                    "ctype": "int16_t",
                     "desc": "Magnetic declination / 10 (`compassConfig()->mag_declination / 10`). 0 if `USE_MAG` disabled",
                     "units": "0.1 degrees"
                 },
@@ -7088,7 +7085,7 @@
                 {
                     "name": "capacityUnit",
                     "ctype": "uint8_t",
-                    "desc": "Enum `batCapacityUnit_e` Capacity unit ('batteryMetersConfig()->capacity_unit')",
+                    "desc": "Enum `batCapacityUnit_e` Capacity unit (`batteryMetersConfig()->capacity_unit`)",
                     "units": "Enum",
                     "enum": "batCapacityUnit_e"
                 }
@@ -7152,12 +7149,12 @@
                 {
                     "name": "rssiChannel",
                     "ctype": "uint8_t",
-                    "desc": "Sets `rxConfigMutable()->rssi_channel` (constrained). Updates source",
+                    "desc": "Sets `rxConfigMutable()->rssi_channel` (1-based, 0 disables) when <= `MAX_SUPPORTED_RC_CHANNEL_COUNT`",
                     "units": "Index"
                 },
                 {
                     "name": "magDeclination",
-                    "ctype": "uint16_t",
+                    "ctype": "int16_t",
                     "desc": "Sets `compassConfigMutable()->mag_declination = value * 10` (if `USE_MAG`)",
                     "units": "0.1 degrees"
                 },
@@ -7207,25 +7204,25 @@
                 {
                     "name": "capacityValue",
                     "ctype": "uint32_t",
-                    "desc": "Sets `currentBatteryProfileMutable->capacity.value",
+                    "desc": "Sets `currentBatteryProfileMutable->capacity.value`",
                     "units": "mAh/mWh"
                 },
                 {
                     "name": "capacityWarning",
                     "ctype": "uint32_t",
-                    "desc": "Sets `currentBatteryProfileMutable->capacity.warning",
+                    "desc": "Sets `currentBatteryProfileMutable->capacity.warning`",
                     "units": "mAh/mWh"
                 },
                 {
                     "name": "capacityCritical",
                     "ctype": "uint32_t",
-                    "desc": "Sets `currentBatteryProfileMutable->capacity.critical",
+                    "desc": "Sets `currentBatteryProfileMutable->capacity.critical`",
                     "units": "mAh/mWh"
                 },
                 {
                     "name": "capacityUnit",
                     "ctype": "uint8_t",
-                    "desc": "Enum `batCapacityUnit_e` sets Capacity unit ('batteryMetersConfig()->capacity_unit'). Updates OSD energy unit if changed",
+                    "desc": "Enum `batCapacityUnit_e` Sets `batteryMetersConfigMutable()->capacity_unit` (validated, updates OSD energy unit if changed)",
                     "units": "Enum",
                     "enum": "batCapacityUnit_e"
                 }
@@ -7286,15 +7283,15 @@
                 },
                 {
                     "name": "currentOffset",
-                    "ctype": "uint16_t",
+                    "ctype": "int16_t",
                     "desc": "Current sensor offset (`batteryMetersConfig()->current.offset`)",
                     "units": "mV"
                 },
                 {
                     "name": "currentScale",
-                    "ctype": "uint16_t",
+                    "ctype": "int16_t",
                     "desc": "Current sensor scale (`batteryMetersConfig()->current.scale`)",
-                    "units": "Scale"
+                    "units": "0.1 mV/A"
                 },
                 {
                     "name": "capacityValue",
@@ -7317,7 +7314,7 @@
                 {
                     "name": "capacityUnit",
                     "ctype": "uint8_t",
-                    "desc": "Enum `batCapacityUnit_e` Capacity unit ('batteryMetersConfig()->capacity_unit')",
+                    "desc": "Enum `batCapacityUnit_e` Capacity unit (`batteryMetersConfig()->capacity_unit`)",
                     "units": "Enum",
                     "enum": "batCapacityUnit_e"
                 }
@@ -7376,38 +7373,38 @@
                 },
                 {
                     "name": "currentOffset",
-                    "ctype": "uint16_t",
-                    "desc": "Sets `batteryMetersConfigMutable()->current.offset",
+                    "ctype": "int16_t",
+                    "desc": "Sets `batteryMetersConfigMutable()->current.offset`",
                     "units": "mV"
                 },
                 {
                     "name": "currentScale",
-                    "ctype": "uint16_t",
-                    "desc": "Sets `batteryMetersConfigMutable()->current.scale",
-                    "units": "Scale"
+                    "ctype": "int16_t",
+                    "desc": "Sets `batteryMetersConfigMutable()->current.scale`",
+                    "units": "0.1 mV/A"
                 },
                 {
                     "name": "capacityValue",
                     "ctype": "uint32_t",
-                    "desc": "Sets `currentBatteryProfileMutable->capacity.value",
+                    "desc": "Sets `currentBatteryProfileMutable->capacity.value`",
                     "units": "mAh/mWh"
                 },
                 {
                     "name": "capacityWarning",
                     "ctype": "uint32_t",
-                    "desc": "Sets `currentBatteryProfileMutable->capacity.warning",
+                    "desc": "Sets `currentBatteryProfileMutable->capacity.warning`",
                     "units": "mAh/mWh"
                 },
                 {
                     "name": "capacityCritical",
                     "ctype": "uint32_t",
-                    "desc": "Sets `currentBatteryProfileMutable->capacity.critical",
+                    "desc": "Sets `currentBatteryProfileMutable->capacity.critical`",
                     "units": "mAh/mWh"
                 },
                 {
                     "name": "capacityUnit",
                     "ctype": "uint8_t",
-                    "desc": "Enum `batCapacityUnit_e` sets Capacity unit ('batteryMetersConfig()->capacity_unit') Updates OSD energy unit if changed",
+                    "desc": "Enum `batCapacityUnit_e` Sets `batteryMetersConfigMutable()->capacity_unit` (validated, updates OSD energy unit if changed)",
                     "units": "Enum",
                     "enum": "batCapacityUnit_e"
                 }
@@ -7520,85 +7517,85 @@
                 {
                     "name": "throttleMid",
                     "ctype": "uint8_t",
-                    "desc": "Sets `currentControlRateProfile_p->throttle.rcMid8",
+                    "desc": "Sets `currentControlRateProfile->throttle.rcMid8`",
                     "units": ""
                 },
                 {
                     "name": "throttleExpo",
                     "ctype": "uint8_t",
-                    "desc": "Sets `currentControlRateProfile_p->throttle.rcExpo8",
+                    "desc": "Sets `currentControlRateProfile->throttle.rcExpo8`",
                     "units": ""
                 },
                 {
                     "name": "dynamicThrottlePID",
                     "ctype": "uint8_t",
-                    "desc": "Sets `currentControlRateProfile_p->throttle.dynPID",
+                    "desc": "Sets `currentControlRateProfile->throttle.dynPID`",
                     "units": ""
                 },
                 {
                     "name": "tpaBreakpoint",
                     "ctype": "uint16_t",
-                    "desc": "Sets `currentControlRateProfile_p->throttle.pa_breakpoint",
+                    "desc": "Sets `currentControlRateProfile->throttle.pa_breakpoint`",
                     "units": ""
                 },
                 {
                     "name": "stabRcExpo",
                     "ctype": "uint8_t",
-                    "desc": "Sets `currentControlRateProfile_p->stabilized.rcExpo8",
+                    "desc": "Sets `currentControlRateProfile->stabilized.rcExpo8`",
                     "units": ""
                 },
                 {
                     "name": "stabRcYawExpo",
                     "ctype": "uint8_t",
-                    "desc": "Sets `currentControlRateProfile_p->stabilized.rcYawExpo8",
+                    "desc": "Sets `currentControlRateProfile->stabilized.rcYawExpo8`",
                     "units": ""
                 },
                 {
                     "name": "stabRollRate",
                     "ctype": "uint8_t",
-                    "desc": "Sets `currentControlRateProfile_p->stabilized.rates[FD_ROLL]` (constrained)",
+                    "desc": "Sets `currentControlRateProfile->stabilized.rates[FD_ROLL]` (constrained)",
                     "units": ""
                 },
                 {
                     "name": "stabPitchRate",
                     "ctype": "uint8_t",
-                    "desc": "Sets `currentControlRateProfile_p->stabilized.rates[FD_PITCH]` (constrained)",
+                    "desc": "Sets `currentControlRateProfile->stabilized.rates[FD_PITCH]` (constrained)",
                     "units": ""
                 },
                 {
                     "name": "stabYawRate",
                     "ctype": "uint8_t",
-                    "desc": "Sets `currentControlRateProfile_p->stabilized.rates[FD_YAW]` (constrained)",
+                    "desc": "Sets `currentControlRateProfile->stabilized.rates[FD_YAW]` (constrained)",
                     "units": ""
                 },
                 {
                     "name": "manualRcExpo",
                     "ctype": "uint8_t",
-                    "desc": "Sets `currentControlRateProfile_p->manual.rcExpo8",
+                    "desc": "Sets `currentControlRateProfile->manual.rcExpo8`",
                     "units": ""
                 },
                 {
                     "name": "manualRcYawExpo",
                     "ctype": "uint8_t",
-                    "desc": "Sets `currentControlRateProfile_p->manual.rcYawExpo8",
+                    "desc": "Sets `currentControlRateProfile->manual.rcYawExpo8`",
                     "units": ""
                 },
                 {
                     "name": "manualRollRate",
                     "ctype": "uint8_t",
-                    "desc": "Sets `currentControlRateProfile_p->manual.rates[FD_ROLL]` (constrained)",
+                    "desc": "Sets `currentControlRateProfile->manual.rates[FD_ROLL]` (constrained)",
                     "units": ""
                 },
                 {
                     "name": "manualPitchRate",
                     "ctype": "uint8_t",
-                    "desc": "Sets `currentControlRateProfile_p->manual.rates[FD_PITCH]` (constrained)",
+                    "desc": "Sets `currentControlRateProfile->manual.rates[FD_PITCH]` (constrained)",
                     "units": ""
                 },
                 {
                     "name": "manualYawRate",
                     "ctype": "uint8_t",
-                    "desc": "Sets `currentControlRateProfile_p->manual.rates[FD_YAW]` (constrained)",
+                    "desc": "Sets `currentControlRateProfile->manual.rates[FD_YAW]` (constrained)",
                     "units": ""
                 }
             ]
@@ -7616,12 +7613,12 @@
                 {
                     "name": "airspeed",
                     "ctype": "uint32_t",
-                    "desc": "Estimated/measured airspeed (`getAirspeedEstimate()`). 0 if `USE_PITOT` disabled or no valid data",
+                    "desc": "Estimated/measured airspeed (`getAirspeedEstimate()`, cm/s). 0 if unavailable",
                     "units": "cm/s"
                 }
             ]
         },
-        "notes": "Requires `USE_PITOT` for measured airspeed. May return GPS ground speed if pitot unavailable but GPS is present and configured.",
+        "notes": "Requires `USE_PITOT`; returns 0 when pitot functionality is not enabled or calibrated.",
         "description": "Retrieves the estimated or measured airspeed."
     },
     "MSP2_INAV_OUTPUT_MAPPING": {
@@ -7633,7 +7630,7 @@
                 {
                     "name": "usageFlags",
                     "ctype": "uint8_t",
-                    "desc": "Timer usage flags (truncated). `TIM_USE_MOTOR` or `TIM_USE_SERVO",
+                    "desc": "Timer usage flags (lower 8 bits of `timerHardware[i].usageFlags`, e.g. `TIM_USE_MOTOR`, `TIM_USE_SERVO`)",
                     "units": ""
                 }
             ],
@@ -7710,49 +7707,49 @@
                 {
                     "name": "brakingSpeedThreshold",
                     "ctype": "uint16_t",
-                    "desc": "Sets `navConfigMutable()->mc.braking_speed_threshold",
+                    "desc": "Sets `navConfigMutable()->mc.braking_speed_threshold`",
                     "units": "cm/s"
                 },
                 {
                     "name": "brakingDisengageSpeed",
                     "ctype": "uint16_t",
-                    "desc": "Sets `navConfigMutable()->mc.braking_disengage_speed",
+                    "desc": "Sets `navConfigMutable()->mc.braking_disengage_speed`",
                     "units": "cm/s"
                 },
                 {
                     "name": "brakingTimeout",
                     "ctype": "uint16_t",
-                    "desc": "Sets `navConfigMutable()->mc.braking_timeout",
+                    "desc": "Sets `navConfigMutable()->mc.braking_timeout`",
                     "units": "ms"
                 },
                 {
                     "name": "brakingBoostFactor",
                     "ctype": "uint8_t",
-                    "desc": "Sets `navConfigMutable()->mc.braking_boost_factor",
+                    "desc": "Sets `navConfigMutable()->mc.braking_boost_factor`",
                     "units": "%"
                 },
                 {
                     "name": "brakingBoostTimeout",
                     "ctype": "uint16_t",
-                    "desc": "Sets `navConfigMutable()->mc.braking_boost_timeout",
+                    "desc": "Sets `navConfigMutable()->mc.braking_boost_timeout`",
                     "units": "ms"
                 },
                 {
                     "name": "brakingBoostSpeedThreshold",
                     "ctype": "uint16_t",
-                    "desc": "Sets `navConfigMutable()->mc.braking_boost_speed_threshold",
+                    "desc": "Sets `navConfigMutable()->mc.braking_boost_speed_threshold`",
                     "units": "cm/s"
                 },
                 {
                     "name": "brakingBoostDisengageSpeed",
                     "ctype": "uint16_t",
-                    "desc": "Sets `navConfigMutable()->mc.braking_boost_disengage_speed",
+                    "desc": "Sets `navConfigMutable()->mc.braking_boost_disengage_speed`",
                     "units": "cm/s"
                 },
                 {
                     "name": "brakingBankAngle",
                     "ctype": "uint8_t",
-                    "desc": "Sets `navConfigMutable()->mc.braking_bank_angle",
+                    "desc": "Sets `navConfigMutable()->mc.braking_bank_angle`",
                     "units": "degrees"
                 }
             ]
@@ -7776,7 +7773,7 @@
                 {
                     "name": "usageFlags",
                     "ctype": "uint8_t",
-                    "desc": "Timer usage flags (truncated). `TIM_USE_MOTOR` or `TIM_USE_SERVO",
+                    "desc": "Timer usage flags (lower 8 bits of `timerHardware[i].usageFlags`, e.g. `TIM_USE_MOTOR`, `TIM_USE_SERVO`)",
                     "units": ""
                 }
             ],
@@ -7858,9 +7855,9 @@
                 {
                     "name": "outputMode",
                     "ctype": "uint8_t",
-                    "desc": "Output mode override (`TIMER_OUTPUT_MODE_*` enum) to set",
+                    "desc": "Output mode override (`outputMode_e` enum) to set",
                     "units": "",
-                    "enum": "outputMode_e*"
+                    "enum": "outputMode_e"
                 }
             ]
         },
@@ -7908,7 +7905,7 @@
                 },
                 {
                     "name": "appliedMixerPreset",
-                    "ctype": "uint16_t",
+                    "ctype": "int16_t",
                     "desc": "Enum (`mixerPreset_e`): Mixer preset currently applied (`mixerConfig()->appliedMixerPreset`)",
                     "units": "",
                     "enum": "mixerPreset_e"
@@ -7938,7 +7935,7 @@
                 {
                     "name": "motorDirectionInverted",
                     "ctype": "uint8_t",
-                    "desc": "Sets `mixerConfigMutable()->motorDirectionInverted",
+                    "desc": "Sets `mixerConfigMutable()->motorDirectionInverted`",
                     "units": ""
                 },
                 {
@@ -7950,25 +7947,25 @@
                 {
                     "name": "motorStopOnLow",
                     "ctype": "uint8_t",
-                    "desc": "Sets `mixerConfigMutable()->motorstopOnLow",
+                    "desc": "Sets `mixerConfigMutable()->motorstopOnLow`",
                     "units": ""
                 },
                 {
                     "name": "platformType",
                     "ctype": "uint8_t",
-                    "desc": "Sets `mixerConfigMutable()->platformType",
+                    "desc": "Sets `mixerConfigMutable()->platformType`",
                     "units": ""
                 },
                 {
                     "name": "hasFlaps",
                     "ctype": "uint8_t",
-                    "desc": "Sets `mixerConfigMutable()->hasFlaps",
+                    "desc": "Sets `mixerConfigMutable()->hasFlaps`",
                     "units": ""
                 },
                 {
                     "name": "appliedMixerPreset",
-                    "ctype": "uint16_t",
-                    "desc": "Sets `mixerConfigMutable()->appliedMixerPreset",
+                    "ctype": "int16_t",
+                    "desc": "Sets `mixerConfigMutable()->appliedMixerPreset`",
                     "units": ""
                 },
                 {
@@ -7993,24 +7990,79 @@
         "code": 8210,
         "mspv": 2,
         "request": null,
-        "reply": {
-            "payload": [
-                {
-                    "name": "layoutCount",
-                    "ctype": "uint8_t",
-                    "desc": "Number of OSD layouts (`OSD_LAYOUT_COUNT`)",
-                    "units": ""
-                },
-                {
-                    "name": "itemCount",
-                    "ctype": "uint8_t",
-                    "desc": "Number of OSD items per layout (`OSD_ITEM_COUNT`)",
-                    "units": ""
+        "reply": null,
+        "variants": {
+            "dataSize == 0": {
+                "description": "Query layout/item counts",
+                "request": null,
+                "reply": {
+                    "payload": [
+                        {
+                            "name": "layoutCount",
+                            "ctype": "uint8_t",
+                            "desc": "Number of OSD layouts (`OSD_LAYOUT_COUNT`)"
+                        },
+                        {
+                            "name": "itemCount",
+                            "ctype": "uint8_t",
+                            "desc": "Number of OSD items per layout (`OSD_ITEM_COUNT`)"
+                        }
+                    ]
                 }
-            ]
+            },
+            "dataSize == 1": {
+                "description": "Fetch all item positions for a layout",
+                "request": {
+                    "payload": [
+                        {
+                            "name": "layoutIndex",
+                            "ctype": "uint8_t",
+                            "desc": "Layout index (0 to `OSD_LAYOUT_COUNT - 1`)"
+                        }
+                    ]
+                },
+                "reply": {
+                    "payload": [
+                        {
+                            "name": "itemPosition",
+                            "ctype": "uint16_t",
+                            "desc": "Packed X/Y position (`osdLayoutsConfig()->item_pos[layoutIndex][item]`)",
+                            "units": "packed coords"
+                        }
+                    ],
+                    "repeating": "OSD_ITEM_COUNT"
+                }
+            },
+            "dataSize == 3": {
+                "description": "Fetch a single item position",
+                "request": {
+                    "payload": [
+                        {
+                            "name": "layoutIndex",
+                            "ctype": "uint8_t",
+                            "desc": "Layout index (0 to `OSD_LAYOUT_COUNT - 1`)"
+                        },
+                        {
+                            "name": "itemIndex",
+                            "ctype": "uint16_t",
+                            "desc": "OSD item index (0 to `OSD_ITEM_COUNT - 1`)"
+                        }
+                    ]
+                },
+                "reply": {
+                    "payload": [
+                        {
+                            "name": "itemPosition",
+                            "ctype": "uint16_t",
+                            "desc": "Packed X/Y position (`osdLayoutsConfig()->item_pos[layoutIndex][itemIndex]`)",
+                            "units": "packed coords"
+                        }
+                    ]
+                }
+            }
         },
-        "notes": "Requires `USE_OSD`. Returns error if indexes are invalid.",
-        "description": "Gets OSD layout information (counts, positions for a specific layout, or position for a specific item)."
+        "notes": "Requires `USE_OSD`. Returns `MSP_RESULT_ACK` on success, `MSP_RESULT_ERROR` if indexes are out of range.",
+        "description": "Retrieves OSD layout metadata or item positions for specific layouts/items."
     },
     "MSP2_INAV_OSD_SET_LAYOUT_ITEM": {
         "code": 8211,
@@ -8033,7 +8085,7 @@
                 {
                     "name": "itemPosition",
                     "ctype": "uint16_t",
-                    "desc": "Packed X/Y position (`(Y << 8)",
+                    "desc": "Packed X/Y position using `OSD_POS(x, y)` with `OSD_VISIBLE_FLAG` bit",
                     "units": "Coordinates"
                 }
             ]
@@ -8099,30 +8151,30 @@
                 {
                     "name": "currentAlarm",
                     "ctype": "uint8_t",
-                    "desc": "Current draw alarm threshold (`osdConfig()->current_alarm`). Units may need verification",
-                    "units": "0.1 A ?"
+                    "desc": "Current draw alarm threshold (`osdConfig()->current_alarm`)",
+                    "units": "A"
                 },
                 {
                     "name": "imuTempMinAlarm",
-                    "ctype": "uint16_t",
+                    "ctype": "int16_t",
                     "desc": "Min IMU temperature alarm (`osdConfig()->imu_temp_alarm_min`)",
                     "units": "degrees C"
                 },
                 {
                     "name": "imuTempMaxAlarm",
-                    "ctype": "uint16_t",
+                    "ctype": "int16_t",
                     "desc": "Max IMU temperature alarm (`osdConfig()->imu_temp_alarm_max`)",
                     "units": "degrees C"
                 },
                 {
                     "name": "baroTempMinAlarm",
-                    "ctype": "uint16_t",
+                    "ctype": "int16_t",
                     "desc": "Min Baro temperature alarm (`osdConfig()->baro_temp_alarm_min`). 0 if `USE_BARO` disabled",
                     "units": "degrees C"
                 },
                 {
                     "name": "baroTempMaxAlarm",
-                    "ctype": "uint16_t",
+                    "ctype": "int16_t",
                     "desc": "Max Baro temperature alarm (`osdConfig()->baro_temp_alarm_max`). 0 if `USE_BARO` disabled",
                     "units": "degrees C"
                 },
@@ -8175,54 +8227,54 @@
                 {
                     "name": "negAltAlarm",
                     "ctype": "uint16_t",
-                    "desc": "Sets `osdConfigMutable()->neg_alt_alarm",
+                    "desc": "Sets `osdConfigMutable()->neg_alt_alarm`",
                     "units": "meters"
                 },
                 {
                     "name": "gForceAlarm",
                     "ctype": "uint16_t",
-                    "desc": "Sets `osdConfigMutable()->gforce_alarm = value / 1000.0f",
+                    "desc": "Sets `osdConfigMutable()->gforce_alarm = value / 1000.0f`",
                     "units": "G * 1000"
                 },
                 {
                     "name": "gForceAxisMinAlarm",
                     "ctype": "int16_t",
-                    "desc": "Sets `osdConfigMutable()->gforce_axis_alarm_min = value / 1000.0f",
+                    "desc": "Sets `osdConfigMutable()->gforce_axis_alarm_min = value / 1000.0f`",
                     "units": "G * 1000"
                 },
                 {
                     "name": "gForceAxisMaxAlarm",
                     "ctype": "int16_t",
-                    "desc": "Sets `osdConfigMutable()->gforce_axis_alarm_max = value / 1000.0f",
+                    "desc": "Sets `osdConfigMutable()->gforce_axis_alarm_max = value / 1000.0f`",
                     "units": "G * 1000"
                 },
                 {
                     "name": "currentAlarm",
                     "ctype": "uint8_t",
-                    "desc": "Sets `osdConfigMutable()->current_alarm",
-                    "units": "0.1 A ?"
+                    "desc": "Sets `osdConfigMutable()->current_alarm`",
+                    "units": "A"
                 },
                 {
                     "name": "imuTempMinAlarm",
-                    "ctype": "uint16_t",
-                    "desc": "Sets `osdConfigMutable()->imu_temp_alarm_min",
+                    "ctype": "int16_t",
+                    "desc": "Sets `osdConfigMutable()->imu_temp_alarm_min`",
                     "units": "degrees C"
                 },
                 {
                     "name": "imuTempMaxAlarm",
-                    "ctype": "uint16_t",
-                    "desc": "Sets `osdConfigMutable()->imu_temp_alarm_max",
+                    "ctype": "int16_t",
+                    "desc": "Sets `osdConfigMutable()->imu_temp_alarm_max`",
                     "units": "degrees C"
                 },
                 {
                     "name": "baroTempMinAlarm",
-                    "ctype": "uint16_t",
+                    "ctype": "int16_t",
                     "desc": "Sets `osdConfigMutable()->baro_temp_alarm_min` (if `USE_BARO`)",
                     "units": "degrees C"
                 },
                 {
                     "name": "baroTempMaxAlarm",
-                    "ctype": "uint16_t",
+                    "ctype": "int16_t",
                     "desc": "Sets `osdConfigMutable()->baro_temp_alarm_max` (if `USE_BARO`)",
                     "units": "degrees C"
                 }
@@ -8241,9 +8293,9 @@
                 {
                     "name": "videoSystem",
                     "ctype": "uint8_t",
-                    "desc": "Enum: Video system (Auto/PAL/NTSC) (`osdConfig()->video_system`)",
+                    "desc": "Enum `videoSystem_e`: Video system (Auto/PAL/NTSC) (`osdConfig()->video_system`)",
                     "units": "",
-                    "enum": "osdConfig()->video_system"
+                    "enum": "videoSystem_e"
                 },
                 {
                     "name": "mainVoltageDecimals",
@@ -8260,21 +8312,23 @@
                 {
                     "name": "crosshairsStyle",
                     "ctype": "uint8_t",
-                    "desc": "Enum: Style of the center crosshairs (`osdConfig()->crosshairs_style`)",
+                    "desc": "Enum `osd_crosshairs_style_e`: Style of the center crosshairs (`osdConfig()->crosshairs_style`)",
                     "units": "",
-                    "enum": "osdConfig()->crosshairs_style"
+                    "enum": "osd_crosshairs_style_e"
                 },
                 {
                     "name": "leftSidebarScroll",
                     "ctype": "uint8_t",
-                    "desc": "Boolean: Enable scrolling for left sidebar (`osdConfig()->left_sidebar_scroll`)",
-                    "units": ""
+                    "desc": "Enum `osd_sidebar_scroll_e`: Left sidebar scroll behavior (`osdConfig()->left_sidebar_scroll`)",
+                    "units": "",
+                    "enum": "osd_sidebar_scroll_e"
                 },
                 {
                     "name": "rightSidebarScroll",
                     "ctype": "uint8_t",
-                    "desc": "Boolean: Enable scrolling for right sidebar (`osdConfig()->right_sidebar_scroll`)",
-                    "units": ""
+                    "desc": "Enum `osd_sidebar_scroll_e`: Right sidebar scroll behavior (`osdConfig()->right_sidebar_scroll`)",
+                    "units": "",
+                    "enum": "osd_sidebar_scroll_e"
                 },
                 {
                     "name": "sidebarScrollArrows",
@@ -8292,9 +8346,9 @@
                 {
                     "name": "statsEnergyUnit",
                     "ctype": "uint8_t",
-                    "desc": "Enum: Unit for energy display in post-flight stats (`osdConfig()->stats_energy_unit`)",
+                    "desc": "Enum `osd_stats_energy_unit_e`: Unit for energy display in post-flight stats (`osdConfig()->stats_energy_unit`)",
                     "units": "",
-                    "enum": "osdConfig()->stats_energy_unit"
+                    "enum": "osd_stats_energy_unit_e"
                 }
             ]
         },
@@ -8309,57 +8363,62 @@
                 {
                     "name": "videoSystem",
                     "ctype": "uint8_t",
-                    "desc": "Sets `osdConfigMutable()->video_system",
-                    "units": ""
+                    "desc": "Sets `osdConfigMutable()->video_system`",
+                    "units": "",
+                    "enum": "videoSystem_e"
                 },
                 {
                     "name": "mainVoltageDecimals",
                     "ctype": "uint8_t",
-                    "desc": "Sets `osdConfigMutable()->main_voltage_decimals",
+                    "desc": "Sets `osdConfigMutable()->main_voltage_decimals`",
                     "units": ""
                 },
                 {
                     "name": "ahiReverseRoll",
                     "ctype": "uint8_t",
-                    "desc": "Sets `osdConfigMutable()->ahi_reverse_roll",
+                    "desc": "Sets `osdConfigMutable()->ahi_reverse_roll`",
                     "units": ""
                 },
                 {
                     "name": "crosshairsStyle",
                     "ctype": "uint8_t",
-                    "desc": "Sets `osdConfigMutable()->crosshairs_style",
-                    "units": ""
+                    "desc": "Sets `osdConfigMutable()->crosshairs_style`",
+                    "units": "",
+                    "enum": "osd_crosshairs_style_e"
                 },
                 {
                     "name": "leftSidebarScroll",
                     "ctype": "uint8_t",
-                    "desc": "Sets `osdConfigMutable()->left_sidebar_scroll",
-                    "units": ""
+                    "desc": "Sets `osdConfigMutable()->left_sidebar_scroll`",
+                    "units": "",
+                    "enum": "osd_sidebar_scroll_e"
                 },
                 {
                     "name": "rightSidebarScroll",
                     "ctype": "uint8_t",
-                    "desc": "Sets `osdConfigMutable()->right_sidebar_scroll",
-                    "units": ""
+                    "desc": "Sets `osdConfigMutable()->right_sidebar_scroll`",
+                    "units": "",
+                    "enum": "osd_sidebar_scroll_e"
                 },
                 {
                     "name": "sidebarScrollArrows",
                     "ctype": "uint8_t",
-                    "desc": "Sets `osdConfigMutable()->sidebar_scroll_arrows",
+                    "desc": "Sets `osdConfigMutable()->sidebar_scroll_arrows`",
                     "units": ""
                 },
                 {
                     "name": "units",
                     "ctype": "uint8_t",
-                    "desc": "Enum `osd_unit_e` Sets `osdConfigMutable()->units",
+                    "desc": "Sets `osdConfigMutable()->units` (enum `osd_unit_e`)",
                     "units": "",
                     "enum": "osd_unit_e"
                 },
                 {
                     "name": "statsEnergyUnit",
                     "ctype": "uint8_t",
-                    "desc": "Sets `osdConfigMutable()->stats_energy_unit",
-                    "units": ""
+                    "desc": "Sets `osdConfigMutable()->stats_energy_unit`",
+                    "units": "",
+                    "enum": "osd_stats_energy_unit_e"
                 }
             ]
         },
@@ -8392,10 +8451,10 @@
             "payload": [
                 {
                     "name": "debugValues",
-                    "ctype": "uint32_t[DEBUG32_VALUE_COUNT]",
-                    "desc": "Values from the `debug` array (typically 8 values)",
+                    "ctype": "int32_t[DEBUG32_VALUE_COUNT]",
+                    "desc": "Values from the `debug` array (signed, typically 8 entries)",
                     "array": true,
-                    "array_ctype": "uint32_t",
+                    "array_ctype": "int32_t",
                     "array_size": "DEBUG32_VALUE_COUNT",
                     "units": ""
                 }
@@ -8420,9 +8479,9 @@
                 {
                     "name": "blackboxDevice",
                     "ctype": "uint8_t",
-                    "desc": "Enum (`blackboxDevice_e`): Target device for logging (`blackboxConfig()->device`). 0 if not supported",
+                    "desc": "Enum `BlackboxDevice`: Target device for logging (`blackboxConfig()->device`). 0 if not supported",
                     "units": "",
-                    "enum": "blackboxDevice_e"
+                    "enum": "BlackboxDevice"
                 },
                 {
                     "name": "blackboxRateNum",
@@ -8445,7 +8504,7 @@
                 }
             ]
         },
-        "notes": "Requires `USE_BLACKBOX`.",
+        "notes": "If `USE_BLACKBOX` is disabled, only the first four fields are returned (all zero).",
         "description": "Retrieves the Blackbox configuration. Supersedes `MSP_BLACKBOX_CONFIG`."
     },
     "MSP2_SET_BLACKBOX_CONFIG": {
@@ -8456,25 +8515,26 @@
                 {
                     "name": "blackboxDevice",
                     "ctype": "uint8_t",
-                    "desc": "Sets `blackboxConfigMutable()->device",
-                    "units": ""
+                    "desc": "Sets `blackboxConfigMutable()->device`",
+                    "units": "",
+                    "enum": "BlackboxDevice"
                 },
                 {
                     "name": "blackboxRateNum",
                     "ctype": "uint16_t",
-                    "desc": "Sets `blackboxConfigMutable()->rate_num",
+                    "desc": "Sets `blackboxConfigMutable()->rate_num`",
                     "units": ""
                 },
                 {
                     "name": "blackboxRateDenom",
                     "ctype": "uint16_t",
-                    "desc": "Sets `blackboxConfigMutable()->rate_denom",
+                    "desc": "Sets `blackboxConfigMutable()->rate_denom`",
                     "units": ""
                 },
                 {
                     "name": "blackboxIncludeFlags",
                     "ctype": "uint32_t",
-                    "desc": "Sets `blackboxConfigMutable()->includeFlags",
+                    "desc": "Sets `blackboxConfigMutable()->includeFlags`",
                     "units": ""
                 }
             ]
@@ -8504,15 +8564,15 @@
                 },
                 {
                     "name": "alarmMin",
-                    "ctype": "uint16_t",
-                    "desc": "Min temperature alarm threshold (degrees C)",
-                    "units": ""
+                    "ctype": "int16_t",
+                    "desc": "Min temperature alarm threshold (`sensorConfig->alarm_min`)",
+                    "units": "0.1°C"
                 },
                 {
                     "name": "alarmMax",
-                    "ctype": "uint16_t",
-                    "desc": "Max temperature alarm threshold (degrees C)",
-                    "units": ""
+                    "ctype": "int16_t",
+                    "desc": "Max temperature alarm threshold (`sensorConfig->alarm_max`)",
+                    "units": "0.1°C"
                 },
                 {
                     "name": "osdSymbol",
@@ -8544,8 +8604,9 @@
                 {
                     "name": "type",
                     "ctype": "uint8_t",
-                    "desc": "Sets sensor type",
-                    "units": ""
+                    "desc": "Sets sensor type (`tempSensorType_e`)",
+                    "units": "",
+                    "enum": "tempSensorType_e"
                 },
                 {
                     "name": "address",
@@ -8555,15 +8616,15 @@
                 },
                 {
                     "name": "alarmMin",
-                    "ctype": "uint16_t",
-                    "desc": "Sets min alarm threshold",
-                    "units": ""
+                    "ctype": "int16_t",
+                    "desc": "Sets min alarm threshold (`tempSensorConfigMutable(index)->alarm_min`)",
+                    "units": "0.1°C"
                 },
                 {
                     "name": "alarmMax",
-                    "ctype": "uint16_t",
-                    "desc": "Sets max alarm threshold",
-                    "units": ""
+                    "ctype": "int16_t",
+                    "desc": "Sets max alarm threshold (`tempSensorConfigMutable(index)->alarm_max`)",
+                    "units": "0.1°C"
                 },
                 {
                     "name": "osdSymbol",
@@ -8584,8 +8645,7 @@
             "repeating": "MAX_TEMP_SENSORS"
         },
         "reply": null,
-        "variable_len": "2",
-        "notes": "Requires `USE_TEMPERATURE_SENSOR`. Expects `MAX_TEMP_SENSORS * sizeof(tempSensorConfig_t)` bytes.",
+        "notes": "Requires `USE_TEMPERATURE_SENSOR`. Payload must include `MAX_TEMP_SENSORS` consecutive `tempSensorConfig_t` structures (labels are uppercased).",
         "description": "Sets the configuration for all onboard temperature sensors."
     },
     "MSP2_INAV_TEMPERATURES": {
@@ -8598,7 +8658,7 @@
                     "name": "temperature",
                     "ctype": "int16_t",
                     "desc": "Current temperature reading. -1000 if sensor is invalid or reading failed",
-                    "units": "degrees C"
+                    "units": "0.1°C"
                 }
             ],
             "repeating": "MAX_TEMP_SENSORS"
@@ -8873,7 +8933,7 @@
                 {
                     "name": "osdRleData",
                     "ctype": "uint8_t[]",
-                    "desc": "(If OSD supported) Run-length encoded OSD character data. Terminated by `[0, 0]",
+                    "desc": "(If OSD supported) Run-length encoded OSD character data. Terminated by `[0, 0]`",
                     "array": true,
                     "array_ctype": "uint8_t",
                     "array_size": 0,
@@ -8906,7 +8966,7 @@
                 },
                 {
                     "name": "rate",
-                    "ctype": "uint16_t",
+                    "ctype": "int16_t",
                     "desc": "Mixing rate/weight",
                     "units": ""
                 },
@@ -8918,7 +8978,7 @@
                 },
                 {
                     "name": "conditionId",
-                    "ctype": "uint8_t",
+                    "ctype": "int8_t",
                     "desc": "Logic Condition ID (0 to `MAX_LOGIC_CONDITIONS - 1`, or 255/-1 if none/disabled)",
                     "units": ""
                 },
@@ -8939,7 +8999,7 @@
                 },
                 {
                     "name": "rate",
-                    "ctype": "uint16_t",
+                    "ctype": "int16_t",
                     "desc": "(Optional) Profile 2 Rate",
                     "units": "",
                     "optional": true
@@ -8953,7 +9013,7 @@
                 },
                 {
                     "name": "conditionId",
-                    "ctype": "uint8_t",
+                    "ctype": "int8_t",
                     "desc": "(Optional) Profile 2 Logic Condition ID",
                     "units": "",
                     "optional": true
@@ -8991,7 +9051,7 @@
                 },
                 {
                     "name": "rate",
-                    "ctype": "uint16_t",
+                    "ctype": "int16_t",
                     "desc": "Mixing rate/weight",
                     "units": ""
                 },
@@ -9003,7 +9063,7 @@
                 },
                 {
                     "name": "conditionId",
-                    "ctype": "uint8_t",
+                    "ctype": "int8_t",
                     "desc": "Logic Condition ID (255/-1 if none). Ignored if `USE_PROGRAMMING_FRAMEWORK` is disabled",
                     "units": ""
                 }
@@ -9027,8 +9087,8 @@
                 },
                 {
                     "name": "activatorId",
-                    "ctype": "uint8_t",
-                    "desc": "ID of the activator condition (if any, 255 if none)",
+                    "ctype": "int8_t",
+                    "desc": "Activator condition ID (-1/255 if none)",
                     "units": ""
                 },
                 {
@@ -9047,7 +9107,7 @@
                 },
                 {
                     "name": "operandAValue",
-                    "ctype": "uint32_t",
+                    "ctype": "int32_t",
                     "desc": "Value/ID of the first operand",
                     "units": ""
                 },
@@ -9060,14 +9120,14 @@
                 },
                 {
                     "name": "operandBValue",
-                    "ctype": "uint32_t",
+                    "ctype": "int32_t",
                     "desc": "Value/ID of the second operand",
                     "units": ""
                 },
                 {
                     "name": "flags",
                     "ctype": "uint8_t",
-                    "desc": "Bitmask: Condition flags (e.g., `LC_FLAG_FIRST_TIME_TRUE`)",
+                    "desc": "Bitmask: Condition flags (`logicConditionFlags_e`)",
                     "units": "Bitmask",
                     "bitmask": true
                 }
@@ -9097,8 +9157,8 @@
                 },
                 {
                     "name": "activatorId",
-                    "ctype": "uint8_t",
-                    "desc": "Activator condition ID",
+                    "ctype": "int8_t",
+                    "desc": "Activator condition ID (-1/255 if none)",
                     "units": ""
                 },
                 {
@@ -9117,7 +9177,7 @@
                 },
                 {
                     "name": "operandAValue",
-                    "ctype": "uint32_t",
+                    "ctype": "int32_t",
                     "desc": "Value/ID of operand A",
                     "units": ""
                 },
@@ -9130,14 +9190,14 @@
                 },
                 {
                     "name": "operandBValue",
-                    "ctype": "uint32_t",
+                    "ctype": "int32_t",
                     "desc": "Value/ID of operand B",
                     "units": ""
                 },
                 {
                     "name": "flags",
                     "ctype": "uint8_t",
-                    "desc": "Bitmask: Condition flags",
+                    "desc": "Bitmask: Condition flags (`logicConditionFlags_e`)",
                     "units": "Bitmask",
                     "bitmask": true
                 }
@@ -9165,10 +9225,10 @@
             "payload": [
                 {
                     "name": "conditionValues",
-                    "ctype": "uint32_t[MAX_LOGIC_CONDITIONS]",
+                    "ctype": "int32_t[MAX_LOGIC_CONDITIONS]",
                     "desc": "Array of current values for each logic condition (`logicConditionGetValue(i)`). 1 for true, 0 for false, or numerical value depending on operation",
                     "array": true,
-                    "array_ctype": "uint32_t",
+                    "array_ctype": "int32_t",
                     "array_size": "MAX_LOGIC_CONDITIONS",
                     "units": ""
                 }
@@ -9186,10 +9246,10 @@
             "payload": [
                 {
                     "name": "gvarValues",
-                    "ctype": "uint32_t[MAX_GLOBAL_VARIABLES]",
+                    "ctype": "int32_t[MAX_GLOBAL_VARIABLES]",
                     "desc": "Array of current values for each global variable (`gvGet(i)`)",
                     "array": true,
-                    "array_ctype": "uint32_t",
+                    "array_ctype": "int32_t",
                     "array_size": "MAX_GLOBAL_VARIABLES",
                     "units": ""
                 }
@@ -9220,7 +9280,7 @@
                 },
                 {
                     "name": "setpointValue",
-                    "ctype": "uint32_t",
+                    "ctype": "int32_t",
                     "desc": "Value/ID of the setpoint source",
                     "units": ""
                 },
@@ -9233,7 +9293,7 @@
                 },
                 {
                     "name": "measurementValue",
-                    "ctype": "uint32_t",
+                    "ctype": "int32_t",
                     "desc": "Value/ID of the measurement source",
                     "units": ""
                 },
@@ -9294,7 +9354,7 @@
                 },
                 {
                     "name": "setpointValue",
-                    "ctype": "uint32_t",
+                    "ctype": "int32_t",
                     "desc": "Value/ID of the setpoint source",
                     "units": ""
                 },
@@ -9307,7 +9367,7 @@
                 },
                 {
                     "name": "measurementValue",
-                    "ctype": "uint32_t",
+                    "ctype": "int32_t",
                     "desc": "Value/ID of the measurement source",
                     "units": ""
                 },
@@ -9349,10 +9409,10 @@
             "payload": [
                 {
                     "name": "pidOutputs",
-                    "ctype": "uint32_t[MAX_PROGRAMMING_PID_COUNT]",
-                    "desc": "Array of current output values for each Programming PID (`programmingPidGetOutput(i)`)",
+                    "ctype": "int32_t[MAX_PROGRAMMING_PID_COUNT]",
+                    "desc": "Array of current output values for each Programming PID (`programmingPidGetOutput(i)`, signed)",
                     "array": true,
-                    "array_ctype": "uint32_t",
+                    "array_ctype": "int32_t",
                     "array_size": "MAX_PROGRAMMING_PID_COUNT",
                     "units": ""
                 }
@@ -9652,8 +9712,8 @@
                 },
                 {
                     "name": "activatorId",
-                    "ctype": "uint8_t",
-                    "desc": "Activator ID",
+                    "ctype": "int8_t",
+                    "desc": "Activator ID (-1/255 if none)",
                     "units": ""
                 },
                 {
@@ -9672,7 +9732,7 @@
                 },
                 {
                     "name": "operandAValue",
-                    "ctype": "uint32_t",
+                    "ctype": "int32_t",
                     "desc": "Value/ID of operand A",
                     "units": ""
                 },
@@ -9685,14 +9745,14 @@
                 },
                 {
                     "name": "operandBValue",
-                    "ctype": "uint32_t",
+                    "ctype": "int32_t",
                     "desc": "Value/ID of operand B",
                     "units": ""
                 },
                 {
                     "name": "flags",
                     "ctype": "uint8_t",
-                    "desc": "Bitmask: Condition flags",
+                    "desc": "Bitmask: Condition flags (`logicConditionFlags_e`)",
                     "units": "Bitmask",
                     "bitmask": true
                 }
