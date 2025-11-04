@@ -2004,7 +2004,7 @@ For current generation code, see [documentation project](https://github.com/xznh
 |Field|C Type|Size (Bytes)|Units|Description|
 |---|---|---|---|---|
 | `modeIndex` | `uint8_t` | 1 | [ledModeIndex_e](https://github.com/iNavFlight/inav/wiki/Enums-reference#enum-ledmodeindex_e) | Index of the LED mode Enum (`ledModeIndex_e`). `LED_MODE_COUNT` for special colors |
-| `directionOrSpecialIndex` | `uint8_t` | 1 | - | Index of the direction (`ledDirection_e`) or special color (`ledSpecialColor_e`) |
+| `directionOrSpecialIndex` | `uint8_t` | 1 | - | Index of the direction (`ledDirectionId_e`) or special color (`ledSpecialColorIds_e`) |
 | `colorIndex` | `uint8_t` | 1 | - | Index of the color assigned from `ledStripConfig()->colors` |
 
 **Notes:** Only available if `USE_LED_STRIP` is defined. Entries where `modeIndex == LED_MODE_COUNT` describe special colors.
@@ -2091,7 +2091,7 @@ For current generation code, see [documentation project](https://github.com/xznh
 | `pitotStatus` | `uint8_t` | 1 | [hardwareSensorStatus_e](https://github.com/iNavFlight/inav/wiki/Enums-reference#enum-hardwaresensorstatus_e) | Enum `hardwareSensorStatus_e` Pitot hardware status (`getHwPitotmeterStatus()`) |
 | `opflowStatus` | `uint8_t` | 1 | [hardwareSensorStatus_e](https://github.com/iNavFlight/inav/wiki/Enums-reference#enum-hardwaresensorstatus_e) | Enum `hardwareSensorStatus_e` Optical Flow hardware status (`getHwOpticalFlowStatus()`) |
 
-**Notes:** Status values likely correspond to `SENSOR_STATUS_*` enums (e.g., OK, Unhealthy, Not Present).
+**Notes:** Status values map to the `hardwareSensorStatus_e` enum: `HW_SENSOR_NONE`, `HW_SENSOR_OK`, `HW_SENSOR_UNAVAILABLE`, `HW_SENSOR_UNHEALTHY`.
 
 ## <a id="msp_uid"></a>`MSP_UID (160 / 0xa0)`
 **Description:** Provides the unique identifier of the microcontroller.  
@@ -2117,10 +2117,11 @@ For current generation code, see [documentation project](https://github.com/xznh
 |---|---|---|---|
 | `protocolVersion` | `uint8_t` | 1 | Always 1 (Stub version) |
 | `numChannels` | `uint8_t` | 1 | Always 0 (Number of SV info channels reported) |
-| `hdopHundreds` | `uint8_t` | 1 | HDOP / 100 (`gpsSol.hdop / 100`) |
-| `hdopUnits` | `uint8_t` | 1 | HDOP / 100 (`gpsSol.hdop / 100`) |
+| `hdopHundredsDigit` | `uint8_t` | 1 | Hundreds digit of HDOP (stub always writes 0) |
+| `hdopTensDigit` | `uint8_t` | 1 | Tens digit of HDOP (`gpsSol.hdop / 100`, truncated) |
+| `hdopUnitsDigit` | `uint8_t` | 1 | Units digit of HDOP (`gpsSol.hdop / 100`, duplicated by stub) |
 
-**Notes:** Requires `USE_GPS`. This is just a stub in INAV and does not provide actual per-satellite signal info. `hdopUnits` duplicates `hdopHundreds`.
+**Notes:** Requires `USE_GPS`. This is just a stub in INAV and does not provide actual per-satellite signal info. HDOP digits are not formatted correctly: tens and units both contain `gpsSol.hdop / 100`.
 
 ## <a id="msp_gpsstatistics"></a>`MSP_GPSSTATISTICS (166 / 0xa6)`
 **Description:** Provides debugging statistics for the GPS communication link.  
@@ -2164,7 +2165,7 @@ For current generation code, see [documentation project](https://github.com/xznh
 **Request Payload:**
 |Field|C Type|Size (Bytes)|Units|Description|
 |---|---|---|---|---|
-| `rssi` | `uint8_t` | 1 | % | RSSI value (0-100) provided by the external source |
+| `rssi` | `uint8_t` | 1 | Raw | RSSI value (0-255) provided by the external source; firmware scales it to 10-bit (`value << 2`) |
 
 **Reply Payload:** **None**  
 
@@ -2178,7 +2179,7 @@ For current generation code, see [documentation project](https://github.com/xznh
 **Reply Payload:**
 |Field|C Type|Size (Bytes)|Units|Description|
 |---|---|---|---|---|
-| `rssiSource` | `uint8_t` | 1 | [getRSSISource()](https://github.com/iNavFlight/inav/wiki/Enums-reference#enum-getrssisource()) | Enum: Source of the RSSI value (`getRSSISource()`) |
+| `rssiSource` | `uint8_t` | 1 | [rssiSource_e](https://github.com/iNavFlight/inav/wiki/Enums-reference#enum-rssisource_e) | Enum: Source of the RSSI value (`getRSSISource()`, see `rssiSource_e`) |
 | `rtcDateTimeIsSet` | `uint8_t` | 1 | - | Boolean: 1 if the RTC has been set, 0 otherwise |
 
 **Notes:** See `rssiSource_e`.
@@ -2205,8 +2206,8 @@ For current generation code, see [documentation project](https://github.com/xznh
 | `numSat` | `uint8_t` | 1 | Count | Number of satellites |
 | `latitude` | `int32_t` | 4 | deg * 1e7 | Latitude |
 | `longitude` | `int32_t` | 4 | deg * 1e7 | Longitude |
-| `altitude` | `int16_t` | 2 | meters | Altitude (converted to cm internally) |
-| `speed` | `int16_t` | 2 | cm/s | Ground speed |
+| `altitude` | `uint16_t` | 2 | m | Altitude in meters (converted to centimeters internally; limited to 0-65535 m) |
+| `speed` | `uint16_t` | 2 | cm/s | Ground speed (`gpsSol.groundSpeed`) |
 
 **Reply Payload:** **None**  
 
@@ -2228,15 +2229,15 @@ For current generation code, see [documentation project](https://github.com/xznh
 |Field|C Type|Size (Bytes)|Description|
 |---|---|---|---|
 | `legacyRcRate` | `uint8_t` | 1 | Ignored |
-| `rcExpo` | `uint8_t` | 1 | Sets `currentControlRateProfile->stabilized.rcExpo8 |
+| `rcExpo` | `uint8_t` | 1 | Sets `currentControlRateProfile->stabilized.rcExpo8` |
 | `rollRate` | `uint8_t` | 1 | Sets `currentControlRateProfile->stabilized.rates[FD_ROLL]` (constrained) |
 | `pitchRate` | `uint8_t` | 1 | Sets `currentControlRateProfile->stabilized.rates[FD_PITCH]` (constrained) |
 | `yawRate` | `uint8_t` | 1 | Sets `currentControlRateProfile->stabilized.rates[FD_YAW]` (constrained) |
 | `dynamicThrottlePID` | `uint8_t` | 1 | Sets `currentControlRateProfile->throttle.dynPID` (constrained) |
-| `throttleMid` | `uint8_t` | 1 | Sets `currentControlRateProfile->throttle.rcMid8 |
-| `throttleExpo` | `uint8_t` | 1 | Sets `currentControlRateProfile->throttle.rcExpo8 |
-| `tpaBreakpoint` | `uint16_t` | 2 | Sets `currentControlRateProfile->throttle.pa_breakpoint |
-| `rcYawExpo` | `uint8_t` | 1 | (Optional) Sets `currentControlRateProfile->stabilized.rcYawExpo8 |
+| `throttleMid` | `uint8_t` | 1 | Sets `currentControlRateProfile->throttle.rcMid8` |
+| `throttleExpo` | `uint8_t` | 1 | Sets `currentControlRateProfile->throttle.rcExpo8` |
+| `tpaBreakpoint` | `uint16_t` | 2 | Sets `currentControlRateProfile->throttle.pa_breakpoint` |
+| `rcYawExpo` | `uint8_t` | 1 | (Optional) Sets `currentControlRateProfile->stabilized.rcYawExpo8` |
 
 **Reply Payload:** **None**  
 
@@ -2310,7 +2311,7 @@ For current generation code, see [documentation project](https://github.com/xznh
 | `param1` | `uint16_t` | 2 | Varies | Parameter 1 |
 | `param2` | `uint16_t` | 2 | Varies | Parameter 2 |
 | `param3` | `uint16_t` | 2 | Varies | Parameter 3 |
-| `flag` | `uint8_t` | 1 | Bitmask | Bitmask: Waypoint flags |
+| `flag` | `uint8_t` | 1 | [navWaypointFlags_e](https://github.com/iNavFlight/inav/wiki/Enums-reference#enum-navwaypointflags_e) | Bitmask: Waypoint flags (`navWaypointFlags_e`) |
 
 **Reply Payload:** **None**  
 
@@ -2334,7 +2335,7 @@ For current generation code, see [documentation project](https://github.com/xznh
 **Request Payload:**
 |Field|C Type|Size (Bytes)|Units|Description|
 |---|---|---|---|---|
-| `heading` | `int16_t` | 2 | degrees | Target heading (0-359) |
+| `heading` | `uint16_t` | 2 | degrees | Target heading (0-359) |
 
 **Reply Payload:** **None**  
 
@@ -2366,7 +2367,7 @@ For current generation code, see [documentation project](https://github.com/xznh
 **Request Payload:**
 |Field|C Type|Size (Bytes)|Units|Description|
 |---|---|---|---|---|
-| `motorValues` | `uint16_t[8]` | 16 | PWM | Array of motor values to set when disarmed. Only affects first `MAX_SUPPORTED_MOTORS |
+| `motorValues` | `uint16_t[8]` | 16 | PWM | Array of motor values to set when disarmed. Only affects first `MAX_SUPPORTED_MOTORS` entries |
 
 **Reply Payload:** **None**  
 
@@ -2384,9 +2385,9 @@ For current generation code, see [documentation project](https://github.com/xznh
 **Request Payload:**
 |Field|C Type|Size (Bytes)|Units|Description|
 |---|---|---|---|---|
-| `deadbandLow` | `uint16_t` | 2 | PWM | Sets `reversibleMotorsConfigMutable()->deadband_low |
-| `deadbandHigh` | `uint16_t` | 2 | PWM | Sets `reversibleMotorsConfigMutable()->deadband_high |
-| `neutral` | `uint16_t` | 2 | PWM | Sets `reversibleMotorsConfigMutable()->neutral |
+| `deadbandLow` | `uint16_t` | 2 | PWM | Sets `reversibleMotorsConfigMutable()->deadband_low` |
+| `deadbandHigh` | `uint16_t` | 2 | PWM | Sets `reversibleMotorsConfigMutable()->deadband_high` |
+| `neutral` | `uint16_t` | 2 | PWM | Sets `reversibleMotorsConfigMutable()->neutral` |
 
 **Reply Payload:** **None**  
 
@@ -2398,10 +2399,10 @@ For current generation code, see [documentation project](https://github.com/xznh
 **Request Payload:**
 |Field|C Type|Size (Bytes)|Units|Description|
 |---|---|---|---|---|
-| `deadband` | `uint8_t` | 1 | PWM | Sets `rcControlsConfigMutable()->deadband |
-| `yawDeadband` | `uint8_t` | 1 | PWM | Sets `rcControlsConfigMutable()->yaw_deadband |
-| `altHoldDeadband` | `uint8_t` | 1 | PWM | Sets `rcControlsConfigMutable()->alt_hold_deadband |
-| `throttleDeadband` | `uint16_t` | 2 | PWM | Sets `rcControlsConfigMutable()->mid_throttle_deadband |
+| `deadband` | `uint8_t` | 1 | PWM | Sets `rcControlsConfigMutable()->deadband` |
+| `yawDeadband` | `uint8_t` | 1 | PWM | Sets `rcControlsConfigMutable()->yaw_deadband` |
+| `altHoldDeadband` | `uint8_t` | 1 | PWM | Sets `rcControlsConfigMutable()->alt_hold_deadband` |
+| `throttleDeadband` | `uint16_t` | 2 | PWM | Sets `rcControlsConfigMutable()->mid_throttle_deadband` |
 
 **Reply Payload:** **None**  
 
@@ -2438,8 +2439,8 @@ For current generation code, see [documentation project](https://github.com/xznh
 |Field|C Type|Size (Bytes)|Description|
 |---|---|---|---|
 | `modeIndex` | `uint8_t` | 1 | Index of the LED mode (`ledModeIndex_e` or `LED_MODE_COUNT` for special) |
-| `directionOrSpecialIndex` | `uint8_t` | 1 | Index of the direction or special color |
-| `colorIndex` | `uint8_t` | 1 | Index of the color to assign from `ledStripConfig()->colors |
+| `directionOrSpecialIndex` | `uint8_t` | 1 | Index of the direction (`ledDirectionId_e`) or special color (`ledSpecialColorIds_e`) |
+| `colorIndex` | `uint8_t` | 1 | Index of the color to assign from `ledStripConfig()->colors` |
 
 **Reply Payload:** **None**  
 
@@ -2473,8 +2474,8 @@ For current generation code, see [documentation project](https://github.com/xznh
 |---|---|---|---|---|
 | `targetChannel` | `uint8_t` | 1 | Index | Servo output channel index (0-based) |
 | `inputSource` | `uint8_t` | 1 | [inputSource_e](https://github.com/iNavFlight/inav/wiki/Enums-reference#enum-inputsource_e) | Enum `inputSource_e` Input source for the mix (RC chan, Roll, Pitch...) |
-| `rate` | `uint16_t` | 2 | % * 100? | Mixing rate/weight. Needs scaling check |
-| `speed` | `uint8_t` | 1 | 0-100 | Speed/Slew rate limit |
+| `rate` | `int16_t` | 2 | % | Mixing rate/weight (`-1000` to `+1000`, percent with sign) |
+| `speed` | `uint8_t` | 1 | 0-255 | Speed/Slew rate limit (`0`=instant, higher slows response) |
 | `reserved1` | `uint8_t` | 1 | - | Always 0 |
 | `legacyMax` | `uint8_t` | 1 | - | Always 100 (Legacy) |
 | `legacyBox` | `uint8_t` | 1 | - | Always 0 (Legacy) |
@@ -2490,8 +2491,8 @@ For current generation code, see [documentation project](https://github.com/xznh
 | `ruleIndex` | `uint8_t` | 1 | Index | Index of the rule to set (0 to `MAX_SERVO_RULES - 1`) |
 | `targetChannel` | `uint8_t` | 1 | Index | Servo output channel index |
 | `inputSource` | `uint8_t` | 1 | [inputSource_e](https://github.com/iNavFlight/inav/wiki/Enums-reference#enum-inputsource_e) | Enum `inputSource_e` Input source for the mix |
-| `rate` | `uint16_t` | 2 | % * 100? | Mixing rate/weight |
-| `speed` | `uint8_t` | 1 | 0-100 | Speed/Slew rate limit |
+| `rate` | `int16_t` | 2 | % | Mixing rate/weight (`-1000` to `+1000`, percent with sign) |
+| `speed` | `uint8_t` | 1 | 0-255 | Speed/Slew rate limit (`0`=instant, higher slows response) |
 | `legacyMinMax` | `uint16_t` | 2 | - | Ignored |
 | `legacyBox` | `uint8_t` | 1 | - | Ignored |
 
@@ -2509,7 +2510,7 @@ For current generation code, see [documentation project](https://github.com/xznh
 |---|---|---|---|
 | `status` | `uint8_t` | 1 | 1 if passthrough started successfully, 0 on error (e.g., port not found). For 4way, returns number of ESCs found |
 
-**Notes:** If successful, sets `mspPostProcessFn` to the appropriate handler (`mspSerialPassthroughFn` or `esc4wayProcess`). This handler takes over the serial port after the reply is sent. Requires `USE_SERIAL_4WAY_BLHELI_INTERFACE` for ESC passthrough.
+**Notes:** Accepts 0 bytes (defaults to ESC 4-way) or up to 2 bytes for mode/argument. If successful, sets `mspPostProcessFn` to the appropriate handler (`mspSerialPassthroughFn` or `esc4wayProcess`). This handler takes over the serial port after the reply is sent. Requires `USE_SERIAL_4WAY_BLHELI_INTERFACE` for ESC passthrough.
 
 ## <a id="msp_rtc"></a>`MSP_RTC (246 / 0xf6)`
 **Description:** Retrieves the current Real-Time Clock time.  
@@ -2566,7 +2567,9 @@ For current generation code, see [documentation project](https://github.com/xznh
 **Reply Payload:**
 |Field|C Type|Size (Bytes)|Description|
 |---|---|---|---|
-| `Message Text` | `char[]` | - | NUL` terminated [debug message](https://github.com/iNavFlight/inav/blob/master/docs/development/serial_printf_debugging.md) text |
+| `Message Text` | `char[]` | - | Debug message text (not NUL-terminated). See [serial printf debugging](https://github.com/iNavFlight/inav/blob/master/docs/development/serial_printf_debugging.md) |
+
+**Notes:** Published via the LOG UART or shared MSP/LOG port using `mspSerialPushPort()`.
 
 ## <a id="msp_debug"></a>`MSP_DEBUG (254 / 0xfe)`
 **Description:** Retrieves values from the firmware's `debug[]` array (legacy 16-bit version).  
@@ -2578,7 +2581,7 @@ For current generation code, see [documentation project](https://github.com/xznh
 |---|---|---|---|
 | `debugValues` | `uint16_t[4]` | 8 | First 4 values from the `debug` array |
 
-**Notes:** Useful for developers. See `MSP2_INAV_DEBUG` for 32-bit values.
+**Notes:** Useful for developers. Values are truncated to the lower 16 bits of each `debug[]` entry. See `MSP2_INAV_DEBUG` for full 32-bit values.
 
 ## <a id="msp_v2_frame"></a>`MSP_V2_FRAME (255 / 0xff)`
 **Description:** This ID is used as a *payload indicator* within an MSPv1 message structure (`$M>`) to signify that the following payload conforms to the MSPv2 format. It's not a command itself.  
@@ -2634,7 +2637,7 @@ For current generation code, see [documentation project](https://github.com/xznh
 **Request Payload:**
 |Field|C Type|Size (Bytes)|Description|
 |---|---|---|---|
-| `settingName` | `char[]` | - | Null-terminated string containing the setting name (e.g., "gyro_main_lpf_hz") |
+| `settingIdentifier` | `Varies` | - | Setting name (null-terminated string) OR index selector (`0x00` followed by `uint16_t` index) |
   
 **Reply Payload:**
 |Field|C Type|Size (Bytes)|Description|
@@ -2655,23 +2658,16 @@ For current generation code, see [documentation project](https://github.com/xznh
 
 
 ## <a id="msp2_common_motor_mixer"></a>`MSP2_COMMON_MOTOR_MIXER (4101 / 0x1005)`
-**Description:** Retrieves the current motor mixer configuration (throttle, roll, pitch, yaw weights for each motor) for the primary and secondary mixer profiles.  
+**Description:** Retrieves the current motor mixer configuration (throttle, roll, pitch, yaw weights) for each motor.  
 
 **Request Payload:** **None**  
   
 **Reply Payload:**
 |Field|C Type|Size (Bytes)|Units|Description|
 |---|---|---|---|---|
-| `throttleWeight` | `uint16_t` | 2 | Scaled (0-4000) | Throttle weight * 1000, offset by 2000. (Range -2.0 to +2.0 -> 0 to 4000) |
-| `rollWeight` | `uint16_t` | 2 | Scaled (0-4000) | Roll weight * 1000, offset by 2000 |
-| `pitchWeight` | `uint16_t` | 2 | Scaled (0-4000) | Pitch weight * 1000, offset by 2000 |
-| `yawWeight` | `uint16_t` | 2 | Scaled (0-4000) | Yaw weight * 1000, offset by 2000 |
-| `throttleWeight` | `uint16_t` | 2 | (Optional) Scaled (0-4000) | Profile 2 Throttle weight |
-| `rollWeight` | `uint16_t` | 2 | (Optional) Scaled (0-4000) | Profile 2 Roll weight |
-| `pitchWeight` | `uint16_t` | 2 | (Optional) Scaled (0-4000) | Profile 2 Pitch weight |
-| `yawWeight` | `uint16_t` | 2 | (Optional) Scaled (0-4000) | Profile 2 Yaw weight |
+| `motorMix` | `uint16_t[4]` | 8 | Scaled (0-4000) | Weights for a single motor `[throttle, roll, pitch, yaw]`, each encoded as `(mix + 2.0) * 1000` (range 0-4000) |
 
-**Notes:** Scaling is `(float_weight + 2.0) * 1000`. `primaryMotorMixer()` provides the data.
+**Notes:** Scaling is `(float_weight + 2.0) * 1000`. `primaryMotorMixer()` provides the data. If multiple mixer profiles are enabled (`MAX_MIXER_PROFILE_COUNT > 1`), an additional block of mixes for the next profile follows immediately.
 
 ## <a id="msp2_common_set_motor_mixer"></a>`MSP2_COMMON_SET_MOTOR_MIXER (4102 / 0x1006)`
 **Description:** Sets the motor mixer weights for a single motor in the primary mixer profile.  
@@ -2768,17 +2764,17 @@ For current generation code, see [documentation project](https://github.com/xznh
 |Field|C Type|Size (Bytes)|Units|Description|
 |---|---|---|---|---|
 | `poiIndex` | `uint8_t` | 1 | Index | Index of the POI slot (0 to `RADAR_MAX_POIS - 1`) |
-| `state` | `uint8_t` | 1 | [ENUM_NAME](LINK_TO_ENUM) | Status of the POI (0=undefined, 1=armed, 2=lost) |
+| `state` | `uint8_t` | 1 | - | Status of the POI (0=undefined, 1=armed, 2=lost) |
 | `latitude` | `int32_t` | 4 | deg * 1e7 | Latitude of the POI |
 | `longitude` | `int32_t` | 4 | deg * 1e7 | Longitude of the POI |
 | `altitude` | `int32_t` | 4 | cm | Altitude of the POI |
-| `heading` | `int16_t` | 2 | degrees | Heading of the POI |
+| `heading` | `uint16_t` | 2 | degrees | Heading of the POI |
 | `speed` | `uint16_t` | 2 | cm/s | Speed of the POI |
 | `linkQuality` | `uint8_t` | 1 | 0-4 | Link quality indicator |
 
 **Reply Payload:** **None**  
 
-**Notes:** Expects 19 bytes. Updates the `radar_pois` array.
+**Notes:** Expects 19 bytes. POI index is clamped to `RADAR_MAX_POIS - 1`. Updates the `radar_pois` array.
 
 ## <a id="msp2_common_set_radar_itd"></a>`MSP2_COMMON_SET_RADAR_ITD (4108 / 0x100c)`
 **Description:** Sets radar information to display (likely internal/unused).  
@@ -2814,20 +2810,28 @@ For current generation code, see [documentation project](https://github.com/xznh
 |Field|C Type|Size (Bytes)|Units|Description|
 |---|---|---|---|---|
 | `sublinkID` | `uint8_t` | 1 | - | Sublink identifier (usually 0) |
-| `uplinkTxPower` | `uint16_t` | 2 | mW? | Uplink transmitter power level |
-| `downlinkTxPower` | `uint16_t` | 2 | mW? | Downlink transmitter power level |
-| `band` | `char[4]` | 4 | - | Operating band string (e.g., "2G4", "900") |
-| `mode` | `char[6]` | 6 | - | Operating mode/rate string (e.g., "100HZ", "F1000") |
+| `uplinkTxPower` | `uint16_t` | 2 | mW | Uplink transmitter power level |
+| `downlinkTxPower` | `uint16_t` | 2 | mW | Downlink transmitter power level |
+| `band` | `char[4]` | 4 | - | Operating band string (e.g., "2G4", "900"), null-terminated/padded |
+| `mode` | `char[6]` | 6 | - | Operating mode/rate string (e.g., "100HZ", "F1000"), null-terminated/padded |
 
 **Reply Payload:** **None**  
 
 **Notes:** Requires `USE_RX_MSP`. Expects at least 15 bytes. Updates `rxLinkStatistics` only if `sublinkID` is 0. Converts band/mode strings to uppercase. This message expects **no reply** (`MSP_RESULT_NO_REPLY`).
 
 ## <a id="msp2_common_get_radar_gps"></a>`MSP2_COMMON_GET_RADAR_GPS (4111 / 0x100f)`
+**Description:** Provides the GPS positions (latitude, longitude, altitude) for each radar point of interest.  
 
 **Request Payload:** **None**  
+  
+**Reply Payload:**
+|Field|C Type|Size (Bytes)|Units|Description|
+|---|---|---|---|---|
+| `poiLatitude` | `int32_t` | 4 | deg * 1e7 | Latitude of a radar POI |
+| `poiLongitude` | `int32_t` | 4 | deg * 1e7 | Longitude of a radar POI |
+| `poiAltitude` | `int32_t` | 4 | cm | Altitude of a radar POI |
 
-**Reply Payload:** **None**  
+**Notes:** Returns the stored GPS coordinates for all radar POIs (`radar_pois[i].gps`).
 
 ## <a id="msp2_sensor_rangefinder"></a>`MSP2_SENSOR_RANGEFINDER (7937 / 0x1f01)`
 **Description:** Provides rangefinder data (distance, quality) from an external MSP-based sensor.  
@@ -2960,8 +2964,10 @@ For current generation code, see [documentation project](https://github.com/xznh
 | `cpuLoad` | `uint16_t` | 2 | % | Average system load percentage |
 | `profileAndBattProfile` | `uint8_t` | 1 | Packed | Bits 0-3: Config profile index (`getConfigProfile()`), Bits 4-7: Battery profile index (`getConfigBatteryProfile()`) |
 | `armingFlags` | `uint32_t` | 4 | Bitmask | Bitmask: Full 32-bit flight controller arming flags (`armingFlags`) |
-| `activeModes` | `boxBitmask_t` | - | Bitmask | Bitmask: Full active flight modes (`packBoxModeFlags()`) |
+| `activeModes` | `uint32_t[]` | - | Bitmask | Bitmask words for active flight modes (`packBoxModeFlags()`), length = ceil(`CHECKBOX_ITEM_COUNT` / 32) |
 | `mixerProfile` | `uint8_t` | 1 | Index | Current mixer profile index (`getConfigMixerProfile()`) |
+
+**Notes:** `sensorStatus` bits follow `packSensorStatus()` (bit 15 indicates hardware failure). `profileAndBattProfile` packs the current config profile in the low nibble and the battery profile in the high nibble. `activeModes` is emitted as a little-endian array of 32-bit words sized to `CHECKBOX_ITEM_COUNT`.
 
 ## <a id="msp2_inav_optical_flow"></a>`MSP2_INAV_OPTICAL_FLOW (8193 / 0x2001)`
 **Description:** Provides data from the optical flow sensor.  
@@ -2987,15 +2993,17 @@ For current generation code, see [documentation project](https://github.com/xznh
 **Reply Payload:**
 |Field|C Type|Size (Bytes)|Units|Description|
 |---|---|---|---|---|
-| `batteryFlags` | `uint8_t` | 1 | [getBatteryState()](https://github.com/iNavFlight/inav/wiki/Enums-reference#enum-getbatterystate()) | Battery status flags: Bit 0=Full on plug-in, Bit 1=Use capacity threshold, Bit 2-3=Battery State enum (`getBatteryState()`), Bit 4-7=Cell Count (`getBatteryCellCount()`) |
+| `batteryFlags` | `uint8_t` | 1 | Bitmask | Bitmask: Bit0=Full on plug-in, Bit1=Use capacity thresholds, Bits2-3=`batteryState_e` (`getBatteryState()`), Bits4-7=Cell count (`getBatteryCellCount()`) |
 | `vbat` | `uint16_t` | 2 | 0.01V | Battery voltage (`getBatteryVoltage()`) |
-| `amperage` | `uint16_t` | 2 | 0.01A | Current draw (`getAmperage()`) |
-| `powerDraw` | `uint32_t` | 4 | mW | Power draw (`getPower()`) |
+| `amperage` | `int16_t` | 2 | 0.01A | Current draw (`getAmperage()`) |
+| `powerDraw` | `uint32_t` | 4 | 0.01W | Power draw (`getPower()`) |
 | `mAhDrawn` | `uint32_t` | 4 | mAh | Consumed capacity (`getMAhDrawn()`) |
 | `mWhDrawn` | `uint32_t` | 4 | mWh | Consumed energy (`getMWhDrawn()`) |
-| `remainingCapacity` | `uint32_t` | 4 | mAh/mWh | Estimated remaining capacity (`getBatteryRemainingCapacity()`) |
+| `remainingCapacity` | `uint32_t` | 4 | Capacity unit (`batteryMetersConfig()->capacity_unit`) | Estimated remaining capacity (`getBatteryRemainingCapacity()`) |
 | `percentageRemaining` | `uint8_t` | 1 | % | Estimated remaining capacity percentage (`calculateBatteryPercentage()`) |
-| `rssi` | `uint16_t` | 2 | 0-1023 or % | RSSI value (`getRSSI()`) |
+| `rssi` | `uint16_t` | 2 | Raw (0-1023) | RSSI value (`getRSSI()`) |
+
+**Notes:** Requires `USE_CURRENT_METER`/`USE_ADC` for current-related fields; values fall back to zero when unavailable. Capacity fields are reported in the units configured by `batteryMetersConfig()->capacity_unit` (mAh or mWh).
 
 ## <a id="msp2_inav_misc"></a>`MSP2_INAV_MISC (8195 / 0x2003)`
 **Description:** Retrieves miscellaneous configuration settings, superseding `MSP_MISC` with higher precision and capacity fields.  

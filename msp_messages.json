@@ -4787,7 +4787,7 @@
                 }
             ]
         },
-        "notes": "Status values likely correspond to `SENSOR_STATUS_*` enums (e.g., OK, Unhealthy, Not Present).",
+        "notes": "Status values map to the `hardwareSensorStatus_e` enum: `HW_SENSOR_NONE`, `HW_SENSOR_OK`, `HW_SENSOR_UNAVAILABLE`, `HW_SENSOR_UNHEALTHY`.",
         "description": "Provides the hardware status for each individual sensor system."
     },
     "MSP_UID": {
@@ -4840,20 +4840,26 @@
                     "value": 0
                 },
                 {
-                    "name": "hdopHundreds",
+                    "name": "hdopHundredsDigit",
                     "ctype": "uint8_t",
-                    "desc": "HDOP / 100 (`gpsSol.hdop / 100`)",
+                    "desc": "Hundreds digit of HDOP (stub always writes 0)",
                     "units": ""
                 },
                 {
-                    "name": "hdopUnits",
+                    "name": "hdopTensDigit",
                     "ctype": "uint8_t",
-                    "desc": "HDOP / 100 (`gpsSol.hdop / 100`)",
+                    "desc": "Tens digit of HDOP (`gpsSol.hdop / 100`, truncated)",
+                    "units": ""
+                },
+                {
+                    "name": "hdopUnitsDigit",
+                    "ctype": "uint8_t",
+                    "desc": "Units digit of HDOP (`gpsSol.hdop / 100`, duplicated by stub)",
                     "units": ""
                 }
             ]
         },
-        "notes": "Requires `USE_GPS`. This is just a stub in INAV and does not provide actual per-satellite signal info. `hdopUnits` duplicates `hdopHundreds`.",
+        "notes": "Requires `USE_GPS`. This is just a stub in INAV and does not provide actual per-satellite signal info. HDOP digits are not formatted correctly: tens and units both contain `gpsSol.hdop / 100`.",
         "description": "Provides satellite signal strength information (legacy U-Blox compatibility stub)."
     },
     "MSP_GPSSTATISTICS": {
@@ -4941,8 +4947,8 @@
                 {
                     "name": "rssi",
                     "ctype": "uint8_t",
-                    "desc": "RSSI value (0-100) provided by the external source",
-                    "units": "%"
+                    "desc": "RSSI value (0-255) provided by the external source; firmware scales it to 10-bit (`value << 2`)",
+                    "units": "Raw"
                 }
             ]
         },
@@ -4959,9 +4965,9 @@
                 {
                     "name": "rssiSource",
                     "ctype": "uint8_t",
-                    "desc": "Enum: Source of the RSSI value (`getRSSISource()`)",
+                    "desc": "Enum: Source of the RSSI value (`getRSSISource()`, see `rssiSource_e`)",
                     "units": "",
-                    "enum": "getRSSISource()"
+                    "enum": "rssiSource_e"
                 },
                 {
                     "name": "rtcDateTimeIsSet",
@@ -5027,14 +5033,14 @@
                 },
                 {
                     "name": "altitude",
-                    "ctype": "int16_t",
-                    "desc": "Altitude (converted to cm internally)",
-                    "units": "meters"
+                    "ctype": "uint16_t",
+                    "desc": "Altitude in meters (converted to centimeters internally; limited to 0-65535 m)",
+                    "units": "m"
                 },
                 {
                     "name": "speed",
-                    "ctype": "int16_t",
-                    "desc": "Ground speed",
+                    "ctype": "uint16_t",
+                    "desc": "Ground speed (`gpsSol.groundSpeed`)",
                     "units": "cm/s"
                 }
             ]
@@ -5066,7 +5072,7 @@
                 {
                     "name": "rcExpo",
                     "ctype": "uint8_t",
-                    "desc": "Sets `currentControlRateProfile->stabilized.rcExpo8",
+                    "desc": "Sets `currentControlRateProfile->stabilized.rcExpo8`",
                     "units": ""
                 },
                 {
@@ -5096,25 +5102,25 @@
                 {
                     "name": "throttleMid",
                     "ctype": "uint8_t",
-                    "desc": "Sets `currentControlRateProfile->throttle.rcMid8",
+                    "desc": "Sets `currentControlRateProfile->throttle.rcMid8`",
                     "units": ""
                 },
                 {
                     "name": "throttleExpo",
                     "ctype": "uint8_t",
-                    "desc": "Sets `currentControlRateProfile->throttle.rcExpo8",
+                    "desc": "Sets `currentControlRateProfile->throttle.rcExpo8`",
                     "units": ""
                 },
                 {
                     "name": "tpaBreakpoint",
                     "ctype": "uint16_t",
-                    "desc": "Sets `currentControlRateProfile->throttle.pa_breakpoint",
+                    "desc": "Sets `currentControlRateProfile->throttle.pa_breakpoint`",
                     "units": ""
                 },
                 {
                     "name": "rcYawExpo",
                     "ctype": "uint8_t",
-                    "desc": "(Optional) Sets `currentControlRateProfile->stabilized.rcYawExpo8",
+                    "desc": "(Optional) Sets `currentControlRateProfile->stabilized.rcYawExpo8`",
                     "units": "",
                     "optional": true
                 }
@@ -5309,9 +5315,10 @@
                 {
                     "name": "flag",
                     "ctype": "uint8_t",
-                    "desc": "Bitmask: Waypoint flags",
+                    "desc": "Bitmask: Waypoint flags (`navWaypointFlags_e`)",
                     "units": "Bitmask",
-                    "bitmask": true
+                    "bitmask": true,
+                    "enum": "navWaypointFlags_e"
                 }
             ]
         },
@@ -5343,7 +5350,7 @@
             "payload": [
                 {
                     "name": "heading",
-                    "ctype": "int16_t",
+                    "ctype": "uint16_t",
                     "desc": "Target heading (0-359)",
                     "units": "degrees"
                 }
@@ -5422,7 +5429,7 @@
                 {
                     "name": "motorValues",
                     "ctype": "uint16_t[8]",
-                    "desc": "Array of motor values to set when disarmed. Only affects first `MAX_SUPPORTED_MOTORS",
+                    "desc": "Array of motor values to set when disarmed. Only affects first `MAX_SUPPORTED_MOTORS` entries",
                     "array": true,
                     "array_ctype": "uint16_t",
                     "array_size": 8,
@@ -5447,19 +5454,19 @@
                 {
                     "name": "deadbandLow",
                     "ctype": "uint16_t",
-                    "desc": "Sets `reversibleMotorsConfigMutable()->deadband_low",
+                    "desc": "Sets `reversibleMotorsConfigMutable()->deadband_low`",
                     "units": "PWM"
                 },
                 {
                     "name": "deadbandHigh",
                     "ctype": "uint16_t",
-                    "desc": "Sets `reversibleMotorsConfigMutable()->deadband_high",
+                    "desc": "Sets `reversibleMotorsConfigMutable()->deadband_high`",
                     "units": "PWM"
                 },
                 {
                     "name": "neutral",
                     "ctype": "uint16_t",
-                    "desc": "Sets `reversibleMotorsConfigMutable()->neutral",
+                    "desc": "Sets `reversibleMotorsConfigMutable()->neutral`",
                     "units": "PWM"
                 }
             ]
@@ -5476,25 +5483,25 @@
                 {
                     "name": "deadband",
                     "ctype": "uint8_t",
-                    "desc": "Sets `rcControlsConfigMutable()->deadband",
+                    "desc": "Sets `rcControlsConfigMutable()->deadband`",
                     "units": "PWM"
                 },
                 {
                     "name": "yawDeadband",
                     "ctype": "uint8_t",
-                    "desc": "Sets `rcControlsConfigMutable()->yaw_deadband",
+                    "desc": "Sets `rcControlsConfigMutable()->yaw_deadband`",
                     "units": "PWM"
                 },
                 {
                     "name": "altHoldDeadband",
                     "ctype": "uint8_t",
-                    "desc": "Sets `rcControlsConfigMutable()->alt_hold_deadband",
+                    "desc": "Sets `rcControlsConfigMutable()->alt_hold_deadband`",
                     "units": "PWM"
                 },
                 {
                     "name": "throttleDeadband",
                     "ctype": "uint16_t",
-                    "desc": "Sets `rcControlsConfigMutable()->mid_throttle_deadband",
+                    "desc": "Sets `rcControlsConfigMutable()->mid_throttle_deadband`",
                     "units": "PWM"
                 }
             ]
@@ -5560,13 +5567,13 @@
                 {
                     "name": "directionOrSpecialIndex",
                     "ctype": "uint8_t",
-                    "desc": "Index of the direction or special color",
+                    "desc": "Index of the direction (`ledDirectionId_e`) or special color (`ledSpecialColorIds_e`)",
                     "units": ""
                 },
                 {
                     "name": "colorIndex",
                     "ctype": "uint8_t",
-                    "desc": "Index of the color to assign from `ledStripConfig()->colors",
+                    "desc": "Index of the color to assign from `ledStripConfig()->colors`",
                     "units": ""
                 }
             ]
@@ -5614,15 +5621,15 @@
                 },
                 {
                     "name": "rate",
-                    "ctype": "uint16_t",
-                    "desc": "Mixing rate/weight. Needs scaling check",
-                    "units": "% * 100?"
+                    "ctype": "int16_t",
+                    "desc": "Mixing rate/weight (`-1000` to `+1000`, percent with sign)",
+                    "units": "%"
                 },
                 {
                     "name": "speed",
                     "ctype": "uint8_t",
-                    "desc": "Speed/Slew rate limit",
-                    "units": "0-100"
+                    "desc": "Speed/Slew rate limit (`0`=instant, higher slows response)",
+                    "units": "0-255"
                 },
                 {
                     "name": "reserved1",
@@ -5675,15 +5682,15 @@
                 },
                 {
                     "name": "rate",
-                    "ctype": "uint16_t",
-                    "desc": "Mixing rate/weight",
-                    "units": "% * 100?"
+                    "ctype": "int16_t",
+                    "desc": "Mixing rate/weight (`-1000` to `+1000`, percent with sign)",
+                    "units": "%"
                 },
                 {
                     "name": "speed",
                     "ctype": "uint8_t",
-                    "desc": "Speed/Slew rate limit",
-                    "units": "0-100"
+                    "desc": "Speed/Slew rate limit (`0`=instant, higher slows response)",
+                    "units": "0-255"
                 },
                 {
                     "name": "legacyMinMax",
@@ -5715,7 +5722,7 @@
                 }
             ]
         },
-        "notes": "If successful, sets `mspPostProcessFn` to the appropriate handler (`mspSerialPassthroughFn` or `esc4wayProcess`). This handler takes over the serial port after the reply is sent. Requires `USE_SERIAL_4WAY_BLHELI_INTERFACE` for ESC passthrough.",
+        "notes": "Accepts 0 bytes (defaults to ESC 4-way) or up to 2 bytes for mode/argument. If successful, sets `mspPostProcessFn` to the appropriate handler (`mspSerialPassthroughFn` or `esc4wayProcess`). This handler takes over the serial port after the reply is sent. Requires `USE_SERIAL_4WAY_BLHELI_INTERFACE` for ESC passthrough.",
         "description": "Enables serial passthrough mode to peripherals like ESCs (BLHeli 4-way) or other serial devices."
     },
     "MSP_RTC": {
@@ -5797,7 +5804,7 @@
                 {
                     "name": "Message Text",
                     "ctype": "char[]",
-                    "desc": "NUL` terminated [debug message](https://github.com/iNavFlight/inav/blob/master/docs/development/serial_printf_debugging.md) text",
+                    "desc": "Debug message text (not NUL-terminated). See [serial printf debugging](https://github.com/iNavFlight/inav/blob/master/docs/development/serial_printf_debugging.md)",
                     "array": true,
                     "array_ctype": "char",
                     "array_size": 0,
@@ -5806,7 +5813,7 @@
             ]
         },
         "variable_len": true,
-        "notes": "",
+        "notes": "Published via the LOG UART or shared MSP/LOG port using `mspSerialPushPort()`.",
         "description": "Retrieves debug (\"serial printf\") messages from the firmware."
     },
     "MSP_DEBUG": {
@@ -5826,7 +5833,7 @@
                 }
             ]
         },
-        "notes": "Useful for developers. See `MSP2_INAV_DEBUG` for 32-bit values.",
+        "notes": "Useful for developers. Values are truncated to the lower 16 bits of each `debug[]` entry. See `MSP2_INAV_DEBUG` for full 32-bit values.",
         "description": "Retrieves values from the firmware's `debug[]` array (legacy 16-bit version)."
     },
     "MSP_V2_FRAME": {
@@ -5910,12 +5917,10 @@
         "request": {
             "payload": [
                 {
-                    "name": "settingName",
-                    "ctype": "char[]",
-                    "desc": "Null-terminated string containing the setting name (e.g., \"gyro_main_lpf_hz\")",
-                    "array": true,
-                    "array_ctype": "char",
-                    "array_size": 0,
+                    "name": "settingIdentifier",
+                    "ctype": "Varies",
+                    "desc": "Setting name (null-terminated string) OR index selector (`0x00` followed by `uint16_t` index)",
+                    "polymorph": true,
                     "units": ""
                 }
             ]
@@ -5973,59 +5978,20 @@
         "reply": {
             "payload": [
                 {
-                    "name": "throttleWeight",
-                    "ctype": "uint16_t",
-                    "desc": "Throttle weight * 1000, offset by 2000. (Range -2.0 to +2.0 -> 0 to 4000)",
+                    "name": "motorMix",
+                    "ctype": "uint16_t[4]",
+                    "desc": "Weights for a single motor `[throttle, roll, pitch, yaw]`, each encoded as `(mix + 2.0) * 1000` (range 0-4000)",
+                    "array": true,
+                    "array_ctype": "uint16_t",
+                    "array_size": 4,
                     "units": "Scaled (0-4000)"
-                },
-                {
-                    "name": "rollWeight",
-                    "ctype": "uint16_t",
-                    "desc": "Roll weight * 1000, offset by 2000",
-                    "units": "Scaled (0-4000)"
-                },
-                {
-                    "name": "pitchWeight",
-                    "ctype": "uint16_t",
-                    "desc": "Pitch weight * 1000, offset by 2000",
-                    "units": "Scaled (0-4000)"
-                },
-                {
-                    "name": "yawWeight",
-                    "ctype": "uint16_t",
-                    "desc": "Yaw weight * 1000, offset by 2000",
-                    "units": "Scaled (0-4000)"
-                },
-                {
-                    "name": "throttleWeight",
-                    "ctype": "uint16_t",
-                    "desc": "Profile 2 Throttle weight",
-                    "units": "(Optional) Scaled (0-4000)"
-                },
-                {
-                    "name": "rollWeight",
-                    "ctype": "uint16_t",
-                    "desc": "Profile 2 Roll weight",
-                    "units": "(Optional) Scaled (0-4000)"
-                },
-                {
-                    "name": "pitchWeight",
-                    "ctype": "uint16_t",
-                    "desc": "Profile 2 Pitch weight",
-                    "units": "(Optional) Scaled (0-4000)"
-                },
-                {
-                    "name": "yawWeight",
-                    "ctype": "uint16_t",
-                    "desc": "Profile 2 Yaw weight",
-                    "units": "(Optional) Scaled (0-4000)"
                 }
             ],
             "repeating": "MAX_SUPPORTED_MOTORS"
         },
         "variable_len": "MAX_SUPPORTED_MOTORS",
-        "notes": "Scaling is `(float_weight + 2.0) * 1000`. `primaryMotorMixer()` provides the data.",
-        "description": "Retrieves the current motor mixer configuration (throttle, roll, pitch, yaw weights for each motor) for the primary and secondary mixer profiles."
+        "notes": "Scaling is `(float_weight + 2.0) * 1000`. `primaryMotorMixer()` provides the data. If multiple mixer profiles are enabled (`MAX_MIXER_PROFILE_COUNT > 1`), an additional block of mixes for the next profile follows immediately.",
+        "description": "Retrieves the current motor mixer configuration (throttle, roll, pitch, yaw weights) for each motor."
     },
     "MSP2_COMMON_SET_MOTOR_MIXER": {
         "code": 4102,
@@ -6319,8 +6285,7 @@
                     "name": "state",
                     "ctype": "uint8_t",
                     "desc": "Status of the POI (0=undefined, 1=armed, 2=lost)",
-                    "units": "Enum",
-                    "enum": "?_e"
+                    "units": ""
                 },
                 {
                     "name": "latitude",
@@ -6342,7 +6307,7 @@
                 },
                 {
                     "name": "heading",
-                    "ctype": "int16_t",
+                    "ctype": "uint16_t",
                     "desc": "Heading of the POI",
                     "units": "degrees"
                 },
@@ -6361,7 +6326,7 @@
             ]
         },
         "reply": null,
-        "notes": "Expects 19 bytes. Updates the `radar_pois` array.",
+        "notes": "Expects 19 bytes. POI index is clamped to `RADAR_MAX_POIS - 1`. Updates the `radar_pois` array.",
         "description": "Sets the position and status information for a \"radar\" Point of Interest (POI). Used for displaying other craft/objects on the OSD map."
     },
     "MSP2_COMMON_SET_RADAR_ITD": {
@@ -6438,18 +6403,18 @@
                     "name": "uplinkTxPower",
                     "ctype": "uint16_t",
                     "desc": "Uplink transmitter power level",
-                    "units": "mW?"
+                    "units": "mW"
                 },
                 {
                     "name": "downlinkTxPower",
                     "ctype": "uint16_t",
                     "desc": "Downlink transmitter power level",
-                    "units": "mW?"
+                    "units": "mW"
                 },
                 {
                     "name": "band",
                     "ctype": "char[4]",
-                    "desc": "Operating band string (e.g., \"2G4\", \"900\")",
+                    "desc": "Operating band string (e.g., \"2G4\", \"900\"), null-terminated/padded",
                     "array": true,
                     "array_ctype": "char",
                     "array_size": 4
@@ -6457,7 +6422,7 @@
                 {
                     "name": "mode",
                     "ctype": "char[6]",
-                    "desc": "Operating mode/rate string (e.g., \"100HZ\", \"F1000\")",
+                    "desc": "Operating mode/rate string (e.g., \"100HZ\", \"F1000\"), null-terminated/padded",
                     "array": true,
                     "array_ctype": "char",
                     "array_size": 6
@@ -6470,11 +6435,33 @@
     },
     "MSP2_COMMON_GET_RADAR_GPS": {
         "code": 4111,
-        "mspv": null,
+        "mspv": 2,
         "request": null,
-        "reply": null,
-        "name": "MSP2_COMMON_GET_RADAR_GPS",
-        "missing": true
+        "reply": {
+            "payload": [
+                {
+                    "name": "poiLatitude",
+                    "ctype": "int32_t",
+                    "desc": "Latitude of a radar POI",
+                    "units": "deg * 1e7"
+                },
+                {
+                    "name": "poiLongitude",
+                    "ctype": "int32_t",
+                    "desc": "Longitude of a radar POI",
+                    "units": "deg * 1e7"
+                },
+                {
+                    "name": "poiAltitude",
+                    "ctype": "int32_t",
+                    "desc": "Altitude of a radar POI",
+                    "units": "cm"
+                }
+            ],
+            "repeating": "RADAR_MAX_POIS"
+        },
+        "notes": "Returns the stored GPS coordinates for all radar POIs (`radar_pois[i].gps`).",
+        "description": "Provides the GPS positions (latitude, longitude, altitude) for each radar point of interest." 
     },
     "MSP2_SENSOR_RANGEFINDER": {
         "code": 7937,
@@ -6843,8 +6830,11 @@
                 },
                 {
                     "name": "activeModes",
-                    "ctype": "boxBitmask_t",
-                    "desc": "Bitmask: Full active flight modes (`packBoxModeFlags()`)",
+                    "ctype": "uint32_t[]",
+                    "desc": "Bitmask words for active flight modes (`packBoxModeFlags()`), length = ceil(`CHECKBOX_ITEM_COUNT` / 32)",
+                    "array": true,
+                    "array_ctype": "uint32_t",
+                    "array_size": 0,
                     "units": "Bitmask",
                     "bitmask": true
                 },
@@ -6856,7 +6846,7 @@
                 }
             ]
         },
-        "notes": "",
+        "notes": "`sensorStatus` bits follow `packSensorStatus()` (bit 15 indicates hardware failure). `profileAndBattProfile` packs the current config profile in the low nibble and the battery profile in the high nibble. `activeModes` is emitted as a little-endian array of 32-bit words sized to `CHECKBOX_ITEM_COUNT`.",
         "description": "Provides comprehensive flight controller status, extending `MSP_STATUS_EX` with full arming flags, battery profile, and mixer profile."
     },
     "MSP2_INAV_OPTICAL_FLOW": {
@@ -6909,9 +6899,9 @@
                 {
                     "name": "batteryFlags",
                     "ctype": "uint8_t",
-                    "desc": "Battery status flags: Bit 0=Full on plug-in, Bit 1=Use capacity threshold, Bit 2-3=Battery State enum (`getBatteryState()`), Bit 4-7=Cell Count (`getBatteryCellCount()`)",
-                    "units": "Enum",
-                    "enum": "getBatteryState()"
+                    "desc": "Bitmask: Bit0=Full on plug-in, Bit1=Use capacity thresholds, Bits2-3=`batteryState_e` (`getBatteryState()`), Bits4-7=Cell count (`getBatteryCellCount()`)",
+                    "units": "Bitmask",
+                    "bitmask": true
                 },
                 {
                     "name": "vbat",
@@ -6921,7 +6911,7 @@
                 },
                 {
                     "name": "amperage",
-                    "ctype": "uint16_t",
+                    "ctype": "int16_t",
                     "desc": "Current draw (`getAmperage()`)",
                     "units": "0.01A"
                 },
@@ -6929,7 +6919,7 @@
                     "name": "powerDraw",
                     "ctype": "uint32_t",
                     "desc": "Power draw (`getPower()`)",
-                    "units": "mW"
+                    "units": "0.01W"
                 },
                 {
                     "name": "mAhDrawn",
@@ -6947,7 +6937,7 @@
                     "name": "remainingCapacity",
                     "ctype": "uint32_t",
                     "desc": "Estimated remaining capacity (`getBatteryRemainingCapacity()`)",
-                    "units": "mAh/mWh"
+                    "units": "Capacity unit (`batteryMetersConfig()->capacity_unit`)"
                 },
                 {
                     "name": "percentageRemaining",
@@ -6959,11 +6949,11 @@
                     "name": "rssi",
                     "ctype": "uint16_t",
                     "desc": "RSSI value (`getRSSI()`)",
-                    "units": "0-1023 or %"
+                    "units": "Raw (0-1023)"
                 }
             ]
         },
-        "notes": "",
+        "notes": "Requires `USE_CURRENT_METER`/`USE_ADC` for current-related fields; values fall back to zero when unavailable. Capacity fields are reported in the units configured by `batteryMetersConfig()->capacity_unit` (mAh or mWh).",
         "description": "Provides detailed analog sensor readings, superseding `MSP_ANALOG` with higher precision and additional fields."
     },
     "MSP2_INAV_MISC": {

@@ -1,4 +1,5 @@
 
+# WARNING: DEPRECATED, OBSOLETE, FULL OF ERRORS, DO NOT USE AS REFERENCE
 # INAV MSP Messages reference
 
 **Warning: Work in progress**\
