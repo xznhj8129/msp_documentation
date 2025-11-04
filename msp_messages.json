@@ -4527,7 +4527,7 @@
                 {
                     "name": "directionOrSpecialIndex",
                     "ctype": "uint8_t",
-                    "desc": "Index of the direction (`ledDirection_e`) or special color (`ledSpecialColor_e`)",
+                    "desc": "Index of the direction (`ledDirectionId_e`) or special color (`ledSpecialColorIds_e`)",
                     "units": ""
                 },
                 {
