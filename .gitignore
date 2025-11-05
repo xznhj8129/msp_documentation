@@ -1,3 +1,5 @@
 __pycache__/
 test/
 test/*
+cgen_test/all_*.h
+cgen_test/*.gch

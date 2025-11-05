@@ -7,5 +7,4 @@ Refer to msp_documentation/README.md for primer on json structure, but defer to 
 Messages indicated as having variants or variable length demand special care to correctly interpret.
 fc_msp.c uses a sbufWriteU(n) function to pack and unpack, but it does not indicate correct sign. Set value must often be followed to it's structure definition a few levels down, or it's true type searched for elsewhere in the code. This is tedious, error prone, and the primary reason for this task.
 Take special care to verify integer signs, do not trust fc_msp.c, follow through structs and types to the true definition.
-Pay attention to units and their direction, ie: "sbufWriteU16(dst, gpsSol.llh.alt/100); // meters" in *incoming* messages means the data is divided by 100 to produce meters, which means it is in centimeters; which is why you must follow through and never interpret directly from fc_msp.c.
 Do not change any other file but msp_documentation/msp_messages.json and msplist.txt

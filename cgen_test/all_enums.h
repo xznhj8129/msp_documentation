@@ -1,3 +1,5 @@
+#include "all_defines.h"
+
 // Consolidated enums — generated on 2025-11-04 20:44:51.929637
 
 // ../inav/src/main/common/calibration.h
@@ -2831,23 +2833,6 @@ typedef enum {
     LED_OVERLAY_STROBE
 } ledOverlayId_e;
 
-// ../inav/src/main/io/smartport_master.c
-typedef enum {
-    PT_ACTIVE_ID,
-    PT_INACTIVE_ID
-} pollType_e;
-
-// ../inav/src/main/io/vtx_smartaudio.c
-enum saFramerState_e {
-        S_WAITPRE1, 
-        S_WAITPRE2, 
-        S_WAITRESP, 
-        S_WAITLEN,  
-        S_DATA,     
-        S_WAITCRC,  
-    } state = S_WAITPRE1;
-typedef enum saFramerState_e saFramerState_e;
-
 // ../inav/src/main/io/statusindicator.c
 typedef enum {
     WARNING_LED_OFF = 0,
@@ -3728,16 +3713,6 @@ enum disarmReason_e {
 } disarmReason_t;
 typedef enum disarmReason_e disarmReason_e;
 
-// ../inav/src/main/fc/fc_init.c
-typedef enum {
-    SYSTEM_STATE_INITIALISING   = 0,
-    SYSTEM_STATE_CONFIG_LOADED  = (1 << 0),
-    SYSTEM_STATE_SENSORS_READY  = (1 << 1),
-    SYSTEM_STATE_MOTORS_READY   = (1 << 2),
-    SYSTEM_STATE_TRANSPONDER_ENABLED = (1 << 3),
-    SYSTEM_STATE_READY          = (1 << 7)
-} systemState_e;
-
 // ../inav/src/main/fc/rc_modes.h
 typedef enum {
     BOXARM           = 0,
@@ -4519,7 +4494,7 @@ enum portMode_t {
 typedef enum portMode_t portMode_t;
 
 // ../inav/src/main/drivers/serial.h
-enum portOptions_t {
+typedef enum portOptions_t {
     SERIAL_NOT_INVERTED  = 0 << 0,
     SERIAL_INVERTED      = 1 << 0,
     SERIAL_STOPBITS_1    = 0 << 1,
@@ -4538,7 +4513,6 @@ enum portOptions_t {
     SERIAL_LONGSTOP      = 0 << 6,
     SERIAL_SHORTSTOP     = 1 << 6,
 } portOptions_t;
-typedef enum portOptions_t portOptions_t;
 
 // ../inav/src/main/drivers/light_ws2811strip.h
 typedef enum {
@@ -4947,35 +4921,6 @@ typedef enum {
     FAILURE_FLASH_READ_FAILED,
 } failureMode_e;
 
-// ../inav/src/main/drivers/adc_impl.h
-typedef enum ADCDevice {
-    ADCINVALID = -1,
-    ADCDEV_1   = 0,
-#if defined(STM32F4) || defined(STM32F7) || defined(STM32H7)
-    ADCDEV_2,
-    ADCDEV_3,
-    ADCDEV_MAX = ADCDEV_3,
-#else
-    ADCDEV_MAX = ADCDEV_1,
-#endif
-    ADCDEV_COUNT = ADCDEV_MAX + 1
-} ADCDevice;
-
-// ../inav/src/main/drivers/adc_impl.h
-enum ADCDevice {
-    ADCINVALID = -1,
-    ADCDEV_1   = 0,
-#if defined(STM32F4) || defined(STM32F7) || defined(STM32H7)
-    ADCDEV_2,
-    ADCDEV_3,
-    ADCDEV_MAX = ADCDEV_3,
-#else
-    ADCDEV_MAX = ADCDEV_1,
-#endif
-    ADCDEV_COUNT = ADCDEV_MAX + 1
-} ADCDevice;
-typedef enum ADCDevice ADCDevice;
-
 // ../inav/src/main/drivers/persistent.h
 typedef enum {
     PERSISTENT_OBJECT_MAGIC = 0,
@@ -5216,55 +5161,6 @@ typedef enum {
 
 // ../inav/src/main/drivers/accgyro/accgyro_lsm6dxx.h
 typedef enum {
-    LSM6DXX_VAL_COUNTER_BDR1_DDRY_PM = BIT(7),
-    LSM6DXX_VAL_INT1_CTRL = 0x02,             
-    LSM6DXX_VAL_INT2_CTRL = 0x00,             
-    LSM6DXX_VAL_CTRL1_XL_ODR833 = 0x07,       
-    LSM6DXX_VAL_CTRL1_XL_ODR1667 = 0x08,      
-    LSM6DXX_VAL_CTRL1_XL_ODR3332 = 0x09,      
-    LSM6DXX_VAL_CTRL1_XL_ODR3333 = 0x0A,      
-    LSM6DXX_VAL_CTRL1_XL_8G = 0x03,           
-    LSM6DXX_VAL_CTRL1_XL_16G = 0x01,          
-    LSM6DXX_VAL_CTRL1_XL_LPF1 = 0x00,         
-    LSM6DXX_VAL_CTRL1_XL_LPF2 = 0x01,         
-    LSM6DXX_VAL_CTRL2_G_ODR6664 = 0x0A,       
-    LSM6DXX_VAL_CTRL2_G_2000DPS = 0x03,       
-    
-    LSM6DXX_VAL_CTRL3_C_H_LACTIVE = 0,        
-    LSM6DXX_VAL_CTRL3_C_PP_OD = 0,            
-    LSM6DXX_VAL_CTRL3_C_SIM = 0,              
-    LSM6DXX_VAL_CTRL3_C_IF_INC = BIT(2),      
-    LSM6DXX_VAL_CTRL4_C_DRDY_MASK = BIT(3),   
-    LSM6DXX_VAL_CTRL4_C_I2C_DISABLE = BIT(2), 
-    LSM6DXX_VAL_CTRL4_C_LPF1_SEL_G = BIT(1),  
-    LSM6DXX_VAL_CTRL6_C_XL_HM_MODE = 0,       
-    LSM6DXX_VAL_CTRL6_C_FTYPE_300HZ = 0x00,   
-    LSM6DXX_VAL_CTRL6_C_FTYPE_201HZ = 0x01,   
-    LSM6DXX_VAL_CTRL6_C_FTYPE_102HZ = 0x02,   
-    LSM6DXX_VAL_CTRL6_C_FTYPE_603HZ = 0x03,   
-    LSM6DXX_VAL_CTRL7_G_HP_EN_G = BIT(6),   
-    LSM6DXX_VAL_CTRL7_G_HPM_G_16 = 0x00,      
-    LSM6DXX_VAL_CTRL7_G_HPM_G_65 = 0x01,      
-    LSM6DXX_VAL_CTRL7_G_HPM_G_260 = 0x02,     
-    LSM6DXX_VAL_CTRL7_G_HPM_G_1040 = 0x03,    
-    LSM6DXX_VAL_CTRL9_XL_I3C_DISABLE = BIT(1),
-} lsm6dxxConfigValues_e;
-
-// ../inav/src/main/drivers/accgyro/accgyro_lsm6dxx.h
-typedef enum {
-    LSM6DXX_MASK_COUNTER_BDR1 = 0x80,    
-    LSM6DXX_MASK_CTRL3_C = 0x3C,         
-    LSM6DXX_MASK_CTRL3_C_RESET = BIT(0), 
-    LSM6DXX_MASK_CTRL4_C = 0x0E,         
-    LSM6DXX_MASK_CTRL6_C = 0x17,         
-    LSM6DXX_MASK_CTRL7_G = 0x70,         
-    LSM6DXX_MASK_CTRL9_XL = 0x02,        
-    LSM6DSL_MASK_CTRL6_C = 0x13,         
-
-} lsm6dxxConfigMasks_e;
-
-// ../inav/src/main/drivers/accgyro/accgyro_lsm6dxx.h
-typedef enum {
     GYRO_HARDWARE_LPF_NORMAL,
     GYRO_HARDWARE_LPF_OPTION_1,
     GYRO_HARDWARE_LPF_OPTION_2,
@@ -5393,28 +5289,3 @@ typedef enum {
     SDCARD_OPERATION_SUCCESS,
     SDCARD_OPERATION_FAILURE
 } sdcardOperationStatus_e;
-
-// ../inav/src/main/drivers/sdcard/sdcard_impl.h
-typedef enum {
-    
-    SDCARD_STATE_NOT_PRESENT = 0,
-    SDCARD_STATE_RESET,
-    SDCARD_STATE_CARD_INIT_IN_PROGRESS,
-    SDCARD_STATE_INITIALIZATION_RECEIVE_CID,
-
-    
-    SDCARD_STATE_READY,
-    SDCARD_STATE_READING,
-    SDCARD_STATE_SENDING_WRITE,
-    SDCARD_STATE_WAITING_FOR_WRITE,
-    SDCARD_STATE_WRITING_MULTIPLE_BLOCKS,
-    SDCARD_STATE_STOPPING_MULTIPLE_BLOCK_WRITE,
-} sdcardState_e;
-
-// ../inav/src/main/drivers/sdcard/sdcard_spi.c
-typedef enum {
-    SDCARD_RECEIVE_SUCCESS,
-    SDCARD_RECEIVE_BLOCK_IN_PROGRESS,
-    SDCARD_RECEIVE_ERROR,
-} sdcardReceiveBlockStatus_e;
-
