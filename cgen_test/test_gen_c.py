@@ -52,7 +52,8 @@ def field_decl(entry: dict, suffix_comment: str = "") -> str:
 
     # Compute C type and declarator
     if enum_t:
-        basetype = enum_t
+        # Always use the tag form; safe in C even if a typedef also exists
+        basetype = enum_t if enum_t.startswith("enum ") else f"enum {enum_t}"
         declarator = name
     elif array:
         # Explicit array details override generic ctype
@@ -97,6 +98,8 @@ def emit_header_preamble():
 
 #include <stdint.h>
 #include "msp_protocol.h"
+#include "all_enums.h"
+#include "all_defines.h"
 
 #if !defined(MSP_PROTOCOL_VERSION)
 # error "msp_protocol.h must be present and define protocol macros"

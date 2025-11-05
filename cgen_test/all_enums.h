@@ -1,4 +1,4 @@
-// Consolidated enums — generated on 2025-11-03 15:48:18.808066
+// Consolidated enums — generated on 2025-11-04 20:21:39.534228
 
 // ../inav/src/main/common/calibration.h
 typedef enum {
@@ -96,6 +96,390 @@ typedef enum {
     FILTER_LPF,
     FILTER_NOTCH
 } biquadFilterType_e;
+
+// ../inav/src/main/blackbox/blackbox_fielddefs.h
+typedef enum FlightLogFieldCondition {
+    FLIGHT_LOG_FIELD_CONDITION_ALWAYS = 0,
+    FLIGHT_LOG_FIELD_CONDITION_MOTORS,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_MOTORS_1,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_MOTORS_2,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_MOTORS_3,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_MOTORS_4,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_MOTORS_5,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_MOTORS_6,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_MOTORS_7,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_MOTORS_8,
+
+    FLIGHT_LOG_FIELD_CONDITION_SERVOS,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_1,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_2,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_3,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_4,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_5,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_6,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_7,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_8,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_9,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_10,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_11,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_12,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_13,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_14,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_15,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_16,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_17,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_18,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_19,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_20,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_21,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_22,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_23,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_24,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_25,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_26,
+    
+
+    FLIGHT_LOG_FIELD_CONDITION_MAG,
+    FLIGHT_LOG_FIELD_CONDITION_BARO,
+    FLIGHT_LOG_FIELD_CONDITION_PITOT,
+    FLIGHT_LOG_FIELD_CONDITION_VBAT,
+    FLIGHT_LOG_FIELD_CONDITION_AMPERAGE,
+    FLIGHT_LOG_FIELD_CONDITION_SURFACE,
+    FLIGHT_LOG_FIELD_CONDITION_FIXED_WING_NAV,
+    FLIGHT_LOG_FIELD_CONDITION_MC_NAV,
+    FLIGHT_LOG_FIELD_CONDITION_RSSI,
+
+    FLIGHT_LOG_FIELD_CONDITION_NONZERO_PID_D_0,
+    FLIGHT_LOG_FIELD_CONDITION_NONZERO_PID_D_1,
+    FLIGHT_LOG_FIELD_CONDITION_NONZERO_PID_D_2,
+
+    FLIGHT_LOG_FIELD_CONDITION_NOT_LOGGING_EVERY_FRAME,
+
+    FLIGHT_LOG_FIELD_CONDITION_DEBUG,
+
+    FLIGHT_LOG_FIELD_CONDITION_NAV_ACC,
+    FLIGHT_LOG_FIELD_CONDITION_NAV_POS,
+    FLIGHT_LOG_FIELD_CONDITION_NAV_PID,
+    FLIGHT_LOG_FIELD_CONDITION_ACC,
+    FLIGHT_LOG_FIELD_CONDITION_ATTITUDE,
+    FLIGHT_LOG_FIELD_CONDITION_RC_DATA,
+    FLIGHT_LOG_FIELD_CONDITION_RC_COMMAND,
+    FLIGHT_LOG_FIELD_CONDITION_GYRO_RAW,
+
+    FLIGHT_LOG_FIELD_CONDITION_GYRO_PEAKS_ROLL,
+    FLIGHT_LOG_FIELD_CONDITION_GYRO_PEAKS_PITCH,
+    FLIGHT_LOG_FIELD_CONDITION_GYRO_PEAKS_YAW,
+
+    FLIGHT_LOG_FIELD_CONDITION_NEVER,
+
+    FLIGHT_LOG_FIELD_CONDITION_FIRST = FLIGHT_LOG_FIELD_CONDITION_ALWAYS,
+    FLIGHT_LOG_FIELD_CONDITION_LAST = FLIGHT_LOG_FIELD_CONDITION_NEVER
+} FlightLogFieldCondition;
+
+// ../inav/src/main/blackbox/blackbox_fielddefs.h
+typedef enum FlightLogFieldPredictor {
+    
+    FLIGHT_LOG_FIELD_PREDICTOR_0              = 0,
+
+    
+    FLIGHT_LOG_FIELD_PREDICTOR_PREVIOUS       = 1,
+
+    
+    FLIGHT_LOG_FIELD_PREDICTOR_STRAIGHT_LINE  = 2,
+
+    
+    FLIGHT_LOG_FIELD_PREDICTOR_AVERAGE_2      = 3,
+
+    
+    FLIGHT_LOG_FIELD_PREDICTOR_MINTHROTTLE    = 4,
+
+    
+    FLIGHT_LOG_FIELD_PREDICTOR_MOTOR_0        = 5,
+
+    
+    FLIGHT_LOG_FIELD_PREDICTOR_INC            = 6,
+
+    
+    FLIGHT_LOG_FIELD_PREDICTOR_HOME_COORD     = 7,
+
+    
+    FLIGHT_LOG_FIELD_PREDICTOR_1500           = 8,
+
+    
+    FLIGHT_LOG_FIELD_PREDICTOR_VBATREF        = 9,
+
+    
+    FLIGHT_LOG_FIELD_PREDICTOR_LAST_MAIN_FRAME_TIME = 10
+
+} FlightLogFieldPredictor;
+
+// ../inav/src/main/blackbox/blackbox_fielddefs.h
+typedef enum FlightLogFieldEncoding {
+    FLIGHT_LOG_FIELD_ENCODING_SIGNED_VB       = 0, 
+    FLIGHT_LOG_FIELD_ENCODING_UNSIGNED_VB     = 1, 
+    FLIGHT_LOG_FIELD_ENCODING_NEG_14BIT       = 3, 
+    FLIGHT_LOG_FIELD_ENCODING_TAG8_8SVB       = 6,
+    FLIGHT_LOG_FIELD_ENCODING_TAG2_3S32       = 7,
+    FLIGHT_LOG_FIELD_ENCODING_TAG8_4S16       = 8,
+    FLIGHT_LOG_FIELD_ENCODING_NULL            = 9 
+} FlightLogFieldEncoding;
+
+// ../inav/src/main/blackbox/blackbox_fielddefs.h
+typedef enum FlightLogFieldSign {
+    FLIGHT_LOG_FIELD_UNSIGNED = 0,
+    FLIGHT_LOG_FIELD_SIGNED   = 1
+} FlightLogFieldSign;
+
+// ../inav/src/main/blackbox/blackbox_fielddefs.h
+typedef enum FlightLogEvent {
+    FLIGHT_LOG_EVENT_SYNC_BEEP = 0,
+    FLIGHT_LOG_EVENT_INFLIGHT_ADJUSTMENT = 13,
+    FLIGHT_LOG_EVENT_LOGGING_RESUME = 14,
+    FLIGHT_LOG_EVENT_FLIGHTMODE = 30, 
+    FLIGHT_LOG_EVENT_IMU_FAILURE = 40,
+    FLIGHT_LOG_EVENT_LOG_END = 255
+} FlightLogEvent;
+
+// ../inav/src/main/blackbox/blackbox_fielddefs.h
+enum FlightLogFieldCondition {
+    FLIGHT_LOG_FIELD_CONDITION_ALWAYS = 0,
+    FLIGHT_LOG_FIELD_CONDITION_MOTORS,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_MOTORS_1,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_MOTORS_2,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_MOTORS_3,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_MOTORS_4,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_MOTORS_5,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_MOTORS_6,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_MOTORS_7,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_MOTORS_8,
+
+    FLIGHT_LOG_FIELD_CONDITION_SERVOS,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_1,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_2,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_3,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_4,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_5,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_6,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_7,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_8,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_9,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_10,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_11,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_12,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_13,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_14,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_15,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_16,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_17,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_18,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_19,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_20,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_21,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_22,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_23,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_24,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_25,
+    FLIGHT_LOG_FIELD_CONDITION_AT_LEAST_SERVOS_26,
+    
+
+    FLIGHT_LOG_FIELD_CONDITION_MAG,
+    FLIGHT_LOG_FIELD_CONDITION_BARO,
+    FLIGHT_LOG_FIELD_CONDITION_PITOT,
+    FLIGHT_LOG_FIELD_CONDITION_VBAT,
+    FLIGHT_LOG_FIELD_CONDITION_AMPERAGE,
+    FLIGHT_LOG_FIELD_CONDITION_SURFACE,
+    FLIGHT_LOG_FIELD_CONDITION_FIXED_WING_NAV,
+    FLIGHT_LOG_FIELD_CONDITION_MC_NAV,
+    FLIGHT_LOG_FIELD_CONDITION_RSSI,
+
+    FLIGHT_LOG_FIELD_CONDITION_NONZERO_PID_D_0,
+    FLIGHT_LOG_FIELD_CONDITION_NONZERO_PID_D_1,
+    FLIGHT_LOG_FIELD_CONDITION_NONZERO_PID_D_2,
+
+    FLIGHT_LOG_FIELD_CONDITION_NOT_LOGGING_EVERY_FRAME,
+
+    FLIGHT_LOG_FIELD_CONDITION_DEBUG,
+
+    FLIGHT_LOG_FIELD_CONDITION_NAV_ACC,
+    FLIGHT_LOG_FIELD_CONDITION_NAV_POS,
+    FLIGHT_LOG_FIELD_CONDITION_NAV_PID,
+    FLIGHT_LOG_FIELD_CONDITION_ACC,
+    FLIGHT_LOG_FIELD_CONDITION_ATTITUDE,
+    FLIGHT_LOG_FIELD_CONDITION_RC_DATA,
+    FLIGHT_LOG_FIELD_CONDITION_RC_COMMAND,
+    FLIGHT_LOG_FIELD_CONDITION_GYRO_RAW,
+
+    FLIGHT_LOG_FIELD_CONDITION_GYRO_PEAKS_ROLL,
+    FLIGHT_LOG_FIELD_CONDITION_GYRO_PEAKS_PITCH,
+    FLIGHT_LOG_FIELD_CONDITION_GYRO_PEAKS_YAW,
+
+    FLIGHT_LOG_FIELD_CONDITION_NEVER,
+
+    FLIGHT_LOG_FIELD_CONDITION_FIRST = FLIGHT_LOG_FIELD_CONDITION_ALWAYS,
+    FLIGHT_LOG_FIELD_CONDITION_LAST = FLIGHT_LOG_FIELD_CONDITION_NEVER
+} FlightLogFieldCondition;
+typedef enum FlightLogFieldCondition FlightLogFieldCondition;
+
+// ../inav/src/main/blackbox/blackbox_fielddefs.h
+enum FlightLogFieldPredictor {
+    
+    FLIGHT_LOG_FIELD_PREDICTOR_0              = 0,
+
+    
+    FLIGHT_LOG_FIELD_PREDICTOR_PREVIOUS       = 1,
+
+    
+    FLIGHT_LOG_FIELD_PREDICTOR_STRAIGHT_LINE  = 2,
+
+    
+    FLIGHT_LOG_FIELD_PREDICTOR_AVERAGE_2      = 3,
+
+    
+    FLIGHT_LOG_FIELD_PREDICTOR_MINTHROTTLE    = 4,
+
+    
+    FLIGHT_LOG_FIELD_PREDICTOR_MOTOR_0        = 5,
+
+    
+    FLIGHT_LOG_FIELD_PREDICTOR_INC            = 6,
+
+    
+    FLIGHT_LOG_FIELD_PREDICTOR_HOME_COORD     = 7,
+
+    
+    FLIGHT_LOG_FIELD_PREDICTOR_1500           = 8,
+
+    
+    FLIGHT_LOG_FIELD_PREDICTOR_VBATREF        = 9,
+
+    
+    FLIGHT_LOG_FIELD_PREDICTOR_LAST_MAIN_FRAME_TIME = 10
+
+} FlightLogFieldPredictor;
+typedef enum FlightLogFieldPredictor FlightLogFieldPredictor;
+
+// ../inav/src/main/blackbox/blackbox_fielddefs.h
+enum FlightLogFieldEncoding {
+    FLIGHT_LOG_FIELD_ENCODING_SIGNED_VB       = 0, 
+    FLIGHT_LOG_FIELD_ENCODING_UNSIGNED_VB     = 1, 
+    FLIGHT_LOG_FIELD_ENCODING_NEG_14BIT       = 3, 
+    FLIGHT_LOG_FIELD_ENCODING_TAG8_8SVB       = 6,
+    FLIGHT_LOG_FIELD_ENCODING_TAG2_3S32       = 7,
+    FLIGHT_LOG_FIELD_ENCODING_TAG8_4S16       = 8,
+    FLIGHT_LOG_FIELD_ENCODING_NULL            = 9 
+} FlightLogFieldEncoding;
+typedef enum FlightLogFieldEncoding FlightLogFieldEncoding;
+
+// ../inav/src/main/blackbox/blackbox_fielddefs.h
+enum FlightLogFieldSign {
+    FLIGHT_LOG_FIELD_UNSIGNED = 0,
+    FLIGHT_LOG_FIELD_SIGNED   = 1
+} FlightLogFieldSign;
+typedef enum FlightLogFieldSign FlightLogFieldSign;
+
+// ../inav/src/main/blackbox/blackbox_fielddefs.h
+enum FlightLogEvent {
+    FLIGHT_LOG_EVENT_SYNC_BEEP = 0,
+    FLIGHT_LOG_EVENT_INFLIGHT_ADJUSTMENT = 13,
+    FLIGHT_LOG_EVENT_LOGGING_RESUME = 14,
+    FLIGHT_LOG_EVENT_FLIGHTMODE = 30, 
+    FLIGHT_LOG_EVENT_IMU_FAILURE = 40,
+    FLIGHT_LOG_EVENT_LOG_END = 255
+} FlightLogEvent;
+typedef enum FlightLogEvent FlightLogEvent;
+
+// ../inav/src/main/blackbox/blackbox.h
+typedef enum {
+    BLACKBOX_FEATURE_NAV_ACC            = 1 << 0,
+    BLACKBOX_FEATURE_NAV_POS            = 1 << 1,
+    BLACKBOX_FEATURE_NAV_PID            = 1 << 2,
+    BLACKBOX_FEATURE_MAG                = 1 << 3,
+    BLACKBOX_FEATURE_ACC                = 1 << 4,
+    BLACKBOX_FEATURE_ATTITUDE           = 1 << 5,
+    BLACKBOX_FEATURE_RC_DATA            = 1 << 6,
+    BLACKBOX_FEATURE_RC_COMMAND         = 1 << 7,
+    BLACKBOX_FEATURE_MOTORS             = 1 << 8,
+    BLACKBOX_FEATURE_GYRO_RAW           = 1 << 9,
+    BLACKBOX_FEATURE_GYRO_PEAKS_ROLL    = 1 << 10,
+    BLACKBOX_FEATURE_GYRO_PEAKS_PITCH   = 1 << 11,
+    BLACKBOX_FEATURE_GYRO_PEAKS_YAW     = 1 << 12,
+    BLACKBOX_FEATURE_SERVOS             = 1 << 13,
+} blackboxFeatureMask_e;
+
+// ../inav/src/main/blackbox/blackbox.h
+typedef enum BlackboxState {
+    BLACKBOX_STATE_DISABLED = 0,
+    BLACKBOX_STATE_STOPPED,
+    BLACKBOX_STATE_PREPARE_LOG_FILE,
+    BLACKBOX_STATE_SEND_HEADER,
+    BLACKBOX_STATE_SEND_MAIN_FIELD_HEADER,
+    BLACKBOX_STATE_SEND_GPS_H_HEADER,
+    BLACKBOX_STATE_SEND_GPS_G_HEADER,
+    BLACKBOX_STATE_SEND_SLOW_HEADER,
+    BLACKBOX_STATE_SEND_SYSINFO,
+    BLACKBOX_STATE_PAUSED,
+    BLACKBOX_STATE_RUNNING,
+    BLACKBOX_STATE_SHUTTING_DOWN
+} BlackboxState;
+
+// ../inav/src/main/blackbox/blackbox.h
+enum BlackboxState {
+    BLACKBOX_STATE_DISABLED = 0,
+    BLACKBOX_STATE_STOPPED,
+    BLACKBOX_STATE_PREPARE_LOG_FILE,
+    BLACKBOX_STATE_SEND_HEADER,
+    BLACKBOX_STATE_SEND_MAIN_FIELD_HEADER,
+    BLACKBOX_STATE_SEND_GPS_H_HEADER,
+    BLACKBOX_STATE_SEND_GPS_G_HEADER,
+    BLACKBOX_STATE_SEND_SLOW_HEADER,
+    BLACKBOX_STATE_SEND_SYSINFO,
+    BLACKBOX_STATE_PAUSED,
+    BLACKBOX_STATE_RUNNING,
+    BLACKBOX_STATE_SHUTTING_DOWN
+} BlackboxState;
+typedef enum BlackboxState BlackboxState;
+
+// ../inav/src/main/blackbox/blackbox_io.h
+typedef enum BlackboxDevice {
+    BLACKBOX_DEVICE_SERIAL = 0,
+
+#ifdef USE_FLASHFS
+    BLACKBOX_DEVICE_FLASH = 1,
+#endif
+#ifdef USE_SDCARD
+    BLACKBOX_DEVICE_SDCARD = 2,
+#endif
+#if defined(SITL_BUILD)
+    BLACKBOX_DEVICE_FILE = 3,
+#endif
+
+    BLACKBOX_DEVICE_END
+} BlackboxDevice;
+
+// ../inav/src/main/blackbox/blackbox_io.h
+typedef enum {
+    BLACKBOX_RESERVE_SUCCESS,
+    BLACKBOX_RESERVE_TEMPORARY_FAILURE,
+    BLACKBOX_RESERVE_PERMANENT_FAILURE
+} blackboxBufferReserveStatus_e;
+
+// ../inav/src/main/blackbox/blackbox_io.h
+enum BlackboxDevice {
+    BLACKBOX_DEVICE_SERIAL = 0,
+
+#ifdef USE_FLASHFS
+    BLACKBOX_DEVICE_FLASH = 1,
+#endif
+#ifdef USE_SDCARD
+    BLACKBOX_DEVICE_SDCARD = 2,
+#endif
+#if defined(SITL_BUILD)
+    BLACKBOX_DEVICE_FILE = 3,
+#endif
+
+    BLACKBOX_DEVICE_END
+} BlackboxDevice;
+typedef enum BlackboxDevice BlackboxDevice;
 
 // ../inav/src/main/navigation/navigation_private.h
 typedef enum {
@@ -645,6 +1029,22 @@ typedef enum {
     NAV_WP_MSL_DATUM
 } geoAltitudeDatumFlag_e;
 
+// ../inav/src/main/navigation/navigation.h
+enum fenceAction_e {
+    GEOFENCE_ACTION_NONE,
+    GEOFENCE_ACTION_AVOID,
+    GEOFENCE_ACTION_POS_HOLD,
+    GEOFENCE_ACTION_RTH,
+};
+typedef enum fenceAction_e fenceAction_e;
+
+// ../inav/src/main/navigation/navigation.h
+enum noWayHomeAction {
+    NO_WAY_HOME_ACTION_RTH,
+    NO_WAY_HOME_ACTION_EMRG_LAND,
+};
+typedef enum noWayHomeAction noWayHomeAction;
+
 // ../inav/src/main/navigation/navigation_geozone.c
 typedef enum {
     GEOZONE_ACTION_STATE_NONE,
@@ -815,6 +1215,13 @@ typedef enum {
     SENSOR_TEMP = 1 << 9
 } sensors_e;
 
+// ../inav/src/main/sensors/sensors.h
+typedef enum {
+    SENSOR_TEMP_CAL_INITIALISE,
+    SENSOR_TEMP_CAL_IN_PROGRESS,
+    SENSOR_TEMP_CAL_COMPLETE,
+} sensorTempCalState_e;
+
 // ../inav/src/main/sensors/barometer.c
 typedef enum {
     BAROMETER_NEEDS_SAMPLES = 0,
@@ -942,7 +1349,8 @@ typedef enum {
     LOGIC_CONDITION_LED_PIN_PWM                 = 52,
     LOGIC_CONDITION_DISABLE_GPS_FIX             = 53,
     LOGIC_CONDITION_RESET_MAG_CALIBRATION       = 54,
-    LOGIC_CONDITION_LAST                        = 55,
+    LOGIC_CONDITION_SET_GIMBAL_SENSITIVITY      = 55,
+    LOGIC_CONDITION_LAST                        = 56,
 } logicOperation_e;
 
 // ../inav/src/main/programming/logic_condition.h
@@ -1071,6 +1479,20 @@ typedef enum {
     LOGIC_CONDITION_FLAG_TIMEOUT_SATISFIED  = 1 << 1,
 } logicConditionFlags_e;
 
+// ../inav/src/main/programming/logic_condition.h
+enum logicOperandType_s {
+    LOGIC_CONDITION_OPERAND_TYPE_VALUE = 0,
+    LOGIC_CONDITION_OPERAND_TYPE_RC_CHANNEL,
+    LOGIC_CONDITION_OPERAND_TYPE_FLIGHT,
+    LOGIC_CONDITION_OPERAND_TYPE_FLIGHT_MODE,
+    LOGIC_CONDITION_OPERAND_TYPE_LC,    
+    LOGIC_CONDITION_OPERAND_TYPE_GVAR,  
+    LOGIC_CONDITION_OPERAND_TYPE_PID,  
+    LOGIC_CONDITION_OPERAND_TYPE_WAYPOINTS,
+    LOGIC_CONDITION_OPERAND_TYPE_LAST
+} logicOperandType_e;
+typedef enum logicOperandType_s logicOperandType_s;
+
 // ../inav/src/main/rx/rx.h
 typedef enum {
     RX_FRAME_PENDING             = 0,         
@@ -1139,6 +1561,7 @@ typedef enum {
     CRSF_FRAMETYPE_GPS = 0x02,
     CRSF_FRAMETYPE_VARIO_SENSOR = 0x07,
     CRSF_FRAMETYPE_BATTERY_SENSOR = 0x08,
+    CRSF_FRAMETYPE_BAROMETER_ALTITUDE = 0x09,
     CRSF_FRAMETYPE_LINK_STATISTICS = 0x14,
     CRSF_FRAMETYPE_RC_CHANNELS_PACKED = 0x16,
     CRSF_FRAMETYPE_ATTITUDE = 0x1E,
@@ -1224,6 +1647,18 @@ typedef enum {
     FS_DOWNLINK_FRAME_START,
     FS_DOWNLINK_FRAME_DATA
 } frame_state_e;
+
+// ../inav/src/main/rx/jetiexbus.h
+enum exBusHeader_e {
+    EXBUS_HEADER_SYNC = 0,
+    EXBUS_HEADER_REQ,
+    EXBUS_HEADER_MSG_LEN,
+    EXBUS_HEADER_PACKET_ID,
+    EXBUS_HEADER_DATA_ID,
+    EXBUS_HEADER_SUBLEN,
+    EXBUS_HEADER_DATA
+};
+typedef enum exBusHeader_e exBusHeader_e;
 
 // ../inav/src/main/rx/srxl2_types.h
 typedef enum {
@@ -1325,6 +1760,7 @@ typedef enum {
     CRSF_FRAME_FLIGHT_MODE_INDEX,
     CRSF_FRAME_GPS_INDEX,
     CRSF_FRAME_VARIO_SENSOR_INDEX,
+    CRSF_FRAME_BAROMETER_ALTITUDE_INDEX,
     CRSF_SCHEDULE_COUNT_MAX
 } crsfFrameTypeIndex_e;
 
@@ -1334,12 +1770,6 @@ typedef enum {
     LTM_RATE_MEDIUM,
     LTM_RATE_SLOW
 } ltmUpdateRate_e;
-
-// ../inav/src/main/telemetry/telemetry.h
-typedef enum {
-    MAVLINK_AUTOPILOT_GENERIC,
-    MAVLINK_AUTOPILOT_ARDUPILOT
-} mavlinkAutopilotType_e;
 
 // ../inav/src/main/telemetry/telemetry.h
 typedef enum {
@@ -1674,6 +2104,61 @@ typedef enum APM_COPTER_MODE
    COPTER_MODE_ENUM_END=22,
 } APM_COPTER_MODE;
 
+// ../inav/src/main/telemetry/mavlink.c
+enum APM_PLANE_MODE
+{
+   PLANE_MODE_MANUAL=0,
+   PLANE_MODE_CIRCLE=1,
+   PLANE_MODE_STABILIZE=2,
+   PLANE_MODE_TRAINING=3,
+   PLANE_MODE_ACRO=4,
+   PLANE_MODE_FLY_BY_WIRE_A=5,
+   PLANE_MODE_FLY_BY_WIRE_B=6,
+   PLANE_MODE_CRUISE=7,
+   PLANE_MODE_AUTOTUNE=8,
+   PLANE_MODE_AUTO=10,
+   PLANE_MODE_RTL=11,
+   PLANE_MODE_LOITER=12,
+   PLANE_MODE_TAKEOFF=13,
+   PLANE_MODE_AVOID_ADSB=14,
+   PLANE_MODE_GUIDED=15,
+   PLANE_MODE_INITIALIZING=16,
+   PLANE_MODE_QSTABILIZE=17,
+   PLANE_MODE_QHOVER=18,
+   PLANE_MODE_QLOITER=19,
+   PLANE_MODE_QLAND=20,
+   PLANE_MODE_QRTL=21,
+   PLANE_MODE_QAUTOTUNE=22,
+   PLANE_MODE_ENUM_END=23,
+} APM_PLANE_MODE;
+typedef enum APM_PLANE_MODE APM_PLANE_MODE;
+
+// ../inav/src/main/telemetry/mavlink.c
+enum APM_COPTER_MODE
+{
+   COPTER_MODE_STABILIZE=0,
+   COPTER_MODE_ACRO=1,
+   COPTER_MODE_ALT_HOLD=2,
+   COPTER_MODE_AUTO=3,
+   COPTER_MODE_GUIDED=4,
+   COPTER_MODE_LOITER=5,
+   COPTER_MODE_RTL=6,
+   COPTER_MODE_CIRCLE=7,
+   COPTER_MODE_LAND=9,
+   COPTER_MODE_DRIFT=11,
+   COPTER_MODE_SPORT=13,
+   COPTER_MODE_FLIP=14,
+   COPTER_MODE_AUTOTUNE=15,
+   COPTER_MODE_POSHOLD=16,
+   COPTER_MODE_BRAKE=17,
+   COPTER_MODE_THROW=18,
+   COPTER_MODE_AVOID_ADSB=19,
+   COPTER_MODE_GUIDED_NOGPS=20,
+   COPTER_MODE_SMART_RTL=21,
+   COPTER_MODE_ENUM_END=22,
+} APM_COPTER_MODE;
+typedef enum APM_COPTER_MODE APM_COPTER_MODE;
+
 // ../inav/src/main/telemetry/sim.h
 typedef enum  {
     SIM_TX_FLAG                 = (1 << 0),
@@ -1683,6 +2168,67 @@ typedef enum  {
     SIM_TX_FLAG_LOW_ALT         = (1 << 4),
     SIM_TX_FLAG_RESPONSE        = (1 << 5)
 } simTxFlags_e;
+
+// ../inav/src/main/telemetry/jetiexbus.c
+enum exTelHeader_e {
+    EXTEL_HEADER_SYNC = 0,
+    EXTEL_HEADER_TYPE_LEN,
+    EXTEL_HEADER_USN_LB,
+    EXTEL_HEADER_USN_HB,
+    EXTEL_HEADER_LSN_LB,
+    EXTEL_HEADER_LSN_HB,
+    EXTEL_HEADER_RES,
+    EXTEL_HEADER_ID,
+    EXTEL_HEADER_DATA
+};
+typedef enum exTelHeader_e exTelHeader_e;
+
+// ../inav/src/main/telemetry/jetiexbus.c
+enum exDataType_e {
+    EX_TYPE_6b   = 0,                
+    EX_TYPE_14b  = 1,                
+    EX_TYPE_22b  = 4,                
+    EX_TYPE_DT   = 5,                
+    EX_TYPE_30b  = 8,                
+    EX_TYPE_GPS  = 9,                
+    EX_TYPE_DES  = 255               
+};
+typedef enum exDataType_e exDataType_e;
+
+// ../inav/src/main/telemetry/jetiexbus.c
+enum exSensors_e {
+    EX_VOLTAGE = 1,
+    EX_CURRENT,
+    EX_ALTITUDE,
+    EX_CAPACITY,
+    EX_POWER,
+    EX_ROLL_ANGLE,
+    EX_PITCH_ANGLE,
+    EX_HEADING,
+    EX_VARIO,
+    EX_GPS_SATS,
+    EX_GPS_LONG,
+    EX_GPS_LAT,
+    EX_GPS_SPEED,
+    EX_GPS_DISTANCE_TO_HOME,
+    EX_GPS_DIRECTION_TO_HOME,
+    EX_GPS_HEADING = 17,
+    EX_GPS_ALTITUDE,
+    EX_GFORCE_X,
+    EX_GFORCE_Y,
+    EX_GFORCE_Z,
+    EX_RPM,
+    EX_TRIP_DISTANCE,
+    EX_DEBUG0,
+    EX_DEBUG1,
+    EX_DEBUG2,
+    EX_DEBUG3,
+    EX_DEBUG4,
+    EX_DEBUG5,
+    EX_DEBUG6,
+    EX_DEBUG7
+};
+typedef enum exSensors_e exSensors_e;
 
 // ../inav/src/main/telemetry/ghst.c
 typedef enum {
@@ -2189,6 +2735,27 @@ typedef enum {
     OSD_DRAW_POINT_TYPE_PIXEL,
 } osdDrawPointType_e;
 
+// ../inav/src/main/io/osd_dji_hd.h
+enum djiOsdTempSource_e {
+    DJI_OSD_TEMP_ESC    = 0,
+    DJI_OSD_TEMP_CORE   = 1,
+    DJI_OSD_TEMP_BARO   = 2
+};
+typedef enum djiOsdTempSource_e djiOsdTempSource_e;
+
+// ../inav/src/main/io/osd_dji_hd.h
+enum djiRssiSource_e {
+    DJI_RSSI = 0,
+    DJI_CRSF_LQ = 1
+};
+typedef enum djiRssiSource_e djiRssiSource_e;
+
+// ../inav/src/main/io/osd_dji_hd.h
+enum djiOsdProtoWorkarounds_e {
+    DJI_OSD_USE_NON_STANDARD_MSP_ESC_SENSOR_DATA    = 1 << 0,
+};
+typedef enum djiOsdProtoWorkarounds_e djiOsdProtoWorkarounds_e;
+
 // ../inav/src/main/io/ledstrip.h
 typedef enum {
     COLOR_BLACK = 0,
@@ -2269,6 +2836,17 @@ typedef enum {
     PT_ACTIVE_ID,
     PT_INACTIVE_ID
 } pollType_e;
+
+// ../inav/src/main/io/vtx_smartaudio.c
+enum saFramerState_e {
+        S_WAITPRE1, 
+        S_WAITPRE2, 
+        S_WAITRESP, 
+        S_WAITLEN,  
+        S_DATA,     
+        S_WAITCRC,  
+    } state = S_WAITPRE1;
+typedef enum saFramerState_e saFramerState_e;
 
 // ../inav/src/main/io/statusindicator.c
 typedef enum {
@@ -2599,6 +3177,17 @@ typedef enum {
     timRing,
     timTimerCount
 } timId_e;
+
+// ../inav/src/main/io/ledstrip.c
+enum parseState_e {
+        X_COORDINATE,
+        Y_COORDINATE,
+        DIRECTIONS,
+        FUNCTIONS,
+        RING_COLORS,
+        PARSE_STATE_COUNT
+    };
+typedef enum parseState_e parseState_e;
 
 // ../inav/src/main/io/vtx_smartaudio.h
 typedef enum {
@@ -3125,6 +3714,20 @@ typedef enum disarmReason_e {
     DISARM_REASON_COUNT
 } disarmReason_t;
 
+// ../inav/src/main/fc/fc_core.h
+enum disarmReason_e {
+    DISARM_NONE         = 0,
+    DISARM_TIMEOUT      = 1,
+    DISARM_STICKS       = 2,
+    DISARM_SWITCH_3D    = 3,
+    DISARM_SWITCH       = 4,
+    DISARM_FAILSAFE     = 6,
+    DISARM_NAVIGATION   = 7,
+    DISARM_LANDING      = 8,
+    DISARM_REASON_COUNT
+} disarmReason_t;
+typedef enum disarmReason_e disarmReason_e;
+
 // ../inav/src/main/fc/fc_init.c
 typedef enum {
     SYSTEM_STATE_INITIALISING   = 0,
@@ -3367,6 +3970,47 @@ typedef enum {
     THR_CE = (3 << (2 * THROTTLE)),
     THR_HI = (2 << (2 * THROTTLE))
 } stickPositions_e;
+
+// ../inav/src/main/fc/rc_controls.h
+enum rc_alias {
+    ROLL = 0,
+    PITCH,
+    YAW,
+    THROTTLE,
+    AUX1, 
+    AUX2, 
+    AUX3, 
+    AUX4, 
+    AUX5, 
+    AUX6, 
+    AUX7, 
+    AUX8, 
+    AUX9, 
+    AUX10, 
+    AUX11, 
+    AUX12, 
+    AUX13, 
+    AUX14, 
+#ifdef USE_34CHANNELS
+    AUX15, 
+    AUX16, 
+    AUX17, 
+    AUX18, 
+    AUX19, 
+    AUX20, 
+    AUX21, 
+    AUX22, 
+    AUX23, 
+    AUX24, 
+    AUX25, 
+    AUX26, 
+    AUX27, 
+    AUX28, 
+    AUX29, 
+    AUX30, 
+#endif
+} rc_alias_e;
+typedef enum rc_alias rc_alias;
 
 // ../inav/src/main/fc/multifunction.h
 typedef enum {
@@ -3630,4 +4274,1147 @@ typedef enum {
     HITL_GPS_TIMEOUT            = (1 << 8),
     HITL_PITOT_FAILURE          = (1 << 9)
 } simulatorFlags_t;
+
+// ../inav/src/main/drivers/timer.h
+typedef enum {
+    TIM_USE_ANY             = 0,
+    TIM_USE_PPM             = (1 << 0),
+    TIM_USE_PWM             = (1 << 1),
+    TIM_USE_MOTOR           = (1 << 2),     
+    TIM_USE_SERVO           = (1 << 3),     
+    TIM_USE_MC_CHNFW        = (1 << 4),     
+    
+    
+    TIM_USE_LED             = (1 << 24),    
+    TIM_USE_BEEPER          = (1 << 25),
+} timerUsageFlag_e;
+
+// ../inav/src/main/drivers/timer.h
+typedef enum {
+    TCH_DMA_IDLE = 0,
+    TCH_DMA_READY,
+    TCH_DMA_ACTIVE,
+} tchDmaState_e;
+
+// ../inav/src/main/drivers/timer.h
+typedef enum {
+    TYPE_FREE,
+    TYPE_PWMINPUT,
+    TYPE_PPMINPUT,
+    TYPE_PWMOUTPUT_MOTOR,
+    TYPE_PWMOUTPUT_FAST,
+    TYPE_PWMOUTPUT_SERVO,
+    TYPE_SOFTSERIAL_RX,
+    TYPE_SOFTSERIAL_TX,
+    TYPE_SOFTSERIAL_RXTX,        
+    TYPE_SOFTSERIAL_AUXTIMER,    
+    TYPE_ADC,
+    TYPE_SERIAL_RX,
+    TYPE_SERIAL_TX,
+    TYPE_SERIAL_RXTX,
+    TYPE_TIMER
+} channelType_t;
+
+// ../inav/src/main/drivers/uart_inverter.h
+typedef enum {
+    UART_INVERTER_LINE_NONE = 0,
+    UART_INVERTER_LINE_RX = 1 << 0,
+    UART_INVERTER_LINE_TX = 1 << 1,
+} uartInverterLine_e;
+
+// ../inav/src/main/drivers/serial_softserial.c
+typedef enum {
+    TIMER_MODE_SINGLE,
+    TIMER_MODE_DUAL,
+} timerMode_e;
+
+// ../inav/src/main/drivers/display.h
+typedef enum {
+    DISPLAY_TRANSACTION_OPT_NONE = 0,
+    DISPLAY_TRANSACTION_OPT_PROFILED = 1 << 0,
+    DISPLAY_TRANSACTION_OPT_RESET_DRAWING = 1 << 1,
+} displayTransactionOption_e;
+
+// ../inav/src/main/drivers/vtx_common.h
+typedef enum {
+    VTXDEV_UNSUPPORTED = 0, 
+    VTXDEV_RTC6705    = 1,  
+    
+    VTXDEV_SMARTAUDIO = 3,
+    VTXDEV_TRAMP      = 4,
+    VTXDEV_FFPV       = 5,
+    VTXDEV_MSP        = 6,
+    VTXDEV_UNKNOWN    = 0xFF,
+} vtxDevType_e;
+
+// ../inav/src/main/drivers/vtx_common.h
+typedef enum {
+    FREQUENCYGROUP_5G8 = 0,
+    FREQUENCYGROUP_2G4 = 1,
+    FREQUENCYGROUP_1G3 = 2,
+} vtxFrequencyGroups_e;
+
+// ../inav/src/main/drivers/sensor.h
+typedef enum {
+    ALIGN_DEFAULT = 0,                                      
+    CW0_DEG = 1,
+    CW90_DEG = 2,
+    CW180_DEG = 3,
+    CW270_DEG = 4,
+    CW0_DEG_FLIP = 5,
+    CW90_DEG_FLIP = 6,
+    CW180_DEG_FLIP = 7,
+    CW270_DEG_FLIP = 8
+} sensor_align_e;
+
+// ../inav/src/main/drivers/headtracker_common.h
+typedef enum {
+    HEADTRACKER_NONE   = 0,
+    HEADTRACKER_SERIAL = 1,
+    HEADTRACKER_MSP    = 2,
+    HEADTRACKER_UNKNOWN = 0xFF
+} headTrackerDevType_e;
+
+// ../inav/src/main/drivers/adc.h
+typedef enum {
+    ADC_BATTERY = 0,
+    ADC_RSSI = 1,
+    ADC_CURRENT = 2,
+    ADC_AIRSPEED = 3,
+    ADC_FUNCTION_COUNT
+} adcFunction_e;
+
+// ../inav/src/main/drivers/adc.h
+typedef enum {
+    ADC_CHN_NONE = 0,
+    ADC_CHN_1 = 1,
+    ADC_CHN_2,
+    ADC_CHN_3,
+    ADC_CHN_4,
+	ADC_CHN_5,
+	ADC_CHN_6,
+    ADC_CHN_MAX = ADC_CHN_6,
+    ADC_CHN_COUNT
+} adcChannel_e;
+
+// ../inav/src/main/drivers/resource.h
+typedef enum {
+    OWNER_FREE = 0,
+    OWNER_PWMIO,
+    OWNER_MOTOR,
+    OWNER_SERVO,
+    OWNER_SOFTSERIAL,
+    OWNER_ADC,
+    OWNER_SERIAL,
+    OWNER_TIMER,
+    OWNER_RANGEFINDER,
+    OWNER_SYSTEM,
+    OWNER_SPI,
+    OWNER_QUADSPI,
+    OWNER_I2C,
+    OWNER_SDCARD,
+    OWNER_FLASH,
+    OWNER_USB,
+    OWNER_BEEPER,
+    OWNER_OSD,
+    OWNER_BARO,
+    OWNER_MPU,
+    OWNER_INVERTER,
+    OWNER_LED_STRIP,
+    OWNER_LED,
+    OWNER_RX,
+    OWNER_TX,
+    OWNER_VTX,
+    OWNER_SPI_PREINIT,
+    OWNER_COMPASS,
+    OWNER_TEMPERATURE,
+    OWNER_1WIRE,
+    OWNER_AIRSPEED,
+    OWNER_OLED_DISPLAY,
+    OWNER_PINIO,
+    OWNER_IRLOCK,
+    OWNER_TOTAL_COUNT
+} resourceOwner_e;
+
+// ../inav/src/main/drivers/resource.h
+typedef enum {
+    RESOURCE_NONE       = 0,
+    RESOURCE_INPUT, RESOURCE_OUTPUT, RESOURCE_IO,
+    RESOURCE_TIMER,
+    RESOURCE_UART_TX, RESOURCE_UART_RX, RESOURCE_UART_TXRX,
+    RESOURCE_EXTI,
+    RESOURCE_I2C_SCL, RESOURCE_I2C_SDA,
+    RESOURCE_SPI_SCK, RESOURCE_SPI_MOSI, RESOURCE_SPI_MISO, RESOURCE_SPI_CS,
+    RESOURCE_QUADSPI_CLK, RESOURCE_QUADSPI_BK1IO0, RESOURCE_QUADSPI_BK1IO1,
+    RESOURCE_QUADSPI_BK1IO2, RESOURCE_QUADSPI_BK1IO3, RESOURCE_QUADSPI_BK1CS,
+    RESOURCE_QUADSPI_BK2IO0, RESOURCE_QUADSPI_BK2IO1, RESOURCE_QUADSPI_BK2IO2,
+    RESOURCE_QUADSPI_BK2IO3, RESOURCE_QUADSPI_BK2CS,
+    RESOURCE_ADC_CH1, RESOURCE_ADC_CH2, RESOURCE_ADC_CH3, RESOURCE_ADC_CH4,
+    RESOURCE_RX_CE,
+    RESOURCE_TOTAL_COUNT
+} resourceType_e;
+
+// ../inav/src/main/drivers/display_canvas.h
+typedef enum {
+    DISPLAY_CANVAS_BITMAP_OPT_INVERT_COLORS = 1 << 0,
+    DISPLAY_CANVAS_BITMAP_OPT_SOLID_BACKGROUND = 1 << 1,
+    DISPLAY_CANVAS_BITMAP_OPT_ERASE_TRANSPARENT = 1 << 2,
+} displayCanvasBitmapOption_t;
+
+// ../inav/src/main/drivers/display_canvas.h
+typedef enum {
+    DISPLAY_CANVAS_COLOR_BLACK = 0,
+    DISPLAY_CANVAS_COLOR_TRANSPARENT = 1,
+    DISPLAY_CANVAS_COLOR_WHITE = 2,
+    DISPLAY_CANVAS_COLOR_GRAY = 3,
+} displayCanvasColor_e;
+
+// ../inav/src/main/drivers/display_canvas.h
+typedef enum {
+    DISPLAY_CANVAS_OUTLINE_TYPE_NONE = 0,
+    DISPLAY_CANVAS_OUTLINE_TYPE_TOP = 1 << 0,
+    DISPLAY_CANVAS_OUTLINE_TYPE_RIGHT = 1 << 1,
+    DISPLAY_CANVAS_OUTLINE_TYPE_BOTTOM = 1 << 2,
+    DISPLAY_CANVAS_OUTLINE_TYPE_LEFT = 1 << 3,
+} displayCanvasOutlineType_e;
+
+// ../inav/src/main/drivers/max7456.h
+enum VIDEO_TYPES { AUTO = 0, PAL, NTSC };
+typedef enum VIDEO_TYPES VIDEO_TYPES;
+
+// ../inav/src/main/drivers/serial.h
+typedef enum portMode_t {
+    MODE_RX = 1 << 0,
+    MODE_TX = 1 << 1,
+    MODE_RXTX = MODE_RX | MODE_TX
+} portMode_t;
+
+// ../inav/src/main/drivers/serial.h
+typedef enum portOptions_t {
+    SERIAL_NOT_INVERTED  = 0 << 0,
+    SERIAL_INVERTED      = 1 << 0,
+    SERIAL_STOPBITS_1    = 0 << 1,
+    SERIAL_STOPBITS_2    = 1 << 1,
+    SERIAL_PARITY_NO     = 0 << 2,
+    SERIAL_PARITY_EVEN   = 1 << 2,
+    SERIAL_UNIDIR        = 0 << 3,
+    SERIAL_BIDIR         = 1 << 3,
+
+    
+    SERIAL_BIDIR_OD      = 0 << 4,
+    SERIAL_BIDIR_PP      = 1 << 4,
+    SERIAL_BIDIR_NOPULL  = 1 << 5, 
+    SERIAL_BIDIR_UP      = 0 << 5, 
+
+    SERIAL_LONGSTOP      = 0 << 6,
+    SERIAL_SHORTSTOP     = 1 << 6,
+} portOptions_t;
+
+// ../inav/src/main/drivers/serial.h
+enum portMode_t {
+    MODE_RX = 1 << 0,
+    MODE_TX = 1 << 1,
+    MODE_RXTX = MODE_RX | MODE_TX
+} portMode_t;
+typedef enum portMode_t portMode_t;
+
+// ../inav/src/main/drivers/serial.h
+enum portOptions_t {
+    SERIAL_NOT_INVERTED  = 0 << 0,
+    SERIAL_INVERTED      = 1 << 0,
+    SERIAL_STOPBITS_1    = 0 << 1,
+    SERIAL_STOPBITS_2    = 1 << 1,
+    SERIAL_PARITY_NO     = 0 << 2,
+    SERIAL_PARITY_EVEN   = 1 << 2,
+    SERIAL_UNIDIR        = 0 << 3,
+    SERIAL_BIDIR         = 1 << 3,
+
+    
+    SERIAL_BIDIR_OD      = 0 << 4,
+    SERIAL_BIDIR_PP      = 1 << 4,
+    SERIAL_BIDIR_NOPULL  = 1 << 5, 
+    SERIAL_BIDIR_UP      = 0 << 5, 
+
+    SERIAL_LONGSTOP      = 0 << 6,
+    SERIAL_SHORTSTOP     = 1 << 6,
+} portOptions_t;
+typedef enum portOptions_t portOptions_t;
+
+// ../inav/src/main/drivers/light_ws2811strip.h
+typedef enum {
+    LED_PIN_PWM_MODE_SHARED_LOW = 0,
+    LED_PIN_PWM_MODE_SHARED_HIGH = 1,
+    LED_PIN_PWM_MODE_LOW = 2,
+    LED_PIN_PWM_MODE_HIGH = 3
+} led_pin_pwm_mode_e;
+
+// ../inav/src/main/drivers/pwm_output.h
+typedef enum {
+    DSHOT_CMD_SPIN_DIRECTION_NORMAL = 20,
+    DSHOT_CMD_SPIN_DIRECTION_REVERSED = 21,
+} dshotCommands_e;
+
+// ../inav/src/main/drivers/bus_i2c_stm32f40x.c
+typedef enum {
+    I2C_STATE_STOPPED = 0,
+    I2C_STATE_STOPPING,
+    I2C_STATE_STARTING,
+    I2C_STATE_STARTING_WAIT,
+
+    I2C_STATE_R_ADDR,
+    I2C_STATE_R_ADDR_WAIT,
+    I2C_STATE_R_REGISTER,
+    I2C_STATE_R_REGISTER_WAIT,
+    I2C_STATE_R_RESTARTING,
+    I2C_STATE_R_RESTARTING_WAIT,
+    I2C_STATE_R_RESTART_ADDR,
+    I2C_STATE_R_RESTART_ADDR_WAIT,
+    I2C_STATE_R_TRANSFER_EQ1,
+    I2C_STATE_R_TRANSFER_EQ2,
+    I2C_STATE_R_TRANSFER_GE2,
+
+    I2C_STATE_W_ADDR,
+    I2C_STATE_W_ADDR_WAIT,
+    I2C_STATE_W_REGISTER,
+    I2C_STATE_W_TRANSFER_WAIT,
+    I2C_STATE_W_TRANSFER,
+
+    I2C_STATE_NACK,
+    I2C_STATE_BUS_ERROR,
+} i2cState_t;
+
+// ../inav/src/main/drivers/bus_i2c_stm32f40x.c
+typedef enum {
+    I2C_TXN_READ,
+    I2C_TXN_WRITE
+} i2cTransferDirection_t;
+
+// ../inav/src/main/drivers/bus_i2c.h
+typedef enum {  
+    I2C_SPEED_100KHZ    = 2,
+    I2C_SPEED_200KHZ    = 3,
+    I2C_SPEED_400KHZ    = 0,
+    I2C_SPEED_800KHZ    = 1,
+} I2CSpeed;
+
+// ../inav/src/main/drivers/bus_i2c.h
+typedef enum I2CDevice {
+    I2CINVALID = -1,
+    I2CDEV_EMULATED = -1,   
+    I2CDEV_1   = 0,
+    I2CDEV_2,
+    I2CDEV_3,
+#ifdef USE_I2C_DEVICE_4
+    I2CDEV_4,
+#endif
+    I2CDEV_COUNT
+} I2CDevice;
+
+// ../inav/src/main/drivers/bus_i2c.h
+enum I2CDevice {
+    I2CINVALID = -1,
+    I2CDEV_EMULATED = -1,   
+    I2CDEV_1   = 0,
+    I2CDEV_2,
+    I2CDEV_3,
+#ifdef USE_I2C_DEVICE_4
+    I2CDEV_4,
+#endif
+    I2CDEV_COUNT
+} I2CDevice;
+typedef enum I2CDevice I2CDevice;
+
+// ../inav/src/main/drivers/i2c_application.h
+typedef enum
+{
+  I2C_MEM_ADDR_WIDIH_8                   = 0x01, 
+  I2C_MEM_ADDR_WIDIH_16                  = 0x02, 
+} i2c_mem_address_width_type;
+
+// ../inav/src/main/drivers/i2c_application.h
+typedef enum
+{
+  I2C_INT_MA_TX = 0,
+  I2C_INT_MA_RX,
+  I2C_INT_SLA_TX,
+  I2C_INT_SLA_RX,
+  I2C_DMA_MA_TX,
+  I2C_DMA_MA_RX,
+  I2C_DMA_SLA_TX,
+  I2C_DMA_SLA_RX,
+} i2c_mode_type;
+
+// ../inav/src/main/drivers/i2c_application.h
+typedef enum
+{
+  I2C_OK = 0,          
+  I2C_ERR_STEP_1,      
+  I2C_ERR_STEP_2,      
+  I2C_ERR_STEP_3,      
+  I2C_ERR_STEP_4,      
+  I2C_ERR_STEP_5,      
+  I2C_ERR_STEP_6,      
+  I2C_ERR_STEP_7,      
+  I2C_ERR_STEP_8,      
+  I2C_ERR_STEP_9,      
+  I2C_ERR_STEP_10,     
+  I2C_ERR_STEP_11,     
+  I2C_ERR_STEP_12,     
+  I2C_ERR_TCRLD,       
+  I2C_ERR_TDC,         
+  I2C_ERR_ADDR,        
+  I2C_ERR_STOP,        
+  I2C_ERR_ACKFAIL,     
+  I2C_ERR_TIMEOUT,     
+  I2C_ERR_INTERRUPT,   
+} i2c_status_type;
+
+// ../inav/src/main/drivers/bus_quadspi.h
+typedef enum {
+    
+    QUADSPI_CLOCK_INITIALISATION = 255, 
+    QUADSPI_CLOCK_SLOW           = 19,  
+    QUADSPI_CLOCK_STANDARD       = 9,   
+    QUADSPI_CLOCK_FAST           = 3,   
+    QUADSPI_CLOCK_ULTRAFAST      = 1    
+} QUADSPIClockDivider_e;
+
+// ../inav/src/main/drivers/bus_quadspi.h
+typedef enum QUADSPIDevice {
+    QUADSPIINVALID = -1,
+    QUADSPIDEV_1   = 0,
+} QUADSPIDevice;
+
+// ../inav/src/main/drivers/bus_quadspi.h
+typedef enum {
+    QUADSPI_MODE_BK1_ONLY = 0,
+    QUADSPI_MODE_BK2_ONLY,
+    QUADSPI_MODE_DUAL_FLASH,
+} quadSpiMode_e;
+
+// ../inav/src/main/drivers/bus_quadspi.h
+enum QUADSPIDevice {
+    QUADSPIINVALID = -1,
+    QUADSPIDEV_1   = 0,
+} QUADSPIDevice;
+typedef enum QUADSPIDevice QUADSPIDevice;
+
+// ../inav/src/main/drivers/flash.h
+typedef enum {
+    FLASH_TYPE_NOR = 0,
+    FLASH_TYPE_NAND
+} flashType_e;
+
+// ../inav/src/main/drivers/flash.h
+typedef enum {
+    FLASH_PARTITION_TYPE_UNKNOWN = 0,
+    FLASH_PARTITION_TYPE_PARTITION_TABLE,
+    FLASH_PARTITION_TYPE_FLASHFS,
+    FLASH_PARTITION_TYPE_BADBLOCK_MANAGEMENT,
+    FLASH_PARTITION_TYPE_FIRMWARE,
+    FLASH_PARTITION_TYPE_CONFIG,
+    FLASH_PARTITION_TYPE_FULL_BACKUP,
+    FLASH_PARTITION_TYPE_FIRMWARE_UPDATE_META,
+    FLASH_PARTITION_TYPE_UPDATE_FIRMWARE,
+    FLASH_MAX_PARTITIONS
+} flashPartitionType_e;
+
+// ../inav/src/main/drivers/serial_softserial.h
+typedef enum {
+    SOFTSERIAL1 = 0,
+    SOFTSERIAL2
+} softSerialPortIndex_e;
+
+// ../inav/src/main/drivers/display_widgets.h
+typedef enum {
+    DISPLAY_WIDGET_TYPE_AHI,
+    DISPLAY_WIDGET_TYPE_SIDEBAR,
+} displayWidgetType_e;
+
+// ../inav/src/main/drivers/display_widgets.h
+typedef enum {
+    DISPLAY_WIDGET_AHI_STYLE_STAIRCASE = 0,
+    DISPLAY_WIDGET_AHI_STYLE_LINE = 1,
+} widgetAHIStyle_e;
+
+// ../inav/src/main/drivers/display_widgets.h
+typedef enum {
+    DISPLAY_WIDGET_AHI_OPTION_SHOW_CORNERS = 1 << 0,
+} widgetAHIOptions_t;
+
+// ../inav/src/main/drivers/display_widgets.h
+typedef enum
+{
+    DISPLAY_WIDGET_SIDEBAR_OPTION_LEFT = 1 << 0,      
+    DISPLAY_WIDGET_SIDEBAR_OPTION_REVERSE = 1 << 1,   
+    DISPLAY_WIDGET_SIDEBAR_OPTION_UNLABELED = 1 << 2, 
+    DISPLAY_WIDGET_SIDEBAR_OPTION_STATIC = 1 << 3,    
+} widgetSidebarOptions_t;
+
+// ../inav/src/main/drivers/bus_spi.h
+typedef enum {
+    SPI_CLOCK_INITIALIZATON = 0,    
+    SPI_CLOCK_SLOW          = 1,    
+    SPI_CLOCK_STANDARD      = 2,    
+    SPI_CLOCK_FAST          = 3,    
+    SPI_CLOCK_ULTRAFAST     = 4     
+} SPIClockSpeed_e;
+
+// ../inav/src/main/drivers/bus_spi.h
+typedef enum SPIDevice {
+    SPIINVALID = -1,
+    SPIDEV_1   = 0,
+    SPIDEV_2,
+    SPIDEV_3,
+    SPIDEV_4
+} SPIDevice;
+
+// ../inav/src/main/drivers/bus_spi.h
+enum SPIDevice {
+    SPIINVALID = -1,
+    SPIDEV_1   = 0,
+    SPIDEV_2,
+    SPIDEV_3,
+    SPIDEV_4
+} SPIDevice;
+typedef enum SPIDevice SPIDevice;
+
+// ../inav/src/main/drivers/rcc.h
+enum rcc_reg {
+    RCC_EMPTY = 0,   
+    RCC_AHB,        
+    RCC_APB2,       
+    RCC_APB1,       
+    RCC_AHB1,       
+    RCC_AHB2,
+    RCC_APB1L,
+    RCC_APB1H,
+    RCC_AHB3,
+    RCC_APB3,
+    RCC_AHB4,
+    RCC_APB4
+};
+typedef enum rcc_reg rcc_reg;
+
+// ../inav/src/main/drivers/sdio.h
+typedef enum {
+    SDIOINVALID = -1,
+    SDIODEV_1 = 0,
+    SDIODEV_2,
+} SDIODevice;
+
+// ../inav/src/main/drivers/osd.h
+typedef enum {
+    VIDEO_SYSTEM_AUTO = 0,
+    VIDEO_SYSTEM_PAL,
+    VIDEO_SYSTEM_NTSC,
+    VIDEO_SYSTEM_HDZERO,
+    VIDEO_SYSTEM_DJIWTF,
+    VIDEO_SYSTEM_AVATAR,
+    VIDEO_SYSTEM_DJICOMPAT,
+    VIDEO_SYSTEM_DJICOMPAT_HD,
+    VIDEO_SYSTEM_DJI_NATIVE
+} videoSystem_e;
+
+// ../inav/src/main/drivers/osd.h
+typedef enum {
+    OSD_DRIVER_NONE = 0,
+    OSD_DRIVER_MAX7456 = 1,
+} osdDriver_e;
+
+// ../inav/src/main/drivers/bus.h
+typedef enum {
+    BUS_SPEED_INITIALIZATION = 0,
+    BUS_SPEED_SLOW           = 1,
+    BUS_SPEED_STANDARD       = 2,
+    BUS_SPEED_FAST           = 3,
+    BUS_SPEED_ULTRAFAST      = 4
+} busSpeed_e;
+
+// ../inav/src/main/drivers/bus.h
+typedef enum {
+    BUSTYPE_ANY  = 0,
+    BUSTYPE_NONE = 0,
+    BUSTYPE_I2C  = 1,
+    BUSTYPE_SPI  = 2,
+    BUSTYPE_SDIO = 3,
+} busType_e;
+
+// ../inav/src/main/drivers/bus.h
+typedef enum {
+    BUSINDEX_1  = 0,
+    BUSINDEX_2  = 1,
+    BUSINDEX_3  = 2,
+    BUSINDEX_4  = 3
+} busIndex_e;
+
+// ../inav/src/main/drivers/bus.h
+typedef enum {
+    DEVHW_NONE = 0,
+
+    
+    DEVHW_MPU6000,
+    DEVHW_MPU6500,
+    DEVHW_BMI160,
+    DEVHW_BMI088_GYRO,
+    DEVHW_BMI088_ACC,
+    DEVHW_ICM20689,
+    DEVHW_ICM42605,
+    DEVHW_BMI270,
+    DEVHW_LSM6D,
+    
+    DEVHW_MPU9250,
+
+    
+    DEVHW_BMP085,
+    DEVHW_BMP280,
+    DEVHW_MS5611,
+    DEVHW_MS5607,
+    DEVHW_LPS25H,
+    DEVHW_SPL06,
+    DEVHW_BMP388,
+    DEVHW_DPS310,
+    DEVHW_B2SMPB,
+
+    
+    DEVHW_HMC5883,
+    DEVHW_AK8963,
+    DEVHW_AK8975,
+    DEVHW_IST8310_0,
+    DEVHW_IST8310_1,
+    DEVHW_IST8308,
+    DEVHW_QMC5883,
+    DEVHW_MAG3110,
+    DEVHW_LIS3MDL,
+    DEVHW_RM3100,
+    DEVHW_VCM5883,
+    DEVHW_MLX90393,
+
+    
+    DEVHW_LM75_0,
+    DEVHW_LM75_1,
+    DEVHW_LM75_2,
+    DEVHW_LM75_3,
+    DEVHW_LM75_4,
+    DEVHW_LM75_5,
+    DEVHW_LM75_6,
+    DEVHW_LM75_7,
+
+    
+    DEVHW_DS2482,
+
+    
+    DEVHW_MAX7456,
+
+    
+    DEVHW_SRF10,
+    DEVHW_VL53L0X,
+    DEVHW_VL53L1X,
+    DEVHW_US42,
+    DEVHW_TOF10120_I2C,
+    DEVHW_TERARANGER_EVO_I2C,
+
+    
+    DEVHW_MS4525,       
+    DEVHW_DLVR,         
+    DEVHW_M25P16,       
+    DEVHW_W25N01G,      
+    DEVHW_UG2864,       
+    DEVHW_SDCARD,       
+    DEVHW_IRLOCK,       
+    DEVHW_PCF8574,      
+} devHardwareType_e;
+
+// ../inav/src/main/drivers/bus.h
+typedef enum {
+    DEVFLAGS_NONE                       = 0,
+    DEVFLAGS_USE_RAW_REGISTERS          = (1 << 0),     
+
+    
+    DEVFLAGS_USE_MANUAL_DEVICE_SELECT   = (1 << 1),     
+    DEVFLAGS_SPI_MODE_0                 = (1 << 2),     
+} deviceFlags_e;
+
+// ../inav/src/main/drivers/system.h
+typedef enum {
+    FAILURE_DEVELOPER = 0,
+    FAILURE_MISSING_ACC,
+    FAILURE_ACC_INIT,
+    FAILURE_ACC_INCOMPATIBLE,
+    FAILURE_INVALID_EEPROM_CONTENTS,
+    FAILURE_FLASH_WRITE_FAILED,
+    FAILURE_GYRO_INIT_FAILED,
+    FAILURE_FLASH_READ_FAILED,
+} failureMode_e;
+
+// ../inav/src/main/drivers/adc_impl.h
+typedef enum ADCDevice {
+    ADCINVALID = -1,
+    ADCDEV_1   = 0,
+#if defined(STM32F4) || defined(STM32F7) || defined(STM32H7)
+    ADCDEV_2,
+    ADCDEV_3,
+    ADCDEV_MAX = ADCDEV_3,
+#else
+    ADCDEV_MAX = ADCDEV_1,
+#endif
+    ADCDEV_COUNT = ADCDEV_MAX + 1
+} ADCDevice;
+
+// ../inav/src/main/drivers/adc_impl.h
+enum ADCDevice {
+    ADCINVALID = -1,
+    ADCDEV_1   = 0,
+#if defined(STM32F4) || defined(STM32F7) || defined(STM32H7)
+    ADCDEV_2,
+    ADCDEV_3,
+    ADCDEV_MAX = ADCDEV_3,
+#else
+    ADCDEV_MAX = ADCDEV_1,
+#endif
+    ADCDEV_COUNT = ADCDEV_MAX + 1
+} ADCDevice;
+typedef enum ADCDevice ADCDevice;
+
+// ../inav/src/main/drivers/persistent.h
+typedef enum {
+    PERSISTENT_OBJECT_MAGIC = 0,
+    PERSISTENT_OBJECT_RESET_REASON,
+    PERSISTENT_OBJECT_COUNT,
+} persistentObjectId_e;
+
+// ../inav/src/main/drivers/gimbal_common.h
+typedef enum {
+    GIMBAL_DEV_UNSUPPORTED = 0,
+    GIMBAL_DEV_SERIAL,
+    GIMBAL_DEV_UNKNOWN=0xFF
+} gimbalDevType_e;
+
+// ../inav/src/main/drivers/gimbal_common.h
+typedef enum {
+    GIMBAL_MODE_FOLLOW = 0,
+    GIMBAL_MODE_TILT_LOCK = (1<<0),
+    GIMBAL_MODE_ROLL_LOCK = (1<<1),
+    GIMBAL_MODE_PAN_LOCK  = (1<<2),
+} gimbal_htk_mode_e;
+
+// ../inav/src/main/drivers/pwm_mapping.h
+typedef enum {
+    PWM_TYPE_STANDARD = 0,
+    PWM_TYPE_ONESHOT125,
+    PWM_TYPE_MULTISHOT,
+    PWM_TYPE_BRUSHED,
+    PWM_TYPE_DSHOT150,
+    PWM_TYPE_DSHOT300,
+    PWM_TYPE_DSHOT600,
+} motorPwmProtocolTypes_e;
+
+// ../inav/src/main/drivers/pwm_mapping.h
+typedef enum {
+    SERVO_TYPE_PWM = 0,
+    SERVO_TYPE_SBUS,
+    SERVO_TYPE_SBUS_PWM
+} servoProtocolType_e;
+
+// ../inav/src/main/drivers/pwm_mapping.h
+typedef enum {
+    PIN_LABEL_NONE = 0,
+    PIN_LABEL_LED
+} pinLabel_e;
+
+// ../inav/src/main/drivers/pwm_mapping.h
+typedef enum {
+    PWM_INIT_ERROR_NONE = 0,
+    PWM_INIT_ERROR_TOO_MANY_MOTORS,
+    PWM_INIT_ERROR_TOO_MANY_SERVOS,
+    PWM_INIT_ERROR_NOT_ENOUGH_MOTOR_OUTPUTS,
+    PWM_INIT_ERROR_NOT_ENOUGH_SERVO_OUTPUTS,
+    PWM_INIT_ERROR_TIMER_INIT_FAILED,
+} pwmInitError_e;
+
+// ../inav/src/main/drivers/serial_uart.h
+typedef enum {
+    UARTDEV_1 = 0,
+    UARTDEV_2 = 1,
+    UARTDEV_3 = 2,
+    UARTDEV_4 = 3,
+    UARTDEV_5 = 4,
+    UARTDEV_6 = 5,
+    UARTDEV_7 = 6,
+    UARTDEV_8 = 7,
+    UARTDEV_MAX
+} UARTDevice_e;
+
+// ../inav/src/main/drivers/logging_codes.h
+typedef enum {
+    BOOT_EVENT_FLAGS_NONE           = 0,
+    BOOT_EVENT_FLAGS_WARNING        = 1 << 0,
+    BOOT_EVENT_FLAGS_ERROR          = 1 << 1,
+
+    BOOT_EVENT_FLAGS_PARAM16        = 1 << 14,
+    BOOT_EVENT_FLAGS_PARAM32        = 1 << 15
+} bootLogFlags_e;
+
+// ../inav/src/main/drivers/logging_codes.h
+typedef enum {
+    BOOT_EVENT_CONFIG_LOADED            = 0,
+    BOOT_EVENT_SYSTEM_INIT_DONE         = 1,
+    BOOT_EVENT_PWM_INIT_DONE            = 2,
+    BOOT_EVENT_EXTRA_BOOT_DELAY         = 3,
+    BOOT_EVENT_SENSOR_INIT_DONE         = 4,
+    BOOT_EVENT_GPS_INIT_DONE            = 5,
+    BOOT_EVENT_LEDSTRIP_INIT_DONE       = 6,
+    BOOT_EVENT_TELEMETRY_INIT_DONE      = 7,
+    BOOT_EVENT_SYSTEM_READY             = 8,
+    BOOT_EVENT_GYRO_DETECTION           = 9,
+    BOOT_EVENT_ACC_DETECTION            = 10,
+    BOOT_EVENT_BARO_DETECTION           = 11,
+    BOOT_EVENT_MAG_DETECTION            = 12,
+    BOOT_EVENT_RANGEFINDER_DETECTION    = 13,
+    BOOT_EVENT_MAG_INIT_FAILED          = 14,
+    BOOT_EVENT_HMC5883L_READ_OK_COUNT   = 15,
+    BOOT_EVENT_HMC5883L_READ_FAILED     = 16,
+    BOOT_EVENT_HMC5883L_SATURATION      = 17,
+    BOOT_EVENT_TIMER_CH_SKIPPED         = 18,   
+    BOOT_EVENT_TIMER_CH_MAPPED          = 19,   
+    BOOT_EVENT_PITOT_DETECTION          = 20,
+    BOOT_EVENT_TEMP_SENSOR_DETECTION    = 21,
+    BOOT_EVENT_1WIRE_DETECTION          = 22,
+    BOOT_EVENT_HARDWARE_IO_CONFLICT     = 23,   
+    BOOT_EVENT_OPFLOW_DETECTION         = 24,
+
+    BOOT_EVENT_CODE_COUNT
+} bootLogEventCode_e;
+
+// ../inav/src/main/drivers/pwm_esc_detect.h
+typedef enum {
+    MOTOR_UNKNOWN = 0,
+    MOTOR_BRUSHED,
+    MOTOR_BRUSHLESS
+} HardwareMotorTypes_e;
+
+// ../inav/src/main/drivers/compass/compass_mpu9250.c
+typedef enum {
+    CHECK_STATUS = 0,
+    WAITING_FOR_STATUS,
+    WAITING_FOR_DATA
+} mpu9250CompassReadState_e;
+
+// ../inav/src/main/drivers/accgyro/accgyro_bmi270.c
+typedef enum {
+    BMI270_REG_CHIP_ID = 0x00,
+    BMI270_REG_ERR_REG = 0x02,
+    BMI270_REG_STATUS = 0x03,
+    BMI270_REG_ACC_DATA_X_LSB = 0x0C,
+    BMI270_REG_GYR_DATA_X_LSB = 0x12,
+    BMI270_REG_SENSORTIME_0 = 0x18,
+    BMI270_REG_SENSORTIME_1 = 0x19,
+    BMI270_REG_SENSORTIME_2 = 0x1A,
+    BMI270_REG_EVENT = 0x1B,
+    BMI270_REG_INT_STATUS_0 = 0x1C,
+    BMI270_REG_INT_STATUS_1 = 0x1D,
+    BMI270_REG_INTERNAL_STATUS = 0x21,
+    BMI270_REG_TEMPERATURE_LSB = 0x22,
+    BMI270_REG_TEMPERATURE_MSB = 0x23,
+    BMI270_REG_FIFO_LENGTH_LSB = 0x24,
+    BMI270_REG_FIFO_LENGTH_MSB = 0x25,
+    BMI270_REG_FIFO_DATA = 0x26,
+    BMI270_REG_ACC_CONF = 0x40,
+    BMI270_REG_ACC_RANGE = 0x41,
+    BMI270_REG_GYRO_CONF = 0x42,
+    BMI270_REG_GYRO_RANGE = 0x43,
+    BMI270_REG_AUX_CONF = 0x44,
+    BMI270_REG_FIFO_DOWNS = 0x45,
+    BMI270_REG_FIFO_WTM_0 = 0x46,
+    BMI270_REG_FIFO_WTM_1 = 0x47,
+    BMI270_REG_FIFO_CONFIG_0 = 0x48,
+    BMI270_REG_FIFO_CONFIG_1 = 0x49,
+    BMI270_REG_SATURATION = 0x4A,
+    BMI270_REG_INT1_IO_CTRL = 0x53,
+    BMI270_REG_INT2_IO_CTRL = 0x54,
+    BMI270_REG_INT_LATCH = 0x55,
+    BMI270_REG_INT1_MAP_FEAT = 0x56,
+    BMI270_REG_INT2_MAP_FEAT = 0x57,
+    BMI270_REG_INT_MAP_DATA = 0x58,
+    BMI270_REG_INIT_CTRL = 0x59,
+    BMI270_REG_INIT_DATA = 0x5E,
+    BMI270_REG_ACC_SELF_TEST = 0x6D,
+    BMI270_REG_GYR_SELF_TEST_AXES = 0x6E,
+    BMI270_REG_PWR_CONF = 0x7C,
+    BMI270_REG_PWR_CTRL = 0x7D,
+    BMI270_REG_CMD = 0x7E,
+} bmi270Register_e;
+
+// ../inav/src/main/drivers/accgyro/accgyro_mpu.h
+enum gyro_fsr_e {
+    INV_FSR_250DPS = 0,
+    INV_FSR_500DPS,
+    INV_FSR_1000DPS,
+    INV_FSR_2000DPS,
+    NUM_GYRO_FSR
+};
+typedef enum gyro_fsr_e gyro_fsr_e;
+
+// ../inav/src/main/drivers/accgyro/accgyro_mpu.h
+enum fchoice_b {
+    FCB_DISABLED = 0,
+    FCB_8800_32,
+    FCB_3600_32
+};
+typedef enum fchoice_b fchoice_b;
+
+// ../inav/src/main/drivers/accgyro/accgyro_mpu.h
+enum clock_sel_e {
+    INV_CLK_INTERNAL = 0,
+    INV_CLK_PLL,
+    NUM_CLK
+};
+typedef enum clock_sel_e clock_sel_e;
+
+// ../inav/src/main/drivers/accgyro/accgyro_mpu.h
+enum accel_fsr_e {
+    INV_FSR_2G = 0,
+    INV_FSR_4G,
+    INV_FSR_8G,
+    INV_FSR_16G,
+    NUM_ACCEL_FSR
+};
+typedef enum accel_fsr_e accel_fsr_e;
+
+// ../inav/src/main/drivers/accgyro/accgyro_lsm6dxx.h
+typedef enum {
+    LSM6DXX_REG_COUNTER_BDR1 = 0x0B,
+    LSM6DXX_REG_INT1_CTRL = 0x0D,  
+    LSM6DXX_REG_INT2_CTRL = 0x0E,  
+    LSM6DXX_REG_WHO_AM_I = 0x0F,   
+    LSM6DXX_REG_CTRL1_XL = 0x10,   
+    LSM6DXX_REG_CTRL2_G = 0x11,    
+    LSM6DXX_REG_CTRL3_C = 0x12,    
+    LSM6DXX_REG_CTRL4_C = 0x13,    
+    LSM6DXX_REG_CTRL5_C = 0x14,    
+    LSM6DXX_REG_CTRL6_C = 0x15,    
+    LSM6DXX_REG_CTRL7_G = 0x16,    
+    LSM6DXX_REG_CTRL8_XL = 0x17,   
+    LSM6DXX_REG_CTRL9_XL = 0x18,   
+    LSM6DXX_REG_CTRL10_C = 0x19,   
+    LSM6DXX_REG_STATUS = 0x1E,     
+    LSM6DXX_REG_OUT_TEMP_L = 0x20, 
+    LSM6DXX_REG_OUT_TEMP_H = 0x21, 
+    LSM6DXX_REG_OUTX_L_G = 0x22,   
+    LSM6DXX_REG_OUTX_H_G = 0x23,   
+    LSM6DXX_REG_OUTY_L_G = 0x24,   
+    LSM6DXX_REG_OUTY_H_G = 0x25,   
+    LSM6DXX_REG_OUTZ_L_G = 0x26,   
+    LSM6DXX_REG_OUTZ_H_G = 0x27,   
+    LSM6DXX_REG_OUTX_L_A = 0x28,   
+    LSM6DXX_REG_OUTX_H_A = 0x29,   
+    LSM6DXX_REG_OUTY_L_A = 0x2A,   
+    LSM6DXX_REG_OUTY_H_A = 0x2B,   
+    LSM6DXX_REG_OUTZ_L_A = 0x2C,   
+    LSM6DXX_REG_OUTZ_H_A = 0x2D,   
+} lsm6dxxRegister_e;
+
+// ../inav/src/main/drivers/accgyro/accgyro_lsm6dxx.h
+typedef enum {
+    LSM6DXX_VAL_COUNTER_BDR1_DDRY_PM = BIT(7),
+    LSM6DXX_VAL_INT1_CTRL = 0x02,             
+    LSM6DXX_VAL_INT2_CTRL = 0x00,             
+    LSM6DXX_VAL_CTRL1_XL_ODR833 = 0x07,       
+    LSM6DXX_VAL_CTRL1_XL_ODR1667 = 0x08,      
+    LSM6DXX_VAL_CTRL1_XL_ODR3332 = 0x09,      
+    LSM6DXX_VAL_CTRL1_XL_ODR3333 = 0x0A,      
+    LSM6DXX_VAL_CTRL1_XL_8G = 0x03,           
+    LSM6DXX_VAL_CTRL1_XL_16G = 0x01,          
+    LSM6DXX_VAL_CTRL1_XL_LPF1 = 0x00,         
+    LSM6DXX_VAL_CTRL1_XL_LPF2 = 0x01,         
+    LSM6DXX_VAL_CTRL2_G_ODR6664 = 0x0A,       
+    LSM6DXX_VAL_CTRL2_G_2000DPS = 0x03,       
+    
+    LSM6DXX_VAL_CTRL3_C_H_LACTIVE = 0,        
+    LSM6DXX_VAL_CTRL3_C_PP_OD = 0,            
+    LSM6DXX_VAL_CTRL3_C_SIM = 0,              
+    LSM6DXX_VAL_CTRL3_C_IF_INC = BIT(2),      
+    LSM6DXX_VAL_CTRL4_C_DRDY_MASK = BIT(3),   
+    LSM6DXX_VAL_CTRL4_C_I2C_DISABLE = BIT(2), 
+    LSM6DXX_VAL_CTRL4_C_LPF1_SEL_G = BIT(1),  
+    LSM6DXX_VAL_CTRL6_C_XL_HM_MODE = 0,       
+    LSM6DXX_VAL_CTRL6_C_FTYPE_300HZ = 0x00,   
+    LSM6DXX_VAL_CTRL6_C_FTYPE_201HZ = 0x01,   
+    LSM6DXX_VAL_CTRL6_C_FTYPE_102HZ = 0x02,   
+    LSM6DXX_VAL_CTRL6_C_FTYPE_603HZ = 0x03,   
+    LSM6DXX_VAL_CTRL7_G_HP_EN_G = BIT(6),   
+    LSM6DXX_VAL_CTRL7_G_HPM_G_16 = 0x00,      
+    LSM6DXX_VAL_CTRL7_G_HPM_G_65 = 0x01,      
+    LSM6DXX_VAL_CTRL7_G_HPM_G_260 = 0x02,     
+    LSM6DXX_VAL_CTRL7_G_HPM_G_1040 = 0x03,    
+    LSM6DXX_VAL_CTRL9_XL_I3C_DISABLE = BIT(1),
+} lsm6dxxConfigValues_e;
+
+// ../inav/src/main/drivers/accgyro/accgyro_lsm6dxx.h
+typedef enum {
+    LSM6DXX_MASK_COUNTER_BDR1 = 0x80,    
+    LSM6DXX_MASK_CTRL3_C = 0x3C,         
+    LSM6DXX_MASK_CTRL3_C_RESET = BIT(0), 
+    LSM6DXX_MASK_CTRL4_C = 0x0E,         
+    LSM6DXX_MASK_CTRL6_C = 0x17,         
+    LSM6DXX_MASK_CTRL7_G = 0x70,         
+    LSM6DXX_MASK_CTRL9_XL = 0x02,        
+    LSM6DSL_MASK_CTRL6_C = 0x13,         
+
+} lsm6dxxConfigMasks_e;
+
+// ../inav/src/main/drivers/accgyro/accgyro_lsm6dxx.h
+typedef enum {
+    GYRO_HARDWARE_LPF_NORMAL,
+    GYRO_HARDWARE_LPF_OPTION_1,
+    GYRO_HARDWARE_LPF_OPTION_2,
+    GYRO_HARDWARE_LPF_EXPERIMENTAL,
+    GYRO_HARDWARE_LPF_COUNT
+} gyroHardwareLpf_e;
+
+// ../inav/src/main/drivers/rangefinder/rangefinder_vl53l0x.c
+typedef enum {
+    VcselPeriodPreRange,
+    VcselPeriodFinalRange
+} vcselPeriodType_e;
+
+// ../inav/src/main/drivers/rangefinder/rangefinder_vl53l0x.c
+typedef enum {
+    MEASUREMENT_START,
+    MEASUREMENT_WAIT,
+    MEASUREMENT_READ,
+} measurementSteps_e;
+
+// ../inav/src/main/drivers/sdcard/sdmmc_sdio_f4xx.c
+typedef enum
+{
+    SD_SINGLE_BLOCK    = 0,             
+    SD_MULTIPLE_BLOCK  = 1,             
+} SD_Operation_t;
+
+// ../inav/src/main/drivers/sdcard/sdmmc_sdio_f4xx.c
+typedef enum
+{
+    SD_CARD_READY                  = ((uint32_t)0x00000001),  
+    SD_CARD_IDENTIFICATION         = ((uint32_t)0x00000002),  
+    SD_CARD_STANDBY                = ((uint32_t)0x00000003),  
+    SD_CARD_TRANSFER               = ((uint32_t)0x00000004),  
+    SD_CARD_SENDING                = ((uint32_t)0x00000005),  
+    SD_CARD_RECEIVING              = ((uint32_t)0x00000006),  
+    SD_CARD_PROGRAMMING            = ((uint32_t)0x00000007),  
+    SD_CARD_DISCONNECTED           = ((uint32_t)0x00000008),  
+    SD_CARD_ERROR                  = ((uint32_t)0x000000FF)   
+} SD_CardState_t;
+
+// ../inav/src/main/drivers/sdcard/sdmmc_sdio.h
+typedef enum
+{
+  
+    SD_CMD_CRC_FAIL                    = (1),   
+    SD_DATA_CRC_FAIL                   = (2),   
+    SD_CMD_RSP_TIMEOUT                 = (3),   
+    SD_DATA_TIMEOUT                    = (4),   
+    SD_TX_UNDERRUN                     = (5),   
+    SD_RX_OVERRUN                      = (6),   
+    SD_START_BIT_ERR                   = (7),   
+    SD_CMD_OUT_OF_RANGE                = (8),   
+    SD_ADDR_MISALIGNED                 = (9),   
+    SD_BLOCK_LEN_ERR                   = (10),  
+    SD_ERASE_SEQ_ERR                   = (11),  
+    SD_BAD_ERASE_PARAM                 = (12),  
+    SD_WRITE_PROT_VIOLATION            = (13),  
+    SD_LOCK_UNLOCK_FAILED              = (14),  
+    SD_COM_CRC_FAILED                  = (15),  
+    SD_ILLEGAL_CMD                     = (16),  
+    SD_CARD_ECC_FAILED                 = (17),  
+    SD_CC_ERROR                        = (18),  
+    SD_GENERAL_UNKNOWN_ERROR           = (19),  
+    SD_STREAM_READ_UNDERRUN            = (20),  
+    SD_STREAM_WRITE_OVERRUN            = (21),  
+    SD_CID_CSD_OVERWRITE               = (22),  
+    SD_WP_ERASE_SKIP                   = (23),  
+    SD_CARD_ECC_DISABLED               = (24),  
+    SD_ERASE_RESET                     = (25),  
+    SD_AKE_SEQ_ERROR                   = (26),  
+    SD_INVALID_VOLTRANGE               = (27),
+    SD_ADDR_OUT_OF_RANGE               = (28),
+    SD_SWITCH_ERROR                    = (29),
+    SD_SDMMC_DISABLED                  = (30),
+    SD_SDMMC_FUNCTION_BUSY             = (31),
+    SD_SDMMC_FUNCTION_FAILED           = (32),
+    SD_SDMMC_UNKNOWN_FUNCTION          = (33),
+    SD_OUT_OF_BOUND                    = (34),
+
+
+    
+    SD_INTERNAL_ERROR                  = (35),
+    SD_NOT_CONFIGURED                  = (36),
+    SD_REQUEST_PENDING                 = (37),
+    SD_REQUEST_NOT_APPLICABLE          = (38),
+    SD_INVALID_PARAMETER               = (39),
+    SD_UNSUPPORTED_FEATURE             = (40),
+    SD_UNSUPPORTED_HW                  = (41),
+    SD_ERROR                           = (42),
+    SD_BUSY                            = (43),
+    SD_OK                              = (0)
+} SD_Error_t;
+
+// ../inav/src/main/drivers/sdcard/sdmmc_sdio.h
+typedef enum
+{
+    SD_STD_CAPACITY_V1_1       = 0,
+    SD_STD_CAPACITY_V2_0       = 1,
+    SD_HIGH_CAPACITY           = 2,
+    SD_MULTIMEDIA              = 3,
+    SD_SECURE_DIGITAL_IO       = 4,
+    SD_HIGH_SPEED_MULTIMEDIA   = 5,
+    SD_SECURE_DIGITAL_IO_COMBO = 6,
+    SD_HIGH_CAPACITY_MMC       = 7,
+} SD_CardType_t;
+
+// ../inav/src/main/drivers/sdcard/sdcard_sdio.c
+typedef enum {
+    SDCARD_RECEIVE_SUCCESS,
+    SDCARD_RECEIVE_BLOCK_IN_PROGRESS,
+    SDCARD_RECEIVE_ERROR
+} sdcardReceiveBlockStatus_e;
+
+// ../inav/src/main/drivers/sdcard/sdcard.h
+typedef enum {
+    SDCARD_BLOCK_OPERATION_READ,
+    SDCARD_BLOCK_OPERATION_WRITE,
+    SDCARD_BLOCK_OPERATION_ERASE,
+} sdcardBlockOperation_e;
+
+// ../inav/src/main/drivers/sdcard/sdcard.h
+typedef enum {
+    SDCARD_OPERATION_IN_PROGRESS,
+    SDCARD_OPERATION_BUSY,
+    SDCARD_OPERATION_SUCCESS,
+    SDCARD_OPERATION_FAILURE
+} sdcardOperationStatus_e;
+
+// ../inav/src/main/drivers/sdcard/sdcard_impl.h
+typedef enum {
+    
+    SDCARD_STATE_NOT_PRESENT = 0,
+    SDCARD_STATE_RESET,
+    SDCARD_STATE_CARD_INIT_IN_PROGRESS,
+    SDCARD_STATE_INITIALIZATION_RECEIVE_CID,
+
+    
+    SDCARD_STATE_READY,
+    SDCARD_STATE_READING,
+    SDCARD_STATE_SENDING_WRITE,
+    SDCARD_STATE_WAITING_FOR_WRITE,
+    SDCARD_STATE_WRITING_MULTIPLE_BLOCKS,
+    SDCARD_STATE_STOPPING_MULTIPLE_BLOCK_WRITE,
+} sdcardState_e;
+
+// ../inav/src/main/drivers/sdcard/sdcard_spi.c
+typedef enum {
+    SDCARD_RECEIVE_SUCCESS,
+    SDCARD_RECEIVE_BLOCK_IN_PROGRESS,
+    SDCARD_RECEIVE_ERROR,
+} sdcardReceiveBlockStatus_e;
 

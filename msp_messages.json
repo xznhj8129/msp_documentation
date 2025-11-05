@@ -8078,9 +8078,8 @@
                 {
                     "name": "itemIndex",
                     "ctype": "uint8_t",
-                    "desc": "Index of the OSD item (`OSD_ITEM_*` enum)",
-                    "units": "Index",
-                    "enum": "OSD_ITEM_*"
+                    "desc": "Index of the OSD item",
+                    "units": "Index"
                 },
                 {
                     "name": "itemPosition",
@@ -9094,9 +9093,9 @@
                 {
                     "name": "operation",
                     "ctype": "uint8_t",
-                    "desc": "Enum `logicConditionOp_e` Logical operation (AND, OR, XOR, etc.)",
+                    "desc": "Enum `logicOperation_e` Logical operation (AND, OR, XOR, etc.)",
                     "units": "",
-                    "enum": "logicConditionOp_e"
+                    "enum": "logicOperation_e"
                 },
                 {
                     "name": "operandAType",
@@ -9164,9 +9163,9 @@
                 {
                     "name": "operation",
                     "ctype": "uint8_t",
-                    "desc": "Enum `logicConditionOp_e` Logical operation",
+                    "desc": "Enum `logicOperation_e` Logical operation",
                     "units": "",
-                    "enum": "logicConditionOp_e"
+                    "enum": "logicOperation_e"
                 },
                 {
                     "name": "operandAType",
@@ -9719,9 +9718,9 @@
                 {
                     "name": "operation",
                     "ctype": "uint8_t",
-                    "desc": "Enum `logicConditionOp_e` Logical operation",
+                    "desc": "Enum `logicOperation_e` Logical operation",
                     "units": "",
-                    "enum": "logicConditionOp_e"
+                    "enum": "logicOperation_e"
                 },
                 {
                     "name": "operandAType",
@@ -10322,9 +10321,8 @@
                         {
                             "name": "emitterType",
                             "ctype": "uint8_t",
-                            "desc": "Emitter category (`adsbVehicle->vehicleValues.emitterType`).",
-                            "units": "",
-                            "enum": "ADSB_EMITTER_TYPE"
+                            "desc": "Emitter category (`adsbVehicle->vehicleValues.emitterType`) (refers to enum 'ADSB_EMITTER_TYPE', but none found)",
+                            "units": ""
                         },
                         {
                             "name": "ttl",
@@ -10497,7 +10495,7 @@
                     "ctype": "uint8_t",
                     "desc": "Label for special pin usage (`PIN_LABEL_*` enum, e.g., `PIN_LABEL_LED`). 0 (`PIN_LABEL_NONE`) otherwise",
                     "units": "",
-                    "enum": "PIN_LABEL_*"
+                    "enum": "pinLabel_e"
                 }
             ],
             "repeating": "for each Motor/Servo timer"
