@@ -14,7 +14,9 @@ SUBDIRS = [
     'io',
     'flight',
     'fc',
-    'drivers'
+    'drivers',
+    'blackbox',
+    'build'
 ]
 
 def strip_comments(text: str) -> str:
@@ -143,22 +145,28 @@ def extract_defines_with_conditionals(text: str):
 all_out_lines = []
 total_defines = 0
 file_hits = 0
+blacklist = ["drivers/bus_i2c_","drivers/serial_uart_","drivers/io_def_"]
 
 for sd in SUBDIRS:
     root = BASE / sd
     if not root.is_dir():
         continue
     for fn in root.rglob('*'):
-        if fn.suffix in ('.c', '.h'):
-            txt = fn.read_text(errors='ignore')
-            extracted, count = extract_defines_with_conditionals(txt)
-            if count > 0:
-                file_hits += 1
-                all_out_lines.append(f"\n// {fn}\n")
-                all_out_lines.extend(extracted)
-                if not (all_out_lines and all_out_lines[-1].endswith('\n\n')):
-                    all_out_lines.append('\n')
-                total_defines += count
+        if fn.suffix not in ('.c', '.h'):
+            continue
+        p = fn.as_posix()  # normalize for substring checks
+        if any(b in p for b in blacklist):
+            continue
+        txt = fn.read_text(errors='ignore')
+        extracted, count = extract_defines_with_conditionals(txt)
+        if count > 0:
+            print(fn)
+            file_hits += 1
+            all_out_lines.append(f"\n// {fn}\n")
+            all_out_lines.extend(extracted)
+            if not (all_out_lines and all_out_lines[-1].endswith('\n\n')):
+                all_out_lines.append('\n')
+            total_defines += count
 
 with open('all_defines.h', 'w') as out:
     out.write(f"// Consolidated defines - generated on {datetime.datetime.now()}\n\n")

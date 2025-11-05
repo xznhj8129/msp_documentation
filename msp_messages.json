@@ -8982,14 +8982,14 @@
                     "units": ""
                 },
                 {
-                    "name": "targetChannel",
+                    "name": "p2TargetChannel",
                     "ctype": "uint8_t",
                     "desc": "(Optional) Profile 2 Target channel",
                     "units": "",
                     "optional": true
                 },
                 {
-                    "name": "inputSource",
+                    "name": "p2InputSource",
                     "ctype": "uint8_t",
                     "desc": "(Optional) Profile 2 Enum `inputSource_e` Input source",
                     "units": "",
@@ -8997,21 +8997,21 @@
                     "enum": "inputSource_e"
                 },
                 {
-                    "name": "rate",
+                    "name": "p2Rate",
                     "ctype": "int16_t",
                     "desc": "(Optional) Profile 2 Rate",
                     "units": "",
                     "optional": true
                 },
                 {
-                    "name": "speed",
+                    "name": "p2Speed",
                     "ctype": "uint8_t",
                     "desc": "(Optional) Profile 2 Speed",
                     "units": "",
                     "optional": true
                 },
                 {
-                    "name": "conditionId",
+                    "name": "p2ConditionId",
                     "ctype": "int8_t",
                     "desc": "(Optional) Profile 2 Logic Condition ID",
                     "units": "",

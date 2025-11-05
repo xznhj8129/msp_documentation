@@ -1,4 +1,4 @@
-// Consolidated defines - generated on 2025-11-04 19:13:08.289265
+// Consolidated defines - generated on 2025-11-04 20:56:27.015842
 
 
 // ../inav/src/main/sensors/pitotmeter.c
@@ -2421,11 +2421,6 @@
 #define TIM_IS_SERVO_ONLY(flags) (!TIM_IS_MOTOR(flags) && TIM_IS_SERVO(flags))
 
 
-// ../inav/src/main/drivers/serial_uart_stm32f7xx.c
-#define UART_RX_BUFFER_SIZE UART1_RX_BUFFER_SIZE
-#define UART_TX_BUFFER_SIZE UART1_TX_BUFFER_SIZE
-
-
 // ../inav/src/main/drivers/bus_spi_at32f43x.c
 #ifdef USE_SPI
 #ifndef SPI1_SCK_PIN
@@ -3274,52 +3269,6 @@
 #endif
 
 
-// ../inav/src/main/drivers/bus_i2c_stm32f40x.c
-#ifndef SOFT_I2C
-#define GPIO_AF_I2C GPIO_AF_I2C1
-#ifdef STM32F4
-#if defined(USE_I2C_PULLUP)
-#define IOCFG_I2C IO_CONFIG(GPIO_Mode_AF, GPIO_Speed_50MHz, GPIO_OType_OD, GPIO_PuPd_UP)
-#else
-#define IOCFG_I2C IOCFG_AF_OD
-#endif
-#ifndef I2C1_SCL
-#define I2C1_SCL PB8
-#endif
-#ifndef I2C1_SDA
-#define I2C1_SDA PB9
-#endif
-#else
-#ifndef I2C1_SCL
-#define I2C1_SCL PB6
-#endif
-#ifndef I2C1_SDA
-#define I2C1_SDA PB7
-#endif
-#define IOCFG_I2C   IO_CONFIG(GPIO_Mode_AF_OD, GPIO_Speed_50MHz)
-#endif
-#ifndef I2C2_SCL
-#define I2C2_SCL PB10
-#endif
-#ifndef I2C2_SDA
-#define I2C2_SDA PB11
-#endif
-#ifdef STM32F4
-#ifndef I2C3_SCL
-#define I2C3_SCL PA8
-#endif
-#ifndef I2C3_SDA
-#define I2C3_SDA PB4
-#endif
-#endif
-#endif
-
-
-// ../inav/src/main/drivers/serial_uart_at32f43x.c
-#define UART_RX_BUFFER_SIZE UART1_RX_BUFFER_SIZE
-#define UART_TX_BUFFER_SIZE UART1_RX_BUFFER_SIZE
-
-
 // ../inav/src/main/drivers/display_ug2864hsweg01.c
 #ifdef USE_OLED_UG2864
 #define INVERSE_CHAR_FORMAT 0x7f
@@ -3558,11 +3507,6 @@
 
 // ../inav/src/main/drivers/flash.h
 #define FLASH_PARTITION_SECTOR_COUNT(partition) (partition->endSector + 1 - partition->startSector)
-
-
-// ../inav/src/main/drivers/serial_uart_stm32f4xx.c
-#define UART_RX_BUFFER_SIZE UART1_RX_BUFFER_SIZE
-#define UART_TX_BUFFER_SIZE UART1_RX_BUFFER_SIZE
 
 
 // ../inav/src/main/drivers/rcc.c
@@ -4045,46 +3989,6 @@
 #define CODE_FLASH_DURATION 250
 
 
-// ../inav/src/main/drivers/bus_i2c_hal.c
-#if !defined(SOFT_I2C) && defined(USE_I2C)
-#define CLOCKSPEED 800000
-#if defined(USE_I2C_PULLUP)
-#define IOCFG_I2C IO_CONFIG(GPIO_MODE_AF_OD, GPIO_SPEED_FREQ_VERY_HIGH, GPIO_PULLUP)
-#else
-#define IOCFG_I2C IOCFG_AF_OD
-#endif
-#ifndef I2C1_SCL
-#define I2C1_SCL PB6
-#endif
-#ifndef I2C1_SDA
-#define I2C1_SDA PB7
-#endif
-#ifndef I2C2_SCL
-#define I2C2_SCL PB10
-#endif
-#ifndef I2C2_SDA
-#define I2C2_SDA PB11
-#endif
-#ifndef I2C3_SCL
-#define I2C3_SCL PA8
-#endif
-#ifndef I2C3_SDA
-#define I2C3_SDA PB4
-#endif
-#if defined(USE_I2C_DEVICE_4)
-#ifndef I2C4_SCL
-#define I2C4_SCL PD12
-#endif
-#ifndef I2C4_SDA
-#define I2C4_SDA PD13
-#endif
-#endif
-#define I2C_DEFAULT_TIMEOUT     (I2C_TIMEOUT / 1000)
-#define TIMINGR(presc, scldel, sdadel, sclh, scll) \
-    ((presc << 28)|(scldel << 20)|(sdadel << 16)|(sclh << 8)|(scll << 0))
-#endif
-
-
 // ../inav/src/main/drivers/sdio.h
 #define SDIO_CFG_TO_DEV(x) ((x) - 1)
 #define SDIO_DEV_TO_CFG(x) ((x) + 1)
@@ -4394,41 +4298,6 @@
 #define DEF_TIM_AF__PI7__TCH_TIM8_CH3     D(3, 8)
 
 
-// ../inav/src/main/drivers/bus_i2c_at32f43x.c
-#if !defined(SOFT_I2C) && defined(USE_I2C)
-#define CLOCKSPEED 800000
-#define I2Cx_ADDRESS                     0x00
-#define UNSTICK_CLK_US 10
-#define UNSTICK_CLK_STRETCH (500/UNSTICK_CLK_US)
-#if defined(USE_I2C_PULLUP)
-#define IOCFG_I2C IOCFG_AF_OD_UP
-#else
-#define IOCFG_I2C IOCFG_AF_OD
-#endif
-#ifndef I2C1_SCL
-#define I2C1_SCL PA9
-#endif
-#ifndef I2C1_SDA
-#define I2C1_SDA PA10
-#endif
-#ifndef I2C2_SCL
-#define I2C2_SCL PD12
-#endif
-#ifndef I2C2_SDA
-#define I2C2_SDA PD13
-#endif
-#ifndef I2C3_SCL
-#define I2C3_SCL PC0
-#endif
-#ifndef I2C3_SDA
-#define I2C3_SDA PC1
-#endif
-#define I2C_DEFAULT_TIMEOUT     (I2C_TIMEOUT*288 / 1000  )
-#define TIMINGR(presc, scldel, sdadel, sclh, scll) \
-    ((presc << 28)|(scldel << 20)|(sdadel << 16)|(sclh << 8)|(scll << 0))
-#endif
-
-
 // ../inav/src/main/drivers/persistent.h
 #define RESET_NONE                                      0
 #define RESET_BOOTLOADER_REQUEST_ROM                    1
@@ -4491,17 +4360,6 @@
 #define UART8_TX_BUFFER_SIZE    256
 
 
-// ../inav/src/main/drivers/bus_i2c_soft.c
-#ifdef SOFT_I2C
-#define SCL_H         IOHi(scl)
-#define SCL_L         IOLo(scl)
-#define SDA_H         IOHi(sda)
-#define SDA_L         IOLo(sda)
-#define SCL_read      IORead(scl)
-#define SDA_read      IORead(sda)
-#endif
-
-
 // ../inav/src/main/drivers/io.h
 #define IO_TAG(pinid) DEFIO_TAG(pinid)
 #if defined(STM32F7) || defined(STM32H7)
@@ -4558,1481 +4416,6 @@
 # define IOCFG_IPD            0
 # define IOCFG_IPU            0
 # define IOCFG_IN_FLOATING    0
-#endif
-
-
-// ../inav/src/main/drivers/serial_uart_stm32h7xx.c
-#define UART_RX_BUFFER_SIZE UART1_RX_BUFFER_SIZE
-#define UART_TX_BUFFER_SIZE UART1_TX_BUFFER_SIZE
-#define UART_PIN_AF_HELPER(uart, pin)  CONCAT4(UART_PIN_AF_UART, uart, _, pin)
-#ifdef USE_UART1
-#define UART_PIN_AF_UART1_PA9       GPIO_AF7_USART1
-#define UART_PIN_AF_UART1_PA10      GPIO_AF7_USART1
-#define UART_PIN_AF_UART1_PB6       GPIO_AF7_USART1
-#define UART_PIN_AF_UART1_PB7       GPIO_AF7_USART1
-#define UART_PIN_AF_UART1_PB14      GPIO_AF4_USART1
-#define UART_PIN_AF_UART1_PB15      GPIO_AF4_USART1
-#endif
-#ifdef USE_UART4
-#define UART_PIN_AF_UART4_PA0       GPIO_AF8_UART4
-#define UART_PIN_AF_UART4_PA1       GPIO_AF8_UART4
-#define UART_PIN_AF_UART4_PA11      GPIO_AF6_UART4
-#define UART_PIN_AF_UART4_PA12      GPIO_AF6_UART4
-#define UART_PIN_AF_UART4_PB8       GPIO_AF8_UART4
-#define UART_PIN_AF_UART4_PB9       GPIO_AF8_UART4
-#define UART_PIN_AF_UART4_PC10      GPIO_AF8_UART4
-#define UART_PIN_AF_UART4_PC11      GPIO_AF8_UART4
-#define UART_PIN_AF_UART4_PD0       GPIO_AF8_UART4
-#define UART_PIN_AF_UART4_PD1       GPIO_AF8_UART4
-#endif
-#ifdef USE_UART5
-#define UART_PIN_AF_UART5_PB5       GPIO_AF14_UART5
-#define UART_PIN_AF_UART5_PB6       GPIO_AF14_UART5
-#define UART_PIN_AF_UART5_PB12      GPIO_AF14_UART5
-#define UART_PIN_AF_UART5_PB13      GPIO_AF14_UART5
-#define UART_PIN_AF_UART5_PD2       GPIO_AF8_UART5
-#define UART_PIN_AF_UART5_PC12      GPIO_AF8_UART5
-#endif
-#ifdef USE_UART7
-#define UART_PIN_AF_UART7_PA8       GPIO_AF11_UART7
-#define UART_PIN_AF_UART7_PA15      GPIO_AF11_UART7
-#define UART_PIN_AF_UART7_PB3       GPIO_AF11_UART7
-#define UART_PIN_AF_UART7_PB4       GPIO_AF11_UART7
-#define UART_PIN_AF_UART7_PE7       GPIO_AF7_UART7
-#define UART_PIN_AF_UART7_PE8       GPIO_AF7_UART7
-#define UART_PIN_AF_UART7_PF6       GPIO_AF7_UART7
-#define UART_PIN_AF_UART7_PF7       GPIO_AF7_UART7
-#endif
-
-
-// ../inav/src/main/drivers/io_def_generated.h
-#if defined(TARGET_IO_PORTA)
-# define DEFIO_PORT_A_USED_MASK TARGET_IO_PORTA
-# define DEFIO_PORT_A_USED_COUNT BITCOUNT(DEFIO_PORT_A_USED_MASK)
-#else
-# define DEFIO_PORT_A_USED_MASK 0
-# define DEFIO_PORT_A_USED_COUNT 0
-#endif
-#define DEFIO_PORT_A_OFFSET (0)
-#if defined(TARGET_IO_PORTB)
-# define DEFIO_PORT_B_USED_MASK TARGET_IO_PORTB
-# define DEFIO_PORT_B_USED_COUNT BITCOUNT(DEFIO_PORT_B_USED_MASK)
-#else
-# define DEFIO_PORT_B_USED_MASK 0
-# define DEFIO_PORT_B_USED_COUNT 0
-#endif
-#define DEFIO_PORT_B_OFFSET (DEFIO_PORT_A_USED_COUNT)
-#if defined(TARGET_IO_PORTC)
-# define DEFIO_PORT_C_USED_MASK TARGET_IO_PORTC
-# define DEFIO_PORT_C_USED_COUNT BITCOUNT(DEFIO_PORT_C_USED_MASK)
-#else
-# define DEFIO_PORT_C_USED_MASK 0
-# define DEFIO_PORT_C_USED_COUNT 0
-#endif
-#define DEFIO_PORT_C_OFFSET (DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT)
-#if defined(TARGET_IO_PORTD)
-# define DEFIO_PORT_D_USED_MASK TARGET_IO_PORTD
-# define DEFIO_PORT_D_USED_COUNT BITCOUNT(DEFIO_PORT_D_USED_MASK)
-#else
-# define DEFIO_PORT_D_USED_MASK 0
-# define DEFIO_PORT_D_USED_COUNT 0
-#endif
-#define DEFIO_PORT_D_OFFSET (DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT)
-#if defined(TARGET_IO_PORTE)
-# define DEFIO_PORT_E_USED_MASK TARGET_IO_PORTE
-# define DEFIO_PORT_E_USED_COUNT BITCOUNT(DEFIO_PORT_E_USED_MASK)
-#else
-# define DEFIO_PORT_E_USED_MASK 0
-# define DEFIO_PORT_E_USED_COUNT 0
-#endif
-#define DEFIO_PORT_E_OFFSET (DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT)
-#if defined(TARGET_IO_PORTF)
-# define DEFIO_PORT_F_USED_MASK TARGET_IO_PORTF
-# define DEFIO_PORT_F_USED_COUNT BITCOUNT(DEFIO_PORT_F_USED_MASK)
-#else
-# define DEFIO_PORT_F_USED_MASK 0
-# define DEFIO_PORT_F_USED_COUNT 0
-#endif
-#define DEFIO_PORT_F_OFFSET (DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT)
-#if defined(TARGET_IO_PORTG)
-# define DEFIO_PORT_G_USED_MASK TARGET_IO_PORTG
-# define DEFIO_PORT_G_USED_COUNT BITCOUNT(DEFIO_PORT_G_USED_MASK)
-#else
-# define DEFIO_PORT_G_USED_MASK 0
-# define DEFIO_PORT_G_USED_COUNT 0
-#endif
-#define DEFIO_PORT_G_OFFSET (DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT+DEFIO_PORT_F_USED_COUNT)
-#if defined(TARGET_IO_PORTH)
-# define DEFIO_PORT_H_USED_MASK TARGET_IO_PORTH
-# define DEFIO_PORT_H_USED_COUNT BITCOUNT(DEFIO_PORT_H_USED_MASK)
-#else
-# define DEFIO_PORT_H_USED_MASK 0
-# define DEFIO_PORT_H_USED_COUNT 0
-#endif
-#define DEFIO_PORT_H_OFFSET (DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT+DEFIO_PORT_F_USED_COUNT+DEFIO_PORT_G_USED_COUNT)
-#if defined(TARGET_IO_PORTI)
-# define DEFIO_PORT_I_USED_MASK TARGET_IO_PORTI
-# define DEFIO_PORT_I_USED_COUNT BITCOUNT(DEFIO_PORT_I_USED_MASK)
-#else
-# define DEFIO_PORT_I_USED_MASK 0
-# define DEFIO_PORT_I_USED_COUNT 0
-#endif
-#define DEFIO_PORT_I_OFFSET (DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT+DEFIO_PORT_F_USED_COUNT+DEFIO_PORT_G_USED_COUNT+DEFIO_PORT_H_USED_COUNT)
-#define DEFIO_GPIOID__A 0
-#define DEFIO_GPIOID__B 1
-#define DEFIO_GPIOID__C 2
-#define DEFIO_GPIOID__D 3
-#define DEFIO_GPIOID__E 4
-#define DEFIO_GPIOID__F 5
-#define DEFIO_GPIOID__G 6
-#define DEFIO_GPIOID__H 7
-#define DEFIO_GPIOID__I 8
-#if DEFIO_PORT_A_USED_MASK & BIT(0)
-# define DEFIO_TAG__PA0 DEFIO_TAG_MAKE(DEFIO_GPIOID__A, 0)
-# define DEFIO_TAG_E__PA0 DEFIO_TAG_MAKE(DEFIO_GPIOID__A, 0)
-# define DEFIO_REC__PA0 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_A_USED_MASK & (BIT(0) - 1)) + 0)
-#else
-# define DEFIO_TAG__PA0 defio_error_PA0_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PA0 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PA0 defio_error_PA0_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_A_USED_MASK & BIT(1)
-# define DEFIO_TAG__PA1 DEFIO_TAG_MAKE(DEFIO_GPIOID__A, 1)
-# define DEFIO_TAG_E__PA1 DEFIO_TAG_MAKE(DEFIO_GPIOID__A, 1)
-# define DEFIO_REC__PA1 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_A_USED_MASK & (BIT(1) - 1)) + 0)
-#else
-# define DEFIO_TAG__PA1 defio_error_PA1_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PA1 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PA1 defio_error_PA1_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_A_USED_MASK & BIT(2)
-# define DEFIO_TAG__PA2 DEFIO_TAG_MAKE(DEFIO_GPIOID__A, 2)
-# define DEFIO_TAG_E__PA2 DEFIO_TAG_MAKE(DEFIO_GPIOID__A, 2)
-# define DEFIO_REC__PA2 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_A_USED_MASK & (BIT(2) - 1)) + 0)
-#else
-# define DEFIO_TAG__PA2 defio_error_PA2_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PA2 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PA2 defio_error_PA2_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_A_USED_MASK & BIT(3)
-# define DEFIO_TAG__PA3 DEFIO_TAG_MAKE(DEFIO_GPIOID__A, 3)
-# define DEFIO_TAG_E__PA3 DEFIO_TAG_MAKE(DEFIO_GPIOID__A, 3)
-# define DEFIO_REC__PA3 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_A_USED_MASK & (BIT(3) - 1)) + 0)
-#else
-# define DEFIO_TAG__PA3 defio_error_PA3_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PA3 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PA3 defio_error_PA3_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_A_USED_MASK & BIT(4)
-# define DEFIO_TAG__PA4 DEFIO_TAG_MAKE(DEFIO_GPIOID__A, 4)
-# define DEFIO_TAG_E__PA4 DEFIO_TAG_MAKE(DEFIO_GPIOID__A, 4)
-# define DEFIO_REC__PA4 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_A_USED_MASK & (BIT(4) - 1)) + 0)
-#else
-# define DEFIO_TAG__PA4 defio_error_PA4_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PA4 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PA4 defio_error_PA4_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_A_USED_MASK & BIT(5)
-# define DEFIO_TAG__PA5 DEFIO_TAG_MAKE(DEFIO_GPIOID__A, 5)
-# define DEFIO_TAG_E__PA5 DEFIO_TAG_MAKE(DEFIO_GPIOID__A, 5)
-# define DEFIO_REC__PA5 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_A_USED_MASK & (BIT(5) - 1)) + 0)
-#else
-# define DEFIO_TAG__PA5 defio_error_PA5_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PA5 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PA5 defio_error_PA5_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_A_USED_MASK & BIT(6)
-# define DEFIO_TAG__PA6 DEFIO_TAG_MAKE(DEFIO_GPIOID__A, 6)
-# define DEFIO_TAG_E__PA6 DEFIO_TAG_MAKE(DEFIO_GPIOID__A, 6)
-# define DEFIO_REC__PA6 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_A_USED_MASK & (BIT(6) - 1)) + 0)
-#else
-# define DEFIO_TAG__PA6 defio_error_PA6_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PA6 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PA6 defio_error_PA6_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_A_USED_MASK & BIT(7)
-# define DEFIO_TAG__PA7 DEFIO_TAG_MAKE(DEFIO_GPIOID__A, 7)
-# define DEFIO_TAG_E__PA7 DEFIO_TAG_MAKE(DEFIO_GPIOID__A, 7)
-# define DEFIO_REC__PA7 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_A_USED_MASK & (BIT(7) - 1)) + 0)
-#else
-# define DEFIO_TAG__PA7 defio_error_PA7_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PA7 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PA7 defio_error_PA7_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_A_USED_MASK & BIT(8)
-# define DEFIO_TAG__PA8 DEFIO_TAG_MAKE(DEFIO_GPIOID__A, 8)
-# define DEFIO_TAG_E__PA8 DEFIO_TAG_MAKE(DEFIO_GPIOID__A, 8)
-# define DEFIO_REC__PA8 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_A_USED_MASK & (BIT(8) - 1)) + 0)
-#else
-# define DEFIO_TAG__PA8 defio_error_PA8_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PA8 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PA8 defio_error_PA8_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_A_USED_MASK & BIT(9)
-# define DEFIO_TAG__PA9 DEFIO_TAG_MAKE(DEFIO_GPIOID__A, 9)
-# define DEFIO_TAG_E__PA9 DEFIO_TAG_MAKE(DEFIO_GPIOID__A, 9)
-# define DEFIO_REC__PA9 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_A_USED_MASK & (BIT(9) - 1)) + 0)
-#else
-# define DEFIO_TAG__PA9 defio_error_PA9_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PA9 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PA9 defio_error_PA9_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_A_USED_MASK & BIT(10)
-# define DEFIO_TAG__PA10 DEFIO_TAG_MAKE(DEFIO_GPIOID__A, 10)
-# define DEFIO_TAG_E__PA10 DEFIO_TAG_MAKE(DEFIO_GPIOID__A, 10)
-# define DEFIO_REC__PA10 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_A_USED_MASK & (BIT(10) - 1)) + 0)
-#else
-# define DEFIO_TAG__PA10 defio_error_PA10_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PA10 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PA10 defio_error_PA10_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_A_USED_MASK & BIT(11)
-# define DEFIO_TAG__PA11 DEFIO_TAG_MAKE(DEFIO_GPIOID__A, 11)
-# define DEFIO_TAG_E__PA11 DEFIO_TAG_MAKE(DEFIO_GPIOID__A, 11)
-# define DEFIO_REC__PA11 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_A_USED_MASK & (BIT(11) - 1)) + 0)
-#else
-# define DEFIO_TAG__PA11 defio_error_PA11_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PA11 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PA11 defio_error_PA11_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_A_USED_MASK & BIT(12)
-# define DEFIO_TAG__PA12 DEFIO_TAG_MAKE(DEFIO_GPIOID__A, 12)
-# define DEFIO_TAG_E__PA12 DEFIO_TAG_MAKE(DEFIO_GPIOID__A, 12)
-# define DEFIO_REC__PA12 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_A_USED_MASK & (BIT(12) - 1)) + 0)
-#else
-# define DEFIO_TAG__PA12 defio_error_PA12_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PA12 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PA12 defio_error_PA12_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_A_USED_MASK & BIT(13)
-# define DEFIO_TAG__PA13 DEFIO_TAG_MAKE(DEFIO_GPIOID__A, 13)
-# define DEFIO_TAG_E__PA13 DEFIO_TAG_MAKE(DEFIO_GPIOID__A, 13)
-# define DEFIO_REC__PA13 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_A_USED_MASK & (BIT(13) - 1)) + 0)
-#else
-# define DEFIO_TAG__PA13 defio_error_PA13_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PA13 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PA13 defio_error_PA13_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_A_USED_MASK & BIT(14)
-# define DEFIO_TAG__PA14 DEFIO_TAG_MAKE(DEFIO_GPIOID__A, 14)
-# define DEFIO_TAG_E__PA14 DEFIO_TAG_MAKE(DEFIO_GPIOID__A, 14)
-# define DEFIO_REC__PA14 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_A_USED_MASK & (BIT(14) - 1)) + 0)
-#else
-# define DEFIO_TAG__PA14 defio_error_PA14_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PA14 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PA14 defio_error_PA14_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_A_USED_MASK & BIT(15)
-# define DEFIO_TAG__PA15 DEFIO_TAG_MAKE(DEFIO_GPIOID__A, 15)
-# define DEFIO_TAG_E__PA15 DEFIO_TAG_MAKE(DEFIO_GPIOID__A, 15)
-# define DEFIO_REC__PA15 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_A_USED_MASK & (BIT(15) - 1)) + 0)
-#else
-# define DEFIO_TAG__PA15 defio_error_PA15_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PA15 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PA15 defio_error_PA15_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_B_USED_MASK & BIT(0)
-# define DEFIO_TAG__PB0 DEFIO_TAG_MAKE(DEFIO_GPIOID__B, 0)
-# define DEFIO_TAG_E__PB0 DEFIO_TAG_MAKE(DEFIO_GPIOID__B, 0)
-# define DEFIO_REC__PB0 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_B_USED_MASK & (BIT(0) - 1)) + DEFIO_PORT_A_USED_COUNT)
-#else
-# define DEFIO_TAG__PB0 defio_error_PB0_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PB0 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PB0 defio_error_PB0_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_B_USED_MASK & BIT(1)
-# define DEFIO_TAG__PB1 DEFIO_TAG_MAKE(DEFIO_GPIOID__B, 1)
-# define DEFIO_TAG_E__PB1 DEFIO_TAG_MAKE(DEFIO_GPIOID__B, 1)
-# define DEFIO_REC__PB1 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_B_USED_MASK & (BIT(1) - 1)) + DEFIO_PORT_A_USED_COUNT)
-#else
-# define DEFIO_TAG__PB1 defio_error_PB1_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PB1 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PB1 defio_error_PB1_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_B_USED_MASK & BIT(2)
-# define DEFIO_TAG__PB2 DEFIO_TAG_MAKE(DEFIO_GPIOID__B, 2)
-# define DEFIO_TAG_E__PB2 DEFIO_TAG_MAKE(DEFIO_GPIOID__B, 2)
-# define DEFIO_REC__PB2 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_B_USED_MASK & (BIT(2) - 1)) + DEFIO_PORT_A_USED_COUNT)
-#else
-# define DEFIO_TAG__PB2 defio_error_PB2_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PB2 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PB2 defio_error_PB2_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_B_USED_MASK & BIT(3)
-# define DEFIO_TAG__PB3 DEFIO_TAG_MAKE(DEFIO_GPIOID__B, 3)
-# define DEFIO_TAG_E__PB3 DEFIO_TAG_MAKE(DEFIO_GPIOID__B, 3)
-# define DEFIO_REC__PB3 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_B_USED_MASK & (BIT(3) - 1)) + DEFIO_PORT_A_USED_COUNT)
-#else
-# define DEFIO_TAG__PB3 defio_error_PB3_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PB3 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PB3 defio_error_PB3_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_B_USED_MASK & BIT(4)
-# define DEFIO_TAG__PB4 DEFIO_TAG_MAKE(DEFIO_GPIOID__B, 4)
-# define DEFIO_TAG_E__PB4 DEFIO_TAG_MAKE(DEFIO_GPIOID__B, 4)
-# define DEFIO_REC__PB4 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_B_USED_MASK & (BIT(4) - 1)) + DEFIO_PORT_A_USED_COUNT)
-#else
-# define DEFIO_TAG__PB4 defio_error_PB4_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PB4 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PB4 defio_error_PB4_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_B_USED_MASK & BIT(5)
-# define DEFIO_TAG__PB5 DEFIO_TAG_MAKE(DEFIO_GPIOID__B, 5)
-# define DEFIO_TAG_E__PB5 DEFIO_TAG_MAKE(DEFIO_GPIOID__B, 5)
-# define DEFIO_REC__PB5 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_B_USED_MASK & (BIT(5) - 1)) + DEFIO_PORT_A_USED_COUNT)
-#else
-# define DEFIO_TAG__PB5 defio_error_PB5_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PB5 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PB5 defio_error_PB5_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_B_USED_MASK & BIT(6)
-# define DEFIO_TAG__PB6 DEFIO_TAG_MAKE(DEFIO_GPIOID__B, 6)
-# define DEFIO_TAG_E__PB6 DEFIO_TAG_MAKE(DEFIO_GPIOID__B, 6)
-# define DEFIO_REC__PB6 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_B_USED_MASK & (BIT(6) - 1)) + DEFIO_PORT_A_USED_COUNT)
-#else
-# define DEFIO_TAG__PB6 defio_error_PB6_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PB6 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PB6 defio_error_PB6_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_B_USED_MASK & BIT(7)
-# define DEFIO_TAG__PB7 DEFIO_TAG_MAKE(DEFIO_GPIOID__B, 7)
-# define DEFIO_TAG_E__PB7 DEFIO_TAG_MAKE(DEFIO_GPIOID__B, 7)
-# define DEFIO_REC__PB7 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_B_USED_MASK & (BIT(7) - 1)) + DEFIO_PORT_A_USED_COUNT)
-#else
-# define DEFIO_TAG__PB7 defio_error_PB7_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PB7 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PB7 defio_error_PB7_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_B_USED_MASK & BIT(8)
-# define DEFIO_TAG__PB8 DEFIO_TAG_MAKE(DEFIO_GPIOID__B, 8)
-# define DEFIO_TAG_E__PB8 DEFIO_TAG_MAKE(DEFIO_GPIOID__B, 8)
-# define DEFIO_REC__PB8 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_B_USED_MASK & (BIT(8) - 1)) + DEFIO_PORT_A_USED_COUNT)
-#else
-# define DEFIO_TAG__PB8 defio_error_PB8_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PB8 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PB8 defio_error_PB8_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_B_USED_MASK & BIT(9)
-# define DEFIO_TAG__PB9 DEFIO_TAG_MAKE(DEFIO_GPIOID__B, 9)
-# define DEFIO_TAG_E__PB9 DEFIO_TAG_MAKE(DEFIO_GPIOID__B, 9)
-# define DEFIO_REC__PB9 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_B_USED_MASK & (BIT(9) - 1)) + DEFIO_PORT_A_USED_COUNT)
-#else
-# define DEFIO_TAG__PB9 defio_error_PB9_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PB9 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PB9 defio_error_PB9_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_B_USED_MASK & BIT(10)
-# define DEFIO_TAG__PB10 DEFIO_TAG_MAKE(DEFIO_GPIOID__B, 10)
-# define DEFIO_TAG_E__PB10 DEFIO_TAG_MAKE(DEFIO_GPIOID__B, 10)
-# define DEFIO_REC__PB10 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_B_USED_MASK & (BIT(10) - 1)) + DEFIO_PORT_A_USED_COUNT)
-#else
-# define DEFIO_TAG__PB10 defio_error_PB10_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PB10 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PB10 defio_error_PB10_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_B_USED_MASK & BIT(11)
-# define DEFIO_TAG__PB11 DEFIO_TAG_MAKE(DEFIO_GPIOID__B, 11)
-# define DEFIO_TAG_E__PB11 DEFIO_TAG_MAKE(DEFIO_GPIOID__B, 11)
-# define DEFIO_REC__PB11 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_B_USED_MASK & (BIT(11) - 1)) + DEFIO_PORT_A_USED_COUNT)
-#else
-# define DEFIO_TAG__PB11 defio_error_PB11_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PB11 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PB11 defio_error_PB11_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_B_USED_MASK & BIT(12)
-# define DEFIO_TAG__PB12 DEFIO_TAG_MAKE(DEFIO_GPIOID__B, 12)
-# define DEFIO_TAG_E__PB12 DEFIO_TAG_MAKE(DEFIO_GPIOID__B, 12)
-# define DEFIO_REC__PB12 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_B_USED_MASK & (BIT(12) - 1)) + DEFIO_PORT_A_USED_COUNT)
-#else
-# define DEFIO_TAG__PB12 defio_error_PB12_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PB12 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PB12 defio_error_PB12_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_B_USED_MASK & BIT(13)
-# define DEFIO_TAG__PB13 DEFIO_TAG_MAKE(DEFIO_GPIOID__B, 13)
-# define DEFIO_TAG_E__PB13 DEFIO_TAG_MAKE(DEFIO_GPIOID__B, 13)
-# define DEFIO_REC__PB13 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_B_USED_MASK & (BIT(13) - 1)) + DEFIO_PORT_A_USED_COUNT)
-#else
-# define DEFIO_TAG__PB13 defio_error_PB13_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PB13 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PB13 defio_error_PB13_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_B_USED_MASK & BIT(14)
-# define DEFIO_TAG__PB14 DEFIO_TAG_MAKE(DEFIO_GPIOID__B, 14)
-# define DEFIO_TAG_E__PB14 DEFIO_TAG_MAKE(DEFIO_GPIOID__B, 14)
-# define DEFIO_REC__PB14 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_B_USED_MASK & (BIT(14) - 1)) + DEFIO_PORT_A_USED_COUNT)
-#else
-# define DEFIO_TAG__PB14 defio_error_PB14_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PB14 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PB14 defio_error_PB14_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_B_USED_MASK & BIT(15)
-# define DEFIO_TAG__PB15 DEFIO_TAG_MAKE(DEFIO_GPIOID__B, 15)
-# define DEFIO_TAG_E__PB15 DEFIO_TAG_MAKE(DEFIO_GPIOID__B, 15)
-# define DEFIO_REC__PB15 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_B_USED_MASK & (BIT(15) - 1)) + DEFIO_PORT_A_USED_COUNT)
-#else
-# define DEFIO_TAG__PB15 defio_error_PB15_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PB15 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PB15 defio_error_PB15_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_C_USED_MASK & BIT(0)
-# define DEFIO_TAG__PC0 DEFIO_TAG_MAKE(DEFIO_GPIOID__C, 0)
-# define DEFIO_TAG_E__PC0 DEFIO_TAG_MAKE(DEFIO_GPIOID__C, 0)
-# define DEFIO_REC__PC0 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_C_USED_MASK & (BIT(0) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT)
-#else
-# define DEFIO_TAG__PC0 defio_error_PC0_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PC0 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PC0 defio_error_PC0_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_C_USED_MASK & BIT(1)
-# define DEFIO_TAG__PC1 DEFIO_TAG_MAKE(DEFIO_GPIOID__C, 1)
-# define DEFIO_TAG_E__PC1 DEFIO_TAG_MAKE(DEFIO_GPIOID__C, 1)
-# define DEFIO_REC__PC1 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_C_USED_MASK & (BIT(1) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT)
-#else
-# define DEFIO_TAG__PC1 defio_error_PC1_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PC1 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PC1 defio_error_PC1_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_C_USED_MASK & BIT(2)
-# define DEFIO_TAG__PC2 DEFIO_TAG_MAKE(DEFIO_GPIOID__C, 2)
-# define DEFIO_TAG_E__PC2 DEFIO_TAG_MAKE(DEFIO_GPIOID__C, 2)
-# define DEFIO_REC__PC2 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_C_USED_MASK & (BIT(2) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT)
-#else
-# define DEFIO_TAG__PC2 defio_error_PC2_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PC2 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PC2 defio_error_PC2_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_C_USED_MASK & BIT(3)
-# define DEFIO_TAG__PC3 DEFIO_TAG_MAKE(DEFIO_GPIOID__C, 3)
-# define DEFIO_TAG_E__PC3 DEFIO_TAG_MAKE(DEFIO_GPIOID__C, 3)
-# define DEFIO_REC__PC3 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_C_USED_MASK & (BIT(3) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT)
-#else
-# define DEFIO_TAG__PC3 defio_error_PC3_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PC3 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PC3 defio_error_PC3_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_C_USED_MASK & BIT(4)
-# define DEFIO_TAG__PC4 DEFIO_TAG_MAKE(DEFIO_GPIOID__C, 4)
-# define DEFIO_TAG_E__PC4 DEFIO_TAG_MAKE(DEFIO_GPIOID__C, 4)
-# define DEFIO_REC__PC4 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_C_USED_MASK & (BIT(4) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT)
-#else
-# define DEFIO_TAG__PC4 defio_error_PC4_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PC4 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PC4 defio_error_PC4_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_C_USED_MASK & BIT(5)
-# define DEFIO_TAG__PC5 DEFIO_TAG_MAKE(DEFIO_GPIOID__C, 5)
-# define DEFIO_TAG_E__PC5 DEFIO_TAG_MAKE(DEFIO_GPIOID__C, 5)
-# define DEFIO_REC__PC5 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_C_USED_MASK & (BIT(5) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT)
-#else
-# define DEFIO_TAG__PC5 defio_error_PC5_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PC5 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PC5 defio_error_PC5_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_C_USED_MASK & BIT(6)
-# define DEFIO_TAG__PC6 DEFIO_TAG_MAKE(DEFIO_GPIOID__C, 6)
-# define DEFIO_TAG_E__PC6 DEFIO_TAG_MAKE(DEFIO_GPIOID__C, 6)
-# define DEFIO_REC__PC6 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_C_USED_MASK & (BIT(6) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT)
-#else
-# define DEFIO_TAG__PC6 defio_error_PC6_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PC6 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PC6 defio_error_PC6_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_C_USED_MASK & BIT(7)
-# define DEFIO_TAG__PC7 DEFIO_TAG_MAKE(DEFIO_GPIOID__C, 7)
-# define DEFIO_TAG_E__PC7 DEFIO_TAG_MAKE(DEFIO_GPIOID__C, 7)
-# define DEFIO_REC__PC7 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_C_USED_MASK & (BIT(7) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT)
-#else
-# define DEFIO_TAG__PC7 defio_error_PC7_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PC7 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PC7 defio_error_PC7_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_C_USED_MASK & BIT(8)
-# define DEFIO_TAG__PC8 DEFIO_TAG_MAKE(DEFIO_GPIOID__C, 8)
-# define DEFIO_TAG_E__PC8 DEFIO_TAG_MAKE(DEFIO_GPIOID__C, 8)
-# define DEFIO_REC__PC8 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_C_USED_MASK & (BIT(8) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT)
-#else
-# define DEFIO_TAG__PC8 defio_error_PC8_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PC8 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PC8 defio_error_PC8_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_C_USED_MASK & BIT(9)
-# define DEFIO_TAG__PC9 DEFIO_TAG_MAKE(DEFIO_GPIOID__C, 9)
-# define DEFIO_TAG_E__PC9 DEFIO_TAG_MAKE(DEFIO_GPIOID__C, 9)
-# define DEFIO_REC__PC9 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_C_USED_MASK & (BIT(9) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT)
-#else
-# define DEFIO_TAG__PC9 defio_error_PC9_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PC9 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PC9 defio_error_PC9_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_C_USED_MASK & BIT(10)
-# define DEFIO_TAG__PC10 DEFIO_TAG_MAKE(DEFIO_GPIOID__C, 10)
-# define DEFIO_TAG_E__PC10 DEFIO_TAG_MAKE(DEFIO_GPIOID__C, 10)
-# define DEFIO_REC__PC10 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_C_USED_MASK & (BIT(10) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT)
-#else
-# define DEFIO_TAG__PC10 defio_error_PC10_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PC10 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PC10 defio_error_PC10_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_C_USED_MASK & BIT(11)
-# define DEFIO_TAG__PC11 DEFIO_TAG_MAKE(DEFIO_GPIOID__C, 11)
-# define DEFIO_TAG_E__PC11 DEFIO_TAG_MAKE(DEFIO_GPIOID__C, 11)
-# define DEFIO_REC__PC11 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_C_USED_MASK & (BIT(11) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT)
-#else
-# define DEFIO_TAG__PC11 defio_error_PC11_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PC11 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PC11 defio_error_PC11_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_C_USED_MASK & BIT(12)
-# define DEFIO_TAG__PC12 DEFIO_TAG_MAKE(DEFIO_GPIOID__C, 12)
-# define DEFIO_TAG_E__PC12 DEFIO_TAG_MAKE(DEFIO_GPIOID__C, 12)
-# define DEFIO_REC__PC12 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_C_USED_MASK & (BIT(12) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT)
-#else
-# define DEFIO_TAG__PC12 defio_error_PC12_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PC12 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PC12 defio_error_PC12_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_C_USED_MASK & BIT(13)
-# define DEFIO_TAG__PC13 DEFIO_TAG_MAKE(DEFIO_GPIOID__C, 13)
-# define DEFIO_TAG_E__PC13 DEFIO_TAG_MAKE(DEFIO_GPIOID__C, 13)
-# define DEFIO_REC__PC13 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_C_USED_MASK & (BIT(13) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT)
-#else
-# define DEFIO_TAG__PC13 defio_error_PC13_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PC13 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PC13 defio_error_PC13_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_C_USED_MASK & BIT(14)
-# define DEFIO_TAG__PC14 DEFIO_TAG_MAKE(DEFIO_GPIOID__C, 14)
-# define DEFIO_TAG_E__PC14 DEFIO_TAG_MAKE(DEFIO_GPIOID__C, 14)
-# define DEFIO_REC__PC14 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_C_USED_MASK & (BIT(14) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT)
-#else
-# define DEFIO_TAG__PC14 defio_error_PC14_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PC14 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PC14 defio_error_PC14_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_C_USED_MASK & BIT(15)
-# define DEFIO_TAG__PC15 DEFIO_TAG_MAKE(DEFIO_GPIOID__C, 15)
-# define DEFIO_TAG_E__PC15 DEFIO_TAG_MAKE(DEFIO_GPIOID__C, 15)
-# define DEFIO_REC__PC15 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_C_USED_MASK & (BIT(15) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT)
-#else
-# define DEFIO_TAG__PC15 defio_error_PC15_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PC15 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PC15 defio_error_PC15_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_D_USED_MASK & BIT(0)
-# define DEFIO_TAG__PD0 DEFIO_TAG_MAKE(DEFIO_GPIOID__D, 0)
-# define DEFIO_TAG_E__PD0 DEFIO_TAG_MAKE(DEFIO_GPIOID__D, 0)
-# define DEFIO_REC__PD0 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_D_USED_MASK & (BIT(0) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT)
-#else
-# define DEFIO_TAG__PD0 defio_error_PD0_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PD0 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PD0 defio_error_PD0_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_D_USED_MASK & BIT(1)
-# define DEFIO_TAG__PD1 DEFIO_TAG_MAKE(DEFIO_GPIOID__D, 1)
-# define DEFIO_TAG_E__PD1 DEFIO_TAG_MAKE(DEFIO_GPIOID__D, 1)
-# define DEFIO_REC__PD1 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_D_USED_MASK & (BIT(1) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT)
-#else
-# define DEFIO_TAG__PD1 defio_error_PD1_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PD1 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PD1 defio_error_PD1_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_D_USED_MASK & BIT(2)
-# define DEFIO_TAG__PD2 DEFIO_TAG_MAKE(DEFIO_GPIOID__D, 2)
-# define DEFIO_TAG_E__PD2 DEFIO_TAG_MAKE(DEFIO_GPIOID__D, 2)
-# define DEFIO_REC__PD2 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_D_USED_MASK & (BIT(2) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT)
-#else
-# define DEFIO_TAG__PD2 defio_error_PD2_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PD2 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PD2 defio_error_PD2_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_D_USED_MASK & BIT(3)
-# define DEFIO_TAG__PD3 DEFIO_TAG_MAKE(DEFIO_GPIOID__D, 3)
-# define DEFIO_TAG_E__PD3 DEFIO_TAG_MAKE(DEFIO_GPIOID__D, 3)
-# define DEFIO_REC__PD3 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_D_USED_MASK & (BIT(3) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT)
-#else
-# define DEFIO_TAG__PD3 defio_error_PD3_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PD3 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PD3 defio_error_PD3_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_D_USED_MASK & BIT(4)
-# define DEFIO_TAG__PD4 DEFIO_TAG_MAKE(DEFIO_GPIOID__D, 4)
-# define DEFIO_TAG_E__PD4 DEFIO_TAG_MAKE(DEFIO_GPIOID__D, 4)
-# define DEFIO_REC__PD4 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_D_USED_MASK & (BIT(4) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT)
-#else
-# define DEFIO_TAG__PD4 defio_error_PD4_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PD4 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PD4 defio_error_PD4_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_D_USED_MASK & BIT(5)
-# define DEFIO_TAG__PD5 DEFIO_TAG_MAKE(DEFIO_GPIOID__D, 5)
-# define DEFIO_TAG_E__PD5 DEFIO_TAG_MAKE(DEFIO_GPIOID__D, 5)
-# define DEFIO_REC__PD5 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_D_USED_MASK & (BIT(5) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT)
-#else
-# define DEFIO_TAG__PD5 defio_error_PD5_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PD5 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PD5 defio_error_PD5_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_D_USED_MASK & BIT(6)
-# define DEFIO_TAG__PD6 DEFIO_TAG_MAKE(DEFIO_GPIOID__D, 6)
-# define DEFIO_TAG_E__PD6 DEFIO_TAG_MAKE(DEFIO_GPIOID__D, 6)
-# define DEFIO_REC__PD6 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_D_USED_MASK & (BIT(6) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT)
-#else
-# define DEFIO_TAG__PD6 defio_error_PD6_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PD6 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PD6 defio_error_PD6_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_D_USED_MASK & BIT(7)
-# define DEFIO_TAG__PD7 DEFIO_TAG_MAKE(DEFIO_GPIOID__D, 7)
-# define DEFIO_TAG_E__PD7 DEFIO_TAG_MAKE(DEFIO_GPIOID__D, 7)
-# define DEFIO_REC__PD7 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_D_USED_MASK & (BIT(7) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT)
-#else
-# define DEFIO_TAG__PD7 defio_error_PD7_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PD7 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PD7 defio_error_PD7_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_D_USED_MASK & BIT(8)
-# define DEFIO_TAG__PD8 DEFIO_TAG_MAKE(DEFIO_GPIOID__D, 8)
-# define DEFIO_TAG_E__PD8 DEFIO_TAG_MAKE(DEFIO_GPIOID__D, 8)
-# define DEFIO_REC__PD8 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_D_USED_MASK & (BIT(8) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT)
-#else
-# define DEFIO_TAG__PD8 defio_error_PD8_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PD8 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PD8 defio_error_PD8_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_D_USED_MASK & BIT(9)
-# define DEFIO_TAG__PD9 DEFIO_TAG_MAKE(DEFIO_GPIOID__D, 9)
-# define DEFIO_TAG_E__PD9 DEFIO_TAG_MAKE(DEFIO_GPIOID__D, 9)
-# define DEFIO_REC__PD9 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_D_USED_MASK & (BIT(9) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT)
-#else
-# define DEFIO_TAG__PD9 defio_error_PD9_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PD9 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PD9 defio_error_PD9_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_D_USED_MASK & BIT(10)
-# define DEFIO_TAG__PD10 DEFIO_TAG_MAKE(DEFIO_GPIOID__D, 10)
-# define DEFIO_TAG_E__PD10 DEFIO_TAG_MAKE(DEFIO_GPIOID__D, 10)
-# define DEFIO_REC__PD10 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_D_USED_MASK & (BIT(10) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT)
-#else
-# define DEFIO_TAG__PD10 defio_error_PD10_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PD10 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PD10 defio_error_PD10_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_D_USED_MASK & BIT(11)
-# define DEFIO_TAG__PD11 DEFIO_TAG_MAKE(DEFIO_GPIOID__D, 11)
-# define DEFIO_TAG_E__PD11 DEFIO_TAG_MAKE(DEFIO_GPIOID__D, 11)
-# define DEFIO_REC__PD11 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_D_USED_MASK & (BIT(11) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT)
-#else
-# define DEFIO_TAG__PD11 defio_error_PD11_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PD11 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PD11 defio_error_PD11_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_D_USED_MASK & BIT(12)
-# define DEFIO_TAG__PD12 DEFIO_TAG_MAKE(DEFIO_GPIOID__D, 12)
-# define DEFIO_TAG_E__PD12 DEFIO_TAG_MAKE(DEFIO_GPIOID__D, 12)
-# define DEFIO_REC__PD12 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_D_USED_MASK & (BIT(12) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT)
-#else
-# define DEFIO_TAG__PD12 defio_error_PD12_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PD12 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PD12 defio_error_PD12_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_D_USED_MASK & BIT(13)
-# define DEFIO_TAG__PD13 DEFIO_TAG_MAKE(DEFIO_GPIOID__D, 13)
-# define DEFIO_TAG_E__PD13 DEFIO_TAG_MAKE(DEFIO_GPIOID__D, 13)
-# define DEFIO_REC__PD13 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_D_USED_MASK & (BIT(13) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT)
-#else
-# define DEFIO_TAG__PD13 defio_error_PD13_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PD13 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PD13 defio_error_PD13_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_D_USED_MASK & BIT(14)
-# define DEFIO_TAG__PD14 DEFIO_TAG_MAKE(DEFIO_GPIOID__D, 14)
-# define DEFIO_TAG_E__PD14 DEFIO_TAG_MAKE(DEFIO_GPIOID__D, 14)
-# define DEFIO_REC__PD14 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_D_USED_MASK & (BIT(14) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT)
-#else
-# define DEFIO_TAG__PD14 defio_error_PD14_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PD14 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PD14 defio_error_PD14_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_D_USED_MASK & BIT(15)
-# define DEFIO_TAG__PD15 DEFIO_TAG_MAKE(DEFIO_GPIOID__D, 15)
-# define DEFIO_TAG_E__PD15 DEFIO_TAG_MAKE(DEFIO_GPIOID__D, 15)
-# define DEFIO_REC__PD15 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_D_USED_MASK & (BIT(15) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT)
-#else
-# define DEFIO_TAG__PD15 defio_error_PD15_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PD15 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PD15 defio_error_PD15_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_E_USED_MASK & BIT(0)
-# define DEFIO_TAG__PE0 DEFIO_TAG_MAKE(DEFIO_GPIOID__E, 0)
-# define DEFIO_TAG_E__PE0 DEFIO_TAG_MAKE(DEFIO_GPIOID__E, 0)
-# define DEFIO_REC__PE0 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_E_USED_MASK & (BIT(0) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT)
-#else
-# define DEFIO_TAG__PE0 defio_error_PE0_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PE0 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PE0 defio_error_PE0_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_E_USED_MASK & BIT(1)
-# define DEFIO_TAG__PE1 DEFIO_TAG_MAKE(DEFIO_GPIOID__E, 1)
-# define DEFIO_TAG_E__PE1 DEFIO_TAG_MAKE(DEFIO_GPIOID__E, 1)
-# define DEFIO_REC__PE1 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_E_USED_MASK & (BIT(1) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT)
-#else
-# define DEFIO_TAG__PE1 defio_error_PE1_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PE1 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PE1 defio_error_PE1_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_E_USED_MASK & BIT(2)
-# define DEFIO_TAG__PE2 DEFIO_TAG_MAKE(DEFIO_GPIOID__E, 2)
-# define DEFIO_TAG_E__PE2 DEFIO_TAG_MAKE(DEFIO_GPIOID__E, 2)
-# define DEFIO_REC__PE2 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_E_USED_MASK & (BIT(2) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT)
-#else
-# define DEFIO_TAG__PE2 defio_error_PE2_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PE2 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PE2 defio_error_PE2_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_E_USED_MASK & BIT(3)
-# define DEFIO_TAG__PE3 DEFIO_TAG_MAKE(DEFIO_GPIOID__E, 3)
-# define DEFIO_TAG_E__PE3 DEFIO_TAG_MAKE(DEFIO_GPIOID__E, 3)
-# define DEFIO_REC__PE3 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_E_USED_MASK & (BIT(3) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT)
-#else
-# define DEFIO_TAG__PE3 defio_error_PE3_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PE3 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PE3 defio_error_PE3_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_E_USED_MASK & BIT(4)
-# define DEFIO_TAG__PE4 DEFIO_TAG_MAKE(DEFIO_GPIOID__E, 4)
-# define DEFIO_TAG_E__PE4 DEFIO_TAG_MAKE(DEFIO_GPIOID__E, 4)
-# define DEFIO_REC__PE4 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_E_USED_MASK & (BIT(4) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT)
-#else
-# define DEFIO_TAG__PE4 defio_error_PE4_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PE4 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PE4 defio_error_PE4_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_E_USED_MASK & BIT(5)
-# define DEFIO_TAG__PE5 DEFIO_TAG_MAKE(DEFIO_GPIOID__E, 5)
-# define DEFIO_TAG_E__PE5 DEFIO_TAG_MAKE(DEFIO_GPIOID__E, 5)
-# define DEFIO_REC__PE5 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_E_USED_MASK & (BIT(5) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT)
-#else
-# define DEFIO_TAG__PE5 defio_error_PE5_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PE5 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PE5 defio_error_PE5_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_E_USED_MASK & BIT(6)
-# define DEFIO_TAG__PE6 DEFIO_TAG_MAKE(DEFIO_GPIOID__E, 6)
-# define DEFIO_TAG_E__PE6 DEFIO_TAG_MAKE(DEFIO_GPIOID__E, 6)
-# define DEFIO_REC__PE6 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_E_USED_MASK & (BIT(6) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT)
-#else
-# define DEFIO_TAG__PE6 defio_error_PE6_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PE6 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PE6 defio_error_PE6_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_E_USED_MASK & BIT(7)
-# define DEFIO_TAG__PE7 DEFIO_TAG_MAKE(DEFIO_GPIOID__E, 7)
-# define DEFIO_TAG_E__PE7 DEFIO_TAG_MAKE(DEFIO_GPIOID__E, 7)
-# define DEFIO_REC__PE7 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_E_USED_MASK & (BIT(7) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT)
-#else
-# define DEFIO_TAG__PE7 defio_error_PE7_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PE7 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PE7 defio_error_PE7_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_E_USED_MASK & BIT(8)
-# define DEFIO_TAG__PE8 DEFIO_TAG_MAKE(DEFIO_GPIOID__E, 8)
-# define DEFIO_TAG_E__PE8 DEFIO_TAG_MAKE(DEFIO_GPIOID__E, 8)
-# define DEFIO_REC__PE8 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_E_USED_MASK & (BIT(8) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT)
-#else
-# define DEFIO_TAG__PE8 defio_error_PE8_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PE8 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PE8 defio_error_PE8_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_E_USED_MASK & BIT(9)
-# define DEFIO_TAG__PE9 DEFIO_TAG_MAKE(DEFIO_GPIOID__E, 9)
-# define DEFIO_TAG_E__PE9 DEFIO_TAG_MAKE(DEFIO_GPIOID__E, 9)
-# define DEFIO_REC__PE9 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_E_USED_MASK & (BIT(9) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT)
-#else
-# define DEFIO_TAG__PE9 defio_error_PE9_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PE9 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PE9 defio_error_PE9_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_E_USED_MASK & BIT(10)
-# define DEFIO_TAG__PE10 DEFIO_TAG_MAKE(DEFIO_GPIOID__E, 10)
-# define DEFIO_TAG_E__PE10 DEFIO_TAG_MAKE(DEFIO_GPIOID__E, 10)
-# define DEFIO_REC__PE10 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_E_USED_MASK & (BIT(10) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT)
-#else
-# define DEFIO_TAG__PE10 defio_error_PE10_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PE10 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PE10 defio_error_PE10_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_E_USED_MASK & BIT(11)
-# define DEFIO_TAG__PE11 DEFIO_TAG_MAKE(DEFIO_GPIOID__E, 11)
-# define DEFIO_TAG_E__PE11 DEFIO_TAG_MAKE(DEFIO_GPIOID__E, 11)
-# define DEFIO_REC__PE11 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_E_USED_MASK & (BIT(11) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT)
-#else
-# define DEFIO_TAG__PE11 defio_error_PE11_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PE11 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PE11 defio_error_PE11_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_E_USED_MASK & BIT(12)
-# define DEFIO_TAG__PE12 DEFIO_TAG_MAKE(DEFIO_GPIOID__E, 12)
-# define DEFIO_TAG_E__PE12 DEFIO_TAG_MAKE(DEFIO_GPIOID__E, 12)
-# define DEFIO_REC__PE12 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_E_USED_MASK & (BIT(12) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT)
-#else
-# define DEFIO_TAG__PE12 defio_error_PE12_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PE12 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PE12 defio_error_PE12_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_E_USED_MASK & BIT(13)
-# define DEFIO_TAG__PE13 DEFIO_TAG_MAKE(DEFIO_GPIOID__E, 13)
-# define DEFIO_TAG_E__PE13 DEFIO_TAG_MAKE(DEFIO_GPIOID__E, 13)
-# define DEFIO_REC__PE13 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_E_USED_MASK & (BIT(13) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT)
-#else
-# define DEFIO_TAG__PE13 defio_error_PE13_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PE13 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PE13 defio_error_PE13_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_E_USED_MASK & BIT(14)
-# define DEFIO_TAG__PE14 DEFIO_TAG_MAKE(DEFIO_GPIOID__E, 14)
-# define DEFIO_TAG_E__PE14 DEFIO_TAG_MAKE(DEFIO_GPIOID__E, 14)
-# define DEFIO_REC__PE14 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_E_USED_MASK & (BIT(14) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT)
-#else
-# define DEFIO_TAG__PE14 defio_error_PE14_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PE14 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PE14 defio_error_PE14_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_E_USED_MASK & BIT(15)
-# define DEFIO_TAG__PE15 DEFIO_TAG_MAKE(DEFIO_GPIOID__E, 15)
-# define DEFIO_TAG_E__PE15 DEFIO_TAG_MAKE(DEFIO_GPIOID__E, 15)
-# define DEFIO_REC__PE15 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_E_USED_MASK & (BIT(15) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT)
-#else
-# define DEFIO_TAG__PE15 defio_error_PE15_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PE15 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PE15 defio_error_PE15_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_F_USED_MASK & BIT(0)
-# define DEFIO_TAG__PF0 DEFIO_TAG_MAKE(DEFIO_GPIOID__F, 0)
-# define DEFIO_TAG_E__PF0 DEFIO_TAG_MAKE(DEFIO_GPIOID__F, 0)
-# define DEFIO_REC__PF0 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_F_USED_MASK & (BIT(0) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT)
-#else
-# define DEFIO_TAG__PF0 defio_error_PF0_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PF0 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PF0 defio_error_PF0_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_F_USED_MASK & BIT(1)
-# define DEFIO_TAG__PF1 DEFIO_TAG_MAKE(DEFIO_GPIOID__F, 1)
-# define DEFIO_TAG_E__PF1 DEFIO_TAG_MAKE(DEFIO_GPIOID__F, 1)
-# define DEFIO_REC__PF1 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_F_USED_MASK & (BIT(1) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT)
-#else
-# define DEFIO_TAG__PF1 defio_error_PF1_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PF1 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PF1 defio_error_PF1_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_F_USED_MASK & BIT(2)
-# define DEFIO_TAG__PF2 DEFIO_TAG_MAKE(DEFIO_GPIOID__F, 2)
-# define DEFIO_TAG_E__PF2 DEFIO_TAG_MAKE(DEFIO_GPIOID__F, 2)
-# define DEFIO_REC__PF2 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_F_USED_MASK & (BIT(2) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT)
-#else
-# define DEFIO_TAG__PF2 defio_error_PF2_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PF2 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PF2 defio_error_PF2_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_F_USED_MASK & BIT(3)
-# define DEFIO_TAG__PF3 DEFIO_TAG_MAKE(DEFIO_GPIOID__F, 3)
-# define DEFIO_TAG_E__PF3 DEFIO_TAG_MAKE(DEFIO_GPIOID__F, 3)
-# define DEFIO_REC__PF3 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_F_USED_MASK & (BIT(3) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT)
-#else
-# define DEFIO_TAG__PF3 defio_error_PF3_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PF3 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PF3 defio_error_PF3_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_F_USED_MASK & BIT(4)
-# define DEFIO_TAG__PF4 DEFIO_TAG_MAKE(DEFIO_GPIOID__F, 4)
-# define DEFIO_TAG_E__PF4 DEFIO_TAG_MAKE(DEFIO_GPIOID__F, 4)
-# define DEFIO_REC__PF4 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_F_USED_MASK & (BIT(4) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT)
-#else
-# define DEFIO_TAG__PF4 defio_error_PF4_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PF4 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PF4 defio_error_PF4_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_F_USED_MASK & BIT(5)
-# define DEFIO_TAG__PF5 DEFIO_TAG_MAKE(DEFIO_GPIOID__F, 5)
-# define DEFIO_TAG_E__PF5 DEFIO_TAG_MAKE(DEFIO_GPIOID__F, 5)
-# define DEFIO_REC__PF5 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_F_USED_MASK & (BIT(5) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT)
-#else
-# define DEFIO_TAG__PF5 defio_error_PF5_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PF5 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PF5 defio_error_PF5_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_F_USED_MASK & BIT(6)
-# define DEFIO_TAG__PF6 DEFIO_TAG_MAKE(DEFIO_GPIOID__F, 6)
-# define DEFIO_TAG_E__PF6 DEFIO_TAG_MAKE(DEFIO_GPIOID__F, 6)
-# define DEFIO_REC__PF6 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_F_USED_MASK & (BIT(6) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT)
-#else
-# define DEFIO_TAG__PF6 defio_error_PF6_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PF6 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PF6 defio_error_PF6_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_F_USED_MASK & BIT(7)
-# define DEFIO_TAG__PF7 DEFIO_TAG_MAKE(DEFIO_GPIOID__F, 7)
-# define DEFIO_TAG_E__PF7 DEFIO_TAG_MAKE(DEFIO_GPIOID__F, 7)
-# define DEFIO_REC__PF7 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_F_USED_MASK & (BIT(7) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT)
-#else
-# define DEFIO_TAG__PF7 defio_error_PF7_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PF7 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PF7 defio_error_PF7_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_F_USED_MASK & BIT(8)
-# define DEFIO_TAG__PF8 DEFIO_TAG_MAKE(DEFIO_GPIOID__F, 8)
-# define DEFIO_TAG_E__PF8 DEFIO_TAG_MAKE(DEFIO_GPIOID__F, 8)
-# define DEFIO_REC__PF8 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_F_USED_MASK & (BIT(8) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT)
-#else
-# define DEFIO_TAG__PF8 defio_error_PF8_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PF8 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PF8 defio_error_PF8_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_F_USED_MASK & BIT(9)
-# define DEFIO_TAG__PF9 DEFIO_TAG_MAKE(DEFIO_GPIOID__F, 9)
-# define DEFIO_TAG_E__PF9 DEFIO_TAG_MAKE(DEFIO_GPIOID__F, 9)
-# define DEFIO_REC__PF9 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_F_USED_MASK & (BIT(9) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT)
-#else
-# define DEFIO_TAG__PF9 defio_error_PF9_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PF9 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PF9 defio_error_PF9_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_F_USED_MASK & BIT(10)
-# define DEFIO_TAG__PF10 DEFIO_TAG_MAKE(DEFIO_GPIOID__F, 10)
-# define DEFIO_TAG_E__PF10 DEFIO_TAG_MAKE(DEFIO_GPIOID__F, 10)
-# define DEFIO_REC__PF10 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_F_USED_MASK & (BIT(10) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT)
-#else
-# define DEFIO_TAG__PF10 defio_error_PF10_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PF10 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PF10 defio_error_PF10_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_F_USED_MASK & BIT(11)
-# define DEFIO_TAG__PF11 DEFIO_TAG_MAKE(DEFIO_GPIOID__F, 11)
-# define DEFIO_TAG_E__PF11 DEFIO_TAG_MAKE(DEFIO_GPIOID__F, 11)
-# define DEFIO_REC__PF11 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_F_USED_MASK & (BIT(11) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT)
-#else
-# define DEFIO_TAG__PF11 defio_error_PF11_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PF11 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PF11 defio_error_PF11_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_F_USED_MASK & BIT(12)
-# define DEFIO_TAG__PF12 DEFIO_TAG_MAKE(DEFIO_GPIOID__F, 12)
-# define DEFIO_TAG_E__PF12 DEFIO_TAG_MAKE(DEFIO_GPIOID__F, 12)
-# define DEFIO_REC__PF12 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_F_USED_MASK & (BIT(12) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT)
-#else
-# define DEFIO_TAG__PF12 defio_error_PF12_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PF12 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PF12 defio_error_PF12_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_F_USED_MASK & BIT(13)
-# define DEFIO_TAG__PF13 DEFIO_TAG_MAKE(DEFIO_GPIOID__F, 13)
-# define DEFIO_TAG_E__PF13 DEFIO_TAG_MAKE(DEFIO_GPIOID__F, 13)
-# define DEFIO_REC__PF13 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_F_USED_MASK & (BIT(13) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT)
-#else
-# define DEFIO_TAG__PF13 defio_error_PF13_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PF13 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PF13 defio_error_PF13_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_F_USED_MASK & BIT(14)
-# define DEFIO_TAG__PF14 DEFIO_TAG_MAKE(DEFIO_GPIOID__F, 14)
-# define DEFIO_TAG_E__PF14 DEFIO_TAG_MAKE(DEFIO_GPIOID__F, 14)
-# define DEFIO_REC__PF14 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_F_USED_MASK & (BIT(14) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT)
-#else
-# define DEFIO_TAG__PF14 defio_error_PF14_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PF14 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PF14 defio_error_PF14_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_F_USED_MASK & BIT(15)
-# define DEFIO_TAG__PF15 DEFIO_TAG_MAKE(DEFIO_GPIOID__F, 15)
-# define DEFIO_TAG_E__PF15 DEFIO_TAG_MAKE(DEFIO_GPIOID__F, 15)
-# define DEFIO_REC__PF15 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_F_USED_MASK & (BIT(15) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT)
-#else
-# define DEFIO_TAG__PF15 defio_error_PF15_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PF15 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PF15 defio_error_PF15_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_G_USED_MASK & BIT(0)
-# define DEFIO_TAG__PG0 DEFIO_TAG_MAKE(DEFIO_GPIOID__G, 0)
-# define DEFIO_TAG_E__PG0 DEFIO_TAG_MAKE(DEFIO_GPIOID__G, 0)
-# define DEFIO_REC__PG0 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_G_USED_MASK & (BIT(0) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT+DEFIO_PORT_F_USED_COUNT)
-#else
-# define DEFIO_TAG__PG0 defio_error_PG0_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PG0 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PG0 defio_error_PG0_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_G_USED_MASK & BIT(1)
-# define DEFIO_TAG__PG1 DEFIO_TAG_MAKE(DEFIO_GPIOID__G, 1)
-# define DEFIO_TAG_E__PG1 DEFIO_TAG_MAKE(DEFIO_GPIOID__G, 1)
-# define DEFIO_REC__PG1 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_G_USED_MASK & (BIT(1) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT+DEFIO_PORT_F_USED_COUNT)
-#else
-# define DEFIO_TAG__PG1 defio_error_PG1_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PG1 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PG1 defio_error_PG1_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_G_USED_MASK & BIT(2)
-# define DEFIO_TAG__PG2 DEFIO_TAG_MAKE(DEFIO_GPIOID__G, 2)
-# define DEFIO_TAG_E__PG2 DEFIO_TAG_MAKE(DEFIO_GPIOID__G, 2)
-# define DEFIO_REC__PG2 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_G_USED_MASK & (BIT(2) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT+DEFIO_PORT_F_USED_COUNT)
-#else
-# define DEFIO_TAG__PG2 defio_error_PG2_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PG2 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PG2 defio_error_PG2_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_G_USED_MASK & BIT(3)
-# define DEFIO_TAG__PG3 DEFIO_TAG_MAKE(DEFIO_GPIOID__G, 3)
-# define DEFIO_TAG_E__PG3 DEFIO_TAG_MAKE(DEFIO_GPIOID__G, 3)
-# define DEFIO_REC__PG3 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_G_USED_MASK & (BIT(3) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT+DEFIO_PORT_F_USED_COUNT)
-#else
-# define DEFIO_TAG__PG3 defio_error_PG3_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PG3 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PG3 defio_error_PG3_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_G_USED_MASK & BIT(4)
-# define DEFIO_TAG__PG4 DEFIO_TAG_MAKE(DEFIO_GPIOID__G, 4)
-# define DEFIO_TAG_E__PG4 DEFIO_TAG_MAKE(DEFIO_GPIOID__G, 4)
-# define DEFIO_REC__PG4 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_G_USED_MASK & (BIT(4) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT+DEFIO_PORT_F_USED_COUNT)
-#else
-# define DEFIO_TAG__PG4 defio_error_PG4_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PG4 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PG4 defio_error_PG4_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_G_USED_MASK & BIT(5)
-# define DEFIO_TAG__PG5 DEFIO_TAG_MAKE(DEFIO_GPIOID__G, 5)
-# define DEFIO_TAG_E__PG5 DEFIO_TAG_MAKE(DEFIO_GPIOID__G, 5)
-# define DEFIO_REC__PG5 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_G_USED_MASK & (BIT(5) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT+DEFIO_PORT_F_USED_COUNT)
-#else
-# define DEFIO_TAG__PG5 defio_error_PG5_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PG5 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PG5 defio_error_PG5_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_G_USED_MASK & BIT(6)
-# define DEFIO_TAG__PG6 DEFIO_TAG_MAKE(DEFIO_GPIOID__G, 6)
-# define DEFIO_TAG_E__PG6 DEFIO_TAG_MAKE(DEFIO_GPIOID__G, 6)
-# define DEFIO_REC__PG6 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_G_USED_MASK & (BIT(6) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT+DEFIO_PORT_F_USED_COUNT)
-#else
-# define DEFIO_TAG__PG6 defio_error_PG6_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PG6 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PG6 defio_error_PG6_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_G_USED_MASK & BIT(7)
-# define DEFIO_TAG__PG7 DEFIO_TAG_MAKE(DEFIO_GPIOID__G, 7)
-# define DEFIO_TAG_E__PG7 DEFIO_TAG_MAKE(DEFIO_GPIOID__G, 7)
-# define DEFIO_REC__PG7 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_G_USED_MASK & (BIT(7) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT+DEFIO_PORT_F_USED_COUNT)
-#else
-# define DEFIO_TAG__PG7 defio_error_PG7_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PG7 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PG7 defio_error_PG7_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_G_USED_MASK & BIT(8)
-# define DEFIO_TAG__PG8 DEFIO_TAG_MAKE(DEFIO_GPIOID__G, 8)
-# define DEFIO_TAG_E__PG8 DEFIO_TAG_MAKE(DEFIO_GPIOID__G, 8)
-# define DEFIO_REC__PG8 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_G_USED_MASK & (BIT(8) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT+DEFIO_PORT_F_USED_COUNT)
-#else
-# define DEFIO_TAG__PG8 defio_error_PG8_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PG8 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PG8 defio_error_PG8_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_G_USED_MASK & BIT(9)
-# define DEFIO_TAG__PG9 DEFIO_TAG_MAKE(DEFIO_GPIOID__G, 9)
-# define DEFIO_TAG_E__PG9 DEFIO_TAG_MAKE(DEFIO_GPIOID__G, 9)
-# define DEFIO_REC__PG9 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_G_USED_MASK & (BIT(9) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT+DEFIO_PORT_F_USED_COUNT)
-#else
-# define DEFIO_TAG__PG9 defio_error_PG9_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PG9 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PG9 defio_error_PG9_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_G_USED_MASK & BIT(10)
-# define DEFIO_TAG__PG10 DEFIO_TAG_MAKE(DEFIO_GPIOID__G, 10)
-# define DEFIO_TAG_E__PG10 DEFIO_TAG_MAKE(DEFIO_GPIOID__G, 10)
-# define DEFIO_REC__PG10 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_G_USED_MASK & (BIT(10) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT+DEFIO_PORT_F_USED_COUNT)
-#else
-# define DEFIO_TAG__PG10 defio_error_PG10_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PG10 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PG10 defio_error_PG10_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_G_USED_MASK & BIT(11)
-# define DEFIO_TAG__PG11 DEFIO_TAG_MAKE(DEFIO_GPIOID__G, 11)
-# define DEFIO_TAG_E__PG11 DEFIO_TAG_MAKE(DEFIO_GPIOID__G, 11)
-# define DEFIO_REC__PG11 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_G_USED_MASK & (BIT(11) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT+DEFIO_PORT_F_USED_COUNT)
-#else
-# define DEFIO_TAG__PG11 defio_error_PG11_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PG11 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PG11 defio_error_PG11_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_G_USED_MASK & BIT(12)
-# define DEFIO_TAG__PG12 DEFIO_TAG_MAKE(DEFIO_GPIOID__G, 12)
-# define DEFIO_TAG_E__PG12 DEFIO_TAG_MAKE(DEFIO_GPIOID__G, 12)
-# define DEFIO_REC__PG12 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_G_USED_MASK & (BIT(12) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT+DEFIO_PORT_F_USED_COUNT)
-#else
-# define DEFIO_TAG__PG12 defio_error_PG12_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PG12 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PG12 defio_error_PG12_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_G_USED_MASK & BIT(13)
-# define DEFIO_TAG__PG13 DEFIO_TAG_MAKE(DEFIO_GPIOID__G, 13)
-# define DEFIO_TAG_E__PG13 DEFIO_TAG_MAKE(DEFIO_GPIOID__G, 13)
-# define DEFIO_REC__PG13 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_G_USED_MASK & (BIT(13) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT+DEFIO_PORT_F_USED_COUNT)
-#else
-# define DEFIO_TAG__PG13 defio_error_PG13_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PG13 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PG13 defio_error_PG13_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_G_USED_MASK & BIT(14)
-# define DEFIO_TAG__PG14 DEFIO_TAG_MAKE(DEFIO_GPIOID__G, 14)
-# define DEFIO_TAG_E__PG14 DEFIO_TAG_MAKE(DEFIO_GPIOID__G, 14)
-# define DEFIO_REC__PG14 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_G_USED_MASK & (BIT(14) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT+DEFIO_PORT_F_USED_COUNT)
-#else
-# define DEFIO_TAG__PG14 defio_error_PG14_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PG14 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PG14 defio_error_PG14_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_G_USED_MASK & BIT(15)
-# define DEFIO_TAG__PG15 DEFIO_TAG_MAKE(DEFIO_GPIOID__G, 15)
-# define DEFIO_TAG_E__PG15 DEFIO_TAG_MAKE(DEFIO_GPIOID__G, 15)
-# define DEFIO_REC__PG15 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_G_USED_MASK & (BIT(15) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT+DEFIO_PORT_F_USED_COUNT)
-#else
-# define DEFIO_TAG__PG15 defio_error_PG15_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PG15 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PG15 defio_error_PG15_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_H_USED_MASK & BIT(0)
-# define DEFIO_TAG__PH0 DEFIO_TAG_MAKE(DEFIO_GPIOID__H, 0)
-# define DEFIO_TAG_E__PH0 DEFIO_TAG_MAKE(DEFIO_GPIOID__H, 0)
-# define DEFIO_REC__PH0 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_H_USED_MASK & (BIT(0) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT+DEFIO_PORT_F_USED_COUNT+DEFIO_PORT_G_USED_COUNT)
-#else
-# define DEFIO_TAG__PH0 defio_error_PH0_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PH0 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PH0 defio_error_PH0_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_H_USED_MASK & BIT(1)
-# define DEFIO_TAG__PH1 DEFIO_TAG_MAKE(DEFIO_GPIOID__H, 1)
-# define DEFIO_TAG_E__PH1 DEFIO_TAG_MAKE(DEFIO_GPIOID__H, 1)
-# define DEFIO_REC__PH1 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_H_USED_MASK & (BIT(1) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT+DEFIO_PORT_F_USED_COUNT+DEFIO_PORT_G_USED_COUNT)
-#else
-# define DEFIO_TAG__PH1 defio_error_PH1_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PH1 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PH1 defio_error_PH1_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_H_USED_MASK & BIT(2)
-# define DEFIO_TAG__PH2 DEFIO_TAG_MAKE(DEFIO_GPIOID__H, 2)
-# define DEFIO_TAG_E__PH2 DEFIO_TAG_MAKE(DEFIO_GPIOID__H, 2)
-# define DEFIO_REC__PH2 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_H_USED_MASK & (BIT(2) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT+DEFIO_PORT_F_USED_COUNT+DEFIO_PORT_G_USED_COUNT)
-#else
-# define DEFIO_TAG__PH2 defio_error_PH2_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PH2 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PH2 defio_error_PH2_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_H_USED_MASK & BIT(3)
-# define DEFIO_TAG__PH3 DEFIO_TAG_MAKE(DEFIO_GPIOID__H, 3)
-# define DEFIO_TAG_E__PH3 DEFIO_TAG_MAKE(DEFIO_GPIOID__H, 3)
-# define DEFIO_REC__PH3 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_H_USED_MASK & (BIT(3) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT+DEFIO_PORT_F_USED_COUNT+DEFIO_PORT_G_USED_COUNT)
-#else
-# define DEFIO_TAG__PH3 defio_error_PH3_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PH3 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PH3 defio_error_PH3_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_H_USED_MASK & BIT(4)
-# define DEFIO_TAG__PH4 DEFIO_TAG_MAKE(DEFIO_GPIOID__H, 4)
-# define DEFIO_TAG_E__PH4 DEFIO_TAG_MAKE(DEFIO_GPIOID__H, 4)
-# define DEFIO_REC__PH4 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_H_USED_MASK & (BIT(4) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT+DEFIO_PORT_F_USED_COUNT+DEFIO_PORT_G_USED_COUNT)
-#else
-# define DEFIO_TAG__PH4 defio_error_PH4_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PH4 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PH4 defio_error_PH4_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_H_USED_MASK & BIT(5)
-# define DEFIO_TAG__PH5 DEFIO_TAG_MAKE(DEFIO_GPIOID__H, 5)
-# define DEFIO_TAG_E__PH5 DEFIO_TAG_MAKE(DEFIO_GPIOID__H, 5)
-# define DEFIO_REC__PH5 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_H_USED_MASK & (BIT(5) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT+DEFIO_PORT_F_USED_COUNT+DEFIO_PORT_G_USED_COUNT)
-#else
-# define DEFIO_TAG__PH5 defio_error_PH5_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PH5 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PH5 defio_error_PH5_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_H_USED_MASK & BIT(6)
-# define DEFIO_TAG__PH6 DEFIO_TAG_MAKE(DEFIO_GPIOID__H, 6)
-# define DEFIO_TAG_E__PH6 DEFIO_TAG_MAKE(DEFIO_GPIOID__H, 6)
-# define DEFIO_REC__PH6 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_H_USED_MASK & (BIT(6) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT+DEFIO_PORT_F_USED_COUNT+DEFIO_PORT_G_USED_COUNT)
-#else
-# define DEFIO_TAG__PH6 defio_error_PH6_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PH6 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PH6 defio_error_PH6_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_H_USED_MASK & BIT(7)
-# define DEFIO_TAG__PH7 DEFIO_TAG_MAKE(DEFIO_GPIOID__H, 7)
-# define DEFIO_TAG_E__PH7 DEFIO_TAG_MAKE(DEFIO_GPIOID__H, 7)
-# define DEFIO_REC__PH7 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_H_USED_MASK & (BIT(7) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT+DEFIO_PORT_F_USED_COUNT+DEFIO_PORT_G_USED_COUNT)
-#else
-# define DEFIO_TAG__PH7 defio_error_PH7_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PH7 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PH7 defio_error_PH7_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_H_USED_MASK & BIT(8)
-# define DEFIO_TAG__PH8 DEFIO_TAG_MAKE(DEFIO_GPIOID__H, 8)
-# define DEFIO_TAG_E__PH8 DEFIO_TAG_MAKE(DEFIO_GPIOID__H, 8)
-# define DEFIO_REC__PH8 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_H_USED_MASK & (BIT(8) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT+DEFIO_PORT_F_USED_COUNT+DEFIO_PORT_G_USED_COUNT)
-#else
-# define DEFIO_TAG__PH8 defio_error_PH8_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PH8 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PH8 defio_error_PH8_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_H_USED_MASK & BIT(9)
-# define DEFIO_TAG__PH9 DEFIO_TAG_MAKE(DEFIO_GPIOID__H, 9)
-# define DEFIO_TAG_E__PH9 DEFIO_TAG_MAKE(DEFIO_GPIOID__H, 9)
-# define DEFIO_REC__PH9 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_H_USED_MASK & (BIT(9) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT+DEFIO_PORT_F_USED_COUNT+DEFIO_PORT_G_USED_COUNT)
-#else
-# define DEFIO_TAG__PH9 defio_error_PH9_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PH9 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PH9 defio_error_PH9_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_H_USED_MASK & BIT(10)
-# define DEFIO_TAG__PH10 DEFIO_TAG_MAKE(DEFIO_GPIOID__H, 10)
-# define DEFIO_TAG_E__PH10 DEFIO_TAG_MAKE(DEFIO_GPIOID__H, 10)
-# define DEFIO_REC__PH10 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_H_USED_MASK & (BIT(10) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT+DEFIO_PORT_F_USED_COUNT+DEFIO_PORT_G_USED_COUNT)
-#else
-# define DEFIO_TAG__PH10 defio_error_PH10_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PH10 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PH10 defio_error_PH10_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_H_USED_MASK & BIT(11)
-# define DEFIO_TAG__PH11 DEFIO_TAG_MAKE(DEFIO_GPIOID__H, 11)
-# define DEFIO_TAG_E__PH11 DEFIO_TAG_MAKE(DEFIO_GPIOID__H, 11)
-# define DEFIO_REC__PH11 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_H_USED_MASK & (BIT(11) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT+DEFIO_PORT_F_USED_COUNT+DEFIO_PORT_G_USED_COUNT)
-#else
-# define DEFIO_TAG__PH11 defio_error_PH11_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PH11 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PH11 defio_error_PH11_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_H_USED_MASK & BIT(12)
-# define DEFIO_TAG__PH12 DEFIO_TAG_MAKE(DEFIO_GPIOID__H, 12)
-# define DEFIO_TAG_E__PH12 DEFIO_TAG_MAKE(DEFIO_GPIOID__H, 12)
-# define DEFIO_REC__PH12 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_H_USED_MASK & (BIT(12) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT+DEFIO_PORT_F_USED_COUNT+DEFIO_PORT_G_USED_COUNT)
-#else
-# define DEFIO_TAG__PH12 defio_error_PH12_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PH12 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PH12 defio_error_PH12_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_H_USED_MASK & BIT(13)
-# define DEFIO_TAG__PH13 DEFIO_TAG_MAKE(DEFIO_GPIOID__H, 13)
-# define DEFIO_TAG_E__PH13 DEFIO_TAG_MAKE(DEFIO_GPIOID__H, 13)
-# define DEFIO_REC__PH13 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_H_USED_MASK & (BIT(13) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT+DEFIO_PORT_F_USED_COUNT+DEFIO_PORT_G_USED_COUNT)
-#else
-# define DEFIO_TAG__PH13 defio_error_PH13_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PH13 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PH13 defio_error_PH13_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_H_USED_MASK & BIT(14)
-# define DEFIO_TAG__PH14 DEFIO_TAG_MAKE(DEFIO_GPIOID__H, 14)
-# define DEFIO_TAG_E__PH14 DEFIO_TAG_MAKE(DEFIO_GPIOID__H, 14)
-# define DEFIO_REC__PH14 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_H_USED_MASK & (BIT(14) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT+DEFIO_PORT_F_USED_COUNT+DEFIO_PORT_G_USED_COUNT)
-#else
-# define DEFIO_TAG__PH14 defio_error_PH14_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PH14 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PH14 defio_error_PH14_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_H_USED_MASK & BIT(15)
-# define DEFIO_TAG__PH15 DEFIO_TAG_MAKE(DEFIO_GPIOID__H, 15)
-# define DEFIO_TAG_E__PH15 DEFIO_TAG_MAKE(DEFIO_GPIOID__H, 15)
-# define DEFIO_REC__PH15 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_H_USED_MASK & (BIT(15) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT+DEFIO_PORT_F_USED_COUNT+DEFIO_PORT_G_USED_COUNT)
-#else
-# define DEFIO_TAG__PH15 defio_error_PH15_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PH15 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PH15 defio_error_PH15_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_I_USED_MASK & BIT(0)
-# define DEFIO_TAG__PI0 DEFIO_TAG_MAKE(DEFIO_GPIOID__I, 0)
-# define DEFIO_TAG_E__PI0 DEFIO_TAG_MAKE(DEFIO_GPIOID__I, 0)
-# define DEFIO_REC__PI0 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_I_USED_MASK & (BIT(0) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT+DEFIO_PORT_F_USED_COUNT+DEFIO_PORT_G_USED_COUNT+DEFIO_PORT_H_USED_COUNT)
-#else
-# define DEFIO_TAG__PI0 defio_error_PI0_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PI0 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PI0 defio_error_PI0_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_I_USED_MASK & BIT(1)
-# define DEFIO_TAG__PI1 DEFIO_TAG_MAKE(DEFIO_GPIOID__I, 1)
-# define DEFIO_TAG_E__PI1 DEFIO_TAG_MAKE(DEFIO_GPIOID__I, 1)
-# define DEFIO_REC__PI1 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_I_USED_MASK & (BIT(1) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT+DEFIO_PORT_F_USED_COUNT+DEFIO_PORT_G_USED_COUNT+DEFIO_PORT_H_USED_COUNT)
-#else
-# define DEFIO_TAG__PI1 defio_error_PI1_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PI1 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PI1 defio_error_PI1_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_I_USED_MASK & BIT(2)
-# define DEFIO_TAG__PI2 DEFIO_TAG_MAKE(DEFIO_GPIOID__I, 2)
-# define DEFIO_TAG_E__PI2 DEFIO_TAG_MAKE(DEFIO_GPIOID__I, 2)
-# define DEFIO_REC__PI2 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_I_USED_MASK & (BIT(2) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT+DEFIO_PORT_F_USED_COUNT+DEFIO_PORT_G_USED_COUNT+DEFIO_PORT_H_USED_COUNT)
-#else
-# define DEFIO_TAG__PI2 defio_error_PI2_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PI2 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PI2 defio_error_PI2_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_I_USED_MASK & BIT(3)
-# define DEFIO_TAG__PI3 DEFIO_TAG_MAKE(DEFIO_GPIOID__I, 3)
-# define DEFIO_TAG_E__PI3 DEFIO_TAG_MAKE(DEFIO_GPIOID__I, 3)
-# define DEFIO_REC__PI3 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_I_USED_MASK & (BIT(3) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT+DEFIO_PORT_F_USED_COUNT+DEFIO_PORT_G_USED_COUNT+DEFIO_PORT_H_USED_COUNT)
-#else
-# define DEFIO_TAG__PI3 defio_error_PI3_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PI3 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PI3 defio_error_PI3_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_I_USED_MASK & BIT(4)
-# define DEFIO_TAG__PI4 DEFIO_TAG_MAKE(DEFIO_GPIOID__I, 4)
-# define DEFIO_TAG_E__PI4 DEFIO_TAG_MAKE(DEFIO_GPIOID__I, 4)
-# define DEFIO_REC__PI4 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_I_USED_MASK & (BIT(4) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT+DEFIO_PORT_F_USED_COUNT+DEFIO_PORT_G_USED_COUNT+DEFIO_PORT_H_USED_COUNT)
-#else
-# define DEFIO_TAG__PI4 defio_error_PI4_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PI4 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PI4 defio_error_PI4_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_I_USED_MASK & BIT(5)
-# define DEFIO_TAG__PI5 DEFIO_TAG_MAKE(DEFIO_GPIOID__I, 5)
-# define DEFIO_TAG_E__PI5 DEFIO_TAG_MAKE(DEFIO_GPIOID__I, 5)
-# define DEFIO_REC__PI5 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_I_USED_MASK & (BIT(5) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT+DEFIO_PORT_F_USED_COUNT+DEFIO_PORT_G_USED_COUNT+DEFIO_PORT_H_USED_COUNT)
-#else
-# define DEFIO_TAG__PI5 defio_error_PI5_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PI5 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PI5 defio_error_PI5_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_I_USED_MASK & BIT(6)
-# define DEFIO_TAG__PI6 DEFIO_TAG_MAKE(DEFIO_GPIOID__I, 6)
-# define DEFIO_TAG_E__PI6 DEFIO_TAG_MAKE(DEFIO_GPIOID__I, 6)
-# define DEFIO_REC__PI6 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_I_USED_MASK & (BIT(6) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT+DEFIO_PORT_F_USED_COUNT+DEFIO_PORT_G_USED_COUNT+DEFIO_PORT_H_USED_COUNT)
-#else
-# define DEFIO_TAG__PI6 defio_error_PI6_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PI6 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PI6 defio_error_PI6_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_I_USED_MASK & BIT(7)
-# define DEFIO_TAG__PI7 DEFIO_TAG_MAKE(DEFIO_GPIOID__I, 7)
-# define DEFIO_TAG_E__PI7 DEFIO_TAG_MAKE(DEFIO_GPIOID__I, 7)
-# define DEFIO_REC__PI7 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_I_USED_MASK & (BIT(7) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT+DEFIO_PORT_F_USED_COUNT+DEFIO_PORT_G_USED_COUNT+DEFIO_PORT_H_USED_COUNT)
-#else
-# define DEFIO_TAG__PI7 defio_error_PI7_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PI7 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PI7 defio_error_PI7_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_I_USED_MASK & BIT(8)
-# define DEFIO_TAG__PI8 DEFIO_TAG_MAKE(DEFIO_GPIOID__I, 8)
-# define DEFIO_TAG_E__PI8 DEFIO_TAG_MAKE(DEFIO_GPIOID__I, 8)
-# define DEFIO_REC__PI8 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_I_USED_MASK & (BIT(8) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT+DEFIO_PORT_F_USED_COUNT+DEFIO_PORT_G_USED_COUNT+DEFIO_PORT_H_USED_COUNT)
-#else
-# define DEFIO_TAG__PI8 defio_error_PI8_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PI8 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PI8 defio_error_PI8_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_I_USED_MASK & BIT(9)
-# define DEFIO_TAG__PI9 DEFIO_TAG_MAKE(DEFIO_GPIOID__I, 9)
-# define DEFIO_TAG_E__PI9 DEFIO_TAG_MAKE(DEFIO_GPIOID__I, 9)
-# define DEFIO_REC__PI9 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_I_USED_MASK & (BIT(9) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT+DEFIO_PORT_F_USED_COUNT+DEFIO_PORT_G_USED_COUNT+DEFIO_PORT_H_USED_COUNT)
-#else
-# define DEFIO_TAG__PI9 defio_error_PI9_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PI9 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PI9 defio_error_PI9_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_I_USED_MASK & BIT(10)
-# define DEFIO_TAG__PI10 DEFIO_TAG_MAKE(DEFIO_GPIOID__I, 10)
-# define DEFIO_TAG_E__PI10 DEFIO_TAG_MAKE(DEFIO_GPIOID__I, 10)
-# define DEFIO_REC__PI10 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_I_USED_MASK & (BIT(10) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT+DEFIO_PORT_F_USED_COUNT+DEFIO_PORT_G_USED_COUNT+DEFIO_PORT_H_USED_COUNT)
-#else
-# define DEFIO_TAG__PI10 defio_error_PI10_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PI10 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PI10 defio_error_PI10_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_I_USED_MASK & BIT(11)
-# define DEFIO_TAG__PI11 DEFIO_TAG_MAKE(DEFIO_GPIOID__I, 11)
-# define DEFIO_TAG_E__PI11 DEFIO_TAG_MAKE(DEFIO_GPIOID__I, 11)
-# define DEFIO_REC__PI11 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_I_USED_MASK & (BIT(11) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT+DEFIO_PORT_F_USED_COUNT+DEFIO_PORT_G_USED_COUNT+DEFIO_PORT_H_USED_COUNT)
-#else
-# define DEFIO_TAG__PI11 defio_error_PI11_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PI11 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PI11 defio_error_PI11_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_I_USED_MASK & BIT(12)
-# define DEFIO_TAG__PI12 DEFIO_TAG_MAKE(DEFIO_GPIOID__I, 12)
-# define DEFIO_TAG_E__PI12 DEFIO_TAG_MAKE(DEFIO_GPIOID__I, 12)
-# define DEFIO_REC__PI12 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_I_USED_MASK & (BIT(12) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT+DEFIO_PORT_F_USED_COUNT+DEFIO_PORT_G_USED_COUNT+DEFIO_PORT_H_USED_COUNT)
-#else
-# define DEFIO_TAG__PI12 defio_error_PI12_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PI12 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PI12 defio_error_PI12_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_I_USED_MASK & BIT(13)
-# define DEFIO_TAG__PI13 DEFIO_TAG_MAKE(DEFIO_GPIOID__I, 13)
-# define DEFIO_TAG_E__PI13 DEFIO_TAG_MAKE(DEFIO_GPIOID__I, 13)
-# define DEFIO_REC__PI13 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_I_USED_MASK & (BIT(13) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT+DEFIO_PORT_F_USED_COUNT+DEFIO_PORT_G_USED_COUNT+DEFIO_PORT_H_USED_COUNT)
-#else
-# define DEFIO_TAG__PI13 defio_error_PI13_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PI13 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PI13 defio_error_PI13_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_I_USED_MASK & BIT(14)
-# define DEFIO_TAG__PI14 DEFIO_TAG_MAKE(DEFIO_GPIOID__I, 14)
-# define DEFIO_TAG_E__PI14 DEFIO_TAG_MAKE(DEFIO_GPIOID__I, 14)
-# define DEFIO_REC__PI14 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_I_USED_MASK & (BIT(14) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT+DEFIO_PORT_F_USED_COUNT+DEFIO_PORT_G_USED_COUNT+DEFIO_PORT_H_USED_COUNT)
-#else
-# define DEFIO_TAG__PI14 defio_error_PI14_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PI14 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PI14 defio_error_PI14_is_not_supported_on_TARGET
-#endif
-#if DEFIO_PORT_I_USED_MASK & BIT(15)
-# define DEFIO_TAG__PI15 DEFIO_TAG_MAKE(DEFIO_GPIOID__I, 15)
-# define DEFIO_TAG_E__PI15 DEFIO_TAG_MAKE(DEFIO_GPIOID__I, 15)
-# define DEFIO_REC__PI15 DEFIO_REC_INDEXED(BITCOUNT(DEFIO_PORT_I_USED_MASK & (BIT(15) - 1)) + DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT+DEFIO_PORT_F_USED_COUNT+DEFIO_PORT_G_USED_COUNT+DEFIO_PORT_H_USED_COUNT)
-#else
-# define DEFIO_TAG__PI15 defio_error_PI15_is_not_supported_on_TARGET
-# define DEFIO_TAG_E__PI15 DEFIO_TAG_E__NONE
-# define DEFIO_REC__PI15 defio_error_PI15_is_not_supported_on_TARGET
-#endif
-#define DEFIO_IO_USED_COUNT (DEFIO_PORT_A_USED_COUNT+DEFIO_PORT_B_USED_COUNT+DEFIO_PORT_C_USED_COUNT+DEFIO_PORT_D_USED_COUNT+DEFIO_PORT_E_USED_COUNT+DEFIO_PORT_F_USED_COUNT+DEFIO_PORT_G_USED_COUNT+DEFIO_PORT_H_USED_COUNT+DEFIO_PORT_I_USED_COUNT)
-#if !defined DEFIO_PORT_USED_LIST && DEFIO_PORT_I_USED_COUNT > 0
-# define DEFIO_PORT_USED_COUNT 9
-# define DEFIO_PORT_USED_LIST DEFIO_PORT_A_USED_MASK,DEFIO_PORT_B_USED_MASK,DEFIO_PORT_C_USED_MASK,DEFIO_PORT_D_USED_MASK,DEFIO_PORT_E_USED_MASK,DEFIO_PORT_F_USED_MASK,DEFIO_PORT_G_USED_MASK,DEFIO_PORT_H_USED_MASK,DEFIO_PORT_I_USED_MASK
-# define DEFIO_PORT_OFFSET_LIST DEFIO_PORT_A_OFFSET,DEFIO_PORT_B_OFFSET,DEFIO_PORT_C_OFFSET,DEFIO_PORT_D_OFFSET,DEFIO_PORT_E_OFFSET,DEFIO_PORT_F_OFFSET,DEFIO_PORT_G_OFFSET,DEFIO_PORT_H_OFFSET,DEFIO_PORT_I_OFFSET
-#endif
-#if !defined DEFIO_PORT_USED_LIST && DEFIO_PORT_H_USED_COUNT > 0
-# define DEFIO_PORT_USED_COUNT 8
-# define DEFIO_PORT_USED_LIST DEFIO_PORT_A_USED_MASK,DEFIO_PORT_B_USED_MASK,DEFIO_PORT_C_USED_MASK,DEFIO_PORT_D_USED_MASK,DEFIO_PORT_E_USED_MASK,DEFIO_PORT_F_USED_MASK,DEFIO_PORT_G_USED_MASK,DEFIO_PORT_H_USED_MASK
-# define DEFIO_PORT_OFFSET_LIST DEFIO_PORT_A_OFFSET,DEFIO_PORT_B_OFFSET,DEFIO_PORT_C_OFFSET,DEFIO_PORT_D_OFFSET,DEFIO_PORT_E_OFFSET,DEFIO_PORT_F_OFFSET,DEFIO_PORT_G_OFFSET,DEFIO_PORT_H_OFFSET
-#endif
-#if !defined DEFIO_PORT_USED_LIST && DEFIO_PORT_G_USED_COUNT > 0
-# define DEFIO_PORT_USED_COUNT 7
-# define DEFIO_PORT_USED_LIST DEFIO_PORT_A_USED_MASK,DEFIO_PORT_B_USED_MASK,DEFIO_PORT_C_USED_MASK,DEFIO_PORT_D_USED_MASK,DEFIO_PORT_E_USED_MASK,DEFIO_PORT_F_USED_MASK,DEFIO_PORT_G_USED_MASK
-# define DEFIO_PORT_OFFSET_LIST DEFIO_PORT_A_OFFSET,DEFIO_PORT_B_OFFSET,DEFIO_PORT_C_OFFSET,DEFIO_PORT_D_OFFSET,DEFIO_PORT_E_OFFSET,DEFIO_PORT_F_OFFSET,DEFIO_PORT_G_OFFSET
-#endif
-#if !defined DEFIO_PORT_USED_LIST && DEFIO_PORT_F_USED_COUNT > 0
-# define DEFIO_PORT_USED_COUNT 6
-# define DEFIO_PORT_USED_LIST DEFIO_PORT_A_USED_MASK,DEFIO_PORT_B_USED_MASK,DEFIO_PORT_C_USED_MASK,DEFIO_PORT_D_USED_MASK,DEFIO_PORT_E_USED_MASK,DEFIO_PORT_F_USED_MASK
-# define DEFIO_PORT_OFFSET_LIST DEFIO_PORT_A_OFFSET,DEFIO_PORT_B_OFFSET,DEFIO_PORT_C_OFFSET,DEFIO_PORT_D_OFFSET,DEFIO_PORT_E_OFFSET,DEFIO_PORT_F_OFFSET
-#endif
-#if !defined DEFIO_PORT_USED_LIST && DEFIO_PORT_E_USED_COUNT > 0
-# define DEFIO_PORT_USED_COUNT 5
-# define DEFIO_PORT_USED_LIST DEFIO_PORT_A_USED_MASK,DEFIO_PORT_B_USED_MASK,DEFIO_PORT_C_USED_MASK,DEFIO_PORT_D_USED_MASK,DEFIO_PORT_E_USED_MASK
-# define DEFIO_PORT_OFFSET_LIST DEFIO_PORT_A_OFFSET,DEFIO_PORT_B_OFFSET,DEFIO_PORT_C_OFFSET,DEFIO_PORT_D_OFFSET,DEFIO_PORT_E_OFFSET
-#endif
-#if !defined DEFIO_PORT_USED_LIST && DEFIO_PORT_D_USED_COUNT > 0
-# define DEFIO_PORT_USED_COUNT 4
-# define DEFIO_PORT_USED_LIST DEFIO_PORT_A_USED_MASK,DEFIO_PORT_B_USED_MASK,DEFIO_PORT_C_USED_MASK,DEFIO_PORT_D_USED_MASK
-# define DEFIO_PORT_OFFSET_LIST DEFIO_PORT_A_OFFSET,DEFIO_PORT_B_OFFSET,DEFIO_PORT_C_OFFSET,DEFIO_PORT_D_OFFSET
-#endif
-#if !defined DEFIO_PORT_USED_LIST && DEFIO_PORT_C_USED_COUNT > 0
-# define DEFIO_PORT_USED_COUNT 3
-# define DEFIO_PORT_USED_LIST DEFIO_PORT_A_USED_MASK,DEFIO_PORT_B_USED_MASK,DEFIO_PORT_C_USED_MASK
-# define DEFIO_PORT_OFFSET_LIST DEFIO_PORT_A_OFFSET,DEFIO_PORT_B_OFFSET,DEFIO_PORT_C_OFFSET
-#endif
-#if !defined DEFIO_PORT_USED_LIST && DEFIO_PORT_B_USED_COUNT > 0
-# define DEFIO_PORT_USED_COUNT 2
-# define DEFIO_PORT_USED_LIST DEFIO_PORT_A_USED_MASK,DEFIO_PORT_B_USED_MASK
-# define DEFIO_PORT_OFFSET_LIST DEFIO_PORT_A_OFFSET,DEFIO_PORT_B_OFFSET
-#endif
-#if !defined DEFIO_PORT_USED_LIST && DEFIO_PORT_A_USED_COUNT > 0
-# define DEFIO_PORT_USED_COUNT 1
-# define DEFIO_PORT_USED_LIST DEFIO_PORT_A_USED_MASK
-# define DEFIO_PORT_OFFSET_LIST DEFIO_PORT_A_OFFSET
-#endif
-#if !defined(DEFIO_PORT_USED_LIST)
-# define DEFIO_PORT_USED_COUNT 0
-# define DEFIO_PORT_USED_LIST
-# define DEFIO_PORT_OFFSET_LIST
 #endif
 
 
@@ -7956,4 +6339,156 @@
 #if defined(USE_1WIRE) && defined(USE_1WIRE_DS2482)
 #define DETECTION_MAX_RETRY_COUNT 5
 #endif
+
+
+// ../inav/src/main/blackbox/blackbox_io.c
+#ifdef USE_BLACKBOX
+#define BLACKBOX_SERIAL_PORT_MODE MODE_TX
+#endif
+
+
+// ../inav/src/main/blackbox/blackbox.c
+#ifdef USE_BLACKBOX
+#if defined(ENABLE_BLACKBOX_LOGGING_ON_SPIFLASH_BY_DEFAULT)
+#define DEFAULT_BLACKBOX_DEVICE     BLACKBOX_DEVICE_FLASH
+#elif defined(ENABLE_BLACKBOX_LOGGING_ON_SDCARD_BY_DEFAULT)
+#define DEFAULT_BLACKBOX_DEVICE     BLACKBOX_DEVICE_SDCARD
+#else
+#define DEFAULT_BLACKBOX_DEVICE     BLACKBOX_DEVICE_SERIAL
+#endif
+#ifdef SDCARD_DETECT_INVERTED
+#define BLACKBOX_INVERTED_CARD_DETECTION 1
+#else
+#define BLACKBOX_INVERTED_CARD_DETECTION 0
+#endif
+#define BLACKBOX_SHUTDOWN_TIMEOUT_MILLIS 200
+#define PREDICT(x) CONCAT(FLIGHT_LOG_FIELD_PREDICTOR_, x)
+#define ENCODING(x) CONCAT(FLIGHT_LOG_FIELD_ENCODING_, x)
+#define CONDITION(x) CONCAT(FLIGHT_LOG_FIELD_CONDITION_, x)
+#define UNSIGNED FLIGHT_LOG_FIELD_UNSIGNED
+#define SIGNED FLIGHT_LOG_FIELD_SIGNED
+#define BLACKBOX_DELTA_FIELD_HEADER_COUNT       ARRAYLEN(blackboxFieldHeaderNames)
+#define BLACKBOX_SIMPLE_FIELD_HEADER_COUNT      (BLACKBOX_DELTA_FIELD_HEADER_COUNT - 2)
+#define BLACKBOX_CONDITIONAL_FIELD_HEADER_COUNT (BLACKBOX_DELTA_FIELD_HEADER_COUNT - 2)
+#define BLACKBOX_FIRST_HEADER_SENDING_STATE BLACKBOX_STATE_SEND_HEADER
+#define BLACKBOX_LAST_HEADER_SENDING_STATE BLACKBOX_STATE_SEND_SYSINFO
+#ifndef BLACKBOX_PRINT_HEADER_LINE
+#define BLACKBOX_PRINT_HEADER_LINE(name, format, ...) case __COUNTER__: \
+                                                blackboxPrintfHeaderLine(name, format, __VA_ARGS__); \
+                                                break;
+#define BLACKBOX_PRINT_HEADER_LINE_CUSTOM(...) case __COUNTER__: \
+                                                    {__VA_ARGS__}; \
+                                               break;
+#endif
+#endif
+
+
+// ../inav/src/main/blackbox/blackbox_fielddefs.h
+#define FLIGHT_LOG_EVENT_INFLIGHT_ADJUSTMENT_FUNCTION_FLOAT_VALUE_FLAG 128
+
+
+// ../inav/src/main/blackbox/blackbox_io.h
+#define BLACKBOX_MAX_ACCUMULATED_HEADER_BUDGET 256
+#define BLACKBOX_TARGET_HEADER_BUDGET_PER_ITERATION 64
+
+
+// ../inav/src/main/build/debug.h
+#define DEBUG32_VALUE_COUNT 8
+#define DEBUG_SET(mode, index, value) {if (debugMode == (mode)) {debug[(index)] = (value);}}
+#define DEBUG_SECTION_TIMES
+#ifdef DEBUG_SECTION_TIMES
+#define TIME_SECTION_BEGIN(index) { \
+    extern timeUs_t sectionTimes[2][4]; \
+    sectionTimes[0][index] = micros(); \
+}
+#define TIME_SECTION_END(index) { \
+    extern timeUs_t sectionTimes[2][4]; \
+    sectionTimes[1][index] = micros(); \
+    debug[index] = sectionTimes[1][index] - sectionTimes[0][index]; \
+}
+#else
+#define TIME_SECTION_BEGIN(index) {}
+#define TIME_SECTION_END(index) {}
+#endif
+#ifdef SITL_BUILD
+#define SD(X) (X)
+#else
+#define SD(X)
+#endif
+
+
+// ../inav/src/main/build/atomic.h
+#ifdef UNIT_TEST
+#define ATOMIC_BLOCK(prio) {}
+#else
+#define ATOMIC_BLOCK(prio) for ( uint8_t __basepri_save __attribute__((__cleanup__(__basepriRestoreMem))) = __get_BASEPRI(), \
+                                     __ToDo = __basepriSetMemRetVal((prio) << (8U - __NVIC_PRIO_BITS)); __ToDo ; __ToDo = 0 )
+#endif
+
+
+// ../inav/src/main/build/assert.h
+#if defined(USE_ASSERT) && defined(USE_ASSERT_CHECK)
+    #if defined(USE_ASSERT_FULL)
+        #define ASSERT(expr)        if (expr) { } else assertFailed2(__FILE__, __LINE__)
+    #else
+        #define ASSERT(expr)        if (expr) { } else assertFailed1(__LINE__)
+#endif
+#else
+    #define ASSERT(expr)        while (0) { }
+#endif
+
+
+// ../inav/src/main/build/build_config.h
+#define BUILD_BUG_ON(condition) ((void)sizeof(char[1 - 2*!!(condition)]))
+#ifdef UNIT_TEST
+#define STATIC_UNIT_TESTED
+#define STATIC_INLINE_UNIT_TESTED
+#define INLINE_UNIT_TESTED
+#define UNIT_TESTED
+#else
+#define STATIC_UNIT_TESTED static
+#define STATIC_INLINE_UNIT_TESTED static inline
+#define INLINE_UNIT_TESTED inline
+#define UNIT_TESTED
+#endif
+#ifndef __CC_ARM
+#define REQUIRE_CC_ARM_PRINTF_SUPPORT
+#define REQUIRE_PRINTF_LONG_SUPPORT
+#endif
+#ifdef __APPLE__
+#define FASTRAM                     __attribute__ ((section("__DATA,__.fastram_bss"), aligned(8)))
+#else
+#define FASTRAM                     __attribute__ ((section(".fastram_bss"), aligned(4)))
+#endif
+#if defined (STM32F4) || defined (STM32F7)
+#define EXTENDED_FASTRAM FASTRAM
+#else
+#define EXTENDED_FASTRAM
+#endif
+#if defined (STM32H7)
+#define DMA_RAM __attribute__ ((section(".DMA_RAM")))
+#define SLOW_RAM __attribute__ ((section(".SLOW_RAM")))
+#elif defined (AT32F43x)
+#define DMA_RAM __attribute__ ((section(".DMA_RAM")))
+#define SLOW_RAM __attribute__ ((section(".SLOW_RAM")))
+#else
+#define DMA_RAM
+#define SLOW_RAM
+#endif
+#define STATIC_FASTRAM              static FASTRAM
+#define STATIC_FASTRAM_UNIT_TESTED  STATIC_UNIT_TESTED FASTRAM
+
+
+// ../inav/src/main/build/version.h
+#define STR_HELPER(x) #x
+#define STR(x) STR_HELPER(x)
+#define FC_VERSION_STRING STR(FC_VERSION_MAJOR) "." STR(FC_VERSION_MINOR) "." STR(FC_VERSION_PATCH_LEVEL)
+#ifndef FC_VERSION_TYPE
+#define FC_VERSION_TYPE ""
+#endif
+#define FC_FIRMWARE_NAME "INAV"
+#define MW_VERSION              231
+#define GIT_SHORT_REVISION_LENGTH   8
+#define BUILD_DATE_LENGTH 11
+#define BUILD_TIME_LENGTH 8
 

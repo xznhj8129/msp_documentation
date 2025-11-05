@@ -25,8 +25,6 @@ def norm_ident(s: str) -> str:
 
 def ctype_from_entry(entry: dict) -> str:
     # If an explicit enum type is provided, use it as-is
-    if "enum" in entry and entry["enum"]:
-        return entry["enum"]
     ctype = entry.get("ctype", "")
     if ctype in CTYPE_MAP:
         return CTYPE_MAP[ctype]
@@ -39,58 +37,62 @@ def ctype_from_entry(entry: dict) -> str:
         return f"{base_c}[{arrn}]"
     # fallback to literal
     return ctype
+# returns (base, size) where size is:
+#   None  -> scalar (no brackets)
+#   ""    -> unsized []  (variable length)
+#   "EXPR"-> sized [EXPR]
+CTYPE_SPLIT_RE = re.compile(r"\s*([A-Za-z_]\w*)\s*(?:\[\s*(.*?)\s*\])?\s*$")
 
+def split_ctype(ctype_raw: str):
+    m = CTYPE_SPLIT_RE.fullmatch(ctype_raw or "")
+    if not m:
+        # unknown literal, fall back to as-is scalar
+        return (ctype_raw, None)
+    base = CTYPE_MAP.get(m.group(1), m.group(1))
+    size = m.group(2)
+    if size is None:
+        return (base, None)
+    # treat "": unsized (i.e., type[])
+    return (base, size)
 def field_decl(entry: dict, suffix_comment: str = "") -> str:
     name = norm_ident(entry["name"])
-    desc = entry.get("desc", "").strip()
-    units = entry.get("units", "").strip()
-    ctype_raw = entry.get("ctype", "")
+    desc = (entry.get("desc") or "").strip()
+    units = (entry.get("units") or "").strip()
     enum_t = entry.get("enum")
-    array = entry.get("array", False)
-    array_ctype = entry.get("array_ctype")
-    array_size = entry.get("array_size", 0)
 
-    # Compute C type and declarator
-    if enum_t:
-        # Always use the tag form; safe in C even if a typedef also exists
-        basetype = enum_t if enum_t.startswith("enum ") else f"enum {enum_t}"
-        declarator = name
-    elif array:
-        # Explicit array details override generic ctype
+    array_flag   = bool(entry.get("array"))
+    array_ctype  = entry.get("array_ctype")
+    array_size   = entry.get("array_size", 0)
+    ctype_raw    = entry.get("ctype", "")
+
+    # Decide base + declarator
+    if array_flag:
+        base = CTYPE_MAP.get(array_ctype, array_ctype)
         if isinstance(array_size, int) and array_size > 0:
-            basetype = CTYPE_MAP.get(array_ctype, array_ctype)
             declarator = f"{name}[{array_size}]"
-        elif isinstance(array_size, str) and array_size:
-            basetype = CTYPE_MAP.get(array_ctype, array_ctype)
-            declarator = f"{name}[{array_size}]"
+        elif isinstance(array_size, str) and array_size.strip():
+            declarator = f"{name}[{array_size.strip()}]"
         else:
-            # flexible array
-            basetype = CTYPE_MAP.get(array_ctype, array_ctype)
-            declarator = f"{name}[]"
+            # variable length (unknown at compile-time)
+            declarator = f"{name}[UNDEFINED_LEN_ARRAY_PLACEHOLDER]"
+        basetype = base
     else:
-        # ctype could be like "char[4]" which we need to split
-        m = re.match(r"^([a-zA-Z0-9_]+)\s*\[(.+)\]$", ctype_raw)
-        if m:
-            base = CTYPE_MAP.get(m.group(1), m.group(1))
-            sz = m.group(2)
-            basetype = base
-            declarator = f"{name}[{sz}]"
-        elif ctype_raw == "char[]":
-            basetype = "char"
-            declarator = f"{name}[]"
+        base, size = split_ctype(ctype_raw)
+        if size is None:
+            basetype, declarator = base, name
+        elif size == "":
+            basetype, declarator = base, f"{name}[UNDEFINED_LEN_ARRAY_PLACEHOLDER]"
         else:
-            basetype = CTYPE_MAP.get(ctype_raw, ctype_raw)
-            declarator = name
+            basetype, declarator = base, f"{name}[{size}]"
 
     cmts = []
-    if desc:
-        cmts.append(desc)
-    if units:
-        cmts.append(f"units: {units}")
-    if suffix_comment:
-        cmts.append(suffix_comment)
+    if desc: cmts.append(desc)
+    if units: cmts.append(f"units: {units}")
+    if enum_t: cmts.append(f"Enum: {enum_t}")
+    if suffix_comment: cmts.append(suffix_comment)
     cmt = "  // " + " | ".join(cmts) if cmts else ""
     return f"    {basetype} {declarator};{cmt}"
+
 
 def emit_header_preamble():
     return """#pragma once
@@ -112,6 +114,11 @@ def emit_header_preamble():
 #  define MSP_PACKED __attribute__((__packed__))
 #endif
 
+// Placeholder size for variable length arrays when the exact length is unknown at compile time
+#ifndef UNDEFINED_LEN_ARRAY_PLACEHOLDER
+#define UNDEFINED_LEN_ARRAY_PLACEHOLDER 1
+#endif
+
 """
 
 def emit_header_postamble():
@@ -124,31 +131,39 @@ def emit_header_postamble():
 def emit_struct(name: str, payload: list, parent_msg: dict) -> str:
     lines = []
     lines.append(f"typedef struct MSP_PACKED {name} {{")
-    # Some messages declare a count field elsewhere that controls flexible arrays.
-    # We simply trust the order given in JSON. If there is a flexible array, it must be last to be valid C.
+
     for ent in payload:
-        # nested repeating block
-        if "payload" in ent and ent.get("repeating"):
-            # create an inner struct type name
-            inner_name = f"{name}__{norm_ident(ent.get('name','repeating')) or 'block'}_t"
+        # Repeating block → emit an anonymous packed struct array member
+        if isinstance(ent, dict) and ent.get("repeating") and "payload" in ent:
+            arr_name = norm_ident(ent.get("name", "items"))
+            rep = ent.get("repeating")
+            # decide bracket expression
+            if isinstance(rep, int) and rep > 0:
+                bracket = f"[{rep}]"
+            elif isinstance(rep, str) and rep.strip():
+                bracket = f"[{rep.strip()}]"
+            else:
+                bracket = "[UNDEFINED_LEN_ARRAY_PLACEHOLDER]"
+
             inner_payload = ent["payload"]
-            # Flatten single-element wrappers
-            if isinstance(inner_payload, list) and len(inner_payload) == 1 and "payload" in inner_payload[0]:
+            if (isinstance(inner_payload, list) and len(inner_payload) == 1
+                    and isinstance(inner_payload[0], dict) and "payload" in inner_payload[0]):
                 inner_payload = inner_payload[0]["payload"]
-            # Emit inner struct
-            lines.append(f"    // Repeating block: {ent.get('repeating')}")
-            lines.append(f"    struct MSP_PACKED {inner_name} {{")
+
+            # one declaration: struct MSP_PACKED { ... } items[...];
+            lines.append(f"    struct MSP_PACKED {{")
             for sub in inner_payload:
                 lines.append(field_decl(sub))
-            lines.append(f"    }};")
-            # Now the flexible array of that inner struct
-            rep_count = str(ent.get("repeating"))
-            # If repeating is a macro or field name, leave brackets flexible. C requires last member be flexible.
-            lines.append(f"    struct {inner_name} {norm_ident(ent.get('name','items'))}[];  // count by field or macro: {rep_count}")
-        else:
-            lines.append(field_decl(ent))
+            lines.append(f"    }} {arr_name}{bracket};  // repeating: {rep}")
+            continue
+
+        # Normal field
+        lines.append(field_decl(ent))
+
     lines.append(f"}} {name};\n")
     return "\n".join(lines)
+
+
 
 def pick_variant_suffix(key: str) -> str:
     # Make a short safe suffix from the variant key

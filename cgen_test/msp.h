@@ -17,6 +17,11 @@
 #  define MSP_PACKED __attribute__((__packed__))
 #endif
 
+// Placeholder size for variable length arrays when the exact length is unknown at compile time
+#ifndef UNDEFINED_LEN_ARRAY_PLACEHOLDER
+#define UNDEFINED_LEN_ARRAY_PLACEHOLDER 1
+#endif
+
 
 // MSP_API_VERSION (MSPv1)
 // Provides the MSP protocol version and the INAV API version.
@@ -55,7 +60,7 @@ typedef struct MSP_PACKED MSP_BOARD_INFO_reply_t {
     uint8_t osdSupport;  // OSD chip type: 0=None, 2=Onboard (`USE_OSD`). INAV does not support slave OSD (1)
     uint8_t commCapabilities;  // Bitmask: Communication capabilities: Bit 0=VCP support (`USE_VCP`), Bit 1=SoftSerial support (`USE_SOFTSERIAL1`/`2`) | units: Bitmask
     uint8_t targetNameLength;  // Length of the target name string that follows
-    char targetName[];  // Target name string (e.g., "MATEKF405"). Length given by previous field
+    char targetName[UNDEFINED_LEN_ARRAY_PLACEHOLDER];  // Target name string (e.g., "MATEKF405"). Length given by previous field
 } MSP_BOARD_INFO_reply_t;
 
 // MSP_BUILD_INFO (MSPv1)
@@ -109,7 +114,7 @@ typedef struct MSP_PACKED MSP_SET_INAV_PID_request_t {
 // Returns the user-defined craft name.
 
 typedef struct MSP_PACKED MSP_NAME_reply_t {
-    char craftName[];  // The craft name string (`systemConfig()->craftName`). Null termination is *not* explicitly sent, the length is determined by the payload size
+    char craftName[UNDEFINED_LEN_ARRAY_PLACEHOLDER];  // The craft name string (`systemConfig()->craftName`). Null termination is *not* explicitly sent, the length is determined by the payload size
 } MSP_NAME_reply_t;
 
 // MSP_SET_NAME (MSPv1)
@@ -117,7 +122,7 @@ typedef struct MSP_PACKED MSP_NAME_reply_t {
 // Notes: Maximum length is `MAX_NAME_LENGTH`.
 
 typedef struct MSP_PACKED MSP_SET_NAME_request_t {
-    char craftName[];  // The new craft name string. Automatically null-terminated by the FC
+    char craftName[UNDEFINED_LEN_ARRAY_PLACEHOLDER];  // The new craft name string. Automatically null-terminated by the FC
 } MSP_SET_NAME_request_t;
 
 // MSP_NAV_POSHOLD (MSPv1)
@@ -130,7 +135,7 @@ typedef struct MSP_PACKED MSP_NAV_POSHOLD_reply_t {
     uint16_t maxManualSpeed;  // Max speed in manual modes with GPS aiding (`navConfig()->general.max_manual_speed`) | units: cm/s
     uint16_t maxManualClimbRate;  // Max climb rate in manual modes with GPS aiding (uses `fw.max_manual_climb_rate` or `mc.max_manual_climb_rate`) | units: cm/s
     uint8_t mcMaxBankAngle;  // Max bank angle for multirotor position hold (`navConfig()->mc.max_bank_angle`) | units: degrees
-    enum navMcAltHoldThrottle_e mcAltHoldThrottleType;  // Enum `navMcAltHoldThrottle_e` mirrored from `navConfig()->mc.althold_throttle_type`. | units: Enum
+    uint8_t mcAltHoldThrottleType;  // Enum `navMcAltHoldThrottle_e` mirrored from `navConfig()->mc.althold_throttle_type`. | units: Enum | Enum: navMcAltHoldThrottle_e
     uint16_t mcHoverThrottle;  // Multirotor hover throttle PWM value (`currentBatteryProfile->nav.mc.hover_throttle`). | units: PWM
 } MSP_NAV_POSHOLD_reply_t;
 
@@ -139,13 +144,13 @@ typedef struct MSP_PACKED MSP_NAV_POSHOLD_reply_t {
 // Notes: Expects 13 bytes.
 
 typedef struct MSP_PACKED MSP_SET_NAV_POSHOLD_request_t {
-    enum navUserControlMode_e userControlMode;  // Sets `navConfigMutable()->general.flags.user_control_mode`. | units: Enum
+    uint8_t userControlMode;  // Sets `navConfigMutable()->general.flags.user_control_mode`. | units: Enum | Enum: navUserControlMode_e
     uint16_t maxAutoSpeed;  // Sets `navConfigMutable()->general.max_auto_speed`. | units: cm/s
     uint16_t maxAutoClimbRate;  // Sets `navConfigMutable()->fw.max_auto_climb_rate` or `navConfigMutable()->mc.max_auto_climb_rate` based on `mixerConfig()->platformType`. | units: cm/s
     uint16_t maxManualSpeed;  // Sets `navConfigMutable()->general.max_manual_speed`. | units: cm/s
     uint16_t maxManualClimbRate;  // Sets `navConfigMutable()->fw.max_manual_climb_rate` or `navConfigMutable()->mc.max_manual_climb_rate`. | units: cm/s
     uint8_t mcMaxBankAngle;  // Sets `navConfigMutable()->mc.max_bank_angle`. | units: degrees
-    enum navMcAltHoldThrottle_e mcAltHoldThrottleType;  // Enum `navMcAltHoldThrottle_e`; updates `navConfigMutable()->mc.althold_throttle_type`. | units: Enum
+    uint8_t mcAltHoldThrottleType;  // Enum `navMcAltHoldThrottle_e`; updates `navConfigMutable()->mc.althold_throttle_type`. | units: Enum | Enum: navMcAltHoldThrottle_e
     uint16_t mcHoverThrottle;  // Sets `currentBatteryProfileMutable->nav.mc.hover_throttle`. | units: PWM
 } MSP_SET_NAV_POSHOLD_request_t;
 
@@ -252,7 +257,7 @@ typedef struct MSP_PACKED MSP_RTH_AND_LAND_CONFIG_reply_t {
     uint8_t rthClimbIgnoreEmerg;  // Flag: Climb even in emergency RTH (`navConfig()->general.flags.rth_climb_ignore_emerg`) | units: Boolean
     uint8_t rthTailFirst;  // Flag: Return tail-first during RTH (`navConfig()->general.flags.rth_tail_first`) | units: Boolean
     uint8_t rthAllowLanding;  // Flag: Allow automatic landing after RTH (`navConfig()->general.flags.rth_allow_landing`) | units: Boolean
-    enum navRthAltMode_e rthAltControlMode;  // RTH altitude control mode (`navConfig()->general.flags.rth_alt_control_mode`). | units: Enum
+    uint8_t rthAltControlMode;  // RTH altitude control mode (`navConfig()->general.flags.rth_alt_control_mode`). | units: Enum | Enum: navRthAltMode_e
     uint16_t rthAbortThreshold;  // Distance increase threshold to abort RTH (`navConfig()->general.rth_abort_threshold`) | units: cm
     uint16_t rthAltitude;  // Target RTH altitude (`navConfig()->general.rth_altitude`) | units: cm
     uint16_t landMinAltVspd;  // Landing vertical speed at minimum slowdown altitude (`navConfig()->general.land_minalt_vspd`) | units: cm/s
@@ -272,7 +277,7 @@ typedef struct MSP_PACKED MSP_SET_RTH_AND_LAND_CONFIG_request_t {
     uint8_t rthClimbIgnoreEmerg;  // Sets `navConfigMutable()->general.flags.rth_climb_ignore_emerg`. | units: Boolean
     uint8_t rthTailFirst;  // Sets `navConfigMutable()->general.flags.rth_tail_first`. | units: Boolean
     uint8_t rthAllowLanding;  // Sets `navConfigMutable()->general.flags.rth_allow_landing`. | units: Boolean
-    enum navRthAltMode_e rthAltControlMode;  // Sets `navConfigMutable()->general.flags.rth_alt_control_mode`. | units: Enum
+    uint8_t rthAltControlMode;  // Sets `navConfigMutable()->general.flags.rth_alt_control_mode`. | units: Enum | Enum: navRthAltMode_e
     uint16_t rthAbortThreshold;  // Sets `navConfigMutable()->general.rth_abort_threshold`. | units: cm
     uint16_t rthAltitude;  // Sets `navConfigMutable()->general.rth_altitude`. | units: cm
     uint16_t landMinAltVspd;  // Sets `navConfigMutable()->general.land_minalt_vspd`. | units: cm/s
@@ -377,7 +382,7 @@ typedef struct MSP_PACKED MSP_SET_BOARD_ALIGNMENT_request_t {
 typedef struct MSP_PACKED MSP_CURRENT_METER_CONFIG_reply_t {
     int16_t scale;  // Current sensor scale factor (`batteryMetersConfig()->current.scale`). Stored in 0.1 mV/A; signed for calibration. | units: 0.1 mV/A
     int16_t offset;  // Current sensor offset (`batteryMetersConfig()->current.offset`). Signed millivolt adjustment. | units: mV
-    enum currentSensor_e type;  // Enum `currentSensor_e` Type of current sensor hardware | units: Enum
+    uint8_t type;  // Enum `currentSensor_e` Type of current sensor hardware | units: Enum | Enum: currentSensor_e
     uint16_t capacity;  // Battery capacity (constrained 0-65535) (`currentBatteryProfile->capacity.value`). Note: This is legacy, use `MSP2_INAV_BATTERY_CONFIG` for full 32-bit capacity | units: mAh (legacy)
 } MSP_CURRENT_METER_CONFIG_reply_t;
 
@@ -388,7 +393,7 @@ typedef struct MSP_PACKED MSP_CURRENT_METER_CONFIG_reply_t {
 typedef struct MSP_PACKED MSP_SET_CURRENT_METER_CONFIG_request_t {
     int16_t scale;  // Sets `batteryMetersConfigMutable()->current.scale` (0.1 mV/A, signed). | units: 0.1 mV/A
     int16_t offset;  // Sets `batteryMetersConfigMutable()->current.offset` (signed millivolts). | units: mV
-    enum currentSensor_e type;  // Enum `currentSensor_e` Sets `batteryMetersConfigMutable()->current.type`. | units: Enum
+    uint8_t type;  // Enum `currentSensor_e` Sets `batteryMetersConfigMutable()->current.type`. | units: Enum | Enum: currentSensor_e
     uint16_t capacity;  // Sets `currentBatteryProfileMutable->capacity.value` (truncated to 16 bits) | units: mAh (legacy)
 } MSP_SET_CURRENT_METER_CONFIG_request_t;
 
@@ -412,7 +417,7 @@ typedef struct MSP_PACKED MSP_SET_MIXER_request_t {
 // Retrieves receiver configuration settings. Some fields are Betaflight compatibility placeholders.
 
 typedef struct MSP_PACKED MSP_RX_CONFIG_reply_t {
-    enum rxSerialReceiverType_e serialRxProvider;  // Enum `rxSerialReceiverType_e`. Serial RX provider (`rxConfig()->serialrx_provider`). | units: Enum
+    uint8_t serialRxProvider;  // Enum `rxSerialReceiverType_e`. Serial RX provider (`rxConfig()->serialrx_provider`). | units: Enum | Enum: rxSerialReceiverType_e
     uint16_t maxCheck;  // Upper channel value threshold for stick commands (`rxConfig()->maxcheck`) | units: PWM
     uint16_t midRc;  // Center channel value (`PWM_RANGE_MIDDLE`, typically 1500) | units: PWM
     uint16_t minCheck;  // Lower channel value threshold for stick commands (`rxConfig()->mincheck`) | units: PWM
@@ -426,7 +431,7 @@ typedef struct MSP_PACKED MSP_RX_CONFIG_reply_t {
     uint32_t reserved2;  // Reserved/Padding. Always 0
     uint8_t reserved3;  // Reserved/Padding. Always 0
     uint8_t bfCompatFpvCamAngle;  // BF compatibility. Always 0
-    enum rxReceiverType_e receiverType;  // Enum `rxReceiverType_e` Receiver type (Parallel PWM, PPM, Serial) ('rxConfig()->receiverType') | units: Enum
+    uint8_t receiverType;  // Enum `rxReceiverType_e` Receiver type (Parallel PWM, PPM, Serial) ('rxConfig()->receiverType') | units: Enum | Enum: rxReceiverType_e
 } MSP_RX_CONFIG_reply_t;
 
 // MSP_SET_RX_CONFIG (MSPv1)
@@ -434,7 +439,7 @@ typedef struct MSP_PACKED MSP_RX_CONFIG_reply_t {
 // Notes: Expects 24 bytes.
 
 typedef struct MSP_PACKED MSP_SET_RX_CONFIG_request_t {
-    enum rxSerialReceiverType_e serialRxProvider;  // Enum `rxSerialReceiverType_e`. Sets `rxConfigMutable()->serialrx_provider`. | units: Enum
+    uint8_t serialRxProvider;  // Enum `rxSerialReceiverType_e`. Sets `rxConfigMutable()->serialrx_provider`. | units: Enum | Enum: rxSerialReceiverType_e
     uint16_t maxCheck;  // Sets `rxConfigMutable()->maxcheck`. | units: PWM
     uint16_t midRc;  // Ignored (`PWM_RANGE_MIDDLE` is used) | units: PWM
     uint16_t minCheck;  // Sets `rxConfigMutable()->mincheck`. | units: PWM
@@ -448,7 +453,7 @@ typedef struct MSP_PACKED MSP_SET_RX_CONFIG_request_t {
     uint32_t reserved2;  // Ignored
     uint8_t reserved3;  // Ignored
     uint8_t bfCompatFpvCamAngle;  // Ignored
-    enum rxReceiverType_e receiverType;  // Enum `rxReceiverType_e` Sets `rxConfigMutable()->receiverType`. | units: Enum
+    uint8_t receiverType;  // Enum `rxReceiverType_e` Sets `rxConfigMutable()->receiverType`. | units: Enum | Enum: rxReceiverType_e
 } MSP_SET_RX_CONFIG_request_t;
 
 // MSP_LED_COLORS (MSPv1)
@@ -512,7 +517,7 @@ typedef struct MSP_PACKED MSP_ADJUSTMENT_RANGES_reply_t {
     uint8_t auxChannelIndex;  // 0-based index of the AUX channel controlling the adjustment value
     uint8_t rangeStartStep;  // Start step (0-48). Each step is 25 PWM units; 0 is <=900 and 48 is >=2100. | units: step
     uint8_t rangeEndStep;  // End step (0-48). Uses the same 25-PWM step mapping as rangeStartStep. | units: step
-    enum adjustmentFunction_e adjustmentFunction;  // Function/parameter being adjusted (see `adjustmentFunction_e`).
+    uint8_t adjustmentFunction;  // Function/parameter being adjusted (see `adjustmentFunction_e`). | Enum: adjustmentFunction_e
     uint8_t auxSwitchChannelIndex;  // 0-based index of the AUX channel acting as an enable switch (or 0 if always enabled)
 } MSP_ADJUSTMENT_RANGES_reply_t;
 
@@ -526,7 +531,7 @@ typedef struct MSP_PACKED MSP_SET_ADJUSTMENT_RANGE_request_t {
     uint8_t auxChannelIndex;  // 0-based index of the control AUX channel
     uint8_t rangeStartStep;  // Start step (0-48). Each step is 25 PWM units; 0 is <=900 and 48 is >=2100. | units: step
     uint8_t rangeEndStep;  // End step (0-48). Uses the same 25-PWM step mapping as rangeStartStep. | units: step
-    enum adjustmentFunction_e adjustmentFunction;  // Function/parameter being adjusted.
+    uint8_t adjustmentFunction;  // Function/parameter being adjusted. | Enum: adjustmentFunction_e
     uint8_t auxSwitchChannelIndex;  // 0-based index of the enable switch AUX channel (or 0)
 } MSP_SET_ADJUSTMENT_RANGE_request_t;
 
@@ -609,7 +614,7 @@ typedef struct MSP_PACKED MSP_DATAFLASH_READ_request_t {
 
 typedef struct MSP_PACKED MSP_DATAFLASH_READ_reply_t {
     uint32_t address;  // The starting address from which data was actually read
-    uint8_t data[];  // The data read from flash. Length is MIN(requested size, remaining buffer space, remaining flashfs data)
+    uint8_t data[UNDEFINED_LEN_ARRAY_PLACEHOLDER];  // The data read from flash. Length is MIN(requested size, remaining buffer space, remaining flashfs data)
 } MSP_DATAFLASH_READ_reply_t;
 
 // MSP_DATAFLASH_ERASE (MSPv1)
@@ -641,14 +646,14 @@ typedef struct MSP_PACKED MSP_FAILSAFE_CONFIG_reply_t {
     uint16_t failsafeThrottle;  // Throttle level during failsafe stage 2 (`currentBatteryProfile->failsafe_throttle`) | units: PWM
     uint8_t legacyKillSwitch;  // Legacy flag, always 0
     uint16_t failsafeThrottleLowDelay;  // Delay for throttle-based failsafe detection (`failsafeConfig()->failsafe_throttle_low_delay`). Units of 0.1 seconds. | units: 0.1s
-    enum failsafeProcedure_e failsafeProcedure;  // Enum `failsafeProcedure_e` Failsafe procedure (Drop, RTH, Land, etc.) ('failsafeConfig()->failsafe_procedure') | units: Enum
+    uint8_t failsafeProcedure;  // Enum `failsafeProcedure_e` Failsafe procedure (Drop, RTH, Land, etc.) ('failsafeConfig()->failsafe_procedure') | units: Enum | Enum: failsafeProcedure_e
     uint8_t failsafeRecoveryDelay;  // Delay after RTH finishes before attempting recovery (`failsafeConfig()->failsafe_recovery_delay`) | units: 0.1s
     int16_t failsafeFWRollAngle;  // Fixed-wing failsafe roll angle (`failsafeConfig()->failsafe_fw_roll_angle`). Signed deci-degrees. | units: deci-degrees
     int16_t failsafeFWPitchAngle;  // Fixed-wing failsafe pitch angle (`failsafeConfig()->failsafe_fw_pitch_angle`). Signed deci-degrees. | units: deci-degrees
     int16_t failsafeFWYawRate;  // Fixed-wing failsafe yaw rate (`failsafeConfig()->failsafe_fw_yaw_rate`). Signed degrees per second. | units: deg/s
     uint16_t failsafeStickThreshold;  // Stick movement threshold to exit failsafe (`failsafeConfig()->failsafe_stick_motion_threshold`) | units: PWM units
     uint16_t failsafeMinDistance;  // Minimum distance from home for RTH failsafe (`failsafeConfig()->failsafe_min_distance`). Units of centimeters. | units: cm
-    enum failsafeProcedure_e failsafeMinDistanceProc;  // Enum `failsafeProcedure_e` Failsafe procedure if below min distance ('failsafeConfig()->failsafe_min_distance_procedure') | units: Enum
+    uint8_t failsafeMinDistanceProc;  // Enum `failsafeProcedure_e` Failsafe procedure if below min distance ('failsafeConfig()->failsafe_min_distance_procedure') | units: Enum | Enum: failsafeProcedure_e
 } MSP_FAILSAFE_CONFIG_reply_t;
 
 // MSP_SET_FAILSAFE_CONFIG (MSPv1)
@@ -661,14 +666,14 @@ typedef struct MSP_PACKED MSP_SET_FAILSAFE_CONFIG_request_t {
     uint16_t failsafeThrottle;  // Sets `currentBatteryProfileMutable->failsafe_throttle`. | units: PWM
     uint8_t legacyKillSwitch;  // Ignored
     uint16_t failsafeThrottleLowDelay;  // Sets `failsafeConfigMutable()->failsafe_throttle_low_delay`. Units of 0.1 seconds. | units: 0.1s
-    enum failsafeProcedure_e failsafeProcedure;  // Enum `failsafeProcedure_e`. Sets `failsafeConfigMutable()->failsafe_procedure`. | units: Enum
+    uint8_t failsafeProcedure;  // Enum `failsafeProcedure_e`. Sets `failsafeConfigMutable()->failsafe_procedure`. | units: Enum | Enum: failsafeProcedure_e
     uint8_t failsafeRecoveryDelay;  // Sets `failsafeConfigMutable()->failsafe_recovery_delay`. | units: 0.1s
     int16_t failsafeFWRollAngle;  // Sets `failsafeConfigMutable()->failsafe_fw_roll_angle`. Signed deci-degrees. | units: deci-degrees
     int16_t failsafeFWPitchAngle;  // Sets `failsafeConfigMutable()->failsafe_fw_pitch_angle`. Signed deci-degrees. | units: deci-degrees
     int16_t failsafeFWYawRate;  // Sets `failsafeConfigMutable()->failsafe_fw_yaw_rate`. Signed degrees per second. | units: deg/s
     uint16_t failsafeStickThreshold;  // Sets `failsafeConfigMutable()->failsafe_stick_motion_threshold`. | units: PWM units
     uint16_t failsafeMinDistance;  // Sets `failsafeConfigMutable()->failsafe_min_distance`. Units of centimeters. | units: cm
-    enum failsafeProcedure_e failsafeMinDistanceProc;  // Enum `failsafeProcedure_e`. Sets `failsafeConfigMutable()->failsafe_min_distance_procedure`. | units: Enum
+    uint8_t failsafeMinDistanceProc;  // Enum `failsafeProcedure_e`. Sets `failsafeConfigMutable()->failsafe_min_distance_procedure`. | units: Enum | Enum: failsafeProcedure_e
 } MSP_SET_FAILSAFE_CONFIG_request_t;
 
 // MSP_SDCARD_SUMMARY (MSPv1)
@@ -677,7 +682,7 @@ typedef struct MSP_PACKED MSP_SET_FAILSAFE_CONFIG_request_t {
 
 typedef struct MSP_PACKED MSP_SDCARD_SUMMARY_reply_t {
     uint8_t sdCardSupported;  // Bitmask: Bit 0 = 1 if SD card support compiled in (`USE_SDCARD`) | units: Bitmask
-    enum mspSDCardState_e sdCardState;  // Enum (`mspSDCardState_e`): Current state (Not Present, Fatal, Card Init, FS Init, Ready). 0 if `USE_SDCARD` disabled
+    uint8_t sdCardState;  // Enum (`mspSDCardState_e`): Current state (Not Present, Fatal, Card Init, FS Init, Ready). 0 if `USE_SDCARD` disabled | Enum: mspSDCardState_e
     uint8_t fsError;  // Last filesystem error code (`afatfs_getLastError()`). 0 if `USE_SDCARD` disabled
     uint32_t freeSpaceKB;  // Free space in KiB (`afatfs_getContiguousFreeSpace() / 1024`). 0 if `USE_SDCARD` disabled
     uint32_t totalSpaceKB;  // Total space in KiB (`sdcard_getMetadata()->numBlocks / 2`). 0 if `USE_SDCARD` disabled
@@ -711,9 +716,9 @@ typedef struct MSP_PACKED MSP_BLACKBOX_CONFIG_reply_t {
 // Notes: 1 byte if `USE_OSD` disabled; full payload (1 + fields + 2*OSD_ITEM_COUNT bytes) otherwise.
 
 typedef struct MSP_PACKED MSP_OSD_CONFIG_reply_t {
-    enum osdDriver_e osdDriverType;  // Enum `osdDriver_e`: `OSD_DRIVER_MAX7456` if `USE_OSD`, else `OSD_DRIVER_NONE`. | units: Enum
-    enum videoSystem_e videoSystem;  // Enum `videoSystem_e`: Video system (Auto/PAL/NTSC) (`osdConfig()->video_system`). Sent even if OSD disabled | units: Enum
-    enum osd_unit_e units;  // Enum `osd_unit_e` Measurement units (Metric/Imperial) (`osdConfig()->units`). Sent even if OSD disabled | units: Enum
+    uint8_t osdDriverType;  // Enum `osdDriver_e`: `OSD_DRIVER_MAX7456` if `USE_OSD`, else `OSD_DRIVER_NONE`. | units: Enum | Enum: osdDriver_e
+    uint8_t videoSystem;  // Enum `videoSystem_e`: Video system (Auto/PAL/NTSC) (`osdConfig()->video_system`). Sent even if OSD disabled | units: Enum | Enum: videoSystem_e
+    uint8_t units;  // Enum `osd_unit_e` Measurement units (Metric/Imperial) (`osdConfig()->units`). Sent even if OSD disabled | units: Enum | Enum: osd_unit_e
     uint8_t rssiAlarm;  // RSSI alarm threshold (`osdConfig()->rssi_alarm`). Sent even if OSD disabled | units: %
     uint16_t capAlarm;  // Capacity alarm threshold (`currentBatteryProfile->capacity.warning`). Truncated to 16 bits. Sent even if OSD disabled. | units: mAh/mWh
     uint16_t timerAlarm;  // Timer alarm threshold in minutes (`osdConfig()->time_alarm`). Sent even if OSD disabled. | units: minutes
@@ -729,8 +734,8 @@ typedef struct MSP_PACKED MSP_OSD_CONFIG_reply_t {
 
 typedef struct MSP_PACKED MSP_SET_OSD_CONFIG_request_t_dataSize_ge_10 {
     uint8_t selector;  // Must be 0xFF (-1) to indicate a configuration update.
-    enum videoSystem_e videoSystem;  // Enum `videoSystem_e`: Video system (Auto/PAL/NTSC) (`osdConfig()->video_system`). | units: Enum
-    enum osd_unit_e units;  // Enum `osd_unit_e` Measurement units (Metric/Imperial) (`osdConfig()->units`). | units: Enum
+    uint8_t videoSystem;  // Enum `videoSystem_e`: Video system (Auto/PAL/NTSC) (`osdConfig()->video_system`). | units: Enum | Enum: videoSystem_e
+    uint8_t units;  // Enum `osd_unit_e` Measurement units (Metric/Imperial) (`osdConfig()->units`). | units: Enum | Enum: osd_unit_e
     uint8_t rssiAlarm;  // RSSI alarm threshold (`osdConfig()->rssi_alarm`). | units: %
     uint16_t capAlarm;  // Capacity alarm threshold (`currentBatteryProfile->capacity.warning`). Truncated to 16 bits. | units: mAh/mWh
     uint16_t timerAlarm;  // Timer alarm threshold in minutes (`osdConfig()->time_alarm`). | units: minutes
@@ -777,13 +782,13 @@ typedef struct MSP_PACKED MSP_OSD_CHAR_WRITE_request_t_payloadSize_eq_OSD_CHAR_V
 // Notes: Returns 1 byte (`VTXDEV_UNKNOWN`) when no VTX is detected or `USE_VTX_CONTROL` is disabled; otherwise sends full payload. BF compatibility field `frequency` (uint16) is missing compared to some BF versions. Use `MSP_VTXTABLE_BAND` and `MSP_VTXTABLE_POWERLEVEL` for details.
 
 typedef struct MSP_PACKED MSP_VTX_CONFIG_reply_t {
-    enum vtxDevType_e vtxDeviceType;  // Enum (`vtxDevType_e`): Type of VTX device detected/configured. `VTXDEV_UNKNOWN` if none
+    uint8_t vtxDeviceType;  // Enum (`vtxDevType_e`): Type of VTX device detected/configured. `VTXDEV_UNKNOWN` if none | Enum: vtxDevType_e
     uint8_t band;  // VTX band number (from `vtxSettingsConfig`)
     uint8_t channel;  // VTX channel number (from `vtxSettingsConfig`)
     uint8_t power;  // VTX power level index (from `vtxSettingsConfig()`).
     uint8_t pitMode;  // Boolean: 1 if VTX is currently in pit mode, 0 otherwise.
     uint8_t vtxReady;  // Boolean: 1 if VTX device reported ready, 0 otherwise
-    enum vtxLowerPowerDisarm_e lowPowerDisarm;  // Enum `vtxLowerPowerDisarm_e`: Low-power behaviour while disarmed (`vtxSettingsConfig()->lowPowerDisarm`). | units: Enum
+    uint8_t lowPowerDisarm;  // Enum `vtxLowerPowerDisarm_e`: Low-power behaviour while disarmed (`vtxSettingsConfig()->lowPowerDisarm`). | units: Enum | Enum: vtxLowerPowerDisarm_e
     uint8_t vtxTableAvailable;  // Boolean: 1 if VTX tables (band/power) are available for query
     uint8_t bandCount;  // Number of bands supported by the VTX device
     uint8_t channelCount;  // Number of channels per band supported by the VTX device
@@ -798,7 +803,7 @@ typedef struct MSP_PACKED MSP_SET_VTX_CONFIG_request_t_payloadSize_ge_14 {
     uint16_t bandChanOrFreq;  // Encoded band/channel if <= `VTXCOMMON_MSP_BANDCHAN_CHKVAL`; otherwise frequency placeholder.
     uint8_t power;
     uint8_t pitMode;
-    enum vtxLowerPowerDisarm_e lowPowerDisarm;
+    uint8_t lowPowerDisarm;  // Enum: vtxLowerPowerDisarm_e
     uint16_t pitModeFreq;
     uint8_t band;
     uint8_t channel;
@@ -812,7 +817,7 @@ typedef struct MSP_PACKED MSP_SET_VTX_CONFIG_request_t_payloadSize_ge_11 {
     uint16_t bandChanOrFreq;
     uint8_t power;
     uint8_t pitMode;
-    enum vtxLowerPowerDisarm_e lowPowerDisarm;
+    uint8_t lowPowerDisarm;  // Enum: vtxLowerPowerDisarm_e
     uint16_t pitModeFreq;
     uint8_t band;
     uint8_t channel;
@@ -823,7 +828,7 @@ typedef struct MSP_PACKED MSP_SET_VTX_CONFIG_request_t_payloadSize_ge_9 {
     uint16_t bandChanOrFreq;
     uint8_t power;
     uint8_t pitMode;
-    enum vtxLowerPowerDisarm_e lowPowerDisarm;
+    uint8_t lowPowerDisarm;  // Enum: vtxLowerPowerDisarm_e
     uint16_t pitModeFreq;
     uint8_t band;  // 1..N; overrides band when present.
     uint8_t channel;  // 1..8; overrides channel when present.
@@ -833,7 +838,7 @@ typedef struct MSP_PACKED MSP_SET_VTX_CONFIG_request_t_payloadSize_ge_7 {
     uint16_t bandChanOrFreq;
     uint8_t power;
     uint8_t pitMode;
-    enum vtxLowerPowerDisarm_e lowPowerDisarm;
+    uint8_t lowPowerDisarm;  // Enum: vtxLowerPowerDisarm_e
     uint16_t pitModeFreq;  // Read and skipped.
 } MSP_SET_VTX_CONFIG_request_t_payloadSize_ge_7;
 
@@ -841,7 +846,7 @@ typedef struct MSP_PACKED MSP_SET_VTX_CONFIG_request_t_payloadSize_ge_5 {
     uint16_t bandChanOrFreq;
     uint8_t power;
     uint8_t pitMode;
-    enum vtxLowerPowerDisarm_e lowPowerDisarm;  // 0=Off, 1=Always, 2=Until first arm.
+    uint8_t lowPowerDisarm;  // 0=Off, 1=Always, 2=Until first arm. | Enum: vtxLowerPowerDisarm_e
 } MSP_SET_VTX_CONFIG_request_t_payloadSize_ge_5;
 
 typedef struct MSP_PACKED MSP_SET_VTX_CONFIG_request_t_payloadSize_ge_4 {
@@ -861,7 +866,7 @@ typedef struct MSP_PACKED MSP_ADVANCED_CONFIG_reply_t {
     uint8_t gyroSyncDenom;  // Always 1 (BF compatibility)
     uint8_t pidProcessDenom;  // Always 1 (BF compatibility)
     uint8_t useUnsyncedPwm;  // Always 1 (BF compatibility, INAV uses async PWM based on protocol)
-    enum motorPwmProtocolTypes_e motorPwmProtocol;  // Motor PWM protocol type (`motorConfig()->motorPwmProtocol`). | units: Enum
+    uint8_t motorPwmProtocol;  // Motor PWM protocol type (`motorConfig()->motorPwmProtocol`). | units: Enum | Enum: motorPwmProtocolTypes_e
     uint16_t motorPwmRate;  // Motor PWM rate (if applicable) (`motorConfig()->motorPwmRate`). | units: Hz
     uint16_t servoPwmRate;  // Servo PWM rate (`servoConfig()->servoPwmRate`). | units: Hz
     uint8_t legacyGyroSync;  // Always 0 (BF compatibility)
@@ -875,7 +880,7 @@ typedef struct MSP_PACKED MSP_SET_ADVANCED_CONFIG_request_t {
     uint8_t gyroSyncDenom;  // Ignored (legacy Betaflight field).
     uint8_t pidProcessDenom;  // Ignored (legacy Betaflight field).
     uint8_t useUnsyncedPwm;  // Ignored (legacy Betaflight field).
-    enum motorPwmProtocolTypes_e motorPwmProtocol;  // Sets `motorConfigMutable()->motorPwmProtocol`. | units: Enum
+    uint8_t motorPwmProtocol;  // Sets `motorConfigMutable()->motorPwmProtocol`. | units: Enum | Enum: motorPwmProtocolTypes_e
     uint16_t motorPwmRate;  // Sets `motorConfigMutable()->motorPwmRate`. | units: Hz
     uint16_t servoPwmRate;  // Sets `servoConfigMutable()->servoPwmRate`. | units: Hz
     uint8_t legacyGyroSync;  // Ignored (legacy Betaflight field).
@@ -958,12 +963,12 @@ typedef struct MSP_PACKED MSP_SET_PID_ADVANCED_request_t {
 // Retrieves the configured hardware type for various sensors.
 
 typedef struct MSP_PACKED MSP_SENSOR_CONFIG_reply_t {
-    enum accHardware_e accHardware;  // Enum (`accHardware_e`): Accelerometer hardware type (`accelerometerConfig()->acc_hardware`)
-    enum baroHardware_e baroHardware;  // Enum (`baroHardware_e`): Barometer hardware type (`barometerConfig()->baro_hardware`). 0 if `USE_BARO` disabled
-    enum magHardware_e magHardware;  // Enum (`magHardware_e`): Magnetometer hardware type (`compassConfig()->mag_hardware`). 0 if `USE_MAG` disabled
-    enum pitotHardware_e pitotHardware;  // Enum (`pitotHardware_e`): Pitot tube hardware type (`pitotmeterConfig()->pitot_hardware`). 0 if `USE_PITOT` disabled
-    enum rangefinderHardware_e rangefinderHardware;  // Enum (`rangefinderHardware_e`): Rangefinder hardware type (`rangefinderConfig()->rangefinder_hardware`). 0 if `USE_RANGEFINDER` disabled
-    enum opticalFlowHardware_e opflowHardware;  // Enum (`opticalFlowHardware_e`): Optical flow hardware type (`opticalFlowConfig()->opflow_hardware`). 0 if `USE_OPFLOW` disabled
+    uint8_t accHardware;  // Enum (`accHardware_e`): Accelerometer hardware type (`accelerometerConfig()->acc_hardware`) | Enum: accHardware_e
+    uint8_t baroHardware;  // Enum (`baroHardware_e`): Barometer hardware type (`barometerConfig()->baro_hardware`). 0 if `USE_BARO` disabled | Enum: baroHardware_e
+    uint8_t magHardware;  // Enum (`magHardware_e`): Magnetometer hardware type (`compassConfig()->mag_hardware`). 0 if `USE_MAG` disabled | Enum: magHardware_e
+    uint8_t pitotHardware;  // Enum (`pitotHardware_e`): Pitot tube hardware type (`pitotmeterConfig()->pitot_hardware`). 0 if `USE_PITOT` disabled | Enum: pitotHardware_e
+    uint8_t rangefinderHardware;  // Enum (`rangefinderHardware_e`): Rangefinder hardware type (`rangefinderConfig()->rangefinder_hardware`). 0 if `USE_RANGEFINDER` disabled | Enum: rangefinderHardware_e
+    uint8_t opflowHardware;  // Enum (`opticalFlowHardware_e`): Optical flow hardware type (`opticalFlowConfig()->opflow_hardware`). 0 if `USE_OPFLOW` disabled | Enum: opticalFlowHardware_e
 } MSP_SENSOR_CONFIG_reply_t;
 
 // MSP_SET_SENSOR_CONFIG (MSPv1)
@@ -971,12 +976,12 @@ typedef struct MSP_PACKED MSP_SENSOR_CONFIG_reply_t {
 // Notes: Expects 6 bytes.
 
 typedef struct MSP_PACKED MSP_SET_SENSOR_CONFIG_request_t {
-    enum accHardware_e accHardware;  // Sets `accelerometerConfigMutable()->acc_hardware`
-    enum baroHardware_e baroHardware;  // Sets `barometerConfigMutable()->baro_hardware` (if `USE_BARO`)
-    enum magHardware_e magHardware;  // Sets `compassConfigMutable()->mag_hardware` (if `USE_MAG`)
-    enum pitotHardware_e pitotHardware;  // Sets `pitotmeterConfigMutable()->pitot_hardware` (if `USE_PITOT`)
-    enum rangefinderHardware_e rangefinderHardware;  // Sets `rangefinderConfigMutable()->rangefinder_hardware` (if `USE_RANGEFINDER`)
-    enum opticalFlowHardware_e opflowHardware;  // Sets `opticalFlowConfigMutable()->opflow_hardware` (if `USE_OPFLOW`)
+    uint8_t accHardware;  // Sets `accelerometerConfigMutable()->acc_hardware` | Enum: accHardware_e
+    uint8_t baroHardware;  // Sets `barometerConfigMutable()->baro_hardware` (if `USE_BARO`) | Enum: baroHardware_e
+    uint8_t magHardware;  // Sets `compassConfigMutable()->mag_hardware` (if `USE_MAG`) | Enum: magHardware_e
+    uint8_t pitotHardware;  // Sets `pitotmeterConfigMutable()->pitot_hardware` (if `USE_PITOT`) | Enum: pitotHardware_e
+    uint8_t rangefinderHardware;  // Sets `rangefinderConfigMutable()->rangefinder_hardware` (if `USE_RANGEFINDER`) | Enum: rangefinderHardware_e
+    uint8_t opflowHardware;  // Sets `opticalFlowConfigMutable()->opflow_hardware` (if `USE_OPFLOW`) | Enum: opticalFlowHardware_e
 } MSP_SET_SENSOR_CONFIG_request_t;
 
 // MSP_SPECIAL_PARAMETERS (MSPv1)
@@ -993,7 +998,7 @@ typedef struct MSP_PACKED MSP_SET_SENSOR_CONFIG_request_t {
 
 typedef struct MSP_PACKED MSP_IDENT_reply_t {
     uint8_t MultiWii_version;  // Scaled version major*100+minor | units: n/a
-    enum ?_e Mixer_Mode;  // Mixer type | units: Enum
+    uint8_t Mixer_Mode;  // Mixer type | units: Enum | Enum: ?_e
     uint8_t MSP_Version;  // Scaled version major*100+minor | units: n/a
     uint32_t Platform_Capability;  // Bitmask: MW capabilities | units: Bitmask
 } MSP_IDENT_reply_t;
@@ -1045,7 +1050,7 @@ typedef struct MSP_PACKED MSP_MOTOR_reply_t {
 // Notes: Array length equals `rxRuntimeConfig.channelCount`.
 
 typedef struct MSP_PACKED MSP_RC_reply_t {
-    int16_t rcChannels[];  // Array of current RC channel values (typically 1000-2000). Length depends on detected channels | units: PWM
+    int16_t rcChannels[UNDEFINED_LEN_ARRAY_PLACEHOLDER];  // Array of current RC channel values (typically 1000-2000). Length depends on detected channels | units: PWM
 } MSP_RC_reply_t;
 
 // MSP_RAW_GPS (MSPv1)
@@ -1053,7 +1058,7 @@ typedef struct MSP_PACKED MSP_RC_reply_t {
 // Notes: Only available if `USE_GPS` is defined. Altitude is truncated to meters.
 
 typedef struct MSP_PACKED MSP_RAW_GPS_reply_t {
-    enum gpsFixType_e fixType;  // Enum `gpsFixType_e` GPS fix type (`gpsSol.fixType`) | units: Enum
+    uint8_t fixType;  // Enum `gpsFixType_e` GPS fix type (`gpsSol.fixType`) | units: Enum | Enum: gpsFixType_e
     uint8_t numSat;  // Number of satellites used in solution (`gpsSol.numSat`) | units: Count
     int32_t latitude;  // Latitude (`gpsSol.llh.lat`) | units: deg * 1e7
     int32_t longitude;  // Longitude (`gpsSol.llh.lon`) | units: deg * 1e7
@@ -1138,9 +1143,9 @@ typedef struct MSP_PACKED MSP_MISC_reply_t {
     uint16_t maxThrottle;  // Maximum throttle command (`getMaxThrottle()`) | units: PWM
     uint16_t minCommand;  // Minimum motor command when disarmed (`motorConfig()->mincommand`) | units: PWM
     uint16_t failsafeThrottle;  // Failsafe throttle level (`currentBatteryProfile->failsafe_throttle`) | units: PWM
-    enum gpsProvider_e gpsType;  // Enum `gpsProvider_e` GPS provider type (`gpsConfig()->provider`). 0 if `USE_GPS` disabled | units: Enum
+    uint8_t gpsType;  // Enum `gpsProvider_e` GPS provider type (`gpsConfig()->provider`). 0 if `USE_GPS` disabled | units: Enum | Enum: gpsProvider_e
     uint8_t legacyGpsBaud;  // Always 0 (Legacy)
-    enum sbasMode_e gpsSbasMode;  // Enum `sbasMode_e` GPS SBAS mode (`gpsConfig()->sbasMode`). 0 if `USE_GPS` disabled | units: Enum
+    uint8_t gpsSbasMode;  // Enum `sbasMode_e` GPS SBAS mode (`gpsConfig()->sbasMode`). 0 if `USE_GPS` disabled | units: Enum | Enum: sbasMode_e
     uint8_t legacyMwCurrentOut;  // Always 0 (Legacy)
     uint8_t rssiChannel;  // RSSI channel index (1-based) (`rxConfig()->rssi_channel`) | units: Index
     uint8_t reserved1;  // Always 0
@@ -1156,14 +1161,14 @@ typedef struct MSP_PACKED MSP_MISC_reply_t {
 // Notes: The exact set of names depends on compiled features and configuration. Due to the size of the payload, it is recommended that [`MSP_BOXIDS`](#msp_boxids-119--0x77) is used instead.
 
 typedef struct MSP_PACKED MSP_BOXNAMES_reply_t {
-    char boxNamesString[];  // String containing mode names separated by ';'. Null termination not guaranteed by MSP, relies on payload size. (`serializeBoxNamesReply()`)
+    char boxNamesString[UNDEFINED_LEN_ARRAY_PLACEHOLDER];  // String containing mode names separated by ';'. Null termination not guaranteed by MSP, relies on payload size. (`serializeBoxNamesReply()`)
 } MSP_BOXNAMES_reply_t;
 
 // MSP_PIDNAMES (MSPv1)
 // Provides a semicolon-separated string containing the names of the PID controllers.
 
 typedef struct MSP_PACKED MSP_PIDNAMES_reply_t {
-    char pidNamesString[];  // String "ROLL;PITCH;YAW;ALT;Pos;PosR;NavR;LEVEL;MAG;VEL;". Null termination not guaranteed by MSP
+    char pidNamesString[UNDEFINED_LEN_ARRAY_PLACEHOLDER];  // String "ROLL;PITCH;YAW;ALT;Pos;PosR;NavR;LEVEL;MAG;VEL;". Null termination not guaranteed by MSP
 } MSP_PIDNAMES_reply_t;
 
 // MSP_WP (MSPv1)
@@ -1176,7 +1181,7 @@ typedef struct MSP_PACKED MSP_WP_request_t {
 
 typedef struct MSP_PACKED MSP_WP_reply_t {
     uint8_t waypointIndex;  // Index of the returned waypoint | units: Index
-    enum navWaypointActions_e action;  // Enum `navWaypointActions_e` Waypoint action type | units: Enum
+    uint8_t action;  // Enum `navWaypointActions_e` Waypoint action type | units: Enum | Enum: navWaypointActions_e
     int32_t latitude;  // Latitude coordinate | units: deg * 1e7
     int32_t longitude;  // Longitude coordinate | units: deg * 1e7
     int32_t altitude;  // Altitude coordinate (relative to home or sea level, see flag) | units: cm
@@ -1191,7 +1196,7 @@ typedef struct MSP_PACKED MSP_WP_reply_t {
 // Notes: Useful for mapping mode range configurations (`MSP_MODE_RANGES`) back to user-understandable modes via `MSP_BOXNAMES`.
 
 typedef struct MSP_PACKED MSP_BOXIDS_reply_t {
-    uint8_t boxIds[];  // Array of permanent IDs for each configured box (`serializeBoxReply()`). Length depends on number of boxes
+    uint8_t boxIds[UNDEFINED_LEN_ARRAY_PLACEHOLDER];  // Array of permanent IDs for each configured box (`serializeBoxReply()`). Length depends on number of boxes
 } MSP_BOXIDS_reply_t;
 
 // MSP_SERVO_CONFIGURATIONS (MSPv1)
@@ -1214,11 +1219,11 @@ typedef struct MSP_PACKED MSP_SERVO_CONFIGURATIONS_reply_t {
 // Notes: Requires `USE_GPS`.
 
 typedef struct MSP_PACKED MSP_NAV_STATUS_reply_t {
-    enum navSystemStatus_Mode_e navMode;  // Enum (`navSystemStatus_Mode_e`): Current navigation mode (None, RTH, NAV, Hold, etc.) (`NAV_Status.mode`)
-    enum navSystemStatus_State_e navState;  // Enum (`navSystemStatus_State_e`): Current navigation state (`NAV_Status.state`)
-    enum navWaypointActions_e activeWpAction;  // Enum (`navWaypointActions_e`): Action of the currently executing waypoint (`NAV_Status.activeWpAction`)
+    uint8_t navMode;  // Enum (`navSystemStatus_Mode_e`): Current navigation mode (None, RTH, NAV, Hold, etc.) (`NAV_Status.mode`) | Enum: navSystemStatus_Mode_e
+    uint8_t navState;  // Enum (`navSystemStatus_State_e`): Current navigation state (`NAV_Status.state`) | Enum: navSystemStatus_State_e
+    uint8_t activeWpAction;  // Enum (`navWaypointActions_e`): Action of the currently executing waypoint (`NAV_Status.activeWpAction`) | Enum: navWaypointActions_e
     uint8_t activeWpNumber;  // Index: Index of the currently executing waypoint (`NAV_Status.activeWpNumber`)
-    enum navSystemStatus_Error_e navError;  // Enum (`navSystemStatus_Error_e`): Current navigation error code (`NAV_Status.error`)
+    uint8_t navError;  // Enum (`navSystemStatus_Error_e`): Current navigation error code (`NAV_Status.error`) | Enum: navSystemStatus_Error_e
     int16_t targetHeading;  // Target heading for heading controller (`getHeadingHoldTarget()`) | units: degrees
 } MSP_NAV_STATUS_reply_t;
 
@@ -1260,7 +1265,7 @@ typedef struct MSP_PACKED MSP_SENSOR_ALIGNMENT_reply_t {
 // Notes: Only available if `USE_LED_STRIP` is defined. Entries where `modeIndex == LED_MODE_COUNT` describe special colors.
 
 typedef struct MSP_PACKED MSP_LED_STRIP_MODECOLOR_reply_t {
-    enum ledModeIndex_e modeIndex;  // Index of the LED mode Enum (`ledModeIndex_e`). `LED_MODE_COUNT` for special colors
+    uint8_t modeIndex;  // Index of the LED mode Enum (`ledModeIndex_e`). `LED_MODE_COUNT` for special colors | Enum: ledModeIndex_e
     uint8_t directionOrSpecialIndex;  // Index of the direction (`ledDirectionId_e`) or special color (`ledSpecialColorIds_e`)
     uint8_t colorIndex;  // Index of the color assigned from `ledStripConfig()->colors`
 } MSP_LED_STRIP_MODECOLOR_reply_t;
@@ -1275,7 +1280,7 @@ typedef struct MSP_PACKED MSP_BATTERY_STATE_reply_t {
     uint8_t vbatScaled;  // Battery voltage / 10 (`getBatteryVoltage() / 10`) | units: 0.1V
     uint16_t mAhDrawn;  // Consumed capacity (`getMAhDrawn()`) | units: mAh
     int16_t amperage;  // Current draw (`getAmperage()`) | units: 0.01A
-    enum batteryState_e batteryState;  // Enum `batteryState_e` Current battery state (`getBatteryState()`, see `BATTERY_STATE_*`) | units: Enum
+    uint8_t batteryState;  // Enum `batteryState_e` Current battery state (`getBatteryState()`, see `BATTERY_STATE_*`) | units: Enum | Enum: batteryState_e
     uint16_t vbatActual;  // Actual battery voltage (`getBatteryVoltage()`) | units: 0.01V
 } MSP_BATTERY_STATE_reply_t;
 
@@ -1295,7 +1300,7 @@ typedef struct MSP_PACKED MSP_VTXTABLE_POWERLEVEL_reply_t {
     uint8_t powerLevelIndex;  // 1-based index of the returned power level
     uint16_t powerValue;  // Always 0 (Actual power value in mW is not stored/returned via MSP)
     uint8_t labelLength;  // Length of the power level label string that follows
-    char label[];  // Power level label string (e.g., "25", "200"). Length given by previous field
+    char label[UNDEFINED_LEN_ARRAY_PLACEHOLDER];  // Power level label string (e.g., "25", "200"). Length given by previous field
 } MSP_VTXTABLE_POWERLEVEL_reply_t;
 
 // MSP_STATUS_EX (MSPv1)
@@ -1319,14 +1324,14 @@ typedef struct MSP_PACKED MSP_STATUS_EX_reply_t {
 
 typedef struct MSP_PACKED MSP_SENSOR_STATUS_reply_t {
     uint8_t overallHealth;  // 1 if all essential hardware is healthy, 0 otherwise (`isHardwareHealthy()`) | units: Boolean
-    enum hardwareSensorStatus_e gyroStatus;  // Enum `hardwareSensorStatus_e` Gyro hardware status (`getHwGyroStatus()`) | units: Enum
-    enum hardwareSensorStatus_e accStatus;  // Enum `hardwareSensorStatus_e` Accelerometer hardware status (`getHwAccelerometerStatus()`) | units: Enum
-    enum hardwareSensorStatus_e magStatus;  // Enum `hardwareSensorStatus_e` Compass hardware status (`getHwCompassStatus()`) | units: Enum
-    enum hardwareSensorStatus_e baroStatus;  // Enum `hardwareSensorStatus_e` Barometer hardware status (`getHwBarometerStatus()`) | units: Enum
-    enum hardwareSensorStatus_e gpsStatus;  // Enum `hardwareSensorStatus_e` GPS hardware status (`getHwGPSStatus()`) | units: Enum
-    enum hardwareSensorStatus_e rangefinderStatus;  // Enum `hardwareSensorStatus_e` Rangefinder hardware status (`getHwRangefinderStatus()`) | units: Enum
-    enum hardwareSensorStatus_e pitotStatus;  // Enum `hardwareSensorStatus_e` Pitot hardware status (`getHwPitotmeterStatus()`) | units: Enum
-    enum hardwareSensorStatus_e opflowStatus;  // Enum `hardwareSensorStatus_e` Optical Flow hardware status (`getHwOpticalFlowStatus()`) | units: Enum
+    uint8_t gyroStatus;  // Enum `hardwareSensorStatus_e` Gyro hardware status (`getHwGyroStatus()`) | units: Enum | Enum: hardwareSensorStatus_e
+    uint8_t accStatus;  // Enum `hardwareSensorStatus_e` Accelerometer hardware status (`getHwAccelerometerStatus()`) | units: Enum | Enum: hardwareSensorStatus_e
+    uint8_t magStatus;  // Enum `hardwareSensorStatus_e` Compass hardware status (`getHwCompassStatus()`) | units: Enum | Enum: hardwareSensorStatus_e
+    uint8_t baroStatus;  // Enum `hardwareSensorStatus_e` Barometer hardware status (`getHwBarometerStatus()`) | units: Enum | Enum: hardwareSensorStatus_e
+    uint8_t gpsStatus;  // Enum `hardwareSensorStatus_e` GPS hardware status (`getHwGPSStatus()`) | units: Enum | Enum: hardwareSensorStatus_e
+    uint8_t rangefinderStatus;  // Enum `hardwareSensorStatus_e` Rangefinder hardware status (`getHwRangefinderStatus()`) | units: Enum | Enum: hardwareSensorStatus_e
+    uint8_t pitotStatus;  // Enum `hardwareSensorStatus_e` Pitot hardware status (`getHwPitotmeterStatus()`) | units: Enum | Enum: hardwareSensorStatus_e
+    uint8_t opflowStatus;  // Enum `hardwareSensorStatus_e` Optical Flow hardware status (`getHwOpticalFlowStatus()`) | units: Enum | Enum: hardwareSensorStatus_e
 } MSP_SENSOR_STATUS_reply_t;
 
 // MSP_UID (MSPv1)
@@ -1384,7 +1389,7 @@ typedef struct MSP_PACKED MSP_SET_TX_INFO_request_t {
 // Notes: See `rssiSource_e`.
 
 typedef struct MSP_PACKED MSP_TX_INFO_reply_t {
-    enum rssiSource_e rssiSource;  // Enum: Source of the RSSI value (`getRSSISource()`, see `rssiSource_e`)
+    uint8_t rssiSource;  // Enum: Source of the RSSI value (`getRSSISource()`, see `rssiSource_e`) | Enum: rssiSource_e
     uint8_t rtcDateTimeIsSet;  // Boolean: 1 if the RTC has been set, 0 otherwise
 } MSP_TX_INFO_reply_t;
 
@@ -1393,7 +1398,7 @@ typedef struct MSP_PACKED MSP_TX_INFO_reply_t {
 // Notes: Requires `USE_RX_MSP`. Maximum channels `MAX_SUPPORTED_RC_CHANNEL_COUNT`. Calls `rxMspFrameReceive()`.
 
 typedef struct MSP_PACKED MSP_SET_RAW_RC_request_t {
-    uint16_t rcChannels[];  // Array of RC channel values (typically 1000-2000). Number of channels determined by payload size | units: PWM
+    uint16_t rcChannels[UNDEFINED_LEN_ARRAY_PLACEHOLDER];  // Array of RC channel values (typically 1000-2000). Number of channels determined by payload size | units: PWM
 } MSP_SET_RAW_RC_request_t;
 
 // MSP_SET_RAW_GPS (MSPv1)
@@ -1401,7 +1406,7 @@ typedef struct MSP_PACKED MSP_SET_RAW_RC_request_t {
 // Notes: Requires `USE_GPS`. Expects 14 bytes. Updates `gpsSol` structure and calls `onNewGPSData()`. Note the altitude unit mismatch (meters in MSP, cm internal). Does not provide velocity components.
 
 typedef struct MSP_PACKED MSP_SET_RAW_GPS_request_t {
-    enum gpsFixType_e fixType;  // Enum `gpsFixType_e` GPS fix type | units: Enum
+    uint8_t fixType;  // Enum `gpsFixType_e` GPS fix type | units: Enum | Enum: gpsFixType_e
     uint8_t numSat;  // Number of satellites | units: Count
     int32_t latitude;  // Latitude | units: deg * 1e7
     int32_t longitude;  // Longitude | units: deg * 1e7
@@ -1448,9 +1453,9 @@ typedef struct MSP_PACKED MSP_SET_MISC_request_t {
     uint16_t legacyMaxThrottle;  // Ignored
     uint16_t minCommand;  // Sets `motorConfigMutable()->mincommand` (constrained 0-PWM_RANGE_MAX) | units: PWM
     uint16_t failsafeThrottle;  // Sets `currentBatteryProfileMutable->failsafe_throttle` (constrained PWM_RANGE_MIN/MAX) | units: PWM
-    enum gpsProvider_e gpsType;  // Enum `gpsProvider_e` (Sets `gpsConfigMutable()->provider`) | units: Enum
+    uint8_t gpsType;  // Enum `gpsProvider_e` (Sets `gpsConfigMutable()->provider`) | units: Enum | Enum: gpsProvider_e
     uint8_t legacyGpsBaud;  // Ignored
-    enum sbasMode_e gpsSbasMode;  // Enum `sbasMode_e` (Sets `gpsConfigMutable()->sbasMode`) | units: Enum
+    uint8_t gpsSbasMode;  // Enum `sbasMode_e` (Sets `gpsConfigMutable()->sbasMode`) | units: Enum | Enum: sbasMode_e
     uint8_t legacyMwCurrentOut;  // Ignored
     uint8_t rssiChannel;  // Sets `rxConfigMutable()->rssi_channel` (constrained 0-MAX_SUPPORTED_RC_CHANNEL_COUNT). Updates source | units: Index
     uint8_t reserved1;  // Ignored
@@ -1471,14 +1476,14 @@ typedef struct MSP_PACKED MSP_SET_MISC_request_t {
 
 typedef struct MSP_PACKED MSP_SET_WP_request_t {
     uint8_t waypointIndex;  // Index of the waypoint to set (0 to `NAV_MAX_WAYPOINTS - 1`) | units: Index
-    enum navWaypointActions_e action;  // Enum `navWaypointActions_e` Waypoint action type | units: Enum
+    uint8_t action;  // Enum `navWaypointActions_e` Waypoint action type | units: Enum | Enum: navWaypointActions_e
     int32_t latitude;  // Latitude coordinate | units: deg * 1e7
     int32_t longitude;  // Longitude coordinate | units: deg * 1e7
     int32_t altitude;  // Altitude coordinate | units: cm
     uint16_t param1;  // Parameter 1 | units: Varies
     uint16_t param2;  // Parameter 2 | units: Varies
     uint16_t param3;  // Parameter 3 | units: Varies
-    enum navWaypointFlags_e flag;  // Bitmask: Waypoint flags (`navWaypointFlags_e`) | units: Bitmask
+    uint8_t flag;  // Bitmask: Waypoint flags (`navWaypointFlags_e`) | units: Bitmask | Enum: navWaypointFlags_e
 } MSP_SET_WP_request_t;
 
 // MSP_SELECT_SETTING (MSPv1)
@@ -1583,7 +1588,7 @@ typedef struct MSP_PACKED MSP_SET_LED_STRIP_MODECOLOR_request_t {
 
 typedef struct MSP_PACKED MSP_SERVO_MIX_RULES_reply_t {
     uint8_t targetChannel;  // Servo output channel index (0-based) | units: Index
-    enum inputSource_e inputSource;  // Enum `inputSource_e` Input source for the mix (RC chan, Roll, Pitch...) | units: Enum
+    uint8_t inputSource;  // Enum `inputSource_e` Input source for the mix (RC chan, Roll, Pitch...) | units: Enum | Enum: inputSource_e
     int16_t rate;  // Mixing rate/weight (`-1000` to `+1000`, percent with sign) | units: %
     uint8_t speed;  // Speed/Slew rate limit (`0`=instant, higher slows response) | units: 0-255
     uint8_t reserved1;  // Always 0
@@ -1598,7 +1603,7 @@ typedef struct MSP_PACKED MSP_SERVO_MIX_RULES_reply_t {
 typedef struct MSP_PACKED MSP_SET_SERVO_MIX_RULE_request_t {
     uint8_t ruleIndex;  // Index of the rule to set (0 to `MAX_SERVO_RULES - 1`) | units: Index
     uint8_t targetChannel;  // Servo output channel index | units: Index
-    enum inputSource_e inputSource;  // Enum `inputSource_e` Input source for the mix | units: Enum
+    uint8_t inputSource;  // Enum `inputSource_e` Input source for the mix | units: Enum | Enum: inputSource_e
     int16_t rate;  // Mixing rate/weight (`-1000` to `+1000`, percent with sign) | units: %
     uint8_t speed;  // Speed/Slew rate limit (`0`=instant, higher slows response) | units: 0-255
     uint16_t legacyMinMax;  // Ignored
@@ -1644,7 +1649,7 @@ typedef struct MSP_PACKED MSP_SET_RTC_request_t {
 // Notes: Published via the LOG UART or shared MSP/LOG port using `mspSerialPushPort()`.
 
 typedef struct MSP_PACKED MSP_DEBUGMSG_reply_t {
-    char Message_Text[];  // Debug message text (not NUL-terminated). See [serial printf debugging](https://github.com/iNavFlight/inav/blob/master/docs/development/serial_printf_debugging.md)
+    char Message_Text[UNDEFINED_LEN_ARRAY_PLACEHOLDER];  // Debug message text (not NUL-terminated). See [serial printf debugging](https://github.com/iNavFlight/inav/blob/master/docs/development/serial_printf_debugging.md)
 } MSP_DEBUGMSG_reply_t;
 
 // MSP_DEBUG (MSPv1)
@@ -1689,7 +1694,7 @@ typedef struct MSP_PACKED MSP2_COMMON_SETTING_request_t {
 } MSP2_COMMON_SETTING_request_t;
 
 typedef struct MSP_PACKED MSP2_COMMON_SETTING_reply_t {
-    uint8_t settingValue[];  // Raw byte value of the setting. Size depends on the setting's type (`settingGetValueSize()`)
+    uint8_t settingValue[UNDEFINED_LEN_ARRAY_PLACEHOLDER];  // Raw byte value of the setting. Size depends on the setting's type (`settingGetValueSize()`)
 } MSP2_COMMON_SETTING_reply_t;
 
 // MSP2_COMMON_SET_SETTING (MSPv2)
@@ -1698,7 +1703,7 @@ typedef struct MSP_PACKED MSP2_COMMON_SETTING_reply_t {
 
 typedef struct MSP_PACKED MSP2_COMMON_SET_SETTING_request_t {
     Varies settingIdentifier;  // Setting name (null-terminated string) OR Index (0x00 followed by `uint16_t` index)
-    uint8_t settingValue[];  // Raw byte value to set for the setting. Size must match the setting's type
+    uint8_t settingValue[UNDEFINED_LEN_ARRAY_PLACEHOLDER];  // Raw byte value to set for the setting. Size must match the setting's type
 } MSP2_COMMON_SET_SETTING_request_t;
 
 // MSP2_COMMON_MOTOR_MIXER (MSPv2)
@@ -1725,7 +1730,7 @@ typedef struct MSP_PACKED MSP2_COMMON_SET_MOTOR_MIXER_request_t {
 // Gets detailed information about a specific configuration setting (name, type, range, flags, current value, etc.).
 
 typedef struct MSP_PACKED MSP2_COMMON_SETTING_INFO_reply_t {
-    char settingName[];  // Null-terminated setting name
+    char settingName[UNDEFINED_LEN_ARRAY_PLACEHOLDER];  // Null-terminated setting name
     uint16_t pgn;  // Parameter Group Number (PGN) ID
     uint8_t type;  // Variable type (`VAR_UINT8`, `VAR_FLOAT`, etc.)
     uint8_t section;  // Setting section (`MASTER_VALUE`, `PROFILE_VALUE`, etc.)
@@ -1735,8 +1740,8 @@ typedef struct MSP_PACKED MSP2_COMMON_SETTING_INFO_reply_t {
     uint16_t settingIndex;  // Absolute index of the setting
     uint8_t profileIndex;  // Current profile index (if applicable, else 0)
     uint8_t profileCount;  // Total number of profiles (if applicable, else 0)
-    char lookupNames[];  // (If `mode == MODE_LOOKUP`) Series of null-terminated strings for each possible value from min to max
-    uint8_t settingValue[];  // Current raw byte value of the setting
+    char lookupNames[UNDEFINED_LEN_ARRAY_PLACEHOLDER];  // (If `mode == MODE_LOOKUP`) Series of null-terminated strings for each possible value from min to max
+    uint8_t settingValue[UNDEFINED_LEN_ARRAY_PLACEHOLDER];  // Current raw byte value of the setting
 } MSP2_COMMON_SETTING_INFO_reply_t;
 
 // MSP2_COMMON_PG_LIST (MSPv2)
@@ -1758,7 +1763,7 @@ typedef struct MSP_PACKED MSP2_COMMON_PG_LIST_reply_t {
 // Notes: Baud rate indexes map to actual baud rates (e.g., 9600, 115200). See `baudRates` array.
 
 typedef struct MSP_PACKED MSP2_COMMON_SERIAL_CONFIG_reply_t {
-    enum serialPortIdentifier_e identifier;  // Port identifier Enum (`serialPortIdentifier_e`)
+    uint8_t identifier;  // Port identifier Enum (`serialPortIdentifier_e`) | Enum: serialPortIdentifier_e
     uint32_t functionMask;  // Bitmask: enabled functions (`FUNCTION_*`) | units: Bitmask
     uint8_t mspBaudIndex;  // Baud rate index for MSP function
     uint8_t gpsBaudIndex;  // Baud rate index for GPS function
@@ -1771,7 +1776,7 @@ typedef struct MSP_PACKED MSP2_COMMON_SERIAL_CONFIG_reply_t {
 // Notes: Payload size must be a multiple of the size of one port config entry (1 + 4 + 4 = 9 bytes). Returns error if identifier is invalid or size is incorrect. Baud rate indexes are constrained `BAUD_MIN` to `BAUD_MAX`.
 
 typedef struct MSP_PACKED MSP2_COMMON_SET_SERIAL_CONFIG_request_t {
-    enum serialPortIdentifier_e identifier;  // Port identifier Enum (`serialPortIdentifier_e`)
+    uint8_t identifier;  // Port identifier Enum (`serialPortIdentifier_e`) | Enum: serialPortIdentifier_e
     uint32_t functionMask;  // Bitmask: functions to enable | units: Bitmask
     uint8_t mspBaudIndex;  // Baud rate index for MSP
     uint8_t gpsBaudIndex;  // Baud rate index for GPS
@@ -1861,7 +1866,7 @@ typedef struct MSP_PACKED MSP2_SENSOR_GPS_request_t {
     uint8_t instance;  // Sensor instance number (for multi-GPS)
     uint16_t gpsWeek;  // GPS week number (0xFFFF if unavailable)
     uint32_t msTOW;  // Milliseconds Time of Week | units: ms
-    enum gpsFixType_e fixType;  // Enum `gpsFixType_e` Type of GPS fix | units: Enum
+    uint8_t fixType;  // Enum `gpsFixType_e` Type of GPS fix | units: Enum | Enum: gpsFixType_e
     uint8_t satellitesInView;  // Number of satellites used in solution | units: Count
     uint16_t hPosAccuracy;  // Horizontal position accuracy estimate | units: cm
     uint16_t vPosAccuracy;  // Vertical position accuracy estimate | units: cm
@@ -1977,13 +1982,13 @@ typedef struct MSP_PACKED MSP2_INAV_MISC_reply_t {
     uint16_t maxThrottle;  // Maximum throttle command (`getMaxThrottle()`) | units: PWM
     uint16_t minCommand;  // Minimum motor command (`motorConfig()->mincommand`) | units: PWM
     uint16_t failsafeThrottle;  // Failsafe throttle level (`currentBatteryProfile->failsafe_throttle`) | units: PWM
-    enum gpsProvider_e gpsType;  // Enum `gpsProvider_e` GPS provider type (`gpsConfig()->provider`). 0 if `USE_GPS` disabled | units: Enum
+    uint8_t gpsType;  // Enum `gpsProvider_e` GPS provider type (`gpsConfig()->provider`). 0 if `USE_GPS` disabled | units: Enum | Enum: gpsProvider_e
     uint8_t legacyGpsBaud;  // Always 0 (Legacy)
-    enum sbasMode_e gpsSbasMode;  // Enum `sbasMode_e` GPS SBAS mode (`gpsConfig()->sbasMode`). 0 if `USE_GPS` disabled | units: Enum
+    uint8_t gpsSbasMode;  // Enum `sbasMode_e` GPS SBAS mode (`gpsConfig()->sbasMode`). 0 if `USE_GPS` disabled | units: Enum | Enum: sbasMode_e
     uint8_t rssiChannel;  // RSSI channel index (1-based, 0 disables) (`rxConfig()->rssi_channel`) | units: Index
     int16_t magDeclination;  // Magnetic declination / 10 (`compassConfig()->mag_declination / 10`). 0 if `USE_MAG` disabled | units: 0.1 degrees
     uint16_t vbatScale;  // Voltage scale (`batteryMetersConfig()->voltage.scale`). 0 if `USE_ADC` disabled | units: Scale
-    enum batVoltageSource_e vbatSource;  // Enum `batVoltageSource_e` Voltage source (`batteryMetersConfig()->voltageSource`). 0 if `USE_ADC` disabled | units: Enum
+    uint8_t vbatSource;  // Enum `batVoltageSource_e` Voltage source (`batteryMetersConfig()->voltageSource`). 0 if `USE_ADC` disabled | units: Enum | Enum: batVoltageSource_e
     uint8_t cellCount;  // Configured cell count (`currentBatteryProfile->cells`). 0 if `USE_ADC` disabled | units: Count
     uint16_t vbatCellDetect;  // Cell detection voltage (`currentBatteryProfile->voltage.cellDetect`). 0 if `USE_ADC` disabled | units: 0.01V
     uint16_t vbatMinCell;  // Min cell voltage (`currentBatteryProfile->voltage.cellMin`). 0 if `USE_ADC` disabled | units: 0.01V
@@ -1992,7 +1997,7 @@ typedef struct MSP_PACKED MSP2_INAV_MISC_reply_t {
     uint32_t capacityValue;  // Battery capacity (`currentBatteryProfile->capacity.value`) | units: mAh/mWh
     uint32_t capacityWarning;  // Capacity warning threshold (`currentBatteryProfile->capacity.warning`) | units: mAh/mWh
     uint32_t capacityCritical;  // Capacity critical threshold (`currentBatteryProfile->capacity.critical`) | units: mAh/mWh
-    enum batCapacityUnit_e capacityUnit;  // Enum `batCapacityUnit_e` Capacity unit (`batteryMetersConfig()->capacity_unit`) | units: Enum
+    uint8_t capacityUnit;  // Enum `batCapacityUnit_e` Capacity unit (`batteryMetersConfig()->capacity_unit`) | units: Enum | Enum: batCapacityUnit_e
 } MSP2_INAV_MISC_reply_t;
 
 // MSP2_INAV_SET_MISC (MSPv2)
@@ -2005,13 +2010,13 @@ typedef struct MSP_PACKED MSP2_INAV_SET_MISC_request_t {
     uint16_t legacyMaxThrottle;  // Ignored
     uint16_t minCommand;  // Sets `motorConfigMutable()->mincommand` (constrained) | units: PWM
     uint16_t failsafeThrottle;  // Sets `currentBatteryProfileMutable->failsafe_throttle` (constrained) | units: PWM
-    enum gpsProvider_e gpsType;  // Enum `gpsProvider_e` Sets `gpsConfigMutable()->provider` (if `USE_GPS`) | units: Enum
+    uint8_t gpsType;  // Enum `gpsProvider_e` Sets `gpsConfigMutable()->provider` (if `USE_GPS`) | units: Enum | Enum: gpsProvider_e
     uint8_t legacyGpsBaud;  // Ignored
-    enum sbasMode_e gpsSbasMode;  // Enum `sbasMode_e` Sets `gpsConfigMutable()->sbasMode` (if `USE_GPS`) | units: Enum
+    uint8_t gpsSbasMode;  // Enum `sbasMode_e` Sets `gpsConfigMutable()->sbasMode` (if `USE_GPS`) | units: Enum | Enum: sbasMode_e
     uint8_t rssiChannel;  // Sets `rxConfigMutable()->rssi_channel` (1-based, 0 disables) when <= `MAX_SUPPORTED_RC_CHANNEL_COUNT` | units: Index
     int16_t magDeclination;  // Sets `compassConfigMutable()->mag_declination = value * 10` (if `USE_MAG`) | units: 0.1 degrees
     uint16_t vbatScale;  // Sets `batteryMetersConfigMutable()->voltage.scale` (if `USE_ADC`) | units: Scale
-    enum batVoltageSource_e vbatSource;  // Enum `batVoltageSource_e` Sets `batteryMetersConfigMutable()->voltageSource` (if `USE_ADC`, validated) | units: Enum
+    uint8_t vbatSource;  // Enum `batVoltageSource_e` Sets `batteryMetersConfigMutable()->voltageSource` (if `USE_ADC`, validated) | units: Enum | Enum: batVoltageSource_e
     uint8_t cellCount;  // Sets `currentBatteryProfileMutable->cells` (if `USE_ADC`) | units: Count
     uint16_t vbatCellDetect;  // Sets `currentBatteryProfileMutable->voltage.cellDetect` (if `USE_ADC`) | units: 0.01V
     uint16_t vbatMinCell;  // Sets `currentBatteryProfileMutable->voltage.cellMin` (if `USE_ADC`) | units: 0.01V
@@ -2020,7 +2025,7 @@ typedef struct MSP_PACKED MSP2_INAV_SET_MISC_request_t {
     uint32_t capacityValue;  // Sets `currentBatteryProfileMutable->capacity.value` | units: mAh/mWh
     uint32_t capacityWarning;  // Sets `currentBatteryProfileMutable->capacity.warning` | units: mAh/mWh
     uint32_t capacityCritical;  // Sets `currentBatteryProfileMutable->capacity.critical` | units: mAh/mWh
-    enum batCapacityUnit_e capacityUnit;  // Enum `batCapacityUnit_e` Sets `batteryMetersConfigMutable()->capacity_unit` (validated, updates OSD energy unit if changed) | units: Enum
+    uint8_t capacityUnit;  // Enum `batCapacityUnit_e` Sets `batteryMetersConfigMutable()->capacity_unit` (validated, updates OSD energy unit if changed) | units: Enum | Enum: batCapacityUnit_e
 } MSP2_INAV_SET_MISC_request_t;
 
 // MSP2_INAV_BATTERY_CONFIG (MSPv2)
@@ -2029,7 +2034,7 @@ typedef struct MSP_PACKED MSP2_INAV_SET_MISC_request_t {
 
 typedef struct MSP_PACKED MSP2_INAV_BATTERY_CONFIG_reply_t {
     uint16_t vbatScale;  // Voltage scale (`batteryMetersConfig()->voltage.scale`) | units: Scale
-    enum batVoltageSource_e vbatSource;  // Enum `batVoltageSource_e` Voltage source (`batteryMetersConfig()->voltageSource`) | units: Enum
+    uint8_t vbatSource;  // Enum `batVoltageSource_e` Voltage source (`batteryMetersConfig()->voltageSource`) | units: Enum | Enum: batVoltageSource_e
     uint8_t cellCount;  // Configured cell count (`currentBatteryProfile->cells`) | units: Count
     uint16_t vbatCellDetect;  // Cell detection voltage (`currentBatteryProfile->voltage.cellDetect`) | units: 0.01V
     uint16_t vbatMinCell;  // Min cell voltage (`currentBatteryProfile->voltage.cellMin`) | units: 0.01V
@@ -2040,7 +2045,7 @@ typedef struct MSP_PACKED MSP2_INAV_BATTERY_CONFIG_reply_t {
     uint32_t capacityValue;  // Battery capacity (`currentBatteryProfile->capacity.value`) | units: mAh/mWh
     uint32_t capacityWarning;  // Capacity warning threshold (`currentBatteryProfile->capacity.warning`) | units: mAh/mWh
     uint32_t capacityCritical;  // Capacity critical threshold (`currentBatteryProfile->capacity.critical`) | units: mAh/mWh
-    enum batCapacityUnit_e capacityUnit;  // Enum `batCapacityUnit_e` Capacity unit (`batteryMetersConfig()->capacity_unit`) | units: Enum
+    uint8_t capacityUnit;  // Enum `batCapacityUnit_e` Capacity unit (`batteryMetersConfig()->capacity_unit`) | units: Enum | Enum: batCapacityUnit_e
 } MSP2_INAV_BATTERY_CONFIG_reply_t;
 
 // MSP2_INAV_SET_BATTERY_CONFIG (MSPv2)
@@ -2049,7 +2054,7 @@ typedef struct MSP_PACKED MSP2_INAV_BATTERY_CONFIG_reply_t {
 
 typedef struct MSP_PACKED MSP2_INAV_SET_BATTERY_CONFIG_request_t {
     uint16_t vbatScale;  // Sets `batteryMetersConfigMutable()->voltage.scale` (if `USE_ADC`) | units: Scale
-    enum batVoltageSource_e vbatSource;  // Enum `batVoltageSource_e` Sets `batteryMetersConfigMutable()->voltageSource` (if `USE_ADC`, validated) | units: Enum
+    uint8_t vbatSource;  // Enum `batVoltageSource_e` Sets `batteryMetersConfigMutable()->voltageSource` (if `USE_ADC`, validated) | units: Enum | Enum: batVoltageSource_e
     uint8_t cellCount;  // Sets `currentBatteryProfileMutable->cells` (if `USE_ADC`) | units: Count
     uint16_t vbatCellDetect;  // Sets `currentBatteryProfileMutable->voltage.cellDetect` (if `USE_ADC`) | units: 0.01V
     uint16_t vbatMinCell;  // Sets `currentBatteryProfileMutable->voltage.cellMin` (if `USE_ADC`) | units: 0.01V
@@ -2060,7 +2065,7 @@ typedef struct MSP_PACKED MSP2_INAV_SET_BATTERY_CONFIG_request_t {
     uint32_t capacityValue;  // Sets `currentBatteryProfileMutable->capacity.value` | units: mAh/mWh
     uint32_t capacityWarning;  // Sets `currentBatteryProfileMutable->capacity.warning` | units: mAh/mWh
     uint32_t capacityCritical;  // Sets `currentBatteryProfileMutable->capacity.critical` | units: mAh/mWh
-    enum batCapacityUnit_e capacityUnit;  // Enum `batCapacityUnit_e` Sets `batteryMetersConfigMutable()->capacity_unit` (validated, updates OSD energy unit if changed) | units: Enum
+    uint8_t capacityUnit;  // Enum `batCapacityUnit_e` Sets `batteryMetersConfigMutable()->capacity_unit` (validated, updates OSD energy unit if changed) | units: Enum | Enum: batCapacityUnit_e
 } MSP2_INAV_SET_BATTERY_CONFIG_request_t;
 
 // MSP2_INAV_RATE_PROFILE (MSPv2)
@@ -2173,7 +2178,7 @@ typedef struct MSP_PACKED MSP2_INAV_TIMER_OUTPUT_MODE_request_t_dataSize_eq_1 {
 
 typedef struct MSP_PACKED MSP2_INAV_SET_TIMER_OUTPUT_MODE_request_t {
     uint8_t timerIndex;  // Index of the hardware timer definition
-    enum outputMode_e outputMode;  // Output mode override (`outputMode_e` enum) to set
+    uint8_t outputMode;  // Output mode override (`outputMode_e` enum) to set | Enum: outputMode_e
 } MSP2_INAV_SET_TIMER_OUTPUT_MODE_request_t;
 
 // MSP2_INAV_MIXER (MSPv2)
@@ -2183,9 +2188,9 @@ typedef struct MSP_PACKED MSP2_INAV_MIXER_reply_t {
     uint8_t motorDirectionInverted;  // Boolean: 1 if motor direction is reversed globally (`mixerConfig()->motorDirectionInverted`)
     uint8_t reserved1;  // Always 0 (Was yaw jump prevention limit)
     uint8_t motorStopOnLow;  // Boolean: 1 if motors stop at minimum throttle (`mixerConfig()->motorstopOnLow`)
-    enum platformType_e platformType;  // Enum (`platformType_e`): Vehicle platform type (Multirotor, Airplane, etc.) (`mixerConfig()->platformType`)
+    uint8_t platformType;  // Enum (`platformType_e`): Vehicle platform type (Multirotor, Airplane, etc.) (`mixerConfig()->platformType`) | Enum: platformType_e
     uint8_t hasFlaps;  // Boolean: 1 if the current mixer configuration includes flaps (`mixerConfig()->hasFlaps`)
-    enum mixerPreset_e appliedMixerPreset;  // Enum (`mixerPreset_e`): Mixer preset currently applied (`mixerConfig()->appliedMixerPreset`)
+    int16_t appliedMixerPreset;  // Enum (`mixerPreset_e`): Mixer preset currently applied (`mixerConfig()->appliedMixerPreset`) | Enum: mixerPreset_e
     uint8_t maxMotors;  // Constant: Maximum motors supported (`MAX_SUPPORTED_MOTORS`)
     uint8_t maxServos;  // Constant: Maximum servos supported (`MAX_SUPPORTED_SERVOS`)
 } MSP2_INAV_MIXER_reply_t;
@@ -2275,15 +2280,15 @@ typedef struct MSP_PACKED MSP2_INAV_OSD_SET_ALARMS_request_t {
 // Notes: Requires `USE_OSD`.
 
 typedef struct MSP_PACKED MSP2_INAV_OSD_PREFERENCES_reply_t {
-    enum videoSystem_e videoSystem;  // Enum `videoSystem_e`: Video system (Auto/PAL/NTSC) (`osdConfig()->video_system`)
+    uint8_t videoSystem;  // Enum `videoSystem_e`: Video system (Auto/PAL/NTSC) (`osdConfig()->video_system`) | Enum: videoSystem_e
     uint8_t mainVoltageDecimals;  // Count: Decimal places for main voltage display (`osdConfig()->main_voltage_decimals`)
     uint8_t ahiReverseRoll;  // Boolean: Reverse roll direction on Artificial Horizon (`osdConfig()->ahi_reverse_roll`)
-    enum osd_crosshairs_style_e crosshairsStyle;  // Enum `osd_crosshairs_style_e`: Style of the center crosshairs (`osdConfig()->crosshairs_style`)
-    enum osd_sidebar_scroll_e leftSidebarScroll;  // Enum `osd_sidebar_scroll_e`: Left sidebar scroll behavior (`osdConfig()->left_sidebar_scroll`)
-    enum osd_sidebar_scroll_e rightSidebarScroll;  // Enum `osd_sidebar_scroll_e`: Right sidebar scroll behavior (`osdConfig()->right_sidebar_scroll`)
+    uint8_t crosshairsStyle;  // Enum `osd_crosshairs_style_e`: Style of the center crosshairs (`osdConfig()->crosshairs_style`) | Enum: osd_crosshairs_style_e
+    uint8_t leftSidebarScroll;  // Enum `osd_sidebar_scroll_e`: Left sidebar scroll behavior (`osdConfig()->left_sidebar_scroll`) | Enum: osd_sidebar_scroll_e
+    uint8_t rightSidebarScroll;  // Enum `osd_sidebar_scroll_e`: Right sidebar scroll behavior (`osdConfig()->right_sidebar_scroll`) | Enum: osd_sidebar_scroll_e
     uint8_t sidebarScrollArrows;  // Boolean: Show arrows for scrollable sidebars (`osdConfig()->sidebar_scroll_arrows`)
-    enum osd_unit_e units;  // Enum: `osd_unit_e` Measurement units (Metric/Imperial) (`osdConfig()->units`)
-    enum osd_stats_energy_unit_e statsEnergyUnit;  // Enum `osd_stats_energy_unit_e`: Unit for energy display in post-flight stats (`osdConfig()->stats_energy_unit`)
+    uint8_t units;  // Enum: `osd_unit_e` Measurement units (Metric/Imperial) (`osdConfig()->units`) | Enum: osd_unit_e
+    uint8_t statsEnergyUnit;  // Enum `osd_stats_energy_unit_e`: Unit for energy display in post-flight stats (`osdConfig()->stats_energy_unit`) | Enum: osd_stats_energy_unit_e
 } MSP2_INAV_OSD_PREFERENCES_reply_t;
 
 // MSP2_INAV_OSD_SET_PREFERENCES (MSPv2)
@@ -2291,15 +2296,15 @@ typedef struct MSP_PACKED MSP2_INAV_OSD_PREFERENCES_reply_t {
 // Notes: Requires `USE_OSD`. Expects 9 bytes. Triggers a full OSD redraw.
 
 typedef struct MSP_PACKED MSP2_INAV_OSD_SET_PREFERENCES_request_t {
-    enum videoSystem_e videoSystem;  // Sets `osdConfigMutable()->video_system`
+    uint8_t videoSystem;  // Sets `osdConfigMutable()->video_system` | Enum: videoSystem_e
     uint8_t mainVoltageDecimals;  // Sets `osdConfigMutable()->main_voltage_decimals`
     uint8_t ahiReverseRoll;  // Sets `osdConfigMutable()->ahi_reverse_roll`
-    enum osd_crosshairs_style_e crosshairsStyle;  // Sets `osdConfigMutable()->crosshairs_style`
-    enum osd_sidebar_scroll_e leftSidebarScroll;  // Sets `osdConfigMutable()->left_sidebar_scroll`
-    enum osd_sidebar_scroll_e rightSidebarScroll;  // Sets `osdConfigMutable()->right_sidebar_scroll`
+    uint8_t crosshairsStyle;  // Sets `osdConfigMutable()->crosshairs_style` | Enum: osd_crosshairs_style_e
+    uint8_t leftSidebarScroll;  // Sets `osdConfigMutable()->left_sidebar_scroll` | Enum: osd_sidebar_scroll_e
+    uint8_t rightSidebarScroll;  // Sets `osdConfigMutable()->right_sidebar_scroll` | Enum: osd_sidebar_scroll_e
     uint8_t sidebarScrollArrows;  // Sets `osdConfigMutable()->sidebar_scroll_arrows`
-    enum osd_unit_e units;  // Sets `osdConfigMutable()->units` (enum `osd_unit_e`)
-    enum osd_stats_energy_unit_e statsEnergyUnit;  // Sets `osdConfigMutable()->stats_energy_unit`
+    uint8_t units;  // Sets `osdConfigMutable()->units` (enum `osd_unit_e`) | Enum: osd_unit_e
+    uint8_t statsEnergyUnit;  // Sets `osdConfigMutable()->stats_energy_unit` | Enum: osd_stats_energy_unit_e
 } MSP2_INAV_OSD_SET_PREFERENCES_request_t;
 
 // MSP2_INAV_SELECT_BATTERY_PROFILE (MSPv2)
@@ -2324,7 +2329,7 @@ typedef struct MSP_PACKED MSP2_INAV_DEBUG_reply_t {
 
 typedef struct MSP_PACKED MSP2_BLACKBOX_CONFIG_reply_t {
     uint8_t blackboxSupported;  // Boolean: 1 if Blackbox is supported (`USE_BLACKBOX`), 0 otherwise
-    enum BlackboxDevice blackboxDevice;  // Enum `BlackboxDevice`: Target device for logging (`blackboxConfig()->device`). 0 if not supported
+    uint8_t blackboxDevice;  // Enum `BlackboxDevice`: Target device for logging (`blackboxConfig()->device`). 0 if not supported | Enum: BlackboxDevice
     uint16_t blackboxRateNum;  // Numerator for logging rate divider (`blackboxConfig()->rate_num`). 0 if not supported
     uint16_t blackboxRateDenom;  // Denominator for logging rate divider (`blackboxConfig()->rate_denom`). 0 if not supported
     uint32_t blackboxIncludeFlags;  // Bitmask: Flags for fields included/excluded from logging (`blackboxConfig()->includeFlags`)
@@ -2335,7 +2340,7 @@ typedef struct MSP_PACKED MSP2_BLACKBOX_CONFIG_reply_t {
 // Notes: Requires `USE_BLACKBOX`. Expects 9 bytes. Returns error if Blackbox is currently logging (`!blackboxMayEditConfig()`).
 
 typedef struct MSP_PACKED MSP2_SET_BLACKBOX_CONFIG_request_t {
-    enum BlackboxDevice blackboxDevice;  // Sets `blackboxConfigMutable()->device`
+    uint8_t blackboxDevice;  // Sets `blackboxConfigMutable()->device` | Enum: BlackboxDevice
     uint16_t blackboxRateNum;  // Sets `blackboxConfigMutable()->rate_num`
     uint16_t blackboxRateDenom;  // Sets `blackboxConfigMutable()->rate_denom`
     uint32_t blackboxIncludeFlags;  // Sets `blackboxConfigMutable()->includeFlags`
@@ -2346,7 +2351,7 @@ typedef struct MSP_PACKED MSP2_SET_BLACKBOX_CONFIG_request_t {
 // Notes: Requires `USE_TEMPERATURE_SENSOR`.
 
 typedef struct MSP_PACKED MSP2_INAV_TEMP_SENSOR_CONFIG_reply_t {
-    enum tempSensorType_e type;  // Enum (`tempSensorType_e`): Type of the temperature sensor
+    uint8_t type;  // Enum (`tempSensorType_e`): Type of the temperature sensor | Enum: tempSensorType_e
     uint64_t address;  // Sensor address/ID (e.g., for 1-Wire sensors)
     int16_t alarmMin;  // Min temperature alarm threshold (`sensorConfig->alarm_min`) | units: 0.1°C
     int16_t alarmMax;  // Max temperature alarm threshold (`sensorConfig->alarm_max`) | units: 0.1°C
@@ -2359,7 +2364,7 @@ typedef struct MSP_PACKED MSP2_INAV_TEMP_SENSOR_CONFIG_reply_t {
 // Notes: Requires `USE_TEMPERATURE_SENSOR`. Payload must include `MAX_TEMP_SENSORS` consecutive `tempSensorConfig_t` structures (labels are uppercased).
 
 typedef struct MSP_PACKED MSP2_INAV_SET_TEMP_SENSOR_CONFIG_request_t {
-    enum tempSensorType_e type;  // Sets sensor type (`tempSensorType_e`)
+    uint8_t type;  // Sets sensor type (`tempSensorType_e`) | Enum: tempSensorType_e
     uint64_t address;  // Sets sensor address/ID
     int16_t alarmMin;  // Sets min alarm threshold (`tempSensorConfigMutable(index)->alarm_min`) | units: 0.1°C
     int16_t alarmMax;  // Sets max alarm threshold (`tempSensorConfigMutable(index)->alarm_max`) | units: 0.1°C
@@ -2382,7 +2387,7 @@ typedef struct MSP_PACKED MSP2_INAV_TEMPERATURES_reply_t {
 typedef struct MSP_PACKED MSP_SIMULATOR_request_t {
     uint8_t simulatorVersion;  // Version of the simulator protocol (`SIMULATOR_MSP_VERSION`)
     uint8_t simulatorFlags_t;  // Bitmask: Options for HITL (`HITL_*` flags) | units: Bitmask
-    enum gpsFixType_e gpsFixType;  // Enum `gpsFixType_e` Type of GPS fix (If `HITL_HAS_NEW_GPS_DATA`) | units: Enum
+    uint8_t gpsFixType;  // Enum `gpsFixType_e` Type of GPS fix (If `HITL_HAS_NEW_GPS_DATA`) | units: Enum | Enum: gpsFixType_e
     uint8_t gpsNumSat;  // (If `HITL_HAS_NEW_GPS_DATA`) Simulated satellite count
     int32_t gpsLat;  // (If `HITL_HAS_NEW_GPS_DATA`) Simulated latitude (1e7 deg)
     int32_t gpsLon;  // (If `HITL_HAS_NEW_GPS_DATA`) Simulated longitude (1e7 deg)
@@ -2425,7 +2430,7 @@ typedef struct MSP_PACKED MSP_SIMULATOR_reply_t {
     uint8_t osdCols;  // (If OSD supported) Number of OSD columns
     uint8_t osdStartY;  // (If OSD supported) Starting row for RLE data
     uint8_t osdStartX;  // (If OSD supported) Starting column for RLE data
-    uint8_t osdRleData[];  // (If OSD supported) Run-length encoded OSD character data. Terminated by `[0, 0]`
+    uint8_t osdRleData[UNDEFINED_LEN_ARRAY_PLACEHOLDER];  // (If OSD supported) Run-length encoded OSD character data. Terminated by `[0, 0]`
 } MSP_SIMULATOR_reply_t;
 
 // MSP2_INAV_SERVO_MIXER (MSPv2)
@@ -2434,15 +2439,15 @@ typedef struct MSP_PACKED MSP_SIMULATOR_reply_t {
 
 typedef struct MSP_PACKED MSP2_INAV_SERVO_MIXER_reply_t {
     uint8_t targetChannel;  // Servo output channel index (0-based)
-    enum inputSource_e inputSource;  // Enum `inputSource_e` Input source
+    uint8_t inputSource;  // Enum `inputSource_e` Input source | Enum: inputSource_e
     int16_t rate;  // Mixing rate/weight
     uint8_t speed;  // Speed/Slew rate limit (0-100)
     int8_t conditionId;  // Logic Condition ID (0 to `MAX_LOGIC_CONDITIONS - 1`, or 255/-1 if none/disabled)
-    uint8_t targetChannel;  // (Optional) Profile 2 Target channel
-    enum inputSource_e inputSource;  // (Optional) Profile 2 Enum `inputSource_e` Input source
-    int16_t rate;  // (Optional) Profile 2 Rate
-    uint8_t speed;  // (Optional) Profile 2 Speed
-    int8_t conditionId;  // (Optional) Profile 2 Logic Condition ID
+    uint8_t p2TargetChannel;  // (Optional) Profile 2 Target channel
+    uint8_t p2InputSource;  // (Optional) Profile 2 Enum `inputSource_e` Input source | Enum: inputSource_e
+    int16_t p2Rate;  // (Optional) Profile 2 Rate
+    uint8_t p2Speed;  // (Optional) Profile 2 Speed
+    int8_t p2ConditionId;  // (Optional) Profile 2 Logic Condition ID
 } MSP2_INAV_SERVO_MIXER_reply_t;
 
 // MSP2_INAV_SET_SERVO_MIXER (MSPv2)
@@ -2452,7 +2457,7 @@ typedef struct MSP_PACKED MSP2_INAV_SERVO_MIXER_reply_t {
 typedef struct MSP_PACKED MSP2_INAV_SET_SERVO_MIXER_request_t {
     uint8_t ruleIndex;  // Index of the rule to set (0 to `MAX_SERVO_RULES - 1`)
     uint8_t targetChannel;  // Servo output channel index
-    enum inputSource_e inputSource;  // Enum `inputSource_e` Input source
+    uint8_t inputSource;  // Enum `inputSource_e` Input source | Enum: inputSource_e
     int16_t rate;  // Mixing rate/weight
     uint8_t speed;  // Speed/Slew rate limit (0-100)
     int8_t conditionId;  // Logic Condition ID (255/-1 if none). Ignored if `USE_PROGRAMMING_FRAMEWORK` is disabled
@@ -2465,10 +2470,10 @@ typedef struct MSP_PACKED MSP2_INAV_SET_SERVO_MIXER_request_t {
 typedef struct MSP_PACKED MSP2_INAV_LOGIC_CONDITIONS_reply_t {
     uint8_t enabled;  // Boolean: 1 if the condition is enabled
     int8_t activatorId;  // Activator condition ID (-1/255 if none)
-    enum logicOperation_e operation;  // Enum `logicOperation_e` Logical operation (AND, OR, XOR, etc.)
-    enum logicOperandType_e operandAType;  // Enum `logicOperandType_e` Type of the first operand (Flight Mode, GVAR, etc.)
+    uint8_t operation;  // Enum `logicOperation_e` Logical operation (AND, OR, XOR, etc.) | Enum: logicOperation_e
+    uint8_t operandAType;  // Enum `logicOperandType_e` Type of the first operand (Flight Mode, GVAR, etc.) | Enum: logicOperandType_e
     int32_t operandAValue;  // Value/ID of the first operand
-    enum logicOperandType_e operandBType;  // Enum `logicOperandType_e`: Type of the second operand
+    uint8_t operandBType;  // Enum `logicOperandType_e`: Type of the second operand | Enum: logicOperandType_e
     int32_t operandBValue;  // Value/ID of the second operand
     uint8_t flags;  // Bitmask: Condition flags (`logicConditionFlags_e`) | units: Bitmask
 } MSP2_INAV_LOGIC_CONDITIONS_reply_t;
@@ -2481,10 +2486,10 @@ typedef struct MSP_PACKED MSP2_INAV_SET_LOGIC_CONDITIONS_request_t {
     uint8_t conditionIndex;  // Index of the condition to set (0 to `MAX_LOGIC_CONDITIONS - 1`)
     uint8_t enabled;  // Boolean: 1 to enable the condition
     int8_t activatorId;  // Activator condition ID (-1/255 if none)
-    enum logicOperation_e operation;  // Enum `logicOperation_e` Logical operation
-    enum logicOperandType_e operandAType;  // Enum `logicOperandType_e` Type of operand A
+    uint8_t operation;  // Enum `logicOperation_e` Logical operation | Enum: logicOperation_e
+    uint8_t operandAType;  // Enum `logicOperandType_e` Type of operand A | Enum: logicOperandType_e
     int32_t operandAValue;  // Value/ID of operand A
-    enum logicOperandType_e operandBType;  // Enum `logicOperandType_e` Type of operand B
+    uint8_t operandBType;  // Enum `logicOperandType_e` Type of operand B | Enum: logicOperandType_e
     int32_t operandBValue;  // Value/ID of operand B
     uint8_t flags;  // Bitmask: Condition flags (`logicConditionFlags_e`) | units: Bitmask
 } MSP2_INAV_SET_LOGIC_CONDITIONS_request_t;
@@ -2515,9 +2520,9 @@ typedef struct MSP_PACKED MSP2_INAV_GVAR_STATUS_reply_t {
 
 typedef struct MSP_PACKED MSP2_INAV_PROGRAMMING_PID_reply_t {
     uint8_t enabled;  // Boolean: 1 if the PID is enabled
-    enum logicOperandType_e setpointType;  // Enum (`logicOperandType_e`) Type of the setpoint source
+    uint8_t setpointType;  // Enum (`logicOperandType_e`) Type of the setpoint source | Enum: logicOperandType_e
     int32_t setpointValue;  // Value/ID of the setpoint source
-    enum logicOperandType_e measurementType;  // Enum (`logicOperandType_e`) Type of the measurement source
+    uint8_t measurementType;  // Enum (`logicOperandType_e`) Type of the measurement source | Enum: logicOperandType_e
     int32_t measurementValue;  // Value/ID of the measurement source
     uint16_t gainP;  // Proportional gain
     uint16_t gainI;  // Integral gain
@@ -2532,9 +2537,9 @@ typedef struct MSP_PACKED MSP2_INAV_PROGRAMMING_PID_reply_t {
 typedef struct MSP_PACKED MSP2_INAV_SET_PROGRAMMING_PID_request_t {
     uint8_t pidIndex;  // Index of the Programming PID to set (0 to `MAX_PROGRAMMING_PID_COUNT - 1`)
     uint8_t enabled;  // Boolean: 1 to enable the PID
-    enum logicOperandType_e setpointType;  // Enum (`logicOperandType_e`) Type of the setpoint source
+    uint8_t setpointType;  // Enum (`logicOperandType_e`) Type of the setpoint source | Enum: logicOperandType_e
     int32_t setpointValue;  // Value/ID of the setpoint source
-    enum logicOperandType_e measurementType;  // Enum (`logicOperandType_e`) Type of the measurement source
+    uint8_t measurementType;  // Enum (`logicOperandType_e`) Type of the measurement source | Enum: logicOperandType_e
     int32_t measurementValue;  // Value/ID of the measurement source
     uint16_t gainP;  // Proportional gain
     uint16_t gainI;  // Integral gain
@@ -2589,7 +2594,7 @@ typedef struct MSP_PACKED MSP2_INAV_FWUPDT_PREPARE_request_t {
 // Notes: Requires `MSP_FIRMWARE_UPDATE`. Returns error if storage fails (e.g., out of space, checksum error). Called repeatedly until the entire firmware is transferred. Calls `firmwareUpdateStore()`.
 
 typedef struct MSP_PACKED MSP2_INAV_FWUPDT_STORE_request_t {
-    uint8_t firmwareChunk[];  // Chunk of firmware data
+    uint8_t firmwareChunk[UNDEFINED_LEN_ARRAY_PLACEHOLDER];  // Chunk of firmware data
 } MSP2_INAV_FWUPDT_STORE_request_t;
 
 // MSP2_INAV_FWUPDT_EXEC (MSPv2)
@@ -2655,10 +2660,10 @@ typedef struct MSP_PACKED MSP2_INAV_LOGIC_CONDITIONS_SINGLE_request_t {
 typedef struct MSP_PACKED MSP2_INAV_LOGIC_CONDITIONS_SINGLE_reply_t {
     uint8_t enabled;  // Boolean: 1 if enabled
     int8_t activatorId;  // Activator ID (-1/255 if none)
-    enum logicOperation_e operation;  // Enum `logicOperation_e` Logical operation
-    enum logicOperandType_e operandAType;  // Enum `logicOperandType_e` Type of operand A
+    uint8_t operation;  // Enum `logicOperation_e` Logical operation | Enum: logicOperation_e
+    uint8_t operandAType;  // Enum `logicOperandType_e` Type of operand A | Enum: logicOperandType_e
     int32_t operandAValue;  // Value/ID of operand A
-    enum logicOperandType_e operandBType;  // Enum `logicOperandType_e` Type of operand B
+    uint8_t operandBType;  // Enum `logicOperandType_e` Type of operand B | Enum: logicOperandType_e
     int32_t operandBValue;  // Value/ID of operand B
     uint8_t flags;  // Bitmask: Condition flags (`logicConditionFlags_e`) | units: Bitmask
 } MSP2_INAV_LOGIC_CONDITIONS_SINGLE_reply_t;
@@ -2677,7 +2682,7 @@ typedef struct MSP_PACKED MSP2_INAV_ESC_RPM_reply_t {
 
 typedef struct MSP_PACKED MSP2_INAV_ESC_TELEM_reply_t {
     uint8_t motorCount;  // Number of motors reporting telemetry (`getMotorCount()`)
-    escSensorData_t escData[];  // Array of `escSensorData_t` structures containing voltage, current, temp, RPM, errors etc. for each ESC
+    escSensorData_t escData[UNDEFINED_LEN_ARRAY_PLACEHOLDER];  // Array of `escSensorData_t` structures containing voltage, current, temp, RPM, errors etc. for each ESC
 } MSP2_INAV_ESC_TELEM_reply_t;
 
 // MSP2_INAV_LED_STRIP_CONFIG_EX (MSPv2)
@@ -2709,7 +2714,7 @@ typedef struct MSP_PACKED MSP2_INAV_FW_APPROACH_reply_t {
     uint8_t approachIndex;  // Index requested | units: Index
     int32_t approachAlt;  // Signed altitude for the approach phase (`navFwAutolandApproach_t.approachAlt`) | units: cm
     int32_t landAlt;  // Signed altitude for the final landing phase (`navFwAutolandApproach_t.landAlt`) | units: cm
-    enum fwAutolandApproachDirection_e approachDirection;  // Enum `fwAutolandApproachDirection_e`: Direction of approach (From WP, Specific Heading) | units: Enum
+    uint8_t approachDirection;  // Enum `fwAutolandApproachDirection_e`: Direction of approach (From WP, Specific Heading) | units: Enum | Enum: fwAutolandApproachDirection_e
     int16_t landHeading1;  // Primary landing heading (if approachDirection requires it) | units: degrees
     int16_t landHeading2;  // Secondary landing heading (if approachDirection requires it) | units: degrees
     uint8_t isSeaLevelRef;  // 1 if altitudes are relative to sea level, 0 if relative to home | units: Boolean
@@ -2723,7 +2728,7 @@ typedef struct MSP_PACKED MSP2_INAV_SET_FW_APPROACH_request_t {
     uint8_t approachIndex;  // Index of the approach setting (0 to `MAX_FW_LAND_APPOACH_SETTINGS - 1`) | units: Index
     int32_t approachAlt;  // Signed approach altitude (`navFwAutolandApproach_t.approachAlt`) | units: cm
     int32_t landAlt;  // Signed landing altitude (`navFwAutolandApproach_t.landAlt`) | units: cm
-    enum fwAutolandApproachDirection_e approachDirection;  // Enum `fwAutolandApproachDirection_e` Sets approach direction | units: Enum
+    uint8_t approachDirection;  // Enum `fwAutolandApproachDirection_e` Sets approach direction | units: Enum | Enum: fwAutolandApproachDirection_e
     int16_t landHeading1;  // Sets primary landing heading | units: degrees
     int16_t landHeading2;  // Sets secondary landing heading | units: degrees
     uint8_t isSeaLevelRef;  // Sets altitude reference | units: Boolean
@@ -2734,7 +2739,7 @@ typedef struct MSP_PACKED MSP2_INAV_SET_FW_APPROACH_request_t {
 // Notes: Requires GPS feature enabled (`FEATURE_GPS`) and the GPS driver to be U-Blox (`isGpsUblox()`). Payload must be at least 8 bytes (minimum UBX frame size). Use with extreme caution, incorrect commands can misconfigure the GPS module. Calls `gpsUbloxSendCommand()`.
 
 typedef struct MSP_PACKED MSP2_INAV_GPS_UBLOX_COMMAND_request_t {
-    uint8_t ubxCommand[];  // Raw U-Blox UBX protocol command frame (including header, class, ID, length, payload, checksum)
+    uint8_t ubxCommand[UNDEFINED_LEN_ARRAY_PLACEHOLDER];  // Raw U-Blox UBX protocol command frame (including header, class, ID, length, payload, checksum)
 } MSP2_INAV_GPS_UBLOX_COMMAND_request_t;
 
 // MSP2_INAV_RATE_DYNAMICS (MSPv2)
@@ -2814,8 +2819,7 @@ typedef struct MSP_PACKED MSP2_ADSB_VEHICLE_LIST_reply_t {
     uint8_t callsignLength;  // Maximum length of callsign string (`ADSB_CALL_SIGN_MAX_LENGTH`). 0 if `USE_ADSB` disabled
     uint32_t totalVehicleMsgs;  // Total vehicle messages received (`getAdsbStatus()->vehiclesMessagesTotal`). 0 if `USE_ADSB` disabled
     uint32_t totalHeartbeatMsgs;  // Total heartbeat messages received (`getAdsbStatus()->heartbeatMessagesTotal`). 0 if `USE_ADSB` disabled
-    // Repeating block: maxVehicles
-    struct MSP_PACKED MSP2_ADSB_VEHICLE_LIST_reply_t__repeating_t {
+    struct MSP_PACKED {
     char callsign[ADSB_CALL_SIGN_MAX_LENGTH];  // Fixed-length callsign from `adsbVehicle->vehicleValues.callsign` (padded with NULs if shorter).
     uint32_t icao;  // ICAO address (`adsbVehicle->vehicleValues.icao`).
     int32_t lat;  // Latitude in degrees * 1e7 (`adsbVehicle->vehicleValues.lat`). | units: 1e-7 deg
@@ -2825,8 +2829,7 @@ typedef struct MSP_PACKED MSP2_ADSB_VEHICLE_LIST_reply_t {
     uint8_t tslc;  // Time since last communication (`adsbVehicle->vehicleValues.tslc`). | units: s
     uint8_t emitterType;  // Emitter category (`adsbVehicle->vehicleValues.emitterType`) (refers to enum 'ADSB_EMITTER_TYPE', but none found)
     uint8_t ttl;  // TTL counter used for list maintenance (`adsbVehicle->ttl`).
-    };
-    struct MSP2_ADSB_VEHICLE_LIST_reply_t__repeating_t items[];  // count by field or macro: maxVehicles
+    } items[maxVehicles];  // repeating: maxVehicles
 } MSP2_ADSB_VEHICLE_LIST_reply_t;
 
 // MSP2_INAV_CUSTOM_OSD_ELEMENTS (MSPv2)
@@ -2848,13 +2851,11 @@ typedef struct MSP_PACKED MSP2_INAV_CUSTOM_OSD_ELEMENT_request_t {
 } MSP2_INAV_CUSTOM_OSD_ELEMENT_request_t;
 
 typedef struct MSP_PACKED MSP2_INAV_CUSTOM_OSD_ELEMENT_reply_t {
-    // Repeating block: CUSTOM_ELEMENTS_PARTS
-    struct MSP_PACKED MSP2_INAV_CUSTOM_OSD_ELEMENT_reply_t__repeating_t {
-    enum osdCustomElementType_e partType;  // Type of this part
+    struct MSP_PACKED {
+    uint8_t partType;  // Type of this part | Enum: osdCustomElementType_e
     uint16_t partValue;  // Value/ID associated with this part
-    };
-    struct MSP2_INAV_CUSTOM_OSD_ELEMENT_reply_t__repeating_t items[];  // count by field or macro: CUSTOM_ELEMENTS_PARTS
-    enum osdCustomElementTypeVisibility_e visibilityType;  // Visibility condition source
+    } items[CUSTOM_ELEMENTS_PARTS];  // repeating: CUSTOM_ELEMENTS_PARTS
+    uint8_t visibilityType;  // Visibility condition source | Enum: osdCustomElementTypeVisibility_e
     uint16_t visibilityValue;  // Value/ID of the visibility condition source
     char elementText[OSD_CUSTOM_ELEMENT_TEXT_SIZE - 1];  // Static text bytes
 } MSP2_INAV_CUSTOM_OSD_ELEMENT_reply_t;
@@ -2865,13 +2866,11 @@ typedef struct MSP_PACKED MSP2_INAV_CUSTOM_OSD_ELEMENT_reply_t {
 
 typedef struct MSP_PACKED MSP2_INAV_SET_CUSTOM_OSD_ELEMENTS_request_t {
     uint8_t elementIndex;  // Index of the custom element (0 to `MAX_CUSTOM_ELEMENTS - 1`)
-    // Repeating block: CUSTOM_ELEMENTS_PARTS
-    struct MSP_PACKED MSP2_INAV_SET_CUSTOM_OSD_ELEMENTS_request_t__repeating_t {
-    enum osdCustomElementType_e partType;  // Type of this part
+    struct MSP_PACKED {
+    uint8_t partType;  // Type of this part | Enum: osdCustomElementType_e
     uint16_t partValue;  // Value/ID associated with this part
-    };
-    struct MSP2_INAV_SET_CUSTOM_OSD_ELEMENTS_request_t__repeating_t items[];  // count by field or macro: CUSTOM_ELEMENTS_PARTS
-    enum osdCustomElementTypeVisibility_e visibilityType;  // Visibility condition source
+    } items[CUSTOM_ELEMENTS_PARTS];  // repeating: CUSTOM_ELEMENTS_PARTS
+    uint8_t visibilityType;  // Visibility condition source | Enum: osdCustomElementTypeVisibility_e
     uint16_t visibilityValue;  // Value/ID of the visibility condition source
     char elementText[OSD_CUSTOM_ELEMENT_TEXT_SIZE - 1];  // Raw bytes
 } MSP2_INAV_SET_CUSTOM_OSD_ELEMENTS_request_t;
@@ -2883,7 +2882,7 @@ typedef struct MSP_PACKED MSP2_INAV_SET_CUSTOM_OSD_ELEMENTS_request_t {
 typedef struct MSP_PACKED MSP2_INAV_OUTPUT_MAPPING_EXT2_reply_t {
     uint8_t timerId;  // Hardware timer identifier (e.g., `TIM1`, `TIM2`). SITL uses index
     uint32_t usageFlags;  // Full 32-bit timer usage flags (`TIM_USE_*`)
-    enum pinLabel_e pinLabel;  // Label for special pin usage (`PIN_LABEL_*` enum, e.g., `PIN_LABEL_LED`). 0 (`PIN_LABEL_NONE`) otherwise
+    uint8_t pinLabel;  // Label for special pin usage (`PIN_LABEL_*` enum, e.g., `PIN_LABEL_LED`). 0 (`PIN_LABEL_NONE`) otherwise | Enum: pinLabel_e
 } MSP2_INAV_OUTPUT_MAPPING_EXT2_reply_t;
 
 // MSP2_INAV_SERVO_CONFIG (MSPv2)
@@ -2923,7 +2922,7 @@ typedef struct MSP_PACKED MSP2_INAV_GEOZONE_reply_t {
     int32_t minAltitude;  // Minimum allowed altitude within the zone (`geoZonesConfig(idx)->minAltitude`) | units: cm
     int32_t maxAltitude;  // Maximum allowed altitude within the zone (`geoZonesConfig(idx)->maxAltitude`) | units: cm
     uint8_t isSeaLevelRef;  // Boolean: 1 if altitudes are relative to sea level, 0 if relative to home
-    enum fenceAction_e fenceAction;  // Enum (`fenceAction_e`): Action to take upon boundary violation
+    uint8_t fenceAction;  // Enum (`fenceAction_e`): Action to take upon boundary violation | Enum: fenceAction_e
     uint8_t vertexCount;  // Number of vertices defined for this zone
 } MSP2_INAV_GEOZONE_reply_t;
 
@@ -2938,7 +2937,7 @@ typedef struct MSP_PACKED MSP2_INAV_SET_GEOZONE_request_t {
     int32_t minAltitude;  // Minimum allowed altitude (`geoZonesConfigMutable()->minAltitude`) | units: cm
     int32_t maxAltitude;  // Maximum allowed altitude (`geoZonesConfigMutable()->maxAltitude`) | units: cm
     uint8_t isSeaLevelRef;  // Boolean: Altitude reference
-    enum fenceAction_e fenceAction;  // Enum (`fenceAction_e`): Action to take upon boundary violation
+    uint8_t fenceAction;  // Enum (`fenceAction_e`): Action to take upon boundary violation | Enum: fenceAction_e
     uint8_t vertexCount;  // Number of vertices to be defined (used for validation later)
 } MSP2_INAV_SET_GEOZONE_request_t;
 
