@@ -1,0 +1,304 @@
+#               INAV                                     - BETAFLIGHT                               - Compatible
+1               MSP_API_VERSION                          - MSP_API_VERSION                          - Compatible
+2               MSP_FC_VARIANT                           - MSP_FC_VARIANT                           - Compatible
+3               MSP_FC_VERSION                           - MSP_FC_VERSION                           - Compatible
+4               MSP_BOARD_INFO                           - MSP_BOARD_INFO                           - Compatible
+5               MSP_BUILD_INFO                           - MSP_BUILD_INFO                           - Compatible
+6               MSP_INAV_PID                             -                                          - 
+7               MSP_SET_INAV_PID                         -                                          - 
+10              MSP_NAME                                 - MSP_NAME                                 - Compatible
+11              MSP_SET_NAME                             - MSP_SET_NAME                             - Compatible
+12              MSP_NAV_POSHOLD                          -                                          - 
+13              MSP_SET_NAV_POSHOLD                      -                                          - 
+14              MSP_CALIBRATION_DATA                     -                                          - 
+15              MSP_SET_CALIBRATION_DATA                 -                                          - 
+16              MSP_POSITION_ESTIMATION_CONFIG           -                                          - 
+17              MSP_SET_POSITION_ESTIMATION_CONFIG       -                                          - 
+18              MSP_WP_MISSION_LOAD                      -                                          - 
+19              MSP_WP_MISSION_SAVE                      -                                          - 
+20              MSP_WP_GETINFO                           -                                          - 
+21              MSP_RTH_AND_LAND_CONFIG                  -                                          - 
+22              MSP_SET_RTH_AND_LAND_CONFIG              -                                          - 
+23              MSP_FW_CONFIG                            -                                          - 
+24              MSP_SET_FW_CONFIG                        -                                          - 
+32                                                       - MSP_BATTERY_CONFIG                       - 
+33                                                       - MSP_SET_BATTERY_CONFIG                   - 
+34              MSP_MODE_RANGES                          - MSP_MODE_RANGES                          - Compatible
+35              MSP_SET_MODE_RANGE                       - MSP_SET_MODE_RANGE                       - Compatible
+36              MSP_FEATURE                              - MSP_FEATURE_CONFIG                       - 
+37              MSP_SET_FEATURE                          - MSP_SET_FEATURE_CONFIG                   - 
+38              MSP_BOARD_ALIGNMENT                      - MSP_BOARD_ALIGNMENT_CONFIG               - 
+39              MSP_SET_BOARD_ALIGNMENT                  - MSP_SET_BOARD_ALIGNMENT_CONFIG           - 
+40              MSP_CURRENT_METER_CONFIG                 - MSP_CURRENT_METER_CONFIG                 - Compatible
+41              MSP_SET_CURRENT_METER_CONFIG             - MSP_SET_CURRENT_METER_CONFIG             - Compatible
+42              MSP_MIXER                                - MSP_MIXER_CONFIG                         - 
+43              MSP_SET_MIXER                            - MSP_SET_MIXER_CONFIG                     - 
+44              MSP_RX_CONFIG                            - MSP_RX_CONFIG                            - Compatible
+45              MSP_SET_RX_CONFIG                        - MSP_SET_RX_CONFIG                        - Compatible
+46              MSP_LED_COLORS                           - MSP_LED_COLORS                           - Compatible
+47              MSP_SET_LED_COLORS                       - MSP_SET_LED_COLORS                       - Compatible
+48              MSP_LED_STRIP_CONFIG                     - MSP_LED_STRIP_CONFIG                     - Compatible
+49              MSP_SET_LED_STRIP_CONFIG                 - MSP_SET_LED_STRIP_CONFIG                 - Compatible
+50              MSP_RSSI_CONFIG                          - MSP_RSSI_CONFIG                          - Compatible
+51              MSP_SET_RSSI_CONFIG                      - MSP_SET_RSSI_CONFIG                      - Compatible
+52              MSP_ADJUSTMENT_RANGES                    - MSP_ADJUSTMENT_RANGES                    - Compatible
+53              MSP_SET_ADJUSTMENT_RANGE                 - MSP_SET_ADJUSTMENT_RANGE                 - Compatible
+54              MSP_CF_SERIAL_CONFIG                     - MSP_CF_SERIAL_CONFIG                     - Compatible
+55              MSP_SET_CF_SERIAL_CONFIG                 - MSP_SET_CF_SERIAL_CONFIG                 - Compatible
+56              MSP_VOLTAGE_METER_CONFIG                 - MSP_VOLTAGE_METER_CONFIG                 - Compatible
+57              MSP_SET_VOLTAGE_METER_CONFIG             - MSP_SET_VOLTAGE_METER_CONFIG             - Compatible
+58              MSP_SONAR_ALTITUDE                       - MSP_SONAR_ALTITUDE                       - Compatible
+59                                                       - MSP_PID_CONTROLLER                       - 
+60                                                       - MSP_SET_PID_CONTROLLER                   - 
+61                                                       - MSP_ARMING_CONFIG                        - 
+62                                                       - MSP_SET_ARMING_CONFIG                    - 
+64              MSP_RX_MAP                               - MSP_RX_MAP                               - Compatible
+65              MSP_SET_RX_MAP                           - MSP_SET_RX_MAP                           - Compatible
+68              MSP_REBOOT                               - MSP_REBOOT                               - Compatible
+70              MSP_DATAFLASH_SUMMARY                    - MSP_DATAFLASH_SUMMARY                    - Compatible
+71              MSP_DATAFLASH_READ                       - MSP_DATAFLASH_READ                       - Compatible
+72              MSP_DATAFLASH_ERASE                      - MSP_DATAFLASH_ERASE                      - Compatible
+73              MSP_LOOP_TIME                            -                                          - 
+74              MSP_SET_LOOP_TIME                        -                                          - 
+75              MSP_FAILSAFE_CONFIG                      - MSP_FAILSAFE_CONFIG                      - Compatible
+76              MSP_SET_FAILSAFE_CONFIG                  - MSP_SET_FAILSAFE_CONFIG                  - Compatible
+77                                                       - MSP_RXFAIL_CONFIG                        - 
+78                                                       - MSP_SET_RXFAIL_CONFIG                    - 
+79              MSP_SDCARD_SUMMARY                       - MSP_SDCARD_SUMMARY                       - Compatible
+80              MSP_BLACKBOX_CONFIG                      - MSP_BLACKBOX_CONFIG                      - Compatible
+81              MSP_SET_BLACKBOX_CONFIG                  - MSP_SET_BLACKBOX_CONFIG                  - Compatible
+82              MSP_TRANSPONDER_CONFIG                   - MSP_TRANSPONDER_CONFIG                   - Compatible
+83              MSP_SET_TRANSPONDER_CONFIG               - MSP_SET_TRANSPONDER_CONFIG               - Compatible
+84              MSP_OSD_CONFIG                           - MSP_OSD_CONFIG                           - Compatible
+85              MSP_SET_OSD_CONFIG                       - MSP_SET_OSD_CONFIG                       - Compatible
+86              MSP_OSD_CHAR_READ                        - MSP_OSD_CHAR_READ                        - Compatible
+87              MSP_OSD_CHAR_WRITE                       - MSP_OSD_CHAR_WRITE                       - Compatible
+88              MSP_VTX_CONFIG                           - MSP_VTX_CONFIG                           - Compatible
+89              MSP_SET_VTX_CONFIG                       - MSP_SET_VTX_CONFIG                       - Compatible
+90              MSP_ADVANCED_CONFIG                      - MSP_ADVANCED_CONFIG                      - Compatible
+91              MSP_SET_ADVANCED_CONFIG                  - MSP_SET_ADVANCED_CONFIG                  - Compatible
+92              MSP_FILTER_CONFIG                        - MSP_FILTER_CONFIG                        - Compatible
+93              MSP_SET_FILTER_CONFIG                    - MSP_SET_FILTER_CONFIG                    - Compatible
+94              MSP_PID_ADVANCED                         - MSP_PID_ADVANCED                         - Compatible
+95              MSP_SET_PID_ADVANCED                     - MSP_SET_PID_ADVANCED                     - Compatible
+96              MSP_SENSOR_CONFIG                        - MSP_SENSOR_CONFIG                        - Compatible
+97              MSP_SET_SENSOR_CONFIG                    - MSP_SET_SENSOR_CONFIG                    - Compatible
+98              MSP_SPECIAL_PARAMETERS                   - MSP_CAMERA_CONTROL                       - 
+99              MSP_SET_SPECIAL_PARAMETERS               - MSP_SET_ARMING_DISABLED                  - 
+100             MSP_IDENT                                - MSP_IDENT                                - Compatible
+101             MSP_STATUS                               - MSP_STATUS                               - Compatible
+102             MSP_RAW_IMU                              - MSP_RAW_IMU                              - Compatible
+103             MSP_SERVO                                - MSP_SERVO                                - Compatible
+104             MSP_MOTOR                                - MSP_MOTOR                                - Compatible
+105             MSP_RC                                   - MSP_RC                                   - Compatible
+106             MSP_RAW_GPS                              - MSP_RAW_GPS                              - Compatible
+107             MSP_COMP_GPS                             - MSP_COMP_GPS                             - Compatible
+108             MSP_ATTITUDE                             - MSP_ATTITUDE                             - Compatible
+109             MSP_ALTITUDE                             - MSP_ALTITUDE                             - Compatible
+110             MSP_ANALOG                               - MSP_ANALOG                               - Compatible
+111             MSP_RC_TUNING                            - MSP_RC_TUNING                            - Compatible
+112                                                      - MSP_PID                                  - 
+113             MSP_ACTIVEBOXES                          -                                          - 
+114             MSP_MISC                                 -                                          - 
+116             MSP_BOXNAMES                             - MSP_BOXNAMES                             - Compatible
+117             MSP_PIDNAMES                             - MSP_PIDNAMES                             - Compatible
+118             MSP_WP                                   - MSP_WP                                   - Compatible
+119             MSP_BOXIDS                               - MSP_BOXIDS                               - Compatible
+120             MSP_SERVO_CONFIGURATIONS                 - MSP_SERVO_CONFIGURATIONS                 - Compatible
+121             MSP_NAV_STATUS                           - MSP_NAV_STATUS                           - Compatible
+122             MSP_NAV_CONFIG                           - MSP_NAV_CONFIG                           - Compatible
+124             MSP_3D                                   - MSP_MOTOR_3D_CONFIG                      - 
+125             MSP_RC_DEADBAND                          - MSP_RC_DEADBAND                          - Compatible
+126             MSP_SENSOR_ALIGNMENT                     - MSP_SENSOR_ALIGNMENT                     - Compatible
+127             MSP_LED_STRIP_MODECOLOR                  - MSP_LED_STRIP_MODECOLOR                  - Compatible
+128                                                      - MSP_VOLTAGE_METERS                       - 
+129                                                      - MSP_CURRENT_METERS                       - 
+130             MSP_BATTERY_STATE                        - MSP_BATTERY_STATE                        - Compatible
+131                                                      - MSP_MOTOR_CONFIG                         - 
+132                                                      - MSP_GPS_CONFIG                           - 
+133                                                      - MSP_COMPASS_CONFIG                       - 
+134                                                      - MSP_ESC_SENSOR_DATA                      - 
+135                                                      - MSP_GPS_RESCUE                           - 
+136                                                      - MSP_GPS_RESCUE_PIDS                      - 
+137             MSP_VTXTABLE_BAND                        - MSP_VTXTABLE_BAND                        - Compatible
+138             MSP_VTXTABLE_POWERLEVEL                  - MSP_VTXTABLE_POWERLEVEL                  - Compatible
+139                                                      - MSP_MOTOR_TELEMETRY                      - 
+140                                                      - MSP_SIMPLIFIED_TUNING                    - 
+141                                                      - MSP_SET_SIMPLIFIED_TUNING                - 
+142                                                      - MSP_CALCULATE_SIMPLIFIED_PID             - 
+143                                                      - MSP_CALCULATE_SIMPLIFIED_GYRO            - 
+144                                                      - MSP_CALCULATE_SIMPLIFIED_DTERM           - 
+145                                                      - MSP_VALIDATE_SIMPLIFIED_TUNING           - 
+150             MSP_STATUS_EX                            - MSP_STATUS_EX                            - Compatible
+151             MSP_SENSOR_STATUS                        -                                          - 
+160             MSP_UID                                  - MSP_UID                                  - Compatible
+164             MSP_GPSSVINFO                            - MSP_GPSSVINFO                            - Compatible
+166             MSP_GPSSTATISTICS                        - MSP_GPSSTATISTICS                        - Compatible
+180             MSP_OSD_VIDEO_CONFIG                     - MSP_OSD_VIDEO_CONFIG                     - Compatible
+181             MSP_SET_OSD_VIDEO_CONFIG                 - MSP_SET_OSD_VIDEO_CONFIG                 - Compatible
+182             MSP_DISPLAYPORT                          - MSP_DISPLAYPORT                          - Compatible
+183                                                      - MSP_COPY_PROFILE                         - 
+184                                                      - MSP_BEEPER_CONFIG                        - 
+185                                                      - MSP_SET_BEEPER_CONFIG                    - 
+186             MSP_SET_TX_INFO                          - MSP_SET_TX_INFO                          - Compatible
+187             MSP_TX_INFO                              - MSP_TX_INFO                              - Compatible
+188                                                      - MSP_SET_OSD_CANVAS                       - 
+189                                                      - MSP_OSD_CANVAS                           - 
+200             MSP_SET_RAW_RC                           - MSP_SET_RAW_RC                           - Compatible
+201             MSP_SET_RAW_GPS                          - MSP_SET_RAW_GPS                          - Compatible
+202                                                      - MSP_SET_PID                              - 
+203             MSP_SET_BOX                              -                                          - 
+204             MSP_SET_RC_TUNING                        - MSP_SET_RC_TUNING                        - Compatible
+205             MSP_ACC_CALIBRATION                      - MSP_ACC_CALIBRATION                      - Compatible
+206             MSP_MAG_CALIBRATION                      - MSP_MAG_CALIBRATION                      - Compatible
+207             MSP_SET_MISC                             -                                          - 
+208             MSP_RESET_CONF                           - MSP_RESET_CONF                           - Compatible
+209             MSP_SET_WP                               - MSP_SET_WP                               - Compatible
+210             MSP_SELECT_SETTING                       - MSP_SELECT_SETTING                       - Compatible
+211             MSP_SET_HEAD                             - MSP_SET_HEADING                          - 
+212             MSP_SET_SERVO_CONFIGURATION              - MSP_SET_SERVO_CONFIGURATION              - Compatible
+214             MSP_SET_MOTOR                            - MSP_SET_MOTOR                            - Compatible
+215             MSP_SET_NAV_CONFIG                       - MSP_SET_NAV_CONFIG                       - Compatible
+217             MSP_SET_3D                               - MSP_SET_MOTOR_3D_CONFIG                  - 
+218             MSP_SET_RC_DEADBAND                      - MSP_SET_RC_DEADBAND                      - Compatible
+219             MSP_SET_RESET_CURR_PID                   - MSP_SET_RESET_CURR_PID                   - Compatible
+220             MSP_SET_SENSOR_ALIGNMENT                 - MSP_SET_SENSOR_ALIGNMENT                 - Compatible
+221             MSP_SET_LED_STRIP_MODECOLOR              - MSP_SET_LED_STRIP_MODECOLOR              - Compatible
+222                                                      - MSP_SET_MOTOR_CONFIG                     - 
+223                                                      - MSP_SET_GPS_CONFIG                       - 
+224                                                      - MSP_SET_COMPASS_CONFIG                   - 
+225                                                      - MSP_SET_GPS_RESCUE                       - 
+226                                                      - MSP_SET_GPS_RESCUE_PIDS                  - 
+227                                                      - MSP_SET_VTXTABLE_BAND                    - 
+228                                                      - MSP_SET_VTXTABLE_POWERLEVEL              - 
+230                                                      - MSP_MULTIPLE_MSP                         - 
+238                                                      - MSP_MODE_RANGES_EXTRA                    - 
+239             MSP_SET_ACC_TRIM                         - MSP_SET_ACC_TRIM                         - Compatible
+240             MSP_ACC_TRIM                             - MSP_ACC_TRIM                             - Compatible
+241             MSP_SERVO_MIX_RULES                      - MSP_SERVO_MIX_RULES                      - Compatible
+242             MSP_SET_SERVO_MIX_RULE                   - MSP_SET_SERVO_MIX_RULE                   - Compatible
+245             MSP_SET_PASSTHROUGH                      - MSP_SET_PASSTHROUGH                      - Compatible
+246             MSP_RTC                                  - MSP_SET_RTC                              - 
+247             MSP_SET_RTC                              - MSP_RTC                                  - 
+248                                                      - MSP_SET_BOARD_INFO                       - 
+249                                                      - MSP_SET_SIGNATURE                        - 
+250             MSP_EEPROM_WRITE                         - MSP_EEPROM_WRITE                         - Compatible
+251             MSP_RESERVE_1                            - MSP_RESERVE_1                            - Compatible
+252             MSP_RESERVE_2                            - MSP_RESERVE_2                            - Compatible
+253             MSP_DEBUGMSG                             - MSP_DEBUGMSG                             - Compatible
+254             MSP_DEBUG                                - MSP_DEBUG                                - Compatible
+255             MSP_V2_FRAME                             - MSP_PASSTHROUGH_ESC_4WAY                 - 
+4097            MSP2_COMMON_TZ                           -                                          - 
+4098            MSP2_COMMON_SET_TZ                       -                                          - 
+4099            MSP2_COMMON_SETTING                      -                                          - 
+4100            MSP2_COMMON_SET_SETTING                  -                                          - 
+4101            MSP2_COMMON_MOTOR_MIXER                  -                                          - 
+4102            MSP2_COMMON_SET_MOTOR_MIXER              -                                          - 
+4103            MSP2_COMMON_SETTING_INFO                 -                                          - 
+4104            MSP2_COMMON_PG_LIST                      -                                          - 
+4105            MSP2_COMMON_SERIAL_CONFIG                - MSP2_COMMON_SERIAL_CONFIG                - Compatible
+4106            MSP2_COMMON_SET_SERIAL_CONFIG            - MSP2_COMMON_SET_SERIAL_CONFIG            - Compatible
+4107            MSP2_COMMON_SET_RADAR_POS                -                                          - 
+4108            MSP2_COMMON_SET_RADAR_ITD                -                                          - 
+4109            MSP2_COMMON_SET_MSP_RC_LINK_STATS        -                                          - 
+4110            MSP2_COMMON_SET_MSP_RC_INFO              -                                          - 
+4111            MSP2_COMMON_GET_RADAR_GPS                -                                          - 
+7937            MSP2_SENSOR_RANGEFINDER                  - MSP2_SENSOR_RANGEFINDER_LIDARMT          - 
+7938            MSP2_SENSOR_OPTIC_FLOW                   - MSP2_SENSOR_OPTICALFLOW_MT               - 
+7939            MSP2_SENSOR_GPS                          - MSP2_SENSOR_GPS                          - Compatible
+7940            MSP2_SENSOR_COMPASS                      -                                          - 
+7941            MSP2_SENSOR_BAROMETER                    -                                          - 
+7942            MSP2_SENSOR_AIRSPEED                     -                                          - 
+7943            MSP2_SENSOR_HEADTRACKER                  -                                          - 
+8192            MSP2_INAV_STATUS                         -                                          - 
+8193            MSP2_INAV_OPTICAL_FLOW                   -                                          - 
+8194            MSP2_INAV_ANALOG                         -                                          - 
+8195            MSP2_INAV_MISC                           -                                          - 
+8196            MSP2_INAV_SET_MISC                       -                                          - 
+8197            MSP2_INAV_BATTERY_CONFIG                 -                                          - 
+8198            MSP2_INAV_SET_BATTERY_CONFIG             -                                          - 
+8199            MSP2_INAV_RATE_PROFILE                   -                                          - 
+8200            MSP2_INAV_SET_RATE_PROFILE               -                                          - 
+8201            MSP2_INAV_AIR_SPEED                      -                                          - 
+8202            MSP2_INAV_OUTPUT_MAPPING                 -                                          - 
+8203            MSP2_INAV_MC_BRAKING                     -                                          - 
+8204            MSP2_INAV_SET_MC_BRAKING                 -                                          - 
+8205            MSP2_INAV_OUTPUT_MAPPING_EXT             -                                          - 
+8206            MSP2_INAV_TIMER_OUTPUT_MODE              -                                          - 
+8207            MSP2_INAV_SET_TIMER_OUTPUT_MODE          -                                          - 
+8208            MSP2_INAV_MIXER                          -                                          - 
+8209            MSP2_INAV_SET_MIXER                      -                                          - 
+8210            MSP2_INAV_OSD_LAYOUTS                    -                                          - 
+8211            MSP2_INAV_OSD_SET_LAYOUT_ITEM            -                                          - 
+8212            MSP2_INAV_OSD_ALARMS                     -                                          - 
+8213            MSP2_INAV_OSD_SET_ALARMS                 -                                          - 
+8214            MSP2_INAV_OSD_PREFERENCES                -                                          - 
+8215            MSP2_INAV_OSD_SET_PREFERENCES            -                                          - 
+8216            MSP2_INAV_SELECT_BATTERY_PROFILE         -                                          - 
+8217            MSP2_INAV_DEBUG                          -                                          - 
+8218            MSP2_BLACKBOX_CONFIG                     -                                          - 
+8219            MSP2_SET_BLACKBOX_CONFIG                 -                                          - 
+8220            MSP2_INAV_TEMP_SENSOR_CONFIG             -                                          - 
+8221            MSP2_INAV_SET_TEMP_SENSOR_CONFIG         -                                          - 
+8222            MSP2_INAV_TEMPERATURES                   -                                          - 
+8223            MSP_SIMULATOR                            -                                          - 
+8224            MSP2_INAV_SERVO_MIXER                    -                                          - 
+8225            MSP2_INAV_SET_SERVO_MIXER                -                                          - 
+8226            MSP2_INAV_LOGIC_CONDITIONS               -                                          - 
+8227            MSP2_INAV_SET_LOGIC_CONDITIONS           -                                          - 
+8228            MSP2_INAV_GLOBAL_FUNCTIONS               -                                          - 
+8229            MSP2_INAV_SET_GLOBAL_FUNCTIONS           -                                          - 
+8230            MSP2_INAV_LOGIC_CONDITIONS_STATUS        -                                          - 
+8231            MSP2_INAV_GVAR_STATUS                    -                                          - 
+8232            MSP2_INAV_PROGRAMMING_PID                -                                          - 
+8233            MSP2_INAV_SET_PROGRAMMING_PID            -                                          - 
+8234            MSP2_INAV_PROGRAMMING_PID_STATUS         -                                          - 
+8240            MSP2_PID                                 -                                          - 
+8241            MSP2_SET_PID                             -                                          - 
+8242            MSP2_INAV_OPFLOW_CALIBRATION             -                                          - 
+8243            MSP2_INAV_FWUPDT_PREPARE                 -                                          - 
+8244            MSP2_INAV_FWUPDT_STORE                   -                                          - 
+8245            MSP2_INAV_FWUPDT_EXEC                    -                                          - 
+8246            MSP2_INAV_FWUPDT_ROLLBACK_PREPARE        -                                          - 
+8247            MSP2_INAV_FWUPDT_ROLLBACK_EXEC           -                                          - 
+8248            MSP2_INAV_SAFEHOME                       -                                          - 
+8249            MSP2_INAV_SET_SAFEHOME                   -                                          - 
+8250            MSP2_INAV_MISC2                          -                                          - 
+8251            MSP2_INAV_LOGIC_CONDITIONS_SINGLE        -                                          - 
+8256            MSP2_INAV_ESC_RPM                        -                                          - 
+8257            MSP2_INAV_ESC_TELEM                      -                                          - 
+8264            MSP2_INAV_LED_STRIP_CONFIG_EX            -                                          - 
+8265            MSP2_INAV_SET_LED_STRIP_CONFIG_EX        -                                          - 
+8266            MSP2_INAV_FW_APPROACH                    -                                          - 
+8267            MSP2_INAV_SET_FW_APPROACH                -                                          - 
+8272            MSP2_INAV_GPS_UBLOX_COMMAND              -                                          - 
+8288            MSP2_INAV_RATE_DYNAMICS                  -                                          - 
+8289            MSP2_INAV_SET_RATE_DYNAMICS              -                                          - 
+8304            MSP2_INAV_EZ_TUNE                        -                                          - 
+8305            MSP2_INAV_EZ_TUNE_SET                    -                                          - 
+8320            MSP2_INAV_SELECT_MIXER_PROFILE           -                                          - 
+8336            MSP2_ADSB_VEHICLE_LIST                   -                                          - 
+8448            MSP2_INAV_CUSTOM_OSD_ELEMENTS            -                                          - 
+8449            MSP2_INAV_CUSTOM_OSD_ELEMENT             -                                          - 
+8450            MSP2_INAV_SET_CUSTOM_OSD_ELEMENTS        -                                          - 
+8461            MSP2_INAV_OUTPUT_MAPPING_EXT2            -                                          - 
+8704            MSP2_INAV_SERVO_CONFIG                   -                                          - 
+8705            MSP2_INAV_SET_SERVO_CONFIG               -                                          - 
+8720            MSP2_INAV_GEOZONE                        -                                          - 
+8721            MSP2_INAV_SET_GEOZONE                    -                                          - 
+8722            MSP2_INAV_GEOZONE_VERTEX                 -                                          - 
+8723            MSP2_INAV_SET_GEOZONE_VERTEX             -                                          - 
+12288           MSP2_BETAFLIGHT_BIND                     - MSP2_BETAFLIGHT_BIND                     - Compatible
+12289                                                    - MSP2_MOTOR_OUTPUT_REORDERING             - 
+12290                                                    - MSP2_SET_MOTOR_OUTPUT_REORDERING         - 
+12291                                                    - MSP2_SEND_DSHOT_COMMAND                  - 
+12292                                                    - MSP2_GET_VTX_DEVICE_STATUS               - 
+12293                                                    - MSP2_GET_OSD_WARNINGS                    - 
+12294                                                    - MSP2_GET_TEXT                            - 
+12295                                                    - MSP2_SET_TEXT                            - 
+12296                                                    - MSP2_GET_LED_STRIP_CONFIG_VALUES         - 
+12297                                                    - MSP2_SET_LED_STRIP_CONFIG_VALUES         - 
+12298                                                    - MSP2_SENSOR_CONFIG_ACTIVE                - 
+12299                                                    - MSP2_SENSOR_OPTICALFLOW                  - 
+12300                                                    - MSP2_MCU_INFO                            - 
+12301                                                    - MSP2_GYRO_SENSOR_ACTIVE                  - 

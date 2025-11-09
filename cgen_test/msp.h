@@ -67,9 +67,9 @@ typedef struct MSP_PACKED MSP_BOARD_INFO_reply_t {
 // Provides build date, time, and Git revision of the firmware.
 
 typedef struct MSP_PACKED MSP_BUILD_INFO_reply_t {
-    char buildDate[11];  // Build date string (e.g., "Dec 31 2023"). `BUILD_DATE_LENGTH`.
-    char buildTime[8];  // Build time string (e.g., "23:59:59"). `BUILD_TIME_LENGTH`.
-    char gitRevision[8];  // Short Git revision string. `GIT_SHORT_REVISION_LENGTH`.
+    char buildDate[BUILD_DATE_LENGTH];  // Build date string (e.g., "Dec 31 2023"). `BUILD_DATE_LENGTH`. | length via BUILD_DATE_LENGTH
+    char buildTime[BUILD_TIME_LENGTH];  // Build time string (e.g., "23:59:59"). `BUILD_TIME_LENGTH`. | length via BUILD_TIME_LENGTH
+    char gitRevision[GIT_SHORT_REVISION_LENGTH];  // Short Git revision string. `GIT_SHORT_REVISION_LENGTH`. | length via GIT_SHORT_REVISION_LENGTH
 } MSP_BUILD_INFO_reply_t;
 
 // MSP_INAV_PID (MSPv1)
@@ -577,7 +577,7 @@ typedef struct MSP_PACKED MSP_SONAR_ALTITUDE_reply_t {
 // Notes: `MAX_MAPPABLE_RX_INPUTS` is currently 4 (Roll, Pitch, Yaw, Throttle).
 
 typedef struct MSP_PACKED MSP_RX_MAP_reply_t {
-    uint8_t rcMap[MAX_MAPPABLE_RX_INPUTS];  // Array defining the mapping from input channel index to logical function (Roll, Pitch, Yaw, Throttle, Aux1...)
+    uint8_t rcMap[MAX_MAPPABLE_RX_INPUTS];  // Array defining the mapping from input channel index to logical function (Roll, Pitch, Yaw, Throttle, Aux1...) | length via MAX_MAPPABLE_RX_INPUTS
 } MSP_RX_MAP_reply_t;
 
 // MSP_SET_RX_MAP (MSPv1)
@@ -585,7 +585,7 @@ typedef struct MSP_PACKED MSP_RX_MAP_reply_t {
 // Notes: Expects `MAX_MAPPABLE_RX_INPUTS` bytes (currently 4).
 
 typedef struct MSP_PACKED MSP_SET_RX_MAP_request_t {
-    uint8_t rcMap[MAX_MAPPABLE_RX_INPUTS];  // Array defining the new channel mapping
+    uint8_t rcMap[MAX_MAPPABLE_RX_INPUTS];  // Array defining the new channel mapping | length via MAX_MAPPABLE_RX_INPUTS
 } MSP_SET_RX_MAP_request_t;
 
 // MSP_REBOOT (MSPv1)
@@ -725,7 +725,7 @@ typedef struct MSP_PACKED MSP_OSD_CONFIG_reply_t {
     uint16_t altAlarm;  // Altitude alarm threshold (`osdConfig()->alt_alarm`). Sent even if OSD disabled | units: meters
     uint16_t distAlarm;  // Distance alarm threshold (`osdConfig()->dist_alarm`). Sent even if OSD disabled | units: meters
     uint16_t negAltAlarm;  // Negative altitude alarm threshold (`osdConfig()->neg_alt_alarm`). Sent even if OSD disabled | units: meters
-    uint16_t itemPositions[OSD_ITEM_COUNT];  // Packed X/Y position for each OSD item on screen 0 (`osdLayoutsConfig()->item_pos[0][i]`). Sent even if OSD disabled | units: packed
+    uint16_t itemPositions[OSD_ITEM_COUNT];  // Packed X/Y position for each OSD item on screen 0 (`osdLayoutsConfig()->item_pos[0][i]`). Sent even if OSD disabled | units: packed | length via OSD_ITEM_COUNT
 } MSP_OSD_CONFIG_reply_t;
 
 // MSP_SET_OSD_CONFIG (MSPv1)
@@ -759,22 +759,22 @@ typedef struct MSP_PACKED MSP_SET_OSD_CONFIG_request_t_dataSize_eq_3 {
 
 typedef struct MSP_PACKED MSP_OSD_CHAR_WRITE_request_t_payloadSize_ge_OSD_CHAR_BYTES___2__ge66_bytes_ {
     uint16_t address;  // Character slot index (0-1023).
-    uint8_t charData[OSD_CHAR_BYTES];  // All 64 bytes, including driver metadata.
+    uint8_t charData[OSD_CHAR_BYTES];  // All 64 bytes, including driver metadata. | length via OSD_CHAR_BYTES
 } MSP_OSD_CHAR_WRITE_request_t_payloadSize_ge_OSD_CHAR_BYTES___2__ge66_bytes_;
 
 typedef struct MSP_PACKED MSP_OSD_CHAR_WRITE_request_t_payloadSize_eq_OSD_CHAR_BYTES___1__65_bytes_ {
     uint8_t address;  // Character slot index (0-255).
-    uint8_t charData[OSD_CHAR_BYTES];  // All 64 bytes, including driver metadata.
+    uint8_t charData[OSD_CHAR_BYTES];  // All 64 bytes, including driver metadata. | length via OSD_CHAR_BYTES
 } MSP_OSD_CHAR_WRITE_request_t_payloadSize_eq_OSD_CHAR_BYTES___1__65_bytes_;
 
 typedef struct MSP_PACKED MSP_OSD_CHAR_WRITE_request_t_payloadSize_eq_OSD_CHAR_VISIBLE_BYTES___2__56_bytes_ {
     uint16_t address;  // Character slot index (0-1023).
-    uint8_t charData[OSD_CHAR_VISIBLE_BYTES];  // Visible pixel data only (no metadata).
+    uint8_t charData[OSD_CHAR_VISIBLE_BYTES];  // Visible pixel data only (no metadata). | length via OSD_CHAR_VISIBLE_BYTES
 } MSP_OSD_CHAR_WRITE_request_t_payloadSize_eq_OSD_CHAR_VISIBLE_BYTES___2__56_bytes_;
 
 typedef struct MSP_PACKED MSP_OSD_CHAR_WRITE_request_t_payloadSize_eq_OSD_CHAR_VISIBLE_BYTES___1__55_bytes_ {
     uint8_t address;  // Character slot index (0-255).
-    uint8_t charData[OSD_CHAR_VISIBLE_BYTES];  // Visible pixel data only (no metadata).
+    uint8_t charData[OSD_CHAR_VISIBLE_BYTES];  // Visible pixel data only (no metadata). | length via OSD_CHAR_VISIBLE_BYTES
 } MSP_OSD_CHAR_WRITE_request_t_payloadSize_eq_OSD_CHAR_VISIBLE_BYTES___1__55_bytes_;
 
 // MSP_VTX_CONFIG (MSPv1)
@@ -1035,7 +1035,7 @@ typedef struct MSP_PACKED MSP_RAW_IMU_reply_t {
 // Provides the current output values for all supported servos.
 
 typedef struct MSP_PACKED MSP_SERVO_reply_t {
-    int16_t servoOutputs[MAX_SUPPORTED_SERVOS];  // Array of current servo output values (typically 1000-2000) | units: PWM
+    int16_t servoOutputs[MAX_SUPPORTED_SERVOS];  // Array of current servo output values (typically 1000-2000) | units: PWM | length via MAX_SUPPORTED_SERVOS
 } MSP_SERVO_reply_t;
 
 // MSP_MOTOR (MSPv1)
@@ -2320,7 +2320,7 @@ typedef struct MSP_PACKED MSP2_INAV_SELECT_BATTERY_PROFILE_request_t {
 // Notes: `DEBUG32_VALUE_COUNT` is usually 8.
 
 typedef struct MSP_PACKED MSP2_INAV_DEBUG_reply_t {
-    int32_t debugValues[DEBUG32_VALUE_COUNT];  // Values from the `debug` array (signed, typically 8 entries)
+    int32_t debugValues[DEBUG32_VALUE_COUNT];  // Values from the `debug` array (signed, typically 8 entries) | length via DEBUG32_VALUE_COUNT
 } MSP2_INAV_DEBUG_reply_t;
 
 // MSP2_BLACKBOX_CONFIG (MSPv2)
@@ -2356,7 +2356,7 @@ typedef struct MSP_PACKED MSP2_INAV_TEMP_SENSOR_CONFIG_reply_t {
     int16_t alarmMin;  // Min temperature alarm threshold (`sensorConfig->alarm_min`) | units: 0.1°C
     int16_t alarmMax;  // Max temperature alarm threshold (`sensorConfig->alarm_max`) | units: 0.1°C
     uint8_t osdSymbol;  // Index: OSD symbol to use for this sensor (0 to `TEMP_SENSOR_SYM_COUNT`)
-    char label[TEMPERATURE_LABEL_LEN];  // User-defined label for the sensor
+    char label[TEMPERATURE_LABEL_LEN];  // User-defined label for the sensor | length via TEMPERATURE_LABEL_LEN
 } MSP2_INAV_TEMP_SENSOR_CONFIG_reply_t;
 
 // MSP2_INAV_SET_TEMP_SENSOR_CONFIG (MSPv2)
@@ -2369,7 +2369,7 @@ typedef struct MSP_PACKED MSP2_INAV_SET_TEMP_SENSOR_CONFIG_request_t {
     int16_t alarmMin;  // Sets min alarm threshold (`tempSensorConfigMutable(index)->alarm_min`) | units: 0.1°C
     int16_t alarmMax;  // Sets max alarm threshold (`tempSensorConfigMutable(index)->alarm_max`) | units: 0.1°C
     uint8_t osdSymbol;  // Sets OSD symbol index (validated)
-    char label[TEMPERATURE_LABEL_LEN];  // Sets sensor label (converted to uppercase)
+    char label[TEMPERATURE_LABEL_LEN];  // Sets sensor label (converted to uppercase) | length via TEMPERATURE_LABEL_LEN
 } MSP2_INAV_SET_TEMP_SENSOR_CONFIG_request_t;
 
 // MSP2_INAV_TEMPERATURES (MSPv2)
@@ -2503,7 +2503,7 @@ typedef struct MSP_PACKED MSP2_INAV_SET_LOGIC_CONDITIONS_request_t {
 // Notes: Requires `USE_PROGRAMMING_FRAMEWORK`.
 
 typedef struct MSP_PACKED MSP2_INAV_LOGIC_CONDITIONS_STATUS_reply_t {
-    int32_t conditionValues[MAX_LOGIC_CONDITIONS];  // Array of current values for each logic condition (`logicConditionGetValue(i)`). 1 for true, 0 for false, or numerical value depending on operation
+    int32_t conditionValues[MAX_LOGIC_CONDITIONS];  // Array of current values for each logic condition (`logicConditionGetValue(i)`). 1 for true, 0 for false, or numerical value depending on operation | length via MAX_LOGIC_CONDITIONS
 } MSP2_INAV_LOGIC_CONDITIONS_STATUS_reply_t;
 
 // MSP2_INAV_GVAR_STATUS (MSPv2)
@@ -2511,7 +2511,7 @@ typedef struct MSP_PACKED MSP2_INAV_LOGIC_CONDITIONS_STATUS_reply_t {
 // Notes: Requires `USE_PROGRAMMING_FRAMEWORK`.
 
 typedef struct MSP_PACKED MSP2_INAV_GVAR_STATUS_reply_t {
-    int32_t gvarValues[MAX_GLOBAL_VARIABLES];  // Array of current values for each global variable (`gvGet(i)`)
+    int32_t gvarValues[MAX_GLOBAL_VARIABLES];  // Array of current values for each global variable (`gvGet(i)`) | length via MAX_GLOBAL_VARIABLES
 } MSP2_INAV_GVAR_STATUS_reply_t;
 
 // MSP2_INAV_PROGRAMMING_PID (MSPv2)
@@ -2552,7 +2552,7 @@ typedef struct MSP_PACKED MSP2_INAV_SET_PROGRAMMING_PID_request_t {
 // Notes: Requires `USE_PROGRAMMING_FRAMEWORK`.
 
 typedef struct MSP_PACKED MSP2_INAV_PROGRAMMING_PID_STATUS_reply_t {
-    int32_t pidOutputs[MAX_PROGRAMMING_PID_COUNT];  // Array of current output values for each Programming PID (`programmingPidGetOutput(i)`, signed)
+    int32_t pidOutputs[MAX_PROGRAMMING_PID_COUNT];  // Array of current output values for each Programming PID (`programmingPidGetOutput(i)`, signed) | length via MAX_PROGRAMMING_PID_COUNT
 } MSP2_INAV_PROGRAMMING_PID_STATUS_reply_t;
 
 // MSP2_PID (MSPv2)
@@ -2820,7 +2820,7 @@ typedef struct MSP_PACKED MSP2_ADSB_VEHICLE_LIST_reply_t {
     uint32_t totalVehicleMsgs;  // Total vehicle messages received (`getAdsbStatus()->vehiclesMessagesTotal`). 0 if `USE_ADSB` disabled
     uint32_t totalHeartbeatMsgs;  // Total heartbeat messages received (`getAdsbStatus()->heartbeatMessagesTotal`). 0 if `USE_ADSB` disabled
     struct MSP_PACKED {
-    char callsign[ADSB_CALL_SIGN_MAX_LENGTH];  // Fixed-length callsign from `adsbVehicle->vehicleValues.callsign` (padded with NULs if shorter).
+    char callsign[ADSB_CALL_SIGN_MAX_LENGTH];  // Fixed-length callsign from `adsbVehicle->vehicleValues.callsign` (padded with NULs if shorter). | length via ADSB_CALL_SIGN_MAX_LENGTH
     uint32_t icao;  // ICAO address (`adsbVehicle->vehicleValues.icao`).
     int32_t lat;  // Latitude in degrees * 1e7 (`adsbVehicle->vehicleValues.lat`). | units: 1e-7 deg
     int32_t lon;  // Longitude in degrees * 1e7 (`adsbVehicle->vehicleValues.lon`). | units: 1e-7 deg
@@ -2857,7 +2857,7 @@ typedef struct MSP_PACKED MSP2_INAV_CUSTOM_OSD_ELEMENT_reply_t {
     } items[CUSTOM_ELEMENTS_PARTS];  // repeating: CUSTOM_ELEMENTS_PARTS
     uint8_t visibilityType;  // Visibility condition source | Enum: osdCustomElementTypeVisibility_e
     uint16_t visibilityValue;  // Value/ID of the visibility condition source
-    char elementText[OSD_CUSTOM_ELEMENT_TEXT_SIZE - 1];  // Static text bytes
+    char elementText[OSD_CUSTOM_ELEMENT_TEXT_SIZE - 1];  // Static text bytes | length via OSD_CUSTOM_ELEMENT_TEXT_SIZE - 1
 } MSP2_INAV_CUSTOM_OSD_ELEMENT_reply_t;
 
 // MSP2_INAV_SET_CUSTOM_OSD_ELEMENTS (MSPv2)
@@ -2872,7 +2872,7 @@ typedef struct MSP_PACKED MSP2_INAV_SET_CUSTOM_OSD_ELEMENTS_request_t {
     } items[CUSTOM_ELEMENTS_PARTS];  // repeating: CUSTOM_ELEMENTS_PARTS
     uint8_t visibilityType;  // Visibility condition source | Enum: osdCustomElementTypeVisibility_e
     uint16_t visibilityValue;  // Value/ID of the visibility condition source
-    char elementText[OSD_CUSTOM_ELEMENT_TEXT_SIZE - 1];  // Raw bytes
+    char elementText[OSD_CUSTOM_ELEMENT_TEXT_SIZE - 1];  // Raw bytes | length via OSD_CUSTOM_ELEMENT_TEXT_SIZE - 1
 } MSP2_INAV_SET_CUSTOM_OSD_ELEMENTS_request_t;
 
 // MSP2_INAV_OUTPUT_MAPPING_EXT2 (MSPv2)

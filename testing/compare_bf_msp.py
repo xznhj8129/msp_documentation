@@ -1,4 +1,16 @@
 import enum
+import json
+from typing import Any, Dict, List, Optional, Tuple, Type
+
+def build_msp_codes_enum(defs: Dict[str, Any]) -> Type[enum.IntEnum]:
+    members: Dict[str, int] = {}
+    for name, body in defs.items():
+        try:
+            code = int(body.get("code", -1))
+        except (TypeError, ValueError):
+            continue
+        members[name] = code
+    return enum.IntEnum("MSPCodes", members)
 
 class BF_MSPCodes(enum.IntEnum):
     MSP_API_VERSION = 1
@@ -190,11 +202,10 @@ class BF_MSPCodes(enum.IntEnum):
     MSP2_GYRO_SENSOR_ACTIVE = 12301
 
 
-from msp_enum import *
-import json
 
-with open("msp_messages.json", 'r') as file:
+with open("../msp_messages.json", 'r') as file:
     inavdata = json.load(file)
+MSPCodes = build_msp_codes_enum(inavdata)
 
 print(f"{'#':<16}{'INAV':<40} - {'BETAFLIGHT':<40} - Compatible")
 for i in range(1,32000):
@@ -210,7 +221,7 @@ for i in range(1,32000):
         bf = BF_MSPCodes(i).name
     except:
         bf = ""
-    agree = "Compatible" if (inav == bf) else ""
+    agree = "Match" if (inav == bf) else ""
 
     if inav or bf: 
         print(f"{i:<16}{inav:<40} - {bf:<40} - {agree}")

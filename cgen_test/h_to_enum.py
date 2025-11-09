@@ -8,12 +8,17 @@ import keyword
 import sys
 
 # --- Patterns ---
-# Enum block: Find complete `typedef enum { ... } name;` potentially spanning lines
+# Enum block: match both `typedef enum { ... } name;` and `enum tag { ... };`
 enum_block_re = re.compile(
-    r'typedef\s+enum\s*\{'      # Start
-    r'(.*?)'                    # Capture content (non-greedy)
-    r'\}\s*([a-zA-Z_][a-zA-Z0-9_]+)\s*;', # Closing brace, capture name, semicolon
-    re.IGNORECASE | re.DOTALL   # Ignore case, '.' matches newline
+    r'(?P<typedef>typedef\s+)?enum'              # optional typedef
+    r'(?:\s+(?P<tag>[a-zA-Z_][a-zA-Z0-9_]*))?'   # optional tag before body
+    r'\s*\{'                                     # opening brace
+    r'(?P<body>.*?)'                             # enum body
+    r'\}\s*'                                     # closing brace
+    r'(?P<alias>[a-zA-Z_][a-zA-Z0-9_]*)?'        # optional alias (typedef target or variable)
+    r'(?:\s*=\s*[^;]*)?'                         # optional initializer for trailing declarators
+    r'\s*;'                                      # terminating semicolon
+    , re.IGNORECASE | re.DOTALL
 )
 
 # Enum member: Parse 'NAME [= VALUE]' within a block
@@ -177,9 +182,14 @@ def extract_data_from_header(file_path):
 
     # Extract Enums using block regex on the potentially multi-line content
     for enum_match in enum_block_re.finditer(content):
-        enum_content_raw = enum_match.group(1).strip()
-        enum_typedef_name = enum_match.group(2).strip()
-        class_name = sanitize_name(enum_typedef_name)
+        enum_typedef_prefix = enum_match.group('typedef')
+        enum_tag = enum_match.group('tag')
+        enum_content_raw = enum_match.group('body').strip()
+        enum_alias = enum_match.group('alias')
+        enum_name = enum_alias if enum_typedef_prefix else enum_tag or enum_alias
+        if not enum_name:
+            continue
+        class_name = sanitize_name(enum_name)
 
         if not class_name or not enum_content_raw: continue
 
@@ -394,7 +404,7 @@ if __name__ == '__main__':
     files_processed = 0
     files_with_data = 0
 
-    dir_path = ["lib/all_defines.h", "lib/all_enums.h"]
+    dir_path = ["all_defines.h", "all_enums.h"]
 
     for f_path in dir_path:
         basename = os.path.basename(f_path)
@@ -421,7 +431,7 @@ if __name__ == '__main__':
 
     # --- Determine Output Path ---
     try:
-        with open("lib/inav_enums.py", "w", encoding='utf-8') as file:
+        with open("inav_enums.py", "w", encoding='utf-8') as file:
             file.write(python_code)
         print("Done.")
     except Exception as e:

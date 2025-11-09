@@ -1,7 +1,8 @@
 # msp_documentation
 mapping/documentation/reverse engineering of INAV multiwii serial protocol\
+
 ## JSON Spec Format: 
-see [format.md](format.md)\
+see [format.md](format.md)
 
 ## Docgen:
 The `gen_docs.sh` helper regenerates the MSP documentation in a fixed sequence:

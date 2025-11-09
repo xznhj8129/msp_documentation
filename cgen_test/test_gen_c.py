@@ -60,18 +60,18 @@ def field_decl(entry: dict, suffix_comment: str = "") -> str:
     units = (entry.get("units") or "").strip()
     enum_t = entry.get("enum")
 
-    array_flag   = bool(entry.get("array"))
-    array_ctype  = entry.get("array_ctype")
-    array_size   = entry.get("array_size", 0)
-    ctype_raw    = entry.get("ctype", "")
+    array_flag        = bool(entry.get("array"))
+    array_size        = entry.get("array_size", 0)
+    array_size_define = (entry.get("array_size_define") or "").strip()
+    ctype_raw         = (entry.get("ctype") or "").strip()
 
     # Decide base + declarator
     if array_flag:
-        base = CTYPE_MAP.get(array_ctype, array_ctype)
-        if isinstance(array_size, int) and array_size > 0:
+        base = CTYPE_MAP.get(ctype_raw, ctype_raw)
+        if array_size_define!="":
+            declarator = f"{name}[{array_size_define}]"
+        elif isinstance(array_size, int) and array_size > 0:
             declarator = f"{name}[{array_size}]"
-        elif isinstance(array_size, str) and array_size.strip():
-            declarator = f"{name}[{array_size.strip()}]"
         else:
             # variable length (unknown at compile-time)
             declarator = f"{name}[UNDEFINED_LEN_ARRAY_PLACEHOLDER]"
@@ -89,6 +89,8 @@ def field_decl(entry: dict, suffix_comment: str = "") -> str:
     if desc: cmts.append(desc)
     if units: cmts.append(f"units: {units}")
     if enum_t: cmts.append(f"Enum: {enum_t}")
+    if array_flag and array_size_define:
+        cmts.append(f"length via {array_size_define}")
     if suffix_comment: cmts.append(suffix_comment)
     cmt = "  // " + " | ".join(cmts) if cmts else ""
     return f"    {basetype} {declarator};{cmt}"

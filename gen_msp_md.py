@@ -50,25 +50,47 @@ def parse_ctype(ctype: str) -> Tuple[str, Optional[str]]:
         return ctype.strip(), None
     return m.group("base").strip(), m.group("size").strip()
 
+def describe_array_bytes(array_size_meta: Any, base_bytes: Optional[int], base_name: str) -> str:
+    """
+    Returns a printable byte-count (or symbolic string) for an array entry.
+    """
+    if isinstance(array_size_meta, int):
+        if array_size_meta <= 0:
+            return "array"
+        if base_bytes is None:
+            return str(array_size_meta)
+        return str(array_size_meta * base_bytes)
+
+    if isinstance(array_size_meta, str):
+        expr = array_size_meta.strip()
+        if not expr:
+            return "array"
+        if base_bytes is None or base_name == "char":
+            return expr
+        return f"{expr} * {base_bytes}"
+
+    return "array"
+
 def sizeof_entry(field: Dict[str, Any]) -> str:
     ctype = field.get("ctype", "").strip()
     base, bracket = parse_ctype(ctype)
 
     is_array = bool(field.get("array", False))
     array_size_meta = field.get("array_size", None)
-    array_ctype = field.get("array_ctype", base)
+    array_size_define = (field.get("array_size_define") or "").strip()
 
     if is_array or bracket is not None:
-        base_for_size = array_ctype if is_array else base
+        base_for_size = base if (base and is_array) else (base or ctype)
         base_bytes = BASE_SIZES.get(base_for_size, None)
 
-        if isinstance(array_size_meta, int):
-            return str(array_size_meta * base_bytes) if base_bytes is not None else str(array_size_meta)
-
-        if isinstance(array_size_meta, str) and array_size_meta:
-            if base_bytes is None or base_for_size == "char":
-                return array_size_meta
-            return f"{array_size_meta} * {base_bytes}"
+        if is_array:
+            size_str = describe_array_bytes(array_size_meta, base_bytes, base_for_size)
+            if array_size_define:
+                if size_str in {"array", "-"}:
+                    size_str = array_size_define
+                else:
+                    size_str = f"{size_str} ({array_size_define})"
+            return size_str
 
         if bracket is not None:
             if bracket == "":
