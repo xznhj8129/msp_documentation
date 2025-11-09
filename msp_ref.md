@@ -10,7 +10,7 @@ For list of enums, see [Enum documentation page](https://github.com/iNavFlight/i
 For current generation code, see [documentation project](https://github.com/xznhj8129/msp_documentation) (temporary until official implementation)  
 
 
-**JSON file rev: 4
+**JSON file rev: 2
  - 17026ea2745c17ce7ca73eafc26eb91e**
 
 **Warning: Verification needed, exercise caution until completely verified for accuracy and cleared, especially for integer signs. Source-based generation/validation is forthcoming. Refer to source for absolute certainty** 
@@ -436,7 +436,7 @@ For current generation code, see [documentation project](https://github.com/xznh
 **Reply Payload:**
 |Field|C Type|Size (Bytes)|Description|
 |---|---|---|---|
-| `fcVariantIdentifier` | `char` | 4 | 4-character identifier string (e.g., "INAV"). Defined by `flightControllerIdentifier`. |
+| `fcVariantIdentifier` | `char[4]` | 4 | 4-character identifier string (e.g., "INAV"). Defined by `flightControllerIdentifier`. |
 
 **Notes:** See `FLIGHT_CONTROLLER_IDENTIFIER_LENGTH`.
 
@@ -460,12 +460,12 @@ For current generation code, see [documentation project](https://github.com/xznh
 **Reply Payload:**
 |Field|C Type|Size (Bytes)|Units|Description|
 |---|---|---|---|---|
-| `boardIdentifier` | `char` | 4 | - | 4-character UPPER CASE board identifier (`TARGET_BOARD_IDENTIFIER`) |
+| `boardIdentifier` | `char[4]` | 4 | - | 4-character UPPER CASE board identifier (`TARGET_BOARD_IDENTIFIER`) |
 | `hardwareRevision` | `uint16_t` | 2 | - | Hardware revision number. 0 if not detected (`USE_HARDWARE_REVISION_DETECTION`) |
 | `osdSupport` | `uint8_t` | 1 | - | OSD chip type: 0=None, 2=Onboard (`USE_OSD`). INAV does not support slave OSD (1) |
 | `commCapabilities` | `uint8_t` | 1 | Bitmask | Bitmask: Communication capabilities: Bit 0=VCP support (`USE_VCP`), Bit 1=SoftSerial support (`USE_SOFTSERIAL1`/`2`) |
 | `targetNameLength` | `uint8_t` | 1 | - | Length of the target name string that follows |
-| `targetName` | `char` | array | - | Target name string (e.g., "MATEKF405"). Length given by previous field |
+| `targetName` | `char[]` | array | - | Target name string (e.g., "MATEKF405"). Length given by previous field |
 
 **Notes:** `BOARD_IDENTIFIER_LENGTH` is 4.
 
@@ -477,9 +477,9 @@ For current generation code, see [documentation project](https://github.com/xznh
 **Reply Payload:**
 |Field|C Type|Size (Bytes)|Description|
 |---|---|---|---|
-| `buildDate` | `char` | 11 (BUILD_DATE_LENGTH) | Build date string (e.g., "Dec 31 2023"). `BUILD_DATE_LENGTH`. |
-| `buildTime` | `char` | 8 (BUILD_TIME_LENGTH) | Build time string (e.g., "23:59:59"). `BUILD_TIME_LENGTH`. |
-| `gitRevision` | `char` | 8 (GIT_SHORT_REVISION_LENGTH) | Short Git revision string. `GIT_SHORT_REVISION_LENGTH`. |
+| `buildDate` | `char[BUILD_DATE_LENGTH]` | 11 (BUILD_DATE_LENGTH) | Build date string (e.g., "Dec 31 2023"). `BUILD_DATE_LENGTH`. |
+| `buildTime` | `char[BUILD_TIME_LENGTH]` | 8 (BUILD_TIME_LENGTH) | Build time string (e.g., "23:59:59"). `BUILD_TIME_LENGTH`. |
+| `gitRevision` | `char[GIT_SHORT_REVISION_LENGTH]` | 8 (GIT_SHORT_REVISION_LENGTH) | Short Git revision string. `GIT_SHORT_REVISION_LENGTH`. |
 
 ## <a id="msp_inav_pid"></a>`MSP_INAV_PID (6 / 0x6)`
 **Description:** Retrieves legacy INAV-specific PID controller related settings. Many fields are now obsolete or placeholders.  
@@ -535,7 +535,7 @@ For current generation code, see [documentation project](https://github.com/xznh
 **Reply Payload:**
 |Field|C Type|Size (Bytes)|Description|
 |---|---|---|---|
-| `craftName` | `char` | array | The craft name string (`systemConfig()->craftName`). Null termination is *not* explicitly sent, the length is determined by the payload size |
+| `craftName` | `char[]` | array | The craft name string (`systemConfig()->craftName`). Null termination is *not* explicitly sent, the length is determined by the payload size |
 
 ## <a id="msp_set_name"></a>`MSP_SET_NAME (11 / 0xb)`
 **Description:** Sets the user-defined craft name.  
@@ -543,7 +543,7 @@ For current generation code, see [documentation project](https://github.com/xznh
 **Request Payload:**
 |Field|C Type|Size (Bytes)|Description|
 |---|---|---|---|
-| `craftName` | `char` | array | The new craft name string. Automatically null-terminated by the FC |
+| `craftName` | `char[]` | array | The new craft name string. Automatically null-terminated by the FC |
 
 **Reply Payload:** **None**  
 
@@ -1150,7 +1150,7 @@ For current generation code, see [documentation project](https://github.com/xznh
 **Reply Payload:**
 |Field|C Type|Size (Bytes)|Description|
 |---|---|---|---|
-| `rcMap` | `uint8_t` | 4 (MAX_MAPPABLE_RX_INPUTS) | Array defining the mapping from input channel index to logical function (Roll, Pitch, Yaw, Throttle, Aux1...) |
+| `rcMap` | `uint8_t[MAX_MAPPABLE_RX_INPUTS]` | 4 (MAX_MAPPABLE_RX_INPUTS) | Array defining the mapping from input channel index to logical function (Roll, Pitch, Yaw, Throttle, Aux1...) |
 
 **Notes:** `MAX_MAPPABLE_RX_INPUTS` is currently 4 (Roll, Pitch, Yaw, Throttle).
 
@@ -1160,7 +1160,7 @@ For current generation code, see [documentation project](https://github.com/xznh
 **Request Payload:**
 |Field|C Type|Size (Bytes)|Description|
 |---|---|---|---|
-| `rcMap` | `uint8_t` | 4 (MAX_MAPPABLE_RX_INPUTS) | Array defining the new channel mapping |
+| `rcMap` | `uint8_t[MAX_MAPPABLE_RX_INPUTS]` | 4 (MAX_MAPPABLE_RX_INPUTS) | Array defining the new channel mapping |
 
 **Reply Payload:** **None**  
 
@@ -1203,7 +1203,7 @@ For current generation code, see [documentation project](https://github.com/xznh
 |Field|C Type|Size (Bytes)|Description|
 |---|---|---|---|
 | `address` | `uint32_t` | 4 | The starting address from which data was actually read |
-| `data` | `uint8_t` | array | The data read from flash. Length is MIN(requested size, remaining buffer space, remaining flashfs data) |
+| `data` | `uint8_t[]` | array | The data read from flash. Length is MIN(requested size, remaining buffer space, remaining flashfs data) |
 
 **Notes:** Requires `USE_FLASHFS`. Read length may be truncated by buffer size or end of flashfs volume.
 
@@ -1361,7 +1361,7 @@ For current generation code, see [documentation project](https://github.com/xznh
 | `altAlarm` | `uint16_t` | 2 | meters | Altitude alarm threshold (`osdConfig()->alt_alarm`). Sent even if OSD disabled |
 | `distAlarm` | `uint16_t` | 2 | meters | Distance alarm threshold (`osdConfig()->dist_alarm`). Sent even if OSD disabled |
 | `negAltAlarm` | `uint16_t` | 2 | meters | Negative altitude alarm threshold (`osdConfig()->neg_alt_alarm`). Sent even if OSD disabled |
-| `itemPositions` | `uint16_t` | OSD_ITEM_COUNT | packed | Packed X/Y position for each OSD item on screen 0 (`osdLayoutsConfig()->item_pos[0][i]`). Sent even if OSD disabled |
+| `itemPositions` | `uint16_t[OSD_ITEM_COUNT]` | OSD_ITEM_COUNT | packed | Packed X/Y position for each OSD item on screen 0 (`osdLayoutsConfig()->item_pos[0][i]`). Sent even if OSD disabled |
 
 **Notes:** 1 byte if `USE_OSD` disabled; full payload (1 + fields + 2*OSD_ITEM_COUNT bytes) otherwise.
 
@@ -1420,7 +1420,7 @@ For current generation code, see [documentation project](https://github.com/xznh
 |Field|C Type|Size (Bytes)|Description|
 |---|---|---|---|
 | `address` | `uint16_t` | 2 | Character slot index (0-1023). |
-| `charData` | `uint8_t` | 64 (OSD_CHAR_BYTES) | All 64 bytes, including driver metadata. |
+| `charData` | `uint8_t[OSD_CHAR_BYTES]` | 64 (OSD_CHAR_BYTES) | All 64 bytes, including driver metadata. |
 
 **Reply Payload:** **None**  
 
@@ -1432,7 +1432,7 @@ For current generation code, see [documentation project](https://github.com/xznh
 |Field|C Type|Size (Bytes)|Description|
 |---|---|---|---|
 | `address` | `uint8_t` | 1 | Character slot index (0-255). |
-| `charData` | `uint8_t` | 64 (OSD_CHAR_BYTES) | All 64 bytes, including driver metadata. |
+| `charData` | `uint8_t[OSD_CHAR_BYTES]` | 64 (OSD_CHAR_BYTES) | All 64 bytes, including driver metadata. |
 
 **Reply Payload:** **None**  
 
@@ -1444,7 +1444,7 @@ For current generation code, see [documentation project](https://github.com/xznh
 |Field|C Type|Size (Bytes)|Description|
 |---|---|---|---|
 | `address` | `uint16_t` | 2 | Character slot index (0-1023). |
-| `charData` | `uint8_t` | 54 (OSD_CHAR_VISIBLE_BYTES) | Visible pixel data only (no metadata). |
+| `charData` | `uint8_t[OSD_CHAR_VISIBLE_BYTES]` | 54 (OSD_CHAR_VISIBLE_BYTES) | Visible pixel data only (no metadata). |
 
 **Reply Payload:** **None**  
 
@@ -1456,7 +1456,7 @@ For current generation code, see [documentation project](https://github.com/xznh
 |Field|C Type|Size (Bytes)|Description|
 |---|---|---|---|
 | `address` | `uint8_t` | 1 | Character slot index (0-255). |
-| `charData` | `uint8_t` | 54 (OSD_CHAR_VISIBLE_BYTES) | Visible pixel data only (no metadata). |
+| `charData` | `uint8_t[OSD_CHAR_VISIBLE_BYTES]` | 54 (OSD_CHAR_VISIBLE_BYTES) | Visible pixel data only (no metadata). |
 
 **Reply Payload:** **None**  
 
@@ -1830,7 +1830,7 @@ For current generation code, see [documentation project](https://github.com/xznh
 **Reply Payload:**
 |Field|C Type|Size (Bytes)|Units|Description|
 |---|---|---|---|---|
-| `servoOutputs` | `int16_t` | 36 (MAX_SUPPORTED_SERVOS) | PWM | Array of current servo output values (typically 1000-2000) |
+| `servoOutputs` | `int16_t[MAX_SUPPORTED_SERVOS]` | 36 (MAX_SUPPORTED_SERVOS) | PWM | Array of current servo output values (typically 1000-2000) |
 
 ## <a id="msp_motor"></a>`MSP_MOTOR (104 / 0x68)`
 **Description:** Provides the current output values for the first 8 motors.  
@@ -1840,7 +1840,7 @@ For current generation code, see [documentation project](https://github.com/xznh
 **Reply Payload:**
 |Field|C Type|Size (Bytes)|Units|Description|
 |---|---|---|---|---|
-| `motorOutputs` | `int16_t` | 16 | PWM | Array of current motor output values (typically 1000-2000). Values beyond `MAX_SUPPORTED_MOTORS` are 0 |
+| `motorOutputs` | `int16_t[8]` | 16 | PWM | Array of current motor output values (typically 1000-2000). Values beyond `MAX_SUPPORTED_MOTORS` are 0 |
 
 ## <a id="msp_rc"></a>`MSP_RC (105 / 0x69)`
 **Description:** Provides the current values of the received RC channels.  
@@ -1850,7 +1850,7 @@ For current generation code, see [documentation project](https://github.com/xznh
 **Reply Payload:**
 |Field|C Type|Size (Bytes)|Units|Description|
 |---|---|---|---|---|
-| `rcChannels` | `int16_t` | array | PWM | Array of current RC channel values (typically 1000-2000). Length depends on detected channels |
+| `rcChannels` | `int16_t[]` | array | PWM | Array of current RC channel values (typically 1000-2000). Length depends on detected channels |
 
 **Notes:** Array length equals `rxRuntimeConfig.channelCount`.
 
@@ -1996,7 +1996,7 @@ For current generation code, see [documentation project](https://github.com/xznh
 **Reply Payload:**
 |Field|C Type|Size (Bytes)|Description|
 |---|---|---|---|
-| `boxNamesString` | `char` | array | String containing mode names separated by ';'. Null termination not guaranteed by MSP, relies on payload size. (`serializeBoxNamesReply()`) |
+| `boxNamesString` | `char[]` | array | String containing mode names separated by ';'. Null termination not guaranteed by MSP, relies on payload size. (`serializeBoxNamesReply()`) |
 
 **Notes:** The exact set of names depends on compiled features and configuration. Due to the size of the payload, it is recommended that [`MSP_BOXIDS`](#msp_boxids-119--0x77) is used instead.
 
@@ -2008,7 +2008,7 @@ For current generation code, see [documentation project](https://github.com/xznh
 **Reply Payload:**
 |Field|C Type|Size (Bytes)|Description|
 |---|---|---|---|
-| `pidNamesString` | `char` | array | String "ROLL;PITCH;YAW;ALT;Pos;PosR;NavR;LEVEL;MAG;VEL;". Null termination not guaranteed by MSP |
+| `pidNamesString` | `char[]` | array | String "ROLL;PITCH;YAW;ALT;Pos;PosR;NavR;LEVEL;MAG;VEL;". Null termination not guaranteed by MSP |
 
 ## <a id="msp_wp"></a>`MSP_WP (118 / 0x76)`
 **Description:** Get/Set a single waypoint from the mission plan.  
@@ -2041,7 +2041,7 @@ For current generation code, see [documentation project](https://github.com/xznh
 **Reply Payload:**
 |Field|C Type|Size (Bytes)|Description|
 |---|---|---|---|
-| `boxIds` | `uint8_t` | array | Array of permanent IDs for each configured box (`serializeBoxReply()`). Length depends on number of boxes |
+| `boxIds` | `uint8_t[]` | array | Array of permanent IDs for each configured box (`serializeBoxReply()`). Length depends on number of boxes |
 
 **Notes:** Useful for mapping mode range configurations (`MSP_MODE_RANGES`) back to user-understandable modes via `MSP_BOXNAMES`.
 
@@ -2184,7 +2184,7 @@ For current generation code, see [documentation project](https://github.com/xznh
 | `powerLevelIndex` | `uint8_t` | 1 | 1-based index of the returned power level |
 | `powerValue` | `uint16_t` | 2 | Always 0 (Actual power value in mW is not stored/returned via MSP) |
 | `labelLength` | `uint8_t` | 1 | Length of the power level label string that follows |
-| `label` | `char` | array | Power level label string (e.g., "25", "200"). Length given by previous field |
+| `label` | `char[]` | array | Power level label string (e.g., "25", "200"). Length given by previous field |
 
 **Notes:** Requires `USE_VTX_CONTROL`. Returns error if index is out of bounds. The `powerValue` field is unused.
 
@@ -2324,7 +2324,7 @@ For current generation code, see [documentation project](https://github.com/xznh
 **Request Payload:**
 |Field|C Type|Size (Bytes)|Units|Description|
 |---|---|---|---|---|
-| `rcChannels` | `uint16_t` | array | PWM | Array of RC channel values (typically 1000-2000). Number of channels determined by payload size |
+| `rcChannels` | `uint16_t[]` | array | PWM | Array of RC channel values (typically 1000-2000). Number of channels determined by payload size |
 
 **Reply Payload:** **None**  
 
@@ -2501,7 +2501,7 @@ For current generation code, see [documentation project](https://github.com/xznh
 **Request Payload:**
 |Field|C Type|Size (Bytes)|Units|Description|
 |---|---|---|---|---|
-| `motorValues` | `uint16_t` | 16 | PWM | Array of motor values to set when disarmed. Only affects first `MAX_SUPPORTED_MOTORS` entries |
+| `motorValues` | `uint16_t[8]` | 16 | PWM | Array of motor values to set when disarmed. Only affects first `MAX_SUPPORTED_MOTORS` entries |
 
 **Reply Payload:** **None**  
 
@@ -2701,7 +2701,7 @@ For current generation code, see [documentation project](https://github.com/xznh
 **Reply Payload:**
 |Field|C Type|Size (Bytes)|Description|
 |---|---|---|---|
-| `Message Text` | `char` | array | Debug message text (not NUL-terminated). See [serial printf debugging](https://github.com/iNavFlight/inav/blob/master/docs/development/serial_printf_debugging.md) |
+| `Message Text` | `char[]` | array | Debug message text (not NUL-terminated). See [serial printf debugging](https://github.com/iNavFlight/inav/blob/master/docs/development/serial_printf_debugging.md) |
 
 **Notes:** Published via the LOG UART or shared MSP/LOG port using `mspSerialPushPort()`.
 
@@ -2713,7 +2713,7 @@ For current generation code, see [documentation project](https://github.com/xznh
 **Reply Payload:**
 |Field|C Type|Size (Bytes)|Description|
 |---|---|---|---|
-| `debugValues` | `uint16_t` | 8 | First 4 values from the `debug` array |
+| `debugValues` | `uint16_t[4]` | 8 | First 4 values from the `debug` array |
 
 **Notes:** Useful for developers. Values are truncated to the lower 16 bits of each `debug[]` entry. See `MSP2_INAV_DEBUG` for full 32-bit values.
 
@@ -2776,7 +2776,7 @@ For current generation code, see [documentation project](https://github.com/xznh
 **Reply Payload:**
 |Field|C Type|Size (Bytes)|Description|
 |---|---|---|---|
-| `settingValue` | `uint8_t` | array | Raw byte value of the setting. Size depends on the setting's type (`settingGetValueSize()`) |
+| `settingValue` | `uint8_t[]` | array | Raw byte value of the setting. Size depends on the setting's type (`settingGetValueSize()`) |
 
 **Notes:** Returns error if setting not found. Use `MSP2_COMMON_SETTING_INFO` to discover settings, types, and sizes.
 
@@ -2787,7 +2787,7 @@ For current generation code, see [documentation project](https://github.com/xznh
 |Field|C Type|Size (Bytes)|Description|
 |---|---|---|---|
 | `settingIdentifier` | `Varies` | - | Setting name (null-terminated string) OR Index (0x00 followed by `uint16_t` index) |
-| `settingValue` | `uint8_t` | array | Raw byte value to set for the setting. Size must match the setting's type |
+| `settingValue` | `uint8_t[]` | array | Raw byte value to set for the setting. Size must match the setting's type |
 
 **Reply Payload:** **None**  
 
@@ -2801,7 +2801,7 @@ For current generation code, see [documentation project](https://github.com/xznh
 **Reply Payload:**
 |Field|C Type|Size (Bytes)|Units|Description|
 |---|---|---|---|---|
-| `motorMix` | `uint16_t` | 8 | Scaled (0-4000) | Weights for a single motor `[throttle, roll, pitch, yaw]`, each encoded as `(mix + 2.0) * 1000` (range 0-4000) |
+| `motorMix` | `uint16_t[4]` | 8 | Scaled (0-4000) | Weights for a single motor `[throttle, roll, pitch, yaw]`, each encoded as `(mix + 2.0) * 1000` (range 0-4000) |
 
 **Notes:** Scaling is `(float_weight + 2.0) * 1000`. `primaryMotorMixer()` provides the data. If multiple mixer profiles are enabled (`MAX_MIXER_PROFILE_COUNT > 1`), an additional block of mixes for the next profile follows immediately.
 
@@ -2829,7 +2829,7 @@ For current generation code, see [documentation project](https://github.com/xznh
 **Reply Payload:**
 |Field|C Type|Size (Bytes)|Description|
 |---|---|---|---|
-| `settingName` | `char` | array | Null-terminated setting name |
+| `settingName` | `char[]` | array | Null-terminated setting name |
 | `pgn` | `uint16_t` | 2 | Parameter Group Number (PGN) ID |
 | `type` | `uint8_t` | 1 | Variable type (`VAR_UINT8`, `VAR_FLOAT`, etc.) |
 | `section` | `uint8_t` | 1 | Setting section (`MASTER_VALUE`, `PROFILE_VALUE`, etc.) |
@@ -2839,8 +2839,8 @@ For current generation code, see [documentation project](https://github.com/xznh
 | `settingIndex` | `uint16_t` | 2 | Absolute index of the setting |
 | `profileIndex` | `uint8_t` | 1 | Current profile index (if applicable, else 0) |
 | `profileCount` | `uint8_t` | 1 | Total number of profiles (if applicable, else 0) |
-| `lookupNames` | `char` | array | (If `mode == MODE_LOOKUP`) Series of null-terminated strings for each possible value from min to max |
-| `settingValue` | `uint8_t` | array | Current raw byte value of the setting |
+| `lookupNames` | `char[]` | array | (If `mode == MODE_LOOKUP`) Series of null-terminated strings for each possible value from min to max |
+| `settingValue` | `uint8_t[]` | array | Current raw byte value of the setting |
 
 ## <a id="msp2_common_pg_list"></a>`MSP2_COMMON_PG_LIST (4104 / 0x1008)`
 **Description:** Gets a list of Parameter Group Numbers (PGNs) used by settings, along with the start and end setting indexes for each group. Can request info for a single PGN.  
@@ -2948,8 +2948,8 @@ For current generation code, see [documentation project](https://github.com/xznh
 | `sublinkID` | `uint8_t` | 1 | - | Sublink identifier (usually 0) |
 | `uplinkTxPower` | `uint16_t` | 2 | mW | Uplink transmitter power level |
 | `downlinkTxPower` | `uint16_t` | 2 | mW | Downlink transmitter power level |
-| `band` | `char` | 4 | - | Operating band string (e.g., "2G4", "900"), null-terminated/padded |
-| `mode` | `char` | 6 | - | Operating mode/rate string (e.g., "100HZ", "F1000"), null-terminated/padded |
+| `band` | `char[4]` | 4 | - | Operating band string (e.g., "2G4", "900"), null-terminated/padded |
+| `mode` | `char[6]` | 6 | - | Operating mode/rate string (e.g., "100HZ", "F1000"), null-terminated/padded |
 
 **Reply Payload:** **None**  
 
@@ -3627,7 +3627,7 @@ For current generation code, see [documentation project](https://github.com/xznh
 **Reply Payload:**
 |Field|C Type|Size (Bytes)|Description|
 |---|---|---|---|
-| `debugValues` | `int32_t` | 32 (DEBUG32_VALUE_COUNT) | Values from the `debug` array (signed, typically 8 entries) |
+| `debugValues` | `int32_t[DEBUG32_VALUE_COUNT]` | 32 (DEBUG32_VALUE_COUNT) | Values from the `debug` array (signed, typically 8 entries) |
 
 **Notes:** `DEBUG32_VALUE_COUNT` is usually 8.
 
@@ -3675,7 +3675,7 @@ For current generation code, see [documentation project](https://github.com/xznh
 | `alarmMin` | `int16_t` | 2 | 0.1°C | Min temperature alarm threshold (`sensorConfig->alarm_min`) |
 | `alarmMax` | `int16_t` | 2 | 0.1°C | Max temperature alarm threshold (`sensorConfig->alarm_max`) |
 | `osdSymbol` | `uint8_t` | 1 | - | Index: OSD symbol to use for this sensor (0 to `TEMP_SENSOR_SYM_COUNT`) |
-| `label` | `char` | 4 (TEMPERATURE_LABEL_LEN) | - | User-defined label for the sensor |
+| `label` | `char[TEMPERATURE_LABEL_LEN]` | 4 (TEMPERATURE_LABEL_LEN) | - | User-defined label for the sensor |
 
 **Notes:** Requires `USE_TEMPERATURE_SENSOR`.
 
@@ -3690,7 +3690,7 @@ For current generation code, see [documentation project](https://github.com/xznh
 | `alarmMin` | `int16_t` | 2 | 0.1°C | Sets min alarm threshold (`tempSensorConfigMutable(index)->alarm_min`) |
 | `alarmMax` | `int16_t` | 2 | 0.1°C | Sets max alarm threshold (`tempSensorConfigMutable(index)->alarm_max`) |
 | `osdSymbol` | `uint8_t` | 1 | - | Sets OSD symbol index (validated) |
-| `label` | `char` | 4 (TEMPERATURE_LABEL_LEN) | - | Sets sensor label (converted to uppercase) |
+| `label` | `char[TEMPERATURE_LABEL_LEN]` | 4 (TEMPERATURE_LABEL_LEN) | - | Sets sensor label (converted to uppercase) |
 
 **Reply Payload:** **None**  
 
@@ -3760,7 +3760,7 @@ For current generation code, see [documentation project](https://github.com/xznh
 | `osdCols` | `uint8_t` | 1 | (If OSD supported) Number of OSD columns |
 | `osdStartY` | `uint8_t` | 1 | (If OSD supported) Starting row for RLE data |
 | `osdStartX` | `uint8_t` | 1 | (If OSD supported) Starting column for RLE data |
-| `osdRleData` | `uint8_t` | array | (If OSD supported) Run-length encoded OSD character data. Terminated by `[0, 0]` |
+| `osdRleData` | `uint8_t[]` | array | (If OSD supported) Run-length encoded OSD character data. Terminated by `[0, 0]` |
 
 **Notes:** Requires `USE_SIMULATOR`. Complex message handling state changes for enabling/disabling HITL. Sensor data is injected directly. OSD data is sent using a custom RLE scheme. See `simulatorData` struct and associated code for details.
 
@@ -3861,7 +3861,7 @@ For current generation code, see [documentation project](https://github.com/xznh
 **Reply Payload:**
 |Field|C Type|Size (Bytes)|Description|
 |---|---|---|---|
-| `conditionValues` | `int32_t` | 256 (MAX_LOGIC_CONDITIONS) | Array of current values for each logic condition (`logicConditionGetValue(i)`). 1 for true, 0 for false, or numerical value depending on operation |
+| `conditionValues` | `int32_t[MAX_LOGIC_CONDITIONS]` | 256 (MAX_LOGIC_CONDITIONS) | Array of current values for each logic condition (`logicConditionGetValue(i)`). 1 for true, 0 for false, or numerical value depending on operation |
 
 **Notes:** Requires `USE_PROGRAMMING_FRAMEWORK`.
 
@@ -3873,7 +3873,7 @@ For current generation code, see [documentation project](https://github.com/xznh
 **Reply Payload:**
 |Field|C Type|Size (Bytes)|Description|
 |---|---|---|---|
-| `gvarValues` | `int32_t` | 32 (MAX_GLOBAL_VARIABLES) | Array of current values for each global variable (`gvGet(i)`) |
+| `gvarValues` | `int32_t[MAX_GLOBAL_VARIABLES]` | 32 (MAX_GLOBAL_VARIABLES) | Array of current values for each global variable (`gvGet(i)`) |
 
 **Notes:** Requires `USE_PROGRAMMING_FRAMEWORK`.
 
@@ -3926,7 +3926,7 @@ For current generation code, see [documentation project](https://github.com/xznh
 **Reply Payload:**
 |Field|C Type|Size (Bytes)|Description|
 |---|---|---|---|
-| `pidOutputs` | `int32_t` | 16 (MAX_PROGRAMMING_PID_COUNT) | Array of current output values for each Programming PID (`programmingPidGetOutput(i)`, signed) |
+| `pidOutputs` | `int32_t[MAX_PROGRAMMING_PID_COUNT]` | 16 (MAX_PROGRAMMING_PID_COUNT) | Array of current output values for each Programming PID (`programmingPidGetOutput(i)`, signed) |
 
 **Notes:** Requires `USE_PROGRAMMING_FRAMEWORK`.
 
@@ -3987,7 +3987,7 @@ For current generation code, see [documentation project](https://github.com/xznh
 **Request Payload:**
 |Field|C Type|Size (Bytes)|Description|
 |---|---|---|---|
-| `firmwareChunk` | `uint8_t` | array | Chunk of firmware data |
+| `firmwareChunk` | `uint8_t[]` | array | Chunk of firmware data |
 
 **Reply Payload:** **None**  
 
@@ -4112,7 +4112,7 @@ For current generation code, see [documentation project](https://github.com/xznh
 |Field|C Type|Size (Bytes)|Description|
 |---|---|---|---|
 | `motorCount` | `uint8_t` | 1 | Number of motors reporting telemetry (`getMotorCount()`) |
-| `escData` | `escSensorData_t` | array | Array of `escSensorData_t` structures containing voltage, current, temp, RPM, errors etc. for each ESC |
+| `escData` | `escSensorData_t[]` | array | Array of `escSensorData_t` structures containing voltage, current, temp, RPM, errors etc. for each ESC |
 
 **Notes:** Requires `USE_ESC_SENSOR`. See `escSensorData_t` in `sensors/esc_sensor.h` for the exact structure fields.
 
@@ -4186,7 +4186,7 @@ For current generation code, see [documentation project](https://github.com/xznh
 **Request Payload:**
 |Field|C Type|Size (Bytes)|Description|
 |---|---|---|---|
-| `ubxCommand` | `uint8_t` | array | Raw U-Blox UBX protocol command frame (including header, class, ID, length, payload, checksum) |
+| `ubxCommand` | `uint8_t[]` | array | Raw U-Blox UBX protocol command frame (including header, class, ID, length, payload, checksum) |
 
 **Reply Payload:** **None**  
 
@@ -4292,7 +4292,7 @@ For current generation code, see [documentation project](https://github.com/xznh
 | `callsignLength` | `uint8_t` | - | 1 | - | Maximum length of callsign string (`ADSB_CALL_SIGN_MAX_LENGTH`). 0 if `USE_ADSB` disabled |
 | `totalVehicleMsgs` | `uint32_t` | - | 4 | - | Total vehicle messages received (`getAdsbStatus()->vehiclesMessagesTotal`). 0 if `USE_ADSB` disabled |
 | `totalHeartbeatMsgs` | `uint32_t` | - | 4 | - | Total heartbeat messages received (`getAdsbStatus()->heartbeatMessagesTotal`). 0 if `USE_ADSB` disabled |
-| `callsign` | `char` | maxVehicles | 9 (ADSB_CALL_SIGN_MAX_LENGTH) | - | Fixed-length callsign from `adsbVehicle->vehicleValues.callsign` (padded with NULs if shorter). |
+| `callsign` | `char[ADSB_CALL_SIGN_MAX_LENGTH]` | maxVehicles | 9 (ADSB_CALL_SIGN_MAX_LENGTH) | - | Fixed-length callsign from `adsbVehicle->vehicleValues.callsign` (padded with NULs if shorter). |
 | `icao` | `uint32_t` | maxVehicles | 4 | - | ICAO address (`adsbVehicle->vehicleValues.icao`). |
 | `lat` | `int32_t` | maxVehicles | 4 | 1e-7 deg | Latitude in degrees * 1e7 (`adsbVehicle->vehicleValues.lat`). |
 | `lon` | `int32_t` | maxVehicles | 4 | 1e-7 deg | Longitude in degrees * 1e7 (`adsbVehicle->vehicleValues.lon`). |
@@ -4333,7 +4333,7 @@ For current generation code, see [documentation project](https://github.com/xznh
 | `partValue` | `uint16_t` | CUSTOM_ELEMENTS_PARTS | 2 | - | Value/ID associated with this part |
 | `visibilityType` | `uint8_t` | - | 1 | [osdCustomElementTypeVisibility_e](https://github.com/iNavFlight/inav/wiki/Enums-reference#enum-osdcustomelementtypevisibility_e) | Visibility condition source |
 | `visibilityValue` | `uint16_t` | - | 2 | - | Value/ID of the visibility condition source |
-| `elementText` | `char` | - | OSD_CUSTOM_ELEMENT_TEXT_SIZE - 1 | - | Static text bytes |
+| `elementText` | `char[OSD_CUSTOM_ELEMENT_TEXT_SIZE - 1]` | - | OSD_CUSTOM_ELEMENT_TEXT_SIZE - 1 | - | Static text bytes |
 
 **Notes:** Reply emitted only if idx < MAX_CUSTOM_ELEMENTS; otherwise no body is written.
 
@@ -4348,7 +4348,7 @@ For current generation code, see [documentation project](https://github.com/xznh
 | `partValue` | `uint16_t` | CUSTOM_ELEMENTS_PARTS | 2 | - | Value/ID associated with this part |
 | `visibilityType` | `uint8_t` | - | 1 | [osdCustomElementTypeVisibility_e](https://github.com/iNavFlight/inav/wiki/Enums-reference#enum-osdcustomelementtypevisibility_e) | Visibility condition source |
 | `visibilityValue` | `uint16_t` | - | 2 | - | Value/ID of the visibility condition source |
-| `elementText` | `char` | - | OSD_CUSTOM_ELEMENT_TEXT_SIZE - 1 | - | Raw bytes |
+| `elementText` | `char[OSD_CUSTOM_ELEMENT_TEXT_SIZE - 1]` | - | OSD_CUSTOM_ELEMENT_TEXT_SIZE - 1 | - | Raw bytes |
 
 **Reply Payload:** **None**  
 

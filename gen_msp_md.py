@@ -18,7 +18,6 @@ import unicodedata
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple, Type
 
-
 import enum
 
 def build_msp_codes_enum(defs: Dict[str, Any]) -> Type[enum.IntEnum]:
@@ -49,6 +48,41 @@ def parse_ctype(ctype: str) -> Tuple[str, Optional[str]]:
     if not m:
         return ctype.strip(), None
     return m.group("base").strip(), m.group("size").strip()
+
+def format_ctype(field: Dict[str, Any]) -> str:
+    raw = (field.get("ctype") or "").strip()
+    if not raw:
+        return "-"
+
+    base, bracket = parse_ctype(raw)
+    has_array_meta = bool(field.get("array", False))
+    is_array = has_array_meta or (bracket is not None)
+    if not is_array:
+        return raw
+
+    size_define = (field.get("array_size_define") or "").strip()
+    array_size = field.get("array_size")
+    size_expr = ""
+
+    if size_define:
+        size_expr = size_define
+    else:
+        if isinstance(array_size, int):
+            if array_size > 0:
+                size_expr = str(array_size)
+        elif isinstance(array_size, str):
+            cleaned = array_size.strip()
+            if cleaned and cleaned != "0":
+                size_expr = cleaned
+
+    if not size_expr and bracket is not None:
+        size_expr = bracket.strip()
+
+    if size_expr == "0":
+        size_expr = ""
+
+    base_part = base or raw
+    return f"{base_part}[{size_expr}]"
 
 def describe_array_bytes(array_size_meta: Any, base_bytes: Optional[int], base_name: str) -> str:
     """
@@ -182,12 +216,11 @@ def table_with_units(fields: List[Dict[str, Any]], label: str) -> str:
     rows: List[str] = []
     for f in flat_fields:
         name = f.get("name", "")
-        ctype = f.get("ctype", "")
         size = sizeof_entry(f)
         if size == "0":
             size = "-"
 
-        row_cells = [f"`{name}`", f"`{ctype}`"]
+        row_cells = [f"`{name}`", f"`{format_ctype(f)}`"]
 
         if has_repeats:
             repeats = f.get("_repeat_multiplier") or "-"
