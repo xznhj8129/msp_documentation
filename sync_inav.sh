@@ -6,4 +6,6 @@ cp gen_msp_md.py ../inav/docs/development/msp/
 cp format.md ../inav/docs/development/msp/
 cp rev ../inav/docs/development/msp/
 cp docs_v2_header.md ../inav/docs/development/msp/
-cp gen_docs.sh ../inav/docs/development/msp/
+#cp gen_docs.sh ../inav/docs/development/msp/
+cp gen_enum_md.py ../inav/docs/development/msp/
+cp get_all_inav_enums_h.py ../inav/docs/development/msp/

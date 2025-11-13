@@ -1,6 +1,8 @@
+INAV_MAIN_PATH="${1:-../inav/src/main}"
+
 echo "###########"
 echo get_all_inav_enums_h.py
-python get_all_inav_enums_h.py
+python get_all_inav_enums_h.py --inav-root "$INAV_MAIN_PATH"
 
 echo "###########"
 echo "msp_messages.json checksum"

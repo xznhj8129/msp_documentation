@@ -106,6 +106,8 @@
 - [geoAltitudeConversionMode_e](#enum-geoaltitudeconversionmode_e)
 - [geoAltitudeDatumFlag_e](#enum-geoaltitudedatumflag_e)
 - [geoOriginResetMode_e](#enum-geooriginresetmode_e)
+- [geozoneActionState_e](#enum-geozoneactionstate_e)
+- [geozoneMessageState_e](#enum-geozonemessagestate_e)
 - [ghstAddr_e](#enum-ghstaddr_e)
 - [ghstDl_e](#enum-ghstdl_e)
 - [ghstFrameTypeIndex_e](#enum-ghstframetypeindex_e)
@@ -160,6 +162,8 @@
 - [ltm_modes_e](#enum-ltm_modes_e)
 - [ltmUpdateRate_e](#enum-ltmupdaterate_e)
 - [magSensor_e](#enum-magsensor_e)
+- [mavlinkAutopilotType_e](#enum-mavlinkautopilottype_e)
+- [mavlinkRadio_e](#enum-mavlinkradio_e)
 - [measurementSteps_e](#enum-measurementsteps_e)
 - [mixerProfileATRequest_e](#enum-mixerprofileatrequest_e)
 - [mixerProfileATState_e](#enum-mixerprofileatstate_e)
@@ -171,12 +175,12 @@
 - [mspPassthroughType_e](#enum-msppassthroughtype_e)
 - [mspSDCardFlags_e](#enum-mspsdcardflags_e)
 - [mspSDCardState_e](#enum-mspsdcardstate_e)
-- [mspVtxStatus_e](#enum-mspvtxstatus_e)
 - [multi_function_e](#enum-multi_function_e)
 - [multiFunctionFlags_e](#enum-multifunctionflags_e)
 - [nav_reset_type_e](#enum-nav_reset_type_e)
 - [navAGLEstimateQuality_e](#enum-navaglestimatequality_e)
 - [navArmingBlocker_e](#enum-navarmingblocker_e)
+- [navDefaultAltitudeSensor_e](#enum-navdefaultaltitudesensor_e)
 - [navExtraArmingSafety_e](#enum-navextraarmingsafety_e)
 - [navFwLaunchStatus_e](#enum-navfwlaunchstatus_e)
 - [navigationEstimateStatus_e](#enum-navigationestimatestatus_e)
@@ -202,6 +206,7 @@
 - [navWaypointP3Flags_e](#enum-navwaypointp3flags_e)
 - [opflowQuality_e](#enum-opflowquality_e)
 - [opticalFlowSensor_e](#enum-opticalflowsensor_e)
+- [osd_adsb_warning_style_e](#enum-osd_adsb_warning_style_e)
 - [osd_ahi_style_e](#enum-osd_ahi_style_e)
 - [osd_alignment_e](#enum-osd_alignment_e)
 - [osd_crosshairs_style_e](#enum-osd_crosshairs_style_e)
@@ -209,6 +214,7 @@
 - [osd_items_e](#enum-osd_items_e)
 - [osd_sidebar_arrow_e](#enum-osd_sidebar_arrow_e)
 - [osd_sidebar_scroll_e](#enum-osd_sidebar_scroll_e)
+- [osd_SpeedTypes_e](#enum-osd_speedtypes_e)
 - [osd_stats_energy_unit_e](#enum-osd_stats_energy_unit_e)
 - [osd_unit_e](#enum-osd_unit_e)
 - [osdCustomElementType_e](#enum-osdcustomelementtype_e)
@@ -263,6 +269,7 @@
 - [sensor_align_e](#enum-sensor_align_e)
 - [sensorIndex_e](#enum-sensorindex_e)
 - [sensors_e](#enum-sensors_e)
+- [sensorTempCalState_e](#enum-sensortempcalstate_e)
 - [serialPortFunction_e](#enum-serialportfunction_e)
 - [serialPortIdentifier_e](#enum-serialportidentifier_e)
 - [servoAutotrimState_e](#enum-servoautotrimstate_e)
@@ -459,7 +466,8 @@
 | `ADJUSTMENT_FW_TPA_TIME_CONSTANT` | 57 |  |
 | `ADJUSTMENT_FW_LEVEL_TRIM` | 58 |  |
 | `ADJUSTMENT_NAV_WP_MULTI_MISSION_INDEX` | 59 |  |
-| `ADJUSTMENT_FUNCTION_COUNT` | 60 |  |
+| `ADJUSTMENT_NAV_FW_ALT_CONTROL_RESPONSE` | 60 |  |
+| `ADJUSTMENT_FUNCTION_COUNT` | 61 |  |
 
 ---
 ## <a id="enum-adjustmentmode_e"></a>`adjustmentMode_e`
@@ -728,6 +736,7 @@
 | `WAS_EVER_ARMED` | (1 << 3) |  |
 | `SIMULATOR_MODE_HITL` | (1 << 4) |  |
 | `SIMULATOR_MODE_SITL` | (1 << 5) |  |
+| `ARMING_DISABLED_GEOZONE` | (1 << 6) |  |
 | `ARMING_DISABLED_FAILSAFE_SYSTEM` | (1 << 7) |  |
 | `ARMING_DISABLED_NOT_LEVEL` | (1 << 8) |  |
 | `ARMING_DISABLED_SENSORS_CALIBRATING` | (1 << 9) |  |
@@ -751,7 +760,7 @@
 | `ARMING_DISABLED_NO_PREARM` | (1 << 28) |  |
 | `ARMING_DISABLED_DSHOT_BEEPER` | (1 << 29) |  |
 | `ARMING_DISABLED_LANDING_DETECTED` | (1 << 30) |  |
-| `ARMING_DISABLED_ALL_FLAGS` | (ARMING_DISABLED_FAILSAFE_SYSTEM | ARMING_DISABLED_NOT_LEVEL | ARMING_DISABLED_SENSORS_CALIBRATING |                                                        ARMING_DISABLED_SYSTEM_OVERLOADED | ARMING_DISABLED_NAVIGATION_UNSAFE |                                                        ARMING_DISABLED_COMPASS_NOT_CALIBRATED | ARMING_DISABLED_ACCELEROMETER_NOT_CALIBRATED |                                                        ARMING_DISABLED_ARM_SWITCH | ARMING_DISABLED_HARDWARE_FAILURE | ARMING_DISABLED_BOXFAILSAFE |                                                        ARMING_DISABLED_RC_LINK | ARMING_DISABLED_THROTTLE | ARMING_DISABLED_CLI |                                                        ARMING_DISABLED_CMS_MENU | ARMING_DISABLED_OSD_MENU | ARMING_DISABLED_ROLLPITCH_NOT_CENTERED |                                                        ARMING_DISABLED_SERVO_AUTOTRIM | ARMING_DISABLED_OOM | ARMING_DISABLED_INVALID_SETTING |                                                        ARMING_DISABLED_PWM_OUTPUT_ERROR | ARMING_DISABLED_NO_PREARM | ARMING_DISABLED_DSHOT_BEEPER |                                                        ARMING_DISABLED_LANDING_DETECTED) |  |
+| `ARMING_DISABLED_ALL_FLAGS` | (ARMING_DISABLED_GEOZONE | ARMING_DISABLED_FAILSAFE_SYSTEM | ARMING_DISABLED_NOT_LEVEL |                                                         ARMING_DISABLED_SENSORS_CALIBRATING | ARMING_DISABLED_SYSTEM_OVERLOADED | ARMING_DISABLED_NAVIGATION_UNSAFE |                                                        ARMING_DISABLED_COMPASS_NOT_CALIBRATED | ARMING_DISABLED_ACCELEROMETER_NOT_CALIBRATED |                                                        ARMING_DISABLED_ARM_SWITCH | ARMING_DISABLED_HARDWARE_FAILURE | ARMING_DISABLED_BOXFAILSAFE |                                                        ARMING_DISABLED_RC_LINK | ARMING_DISABLED_THROTTLE | ARMING_DISABLED_CLI |                                                        ARMING_DISABLED_CMS_MENU | ARMING_DISABLED_OSD_MENU | ARMING_DISABLED_ROLLPITCH_NOT_CENTERED |                                                        ARMING_DISABLED_SERVO_AUTOTRIM | ARMING_DISABLED_OOM | ARMING_DISABLED_INVALID_SETTING |                                                        ARMING_DISABLED_PWM_OUTPUT_ERROR | ARMING_DISABLED_NO_PREARM | ARMING_DISABLED_DSHOT_BEEPER |                                                        ARMING_DISABLED_LANDING_DETECTED) |  |
 
 ---
 ## <a id="enum-axis_e"></a>`axis_e`
@@ -1243,6 +1252,7 @@
 | `CRSF_FRAMETYPE_GPS` | 2 |  |
 | `CRSF_FRAMETYPE_VARIO_SENSOR` | 7 |  |
 | `CRSF_FRAMETYPE_BATTERY_SENSOR` | 8 |  |
+| `CRSF_FRAMETYPE_BAROMETER_ALTITUDE` | 9 |  |
 | `CRSF_FRAMETYPE_LINK_STATISTICS` | 20 |  |
 | `CRSF_FRAMETYPE_RC_CHANNELS_PACKED` | 22 |  |
 | `CRSF_FRAMETYPE_ATTITUDE` | 30 |  |
@@ -1271,6 +1281,7 @@
 | `CRSF_FRAME_FLIGHT_MODE_INDEX` |  |  |
 | `CRSF_FRAME_GPS_INDEX` |  |  |
 | `CRSF_FRAME_VARIO_SENSOR_INDEX` |  |  |
+| `CRSF_FRAME_BAROMETER_ALTITUDE_INDEX` |  |  |
 | `CRSF_SCHEDULE_COUNT_MAX` |  |  |
 
 ---
@@ -1312,7 +1323,8 @@
 | `CURRENT_SENSOR_VIRTUAL` | 2 |  |
 | `CURRENT_SENSOR_FAKE` | 3 |  |
 | `CURRENT_SENSOR_ESC` | 4 |  |
-| `CURRENT_SENSOR_MAX` | CURRENT_SENSOR_FAKE |  |
+| `CURRENT_SENSOR_SMARTPORT` | 5 |  |
+| `CURRENT_SENSOR_MAX` | CURRENT_SENSOR_SMARTPORT |  |
 
 ---
 ## <a id="enum-devhardwaretype_e"></a>`devHardwareType_e`
@@ -1348,35 +1360,36 @@
 | `DEVHW_IST8310_1` | 24 |  |
 | `DEVHW_IST8308` | 25 |  |
 | `DEVHW_QMC5883` | 26 |  |
-| `DEVHW_MAG3110` | 27 |  |
-| `DEVHW_LIS3MDL` | 28 |  |
-| `DEVHW_RM3100` | 29 |  |
-| `DEVHW_VCM5883` | 30 |  |
-| `DEVHW_MLX90393` | 31 |  |
-| `DEVHW_LM75_0` | 32 |  |
-| `DEVHW_LM75_1` | 33 |  |
-| `DEVHW_LM75_2` | 34 |  |
-| `DEVHW_LM75_3` | 35 |  |
-| `DEVHW_LM75_4` | 36 |  |
-| `DEVHW_LM75_5` | 37 |  |
-| `DEVHW_LM75_6` | 38 |  |
-| `DEVHW_LM75_7` | 39 |  |
-| `DEVHW_DS2482` | 40 |  |
-| `DEVHW_MAX7456` | 41 |  |
-| `DEVHW_SRF10` | 42 |  |
-| `DEVHW_VL53L0X` | 43 |  |
-| `DEVHW_VL53L1X` | 44 |  |
-| `DEVHW_US42` | 45 |  |
-| `DEVHW_TOF10120_I2C` | 46 |  |
-| `DEVHW_TERARANGER_EVO_I2C` | 47 |  |
-| `DEVHW_MS4525` | 48 |  |
-| `DEVHW_DLVR` | 49 |  |
-| `DEVHW_M25P16` | 50 |  |
-| `DEVHW_W25N01G` | 51 |  |
-| `DEVHW_UG2864` | 52 |  |
-| `DEVHW_SDCARD` | 53 |  |
-| `DEVHW_IRLOCK` | 54 |  |
-| `DEVHW_PCF8574` | 55 |  |
+| `DEVHW_QMC5883P` | 27 |  |
+| `DEVHW_MAG3110` | 28 |  |
+| `DEVHW_LIS3MDL` | 29 |  |
+| `DEVHW_RM3100` | 30 |  |
+| `DEVHW_VCM5883` | 31 |  |
+| `DEVHW_MLX90393` | 32 |  |
+| `DEVHW_LM75_0` | 33 |  |
+| `DEVHW_LM75_1` | 34 |  |
+| `DEVHW_LM75_2` | 35 |  |
+| `DEVHW_LM75_3` | 36 |  |
+| `DEVHW_LM75_4` | 37 |  |
+| `DEVHW_LM75_5` | 38 |  |
+| `DEVHW_LM75_6` | 39 |  |
+| `DEVHW_LM75_7` | 40 |  |
+| `DEVHW_DS2482` | 41 |  |
+| `DEVHW_MAX7456` | 42 |  |
+| `DEVHW_SRF10` | 43 |  |
+| `DEVHW_VL53L0X` | 44 |  |
+| `DEVHW_VL53L1X` | 45 |  |
+| `DEVHW_US42` | 46 |  |
+| `DEVHW_TOF10120_I2C` | 47 |  |
+| `DEVHW_TERARANGER_EVO_I2C` | 48 |  |
+| `DEVHW_MS4525` | 49 |  |
+| `DEVHW_DLVR` | 50 |  |
+| `DEVHW_M25P16` | 51 |  |
+| `DEVHW_W25N01G` | 52 |  |
+| `DEVHW_UG2864` | 53 |  |
+| `DEVHW_SDCARD` | 54 |  |
+| `DEVHW_IRLOCK` | 55 |  |
+| `DEVHW_PCF8574` | 56 |  |
 
 ---
 ## <a id="enum-deviceflags_e"></a>`deviceFlags_e`
@@ -1635,7 +1648,7 @@
 | `FEATURE_VBAT` | 1 << 1 |  |
 | `FEATURE_TX_PROF_SEL` | 1 << 2 |  |
 | `FEATURE_BAT_PROFILE_AUTOSWITCH` | 1 << 3 |  |
-| `FEATURE_UNUSED_12` | 1 << 4 |  |
+| `FEATURE_GEOZONE` | 1 << 4 |  |
 | `FEATURE_UNUSED_1` | 1 << 5 |  |
 | `FEATURE_SOFTSERIAL` | 1 << 6 |  |
 | `FEATURE_GPS` | 1 << 7 |  |
@@ -1791,6 +1804,7 @@
 | `SOARING_MODE` | (1 << 16) |  |
 | `ANGLEHOLD_MODE` | (1 << 17) |  |
 | `NAV_FW_AUTOLAND` | (1 << 18) |  |
+| `NAV_SEND_TO` | (1 << 19) |  |
 
 ---
 ## <a id="enum-flightmodefortelemetry_e"></a>`flightModeForTelemetry_e`
@@ -1990,6 +2004,40 @@
 |---|---:|---|
 | `GEO_ORIGIN_SET` | 0 |  |
 | `GEO_ORIGIN_RESET_ALTITUDE` | 1 |  |
+
+---
+## <a id="enum-geozoneactionstate_e"></a>`geozoneActionState_e`
+
+> Source: ../inav/src/main/navigation/navigation_geozone.c
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `GEOZONE_ACTION_STATE_NONE` | 0 |  |
+| `GEOZONE_ACTION_STATE_AVOIDING` | 1 |  |
+| `GEOZONE_ACTION_STATE_AVOIDING_UPWARD` | 2 |  |
+| `GEOZONE_ACTION_STATE_AVOIDING_ALTITUDE` | 3 |  |
+| `GEOZONE_ACTION_STATE_RETURN_TO_FZ` | 4 |  |
+| `GEOZONE_ACTION_STATE_FLYOUT_NFZ` | 5 |  |
+| `GEOZONE_ACTION_STATE_POSHOLD` | 6 |  |
+| `GEOZONE_ACTION_STATE_RTH` | 7 |  |
+
+---
+## <a id="enum-geozonemessagestate_e"></a>`geozoneMessageState_e`
+
+> Source: ../inav/src/main/navigation/navigation.h
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `GEOZONE_MESSAGE_STATE_NONE` | 0 |  |
+| `GEOZONE_MESSAGE_STATE_NFZ` | 1 |  |
+| `GEOZONE_MESSAGE_STATE_LEAVING_FZ` | 2 |  |
+| `GEOZONE_MESSAGE_STATE_OUTSIDE_FZ` | 3 |  |
+| `GEOZONE_MESSAGE_STATE_ENTERING_NFZ` | 4 |  |
+| `GEOZONE_MESSAGE_STATE_AVOIDING_FB` | 5 |  |
+| `GEOZONE_MESSAGE_STATE_RETURN_TO_ZONE` | 6 |  |
+| `GEOZONE_MESSAGE_STATE_FLYOUT_NFZ` | 7 |  |
+| `GEOZONE_MESSAGE_STATE_AVOIDING_ALTITUDE_BREACH` | 8 |  |
+| `GEOZONE_MESSAGE_STATE_POS_HOLD` | 9 |  |
 
 ---
 ## <a id="enum-ghstaddr_e"></a>`ghstAddr_e`
@@ -2580,7 +2628,8 @@
 | `INPUT_RC_CH32` | 57 |  |
 | `INPUT_RC_CH33` | 58 |  |
 | `INPUT_RC_CH34` | 59 |  |
-| `INPUT_SOURCE_COUNT` | 60 |  |
+| `INPUT_MIXER_SWITCH_HELPER` | 60 |  |
+| `INPUT_SOURCE_COUNT` | 61 |  |
 
 ---
 ## <a id="enum-itermrelax_e"></a>`itermRelax_e`
@@ -2711,6 +2760,7 @@
 | `LOGIC_CONDITION_GLOBAL_FLAG_OVERRIDE_LOITER_RADIUS` | (1 << 9) |  |
 | `LOGIC_CONDITION_GLOBAL_FLAG_OVERRIDE_FLIGHT_AXIS` | (1 << 10) |  |
 | `LOGIC_CONDITION_GLOBAL_FLAG_DISABLE_GPS_FIX` | (1 << 11) | USE_GPS_FIX_ESTIMATION |
+| `LOGIC_CONDITION_GLOBAL_FLAG_OVERRIDE_MIN_GROUND_SPEED` | (1 << 12) |  |
 
 ---
 ## <a id="enum-logicflightmodeoperands_e"></a>`logicFlightModeOperands_e`
@@ -2773,8 +2823,8 @@
 | `LOGIC_CONDITION_OPERAND_FLIGHT_STABILIZED_PITCH` | 26 |  |
 | `LOGIC_CONDITION_OPERAND_FLIGHT_STABILIZED_YAW` | 27 |  |
 | `LOGIC_CONDITION_OPERAND_FLIGHT_3D_HOME_DISTANCE` | 28 |  |
-| `LOGIC_CONDITION_OPERAND_FLIGHT_CRSF_LQ` | 29 |  |
-| `LOGIC_CONDITION_OPERAND_FLIGHT_CRSF_SNR` | 30 |  |
+| `LOGIC_CONDITION_OPERAND_FLIGHT_LQ_UPLINK` | 29 |  |
+| `LOGIC_CONDITION_OPERAND_FLIGHT_SNR` | 30 |  |
 | `LOGIC_CONDITION_OPERAND_FLIGHT_GPS_VALID` | 31 |  |
 | `LOGIC_CONDITION_OPERAND_FLIGHT_LOITER_RADIUS` | 32 |  |
 | `LOGIC_CONDITION_OPERAND_FLIGHT_ACTIVE_PROFILE` | 33 |  |
@@ -2788,6 +2838,11 @@
 | `LOGIC_CONDITION_OPERAND_FLIGHT_FW_LAND_STATE` | 41 |  |
 | `LOGIC_CONDITION_OPERAND_FLIGHT_BATT_PROFILE` | 42 |  |
 | `LOGIC_CONDITION_OPERAND_FLIGHT_FLOWN_LOITER_RADIUS` | 43 |  |
+| `LOGIC_CONDITION_OPERAND_FLIGHT_LQ_DOWNLINK` | 44 |  |
+| `LOGIC_CONDITION_OPERAND_FLIGHT_UPLINK_RSSI_DBM` | 45 |  |
+| `LOGIC_CONDITION_OPERAND_FLIGHT_MIN_GROUND_SPEED` | 46 |  |
+| `LOGIC_CONDITION_OPERAND_FLIGHT_HORIZONTAL_WIND_SPEED` | 47 |  |
+| `LOGIC_CONDITION_OPERAND_FLIGHT_WIND_DIRECTION` | 48 |  |
 
 ---
 ## <a id="enum-logicoperation_e"></a>`logicOperation_e`
@@ -2851,7 +2906,9 @@
 | `LOGIC_CONDITION_LED_PIN_PWM` | 52 |  |
 | `LOGIC_CONDITION_DISABLE_GPS_FIX` | 53 |  |
 | `LOGIC_CONDITION_RESET_MAG_CALIBRATION` | 54 |  |
-| `LOGIC_CONDITION_LAST` | 55 |  |
+| `LOGIC_CONDITION_SET_GIMBAL_SENSITIVITY` | 55 |  |
+| `LOGIC_CONDITION_OVERRIDE_MIN_GROUND_SPEED` | 56 |  |
+| `LOGIC_CONDITION_LAST` | 57 |  |
 
 ---
 ## <a id="enum-logicwaypointoperands_e"></a>`logicWaypointOperands_e`
@@ -3059,15 +3116,37 @@
 | `MAG_AK8963` | 5 |  |
 | `MAG_IST8310` | 6 |  |
 | `MAG_QMC5883` | 7 |  |
-| `MAG_MPU9250` | 8 |  |
-| `MAG_IST8308` | 9 |  |
-| `MAG_LIS3MDL` | 10 |  |
-| `MAG_MSP` | 11 |  |
-| `MAG_RM3100` | 12 |  |
-| `MAG_VCM5883` | 13 |  |
-| `MAG_MLX90393` | 14 |  |
-| `MAG_FAKE` | 15 |  |
+| `MAG_QMC5883P` | 8 |  |
+| `MAG_MPU9250` | 9 |  |
+| `MAG_IST8308` | 10 |  |
+| `MAG_LIS3MDL` | 11 |  |
+| `MAG_MSP` | 12 |  |
+| `MAG_RM3100` | 13 |  |
+| `MAG_VCM5883` | 14 |  |
+| `MAG_MLX90393` | 15 |  |
+| `MAG_FAKE` | 16 |  |
 | `MAG_MAX` | MAG_FAKE |  |
+
+---
+## <a id="enum-mavlinkautopilottype_e"></a>`mavlinkAutopilotType_e`
+
+> Source: ../inav/src/main/telemetry/telemetry.h
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `MAVLINK_AUTOPILOT_GENERIC` | 0 |  |
+| `MAVLINK_AUTOPILOT_ARDUPILOT` | 1 |  |
+
+---
+## <a id="enum-mavlinkradio_e"></a>`mavlinkRadio_e`
+
+> Source: ../inav/src/main/telemetry/telemetry.h
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `MAVLINK_RADIO_GENERIC` | 0 |  |
+| `MAVLINK_RADIO_ELRS` | 1 |  |
+| `MAVLINK_RADIO_SIK` | 2 |  |
 
 ---
 ## <a id="enum-measurementsteps_e"></a>`measurementSteps_e`
@@ -3195,16 +3274,6 @@
 | `MSP_SDCARD_STATE_READY` | 4 |  |
 
 ---
-## <a id="enum-mspvtxstatus_e"></a>`mspVtxStatus_e`
-
-> Source: ../inav/src/main/io/vtx_msp.h
-
-| Enumerator | Value | Condition |
-|---|---:|---|
-| `MSP_VTX_STATUS_OFFLINE` | 0 |  |
-| `MSP_VTX_STATUS_READY` | 1 |  |
-
----
 ## <a id="enum-multi_function_e"></a>`multi_function_e`
 
 > Source: ../inav/src/main/fc/multifunction.h
@@ -3267,6 +3336,18 @@
 | `NAV_ARMING_BLOCKER_JUMP_WAYPOINT_ERROR` | 4 |  |
 
 ---
+## <a id="enum-navdefaultaltitudesensor_e"></a>`navDefaultAltitudeSensor_e`
+
+> Source: ../inav/src/main/navigation/navigation_pos_estimator_private.h
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `ALTITUDE_SOURCE_GPS` | 0 |  |
+| `ALTITUDE_SOURCE_BARO` | 1 |  |
+| `ALTITUDE_SOURCE_GPS_ONLY` | 2 |  |
+| `ALTITUDE_SOURCE_BARO_ONLY` | 3 |  |
+
+---
 ## <a id="enum-navextraarmingsafety_e"></a>`navExtraArmingSafety_e`
 
 > Source: ../inav/src/main/navigation/navigation.h
@@ -3321,11 +3402,12 @@
 | `NAV_FSM_EVENT_SWITCH_TO_COURSE_ADJ` | 13 |  |
 | `NAV_FSM_EVENT_SWITCH_TO_MIXERAT` | 14 |  |
 | `NAV_FSM_EVENT_SWITCH_TO_NAV_STATE_FW_LANDING` | 15 |  |
-| `NAV_FSM_EVENT_STATE_SPECIFIC_1` | 16 |  |
-| `NAV_FSM_EVENT_STATE_SPECIFIC_2` | 17 |  |
-| `NAV_FSM_EVENT_STATE_SPECIFIC_3` | 18 |  |
-| `NAV_FSM_EVENT_STATE_SPECIFIC_4` | 19 |  |
-| `NAV_FSM_EVENT_STATE_SPECIFIC_5` | 20 |  |
+| `NAV_FSM_EVENT_SWITCH_TO_SEND_TO` | 16 |  |
+| `NAV_FSM_EVENT_STATE_SPECIFIC_1` | 17 |  |
+| `NAV_FSM_EVENT_STATE_SPECIFIC_2` | 18 |  |
+| `NAV_FSM_EVENT_STATE_SPECIFIC_3` | 19 |  |
+| `NAV_FSM_EVENT_STATE_SPECIFIC_4` | 20 |  |
+| `NAV_FSM_EVENT_STATE_SPECIFIC_5` | 21 |  |
 | `NAV_FSM_EVENT_SWITCH_TO_NAV_STATE_FW_LANDING_ABORT` | NAV_FSM_EVENT_STATE_SPECIFIC_1 |  |
 | `NAV_FSM_EVENT_SWITCH_TO_NAV_STATE_FW_LANDING_FINISHED` | NAV_FSM_EVENT_STATE_SPECIFIC_2 |  |
 | `NAV_FSM_EVENT_SWITCH_TO_WAYPOINT_HOLD_TIME` | NAV_FSM_EVENT_STATE_SPECIFIC_1 |  |
@@ -3390,7 +3472,10 @@
 | `NAV_STATE_MIXERAT_INITIALIZE` | 42 |  |
 | `NAV_STATE_MIXERAT_IN_PROGRESS` | 43 |  |
 | `NAV_STATE_MIXERAT_ABORT` | 44 |  |
-| `NAV_STATE_COUNT` | 45 |  |
+| `NAV_STATE_SEND_TO_INITALIZE` | 45 |  |
+| `NAV_STATE_SEND_TO_IN_PROGESS` | 46 |  |
+| `NAV_STATE_SEND_TO_FINISHED` | 47 |  |
+| `NAV_STATE_COUNT` | 48 |  |
 
 ---
 ## <a id="enum-navigationfsmstateflags_t"></a>`navigationFSMStateFlags_t`
@@ -3487,6 +3572,9 @@
 | `NAV_PERSISTENT_ID_FW_LANDING_FLARE` | 46 |  |
 | `NAV_PERSISTENT_ID_FW_LANDING_ABORT` | 47 |  |
 | `NAV_PERSISTENT_ID_FW_LANDING_FINISHED` | 48 |  |
+| `NAV_PERSISTENT_ID_SEND_TO_INITALIZE` | 49 |  |
+| `NAV_PERSISTENT_ID_SEND_TO_IN_PROGRES` | 50 |  |
+| `NAV_PERSISTENT_ID_SEND_TO_FINISHED` | 51 |  |
 
 ---
 ## <a id="enum-navmcaltholdthrottle_e"></a>`navMcAltHoldThrottle_e`
@@ -3712,6 +3800,16 @@
 | `OPFLOW_FAKE` | 3 |  |
 
 ---
+## <a id="enum-osd_adsb_warning_style_e"></a>`osd_adsb_warning_style_e`
+
+> Source: ../inav/src/main/io/osd.h
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `OSD_ADSB_WARNING_STYLE_COMPACT` | 0 |  |
+| `OSD_ADSB_WARNING_STYLE_EXTENDED` | 1 |  |
+
+---
 ## <a id="enum-osd_ahi_style_e"></a>`osd_ahi_style_e`
 
 > Source: ../inav/src/main/io/osd.h
@@ -3790,7 +3888,7 @@
 | `OSD_HOME_DIST` | 23 |  |
 | `OSD_HEADING` | 24 |  |
 | `OSD_VARIO` | 25 |  |
-| `OSD_VARIO_NUM` | 26 |  |
+| `OSD_VERTICAL_SPEED_INDICATOR` | 26 |  |
 | `OSD_AIR_SPEED` | 27 |  |
 | `OSD_ONTIME_FLYTIME` | 28 |  |
 | `OSD_RTC_TIME` | 29 |  |
@@ -3873,10 +3971,10 @@
 | `OSD_ESC_RPM` | 106 |  |
 | `OSD_ESC_TEMPERATURE` | 107 |  |
 | `OSD_AZIMUTH` | 108 |  |
-| `OSD_CRSF_RSSI_DBM` | 109 |  |
-| `OSD_CRSF_LQ` | 110 |  |
-| `OSD_CRSF_SNR_DB` | 111 |  |
-| `OSD_CRSF_TX_POWER` | 112 |  |
+| `OSD_RSSI_DBM` | 109 |  |
+| `OSD_LQ_UPLINK` | 110 |  |
+| `OSD_SNR_DB` | 111 |  |
+| `OSD_TX_POWER_UPLINK` | 112 |  |
 | `OSD_GVAR_0` | 113 |  |
 | `OSD_GVAR_1` | 114 |  |
 | `OSD_GVAR_2` | 115 |  |
@@ -3918,7 +4016,22 @@
 | `OSD_ADSB_INFO` | 151 |  |
 | `OSD_BLACKBOX` | 152 |  |
 | `OSD_FORMATION_FLIGHT` | 153 |  |
-| `OSD_ITEM_COUNT` | 154 |  |
+| `OSD_CUSTOM_ELEMENT_4` | 154 |  |
+| `OSD_CUSTOM_ELEMENT_5` | 155 |  |
+| `OSD_CUSTOM_ELEMENT_6` | 156 |  |
+| `OSD_CUSTOM_ELEMENT_7` | 157 |  |
+| `OSD_CUSTOM_ELEMENT_8` | 158 |  |
+| `OSD_LQ_DOWNLINK` | 159 |  |
+| `OSD_RX_POWER_DOWNLINK` | 160 |  |
+| `OSD_RX_BAND` | 161 |  |
+| `OSD_RX_MODE` | 162 |  |
+| `OSD_COURSE_TO_FENCE` | 163 |  |
+| `OSD_H_DIST_TO_FENCE` | 164 |  |
+| `OSD_V_DIST_TO_FENCE` | 165 |  |
+| `OSD_NAV_FW_ALT_CONTROL_RESPONSE` | 166 |  |
+| `OSD_NAV_MIN_GROUND_SPEED` | 167 |  |
+| `OSD_THROTTLE_GAUGE` | 168 |  |
+| `OSD_ITEM_COUNT` | 169 |  |
 
 ---
 ## <a id="enum-osd_sidebar_arrow_e"></a>`osd_sidebar_arrow_e`
@@ -3943,6 +4056,18 @@
 | `OSD_SIDEBAR_SCROLL_SPEED` | 2 |  |
 | `OSD_SIDEBAR_SCROLL_HOME_DISTANCE` | 3 |  |
 | `OSD_SIDEBAR_SCROLL_MAX` | OSD_SIDEBAR_SCROLL_HOME_DISTANCE |  |
+
+---
+## <a id="enum-osd_speedtypes_e"></a>`osd_SpeedTypes_e`
+
+> Source: ../inav/src/main/io/osd.h
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `OSD_SPEED_TYPE_GROUND` | 0 |  |
+| `OSD_SPEED_TYPE_AIR` | 1 |  |
+| `OSD_SPEED_TYPE_3D` | 2 |  |
+| `OSD_SPEED_TYPE_MIN_GROUND` | 3 |  |
 
 ---
 ## <a id="enum-osd_stats_energy_unit_e"></a>`osd_stats_energy_unit_e`
@@ -3979,10 +4104,32 @@
 | `CUSTOM_ELEMENT_TYPE_TEXT` | 1 |  |
 | `CUSTOM_ELEMENT_TYPE_ICON_STATIC` | 2 |  |
 | `CUSTOM_ELEMENT_TYPE_ICON_GV` | 3 |  |
-| `CUSTOM_ELEMENT_TYPE_GV` | 4 |  |
-| `CUSTOM_ELEMENT_TYPE_GV_FLOAT` | 5 |  |
-| `CUSTOM_ELEMENT_TYPE_GV_SMALL` | 6 |  |
-| `CUSTOM_ELEMENT_TYPE_GV_SMALL_FLOAT` | 7 |  |
+| `CUSTOM_ELEMENT_TYPE_ICON_LC` | 4 |  |
+| `CUSTOM_ELEMENT_TYPE_GV_1` | 5 |  |
+| `CUSTOM_ELEMENT_TYPE_GV_2` | 6 |  |
+| `CUSTOM_ELEMENT_TYPE_GV_3` | 7 |  |
+| `CUSTOM_ELEMENT_TYPE_GV_4` | 8 |  |
+| `CUSTOM_ELEMENT_TYPE_GV_5` | 9 |  |
+| `CUSTOM_ELEMENT_TYPE_GV_FLOAT_1_1` | 10 |  |
+| `CUSTOM_ELEMENT_TYPE_GV_FLOAT_1_2` | 11 |  |
+| `CUSTOM_ELEMENT_TYPE_GV_FLOAT_2_1` | 12 |  |
+| `CUSTOM_ELEMENT_TYPE_GV_FLOAT_2_2` | 13 |  |
+| `CUSTOM_ELEMENT_TYPE_GV_FLOAT_3_1` | 14 |  |
+| `CUSTOM_ELEMENT_TYPE_GV_FLOAT_3_2` | 15 |  |
+| `CUSTOM_ELEMENT_TYPE_GV_FLOAT_4_1` | 16 |  |
+| `CUSTOM_ELEMENT_TYPE_LC_1` | 17 |  |
+| `CUSTOM_ELEMENT_TYPE_LC_2` | 18 |  |
+| `CUSTOM_ELEMENT_TYPE_LC_3` | 19 |  |
+| `CUSTOM_ELEMENT_TYPE_LC_4` | 20 |  |
+| `CUSTOM_ELEMENT_TYPE_LC_5` | 21 |  |
+| `CUSTOM_ELEMENT_TYPE_LC_FLOAT_1_1` | 22 |  |
+| `CUSTOM_ELEMENT_TYPE_LC_FLOAT_1_2` | 23 |  |
+| `CUSTOM_ELEMENT_TYPE_LC_FLOAT_2_1` | 24 |  |
+| `CUSTOM_ELEMENT_TYPE_LC_FLOAT_2_2` | 25 |  |
+| `CUSTOM_ELEMENT_TYPE_LC_FLOAT_3_1` | 26 |  |
+| `CUSTOM_ELEMENT_TYPE_LC_FLOAT_3_2` | 27 |  |
+| `CUSTOM_ELEMENT_TYPE_LC_FLOAT_4_1` | 28 |  |
+| `CUSTOM_ELEMENT_TYPE_END` | 29 |  |
 
 ---
 ## <a id="enum-osdcustomelementtypevisibility_e"></a>`osdCustomElementTypeVisibility_e`
@@ -4693,6 +4840,17 @@
 | `SENSOR_TEMP` | 1 << 9 |  |
 
 ---
+## <a id="enum-sensortempcalstate_e"></a>`sensorTempCalState_e`
+
+> Source: ../inav/src/main/sensors/sensors.h
+
+| Enumerator | Value | Condition |
+|---|---:|---|
+| `SENSOR_TEMP_CAL_INITIALISE` | 0 |  |
+| `SENSOR_TEMP_CAL_IN_PROGRESS` | 1 |  |
+| `SENSOR_TEMP_CAL_COMPLETE` | 2 |  |
+
+---
 ## <a id="enum-serialportfunction_e"></a>`serialPortFunction_e`
 
 > Source: ../inav/src/main/io/serial.h
@@ -5274,6 +5432,7 @@
 | `UARTDEV_6` | 5 |  |
 | `UARTDEV_7` | 6 |  |
 | `UARTDEV_8` | 7 |  |
+| `UARTDEV_MAX` | 8 |  |
 
 ---
 ## <a id="enum-uartinverterline_e"></a>`uartInverterLine_e`
@@ -5413,6 +5572,7 @@
 | `VIDEO_SYSTEM_AVATAR` | 5 |  |
 | `VIDEO_SYSTEM_DJICOMPAT` | 6 |  |
 | `VIDEO_SYSTEM_DJICOMPAT_HD` | 7 |  |
+| `VIDEO_SYSTEM_DJI_NATIVE` | 8 |  |
 
 ---
 ## <a id="enum-voltagesensor_e"></a>`voltageSensor_e`
@@ -5425,6 +5585,8 @@
 | `VOLTAGE_SENSOR_ADC` | 1 |  |
 | `VOLTAGE_SENSOR_ESC` | 2 |  |
 | `VOLTAGE_SENSOR_FAKE` | 3 |  |
+| `VOLTAGE_SENSOR_SMARTPORT` | 4 |  |
+| `VOLTAGE_SENSOR_MAX` | VOLTAGE_SENSOR_SMARTPORT |  |
 
 ---
 ## <a id="enum-vs600band_e"></a>`vs600Band_e`
