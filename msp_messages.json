@@ -4904,7 +4904,7 @@
     },
     "MSP_OSD_VIDEO_CONFIG": {
         "code": 180,
-        "mspv": null,
+        "mspv": 1,
         "request": null,
         "reply": null,
         "name": "MSP_OSD_VIDEO_CONFIG",
@@ -4912,7 +4912,7 @@
     },
     "MSP_SET_OSD_VIDEO_CONFIG": {
         "code": 181,
-        "mspv": null,
+        "mspv": 1,
         "request": null,
         "reply": null,
         "name": "MSP_SET_OSD_VIDEO_CONFIG",
@@ -4920,7 +4920,7 @@
     },
     "MSP_DISPLAYPORT": {
         "code": 182,
-        "mspv": null,
+        "mspv": 1,
         "request": null,
         "reply": null,
         "name": "MSP_DISPLAYPORT",
@@ -5766,7 +5766,7 @@
     },
     "MSP_RESERVE_1": {
         "code": 251,
-        "mspv": null,
+        "mspv": 1,
         "request": null,
         "reply": null,
         "name": "MSP_RESERVE_1",
@@ -5774,7 +5774,7 @@
     },
     "MSP_RESERVE_2": {
         "code": 252,
-        "mspv": null,
+        "mspv": 1,
         "request": null,
         "reply": null,
         "name": "MSP_RESERVE_2",
