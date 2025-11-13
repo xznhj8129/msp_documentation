@@ -10,3 +10,12 @@ The `gen_docs.sh` helper regenerates the MSP documentation in a fixed sequence:
 - Computes an `md5sum` of `msp_messages.json` and compares it with `msp_messages.checksum`; if the API definition changed it increments the numeric revision in `rev` so versioned outputs track the update.
 - Executes `gen_msp_md.py` to rebuild the MSP message reference markdown from the JSON specification.
 - Executes `gen_enum_md.py` to render the enum reference markdown using the freshly generated `all_enums.h`, then deletes the temporary header.
+
+## TODO:
+- Struct handling
+- Include all defines? Some are extremely firmware/STM32 specific and of no interest to high-level code
+- handle conditional enums, actual value sometime depends on firmware build
+
+## API generation:
+- Experimental function header generation for C SDK
+- Python API uses dynamic generation (see [MSPAPI2](https://github.com/xznhj8129/mspapi2))

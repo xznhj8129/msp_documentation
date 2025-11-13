@@ -274,7 +274,8 @@ def render_markdown(enums: List[EnumDef]) -> str:
             out.append(f"| {name_md} | {val} | {cond} |")
             jsonfile[e.name][name_md.strip('`')] = [val, cond] if len(cond)>0 else val
         out.append("")
-    Path("enums.json").write_text(json.dumps(jsonfile,indent=4), encoding="utf-8")
+    # While we're at it, chuck this all into a JSON file
+    Path("inav_enums.json").write_text(json.dumps(jsonfile,indent=4), encoding="utf-8")
     return "\n".join(out)
 
 # ---------- Main ----------
