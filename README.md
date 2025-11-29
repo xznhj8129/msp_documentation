@@ -1,4 +1,5 @@
 # msp_documentation
+# WARNING: Merged to INAV, refer to it instead: https://github.com/iNavFlight/inav/tree/master/docs/development/msp
 mapping/documentation/reverse engineering of INAV multiwii serial protocol\
 
 ## JSON Spec Format: 

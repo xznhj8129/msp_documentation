@@ -1,4 +1,4 @@
-INAV_MAIN_PATH="${1:-../inav/src/main}"
+INAV_MAIN_PATH="../../../src/main"
 
 echo "###########"
 echo get_all_inav_enums_h.py

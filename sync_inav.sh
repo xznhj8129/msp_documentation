@@ -1,11 +1,4 @@
 #!/bin/bash
 
-cp msp_messages.json ../inav/docs/development/msp/
-cp msp_messages.checksum ../inav/docs/development/msp/
-cp gen_msp_md.py ../inav/docs/development/msp/
-cp format.md ../inav/docs/development/msp/
-cp rev ../inav/docs/development/msp/
-cp docs_v2_header.md ../inav/docs/development/msp/
-#cp gen_docs.sh ../inav/docs/development/msp/
-cp gen_enum_md.py ../inav/docs/development/msp/
-cp get_all_inav_enums_h.py ../inav/docs/development/msp/
+cp ../inav/docs/development/msp/* .
+rm original_msp_ref.md
