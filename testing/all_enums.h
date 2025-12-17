@@ -1,4 +1,4 @@
-// Consolidated enums — generated on 2025-11-08 22:45:34.680186
+// Consolidated enums — generated on 2025-12-17 11:56:32.581343
 
 // ../inav/src/main/common/calibration.h
 typedef enum {
@@ -1422,6 +1422,7 @@ typedef enum {
     LOGIC_CONDITION_OPERAND_FLIGHT_MIN_GROUND_SPEED, 
     LOGIC_CONDITION_OPERAND_FLIGHT_HORIZONTAL_WIND_SPEED, 
     LOGIC_CONDITION_OPERAND_FLIGHT_WIND_DIRECTION, 
+    LOGIC_CONDITION_OPERAND_FLIGHT_RELATIVE_WIND_OFFSET, 
 } logicFlightOperands_e;
 
 // ../inav/src/main/programming/logic_condition.h
@@ -3869,7 +3870,7 @@ typedef enum {
     
     MASTER_VALUE = (0 << SETTING_SECTION_OFFSET),
     PROFILE_VALUE = (1 << SETTING_SECTION_OFFSET),
-    CONTROL_RATE_VALUE = (2 << SETTING_SECTION_OFFSET),
+    CONTROL_VALUE = (2 << SETTING_SECTION_OFFSET),
     BATTERY_CONFIG_VALUE = (3 << SETTING_SECTION_OFFSET),
     MIXER_CONFIG_VALUE = (4 << SETTING_SECTION_OFFSET),
     EZ_TUNE_VALUE = (5 << SETTING_SECTION_OFFSET)
@@ -4951,7 +4952,7 @@ typedef enum {
     DEVHW_MS4525,       
     DEVHW_DLVR,         
     DEVHW_M25P16,       
-    DEVHW_W25N01G,      
+    DEVHW_W25N,         
     DEVHW_UG2864,       
     DEVHW_SDCARD,       
     DEVHW_IRLOCK,       

@@ -1,4 +1,4 @@
-// Consolidated defines - generated on 2025-12-17 12:03:11.363937
+// Consolidated defines - generated on 2025-12-17 13:37:19.525871
 
 
 // ../inav/src/main/navigation/navigation_pos_estimator.c

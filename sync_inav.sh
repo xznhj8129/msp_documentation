@@ -1,3 +1,3 @@
 #!/bin/bash
 
-cp ../inav/docs/development/msp/* .
+cp ../inav/docs/development/msp/* docs/

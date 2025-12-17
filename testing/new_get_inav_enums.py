@@ -19,8 +19,8 @@ from typing import Dict, Iterable, Iterator, Mapping, MutableMapping, Optional, 
 
 ROOT = Path(__file__).resolve().parent
 ALL_ENUMS_PATH = ROOT / "all_enums.h"
-MSP_MESSAGES_PATH = ROOT / "msp_messages.json"
-H_TO_ENUM_PATH = ROOT / "cgen_test" / "h_to_enum.py"
+MSP_MESSAGES_PATH = ROOT / "../docs" / "msp_messages.json"
+H_TO_ENUM_PATH = ROOT / "../cgen_test" / "h_to_enum.py"
 DEFAULT_OUTPUT_PATH = ROOT / "inav_enums.json"
 _H_TO_ENUM_MODULE: Optional[object] = None
 CAST_PATTERN = re.compile(

@@ -1,4 +1,11 @@
 #!/usr/bin/env python3
+"""
+Generate a C header from an MSP message schema.
+
+Usage:
+  python test_gen_c.py path/to/msp_messages.json [-o msp.h]
+"""
+import argparse
 import json
 import re
 import sys
@@ -14,6 +21,7 @@ CTYPE_MAP = {
     "int32_t": "int32_t",
     "uint64_t": "uint64_t",
     "int64_t": "int64_t",
+    "float": "float",
     "char": "char",
     "char[]": "char[]",           # special handled
 }
@@ -65,9 +73,24 @@ def field_decl(entry: dict, suffix_comment: str = "") -> str:
     array_size_define = (entry.get("array_size_define") or "").strip()
     ctype_raw         = (entry.get("ctype") or "").strip()
 
+    def pick_base(default: str) -> str:
+        if enum_t and default in ("uint8_t", "int8_t", "uint16_t", "int16_t", "uint32_t", "int32_t", "uint64_t", "int64_t", ""):
+            return enum_t
+        return default
+
+    if ctype_raw == "Varies":
+        basetype = "uint8_t"
+        declarator = f"{name}[UNDEFINED_LEN_ARRAY_PLACEHOLDER]"
+        cmts = []
+        if desc: cmts.append(desc)
+        if units: cmts.append(f"units: {units}")
+        if suffix_comment: cmts.append(suffix_comment)
+        cmt = "  // " + " | ".join(cmts) if cmts else ""
+        return f"    {basetype} {declarator};{cmt}"
+
     # Decide base + declarator
     if array_flag:
-        base = CTYPE_MAP.get(ctype_raw, ctype_raw)
+        base = pick_base(CTYPE_MAP.get(ctype_raw, ctype_raw))
         if array_size_define!="":
             declarator = f"{name}[{array_size_define}]"
         elif isinstance(array_size, int) and array_size > 0:
@@ -77,7 +100,8 @@ def field_decl(entry: dict, suffix_comment: str = "") -> str:
             declarator = f"{name}[UNDEFINED_LEN_ARRAY_PLACEHOLDER]"
         basetype = base
     else:
-        base, size = split_ctype(ctype_raw)
+        base_raw, size = split_ctype(ctype_raw)
+        base = pick_base(base_raw)
         if size is None:
             basetype, declarator = base, name
         elif size == "":
@@ -102,8 +126,82 @@ def emit_header_preamble():
 
 #include <stdint.h>
 #include "msp_protocol.h"
-#include "all_enums.h"
 #include "all_defines.h"
+#include "all_enums.h"
+
+#ifndef BUILD_DATE_LENGTH
+#define BUILD_DATE_LENGTH 11
+#endif
+#ifndef BUILD_TIME_LENGTH
+#define BUILD_TIME_LENGTH 8
+#endif
+#ifndef GIT_SHORT_REVISION_LENGTH
+#define GIT_SHORT_REVISION_LENGTH 8
+#endif
+#ifndef OSD_CHAR_VISIBLE_BYTES
+#define OSD_CHAR_VISIBLE_BYTES 54
+#endif
+#ifndef OSD_CHAR_BYTES
+#define OSD_CHAR_BYTES 64
+#endif
+#ifndef DEBUG32_VALUE_COUNT
+#define DEBUG32_VALUE_COUNT 8
+#endif
+#ifndef CHECKBOX_ITEM_COUNT
+#define CHECKBOX_ITEM_COUNT 60
+#endif
+
+#ifndef MSP_HAS_BOXBITMASK_T
+#define MSP_HAS_BOXBITMASK_T
+typedef struct {
+    uint32_t bits[(CHECKBOX_ITEM_COUNT + 31) / 32];
+} boxBitmask_t;
+#endif
+
+#ifndef MSP_HAS_ESC_SENSOR_T
+#define MSP_HAS_ESC_SENSOR_T
+typedef struct {
+    uint8_t dataAge;
+    int16_t temperature;
+    int16_t voltage;
+    int32_t current;
+    uint32_t rpm;
+} escSensorData_t;
+#endif
+
+#ifndef MSP_HAS_LED_CONFIG_T
+#define MSP_HAS_LED_CONFIG_T
+typedef struct {
+    uint16_t led_position;
+    uint16_t led_function;
+    uint16_t led_overlay;
+    uint16_t led_color;
+    uint16_t led_direction;
+    uint16_t led_params;
+} ledConfig_t;
+#endif
+
+#ifndef MSP_HAS_VARIES_T
+#define MSP_HAS_VARIES_T
+typedef uint8_t Varies;
+#endif
+
+#ifndef MSP_HAS_NAV_USER_CONTROL_MODE_E
+#define MSP_HAS_NAV_USER_CONTROL_MODE_E
+typedef uint8_t navUserControlMode_e;
+#endif
+#ifndef MSP_HAS_NAV_RTH_ALT_CONTROL_MODE_E
+#define MSP_HAS_NAV_RTH_ALT_CONTROL_MODE_E
+typedef uint8_t navRthAltControlMode_e;
+#endif
+#ifndef MSP_HAS_MIXER_PRESET_E
+#define MSP_HAS_MIXER_PRESET_E
+typedef uint16_t mixerPreset_e;
+#endif
+#ifndef MSP_HAS_FENCE_ACTION_E
+#define MSP_HAS_FENCE_ACTION_E
+typedef uint8_t fenceAction_e;
+#endif
 
 #if !defined(MSP_PROTOCOL_VERSION)
 # error "msp_protocol.h must be present and define protocol macros"
@@ -132,7 +230,7 @@ def emit_header_postamble():
 
 def emit_struct(name: str, payload: list, parent_msg: dict) -> str:
     lines = []
-    lines.append(f"typedef struct MSP_PACKED {name} {{")
+    lines.append(f"typedef struct __attribute__((packed)) {{")
 
     for ent in payload:
         # Repeating block → emit an anonymous packed struct array member
@@ -143,7 +241,11 @@ def emit_struct(name: str, payload: list, parent_msg: dict) -> str:
             if isinstance(rep, int) and rep > 0:
                 bracket = f"[{rep}]"
             elif isinstance(rep, str) and rep.strip():
-                bracket = f"[{rep.strip()}]"
+                rep_clean = rep.strip()
+                if any(ch.islower() for ch in rep_clean):
+                    bracket = "[UNDEFINED_LEN_ARRAY_PLACEHOLDER]"
+                else:
+                    bracket = f"[{rep_clean}]"
             else:
                 bracket = "[UNDEFINED_LEN_ARRAY_PLACEHOLDER]"
 
@@ -176,11 +278,12 @@ def pick_variant_suffix(key: str) -> str:
     return "_" + s
 
 def main():
-    if len(sys.argv) != 2:
-        print("usage: gen_msp_header.py <spec.json>", file=sys.stderr)
-        sys.exit(1)
+    parser = argparse.ArgumentParser(description="Generate MSP C header from schema JSON.")
+    parser.add_argument("schema", help="Path to msp_messages.json")
+    parser.add_argument("-o", "--out", default="msp.h", help="Output header path (default: msp.h)")
+    args = parser.parse_args()
 
-    data = json.loads(Path(sys.argv[1]).read_text())
+    data = json.loads(Path(args.schema).read_text())
     out = []
     out.append(emit_header_preamble())
 
@@ -188,11 +291,12 @@ def main():
 
     # Emit one struct per message or per variant
     for msg_name, msg in data.items():
-        desc = msg.get("description", "").strip()
-        notes = msg.get("notes", "").strip()
-        mspv = msg.get("mspv", "")
-        reply = msg.get("reply")
-        request = msg.get("request")
+        desc = (msg.get("description") or "").strip()
+        notes = (msg.get("notes") or "").strip()
+        code = int(msg.get("code"))
+        mspv = int(msg.get("mspv") or (1 if code <= 255 else 2))
+        reply = msg.get("reply") or {}
+        request = msg.get("request") or {}
         variants = msg.get("variants")
 
         safe_msg_name = norm_ident(msg_name)
@@ -226,8 +330,7 @@ def main():
             out.append(emit_struct(base_struct, reply["payload"], msg))
 
     out.append(emit_header_postamble())
-    with open("msp.h","w+") as file:
-        file.write("\n".join(out))
+    Path(args.out).write_text("\n".join(out))
 
 if __name__ == "__main__":
     main()

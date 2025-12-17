@@ -4,6 +4,15 @@ from typing import Union, Dict, Any
 # --- Enums ---
 
 class InavEnums:
+    class ADCDevice(enum.IntEnum):
+        ADCINVALID = -1
+        ADCDEV_1 = 0
+        ADCDEV_2 = 1
+        ADCDEV_3 = 2
+        ADCDEV_MAX = ADCDEV_3
+        ADCDEV_MAX_1 = ADCDEV_1
+        ADCDEV_COUNT = ADCDEV_MAX + 1
+
     class APM_COPTER_MODE(enum.IntEnum):
         COPTER_MODE_STABILIZE = 0
         COPTER_MODE_ACRO = 1
@@ -1035,7 +1044,8 @@ class InavEnums:
         CURRENT_SENSOR_VIRTUAL = 2
         CURRENT_SENSOR_FAKE = 3
         CURRENT_SENSOR_ESC = 4
-        CURRENT_SENSOR_MAX = CURRENT_SENSOR_FAKE
+        CURRENT_SENSOR_SMARTPORT = 5
+        CURRENT_SENSOR_MAX = CURRENT_SENSOR_SMARTPORT
 
     class devHardwareType_e(enum.IntEnum):
         DEVHW_NONE = 0
@@ -1065,35 +1075,36 @@ class InavEnums:
         DEVHW_IST8310_1 = 24
         DEVHW_IST8308 = 25
         DEVHW_QMC5883 = 26
-        DEVHW_MAG3110 = 27
-        DEVHW_LIS3MDL = 28
-        DEVHW_RM3100 = 29
-        DEVHW_VCM5883 = 30
-        DEVHW_MLX90393 = 31
-        DEVHW_LM75_0 = 32
-        DEVHW_LM75_1 = 33
-        DEVHW_LM75_2 = 34
-        DEVHW_LM75_3 = 35
-        DEVHW_LM75_4 = 36
-        DEVHW_LM75_5 = 37
-        DEVHW_LM75_6 = 38
-        DEVHW_LM75_7 = 39
-        DEVHW_DS2482 = 40
-        DEVHW_MAX7456 = 41
-        DEVHW_SRF10 = 42
-        DEVHW_VL53L0X = 43
-        DEVHW_VL53L1X = 44
-        DEVHW_US42 = 45
-        DEVHW_TOF10120_I2C = 46
-        DEVHW_TERARANGER_EVO_I2C = 47
-        DEVHW_MS4525 = 48
-        DEVHW_DLVR = 49
-        DEVHW_M25P16 = 50
-        DEVHW_W25N01G = 51
-        DEVHW_UG2864 = 52
-        DEVHW_SDCARD = 53
-        DEVHW_IRLOCK = 54
-        DEVHW_PCF8574 = 55
+        DEVHW_QMC5883P = 27
+        DEVHW_MAG3110 = 28
+        DEVHW_LIS3MDL = 29
+        DEVHW_RM3100 = 30
+        DEVHW_VCM5883 = 31
+        DEVHW_MLX90393 = 32
+        DEVHW_LM75_0 = 33
+        DEVHW_LM75_1 = 34
+        DEVHW_LM75_2 = 35
+        DEVHW_LM75_3 = 36
+        DEVHW_LM75_4 = 37
+        DEVHW_LM75_5 = 38
+        DEVHW_LM75_6 = 39
+        DEVHW_LM75_7 = 40
+        DEVHW_DS2482 = 41
+        DEVHW_MAX7456 = 42
+        DEVHW_SRF10 = 43
+        DEVHW_VL53L0X = 44
+        DEVHW_VL53L1X = 45
+        DEVHW_US42 = 46
+        DEVHW_TOF10120_I2C = 47
+        DEVHW_TERARANGER_EVO_I2C = 48
+        DEVHW_MS4525 = 49
+        DEVHW_DLVR = 50
+        DEVHW_M25P16 = 51
+        DEVHW_W25N = 52
+        DEVHW_UG2864 = 53
+        DEVHW_SDCARD = 54
+        DEVHW_IRLOCK = 55
+        DEVHW_PCF8574 = 56
 
     class deviceFlags_e(enum.IntEnum):
         DEVFLAGS_NONE = 0
@@ -2001,7 +2012,8 @@ class InavEnums:
         INPUT_RC_CH32 = 57
         INPUT_RC_CH33 = 58
         INPUT_RC_CH34 = 59
-        INPUT_SOURCE_COUNT = 60
+        INPUT_MIXER_SWITCH_HELPER = 60
+        INPUT_SOURCE_COUNT = 61
 
     class itermRelax_e(enum.IntEnum):
         ITERM_RELAX_OFF = 0
@@ -2092,6 +2104,7 @@ class InavEnums:
         LOGIC_CONDITION_GLOBAL_FLAG_OVERRIDE_LOITER_RADIUS = (1 << 9)
         LOGIC_CONDITION_GLOBAL_FLAG_OVERRIDE_FLIGHT_AXIS = (1 << 10)
         LOGIC_CONDITION_GLOBAL_FLAG_DISABLE_GPS_FIX = (1 << 11)
+        LOGIC_CONDITION_GLOBAL_FLAG_OVERRIDE_MIN_GROUND_SPEED = (1 << 12)
 
     class logicFlightModeOperands_e(enum.IntEnum):
         LOGIC_CONDITION_OPERAND_FLIGHT_MODE_FAILSAFE = 0
@@ -2159,6 +2172,10 @@ class InavEnums:
         LOGIC_CONDITION_OPERAND_FLIGHT_FLOWN_LOITER_RADIUS = 43
         LOGIC_CONDITION_OPERAND_FLIGHT_LQ_DOWNLINK = 44
         LOGIC_CONDITION_OPERAND_FLIGHT_UPLINK_RSSI_DBM = 45
+        LOGIC_CONDITION_OPERAND_FLIGHT_MIN_GROUND_SPEED = 46
+        LOGIC_CONDITION_OPERAND_FLIGHT_HORIZONTAL_WIND_SPEED = 47
+        LOGIC_CONDITION_OPERAND_FLIGHT_WIND_DIRECTION = 48
+        LOGIC_CONDITION_OPERAND_FLIGHT_RELATIVE_WIND_OFFSET = 49
 
     class logicOperandType_e(enum.IntEnum):
         LOGIC_CONDITION_OPERAND_TYPE_VALUE = 0
@@ -2239,7 +2256,8 @@ class InavEnums:
         LOGIC_CONDITION_DISABLE_GPS_FIX = 53
         LOGIC_CONDITION_RESET_MAG_CALIBRATION = 54
         LOGIC_CONDITION_SET_GIMBAL_SENSITIVITY = 55
-        LOGIC_CONDITION_LAST = 56
+        LOGIC_CONDITION_OVERRIDE_MIN_GROUND_SPEED = 56
+        LOGIC_CONDITION_LAST = 57
 
     class logicWaypointOperands_e(enum.IntEnum):
         LOGIC_CONDITION_OPERAND_WAYPOINTS_IS_WP = 0
@@ -2256,6 +2274,49 @@ class InavEnums:
         LOGIC_CONDITION_OPERAND_WAYPOINTS_USER2_ACTION_NEXT_WP = 11
         LOGIC_CONDITION_OPERAND_WAYPOINTS_USER3_ACTION_NEXT_WP = 12
         LOGIC_CONDITION_OPERAND_WAYPOINTS_USER4_ACTION_NEXT_WP = 13
+
+    class lsm6dxxConfigMasks_e(enum.IntEnum):
+        LSM6DXX_MASK_COUNTER_BDR1 = 0x80
+        LSM6DXX_MASK_CTRL3_C = 0x3C
+        # Skipped Member: LSM6DXX_MASK_CTRL3_C_RESET = BIT(0) # (Unparseable/Complex/Filtered)
+        LSM6DXX_MASK_CTRL4_C = 0x0E
+        LSM6DXX_MASK_CTRL6_C = 0x17
+        LSM6DXX_MASK_CTRL7_G = 0x70
+        LSM6DXX_MASK_CTRL9_XL = 0x02
+        LSM6DSL_MASK_CTRL6_C = 0x13
+
+    class lsm6dxxConfigValues_e(enum.IntEnum):
+        # Skipped Member: LSM6DXX_VAL_COUNTER_BDR1_DDRY_PM = BIT(7) # (Unparseable/Complex/Filtered)
+        LSM6DXX_VAL_INT1_CTRL = 0x02
+        LSM6DXX_VAL_INT2_CTRL = 0x00
+        LSM6DXX_VAL_CTRL1_XL_ODR833 = 0x07
+        LSM6DXX_VAL_CTRL1_XL_ODR1667 = 0x08
+        LSM6DXX_VAL_CTRL1_XL_ODR3332 = 0x09
+        LSM6DXX_VAL_CTRL1_XL_ODR3333 = 0x0A
+        LSM6DXX_VAL_CTRL1_XL_8G = 0x03
+        LSM6DXX_VAL_CTRL1_XL_16G = 0x01
+        LSM6DXX_VAL_CTRL1_XL_LPF1 = 0x00
+        LSM6DXX_VAL_CTRL1_XL_LPF2 = 0x01
+        LSM6DXX_VAL_CTRL2_G_ODR6664 = 0x0A
+        LSM6DXX_VAL_CTRL2_G_2000DPS = 0x03
+        LSM6DXX_VAL_CTRL3_C_H_LACTIVE = 0
+        LSM6DXX_VAL_CTRL3_C_PP_OD = 0
+        LSM6DXX_VAL_CTRL3_C_SIM = 0
+        # Skipped Member: LSM6DXX_VAL_CTRL3_C_IF_INC = BIT(2) # (Unparseable/Complex/Filtered)
+        # Skipped Member: LSM6DXX_VAL_CTRL4_C_DRDY_MASK = BIT(3) # (Unparseable/Complex/Filtered)
+        # Skipped Member: LSM6DXX_VAL_CTRL4_C_I2C_DISABLE = BIT(2) # (Unparseable/Complex/Filtered)
+        # Skipped Member: LSM6DXX_VAL_CTRL4_C_LPF1_SEL_G = BIT(1) # (Unparseable/Complex/Filtered)
+        LSM6DXX_VAL_CTRL6_C_XL_HM_MODE = 0
+        LSM6DXX_VAL_CTRL6_C_FTYPE_300HZ = 0x00
+        LSM6DXX_VAL_CTRL6_C_FTYPE_201HZ = 0x01
+        LSM6DXX_VAL_CTRL6_C_FTYPE_102HZ = 0x02
+        LSM6DXX_VAL_CTRL6_C_FTYPE_603HZ = 0x03
+        # Skipped Member: LSM6DXX_VAL_CTRL7_G_HP_EN_G = BIT(6) # (Unparseable/Complex/Filtered)
+        LSM6DXX_VAL_CTRL7_G_HPM_G_16 = 0x00
+        LSM6DXX_VAL_CTRL7_G_HPM_G_65 = 0x01
+        LSM6DXX_VAL_CTRL7_G_HPM_G_260 = 0x02
+        LSM6DXX_VAL_CTRL7_G_HPM_G_1040 = 0x03
+        # Skipped Member: LSM6DXX_VAL_CTRL9_XL_I3C_DISABLE = BIT(1) # (Unparseable/Complex/Filtered)
 
     class lsm6dxxRegister_e(enum.IntEnum):
         LSM6DXX_REG_COUNTER_BDR1 = 0x0B
@@ -2330,15 +2391,20 @@ class InavEnums:
         MAG_AK8963 = 5
         MAG_IST8310 = 6
         MAG_QMC5883 = 7
-        MAG_MPU9250 = 8
-        MAG_IST8308 = 9
-        MAG_LIS3MDL = 10
-        MAG_MSP = 11
-        MAG_RM3100 = 12
-        MAG_VCM5883 = 13
-        MAG_MLX90393 = 14
-        MAG_FAKE = 15
+        MAG_QMC5883P = 8
+        MAG_MPU9250 = 9
+        MAG_IST8308 = 10
+        MAG_LIS3MDL = 11
+        MAG_MSP = 12
+        MAG_RM3100 = 13
+        MAG_VCM5883 = 14
+        MAG_MLX90393 = 15
+        MAG_FAKE = 16
         MAG_MAX = MAG_FAKE
+
+    class mavlinkAutopilotType_e(enum.IntEnum):
+        MAVLINK_AUTOPILOT_GENERIC = 0
+        MAVLINK_AUTOPILOT_ARDUPILOT = 1
 
     class mavlinkRadio_e(enum.IntEnum):
         MAVLINK_RADIO_GENERIC = 0
@@ -2862,6 +2928,16 @@ class InavEnums:
         OSD_SPEED_SOURCE_3D = 1
         OSD_SPEED_SOURCE_AIR = 2
 
+    class osd_SpeedTypes_e(enum.IntEnum):
+        OSD_SPEED_TYPE_GROUND = 0
+        OSD_SPEED_TYPE_AIR = 1
+        OSD_SPEED_TYPE_3D = 2
+        OSD_SPEED_TYPE_MIN_GROUND = 3
+
+    class osd_adsb_warning_style_e(enum.IntEnum):
+        OSD_ADSB_WARNING_STYLE_COMPACT = 0
+        OSD_ADSB_WARNING_STYLE_EXTENDED = 1
+
     class osd_ahi_style_e(enum.IntEnum):
         OSD_AHI_STYLE_DEFAULT = 0
         OSD_AHI_STYLE_LINE = 1
@@ -2911,7 +2987,7 @@ class InavEnums:
         OSD_HOME_DIST = 23
         OSD_HEADING = 24
         OSD_VARIO = 25
-        OSD_VARIO_NUM = 26
+        OSD_VERTICAL_SPEED_INDICATOR = 26
         OSD_AIR_SPEED = 27
         OSD_ONTIME_FLYTIME = 28
         OSD_RTC_TIME = 29
@@ -3052,7 +3128,9 @@ class InavEnums:
         OSD_H_DIST_TO_FENCE = 164
         OSD_V_DIST_TO_FENCE = 165
         OSD_NAV_FW_ALT_CONTROL_RESPONSE = 166
-        OSD_ITEM_COUNT = 167
+        OSD_NAV_MIN_GROUND_SPEED = 167
+        OSD_THROTTLE_GAUGE = 168
+        OSD_ITEM_COUNT = 169
 
     class osd_sidebar_arrow_e(enum.IntEnum):
         OSD_SIDEBAR_ARROW_NONE = 0
@@ -3148,6 +3226,10 @@ class InavEnums:
         PITOT_FAKE = 5
         PITOT_MSP = 6
         PITOT_DLVR = 7
+
+    class pollType_e(enum.IntEnum):
+        PT_ACTIVE_ID = 0
+        PT_INACTIVE_ID = 1
 
     class portMode_t(enum.IntEnum):
         MODE_RX = 1 << 0
@@ -3489,6 +3571,14 @@ class InavEnums:
         SERIALRX_FBUS = 13
         SERIALRX_SBUS2 = 14
 
+    class saFramerState_e(enum.IntEnum):
+        S_WAITPRE1 = 0
+        S_WAITPRE2 = 1
+        S_WAITRESP = 2
+        S_WAITLEN = 3
+        S_DATA = 4
+        S_WAITCRC = 5
+
     class safehomeUsageMode_e(enum.IntEnum):
         SAFEHOME_USAGE_OFF = 0
         SAFEHOME_USAGE_RTH = 1
@@ -3524,6 +3614,18 @@ class InavEnums:
         SDCARD_RECEIVE_SUCCESS = 0
         SDCARD_RECEIVE_BLOCK_IN_PROGRESS = 1
         SDCARD_RECEIVE_ERROR = 2
+
+    class sdcardState_e(enum.IntEnum):
+        SDCARD_STATE_NOT_PRESENT = 0
+        SDCARD_STATE_RESET = 1
+        SDCARD_STATE_CARD_INIT_IN_PROGRESS = 2
+        SDCARD_STATE_INITIALIZATION_RECEIVE_CID = 3
+        SDCARD_STATE_READY = 4
+        SDCARD_STATE_READING = 5
+        SDCARD_STATE_SENDING_WRITE = 6
+        SDCARD_STATE_WAITING_FOR_WRITE = 7
+        SDCARD_STATE_WRITING_MULTIPLE_BLOCKS = 8
+        SDCARD_STATE_STOPPING_MULTIPLE_BLOCK_WRITE = 9
 
     class sensorIndex_e(enum.IntEnum):
         SENSOR_INDEX_GYRO = 0
@@ -3643,7 +3745,7 @@ class InavEnums:
     class setting_section_e(enum.IntEnum):
         MASTER_VALUE = (0 << SETTING_SECTION_OFFSET)
         PROFILE_VALUE = (1 << SETTING_SECTION_OFFSET)
-        CONTROL_RATE_VALUE = (2 << SETTING_SECTION_OFFSET)
+        CONTROL_VALUE = (2 << SETTING_SECTION_OFFSET)
         BATTERY_CONFIG_VALUE = (3 << SETTING_SECTION_OFFSET)
         MIXER_CONFIG_VALUE = (4 << SETTING_SECTION_OFFSET)
         EZ_TUNE_VALUE = (5 << SETTING_SECTION_OFFSET)
@@ -3908,6 +4010,8 @@ class InavEnums:
         VOLTAGE_SENSOR_ADC = 1
         VOLTAGE_SENSOR_ESC = 2
         VOLTAGE_SENSOR_FAKE = 3
+        VOLTAGE_SENSOR_SMARTPORT = 4
+        VOLTAGE_SENSOR_MAX = VOLTAGE_SENSOR_SMARTPORT
 
     class vs600Band_e(enum.IntEnum):
         VS600_BAND_A = 0
