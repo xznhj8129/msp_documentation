@@ -31,8 +31,8 @@
 39              MSP_SET_BOARD_ALIGNMENT                  - MSP_SET_BOARD_ALIGNMENT_CONFIG           - 
 40              MSP_CURRENT_METER_CONFIG                 - MSP_CURRENT_METER_CONFIG                 - Compatible
 41              MSP_SET_CURRENT_METER_CONFIG             - MSP_SET_CURRENT_METER_CONFIG             - Compatible
-42              MSP_MIXER                                - MSP_MIXER_CONFIG                         - 
-43              MSP_SET_MIXER                            - MSP_SET_MIXER_CONFIG                     - 
+42              MSP_MIXER                                - MSP_MIXER_CONFIG                         - Compatible ?
+43              MSP_SET_MIXER                            - MSP_SET_MIXER_CONFIG                     - Compatible ?
 44              MSP_RX_CONFIG                            - MSP_RX_CONFIG                            - Compatible
 45              MSP_SET_RX_CONFIG                        - MSP_SET_RX_CONFIG                        - Compatible
 46              MSP_LED_COLORS                           - MSP_LED_COLORS                           - Compatible

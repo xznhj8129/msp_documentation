@@ -24,7 +24,8 @@ IN_FILE = Path("all_defines.h")
 OUT_FILE = Path("inav_defines.py")
 
 DEFINE_RE = re.compile(r'^\s*#\s*define\s+([A-Za-z_]\w*)(?:\s+(.*?))?\s*$')
-FUNC_LIKE_RE = re.compile(r'^\s*#\s*define\s+([A-Za-z_]\w*)\s*\(')
+# Function-like macros require the '(' to appear immediately after the name (no whitespace).
+FUNC_LIKE_RE = re.compile(r'^\s*#\s*define\s+([A-Za-z_]\w*)\(')
 IDENT_RE = re.compile(r'[A-Za-z_]\w*')
 CALL_IN_RHS_RE = re.compile(r'\b[A-Za-z_]\w*\s*\(')  # foo( ... )
 
@@ -38,13 +39,14 @@ INT_WITH_SUFFIX_RE = re.compile(r'''
     (?P<suf>[uUlL]+)?
 ''', re.VERBOSE)
 
-ALLOWED_TOKENS_RE = re.compile(r'^[\s0-9A-Fa-fxXbo()+\-*%<>&|^~/_]*$')
+ALLOWED_TOKENS_RE = re.compile(r'^[\s0-9A-Fa-fxXbo()+\-*%<>&|^~/_.\'":]*$')
 
 FORBIDDEN_SNIPPETS = [
     'sizeof', 'alignof', 'typeof', 'offsetof', 'ARRAYLEN',
-    '->', '.', '{', '}', '[', ']'
+    '->', '{', '}', '[', ']'
 ]
-CAST_RE = re.compile(r'\(\s*[A-Za-z_][\w\s\*]*\)\s*')
+# Strip simple casts like (uint8_t) or (float), not plain parenthesized identifiers.
+CAST_RE = re.compile(r'\(\s*(?:u?int[0-9_]*|float|double|char|long|short)[^)]*\)\s*', re.IGNORECASE)
 
 # Force some known-problematic names to None unconditionally.
 FORCE_NONE = {
@@ -55,6 +57,9 @@ def strip_block_comments(text: str) -> str:
     return re.sub(r'/\*.*?\*/', '', text, flags=re.S)
 
 def strip_line_comment(s: str) -> str:
+    # Avoid treating integer division '//' as a comment; only strip if it doesn't look like numeric op.
+    if re.search(r'\d\s*//\s*\d', s):
+        return s
     return s.split('//', 1)[0]
 
 def join_backslash_lines(text: str) -> str:
@@ -74,9 +79,26 @@ def join_backslash_lines(text: str) -> str:
 def normalize_expr(expr: str) -> str:
     s = expr.strip()
     s = strip_line_comment(s)
-    s = s.replace('/', '//')
+    # strip float suffixes on literals (allow embedded in expressions)
+    s = re.sub(r'(?P<num>(?:\d+\.\d*|\.\d+|\d+)(?:[eE][-+]?\d+)?)[fF]\b', r'\g<num>', s)
+    s = re.sub(r'(?<!/)/(?!/)', '//', s)
+    if 'sizeof' not in s.lower():
+        # strip simple casts like (uint8_t) or (float)
+        s = CAST_RE.sub('', s)
+    s = re.sub(r'BIT\s*\(\s*([0-9]+)\s*\)', lambda m: f"(1<<{m.group(1)})", s)
     s = INT_WITH_SUFFIX_RE.sub(lambda m: m.group('num'), s)
+    # normalize leading-zero integer literals (e.g. 05 -> 5)
+    s = re.sub(r'\b0[0-9]+', lambda m: str(int(m.group(0), 10)), s)
     s = re.sub(r'\s+', ' ', s).strip()
+    had_parens = s.startswith('(') and s.endswith(')')
+    while s.startswith('(') and s.endswith(')'):
+        s = s[1:-1].strip()
+    if s.endswith(';'):
+        s = s[:-1].rstrip()
+    if s.lower().endswith('f') and is_float_literal(s):
+        s = s[:-1]
+    if had_parens and not (s.startswith('(') and s.endswith(')')):
+        s = f"({s})"
     return s
 
 def is_func_like_define(line: str) -> bool:
@@ -89,7 +111,7 @@ def is_unusable(rhs: str) -> bool:
         return True
     if CALL_IN_RHS_RE.search(rhs):
         return True
-    if '?' in rhs or ':' in rhs or ',' in rhs:
+    if '?' in rhs or ',' in rhs:
         return True
     return False
 
@@ -102,21 +124,35 @@ def is_simple_ident(rhs: str) -> bool:
 
 def is_numeric_literal(rhs: str) -> bool:
     return bool(re.fullmatch(r'(0[xX][0-9A-Fa-f]+|0[bB][01]+|0[oO][0-7]+|\d+)', rhs.strip()))
+def is_float_literal(rhs: str) -> bool:
+    return bool(re.fullmatch(r'\(?\s*[-+]?(?:\d+\.\d*|\.\d+|\d+)(?:[eE][-+]?\d+)?f?\s*\)?', rhs.strip(), flags=re.IGNORECASE))
+def is_string_literal(rhs: str) -> bool:
+    rhs = rhs.strip()
+    return (
+        (rhs.startswith('"') and rhs.endswith('"'))
+        or (rhs.startswith("'") and rhs.endswith("'"))
+    )
 
 def is_operator_expr(rhs: str) -> bool:
     s = rhs.strip()
     # Strip outer parens
     while s.startswith('(') and s.endswith(')'):
         s = s[1:-1].strip()
-    if is_simple_ident(s) or is_numeric_literal(s):
+    if is_simple_ident(s) or is_numeric_literal(s) or is_float_literal(s):
         return False
     # Any operator symbol means it's arithmetic/bitwise, which will evaluate in class body.
     return bool(re.search(r'[+\-*/%<>&|^~()]', s))
 
 def extract_defines(text: str):
     macros = {}
+    sources = {}
+    current_source = None
     for line in text.splitlines():
-        if is_func_like_define(line):
+        if line.startswith("// "):
+            current_source = line[3:].strip()
+        m_fun = FUNC_LIKE_RE.match(line)
+        if m_fun:
+            print(f"Skipping function-like define: {m_fun.group(1)} at {current_source}")
             continue
         m = DEFINE_RE.match(line)
         if not m:
@@ -124,29 +160,43 @@ def extract_defines(text: str):
         name, rhs = m.group(1), m.group(2)
 
         if name in FORCE_NONE:
+            print(f"Forcing {name} = None at {current_source}")
             macros[name] = None
+            sources[name] = current_source
             continue
 
         if rhs is None or not strip_line_comment(rhs).strip():
+            print(f"Empty define: {name} -> None at {current_source}")
             macros[name] = None
+            sources[name] = current_source
             continue
 
         rhs = normalize_expr(rhs)
+        if is_string_literal(rhs):
+            macros[name] = rhs
+            sources[name] = current_source
+            continue
         if is_unusable(rhs):
+            print(f"Skipping unusable define: {name} = {rhs} at {current_source}")
             continue
 
         tmp = IDENT_RE.sub('', rhs)
         if not ALLOWED_TOKENS_RE.match(tmp):
+            print(f"Skipping disallowed tokens: {name} = {rhs} at {current_source}")
             continue
 
+        if name in macros and macros[name] != rhs:
+            prev_src = sources.get(name)
+            print(f"Overwriting define {name}: {macros[name]} ({prev_src}) -> {rhs} ({current_source})")
         macros[name] = rhs
+        sources[name] = current_source
     return macros
 
 def dependency_graph(macros: dict):
     names = set(macros.keys())
     deps = {}
     for k, v in macros.items():
-        if v is None:
+        if v is None or is_string_literal(str(v)) or is_float_literal(str(v)) or is_numeric_literal(str(v)):
             deps[k] = set()
         else:
             deps[k] = set(IDENT_RE.findall(v)) & names
@@ -203,18 +253,28 @@ def resolve_safe_values(macros: dict, order: list):
             else:
                 resolved[name] = rhs
             continue
+        # Literal floats are fine
+        if is_float_literal(rhs):
+            resolved[name] = rhs
+            continue
+        if is_string_literal(rhs):
+            resolved[name] = rhs
+            continue
         if not is_operator_expr(rhs):
             # literal like (123) etc.
             resolved[name] = rhs
             continue
         # Operator expression: check deps
         deps = set(IDENT_RE.findall(rhs))
+        deps = {d for d in deps if d.lower() not in {'f', 'u', 'l', 'ul', 'ull'}}  # ignore suffix-like idents
         externals = [d for d in deps if d not in names]
         if externals:
+            print(f"Skipping {name} due to external deps {externals}: {rhs}")
             resolved[name] = None
             continue
         any_none = any(resolved.get(d) is None for d in deps if d in resolved)
         if any_none:
+            print(f"Skipping {name} due to None dependency in {deps}: {rhs}")
             resolved[name] = None
         else:
             resolved[name] = rhs
@@ -271,10 +331,6 @@ def try_exec_and_fix(out_path: Path, max_iters: int = 500):
             lines.insert(insert_idx, f'{missing} = None')
             out_path.write_text('\n'.join(lines) + '\n', encoding='utf-8')
             continue
-        except Exception as e:
-            # Any other runtime error here means something slipped through; surface it.
-            print(f"Execution failed: {type(e).__name__}: {e}", file=sys.stderr)
-            return False
     print("Max iterations reached while fixing missing names.", file=sys.stderr)
     return False
 

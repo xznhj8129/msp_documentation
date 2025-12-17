@@ -1,0 +1,238 @@
+Skipping function-like define: resetTimer at ../inav/src/main/navigation/navigation_pos_estimator.c
+Skipping function-like define: getTimerDeltaMicros at ../inav/src/main/navigation/navigation_pos_estimator.c
+Skipping unusable define: MAX_POSITION_UPDATE_INTERVAL_US = HZ2S(MIN_POSITION_UPDATE_RATE_HZ) at ../inav/src/main/navigation/navigation_private.h
+Skipping unusable define: SWING_LAUNCH_MIN_ROTATION_RATE = DEGREES_TO_RADIANS(100) at ../inav/src/main/navigation/navigation_fw_launch.c
+Skipping function-like define: UNUSED at ../inav/src/main/navigation/navigation_fw_launch.c
+Overwriting define MAX_SAFE_HOMES: 8 (../inav/src/main/navigation/navigation.h) -> 0 (../inav/src/main/navigation/navigation.h)
+Skipping function-like define: IS_IN_TOLERANCE_RANGE at ../inav/src/main/navigation/navigation_geozone.c
+Overwriting define PITOT_HARDWARE_DEFAULT: PITOT_AUTODETECT (../inav/src/main/sensors/pitotmeter.c) -> PITOT_NONE (../inav/src/main/sensors/pitotmeter.c)
+Skipping function-like define: HW_SENSOR_IS_HEALTHY at ../inav/src/main/sensors/diagnostics.h
+Skipping function-like define: LOGIC_CONDITION_GLOBAL_FLAG_DISABLE at ../inav/src/main/programming/logic_condition.h
+Skipping function-like define: LOGIC_CONDITION_GLOBAL_FLAG_ENABLE at ../inav/src/main/programming/logic_condition.h
+Skipping function-like define: LOGIC_CONDITION_GLOBAL_FLAG at ../inav/src/main/programming/logic_condition.h
+Skipping function-like define: RXFAIL_STEP_TO_CHANNEL_VALUE at ../inav/src/main/rx/rx.h
+Skipping function-like define: CHANNEL_VALUE_TO_RXFAIL_STEP at ../inav/src/main/rx/rx.h
+Skipping unusable define: REMAPPABLE_CHANNEL_COUNT = ARRAYLEN(((rxConfig_t *)0)->rcmap) at ../inav/src/main/rx/rx.h
+Skipping unusable define: CRSF_PAYLOAD_OFFSET = offsetof(crsfFrameDef_t, type) at ../inav/src/main/rx/crsf.c
+Skipping unusable define: SBUS_CHANNEL_DATA_LENGTH = sizeof(sbusChannels_t) at ../inav/src/main/rx/sbus_channels.h
+Skipping function-like define: DEBUG_PRINTF at ../inav/src/main/rx/srxl2.c
+Skipping function-like define: DEBUG_PRINTF at ../inav/src/main/rx/srxl2.c
+Overwriting define JETIEXBUS_CHANNEL_COUNT: 24 (../inav/src/main/rx/jetiexbus.c) -> 16 (../inav/src/main/rx/jetiexbus.c)
+Skipping function-like define: SBUS_BYTE_TIME_US at ../inav/src/main/rx/sbus.h
+Skipping unusable define: FPORT_REQUEST_FRAME_LENGTH = sizeof(fportFrame_t) at ../inav/src/main/rx/fport.c
+Skipping unusable define: FPORT_RESPONSE_FRAME_LENGTH = (sizeof(uint8_t) + sizeof(smartPortPayload_t)) at ../inav/src/main/rx/fport.c
+Skipping unusable define: FPORT_FRAME_PAYLOAD_LENGTH_CONTROL = (sizeof(uint8_t) + sizeof(fportControlData_t)) at ../inav/src/main/rx/fport.c
+Skipping unusable define: FPORT_FRAME_PAYLOAD_LENGTH_TELEMETRY_REQUEST = (sizeof(uint8_t) + sizeof(smartPortPayload_t)) at ../inav/src/main/rx/fport.c
+Overwriting define NUM_RX_BUFFERS: 15 (../inav/src/main/rx/fport2.c) -> 3 (../inav/src/main/rx/fport.c)
+Skipping unusable define: BUFFER_SIZE = (FPORT_REQUEST_FRAME_LENGTH + 2 * sizeof(uint8_t)) at ../inav/src/main/rx/fport.c
+Skipping unusable define: GHST_PAYLOAD_OFFSET = offsetof(ghstFrameDef_t, type) at ../inav/src/main/rx/ghst.c
+Skipping unusable define: PACKED = __attribute__((packed)) at ../inav/src/main/rx/srxl2_types.h
+Skipping function-like define: BV at ../inav/src/main/telemetry/crsf.c
+Empty define: __USE_C99_MATH -> None at ../inav/src/main/telemetry/smartport.c
+Skipping unusable define: SMARTPORT_MSP_PAYLOAD_SIZE = (sizeof(smartPortPayload_t) - sizeof(uint8_t)) at ../inav/src/main/telemetry/smartport.c
+Skipping function-like define: RADIANS_TO_MAVLINK_RANGE at ../inav/src/main/telemetry/mavlink.c
+Skipping unusable define: MAXSTREAMS = (sizeof(mavRates) // sizeof(mavRates[0])) at ../inav/src/main/telemetry/mavlink.c
+Skipping function-like define: GET_CHANNEL_VALUE at ../inav/src/main/telemetry/mavlink.c
+Skipping unusable define: SBUS2_DEADTIME = MS2S(2) at ../inav/src/main/telemetry/sbus2.h
+Skipping function-like define: DECIMAL_MASK at ../inav/src/main/telemetry/jetiexbus.c
+Skipping unusable define: JETI_EX_SENSOR_COUNT = (ARRAYLEN(jetiExSensors)) at ../inav/src/main/telemetry/jetiexbus.c
+Overwriting define SRXL_GPS_LOC_COUNT: 1 (../inav/src/main/telemetry/srxl.c) -> 0 (../inav/src/main/telemetry/srxl.c)
+Overwriting define SRXL_GPS_STAT_COUNT: 1 (../inav/src/main/telemetry/srxl.c) -> 0 (../inav/src/main/telemetry/srxl.c)
+Overwriting define SRXL_SCHEDULE_CMS_COUNT: 1 (../inav/src/main/telemetry/srxl.c) -> 0 (../inav/src/main/telemetry/srxl.c)
+Overwriting define SRXL_VTX_TM_COUNT: 1 (../inav/src/main/telemetry/srxl.c) -> 0 (../inav/src/main/telemetry/srxl.c)
+Empty define: _VTX_MSP_H -> None at ../inav/src/main/io/vtx_msp.h
+Skipping unusable define: HEADTRACKER_PAYLOAD_SIZE = (sizeof(gimbalHtkAttitudePkt_t) - 4) at ../inav/src/main/io/gimbal_serial.h
+Skipping function-like define: OSD_ALTERNATING_CHOICES at ../inav/src/main/io/osd_dji_hd.c
+Skipping function-like define: _CONST_STR_SIZE at ../inav/src/main/io/osd_dji_hd.c
+Skipping function-like define: OSD_MESSAGE_STR at ../inav/src/main/io/osd_dji_hd.c
+Skipping function-like define: RSSI_BOUNDARY at ../inav/src/main/io/osd_dji_hd.c
+Overwriting define Bit_RESET: GPIO_PIN_RESET (../inav/src/main/io/serial_4way.c) -> 0 (../inav/src/main/io/serial_4way.c)
+Empty define: USE_TXRX_LED -> None at ../inav/src/main/io/serial_4way.c
+Overwriting define TX_LED_OFF: LED1_OFF (../inav/src/main/io/serial_4way.c) -> LED0_OFF (../inav/src/main/io/serial_4way.c)
+Overwriting define TX_LED_ON: LED1_ON (../inav/src/main/io/serial_4way.c) -> LED0_ON (../inav/src/main/io/serial_4way.c)
+Empty define: RX_LED_OFF -> None at ../inav/src/main/io/serial_4way.c
+Empty define: RX_LED_ON -> None at ../inav/src/main/io/serial_4way.c
+Empty define: TX_LED_OFF -> None at ../inav/src/main/io/serial_4way.c
+Empty define: TX_LED_ON -> None at ../inav/src/main/io/serial_4way.c
+Skipping unusable define: SET_DISCONNECTED = DeviceInfo.words[0] = 0 at ../inav/src/main/io/serial_4way.c
+Skipping unusable define: ATMEL_DEVICE_MATCH = (pDeviceInfo->words[0] == 0x9307) || (pDeviceInfo->words[0] == 0x930A) || (pDeviceInfo->words[0] == 0x930) || (pDeviceInfo->words[0] == 0x940B) at ../inav/src/main/io/serial_4way.c
+Skipping unusable define: SILABS_DEVICE_MATCH = (pDeviceInfo->words[0] == 0xF310)||(pDeviceInfo->words[0] == 0xF330) || (pDeviceInfo->words[0] == 0xF410) || (pDeviceInfo->words[0] == 0xF390) || (pDeviceInfo->words[0] == 0xF850) || (pDeviceInfo->words[0] == 0xE8B1) || (pDeviceInfo->words[0] == 0xE8B2) at ../inav/src/main/io/serial_4way.c
+Skipping unusable define: ARM_DEVICE_MATCH = (pDeviceInfo->bytes[1] > 0x00) && (pDeviceInfo->bytes[1] < 0x90) && (pDeviceInfo->bytes[0] == 0x06) at ../inav/src/main/io/serial_4way.c
+Skipping unusable define: ESC_IS_HI = isEscHi(selected_esc) at ../inav/src/main/io/serial_4way_impl.h
+Skipping unusable define: ESC_IS_LO = isEscLo(selected_esc) at ../inav/src/main/io/serial_4way_impl.h
+Skipping unusable define: ESC_SET_HI = setEscHi(selected_esc) at ../inav/src/main/io/serial_4way_impl.h
+Skipping unusable define: ESC_SET_LO = setEscLo(selected_esc) at ../inav/src/main/io/serial_4way_impl.h
+Skipping unusable define: ESC_INPUT = setEscInput(selected_esc) at ../inav/src/main/io/serial_4way_impl.h
+Skipping unusable define: ESC_OUTPUT = setEscOutput(selected_esc) at ../inav/src/main/io/serial_4way_impl.h
+Skipping function-like define: FRSKY_OSD_GRID_BUFFER_ENCODE at ../inav/src/main/io/frsky_osd.c
+Skipping function-like define: FRSKY_OSD_TRACE at ../inav/src/main/io/frsky_osd.c
+Skipping function-like define: FRSKY_OSD_DEBUG at ../inav/src/main/io/frsky_osd.c
+Skipping function-like define: FRSKY_OSD_ERROR at ../inav/src/main/io/frsky_osd.c
+Skipping function-like define: FRSKY_OSD_ASSERT at ../inav/src/main/io/frsky_osd.c
+Skipping unusable define: NANORADAR_PACKET_SIZE = sizeof(nanoradarPacket_t) at ../inav/src/main/io/rangefinder_nanoradar.c
+Skipping function-like define: IS_HI at ../inav/src/main/io/osd.c
+Skipping function-like define: IS_LO at ../inav/src/main/io/osd.c
+Skipping function-like define: IS_MID at ../inav/src/main/io/osd.c
+Skipping unusable define: OSD_RESUME_UPDATES_STICK_COMMAND = (checkStickPosition(THR_HI) || checkStickPosition(PIT_HI)) at ../inav/src/main/io/osd.c
+Skipping unusable define: STATS_PAGE2 = (checkStickPosition(ROL_HI)) at ../inav/src/main/io/osd.c
+Skipping unusable define: STATS_PAGE1 = (checkStickPosition(ROL_LO)) at ../inav/src/main/io/osd.c
+Skipping function-like define: OSD_ALTERNATING_CHOICES at ../inav/src/main/io/osd.c
+Skipping function-like define: _CONST_STR_SIZE at ../inav/src/main/io/osd.c
+Skipping function-like define: OSD_MESSAGE_STR at ../inav/src/main/io/osd.c
+Skipping function-like define: OSD_CHR_IS_NUM at ../inav/src/main/io/osd.c
+Skipping function-like define: OSD_CENTER_LEN at ../inav/src/main/io/osd.c
+Skipping function-like define: OSD_CENTER_S at ../inav/src/main/io/osd.c
+Skipping unusable define: BAUD_RATE_COUNT = ARRAYLEN(baudRates) at ../inav/src/main/io/serial.c
+Skipping function-like define: UBX_VALID_GPS_DATE at ../inav/src/main/io/gps_ublox.h
+Skipping function-like define: UBX_VALID_GPS_TIME at ../inav/src/main/io/gps_ublox.h
+Skipping function-like define: UBX_VALID_GPS_DATE_TIME at ../inav/src/main/io/gps_ublox.h
+Skipping unusable define: MAX_GNSS_SIZE_BYTES = (sizeof(ubx_gnss_msg_t) + sizeof(ubx_gnss_element_t)*MAX_GNSS) at ../inav/src/main/io/gps_ublox.h
+Skipping unusable define: TICKER_CHARACTER_COUNT = (sizeof(tickerCharacters) // sizeof(char)) at ../inav/src/main/io/dashboard.c
+Skipping unusable define: OSD_AHI_PREV_SIZE = (OSD_AHI_WIDTH > OSD_AHI_HEIGHT ? OSD_AHI_WIDTH : OSD_AHI_HEIGHT) at ../inav/src/main/io/osd_common.h
+Skipping function-like define: OSD_DRAW_POINT_GRID at ../inav/src/main/io/osd_common.h
+Skipping function-like define: OSD_DRAW_POINT_PIXEL at ../inav/src/main/io/osd_common.h
+Skipping unusable define: DJI_ALTERNATING_DURATION_LONG = (djiOsdConfig()->craftNameAlternatingDuration * 100) at ../inav/src/main/io/osd_dji_hd.h
+Skipping function-like define: LED_MOV_FUNCTION at ../inav/src/main/io/ledstrip.h
+Skipping function-like define: LED_MOV_OVERLAY at ../inav/src/main/io/ledstrip.h
+Skipping unusable define: LED_FUNCTION_MASK = LED_MOV_FUNCTION(((1 << LED_FUNCTION_BITCNT) - 1)) at ../inav/src/main/io/ledstrip.h
+Skipping unusable define: LED_OVERLAY_MASK = LED_MOV_OVERLAY(LED_FLAG_OVERLAY_MASK) at ../inav/src/main/io/ledstrip.h
+Skipping function-like define: LED_FLAG_OVERLAY at ../inav/src/main/io/ledstrip.h
+Skipping function-like define: LED_FLAG_DIRECTION at ../inav/src/main/io/ledstrip.h
+Skipping function-like define: CALCULATE_LED_XY at ../inav/src/main/io/ledstrip.h
+Skipping function-like define: DEFINE_LED at ../inav/src/main/io/ledstrip.h
+Skipping function-like define: BEEPER_ENTRY at ../inav/src/main/io/beeper.c
+Skipping unusable define: BEEPER_TABLE_ENTRY_COUNT = (sizeof(beeperTable) // sizeof(beeperTableEntry_t)) at ../inav/src/main/io/beeper.c
+Empty define: USE_SERIAL_4WAY_BLHELI_BOOTLOADER -> None at ../inav/src/main/io/serial_4way.h
+Empty define: USE_SERIAL_4WAY_SK_BOOTLOADER -> None at ../inav/src/main/io/serial_4way.h
+Skipping function-like define: SACMD at ../inav/src/main/io/vtx_smartaudio.c
+Skipping function-like define: SA_IS_PITMODE at ../inav/src/main/io/vtx_smartaudio.c
+Skipping function-like define: SA_IS_PIRMODE at ../inav/src/main/io/vtx_smartaudio.c
+Skipping function-like define: SA_IS_PORMODE at ../inav/src/main/io/vtx_smartaudio.c
+Skipping function-like define: SA_DEVICE_CHVAL_TO_BAND at ../inav/src/main/io/vtx_smartaudio.c
+Skipping function-like define: SA_DEVICE_CHVAL_TO_CHANNEL at ../inav/src/main/io/vtx_smartaudio.c
+Skipping function-like define: SA_BANDCHAN_TO_DEVICE_CHVAL at ../inav/src/main/io/vtx_smartaudio.c
+Skipping function-like define: SBASMASK1_BITS at ../inav/src/main/io/gps_ublox.c
+Skipping unusable define: BENEWAKE_PACKET_SIZE = sizeof(tfminiPacket_t) at ../inav/src/main/io/rangefinder_benewake.c
+Skipping function-like define: OSD_VISIBLE at ../inav/src/main/io/osd.h
+Skipping function-like define: OSD_POS at ../inav/src/main/io/osd.h
+Skipping function-like define: OSD_X at ../inav/src/main/io/osd.h
+Skipping function-like define: OSD_Y at ../inav/src/main/io/osd.h
+Skipping function-like define: OSD_POS_SD at ../inav/src/main/io/osd.h
+Skipping function-like define: LED_STRIP_HZ at ../inav/src/main/io/ledstrip.c
+Skipping function-like define: LED_STRIP_MS at ../inav/src/main/io/ledstrip.c
+Skipping function-like define: HSV at ../inav/src/main/io/ledstrip.c
+Skipping function-like define: IS_HI at ../inav/src/main/io/rcdevice_cam.c
+Skipping function-like define: IS_LO at ../inav/src/main/io/rcdevice_cam.c
+Skipping function-like define: IS_MID at ../inav/src/main/io/rcdevice_cam.c
+Skipping function-like define: getAttrPage at ../inav/src/main/io/displayport_msp_osd.h
+Skipping function-like define: getAttrBlink at ../inav/src/main/io/displayport_msp_osd.h
+Skipping function-like define: getAttrVersion at ../inav/src/main/io/displayport_msp_osd.h
+Skipping unusable define: WaitPinLo = while (ESC_IS_HI) {if (micros() > timeout_timer) goto timeout;} at ../inav/src/main/io/serial_4way_stk500v2.c
+Skipping unusable define: WaitPinHi = while (ESC_IS_LO) {if (micros() > timeout_timer) goto timeout;} at ../inav/src/main/io/serial_4way_stk500v2.c
+Skipping function-like define: delay_us at ../inav/src/main/io/serial_4way_stk500v2.c
+Empty define: IRQ_OFF -> None at ../inav/src/main/io/serial_4way_stk500v2.c
+Empty define: IRQ_ON -> None at ../inav/src/main/io/serial_4way_stk500v2.c
+Skipping function-like define: isDJICompatibleVideoSystem at ../inav/src/main/io/displayport_msp_dji_compat.h
+Skipping function-like define: getDJICharacter at ../inav/src/main/io/displayport_msp_dji_compat.h
+Skipping function-like define: isDJICompatibleVideoSystem at ../inav/src/main/io/displayport_msp_dji_compat.h
+Skipping function-like define: isDJICompatibleVideoSystem at ../inav/src/main/io/displayport_msp_dji_compat.h
+Skipping function-like define: FAT_MAKE_DATE at ../inav/src/main/io/asyncfatfs/fat_standard.h
+Skipping function-like define: FAT_MAKE_TIME at ../inav/src/main/io/asyncfatfs/fat_standard.h
+Empty define: ONLY_EXPOSE_FOR_TESTING -> None at ../inav/src/main/io/asyncfatfs/asyncfatfs.c
+Overwriting define ONLY_EXPOSE_FOR_TESTING: None (../inav/src/main/io/asyncfatfs/asyncfatfs.c) -> static (../inav/src/main/io/asyncfatfs/asyncfatfs.c)
+Skipping unusable define: AFATFS_DEFAULT_FILE_DATE = FAT_MAKE_DATE(2015, 12, 1) at ../inav/src/main/io/asyncfatfs/asyncfatfs.c
+Skipping unusable define: AFATFS_DEFAULT_FILE_TIME = FAT_MAKE_TIME(0, 0, 0) at ../inav/src/main/io/asyncfatfs/asyncfatfs.c
+Skipping unusable define: AFATFS_FILES_PER_DIRECTORY_SECTOR = (AFATFS_SECTOR_SIZE // sizeof(fatDirectoryEntry_t)) at ../inav/src/main/io/asyncfatfs/asyncfatfs.c
+Skipping unusable define: AFATFS_FAT32_FAT_ENTRIES_PER_SECTOR = (AFATFS_SECTOR_SIZE // sizeof(uint32_t)) at ../inav/src/main/io/asyncfatfs/asyncfatfs.c
+Skipping unusable define: AFATFS_FAT16_FAT_ENTRIES_PER_SECTOR = (AFATFS_SECTOR_SIZE // sizeof(uint16_t)) at ../inav/src/main/io/asyncfatfs/asyncfatfs.c
+Empty define: AFATFS_USE_FREEFILE -> None at ../inav/src/main/io/asyncfatfs/asyncfatfs.c
+Skipping function-like define: MIN at ../inav/src/main/io/asyncfatfs/asyncfatfs.c
+Skipping function-like define: MAX at ../inav/src/main/io/asyncfatfs/asyncfatfs.c
+Skipping function-like define: mixerConfig at ../inav/src/main/flight/mixer_profile.h
+Skipping function-like define: mixerConfigMutable at ../inav/src/main/flight/mixer_profile.h
+Skipping function-like define: primaryMotorMixer at ../inav/src/main/flight/mixer_profile.h
+Skipping function-like define: primaryMotorMixerMutable at ../inav/src/main/flight/mixer_profile.h
+Skipping function-like define: customServoMixers at ../inav/src/main/flight/mixer_profile.h
+Skipping function-like define: customServoMixersMutable at ../inav/src/main/flight/mixer_profile.h
+Skipping function-like define: primaryMotorMixer_CopyArray at ../inav/src/main/flight/mixer_profile.h
+Skipping function-like define: customServoMixers_CopyArray at ../inav/src/main/flight/mixer_profile.h
+Skipping function-like define: mixerConfigByIndex at ../inav/src/main/flight/mixer_profile.h
+Skipping function-like define: mixerMotorMixersByIndex at ../inav/src/main/flight/mixer_profile.h
+Skipping function-like define: mixerServoMixersByIndex at ../inav/src/main/flight/mixer_profile.h
+Forcing FIXED_WING_LEVEL_TRIM_CONTROLLER_LIMIT = None at ../inav/src/main/flight/pid.c
+Skipping function-like define: GET_RX_CHANNEL_INPUT at ../inav/src/main/flight/servos.c
+Overwriting define MAX_SUPPORTED_MOTORS: TARGET_MOTOR_COUNT (../inav/src/main/flight/mixer.h) -> 12 (../inav/src/main/flight/mixer.h)
+Skipping unusable define: EZ_TUNE_PID_RP_DEFAULT = { 40, 75, 23, 100 } at ../inav/src/main/flight/ez_tune.c
+Skipping unusable define: EZ_TUNE_PID_YAW_DEFAULT = { 45, 80, 0, 100 } at ../inav/src/main/flight/ez_tune.c
+Skipping function-like define: statsInit at ../inav/src/main/fc/stats.h
+Skipping function-like define: statsOnArm at ../inav/src/main/fc/stats.h
+Skipping function-like define: statsOnDisarm at ../inav/src/main/fc/stats.h
+Skipping function-like define: MODE_STEP_TO_CHANNEL_VALUE at ../inav/src/main/fc/rc_modes.h
+Skipping function-like define: CHANNEL_VALUE_TO_STEP at ../inav/src/main/fc/rc_modes.h
+Skipping function-like define: IS_RANGE_USABLE at ../inav/src/main/fc/rc_modes.h
+Skipping disallowed tokens: RESET_BOX_ID_COUNT = activeBoxIdCount = 0 at ../inav/src/main/fc/fc_msp_box.c
+Skipping function-like define: ADD_ACTIVE_BOX at ../inav/src/main/fc/fc_msp_box.c
+Skipping function-like define: IS_ENABLED at ../inav/src/main/fc/fc_msp_box.c
+Skipping function-like define: CHECK_ACTIVE_BOX at ../inav/src/main/fc/fc_msp_box.c
+Skipping function-like define: cliPrintHashLine at ../inav/src/main/fc/cli.c
+Skipping function-like define: CLI_COMMAND_DEF at ../inav/src/main/fc/cli.c
+Skipping function-like define: CLI_COMMAND_DEF at ../inav/src/main/fc/cli.c
+Skipping function-like define: MARK_ADJUSTMENT_FUNCTION_AS_BUSY at ../inav/src/main/fc/rc_adjustments.c
+Skipping function-like define: MARK_ADJUSTMENT_FUNCTION_AS_READY at ../inav/src/main/fc/rc_adjustments.c
+Skipping function-like define: IS_ADJUSTMENT_FUNCTION_BUSY at ../inav/src/main/fc/rc_adjustments.c
+Skipping function-like define: MULTI_FUNC_FLAG_DISABLE at ../inav/src/main/fc/multifunction.h
+Skipping function-like define: MULTI_FUNC_FLAG_ENABLE at ../inav/src/main/fc/multifunction.h
+Skipping function-like define: MULTI_FUNC_FLAG at ../inav/src/main/fc/multifunction.h
+Skipping function-like define: isArmingDisabled at ../inav/src/main/fc/runtime_config.h
+Skipping function-like define: DISABLE_ARMING_FLAG at ../inav/src/main/fc/runtime_config.h
+Skipping function-like define: ENABLE_ARMING_FLAG at ../inav/src/main/fc/runtime_config.h
+Skipping function-like define: ARMING_FLAG at ../inav/src/main/fc/runtime_config.h
+Skipping function-like define: DISABLE_FLIGHT_MODE at ../inav/src/main/fc/runtime_config.h
+Skipping function-like define: ENABLE_FLIGHT_MODE at ../inav/src/main/fc/runtime_config.h
+Skipping function-like define: FLIGHT_MODE at ../inav/src/main/fc/runtime_config.h
+Skipping function-like define: DISABLE_STATE at ../inav/src/main/fc/runtime_config.h
+Skipping function-like define: ENABLE_STATE at ../inav/src/main/fc/runtime_config.h
+Skipping function-like define: STATE at ../inav/src/main/fc/runtime_config.h
+Skipping function-like define: SIMULATOR_HAS_OPTION at ../inav/src/main/fc/runtime_config.h
+Overwriting define FIRST_PORT_INDEX: 1 (../inav/src/main/fc/config.c) -> 0 (../inav/src/main/fc/config.c)
+Overwriting define SECOND_PORT_INDEX: 0 (../inav/src/main/fc/config.c) -> 1 (../inav/src/main/fc/config.c)
+Skipping MAX_VERTICES due to external deps ['MAX_VERTICES_IN_CONFIG']: (MAX_VERTICES_IN_CONFIG + 1)
+Skipping MAX_GEOZONES due to external deps ['MAX_GEOZONES_IN_CONFIG']: (MAX_GEOZONES_IN_CONFIG + 1)
+Skipping currentBatteryProfileMutable due to external deps ['batteryProfile_t', 'currentBatteryProfile']: ((batteryProfile_t*)currentBatteryProfile)
+Skipping SBUS_FRAME_SIZE due to external deps ['SBUS_CHANNEL_DATA_LENGTH']: (SBUS_CHANNEL_DATA_LENGTH + 2)
+Skipping SBUS_PORT_OPTIONS due to external deps ['SERIAL_PARITY_EVEN', 'SERIAL_STOPBITS_2']: (SERIAL_STOPBITS_2 | SERIAL_PARITY_EVEN)
+Skipping CRSF_PORT_OPTIONS due to external deps ['SERIAL_STOPBITS_1', 'SERIAL_PARITY_NO']: (SERIAL_STOPBITS_1 | SERIAL_PARITY_NO)
+Skipping GHST_UL_RC_CHANS_FRAME_COUNT due to external deps ['GHST_UL_RC_CHANS_HS4_13TO16', 'GHST_UL_RC_CHANS_HS4_5TO8']: (GHST_UL_RC_CHANS_HS4_13TO16 - GHST_UL_RC_CHANS_HS4_5TO8 + 1)
+Skipping GHST_UL_RC_TOTAL_FRAME_COUNT due to external deps ['GHST_UL_RC_CHANS_HS4_LAST', 'GHST_UL_RC_CHANS_HS4_FIRST']: (GHST_UL_RC_CHANS_HS4_LAST - GHST_UL_RC_CHANS_HS4_FIRST + 1)
+Skipping SRXL2_PORT_OPTIONS due to external deps ['SERIAL_STOPBITS_1', 'SERIAL_PARITY_NO', 'SERIAL_BIDIR']: (SERIAL_STOPBITS_1 | SERIAL_PARITY_NO | SERIAL_BIDIR)
+Skipping FPORT2_PORT_OPTIONS due to external deps ['SERIAL_STOPBITS_1', 'SERIAL_PARITY_NO']: (SERIAL_STOPBITS_1 | SERIAL_PARITY_NO)
+Skipping JETIEXBUS_OPTIONS due to external deps ['SERIAL_STOPBITS_1', 'SERIAL_PARITY_NO']: (SERIAL_STOPBITS_1 | SERIAL_PARITY_NO)
+Skipping FPORT_PORT_OPTIONS due to external deps ['SERIAL_STOPBITS_1', 'SERIAL_PARITY_NO']: (SERIAL_STOPBITS_1 | SERIAL_PARITY_NO)
+Skipping GHST_PORT_OPTIONS due to external deps ['SERIAL_STOPBITS_1', 'SERIAL_PARITY_NO', 'SERIAL_BIDIR', 'SERIAL_BIDIR_PP']: (SERIAL_STOPBITS_1 | SERIAL_PARITY_NO | SERIAL_BIDIR | SERIAL_BIDIR_PP)
+Skipping TELEMETRY_SHAREABLE_PORT_FUNCTIONS_MASK due to external deps ['FUNCTION_TELEMETRY_IBUS', 'FUNCTION_TELEMETRY_LTM']: (FUNCTION_TELEMETRY_LTM | FUNCTION_TELEMETRY_IBUS)
+Skipping SIM_LOW_ALT_WARNING_MODES due to external deps ['FAILSAFE_MODE', 'NAV_WP_MODE', 'NAV_ALTHOLD_MODE', 'NAV_RTH_MODE']: (NAV_ALTHOLD_MODE | NAV_RTH_MODE | NAV_WP_MODE | FAILSAFE_MODE)
+Skipping SIM_RESPONSE_CODE_OK due to external deps ['K', 'O']: ('O' << 24 | 'K' << 16)
+Skipping SIM_RESPONSE_CODE_ERROR due to external deps ['R', 'O', 'E']: ('E' << 24 | 'R' << 16 | 'R' << 8 | 'O')
+Skipping SIM_RESPONSE_CODE_RING due to external deps ['N', 'R', 'G', 'I']: ('R' << 24 | 'I' << 16 | 'N' << 8 | 'G')
+Skipping SIM_RESPONSE_CODE_CLIP due to external deps ['P', 'C', 'I']: ('C' << 24 | 'L' << 16 | 'I' << 8 | 'P')
+Skipping SIM_RESPONSE_CODE_CREG due to external deps ['C', 'R', 'G', 'E']: ('C' << 24 | 'R' << 16 | 'E' << 8 | 'G')
+Skipping SIM_RESPONSE_CODE_CSQ due to external deps ['Q', 'C', 'S']: ('C' << 24 | 'S' << 16 | 'Q' << 8 | ':')
+Skipping SIM_RESPONSE_CODE_CMT due to external deps ['M', 'T', 'C']: ('C' << 24 | 'M' << 16 | 'T' << 8 | ':')
+Skipping ALL_TELEMETRY_FUNCTIONS_MASK due to external deps ['FUNCTION_TELEMETRY_SMARTPORT', 'FUNCTION_TELEMETRY_IBUS', 'FUNCTION_TELEMETRY_HOTT', 'FUNCTION_TELEMETRY_LTM', 'FUNCTION_TELEMETRY_MAVLINK']: (FUNCTION_TELEMETRY_HOTT | FUNCTION_TELEMETRY_SMARTPORT | FUNCTION_TELEMETRY_LTM | FUNCTION_TELEMETRY_MAVLINK | FUNCTION_TELEMETRY_IBUS)
+Skipping HALF_SCREEN_CHARACTER_COLUMN_COUNT due to external deps ['SCREEN_CHARACTER_COLUMN_COUNT']: (SCREEN_CHARACTER_COLUMN_COUNT // 2)
+Skipping IS_SCREEN_CHARACTER_COLUMN_COUNT_ODD due to external deps ['SCREEN_CHARACTER_COLUMN_COUNT']: (SCREEN_CHARACTER_COLUMN_COUNT & 1)
+Skipping SENSOR_NAMES_MASK due to external deps ['SENSOR_BARO', 'SENSOR_MAG', 'SENSOR_ACC', 'SENSOR_RANGEFINDER', 'SENSOR_OPFLOW', 'SENSOR_PITOT', 'SENSOR_GYRO']: (SENSOR_GYRO | SENSOR_ACC | SENSOR_BARO | SENSOR_MAG | SENSOR_RANGEFINDER | SENSOR_PITOT | SENSOR_OPFLOW)
+Skipping FIRMWARE_START_ADDRESS due to external deps ['__firmware_start']: (&__firmware_start)
+Skipping CONFIG_START_ADDRESS due to external deps ['__config_start']: (&__config_start)
+Skipping CONFIG_END_ADDRESS due to external deps ['__config_end']: (&__config_end)
+Skipping TELEMETRY_FUNCTION_MASK due to external deps ['FUNCTION_TELEMETRY_SMARTPORT', 'FUNCTION_TELEMETRY_IBUS', 'FUNCTION_TELEMETRY_HOTT', 'FUNCTION_TELEMETRY_LTM', 'FUNCTION_TELEMETRY_MAVLINK']: (FUNCTION_TELEMETRY_HOTT | FUNCTION_TELEMETRY_SMARTPORT | FUNCTION_TELEMETRY_LTM | FUNCTION_TELEMETRY_MAVLINK | FUNCTION_TELEMETRY_IBUS)
+Skipping ARMING_DISABLED_EMERGENCY_OVERRIDE due to external deps ['ARMING_DISABLED_HARDWARE_FAILURE', 'ARMING_DISABLED_GEOZONE', 'ARMING_DISABLED_NAVIGATION_UNSAFE', 'ARMING_DISABLED_ARM_SWITCH', 'ARMING_DISABLED_NOT_LEVEL', 'ARMING_DISABLED_COMPASS_NOT_CALIBRATED', 'ARMING_DISABLED_ACCELEROMETER_NOT_CALIBRATED']: (ARMING_DISABLED_GEOZONE | ARMING_DISABLED_NOT_LEVEL | ARMING_DISABLED_NAVIGATION_UNSAFE | ARMING_DISABLED_COMPASS_NOT_CALIBRATED | ARMING_DISABLED_ACCELEROMETER_NOT_CALIBRATED | ARMING_DISABLED_ARM_SWITCH | ARMING_DISABLED_HARDWARE_FAILURE)
+Skipping MAX_RTH_WAYPOINTS due to None dependency in {'MAX_VERTICES'}: (MAX_VERTICES // 2)
+Skipping MAX_PATH_PONITS due to None dependency in {'MAX_VERTICES'}: (2 + 2 * MAX_VERTICES)
+Skipping MPU_TEMP_VALID due to external deps ['mpuBaroTempValid']: (mpuBaroTempValid & (1 << MPU_TEMP_VALID_BIT))
+Skipping BARO_TEMP_VALID due to external deps ['mpuBaroTempValid']: (mpuBaroTempValid & (1 << BARO_TEMP_VALID_BIT))
+Skipping SERVO_SBUS_OPTIONS due to external deps ['SERIAL_INVERTED', 'SERIAL_UNIDIR']: (SBUS_PORT_OPTIONS | SERIAL_INVERTED | SERIAL_UNIDIR)
+Skipping ALL_FUNCTIONS_SHARABLE_WITH_MSP due to external deps ['FUNCTION_BLACKBOX', 'FUNCTION_LOG']: (FUNCTION_BLACKBOX | ALL_TELEMETRY_FUNCTIONS_MASK | FUNCTION_LOG)
+Skipping FLASH_END due to external deps ['MCU_FLASH_SIZE']: (FLASH_START_ADDRESS + MCU_FLASH_SIZE * 1024)
+Skipping AVAILABLE_FIRMWARE_SPACE due to None dependency in {'FLASH_END', 'FIRMWARE_START_ADDRESS'}: (FLASH_END - FIRMWARE_START_ADDRESS)
+Wrote inav_defines.py and resolved missing references with None where needed.

@@ -215,13 +215,21 @@ for i in range(1,32000):
     except:
         inav = ""
         inav_implemented = False
-    
 
     try:
         bf = BF_MSPCodes(i).name
     except:
         bf = ""
-    agree = "Match" if (inav == bf) else ""
+    
+    if inav == bf and inav_implemented:
+        agree = "Match"
+    elif inav_implemented and bf and (inav in bf or bf in inav):
+        agree = "Close match"
+    elif inav==bf and not inav_implemented:
+        agree = "Not Implemented"
+    else:
+        agree = ""
+
 
     if inav or bf: 
         print(f"{i:<16}{inav:<40} - {bf:<40} - {agree}")
